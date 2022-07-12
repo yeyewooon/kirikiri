@@ -8,7 +8,7 @@ public class MemberDTO {
 	private String user_name;
 	private String user_nickname;
 	private String user_phone;
-	private Date user_bd;
+	private String user_bd;
 	private String user_gender;
 	private String user_job;
 	private String user_intro;
