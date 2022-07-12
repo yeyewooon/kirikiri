@@ -29,6 +29,13 @@
 			<version>2.13.3</version>
 		</dependency>
 
+		<!-- json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+			<version>20220320</version>
+		</dependency>
+
 		<!-- mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>
