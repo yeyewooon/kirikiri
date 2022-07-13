@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,16 +77,20 @@
 	border-bottom: 1px solid gray;
 }
 
+.userTable{
+	height : 40px;
+}
+
 .profile {
 	border-radius: 50%;
 	background-color: orange;
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 }
 
 #profile_img {
-	width: 20px;
-	height: 20px;
+	width: 25px;
+	height: 25px;
 	border-radius: 50%;
 }
 
@@ -110,19 +114,22 @@
 	height: 90%;
 	overflow-y: scroll;
 	-ms-overflow-style: none;
+	margin-bottom : 10px;
 }
 
 .messages::-webkit-scrollbar {
 	display: none;
 }
 
-.mymsg {
-	float: right;
-}
 
 #time {
 	color: darkgray;
 	font-size: 10px;
+}
+
+.mymsg{
+	margin-top : 10px;
+	overflow : hidden;
 }
 
 .mymsg .msgBox {
@@ -131,6 +138,13 @@
 	background-color: #fce2ef;
 	padding: 10px;
 	border-radius: 13px;
+	float: right;
+	margin-left : 20%;
+}
+
+.mymsg .timename{
+	float: right;
+	margin-left : 50%;
 }
 
 .othermsg .msgBox {
@@ -139,6 +153,7 @@
 	background-color: #d6ede0;
 	padding: 10px;
 	border-radius: 13px;
+	margin-right : 20%;
 }
 
 .inputmsg {
@@ -148,65 +163,63 @@
 </head>
 <body>
 	<div class="container chatting">
+	<input type="text" class="d-none" id="nickname" value="${nickname }">
 		<div class="row title">
 			<div class="col-12 d-flex justify-content-center pt-3">
-				<span style="font-size: 30px; color: navy">${tglist}</span> 
+				<span style="font-size: 30px; color: navy">${tgList[0].group_title}</span> 
 				<span style="font-size: 28px;">&nbsp;채팅</span>
 			</div>
 		</div>
 		<div class="row contentBox">
 			<div class="col-3 users">
-				<p>대화상대 목록</p>
-				<table class="mt-3">
+				<p>대화상대 목록(${nickList.size()})</p>
+				<table>
 					<tbody>
 						<c:forEach items="${nickList }" var="user" varStatus="status">
-							<tr>
+							<tr class="userTable">
 								<td>
 									<div class="profile me-2">
-										<img src="${profileList.sys_name[status.index]}" id="profile_img">
+										<img src="${profileList[status.index]}" id="profile_img">
 									</div>
 								</td>
-								<td>${nickList.user_nickname}</td>
+								<td>${user.user_nickname}</td>
 								<td><div class="circle ms-1"></div></td>
 							</tr>
 						</c:forEach>
-							
-							
 							
 					</tbody>
 				</table>
 			</div>
 			<div class="col-9 chatBox">
 				<div class="messages">
-					<div class="mymsg mt-3">
-						<div class="timename">
-							<span id="time">10:00 AM &nbsp;</span> <span>나나나</span>
-						</div>
-						<div class="msgBox">아아ㅏ아ㅏ아ㅏ아ㅏㅏ</div>
-					</div>
-					<div style="clear: both;"></div>
-					<div class="othermsg mt-3">
-						<div class="timename">
-							<span id="time">10:00 AM &nbsp;</span> <span>김예원</span>
-						</div>
-						<div class="msgBox">아아ㅏ아ㅏ아ㅏ아ㅏㅏ</div>
-					</div>
-
-					<div class="mymsg mt-3">
-						<div class="timename">
-							<span id="time">10:00 AM &nbsp;</span> <span>나나나</span>
-						</div>
-						<div class="msgBox">아아ㅏ아ㅏ아ㅏ아ㅏㅏ</div>
-					</div>
-					<div style="clear: both;"></div>
-
-
+					<c:forEach items="${gcList }" var="gcList">
+						<c:choose>
+							<c:when test="${nickname eq gcList.user_nickname}">
+								<div class="mymsg">
+									<div class="timename">
+										<span id="time">${gcList.sendDate } &nbsp</span> 
+										<span>${gcList.user_nickname }</span>
+									</div>
+									<div style="clear: both;"></div>
+									<div class="msgBox">${gcList.message }</div>
+								</div>
+								<div style="clear: both;"></div>
+							</c:when>
+							<c:otherwise>
+								<div class="othermsg mt-3">
+									<div class="timename">
+										<span id="time">${gcList.sendDate } &nbsp</span>
+										<span>${gcList.user_nickname }</span>
+									</div>
+									<div class="msgBox">${gcList.message }</div>
+								</div>
+							</c:otherwise>
+						</c:choose>	
+					</c:forEach>
 				</div>
-				<div
-					class="inputmsg d-flex justify-content-center align-items-center">
+				<div class="inputmsg d-flex justify-content-center align-items-center">
 					<input type="text" id="message" class="form-control w-75 mt-2">
-					<button type="button"
-						class="btn btn-outline-primary d-flex align-items-center mt-2 ms-4 h-75"
+					<button type="button" class="btn btn-outline-primary d-flex align-items-center mt-2 ms-4 h-75"
 						id="send">send</button>
 				</div>
 			</div>
@@ -219,16 +232,39 @@
 		// 그 후 작성하여 보낸 메세지가 요청이 되거나, 다른 접속자가 보낸 메세지를 응답받을 수 있게 만듦.
 		// 웹소켓 객체 생성할때 반드시 서버의 ip 주소값은 실제 ip 주소를 이용
 		// 포트번호 다르면 :포트번호/chat
-		let ws = new WebSocket("ws://192.168.35.109/group/toChat");
-		
+		let ws = new WebSocket("ws://192.168.35.109/chat");
+		let nickname = $("#nickname").val();
 		$("#send").click(function(){
+			sendChat();
+		})
+		$("#message").keypress(function(){
+			sendChat();
+		})
+		
+		//채팅 보내는 함수
+		function sendChat(){
 			let message = $("#message").val();
 			if(message != ""){ // message가 빈값이 아닐때만 전송
 				$("#message").val(""); //입력창 비우기
 				ws.send(message); // 서버의 endpoint에 메세지를 보내는 함수
 				
+				let div_clear = $("<div>").css("clear", "both");
+				
+				let span1 = $("<span>").attr("id", "time").html("00:00 &nbsp");
+				let span2 = $("<span>").html(nickname); 
+				let div_tn = $("<div>").attr("class", "timename");
+				div_tn.append(span1, span2);
+				
+				let div_msgB = $("<div>").attr("class", "msgBox").html(message);
+
+				let div_mymsg = $("<div>").attr("class", "mymsg");
+				div_mymsg.append(div_tn, div_msgB);
+				$(".messages").append(div_mymsg, div_clear);
+				
+				$(".messages").scrollTop($(".messages")[0].scrollHeight);
+
 			}
-		})
+		}
 		
 		// endpoint로부터 전송된 메세지 받기
 		// endpoint에서 sendText() 메서드를 실행하면 onmessage 이벤트가 trigger 됨.
@@ -237,9 +273,14 @@
 			// 넘어 온 json처럼 생긴 문자열을 실제 json형(객체)으로 변환
 			let msg = JSON.parse(message.data);
 			console.log(msg);
-			
 			let msgDiv = $("<div>").append(msg.message);
 			$(".messages").append(msgDiv);
+			$(".messages").scrollTop($(".messages")[0].scrollHeight);
+
+		}
+		
+		window.onload=function(){
+			$(".messages").scrollTop($(".messages")[0].scrollHeight);
 		}
 		
 	</script>

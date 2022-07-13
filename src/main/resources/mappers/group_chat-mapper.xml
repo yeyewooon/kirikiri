@@ -8,16 +8,16 @@
 		insert into group_chat
 			values(seq_chat.nextval, #{seq_group}, #{user_nickname}, #{message}, sysdate)
 	</insert>
-	<select id="selectList" parameterType="int" resultType="com.kiri.dto.Group_ChatDTO">
-		select * from group_chat where seq_group = #{seq_group}
+	<select id="selectChat" parameterType="int" resultType="com.kiri.dto.Group_ChatDTO">
+		select seq_chat, seq_group, user_nickname, message, to_char(sendDate, 'am hh:mi') as sendDate from group_chat where seq_group = #{seq_group} order by 5
 	</select>
 	<select id="selectGroup" parameterType="int" resultType="com.kiri.dto.Tbl_GroupDTO">
 		select * from tbl_group where seq_group = #{seq_group}
 	</select>
-	<select id="selectNick" parameterType="int" resultType="String">
+	<select id="selectNick" parameterType="int" resultType="com.kiri.dto.Group_MemberDTO">
 		select * from group_member where seq_group = #{seq_group} order by 4 
 	</select>
-	<select id="getProfile" parameterType="String">
-		select user_image from member where user_nickname=#{user_nickname}
+	<select id="getProfileImg" parameterType="String" resultType="com.kiri.dto.MemberDTO">
+		select * from member where user_nickname = #{user_nickname}
 	</select>
 </mapper>

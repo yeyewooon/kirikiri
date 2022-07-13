@@ -28,10 +28,12 @@ public class ChatEndPoint {
 		@OnOpen
 		// 지금 접속한 클라이언트의 session 값을 매개변수 받음.
 		public void onOpen(Session session, EndpointConfig config) {
-			String user_nickname = (String)config.getUserProperties().get("user_nickname");
-			System.out.println("접속한 사용자 : "+ user_nickname);
-			this.user_nickname = user_nickname; // 멤버필드로 셋팅해두기(onMessage메서드에서 사용가능하게끔)
+			//원래 이거
+//			String user_nickname = (String)config.getUserProperties().get("user_nickname");
+//			System.out.println("접속한 사용자 : "+ user_nickname);
+//			this.user_nickname = user_nickname; // 멤버필드로 셋팅해두기(onMessage메서드에서 사용가능하게끔)
 			
+			this.user_nickname = "abc초콜릿";
 			System.out.println("접속됨");
 			clients.add(session); // 멤버필드 list에 새로 접속한 클라이언트 세션 추가
 			for(Session client : clients) {
@@ -44,6 +46,7 @@ public class ChatEndPoint {
 		public void onMessage(Session session, String message) {// message 변수에 클라이언트가 전송한 메세지 담김
 			System.out.println("메세지 발신자 : " + this.user_nickname);
 			System.out.println("message : "+message);
+			int seq_group = 1;
 			
 			// Jackson이 가지고 있는 JsonObject 클래스를 이용해 user_nickname, message를 json형태로 변환
 			JSONObject obj = new JSONObject();
@@ -52,7 +55,7 @@ public class ChatEndPoint {
 			System.out.println(obj.toString());
 			
 			try{
-				service.insert(new Group_ChatDTO(0, 0, this.user_nickname, message, null));
+				service.insert(new Group_ChatDTO(0, seq_group, this.user_nickname, message, null));
 			}catch(Exception e) {
 				e.printStackTrace();
 				// 만약 db에 데이터 저장이 정상적으로 이뤄지지 않으면 다른 사용자들에게 메세지를 전송하는 작업 또한 하지 않도록 메서드의 흐름 종료 -> return

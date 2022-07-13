@@ -6,8 +6,11 @@ public class Group_MemberDTO {
 	private int seq_group;
 	private String user_nickname;
 	private String access;
-	
-	public Group_MemberDTO() {}
+
+	public Group_MemberDTO() {
+		super();
+	}
+
 	public Group_MemberDTO(int seq_member, String user_email, int seq_group, String user_nickname, String access) {
 		super();
 		this.seq_member = seq_member;
