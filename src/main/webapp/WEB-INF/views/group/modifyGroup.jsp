@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -187,15 +188,15 @@ body {
 }
 
 .imgBox {
-	width: 240px;
-	height: 240px;
+	width: 500px;
+	height: 340px;
 	background-color: yellowgreen;
 	border-radius: 4px;
 }
 
 .imgBox img {
-	width: 240px;
-	height: 240px;
+	width: 500px;
+	height: 340px;
 }
 
 .mainFooter {
@@ -283,6 +284,21 @@ footer.footer {
 	font-weight: normal;
 	font-style: normal;
 }
+
+
+.btn-primary {
+    color: #fff;
+    background-color: #afc9f6;
+    border-color: #fff;
+}
+
+.btn-primary:hover {
+	border-color: #fff;
+	background-color: cornflowerblue;
+}
+
+
+
 </style>
 </head>
 <body>
@@ -389,24 +405,22 @@ footer.footer {
 			</nav>
 		</div>
 	</header>
-	
-	
 	<div class="container w-75 mainContainer">
-		<form action="/group/moifyGroup" method="post"
+		<form action="/group/modifyGroup" method="post"
 			enctype="multipart/form-data" id="groupForm">
 			<!--관심사 -->
 			<div class="row mt-4">
 				<!--관심사 아이콘-->
 				<div class="col-3 mainIcon text-center">
-					<h4>
+					<h2>
 						<i class="fa-solid fa-tags"></i>
-					</h4>
+					</h2>
 				</div>
 				<!-- seq_group 몰래 넣기 -->
 				<input type="text" name="seq_group" id="seq_group" value="${tbl_group_dto.seq_group}" hidden>
 				<!--관심사 버튼  -->
 				<div class="col-9 mainTextInterest d-flex flex-column justify-content-start">
-					<h3>Interests</h3>
+					<h2>Interests</h2>
 					<span style="font-size: 14px;">주제가 구체적일수록 비슷한 관심사를 가진 사람들에게
 						그룹을 <br>홍보하기가 더 쉬워집니다. 주제는 1개만 선택 가능합니다.<br><br>
 						기존에 선택하셨던 주제는 <strong>${tbl_group_dto.group_category}</strong> 입니다.
@@ -443,13 +457,13 @@ footer.footer {
 			<div class="row mt-5">
 				<!--아이콘-->
 				<div class="col-3 mainIcon text-center">
-					<h4>
+					<h2>
 						<i class="fa-solid fa-pen-to-square"></i>
-					</h4>
+					</h2>
 				</div>
 				<!--기본 글쓰기 -->
 				<div class="col-9 mainTextBasicInfo d-flex flex-column justify-content-start">
-					<h3>Basic Info</h3>
+					<h2>Basic Info</h2>
 					<strong class="mt-2">모임 이름</strong> <span style="font-size: 14px;"
 						class="mt-2">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. 떠오르는 기발한
 						이름이 있나요? <br> 마음이 바뀌면 나중에 다시 변경할 수 있습니다.
@@ -458,7 +472,7 @@ footer.footer {
 						<input type="text" class="form-control" id="group_title"
 							placeholder="모임 이름" name="group_title" value="${tbl_group_dto.group_title}">
 					</div>
-					<strong class="mt-2">모집 내용</strong> <span style="font-size: 14px;"
+					<strong class="mt-3">모집 내용</strong> <span style="font-size: 14px;"
 						class="mt-2">모집내용은 회원들에게 그룹을 홍보할 때 표시됩니다. <br>변경사항이
 						있다면 나중에 언제든지 업데이트가 가능합니다.
 					</span>
@@ -474,9 +488,9 @@ footer.footer {
 			<div class="row mt-5">
 				<!--위치 아이콘-->
 				<div class="col-3 mainIcon text-center">
-					<h4>
+					<h2>
 						<i class="fa-solid fa-location-dot"></i>
-					</h4>
+					</h2>
 				</div>
 				<!--위치 설정  -->
 				<div class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
@@ -501,13 +515,13 @@ footer.footer {
 			<div class="row mt-5">
 				<!--메인 이미지 아이콘-->
 				<div class="col-3 mainIcon text-center">
-					<h4>
+					<h2>
 						<i class="fa-solid fa-images"></i>
-					</h4>
+					</h2>
 				</div>
 				<!--이미지 올리기 -->
 				<div class="col-9 mainTextFile d-flex flex-column justify-content-start">
-					<h3>Main Image</h3>
+					<h2>Main Image</h2>
 					<span style="font-size: 14px;">썸네일로 보여질 이미지입니다. <br>본인이
 						생각하는 최고의 사진을 넣어주세요!
 					</span>
@@ -517,9 +531,9 @@ footer.footer {
 								<img src="/group_profile/${tbl_group_dto.sys_name}" id="profile_image">
 							</c:when>
 							<c:otherwise>
-								<img src="/resources/images/profile.jpg" id="profile_image">
+								<img src="/resources/images/메인사진2(배경).png" id="profile_image">
 							</c:otherwise>
-						</c:choose>
+					</c:choose>
 					</div>
 					<input type="file" class="form-control mt-3 w-75" name="groupFile"
 						id="groupFile" />
@@ -530,16 +544,17 @@ footer.footer {
 			<div class="row mt-5">
 				<!--위치 아이콘-->
 				<div class="col-3 mainIcon text-center">
-					<h4>
+					<h2>
 						<i class="fa-solid fa-user-group"></i>
-					</h4>
+					</h2>
 				</div>
 				<!--위치 설정  -->
 				<div class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
-					<h3>Member</h3>
+					<h2>Member</h2>
 					<span style="font-size: 14px;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
-						인원은 최소 2명부터 최대 10명까지 가능합니다.
-					</span> <strong class="mt-2">인원 설정</strong>
+						인원은 최소 2명부터 최대 10명까지 가능합니다.<br><br>
+					현재 모임의 맴버수는 <strong>${fn:length(memberList)}명</strong> 입니다.
+					</span> <strong class="mt-3">인원 설정</strong>
 					<div class="memberCntBox d-flex mt-2 ">
 						<div
 							class="calBtn minusBtn d-flex justify-content-center align-items-center"
@@ -561,13 +576,13 @@ footer.footer {
 			<div class="row mt-5">
 				<!--이미지 아이콘-->
 				<div class="col-3 mainIcon text-center">
-					<h4>
+					<h2>
 						<i class="fa-solid fa-circle-info"></i>
-					</h4>
+					</h2>
 				</div>
 				<!--이미지 올리기 -->
 				<div class="col-9 mainTextFile d-flex flex-column justify-content-start">
-					<h3>Guideline</h3>
+					<h2>Guideline</h2>
 					<span>
 						<h5>거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
 					</span> <span style="font-size: 14px;" class="mt-2">끼리끼리는 끈끈한 커뮤니티를
@@ -591,7 +606,7 @@ footer.footer {
 	<div class="mainFooter d-flex justify-content-center align-items-center mt-3">
 		<span class="mainFooterBtnBox">
 			<button class="btn btn-outline-warning">뒤로 가기</button>
-			<button class="btn btn-primary ms-4" id="modifyGroupBtn">동의후 등록</button>
+			<button class="btn btn-primary ms-4" id="modifyGroupBtn">동의 후 수정</button>
 		</span>
 	</div>
 
@@ -639,8 +654,6 @@ footer.footer {
 		</div>
 	</div>
 	<script>
-  <!-- AOS 스크립트 시작 -->
-  AOS.init(); // 자바스크립트로 init()을 해야 동작한다.
 
   // 지역 설정
   $('document').ready(function() {
@@ -834,14 +847,29 @@ footer.footer {
 
   // 맴버수
   let memberCnt = Number($(".memberCnt").html());
+  //현재 맴버 수 
+  let curMemberCnt = Number(${fn:length(memberList)});
+  
   // 버튼 클릭시
   $(".calBtn").on("click", function () {
     if ($(this).attr("id") === "plusBtn") {
       countUp();
       cntCondition();
     } else if ($(this).attr("id") === "minusBtn") {
-      countDown();
-      cntCondition();
+    	console.log(curMemberCnt);
+    	console.log(memberCnt);
+    	if(curMemberCnt > memberCnt-1){
+    		Swal.fire({
+    	        icon: 'error',
+    	        title: '맴버수를 체크해주세요',
+    	        text: '현재 맴버수 보다 적은 인원수로 수정이 불가능합니다',
+    	      });
+    		$("#group_people").val(curMemberCnt);
+    		return;
+    	}else {
+    		countDown();
+    	    cntCondition();
+    	}
     }
   })
 
@@ -857,6 +885,8 @@ footer.footer {
     memberCnt -= 1;
     $(".memberCnt").html(memberCnt);
     $("#group_people").val(memberCnt);
+    
+    
   }
 
   // 숫자 조건 (2~10)명
@@ -878,7 +908,7 @@ footer.footer {
       });
       $(".memberCnt").html(10);
       $("#group_people").val(10);
-    }
+    } 
   }
 
   

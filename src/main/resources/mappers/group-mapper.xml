@@ -16,11 +16,6 @@
 		insert into group_member values(seq_member.nextval, #{user_email}, seq_group.currval, #{user_nickname}, '주최자')
 	</insert>
 	
-	<!-- 현재 seq_group 얻어오기 -->
-	<!-- <select id="selectSeqGroup" resultType="int">
-		select seq_group.nextval from dual
-	</select> -->
-	
 	<!-- seq_group 이용해 해당 그룹 내용 가져오기 -->
 	<select id="selectGroupDetail" parameterType="int" resultType="com.kiri.dto.Tbl_GroupDTO">
 		select * from tbl_group where seq_group = #{seq_group}
@@ -49,6 +44,41 @@
 		</choose>
 		where seq_group = #{seq_group}
 	</update>
+	
+	<!-- 해당 모임의 맴버 조회 -->
+	<select id="selectGroupMember" parameterType="int" resultType="com.kiri.dto.Group_MemberDTO">
+		select * from group_member where seq_group = #{seq_group} order by "access" desc
+	</select>
+	
+	<!-- 해당 모임 맴버 탈퇴 -->
+	<delete id="quitGroupMember" parameterType="com.kiri.dto.Group_MemberDTO">
+		delete from group_member where seq_group = #{seq_group} and user_email = #{user_email}
+	</delete>
+	
+	<!-- 해당 그룹 가입 신청 명단 -->
+	<select id="selectApplyList" parameterType="int" resultType="com.kiri.dto.Group_ApplyDTO">
+		select * from group_apply where seq_group = #{seq_group}
+	</select>
+	
+	<!-- 그룹 가입 신청 -->
+	<insert id="applyGroupMember" parameterType="com.kiri.dto.Group_ApplyDTO">
+		insert into group_apply values(seq_apply.nextval, #{user_email}, #{seq_group}, #{user_nickname}, sysdate)
+	</insert>
+	
+	<!-- 해당 그룹 찜 -->
+	<insert id="insertWishList" parameterType="com.kiri.dto.WishListDTO">
+		insert into wishList values(seq_wishlist.nextval ,#{seq_group}, #{user_email})
+	</insert>
+	
+	<!--  해당 그룹 찜 명단 -->
+	<select id="selectWishList" parameterType="int" resultType="com.kiri.dto.WishListDTO">
+		select * from wishList where seq_group = #{seq_group}
+	</select>
+	
+	<!--  해당 그룹 찜 삭제 -->
+	<delete id="deletetWishList" parameterType="com.kiri.dto.WishListDTO">
+		delete from wishList where seq_group = #{seq_group} and user_email = #{user_email}
+	</delete>
 	
 	
 	
