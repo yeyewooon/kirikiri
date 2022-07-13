@@ -282,6 +282,15 @@ footer.footer {
 	font-weight: normal;
 	font-style: normal;
 }
+
+
+.btn-primary {
+    color: #fff;
+    background-color: cornflowerblue;
+    border-color: #fff;
+}
+
+
 </style>
 </head>
 <body>
@@ -503,7 +512,7 @@ footer.footer {
 						생각하는 최고의 사진을 넣어주세요!
 					</span>
 					<div class="imgBox mt-4">
-						<img src="/resources/images/profile.jpg" id="groupDefaultImg">
+						<img src="/resources/images/메인사진2(배경).png" id="groupDefaultImg">
 					</div>
 					<input type="file" class="form-control mt-3 w-75" name="groupFile"
 						id="groupFile" />

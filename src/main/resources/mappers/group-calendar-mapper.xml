@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+ <mapper namespace="calMapper">
+ 	<!-- 일정 글쓰기 -->
+ 	<insert id="calInsert" parameterType="com.kiri.dto.Group_CalendarDTO">
+ 		insert into group_calender values(seq_group_cal.nextval,#{seq_group}, #{user_email, jdbcType = VARCHAR},#{title}, to_date(#{start},'YYYY-MM-DD'),#{gcal_name},#{gcal_content},#{gcal_place},#{gcal_latitude},#{gcal_longitude})
+ 	</insert>
+
+	<!-- 일정 모든 데이터 가져오기 -->
+	<select id="calSelect" parameterType="int"  resultType="com.kiri.dto.Group_CalendarDTO">
+		SELECT *
+		FROM group_calender where seq_group = #{seq_group}
+	</select>
+
+	<!-- 일정 상세 데이터 가져오기 -->
+	<select id="calSelectDetail" parameterType="int" resultType="com.kiri.dto.Group_CalendarDTO">
+		select * from group_calender where seq_group_cal = #{seq_group_cal}
+	</select>
+
+	<!-- 일정 삭제 -->
+	<delete id="calDelete" parameterType="int">
+		delete from group_calender where seq_group_cal = #{seq_group_cal}
+	</delete>
+
+	<!-- 일정 수정 -->
+	<update id="calModify" parameterType="com.kiri.dto.Group_CalendarDTO">
+		update group_calender set "start" = #{start} where seq_group_cal = #{seq_group_cal}
+	</update>
+	
+	
+ </mapper>
