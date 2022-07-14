@@ -183,7 +183,6 @@ a {
 
 .card {
 	width: 18rem;
-	border-radius: 10%;
 	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
 }
 
@@ -194,7 +193,6 @@ a {
 .card-img-top {
 	width: 18rem;
 	height: 13rem;
-	border-radius: 10%;
 }
 
 .imgContainer {

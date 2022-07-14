@@ -501,7 +501,7 @@ footer.footer {
 					</span> <span class="mt-2"><strong>새로운 지역 설정</strong></span>
 					<div class="selectBox d-flex">
 						<select class="form-select mt-2 w-25" name="sido1" id="sido1" onchange="selectBoxChange1(this.value);"></select> 
-						<select class="form-select mt-2 w-25" name="gugun1" id="gugun1" onchange="selectBoxChange2(this.value);"></select>
+						<select class="form-select mt-2 w-25 ms-3" name="gugun1" id="gugun1" onchange="selectBoxChange2(this.value);"></select>
 						<button type="button" class="btn btn-primary mt-2 group_siteBtn ms-3">지역 선택 완료</button>
 					</div>
 					<!--모임 지역-->
@@ -536,7 +536,7 @@ footer.footer {
 					</c:choose>
 					</div>
 					<input type="file" class="form-control mt-3 w-75" name="groupFile"
-						id="groupFile" />
+						id="groupFile" accept='image/jpeg,image/gif,image/png' onchange="chk_file_type(this)"/>
 				</div>
 			</div>
 
@@ -655,6 +655,25 @@ footer.footer {
 	</div>
 	<script>
 
+   // 파일 타입 설정
+   /* function chk_file_type(obj) {
+		 let file_kind = obj.value.lastIndexOf('.');
+		 let file_name = obj.value.substring(file_kind+1,obj.length);
+		 let file_type = file_name.toLowerCase();
+		 let check_file_type=new Array();​
+		 check_file_type=['jpg','gif','png','jpeg','bmp'];
+		 if(check_file_type.indexOf(file_type)==-1){
+		    alert('이미지 파일만 선택할 수 있습니다.');
+		    let parent_Obj=obj.parentNode
+		    let node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
+		  return false;
+		 }
+		}	 */
+	
+	
+	
+	
+	
   // 지역 설정
   $('document').ready(function() {
 	  var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
