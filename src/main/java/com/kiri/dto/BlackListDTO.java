@@ -6,4 +6,5 @@ public class BlackListDTO {
 	private int seq_bl;
 	private String user_email;
 	private Date date_bl;
+	private String bl_reason;
 }
