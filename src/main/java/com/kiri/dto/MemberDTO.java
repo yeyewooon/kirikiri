@@ -1,7 +1,5 @@
 package com.kiri.dto;
 
-import java.util.Date;
-
 public class MemberDTO {
 	private String user_email;
 	private String user_pw;
@@ -16,7 +14,11 @@ public class MemberDTO {
 	private String user_blacklist;
 	private String user_delete;
 	
+<<<<<<< HEAD
 	public MemberDTO() {}
+=======
+	public MemberDTO(){}
+>>>>>>> 811b2f1e80664298b397fe202e26bc7034218d16
 
 	public MemberDTO(String user_email, String user_pw, String user_name, String user_nickname, String user_phone,
 			String user_bd, String user_gender, String user_job, String user_intro, String user_image,
@@ -134,11 +136,18 @@ public class MemberDTO {
 
 	@Override
 	public String toString() {
+<<<<<<< HEAD
 		return "MemberDTO [user_email=" + user_email + ", user_pw=" + user_pw + ", user_name=" + user_name
 				+ ", user_nickname=" + user_nickname + ", user_phone=" + user_phone + ", user_bd=" + user_bd
 				+ ", user_gender=" + user_gender + ", user_job=" + user_job + ", user_intro=" + user_intro
 				+ ", user_image=" + user_image + ", user_blacklist=" + user_blacklist + ", user_delete=" + user_delete
 				+ "]";
+=======
+		return user_email + " : " + user_pw + " : " +  user_name
+				+ " : " + user_nickname + " : " +  user_phone + " : " +  user_bd
+				+ " : " +  user_gender+ " : " + user_job + " : " +  user_intro
+				+ " : " +  user_image + " : " +  user_blacklist + " : " +  user_delete;
+>>>>>>> 811b2f1e80664298b397fe202e26bc7034218d16
 	}
 	
 	

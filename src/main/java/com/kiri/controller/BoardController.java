@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class BoardController {
 	@RequestMapping(value = "/")
 	public String home() {
-		
 		return "mainPage";
 	}
 	
