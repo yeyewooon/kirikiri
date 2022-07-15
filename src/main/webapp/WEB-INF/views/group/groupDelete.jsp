@@ -1,37 +1,36 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+   rel="stylesheet">
 <script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
-	
+   src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+   crossorigin="anonymous"></script>
+   
 <!--구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link
-	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap"
-	rel="stylesheet">
+   href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap"
+   rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
+   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+   crossorigin="anonymous"></script>
 <!-- AOS 라이브러리 불러오기-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
-	crossorigin="anonymous"></script>
+   crossorigin="anonymous"></script>
 <!-- Bootstrap icons-->
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet">
+   href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+   rel="stylesheet">
 <!-- 깃허브 alert -->
 <!-- swal -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -39,54 +38,54 @@
 <title>그룹해산</title>
 <style>
 * {
-	font-family: 'OTWelcomeRA';
+   font-family: 'OTWelcomeRA';
 }
 
 #mainText {
-	font-family: '양진체';
+   font-family: '양진체';
 }
 
 /* header 반응형 */
 @media ( max-width : 768px) {
-	#navLogo {
-		display: none;
-	}
-	#myPageIcon {
-		display: none;
-	}
-	#cartIcon {
-		display: none;
-	}
-	#menu {
-		display: none;
-	}
+   #navLogo {
+      display: none;
+   }
+   #myPageIcon {
+      display: none;
+   }
+   #cartIcon {
+      display: none;
+   }
+   #menu {
+      display: none;
+   }
 }
 
 /* header */
 #navLogo {
-	width: 150px;
-	height: 100px;
+   width: 150px;
+   height: 100px;
 }
 
 #logoImgs {
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 
 @media ( min-width : 768px) {
-	#navibar {
-		display: none;
-	}
+   #navibar {
+      display: none;
+   }
 }
 
 /* header 반응형 끝 */
 #logoImg {
-	width: 50%;
+   width: 50%;
 }
 
 /*버튼 및 테이블*/
 .container-btn {
-	width: 100%;
+   width: 100%;
 }
 .rowBtn{
     border: 5px solid #d2e3ec;
@@ -97,8 +96,8 @@
 }
 
 .btnBox {
-	text-align: center;
-	margin-top: 10px;
+   text-align: center;
+   margin-top: 10px;
     margin-bottom: 10px;
 }
 /*버튼 색 지정*/
@@ -109,54 +108,55 @@ border-color:cornflowerblue;
 
 /*모임 해산 문구 및 사진*/
 .container-content {
-	width: 100%;
-	background-color: #f6f9fe;
+   width: 100%;
+   background-color: #f6f9fe;
 }
 
 .content-delete {
-	width: 60%;
-	height: 100%;
+   width: 60%;
+   height: 100%;
 }
 
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
-	color: #83bf7b;
-	border-color: aliceblue;
+   color: #83bf7b;
+   border-color: aliceblue;
 }
 
 .dropdown:hover .dropdown-menu {
-	display: block;
-	margin-top: 0;
-	font-weight: bold;
+   display: block;
+   margin-top: 0;
+   font-weight: bold;
 }
 
 /*풋터 영역*/
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	background-color: #ffffff;
-	width: fit-content;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
+   background-color: #ffffff;
+   width: fit-content;
     margin: auto;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 </style>
 </head>
 <body>
+
 	<header class="mb-3 border-bottom">
 		<div class="container">
 			<!-- 접혔을 때 nav -->
@@ -391,5 +391,6 @@ footer.footer {
 			deleteForm.submit();
 		}
 	})
+
 </script>
 </html>

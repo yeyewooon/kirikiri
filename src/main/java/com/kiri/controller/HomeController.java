@@ -11,5 +11,13 @@ public class HomeController {
 	public String main() {
 		return "mainPage";
 	}
+	@RequestMapping(value = "/toError")
+	public String toError() {
+		return "error";
+	}
+	@RequestMapping(value = "/toAdmin")
+	public String toAdmin() {
+		return "admin/adminMain";
+	}
 
 }

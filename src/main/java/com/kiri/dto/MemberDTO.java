@@ -132,12 +132,10 @@ public class MemberDTO {
 
 	@Override
 	public String toString() {
-		return "MemberDTO [user_email=" + user_email + ", user_pw=" + user_pw + ", user_name=" + user_name
-				+ ", user_nickname=" + user_nickname + ", user_phone=" + user_phone + ", user_bd=" + user_bd
-				+ ", user_gender=" + user_gender + ", user_job=" + user_job + ", user_intro=" + user_intro
-				+ ", user_image=" + user_image + ", user_blacklist=" + user_blacklist + ", user_delete=" + user_delete
-				+ "]";
-
+		return user_email + " : " + user_pw + " : " +  user_name
+				+ " : " + user_nickname + " : " +  user_phone + " : " +  user_bd
+				+ " : " +  user_gender+ " : " + user_job + " : " +  user_intro
+				+ " : " +  user_image + " : " +  user_blacklist + " : " +  user_delete;
 	}
 	
 	
