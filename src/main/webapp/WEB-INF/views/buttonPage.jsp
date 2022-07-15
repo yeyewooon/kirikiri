@@ -10,16 +10,37 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<button type="button" value="1" class="btn">1</button>
-	<button type="button" value="2" class="btn">2</button>
-	<button type="button" value="3" class="btn">3</button>
-	<button type="button" value="4" class="btn">4</button>
+	<h1>모임 수정</h1>
+	<button type="button" value="1" class="btn">수정 1</button>
+	<button type="button" value="2" class="btn">수정 2</button>
+	<button type="button" value="3" class="btn">수정 3</button>
+	<button type="button" value="4" class="btn">수정 4</button><br>
 	
+	<h1>모임 상세</h1>
+	<button type="button" value="1" class="detailBtn">상세 1</button>
+	<button type="button" value="2" class="detailBtn">상세 2</button>
+	<button type="button" value="3" class="detailBtn">상세 3</button>
+	<button type="button" value="4" class="detailBtn">상세 4</button><br>
+	
+	<h1>모임 일정</h1>
+	<button type="button" value="1" class="calBtn">모임 일정1</button>
+	<button type="button" value="2" class="calBtn">모임 일정2</button>
+	<button type="button" value="3" class="calBtn">모임 일정3</button>
+	<button type="button" value="4" class="calBtn">모임 일정4</button><br>
 	
 	<script>
 		$(".btn").on("click",function(e) {
-			location.href = "/group/toMoifyGroup?seq_group="+e.target.value;
+			location.href = "/group/toModifyGroup?seq_group="+e.target.value;
 		})
+		
+		$(".detailBtn").on("click",function(e) {
+			location.href = "/group/toGroupDetail?seq_group="+e.target.value;
+		})
+		
+		$(".calBtn").on("click",function(e) {
+			location.href = "/cal/toGroupCalendar?seq_group="+e.target.value;
+		})
+		
 		
 		
 	</script>
