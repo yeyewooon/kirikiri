@@ -227,7 +227,7 @@
     	$.ajax({
     		url : "/login/general"
     		, type : "post"
-    		, data : {user_id : $("#id").val() , user_pw : $("#pw").val() }
+    		, data : {user_email : $("#id").val() , user_pw : $("#pw").val() }
     		, dataType : "text"
     		, success : function(result){
     			console.log(result);

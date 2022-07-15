@@ -31,10 +31,9 @@ public class LoginController {
 
 	@ResponseBody
 	@RequestMapping(value = "/general") 	
-	public String general(String user_email, String user_pw) throws Exception { // 일반로그인
+	public String general(String user_email, String user_pw) throws Exception { // 일반로그인 feat.조용진
 		String Encryption_pw = ecp.getSHA512(user_pw); 
 		MemberDTO dto = service.login(user_email, Encryption_pw);
-		System.out.println(dto);
 		
 		if(dto != null) { // 널이 아니라면 조회 성공
 			dto.setUser_pw(null);
@@ -59,7 +58,7 @@ public class LoginController {
 		}
 	}
 	
-	@RequestMapping(value = "/toLogout")//logout페이지 요청
+	@RequestMapping(value = "/toLogout")//logout페이지 요청 feat.조용진
 	public String logout() {
 		session.removeAttribute("loginSession");
 		return "redirect:/";

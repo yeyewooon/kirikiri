@@ -22,7 +22,6 @@ public class SignupContoller {
 	@ResponseBody
 	@RequestMapping(value = "/emailCheck") //이메일 중복체크
 	public String emailCheck(String user_email) throws Exception {
-		System.out.println("유저 이메일 : "+user_email);
 		
 		boolean is_result = service.emailCheck(user_email);
 		if(is_result) {
@@ -36,7 +35,6 @@ public class SignupContoller {
 	@ResponseBody
 	@RequestMapping(value = "/nicknameCheck") //이메일 중복체크
 	public String nicknameCheck(String user_nickname) throws Exception {
-		System.out.println("유저 닉네임 : " + user_nickname);
 		
 		boolean is_result = service.nicknameCheck(user_nickname);
 		if(is_result) {
@@ -46,6 +44,12 @@ public class SignupContoller {
 		}
 		
 	}
+	
+	@RequestMapping(value = "/signup") //회원가입으로
+	public String Signup() {
+		return "/member/signup";
+	}
+	
 	
 	@ExceptionHandler
 	public String toError(Exception e) {

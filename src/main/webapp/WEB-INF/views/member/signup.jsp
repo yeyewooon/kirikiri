@@ -308,7 +308,7 @@ input{
     width: 20%;
 }
 
-#password-regex-span, #password-check-span ,#name-check-span{
+#password-regex-span, #password-check-span ,#name-check-span, #nickname-regex-span{
 	color: red;
 	margin-left: 10px;
 	font-weight: bold;
@@ -395,8 +395,11 @@ footer.footer {
 		$("#emailCheck").click(function(){ //이메일 중복체크
    	   
    	  		 let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;    
-      
-   	  		 if(!emailRegex.test($("#email-domain").val())){
+      		 if($("#email-domain").val() === "1"){
+      			 alert("도메인을 선택 혹은 입력해주세요.");
+      			 return;
+      		
+      		 }else if(!emailRegex.test($("#email-domain").val())){
    	  			 console.log($("#email-domain").val());
        	 		 alert("올바르지 않은 이메일 형식입니다.");
 	       	 	 return;
@@ -434,6 +437,18 @@ footer.footer {
    	   });
       
 		
+		$("#user_nickname").change(function(){
+			$("#nickname-col").empty();
+			$("#nicknameConfirm").val("deny");
+			let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;   
+			
+			if(!nicknameRegex.test($("#user_nickname").val())){
+				invalidNickname();
+	       	 	return;
+			}
+			
+		});
+		
 	   
 		$("#nicknameCheck").click(function(){ //이메일 중복체크
 		   	   
@@ -460,6 +475,8 @@ footer.footer {
 	        				
 	        			}else if(result === "possibility"){
 	        				alert("사용 가능한 닉네임입니다.");
+	        				validNickname();
+	        				$("#nicknameConfirm").val("confirm");
 	        			}
 	        	
 	        		}, error : function(e){
@@ -510,21 +527,67 @@ footer.footer {
        
        });
        
+       
+       
+       
        $("#nextBtn").click(function(){ //다음으로
            
     	   let nameRegex = /^[가-힣]+$/;
-       
+       	   
+      	   let bdRegex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
+		   let bd = $("#year").val() + $("#month").val() + $("#day").val();
+		   
+		   let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
+		   let phone =  $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val(); 
+		   
+		   let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;   
+		   
+		   
+		   
+	       	 	 
            if(!nameRegex.test($("#user_name").val())){
         	   alert("올바르지 않은 이름입니다.");
+        	   return;   
+        	   
+           }else if(!emailRegex.test($("#email-domain").val())){
+      	 	   alert("올바르지 않은 이메일 형식입니다.");
+ 	       	   return;   
+ 	       	   
+           }else if($("#email-id").val() === $("#user_password").val()){
+    		   alert("아이디와 비밀번호를 다르게 설정해주세요.");
+    		   return;
+        	   
+           }else if($("#user_password").val() != $("#pwCheck").val()){
+        	   alert("비밀번호가 다릅니다.");
         	   return;
         	   
-//            }else if(){
+           }else if($("#nicknameConfirm").val() !== "confirm"){
+        	   alert("닉네임 중복확인을 해주세요.");
+        	   return;
         	   
-//            }else if(){
+           }else if($("#month").val() + $("#day").val() === "0230" || $("#month").val() + $("#day").val() === "0231"){
+        	   alert("생일을 정확하게 입력해주세요.");
+        	   $("#day").focus();
+        	   return;
         	   
-//            }else if(){
+           }else if(!bdRegex.test(bd)){
+        	   alert("생일을 정확하게 입력해주세요.");
+        	   $("#day").focus();
+        	   return;
         	   
-//            }else if(){
+           }else if(!phoneRegex.test(phone)){
+        	   alert("핸드폰 번호를 정확하게 입력해주세요.");
+        	   $("#phone3").focus();
+        	   return;
+        	   
+           }else if(!$('input:radio[name="gender"]').is(":checked")){
+        	   alert("성별을 선택해주세요.");
+//         	   console.log($('input:radio[name="gender"]:checked').val());
+        	   return;
+		   
+        	   
+           
+//         }else if(){
         	   
            }else{
         	   next();
@@ -595,6 +658,20 @@ function checkPw(){
     let span = $('<span>').attr('id', 'password-check-span').css("color","red").html("비밀번호가 다릅니다.");
     $("#check-col").append(span);
     $("#checkPw").focus();
+}
+
+function invalidNickname(){
+	$("#nickname-col").empty();
+    let span = $('<span>').attr('id', 'nickname-regex-span').css("color","red").html("올바르지 않은 아이디 형식입니다.");
+    $("#nickname-col").append(span);
+    $("#user_nickname").focus();
+}
+
+function validNickname(){
+	$("#nickname-col").empty();
+    let span = $('<span>').attr('id', 'nickname-regex-span').css("color","green").html("사용 가능한 닉네임입니다.");
+    $("#nickname-col").append(span);
+    $("#user_nickname").focus();
 }
 
 
@@ -694,6 +771,9 @@ function checkPw(){
       </div>
   </header>
 <!--바디-->
+<input type="text" id="nicknameConfirm" />
+
+<form id="signupForm" action="/signup/signup" method="post">
 <div class="container signupBox">
     <div class="row">
         <div class="col"><h1>회원 가입</h1></div>
@@ -776,7 +856,7 @@ function checkPw(){
                 </div>
                 <div class="row email-domain-row">
                 	<div class="col-md-10 p-0">
-                		<input type="text" id="email-domain" name="email-domain" class="form-control">
+                		<input type="text" id="email-domain" name="email-domain" class="form-control" value="1">
                 	</div>
                 	<div class="col-md-2 d-flex align-items-center">
                 		<i id="email-btn" class="bi bi-arrow-up-square-fill"></i>
@@ -873,14 +953,22 @@ function checkPw(){
         	</div>
         	<div class="col-2 text-align-left-col"></div>
         </div>
+        <div class="row">
+        	<div class="col-md-3">
+        	</div>
+        	<div class="col-md-7 text-align-left-col" id="nickname-col" >
+        	
+        	</div>
+        	<div class="col-2 text-align-left-col"></div>
+        </div>
         <div class="row" >
             <div class="col-md-3">
                 <p>생년월일</p>
             </div>
             <div class="col-md-9 d-flex justify-content start align-items-center">
-                <input type="text" id="year" name="year" class="form-control bthday" maxlength="4"><label for="year">년</label>
-                <input type="text" id="month" name="month" class="form-control bthday" maxlength="2"><label for="month">월</label>
-                <input type="text" id="day" name="day" class="form-control bthday" maxlength="2"><label for="day">일</label>
+                <input type="text" id="year" name="year" class="form-control bthday" maxlength="4" required><label for="year">년</label>
+                <input type="text" id="month" name="month" class="form-control bthday" maxlength="2" required><label for="month">월</label>
+                <input type="text" id="day" name="day" class="form-control bthday" maxlength="2" required><label for="day">일</label>
             </div>
         </div> 
         <div class="row" >
@@ -888,7 +976,7 @@ function checkPw(){
                 <p>휴대전화</p>
             </div>
             <div class="col-md-7" style="text-align: left;">
-                <select name="phone1" id="phone1" class="form-control">
+                <select name="phone1" id="phone1" class="form-control" required>
                     <option value="010" selected>010</option>
                     <option value="011">011</option>
                     <option value="016">016</option>
@@ -896,8 +984,8 @@ function checkPw(){
                     <option value="018">018</option>
                     <option value="019">019</option>
                 </select>
-                <input type="text" id="phone2" name="phone2" class="form-control" maxlength="4">
-                <input type="text" id="phone3" name="phone3" class="form-control" maxlength="4">
+                <input type="text" id="phone2" name="phone2" class="form-control" maxlength="4" required>
+                <input type="text" id="phone3" name="phone3" class="form-control" maxlength="4" required>
                 <input type="hidden" id="phone" name="phone">
             </div>
             <div class="col-2"></div>
@@ -907,9 +995,9 @@ function checkPw(){
                 <p>성별</p>
             </div>
             <div class="col-md-7">
-                <input class="gender" type="radio" id="men" name="gender">
+                <input class="gender" type="radio" id="men" name="gender" value="men" required>
                 <label for="men">남자</label>
-                <input class="gender" type="radio" id="women" name="gender">
+                <input class="gender" type="radio" id="women" name="gender" value="women" required>
                 <label for="women">여자</label>
             </div>
             <div class="col-2"></div>
@@ -1028,6 +1116,7 @@ function checkPw(){
         </div>
     </div>
 </div>
+</form>
 
 <!-- Footer-->
 <footer class="footer">
