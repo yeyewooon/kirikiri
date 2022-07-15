@@ -84,8 +84,8 @@ public class GroupController {
 		Group_MemberDTO group_member_dto = new Group_MemberDTO();
 		
 		// 임시 아이디, 닉네임 session에서 뽑아올 값
-		String user_email = "zx8634";
-		String user_nickname = "꼬끼리끼리";
+		String user_email = "qwekjsadkw";
+		String user_nickname = "내삶의반";
 		// setter 설정
 		tbl_group_dto.setUser_email(user_email);
 		
@@ -265,8 +265,6 @@ public class GroupController {
 				return "fail";
 			}
 		}
-	
-	
 	
 	
 }

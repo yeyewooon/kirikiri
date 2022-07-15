@@ -14,19 +14,34 @@
 	<button type="button" value="1" class="btn">수정 1</button>
 	<button type="button" value="2" class="btn">수정 2</button>
 	<button type="button" value="3" class="btn">수정 3</button>
-	<button type="button" value="4" class="btn">수정 4</button><br>
+	<button type="button" value="4" class="btn">수정 4</button>
+	<button type="button" value="5" class="btn">수정 5</button>
+	<button type="button" value="6" class="btn">수정 6</button>
+	<button type="button" value="7" class="btn">수정 7</button>
+	<button type="button" value="8" class="btn">수정 8</button>
+	<button type="button" value="9" class="btn">수정 9</button><br>
 	
 	<h1>모임 상세</h1>
 	<button type="button" value="1" class="detailBtn">상세 1</button>
 	<button type="button" value="2" class="detailBtn">상세 2</button>
 	<button type="button" value="3" class="detailBtn">상세 3</button>
-	<button type="button" value="4" class="detailBtn">상세 4</button><br>
+	<button type="button" value="4" class="detailBtn">상세 4</button>
+	<button type="button" value="5" class="detailBtn">상세 5</button>
+	<button type="button" value="6" class="detailBtn">상세 6</button>
+	<button type="button" value="7" class="detailBtn">상세 7</button>
+	<button type="button" value="8" class="detailBtn">상세 8</button>
+	<button type="button" value="9" class="detailBtn">상세 9</button><br>
 	
 	<h1>모임 일정</h1>
 	<button type="button" value="1" class="calBtn">모임 일정1</button>
 	<button type="button" value="2" class="calBtn">모임 일정2</button>
 	<button type="button" value="3" class="calBtn">모임 일정3</button>
-	<button type="button" value="4" class="calBtn">모임 일정4</button><br>
+	<button type="button" value="4" class="calBtn">모임 일정4</button>
+	<button type="button" value="5" class="calBtn">모임 일정5</button>
+	<button type="button" value="6" class="calBtn">모임 일정6</button>
+	<button type="button" value="7" class="calBtn">모임 일정7</button>
+	<button type="button" value="8" class="calBtn">모임 일정8</button>
+	<button type="button" value="9" class="calBtn">모임 일정9</button><br>
 	
 	<script>
 		$(".btn").on("click",function(e) {
