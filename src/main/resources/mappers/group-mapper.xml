@@ -2,6 +2,113 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
+
+
+<mapper namespace="tblGroupMapper">
+
+	<!-- 그룹 생성 -->
+	<insert id="createGroup"
+		parameterType="com.kiri.dto.Tbl_GroupDTO">
+		insert into tbl_group values(seq_group.nextval, 'as8634',#{group_title},
+		#{group_info}, #{group_category}, #{group_site}, #{group_people} )
+	</insert>
+
+	<!-- 현재 seq_group 얻어오기 -->
+	<select id="selectSeqGroup" resultType="int">
+		select seq_group.nextval from dual
+	</select>
+
+	<select id="selectGroupDetail" parameterType="int"
+		resultType="com.kiri.dto.Tbl_GroupDTO">
+		select * from tbl_group where seq_group = #{seq_group}
+	</select>
+
+	<!-- ///////////////////////////////////////////////////////////////////////////////// -->
+	<!-- 가입신청 넘어올때 인원수빼오기 -->
+	<select id = "applyCount" parameterType = "int" resultType = "int">
+		select group_people from tbl_group where seq_group = #{seq_group}	
+	</select>
+	
+	<!-- 가입신청 넘어올때 해당그룹 멤버수 가져오기 -->
+	<select id = "groupCount" parameterType = "int" resultType = "int">
+		select count(*) from group_member where seq_group = #{seq_group}
+	</select>
+	
+	<!-- 가입신청 목록 가져오기 -->
+	<select id="selectApply" parameterType="int"
+		resultType="com.kiri.dto.MemberDTO">
+		select * from member where user_email in (select user_email from group_apply
+		where seq_group = #{seq_group})
+	</select>
+
+	<!-- 모임 해산하기 -->
+	<delete id="groupDelete" parameterType="int">
+		delete from tbl_group
+		where seq_group = #{seq_group}
+	</delete>
+
+	<!-- 가입신청 거절하기 -->
+	<delete id="denyApply" parameterType="java.util.List">
+		delete from group_apply
+		where user_email in
+		<foreach item="email" collection="userEmails" open="("
+			separator="," close=")">
+			#{email}
+		</foreach>
+	</delete>
+
+	<!-- 가입승인 여러명 받기위한 user_email 뽑기 -->
+	<select id="selectApplyByEmail" parameterType="java.util.List"
+		resultType="com.kiri.dto.Group_ApplyDTO">
+		select *
+		from group_apply
+		where user_email in
+		<foreach item="email" collection="userEmails" open="("
+			separator="," close=")">
+			#{email}
+		</foreach>
+	</select>
+
+	<!-- 가입신청 승인하기 -->
+	<insert id="completeApply"
+		parameterType="com.kiri.dto.Group_MemberDTO">
+		insert into group_member
+		values(seq_member.nextval, #{user_email}, #{seq_group}, #{user_nickname}, #{access})
+	</insert>
+
+	<!-- 해당 모임의 맴버 조회 -->
+	<select id="selectGroupMember" parameterType="int"
+		resultType="com.kiri.dto.TableJoinDTO">
+		select * from member join group_member using (user_email) where seq_group =
+		#{seq_group} order by 16
+	</select>
+
+	<!-- 모임장 위임 -->
+	<update id="groupAccess" parameterType="com.kiri.dto.Group_MemberDTO">
+		update group_member set "access" =
+		<choose>
+			<when test = "access.equals('모임장')">
+				'일반회원' where user_email = #{user_email}
+			</when>
+			<when test = "access.equals('일반회원')">
+				'모임장' where user_email = #{user_email}
+			</when>
+		</choose>
+	</update>
+
+	<!-- 해당 모임 멤버 강퇴 -->
+	<delete id="groupMemberDelete" parameterType="java.util.List">
+		delete from group_member where user_email in
+		<foreach item="email" collection="userEmails" open="("
+			separator="," close=")">
+			#{email}
+		</foreach>
+	</delete>
+
+
+
+=======
    
    
 <mapper namespace="tblGroupMapper">
@@ -82,4 +189,5 @@
 	
 	
 	
+>>>>>>> 811b2f1e80664298b397fe202e26bc7034218d16
 </mapper>
