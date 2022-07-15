@@ -1,5 +1,8 @@
 package com.kiri.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,11 +17,21 @@ public class LoginService {
 	
 	
 	public MemberDTO login(String id, String pw) throws Exception{
-		return dao.login(id, pw);
+		Map<String, String> map = new HashMap<>();
+		map.put("user_email", id);
+		map.put("user_pw", pw);
+		return dao.login(map);
 	}
 	
 	public Login_TypeDTO loginType(String user_email) throws Exception{
 		return dao.loginType(user_email);
 	}
 	
+	public void loginLogSuccess(String user_email) throws Exception{ // 로그인 성공로그
+		dao.loginLogSuccess(user_email);
+	}
+	
+	public void loginLogFailed(String user_email) throws Exception{ // 로그인 실패로그
+		dao.loginLogFailed(user_email);
+	}
 }	

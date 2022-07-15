@@ -212,34 +212,37 @@
     $(document).ready(function(){
     	$("input").on("keyup",function(key){         
     		if(key.keyCode==13) {            
-    			 alert("엔터키 이벤트");       
+    			 login();      
     		}    
     	});
     	
         $("#toLoginBtn").click(function(){
         	console.log("dd");
-        	$.ajax({
-        		url : "/login/general"
-        		, type : "post"
-        		, data : {user_id : $("#id").val() , user_pw : $("#pw").val() }
-        		, dataType : "text"
-        		, success : function(result){
-        			console.log(result);
-        			if(result === "general"){
-        				alert("환영합니다!");
-        				location.href = "/"
-        				
-        			}else if(result === "loginFail"){
-        				alert("아이디 혹은 비밀번호가 맞지 않습니다.");
-        			}
-        		}, error : function(e){
-        			console.log(e);
-        		}
-        		
-        	})
+        	login();
         })
 
-    })
+    })// 레디 종료
+    
+ function login(){
+    	$.ajax({
+    		url : "/login/general"
+    		, type : "post"
+    		, data : {user_id : $("#id").val() , user_pw : $("#pw").val() }
+    		, dataType : "text"
+    		, success : function(result){
+    			console.log(result);
+    			if(result === "general"){
+    				alert("환영합니다!");
+    				location.href = "/"
+    				
+    			}else if(result === "loginFail"){
+    				alert("아이디 혹은 비밀번호가 맞지 않습니다.");
+    			}
+    		}, error : function(e){
+    			console.log(e);
+    		}
+    	})
+    }
 </script>
 <body>
 <!--네비바-->
@@ -516,7 +519,7 @@
 								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="list-inline-item"><a href="member/toSignup">회원가입</a></li>
+								<li class="list-inline-item"><a href="/signup/toSignup">회원가입</a></li>
 								<li class="list-inline-item">⋅</li>
 								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
 							</c:otherwise>

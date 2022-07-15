@@ -5,11 +5,20 @@
    
    
 <mapper namespace="loginMapper">
-	<select id="login" parameterType="String" resultType="com.kiri.dto.MemberDTO">
+	<select id="login" parameterType="map" resultType="com.kiri.dto.MemberDTO">
 		select * from member where user_email = #{user_email} and user_pw = #{user_pw}
 	</select>
 	
 	<select id="loginType" parameterType="String" resultType="com.kiri.dto.Login_TypeDTO">
 		select * from login_type where user_email = #{user_email}
 	</select>
+	
+	<insert id="loginLogSuccess" parameterType="String">
+		insert into login_log values(#{user_email}, '성공', sysdate )
+	</insert>
+	
+	<insert id="loginLogFailed" parameterType="String">
+		insert into login_log values(#{user_email}, '실패', sysdate )
+	</insert>
+	
 </mapper>

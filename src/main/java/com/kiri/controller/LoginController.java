@@ -23,25 +23,27 @@ public class LoginController {
 	@Autowired
 	private HttpSession session;
 	
+	
 	@RequestMapping(value = "/toLogin")
 	public String toLogin() {
 		return "/member/login";
 	}
-	
-
 
 	@ResponseBody
 	@RequestMapping(value = "/general") 	
-	public String general(String user_id, String user_pw) throws Exception { // 일반로그인
+	public String general(String user_email, String user_pw) throws Exception { // 일반로그인
 		String Encryption_pw = ecp.getSHA512(user_pw); 
-		MemberDTO dto = service.login(user_id, Encryption_pw);
+		MemberDTO dto = service.login(user_email, Encryption_pw);
+		System.out.println(dto);
 		
 		if(dto != null) { // 널이 아니라면 조회 성공
 			dto.setUser_pw(null);
-			Login_TypeDTO type = service.loginType(user_id);
+			Login_TypeDTO type = service.loginType(user_email);
 			
 			if(type.getType().equals("general")) { //일반 로그인
 				session.setAttribute("loginSession", dto);
+				service.loginLogSuccess(user_email);
+				
 				return "general";
 				
 			}else if(type.getType().equals("kakao")) { //카카오로 가입된 아이디
@@ -52,10 +54,16 @@ public class LoginController {
 			}
 			
 		}else { // null 로그인 실패 
+			service.loginLogFailed(user_email);
 			return "loginFail";
 		}
 	}
 	
+	@RequestMapping(value = "/toLogout")//logout페이지 요청
+	public String logout() {
+		session.removeAttribute("loginSession");
+		return "redirect:/";
+	}
 	
 	@ExceptionHandler
 	public String toError(Exception e) {

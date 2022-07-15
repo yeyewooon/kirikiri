@@ -689,7 +689,7 @@ footer.footer {
 								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="list-inline-item"><a href="member/toSignup">회원가입</a></li>
+								<li class="list-inline-item"><a href="/signup/toSignup">회원가입</a></li>
 								<li class="list-inline-item">⋅</li>
 								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
 							</c:otherwise>
