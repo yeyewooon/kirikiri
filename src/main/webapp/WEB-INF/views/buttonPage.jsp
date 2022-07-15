@@ -43,6 +43,17 @@
 	<button type="button" value="8" class="calBtn">모임 일정8</button>
 	<button type="button" value="9" class="calBtn">모임 일정9</button><br>
 	
+	
+	
+	<button type = "button" id = "groupMember">멤버관리</button>
+	<button type = "button" id = "groupApply">모임가입</button>
+	<button type = "button" id = "groupDelete">모임해산</button>
+	<button type = "button" id = "publicData">주차장정보</button>
+	<!-- 그룹번호 숨겨서 받기 -->
+	<div class="d-none">
+		<input type="text" value=1 name="seq_group" id="seq_group">
+	</div>
+	
 	<script>
 		$(".btn").on("click",function(e) {
 			location.href = "/group/toModifyGroup?seq_group="+e.target.value;
@@ -55,6 +66,25 @@
 		$(".calBtn").on("click",function(e) {
 			location.href = "/cal/toGroupCalendar?seq_group="+e.target.value;
 		})
+		
+	// 멤버관리 이동
+	$("#groupMember").on("click", function(){
+		location.href = "/group/toGroupMember?seq_group="+$("#seq_group").val();
+	})	
+	// 모임가입 이동
+	$("#groupApply").on("click", function(){
+		console.log($("#seq_group").val());
+		location.href = "/group/toGroupApply?seq_group="+$("#seq_group").val();
+	})	
+	// 모임해산 이동
+	$("#groupDelete").on("click", function(){
+		location.href = "/group/toGroupDelete?seq_group="+$("#seq_group").val();
+	})
+	
+	// 주차장 정보
+	$("#publicData").on("click", function(){
+		location.href = "/public/publicData";
+	})
 		
 		
 		

@@ -379,7 +379,7 @@ footer.footer {
 
 					<div class="col-5">
 						<div class="row align-items-center justify-content-center">
-							<div class="col-auto d-none">
+							<div class="col-auto">
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
 									<c:if test="${empty loginSession}">
 										<li class="nav-item"><a class="nav-link"
@@ -403,6 +403,8 @@ footer.footer {
 										<ul class="dropdown-menu text-small"
 											aria-labelledby="dropdownUser1">
 											<li><a class="dropdown-item" href="#">마이페이지</a></li>
+											<li><a class="dropdown-item" href="#">모임생성</a></li>
+											<li><hr class="dropdown-divider"></li>
 											<li><a class="dropdown-item" href="#">로그아웃</a></li>
 										</ul>
 									</div>

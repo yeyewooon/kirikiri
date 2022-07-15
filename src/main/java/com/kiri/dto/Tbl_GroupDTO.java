@@ -11,8 +11,7 @@ public class Tbl_GroupDTO {
 	private String ori_name;
 	private String sys_name;
 	
-<<<<<<< HEAD
-=======
+
 	public Tbl_GroupDTO() {
 		super();
 	}
@@ -109,14 +108,6 @@ public class Tbl_GroupDTO {
 				+ ", group_info=" + group_info + ", group_category=" + group_category + ", group_site=" + group_site
 				+ ", group_people=" + group_people + ", ori_name=" + ori_name + ", sys_name=" + sys_name + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
->>>>>>> 811b2f1e80664298b397fe202e26bc7034218d16
+
 }
 
