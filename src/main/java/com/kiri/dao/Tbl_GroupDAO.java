@@ -28,12 +28,6 @@ public class Tbl_GroupDAO {
 		else System.out.println("tbl_group 생성 실패");
 	}
 
-	// 모임 시퀀스 번호 출력
-//	public int selectSeq_Group_Seq() throws Exception{
-//		int rs = session.selectOne("tblGroupMapper.selectSeqGroup");
-//		return rs;
-//	}
-
 	// 그룹 생성시 group_member에 호스트로 insert
 	public void insertGroupHost(Group_MemberDTO group_member_dto) throws Exception{
 		int rs = session.insert("tblGroupMapper.insertGroupHost", group_member_dto);

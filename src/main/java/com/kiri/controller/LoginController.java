@@ -27,8 +27,6 @@ public class LoginController {
 	public String toLogin() {
 		return "/member/login";
 	}
-	
-
 
 	@ResponseBody
 	@RequestMapping(value = "/general") 	

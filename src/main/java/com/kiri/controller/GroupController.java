@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.kiri.dto.Group_ApplyDTO;
 import com.kiri.dto.Group_MemberDTO;
+import com.kiri.dto.MemberDTO;
 import com.kiri.dto.Tbl_GroupDTO;
 import com.kiri.dto.WishListDTO;
 import com.kiri.service.Tbl_GroupService;
@@ -27,6 +28,7 @@ public class GroupController {
 	@Autowired
 	private Tbl_GroupService tbl_group_service;
 	
+	// 2022/07/15 김영완
 	// 모임 생성페이지로 이동
 	@RequestMapping(value="/toCreateGroup")
 	public String toMakeGroup() {
@@ -37,14 +39,19 @@ public class GroupController {
 	@RequestMapping(value="/createGroup")
 	public String makeGroup(Tbl_GroupDTO tbl_group_dto, MultipartFile groupFile, HttpSession session) throws Exception{
 		Group_MemberDTO group_member_dto = new Group_MemberDTO();
+		MemberDTO member_dto = new MemberDTO();
 		
-		// 임시 아이디, 닉네임 session에서 뽑아올 값
-		String user_email = "qwekjsadkw";
-		String user_nickname = "내삶의반";
+		System.out.println("createGroup 잘들어옴");
+		System.out.println(((MemberDTO)session.getAttribute("loginSession")).toString());
+		
+		// 세션 아이디, 닉네임 session에서 뽑아올 값
+		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
+		String user_nickname = ((MemberDTO)session.getAttribute("loginSession")).getUser_nickname();
+		
 		// setter 설정
 		tbl_group_dto.setUser_email(user_email);
-		
-		// 출력만 
+	
+		//출력만 
 		System.out.println("그룹 만들기 컨트롤러");
 		System.out.println(tbl_group_dto.toString());
 		System.out.println("groupFile : " + groupFile);
@@ -53,7 +60,6 @@ public class GroupController {
 		if(!groupFile.isEmpty()) {
 			// 그룹 프로필 사진 저장(group_profile)
 			String realPath = session.getServletContext().getRealPath("group_profile");
-			System.out.println("realPath : " + realPath);
 			String sys_name = tbl_group_service.uploadProfile(groupFile, realPath);
 			String ori_name = groupFile.getOriginalFilename();
 			// sys_name setter 설정
@@ -83,9 +89,6 @@ public class GroupController {
 	// 수정페이지로 이동
 	@RequestMapping(value ="/toModifyGroup")
 	public String tomodifyGroup(int seq_group, Model model) throws Exception{
-		System.out.println("groupDetail 잘들어옴");
-		System.out.println(seq_group);
-		
 		// tbl_group의 데이터 가져오기
 		Tbl_GroupDTO tbl_group_dto = tbl_group_service.selectGroupDetail(seq_group);
 		// 수정하는 모임 맴버 가져오기 (맴버수 판단을 위해 사용)
@@ -129,15 +132,9 @@ public class GroupController {
 	@RequestMapping(value = "/toGroupDetail")
 	public String toGroupDetail(int seq_group, Model model) throws Exception{
 		Tbl_GroupDTO tbl_group_dto = new Tbl_GroupDTO();
-		Group_MemberDTO group_member_dto = new Group_MemberDTO();
-		Group_ApplyDTO group_apply_dto = new Group_ApplyDTO();
-		
+
 		tbl_group_dto = tbl_group_service.selectGroupDetail(seq_group); // 그룹 조회 
 		List<Group_MemberDTO> memberList = tbl_group_service.selectGroupMember(seq_group); // 해당 그룹 맴버 조회(주최자가 우선적으로 [0]에 담기게 뽑음)
-		System.out.println("tbl_group 조회 : " + tbl_group_dto.toString());
-		for(Group_MemberDTO dto : memberList) {
-			System.out.println(dto.toString());
-		}
 		
 		// 모임 신청 리스트 
 		List<Group_ApplyDTO> applyList = tbl_group_service.selectApplyList(seq_group);
@@ -147,10 +144,15 @@ public class GroupController {
 		List<WishListDTO> wishList = tbl_group_service.selectWishList(seq_group);
 		System.out.println(wishList.toString());
 		
+		// 현재 세션 아이디 
+		String loginSession_id = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
+		
 		model.addAttribute("tbl_group_dto", tbl_group_dto); // 해당 그룹 내용 가져오기 
 		model.addAttribute("memberList", memberList); // 해당 그룹 맴버 목록 가져오기 
 		model.addAttribute("applyList", applyList); // 해당 그룹 신청 목록 가져오기 
 		model.addAttribute("wishList", wishList); // 해당 그룹 찜 목록 보여주기
+		model.addAttribute("loginSession_id",loginSession_id); // 현재 세션 아이디
+		
 		
 		return "/group/groupDetail";
 	}

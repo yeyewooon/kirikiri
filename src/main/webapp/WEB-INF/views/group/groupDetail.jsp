@@ -339,6 +339,7 @@
   </header>
 
   <!--body-->
+  ${loginSession_id}
   ${memberList}
   ${applyList}
   ${wishList}
@@ -521,9 +522,9 @@
 
     <script>
  	let seq_group = "${tbl_group_dto.seq_group}"; // 현재 모임 번호
- 	let loginSession_id = "er8634"; // 로그인 세션
+ 	let loginSession_id = "${loginSession_id}"; 
  	let hostEmail = "${memberList[0].user_email}"; // 주최자 아이디
- 	
+	
  	console.log(hostEmail);
  	console.log(loginSession_id);
  	
