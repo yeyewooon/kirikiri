@@ -171,10 +171,18 @@ a {
 }
 
 /*content안에*/
+.reportBox {
+	margin: auto;
+	width: 75%;
+	height: 300px;
+	background-color: white;
+	overflow-y : scroll;
+}
+
 .searchBox {
 	margin: auto;
 	width: 75%;
-	height: 150px;
+	height: 80px;
 	background-color: white;
 }
 
@@ -187,12 +195,21 @@ a {
 
 .resultBox span {
 	font-size: larger;
+	height : max-content;
 }
 
 tbody tr {
 	border-top: 1px solid gainsboro;
 	color: rgb(103, 103, 103);
 	text-align: center;
+}
+#spage{
+	display:none;
+}
+
+td>a{
+	color : rgb(103, 103, 103);
+	font-size:17px;
 }
 </style>
 </head>
@@ -201,7 +218,7 @@ tbody tr {
 	<div class="container">
 		<div class="sidebar">
 			<ul class="p-2">
-				<li class="logoHome"><a href="/toAdminHome"> <img
+				<li class="logoHome"><a href="/toAdmin"> <img
 						src="/resources/images/adminLogo.png" id="logoImg"><br>
 						<span>끼리끼리</span>
 				</a></li>
@@ -228,51 +245,92 @@ tbody tr {
 			</div>
 		</div>
 		<div class="contents">
-			<div class="row title">
+			<div class="row title ">
+				<div class="col d-flex mt-4 ms-4">
+					<h3 style="color: darkblue; text-shadow: 1px 1px 1px dodgerblue;">회원
+						신고 관리</h3>
+				</div>
+				<div class="col d-flex me-3 justify-content-end align-items-center">
+					<button type="button" class="btn btn-primary" id="submitBtn">블랙리스트 등록</button>
+					<button type="button" class="btn btn-secondary ms-1" id="deleteBtn">신고 삭제</button>
+				</div>
+			</div>
+			<div class="row reportBox">
+				<table>
+					<thead style="background-color: gainsboro; text-align: center;">
+						<tr>
+							<td><input class="form-check-input ms-2 me-1"
+								type="checkbox" id="checkAll" value=""></td>
+							<td>이메일</td>
+							<td>신고 사유</td>
+						</tr>
+					</thead>
+					<tbody>
+						<c:choose>
+							<c:when test="${reportList.size() == 0}">
+								<tr>
+									<td colspan="3">신고 내역이 없습니다.</td>
+								</tr>
+							</c:when>
+							<c:otherwise>
+								<c:forEach items="${reportList }" var="dto">
+									<tr>
+										<td><input class="form-check-input ms-2 me-1"
+											type="checkbox" id="check" name="seq_report"
+											value="${dto.seq_report }"></td>
+										<td>${dto.user_email }</td>
+										<td>${dto.report_reason }</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</tbody>
+				</table>
+			</div>
+			<div class="row title mt-2">
 				<div class="col mt-4 ms-4">
 					<h3 style="color: darkblue; text-shadow: 1px 1px 1px dodgerblue;">사용자
 						관리</h3>
 				</div>
 			</div>
 			<div class="row searchBox">
-				<form class="d-flex align-items-center m-auto w-75">
+				<div class="d-flex align-items-center m-auto w-75">
 					<select name="searchMem" class="form-select w-25 me-3">
-						<option selected>ALL</option>
-						<option value="user_email">ID</option>
+						<option value="all" selected>ALL</option>
+						<option value="user_email">Email</option>
 						<option value="user_nickname">NICKNAME</option>
-					</select> <input class="form-control me-2" type="search" placeholder="회원 검색"
-						aria-label="Search">
-					<button class="btn btn-outline-primary" type="submit">Search</button>
-				</form>
+						<option value="user_phone">PHONE</option>
+					</select> 
+					<input class="form-control me-2" name="searchKeyword" id="searchKeyword" type="search"
+						placeholder="회원 검색" aria-label="Search">
+					<button class="btn btn-outline-primary" type="button"
+							id="searchBtn">Search</button>
+				</div>
 			</div>
-			<div class="row resultBox mt-5">
-				<span>총 <span style="color: navy">${list.size() }</span>명
+			<div class="row resultBox mt-3">
+				<span>총 <span style="color: navy">${memCnt}</span>명
 				</span>
 				<table>
 					<thead style="background-color: gainsboro; text-align: center;">
 						<tr>
-							<td><input class="form-check-input ms-2 me-1"
-								type="checkbox" id="checkAll" value=""></td>
-							<td>아이디</td>
+							<td>이메일</td>
 							<td>닉네임</td>
 							<td>휴대폰번호</td>
 							<td>성별</td>
 							<td>블랙리스트</td>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody id="tbody">
 						<c:choose>
 							<c:when test="${list.size() == 0}">
 								<tr>
-									<td colspan=6>등록된 회원이 없습니다.</td>
+									<td colspan=5>등록된 회원이 없습니다.</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${list}" var="dto">
 									<tr>
-										<td><input class="form-check-input ms-2 me-1"
-											type="checkbox" id="check" value=""></td>
-										<td>${dto.user_email }</td>
+										<td><a href="/admin/toDetailMem?user_email=${dto.user_email}">${dto.user_email }</a></td>
 										<td>${dto.user_nickname }</td>
 										<td>${dto.user_phone }</td>
 										<td>${dto.user_gender }</td>
@@ -285,8 +343,8 @@ tbody tr {
 				</table>
 			</div>
 
-			<!-- pagination -->
-			<div class="pagination mt-5 justify-content-center">
+			<!-- 검색전 pagination -->
+			<div class="pagination mt-5 justify-content-center" id="page">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination">
 						<c:if test="${naviMap.needPrev eq true}">
@@ -310,24 +368,152 @@ tbody tr {
 		</div>
 	</div>
 	<script>
-    	//체크박스 전체선택해제
-    	$("#checkAll").click(function(){
-    		if($("#checkAll").prop("checked")){
-    			$("input[id=check]").prop("checked", true);
-    		}else{
-    			$("input[id=check]").prop("checked", false);
-    		}
-    	})
-    	$("#check").click(function(){
-    		let total = $("input[id=check]").length;
-    		let checked = $("input[id=check]:checked").length;
-    		
-    		if(total != checked){
-    			$("input[id=checkAll]").prop("checked", false);
-    		}else{
-    			$("input[id=checkAll]").prop("checked", true);
-    		}
-    	})
+	//검색하는거
+	$("#searchBtn").click(function(){
+		let searchType;
+		let searchKeyword = $("#searchKeyword").val();
+		
+		if(searchKeyword!=""){ //뭐가 입력됐음
+			$("#page").css("display", "none");
+			$(".resultBox").css({"height" : "600px", "overflow-y" : "scroll"});
+			searchType = $("select[name=searchMem] option:selected").val();
+			$.ajax({
+				url : "/admin/toSearch"
+				, type : "post"
+				, data : {searchType : searchType, searchKeyword : searchKeyword}
+				, dataType : "json"
+				, success: function(data){
+					console.log(data);
+					$("#spage").css("display", "flex");
+					$("#page").css("display", "none");
+					
+					$("#tbody").empty();
+					if(data.length === 0){ //아무것도 안넘어올때
+						let tr = $("<tr>");
+						let td = $("<td colspan=5>").html("검색된 게시글이 없습니다.");
+						tr.append(td);
+						$("#tbody").append(tr);
+					}else{
+						for(let dto of data){
+							let tr = $("<tr>");
+							let anchor = $("<a>").attr("href", "/admin/toDetailMem?user_email="+dto.user_email).html(dto.user_email);
+							let td1 = $("<td>").append(anchor);
+							let td2 = $("<td>").html(dto.user_nickname);
+							let td3 = $("<td>").html(dto.user_phone);
+							let td4 = $("<td>").html(dto.user_gender);
+							let icon = $("<i>").addClass("fa-solid fa-user-large-slash");
+							let td5 = $("<td>").append(icon);
+							tr.append(td1, td2, td3, td4, td5);
+							$("#tbody").append(tr);
+						}
+					} 
+					
+				}, error : function(e){
+					console.log(e);
+				}
+			})
+			
+		}
+	})
+	
+	//신고 삭제버튼 누르면
+	$("#deleteBtn").click(function(){
+		let array = new Array();
+		$("input:checkbox[name=seq_report]:checked").each(function(){
+			array.push(this.value);
+		})
+		$.ajax({
+				url : "/admin/toReportDelete"
+				,type : "post"
+				,data : {seqArray : array}
+				, success: function(data){
+					console.log(data);
+					if(data == "success"){
+						Swal.fire({
+							title: '정말 삭제하시겠습니까?',
+							text: "해당 유저를 블랙리스트에 등록하지않고 신고내역이 삭제됩니다.",
+							icon: 'warning',
+							showCancelButton: true,
+							confirmButtonColor: '#3085d6',
+							cancelButtonColor: '#d33',
+							confirmButtonText: '그래도 삭제'
+						}).then((result) => {
+							if (result.isConfirmed) {
+							  Swal.fire(
+							     'Deleted!',
+							     '신고내역이 삭제되었습니다.',
+							     'success'
+							  ).then(function() {
+									location.reload();
+								});
+							 }
+						})
+					}else if(data == "fail"){
+						Swal.fire({
+							  icon: 'error',
+							  title: 'Oops...',
+							  text: '블랙리스트 등록에 실패했습니다.'
+							})
+					}
+				}, error : function(e){
+					console.log(e);
+				}
+			})
+	})
+	
+	//신고 영역 블랙리스트 등록
+	$("#submitBtn").click(function(){
+		let array = new Array();
+		$("input:checkbox[name=seq_report]:checked").each(function(){
+			array.push(this.value);
+		})
+		$.ajax({
+				url : "/admin/toReport"
+				,type : "post"
+				,data : {seqArray : array}
+				, success: function(data){
+					console.log(data);
+					if(data == "success"){
+						Swal.fire({
+							  position: 'top',
+							  icon: 'success',
+							  title: '블랙리스트에 등록했습니다!',
+							  showConfirmButton: false,
+							  timer: 1500
+							}).then(function() {
+								location.reload();
+							});
+					}else if(data == "fail"){
+						Swal.fire({
+							  icon: 'error',
+							  title: 'Oops...',
+							  text: '블랙리스트 등록에 실패했습니다.'
+							})
+					}
+				}, error : function(e){
+					console.log(e);
+				}
+			})
+	})
+	
+	//체크박스 전체선택해제
+	$("#checkAll").click(function(){
+		if($("#checkAll").prop("checked")){
+			$("input[id=check]").prop("checked", true);
+		}else{
+			$("input[id=check]").prop("checked", false);
+		}
+	})
+	$("#check").click(function(){
+		let total = $("input[id=check]").length;
+		let checked = $("input[id=check]:checked").length;
+		
+		if(total != checked){
+			$("input[id=checkAll]").prop("checked", false);
+		}else{
+			$("input[id=checkAll]").prop("checked", true);
+		}
+	})
     
         //로그아웃 부분
         $(".user").mouseenter(function () {

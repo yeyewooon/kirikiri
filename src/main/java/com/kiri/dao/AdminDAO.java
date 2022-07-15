@@ -8,7 +8,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kiri.dto.BlackListDTO;
 import com.kiri.dto.MemberDTO;
+import com.kiri.dto.ReportDTO;
+import com.kiri.dto.SearchMemDTO;
 
 @Repository
 public class AdminDAO {
@@ -21,10 +24,37 @@ public class AdminDAO {
 		map.put("end", end);
 		return session.selectList("adminMapper.selectAllMember", map);
 	}
+	
+	public int selectMemCnt() throws Exception{
+		return session.selectOne("adminMapper.getPageNavi");
+	}
+	
+	public List<ReportDTO> selectReport() throws Exception{
+		return session.selectList("adminMapper.selectReport");
+	}
+	
+	public ReportDTO selectReportBySeq(int seq_report) throws Exception{
+		return session.selectOne("adminMapper.selectReportBySeq", seq_report);
+	}
+	
+	public void insertBl(BlackListDTO dto) throws Exception{
+		session.insert("adminMapper.insertBl", dto);
+	}
+	
+	public void deleteReport(int seq_report) throws Exception{
+		session.delete("adminMapper.deleteReport", seq_report);
+	}
+	
+	public List<MemberDTO> searchMember(String searchType, String searchKeyword) throws Exception{
+		Map<String, String> map = new HashMap<>();
+		map.put("searchType", searchType);
+		map.put("searchKeyword", searchKeyword);
+		return session.selectList("adminMapper.searchMember", map);
+	}
 
 	public HashMap<String, Object> getPageNavi(int curPage) throws Exception {
 		int totalCnt = session.selectOne("adminMapper.getPageNavi"); // 전체 게시글의 개수
-		int recordCntPerPage = 15; // 한 페이지에 몇개의 데이터(게시글)을 띄워줄지
+		int recordCntPerPage = 10; // 한 페이지에 몇개의 데이터(게시글)을 띄워줄지
 		int naviCntPerPage = 3; // 네비바에 몇개 단위로 페이징을 구성할지
 		int pageTotalCnt = 0; // 총 몇 페이지가 나올지
 
@@ -48,10 +78,6 @@ public class AdminDAO {
 			endNavi = pageTotalCnt;
 		}
 
-		System.out.println("현재 페이지 : " + curPage);
-		System.out.println("startNavi : " + startNavi);
-		System.out.println("endNavi : " + endNavi);
-
 		// <> 모양을 넣어줄지 여부에 대한 검사
 		boolean needPrev = true; // startNavi가 1일때 needPrev가 false
 		boolean needNext = true; // endNavi가 마지막 페이지(전체 페이지)와 같을때 needNext가 false
@@ -62,9 +88,6 @@ public class AdminDAO {
 		if (endNavi == pageTotalCnt) {
 			needNext = false;
 		}
-
-		System.out.println("needPrev 필요? " + needPrev);
-		System.out.println("needNext 필요? " + needNext);
 
 		// map -> key, value
 		// 제네릭 <키에 대한 자료형, 값에 대한 자료형>

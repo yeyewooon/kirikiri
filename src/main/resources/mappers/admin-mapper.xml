@@ -11,4 +11,22 @@
  	<select id="getPageNavi" resultType="int">
  		select count(*) as totalCnt from member
  	</select>
+ 	<select id="selectReport" resultType="com.kiri.dto.ReportDTO">
+ 		select * from report
+ 	</select>
+ 	<select id="selectReportBySeq" resultType="com.kiri.dto.ReportDTO" parameterType="int">
+ 		select * from report where seq_report = #{seq_report}
+ 	</select>
+ 	<insert id="insertBl" parameterType="com.kiri.dto.BlackListDTO">
+ 		insert into blacklist values(seq_bl.nextval, #{user_email}, sysdate, #{bl_reason})  
+ 	</insert>
+ 	<delete id="deleteReport" parameterType="int">
+ 		delete from report where seq_report=#{seq_report}
+ 	</delete>
+ 	<select id="searchMember" parameterType="map" resultType="com.kiri.dto.MemberDTO">
+ 		select * from member where
+			<if test="searchType == 'all'">user_name like '%' || #{searchKeyword} || '%'or user_nickname like '%' || #{searchKeyword} || '%'or user_phone like '%' || #{searchKeyword} || '%' </if>
+			<if test="searchType != 'all'">${searchType} like '%' || #{searchKeyword} || '%'</if>
+ 	</select>
+ 	
  </mapper>
