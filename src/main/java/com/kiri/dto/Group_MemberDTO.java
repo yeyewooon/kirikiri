@@ -6,7 +6,7 @@ public class Group_MemberDTO {
 	private int seq_group;
 	private String user_nickname;
 	private String access;
-
+	
 	public Group_MemberDTO() {
 		super();
 	}
@@ -54,6 +54,5 @@ public class Group_MemberDTO {
 		return "Group_MemberDTO [seq_member=" + seq_member + ", user_email=" + user_email + ", seq_group=" + seq_group
 				+ ", user_nickname=" + user_nickname + ", access=" + access + "]";
 	}
-	
 	
 }

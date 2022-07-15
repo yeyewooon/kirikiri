@@ -176,7 +176,7 @@ a {
 	width: 75%;
 	height: 300px;
 	background-color: white;
-	overflow-y : scroll;
+	overflow-y: scroll;
 }
 
 .searchBox {
@@ -195,7 +195,7 @@ a {
 
 .resultBox span {
 	font-size: larger;
-	height : max-content;
+	height: max-content;
 }
 
 tbody tr {
@@ -203,13 +203,14 @@ tbody tr {
 	color: rgb(103, 103, 103);
 	text-align: center;
 }
-#spage{
-	display:none;
+
+#spage {
+	display: none;
 }
 
-td>a{
-	color : rgb(103, 103, 103);
-	font-size:17px;
+td>a {
+	color: rgb(103, 103, 103);
+	font-size: 17px;
 }
 </style>
 </head>
@@ -251,12 +252,14 @@ td>a{
 						신고 관리</h3>
 				</div>
 				<div class="col d-flex me-3 justify-content-end align-items-center">
-					<button type="button" class="btn btn-primary" id="submitBtn">블랙리스트 등록</button>
-					<button type="button" class="btn btn-secondary ms-1" id="deleteBtn">신고 삭제</button>
+					<button type="button" class="btn btn-primary" id="submitBtn">블랙리스트
+						등록</button>
+					<button type="button" class="btn btn-secondary ms-1" id="deleteBtn">신고
+						삭제</button>
 				</div>
 			</div>
 			<div class="row reportBox">
-				<table>
+				<table style="margin-bottom: auto">
 					<thead style="background-color: gainsboro; text-align: center;">
 						<tr>
 							<td><input class="form-check-input ms-2 me-1"
@@ -275,8 +278,8 @@ td>a{
 							<c:otherwise>
 								<c:forEach items="${reportList }" var="dto">
 									<tr>
-										<td><input class="form-check-input ms-2 me-1"
-											type="checkbox" id="check" name="seq_report"
+										<td><input class="form-check-input ms-2 me-1 check"
+											type="checkbox" name="seq_report"
 											value="${dto.seq_report }"></td>
 										<td>${dto.user_email }</td>
 										<td>${dto.report_reason }</td>
@@ -300,11 +303,11 @@ td>a{
 						<option value="user_email">Email</option>
 						<option value="user_nickname">NICKNAME</option>
 						<option value="user_phone">PHONE</option>
-					</select> 
-					<input class="form-control me-2" name="searchKeyword" id="searchKeyword" type="search"
-						placeholder="회원 검색" aria-label="Search">
+					</select> <input class="form-control me-2" name="searchKeyword"
+						id="searchKeyword" type="search" placeholder="회원 검색"
+						aria-label="Search">
 					<button class="btn btn-outline-primary" type="button"
-							id="searchBtn">Search</button>
+						id="searchBtn">Search</button>
 				</div>
 			</div>
 			<div class="row resultBox mt-3">
@@ -330,7 +333,8 @@ td>a{
 							<c:otherwise>
 								<c:forEach items="${list}" var="dto">
 									<tr>
-										<td><a href="/admin/toDetailMem?user_email=${dto.user_email}">${dto.user_email }</a></td>
+										<td><a
+											href="/admin/toDetailMem?user_email=${dto.user_email}">${dto.user_email }</a></td>
 										<td>${dto.user_nickname }</td>
 										<td>${dto.user_phone }</td>
 										<td>${dto.user_gender }</td>
@@ -499,21 +503,22 @@ td>a{
 	//체크박스 전체선택해제
 	$("#checkAll").click(function(){
 		if($("#checkAll").prop("checked")){
-			$("input[id=check]").prop("checked", true);
+			$(".check").prop("checked", true);
 		}else{
-			$("input[id=check]").prop("checked", false);
+			$(".check").prop("checked", false);
 		}
 	})
-	$("#check").click(function(){
-		let total = $("input[id=check]").length;
-		let checked = $("input[id=check]:checked").length;
+	$(".check").click(function(){
+		let total = $(".check").length;
+		let checked = $(".check:checked").length;
 		
 		if(total != checked){
-			$("input[id=checkAll]").prop("checked", false);
+			$("#checkAll").prop("checked", false);
 		}else{
-			$("input[id=checkAll]").prop("checked", true);
+			$("#checkAll").prop("checked", true);
 		}
 	})
+	
     
         //로그아웃 부분
         $(".user").mouseenter(function () {

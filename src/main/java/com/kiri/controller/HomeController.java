@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class HomeController {
+	
 	@RequestMapping(value = "/")
-	public String home() {
-
+	public String main() {
 		return "mainPage";
 	}
 	@RequestMapping(value = "/toError")
@@ -20,4 +20,6 @@ public class HomeController {
 	public String toAdmin() {
 		return "admin/adminMain";
 	}
+
+
 }
