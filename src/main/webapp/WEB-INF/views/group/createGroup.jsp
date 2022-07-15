@@ -186,15 +186,15 @@ body {
 }
 
 .imgBox {
-	width: 240px;
-	height: 240px;
+	width: 500px;
+	height: 340px;
 	background-color: yellowgreen;
 	border-radius: 4px;
 }
 
 .imgBox img {
-	width: 240px;
-	height: 240px;
+	width: 500px;
+	height: 340px;
 }
 
 .mainFooter {
@@ -515,7 +515,7 @@ footer.footer {
 						<img src="/resources/images/메인사진2(배경).png" id="groupDefaultImg">
 					</div>
 					<input type="file" class="form-control mt-3 w-75" name="groupFile"
-						id="groupFile" />
+						id="groupFile" accept='image/jpeg,image/gif,image/png'/>
 				</div>
 			</div>
 
@@ -637,8 +637,7 @@ footer.footer {
 		</div>
 	</div>
 	<script>
-  <!-- AOS 스크립트 시작 -->
-  AOS.init(); // 자바스크립트로 init()을 해야 동작한다.
+
 
   // 지역 설정
   $('document').ready(function() {
@@ -877,6 +876,20 @@ footer.footer {
     }
   }
 
+  // 이미지만 올릴 수 있도록 
+  /* function chk_file_type(obj) {
+			 let file_kind = obj.value.lastIndexOf('.');
+			 let file_name = obj.value.substring(file_kind+1,obj.length);
+			 let file_type = file_name.toLowerCase();
+			 let check_file_type=new Array();​
+			 check_file_type=['jpg','gif','png','jpeg','bmp'];
+			 if(check_file_type.indexOf(file_type)==-1){
+			    alert('이미지 파일만 선택할 수 있습니다.');
+			    let parent_Obj=obj.parentNode
+			    let node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
+			  return false;
+			 }
+			} */
   
   </script>
 </body>
