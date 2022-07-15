@@ -7,7 +7,7 @@ public class Group_CalendarDTO {
 	private int seq_group;
 	private String user_email;
 	private String title;
-	private Date start;
+	private String start;
 	private String gcal_name;
 	private String gcal_content;
 	private String gcal_place;
