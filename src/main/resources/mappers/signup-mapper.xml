@@ -13,4 +13,17 @@
 		select count(*) from member where user_nickname = #{user_nickname}
 	</select>
 	
+	<insert id="signup" parameterType="com.kiri.dto.MemberDTO">
+		insert into member values(#{user_email}, #{user_pw}, #{user_name}, #{user_nickname},
+		#{user_phone}, #{user_bd}, #{user_gender}, #{user_job}, #{user_intro}, #{user_image, jdbcType=VARCHAR}, default, default)
+	</insert>
+	
+	<insert id="insertHobby" parameterType="map">
+		insert into hobby values(seq_hobby.nextval, #{user_email}, #{hobby} );
+	</insert>
+	
+	<insert id="insertArea" parameterType="map">
+		insert into site values(seq_site.nextval, #{user_email}, #{area} );
+	</insert>
+	
 </mapper>

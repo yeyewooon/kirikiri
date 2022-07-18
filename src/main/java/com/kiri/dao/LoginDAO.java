@@ -15,7 +15,6 @@ public class LoginDAO {
 	private SqlSession session;
 	
 	public MemberDTO login(Map<String, String> map) throws Exception{ // 로그인 feat.조용진
-		System.out.println("이건맵이다 : " + map);
 		return session.selectOne("loginMapper.login", map);
 	}
 	

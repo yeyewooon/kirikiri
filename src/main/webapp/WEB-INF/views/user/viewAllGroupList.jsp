@@ -1,0 +1,792 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- 화면 해상도에 따라 글자 크기 대응(모바일 대응) -->
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+
+  <!-- swal -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="sweetalert2.min.js"></script>
+
+  <!--bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+  <!-- jquery CDN -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <!--slick carousel -->
+  <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+
+  <!-- 아이콘 -->
+  <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
+<title>Insert title here</title>
+
+
+  <style>
+
+    /* 네비바  */
+body {
+	background-color: #f6f7f9;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: "OTWelcomeRA";
+}
+
+#mainText {
+	font-family: "양진체";
+}
+
+/* header 반응형 */
+@media ( max-width : 768px) {
+	#navLogo {
+		display: none;
+	}
+	#myPageIcon {
+		display: none;
+	}
+	#cartIcon {
+		display: none;
+	}
+	#menu {
+		display: none;
+	}
+}
+
+/* header */
+#navLogo {
+	width: 150px;
+	height: 100px;
+}
+
+#logoImgs {
+	width: 100%;
+	height: 100%;
+}
+
+@media ( min-width : 768px) {
+	#navibar {
+		display: none;
+	}
+}
+
+/* header 반응형 끝 */
+#logoImg {
+	width: 50%;
+}
+
+/*맨위 사진*/
+.topimg {
+	background-color: #d2e3ec;
+	width: 100%;
+}
+
+.txtBox div {
+	color: rgba(85, 85, 95, 0.993);
+}
+
+.txtBox>div:first-child {
+	font-size: 35px;
+	color: navy;
+	text-shadow: 3px 3px white;
+}
+
+.mainIcon i {
+	color: #316f8c;
+}
+
+.imgBox {
+	width: 240px;
+	height: 240px;
+	background-color: yellowgreen;
+	border-radius: 4px;
+}
+
+.imgBox img {
+	width: 240px;
+	height: 240px;
+}
+
+.mainFooter {
+	height: 70px;
+}
+
+#search-addon {
+	cursor: pointer;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+/* 슬라이드 */
+.locationPic {
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+    }
+
+    .locationPic img {
+      width: 100%;
+      height: 100%;
+  } 
+
+/* body content */
+.content {
+	width: 100%;
+	margin: 0px;
+	background-color: rgb(245, 245, 245);
+}
+
+.card {
+	width: 18rem;
+	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
+}
+
+.card>img {
+	width: 100%;
+}
+
+.card-img-top {
+	width: 18rem;
+	height: 13rem;
+}
+
+.card-text-category {
+	width: fit-content;
+	padding: 4px;
+	border: 1px solid #f66a09;
+	background-color: #fea500;
+	height: 22px;
+	border-radius: 5px;
+	font-size: 14px;
+}
+
+/* footer */
+/*풋터 영역*/
+.footerBox {
+	height: 0px;
+}
+
+footer.footer {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	background-color: #f6f7f9;
+}
+
+.footer a {
+	text-decoration: none;
+	color: black;
+	font-weight: 40px;
+	font-weight: bold;
+}
+
+.footer-imgBox>img {
+	width: 100%;
+	height: 100%;
+}
+
+/* 눈누 폰트 */
+@font-face {
+	font-family: "OTWelcomeRA";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2")
+		format("woff2");
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: "양진체";
+	src:
+		url("https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff")
+		format("woff");
+	font-weight: normal;
+	font-style: normal;
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+.slider {
+	width: 80%;
+	margin: 0px auto;
+}
+
+.slider .slick-slide {
+	margin: 10px;
+}
+
+.slick-prev:before, .slick-next:before {
+	color: #444444;
+}
+
+/* 사이즈 */
+.categoryMapper, .locationMapper {
+	width: 120px;
+	color: #62656e;
+}
+
+.categoryMapper:hover {
+	width: 120px;
+	color: cornflowerblue;
+	cursor: pointer;
+}
+
+.locationMapper:hover {
+	width: 120px;
+	color: cornflowerblue;
+	cursor: pointer;
+}
+
+#categoryList {
+	display: none
+}
+</style>
+
+</head>
+
+<body>
+  <header class="mb-3 border-bottom" style="background-color: #fff;">
+    <div class="container ">
+      <!-- 접혔을 때 nav -->
+      <nav id="navibar" class="navbar navbar-expand-md navbar-light" aria-label="Main navigation">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-10">
+              <a class="navbar-brand mb-2 mb-lg-0" href="#">
+                <div class="title-box">
+                  <img id="logoImg" src="/resources/images/kiri.jpg" />
+                </div>
+              </a>
+            </div>
+            <!-- toggle button -->
+            <div class="col-2 d-flex align-items-center">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+            </div>
+            <!-- 메뉴 -->
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+              <ul class="navbar-nav mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link" href=" ">자유게시판</a>
+                </li>
+                <c:choose>
+                  <c:when test="${empty loginSession}">
+                    <li class="nav-item">
+                      <a class="nav-link" href=" ">로그인</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href=" ">회원가입</a>
+                    </li>
+                  </c:when>
+                  <c:otherwise>
+                    <li class="nav-item">
+                      <a class="nav-link" href=" ">마이페이지</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href=" ">로그아웃</a>
+                    </li>
+                  </c:otherwise>
+                </c:choose>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <!-- 펼쳐졌을 때 nav -->
+      <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light" aria-label="Main navigation">
+        <div class="row w-100 align-items-center">
+          <div class="col-5 d-flex justify-content-center">
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link mx-2" href="">자유 게시판</a>
+              </li>
+            </ul>
+          </div>
+
+          <!-- logo -->
+          <div class="col-2">
+            <a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
+              <img id="logoImgs" src="/resources/images/kiri.jpg" />
+            </a>
+          </div>
+
+          <div class="col-5">
+            <div class="row align-items-center justify-content-center">
+              <div class="col-auto d-none">
+                <ul class="navbar-nav mb-2 mb-lg-0 me-2">
+                  <c:if test="${empty loginSession}">
+                    <li class="nav-item">
+                      <a class="nav-link" href="/toLogin.mem">로그인</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" href="/toSignUp.mem">회원가입</a>
+                    </li>
+                  </c:if>
+                </ul>
+              </div>
+
+              <div class="col-auto user">
+                <c:if test="${not empty loginSession}">
+                  <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1"
+                      data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32"
+                        class="rounded-circle" />
+                    </a>
+                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+                      <li>
+                        <a class="dropdown-item" href="#">마이페이지</a>
+                      </li>
+                      <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                    </ul>
+                  </div>
+                </c:if>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+
+
+<div class="container">
+  <button type="button" class="btn btn-primary" id="locationBtn" value="locationList">지역</button>
+  <button type="button" class="btn btn-primary" id="categoryBtn" value="categoryList">카테고리</button>
+  <!--지역 설정 슬라이더-->
+      <div id="locationList" class="responsive mt-5">
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic">
+        <img src = "/resources/images/slide/지역9.png">
+      </div>
+      <span class="locationText mt-1">
+        서울특별시
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역2.png">
+      </div>
+      <span class="locationText mt-1">
+        인천광역시
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역3.png">
+      </div>
+      <span class="locationText mt-1">
+        대전광역시
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역4.png">
+      </div>
+      <span class="locationText mt-1">
+        광주광역시
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역5.png">
+      </div>
+      <span class="locationText mt-1">
+        대구광역시
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역6.png">
+      </div>
+      <span class="locationText mt-1">
+        울산광역시
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역22.png">
+      </div>
+      <span class="locationText mt-1">
+        부산광역시
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역8.png">
+      </div>
+      <span class="locationText mt-1">
+        경기도
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역9.png">
+      </div>
+      <span class="locationText mt-1">
+        강원도
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역10.png">
+      </div>
+      <span class="locationText mt-1">
+       	충청북도
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역11.png">
+      </div>
+      <span class="locationText mt-1">
+        충청남도
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역12.png">
+      </div>
+      <span class="locationText mt-1">
+        전라북도
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역14.png">
+      </div>
+      <span class="locationText mt-1">
+        전라남도
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역13.png">
+      </div>
+      <span class="locationText mt-1">
+        경상북도
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+       <img src = "/resources/images/slide/지역15.png">
+      </div>
+      <span class="locationText mt-1">
+        경상남도
+      </span>
+    </div>
+    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/지역19.png">
+      </div>
+      <span class="locationText mt-1">
+        제주도
+      </span>
+    </div>
+  </div>
+  <!--카테고리 설정 슬라이더-->
+  <div id="categoryList" class="responsive mt-5" >
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center" id="아웃도어/여행">
+      <div class="categoryPic" style="font-size: 66px;">
+        <i class="fa-solid fa-plane-departure"></i>
+      </div>
+      <span class="categoryText mt-1">
+        아웃도어/여행
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic" style="font-size: 66px;">
+        <i class="fa-solid fa-baseball"></i>
+      </div>
+      <span class="categoryText mt-1">
+        운동/스포츠
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic" style="font-size: 66px;">
+        <i class="fa-solid fa-language"></i>
+      </div>
+      <span class="categoryText mt-1">
+        외국어/언어
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic" style="font-size: 66px;">
+        <i class="fa-solid fa-dog"></i>
+      </div>
+      <span class="categoryText mt-1">
+        반려동물
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic" style="font-size: 66px;">
+        <i class="fa-solid fa-guitar"></i>
+      </div>
+      <span class="categoryText mt-1">
+        음악/악기
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic" style="font-size: 66px;">
+        <i class="fa-solid fa-democrat"></i>
+      </div>
+      <span class="categoryText mt-1">
+        공예/만들기
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic" style="font-size: 66px;">
+        <i class="fa-solid fa-people-group"></i>
+      </div>
+      <span class="categoryText mt-1">
+        댄스/무용
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic" style="font-size: 66px;">
+        <i class="fa-solid fa-book"></i>
+      </div>
+      <span class="categoryText mt-1">
+        인문학/책/글
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic" style="font-size: 66px;">
+        <i class="fa-solid fa-camera"></i>
+      </div>
+      <span class="categoryText mt-1">
+        사진/영상
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic" style="font-size: 66px;">
+        <i class="fa-solid fa-gamepad"></i>
+      </div>
+      <span class="categoryText mt-1">
+        게임/오락
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic" style="font-size: 66px;">
+        <i class="fa-solid fa-kitchen-set"></i>
+      </div>
+      <span class="categoryText mt-1">
+        요리/제조
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic" style="font-size: 66px;">
+        <i class="fa-solid fa-balloons"></i>
+      </div>
+      <span class="categoryText mt-1">
+        문화/공연/축제
+      </span>
+    </div>
+</div>
+
+
+	<!-- 모임 card 캐러셀 -->
+      <div class="row content mt-4">
+         <div class="col p-0">
+            <div class="content2">
+               <div class="imgContainer">
+                  <div class="row" style="background-color: #f6f7f9;">
+                     <c:forEach items="${selectAllList}" var="dto">
+                        <div class="col-md-4 d-flex justify-content-center p-4">
+                           <div class="card">
+                           		<c:choose>
+									<c:when test="${dto.sys_name ne null}">
+										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+									</c:when>
+									<c:otherwise>
+										<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+									</c:otherwise>
+								</c:choose>
+								<span class="d-none">${dto.seq_group}</span>
+                              <div class="card-body">
+                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center">
+                                    ${dto.group_category}
+                                 </div>
+                                 <div class="card-text mt-1">
+                                    <strong>${dto.group_title}</strong>
+                                 </div>
+                                 <div class="card-text d-flex justify-content-end">
+                                    <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </c:forEach>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+
+
+
+
+</div>
+
+
+
+  <!-- Footer-->
+  <!-- <div class="footerWrapper" style="background-color: #fff;">
+    <div class="container">
+      <footer class="footer" style="background-color: #fff;">
+        <div class="row">
+          <div class="col-lg-3 footer-imgBox">
+            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-2">
+              <li class="list-inline-item"><a href="#!">공지사항</a></li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item"><a href="#!">회원가입</a></li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item"><a href="#!">로그인</a></li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item">
+                <a href="#!">책임의 한계 및 법적고지</a>
+              </li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item">
+                <a href="#!" style="color: red; font-weight: bold">개인정보처리방침</a>
+              </li>
+            </ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
+              사업자등록번호 : 22-02-22
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2022. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-4">
+                <a href="#!"><i class="bi-facebook fs-3"></i></a>
+              </li>
+              <li class="list-inline-item me-4">
+                <a href="#!"><i class="bi-twitter fs-3"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#!"><i class="bi-instagram fs-3"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div> -->
+
+
+
+  <script>
+
+//카테고리 설정 스크립트
+//지역 클릭시
+$('#locationBtn').on("click", function() {
+   $('#categoryList').css('display', 'none'); // 카테고리 안보이게
+   $('#locationList').css('display', 'block'); // 지역 보이게
+   $('#locationList').get(0).slick.setPosition();
+});
+
+//카테고리 클릭시
+$('#categoryBtn').on("click", function() {
+   $('#categoryList').css('display', 'block'); // 카테고리 보이게
+   $('#locationList').css('display', 'none'); // 지역 안보이게
+   $('#categoryList').get(0).slick.setPosition();
+});
+
+
+$(window).on('load', function() {
+ $('.responsive').slick({
+ dots: false,
+ infinite: true,
+ speed: 300,
+ slidesToShow: 6,
+ slidesToScroll: 6,
+ responsive: [
+   {
+     breakpoint: 1024,
+     settings: {
+       slidesToShow: 3,
+       slidesToScroll: 3,
+       infinite: true,
+       dots: false
+     }
+   },
+   {
+     breakpoint: 600,
+     settings: {
+       slidesToShow: 2,
+       slidesToScroll: 2
+     }
+   },
+   {
+     breakpoint: 480,
+     settings: {
+       slidesToShow: 1,
+       slidesToScroll: 1
+     }
+   }
+ ]
+});
+});
+
+//해당 모임 상세페이지 이동
+$(".card").on("click",function() {
+    let findSeq_group = $(this).find('span').html(); // 공백이 포함되서 나옴
+    let seq_group = findSeq_group.trim(); // 공백을 없앰
+    console.log(seq_group);
+    location.href = "/group/toGroupDetail?seq_group="+seq_group; 
+  })
+
+
+  // 지역으로 모임 조회
+  $(".locationMapper").on("click",function() {
+	console.log("hi");
+    let locationText = $(this).find('span').html(); // 공백이 포함되서 나옴
+    let group_site = locationText.trim(); // 공백을 없앰
+    console.log(group_site);
+    location.href = "/user/toUserSelectedGroupList?group_site="+group_site; 
+  })
+  
+  // 카테고리로로 모임 조회
+  $(".categoryMapper").on("click",function(e) {
+    let categoryText = $(this).find('span').html(); // 공백이 포함되서 나옴
+    let group_category = categoryText.trim(); // 공백을 없앰
+    console.log(group_category);
+    location.href = "/user/toUserSelectedGroupList?group_category="+group_category;
+  })
+
+
+  </script>
+</body>
+
+</html>

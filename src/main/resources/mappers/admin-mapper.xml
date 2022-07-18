@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="adminMapper">
+ 	<select id="selectAllMember" parameterType="map" resultType="com.kiri.dto.MemberDTO">
+ 		select * from (select member.*, row_number() over(order by 1 desc) as num from member)
+				where num between #{start} and #{end}
+ 	</select>
+ 	<select id="getPageNavi" resultType="int">
+ 		select count(*) as totalCnt from member
+ 	</select>
+ 	<select id="selectReport" resultType="com.kiri.dto.ReportDTO">
+ 		select * from report
+ 	</select>
+ 	<select id="selectReportBySeq" resultType="com.kiri.dto.ReportDTO" parameterType="int">
+ 		select * from report where seq_report = #{seq_report}
+ 	</select>
+ 	<insert id="insertBl" parameterType="com.kiri.dto.BlackListDTO">
+ 		insert into blacklist values(seq_bl.nextval, #{user_email}, sysdate, #{bl_reason})  
+ 	</insert>
+ 	<delete id="deleteReport" parameterType="int">
+ 		delete from report where seq_report=#{seq_report}
+ 	</delete>
+ 	<update id="updateBl" parameterType="String">
+ 		update member set user_blacklist='Y' where user_email=#{user_email}
+ 	</update>
+ 	<select id="searchMember" parameterType="map" resultType="com.kiri.dto.MemberDTO">
+ 		select * from member where
+			<if test="searchType == 'all'">user_email like '%${searchKeyword}%' or user_nickname like '%${searchKeyword}%'or user_phone like '%${searchKeyword}%' </if>
+			<if test="searchType != 'all'">${searchType} like '%' || #{searchKeyword} || '%'</if>
+			order by 1
+ 	</select>
+ 	<select id="selectDetailMem" resultType="com.kiri.dto.MemberDTO" parameterType="String">
+ 		select * from member where user_email = #{user_email}
+ 	</select>
+ 	<update id="updateMem" parameterType="map">
+ 		update member set user_blacklist=#{user_blacklist} where user_email=#{user_email}
+ 	</update>
+ </mapper>

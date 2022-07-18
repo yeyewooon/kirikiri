@@ -327,6 +327,9 @@ input{
 	font-size: 0.050rem;
 	margin-left: 10px;
 }
+#user_pw, #pwCheck{
+	font-family: none;
+}
 
 /*공통 요소*/
 h1{
@@ -429,7 +432,6 @@ footer.footer {
 	        				let answer = confirm("사용 가능한 이메일입니다. 해당 이메일로 인증하시겠습니까?");
 	        				
 	        				if(answer){
-	        					$("#emailCheckBox").show();
 	        					$.ajax({
 	        						url : "/signup/emailAuth"
 	        						, type : "post"
@@ -437,6 +439,7 @@ footer.footer {
 	        						, success : function (data) {
 	        							code = data;
 	        							alert('인증번호가 전송되었습니다.');
+	        							$("#emailCheckBox").show();
 	        							$("#authNum").focus();
 	        							
 	        						}, error : function(e){
@@ -616,7 +619,6 @@ footer.footer {
         	   
 //            }else if(!bdRegex.test(bd)){
 //         	   alert("생일을 정확하게 입력해주세요.");
-//         	   $("#day").focus();
 //         	   return;
         	   
 //            }else if(!phoneRegex.test(phone)){
@@ -682,7 +684,7 @@ footer.footer {
     	});
        
 	   $("#completeBtn").click(function(){
-		  if(!$('input:radio[name="job"]').is(':checked')){
+		  if(!$('input:radio[name="user_job"]').is(':checked')){
 		   	  alert("직업을 선택해주세요.");
 		   	  return;
 			  
@@ -693,7 +695,12 @@ footer.footer {
 		  }else if($('input:checkbox[name="area"]:checked').length == 0){
 			  alert("관심 지역은 적어도 1개는 선택해주세요.");
 			  return;
-		  } 
+		  }
+		  $("#user_bd").val($("#year").val() + $("#month").val() + $("#day").val());
+		  $("#user_phone").val($("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val());
+		  $("#user_email").val($("#email-id").val()+"@"+$("#email-domain").val());
+		  $("#signupForm").submit();
+		  
 	   });
 
    })
@@ -888,7 +895,7 @@ function checkFile(obj) {
   </header>
 <!--바디-->
 
-<form id="signupForm" action="/signup/signup" method="post">
+<form id="signupForm" action="/signup/signup" method="post" enctype="multipart/form-data">
 <div class="container signupBox">
     <div class="row">
         <div class="col"><h1>회원 가입</h1></div>
@@ -972,6 +979,7 @@ function checkFile(obj) {
                 <div class="row email-domain-row">
                 	<div class="col-md-10 p-0">
                 		<input type="text" id="email-domain" name="email-domain" class="form-control" value="1">
+                		<input type="hidden" id="user_email" name="user_email" />
                 	</div>
                 	<div class="col-md-2 d-flex align-items-center">
                 		<i id="email-btn" class="bi bi-arrow-up-square-fill"></i>
@@ -1111,9 +1119,9 @@ function checkFile(obj) {
                 <p>성별</p>
             </div>
             <div class="col-md-7">
-                <input class="user_gender" type="radio" id="men" name="user_gender" value="men" required>
+                <input class="user_gender" type="radio" id="men" name="user_gender" value="남자" required>
                 <label for="men">남자</label>
-                <input class="user_gender" type="radio" id="women" name="user_gender" value="women" required>
+                <input class="user_gender" type="radio" id="women" name="user_gender" value="여자" required>
                 <label for="women">여자</label>
             </div>
             <div class="col-2"></div>
@@ -1140,7 +1148,7 @@ function checkFile(obj) {
         </div>
         <div class="row">
             <div class="col">
-                <input type="file" class="form-control" id="user_image" name="user_image" accept="image/jpeg, image/png">
+                <input type="file" class="form-control" id="user_image" name="file" accept="image/jpeg, image/png">
             </div>
         </div>
         <div class="row">
@@ -1165,10 +1173,10 @@ function checkFile(obj) {
                 <p  style="margin-top: 10px;">직업</p>
             </div>
             <div class="col-8" style="text-align: left;">
-                <input type="radio" class="job" id="student" name="job"><label for="student">학생</label>
-                <input type="radio" class="job" id="employee" name="job"><label for="employee">회사원</label>
-                <input type="radio" class="job" id="unemployed" name="job"><label for="unemployed">무직</label>
-                <input type="radio" class="job" id="selectJob" name="job"><label for="selectJob">기타</label>
+                <input type="radio" class="user_job" id="student" name="user_job" value="학생"><label for="student">학생</label>
+                <input type="radio" class="user_job" id="employee" name="user_job" value="회사원"><label for="employee">회사원</label>
+                <input type="radio" class="user_job" id="unemployed" name="user_job" value="무직"><label for="unemployed">무직</label>
+                <input type="radio" class="user_job" id="other" name="user_job" value="기타"><label for="other">기타</label>
             </div>
             <div class="col-1"></div>
         </div>

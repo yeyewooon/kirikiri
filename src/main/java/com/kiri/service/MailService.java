@@ -26,9 +26,9 @@ public class MailService {
 		makeRandomNumber();
 		String setFrom = "eamilsender0222@gmail.com";  
 		String toMail = email;
-		String title = "회원 가입 인증 이메일 입니다."; 
+		String title = "끼리끼리 회원 가입 인증 이메일 입니다."; 
 		String content = 
-				"홈페이지를 방문해주셔서 감사합니다." + 	 
+				"끼리끼리 홈페이지를 방문해주셔서 감사합니다." + 	 
                 "<br><br>" + 
 			    "인증 번호는 " + authNum + "입니다." + 
 			    "<br>" + 
