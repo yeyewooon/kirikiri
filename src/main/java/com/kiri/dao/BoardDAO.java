@@ -40,9 +40,9 @@ public class BoardDAO {
 	}
 	
 	// 게시글 수정
-//	public int modify(BoardDTO dto) throws Exception{
-//		return session.update("boardMapper.modify", dto);
-//	}
+	public int modify(BoardDTO dto) throws Exception{
+		return session.update("boardMapper.modify", dto);
+	}
 	
 	// 게시글 삭제 요청
 	public int delete(int seq_board) throws Exception{

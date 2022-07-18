@@ -231,7 +231,12 @@
     			// , dataType : "json"
     			, success : function(data){
     				//makeComment(data);
-    				$("#body-comment").load(location.href + " #body-comment");
+    				if(data === "success"){
+    					$("#body-comment").load(location.href + " #body-comment");
+    				}else{
+    					alert("댓글 등록에 실패했습니다.");
+    				}
+    				
     			}, error : function(e){
     				console.log(e);
     				alert("댓글 등록에 실패했습니다.");

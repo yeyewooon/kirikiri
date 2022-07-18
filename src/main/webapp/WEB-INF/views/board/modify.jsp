@@ -203,6 +203,43 @@
 					  }
 				  }
 			});
+			
+			// 주기적으로 감지할 대상 요소 선정
+			let target = document.querySelector(".note-editable");
+			
+			// DOM의 어떤 부분을 감시할지를 옵션 설정
+			let config = { 
+				childList: true, // 자식노드 추가/제거 감지
+				subtree : true, // 대상 노드의 자식 뿐만 아니라 손자 이후로 모두 감시
+			};
+			
+			// 옵저버 인스턴스 생성, 콜백함수 설정
+			let observer = new MutationObserver(function(mutationList){ // 타겟에 변화가 일어나면 콜백함수를 실행하게 된다.
+				//console.log(mutationList);
+				for(let mutation of mutationList){
+					if(mutation.removedNodes.length == 1){
+						if(mutation.removedNodes[0].src != null) {
+							let img = mutation.removedNodes[0].src;
+							//console.log(img);
+							let src = img.replace("http://localhost/boardFile/", "")
+							//console.log(src);
+							$.ajax({
+								url : "/board/delImg"
+								, type : "post"
+								, data : {"src" : src}
+								, success : function(data){
+									console.log(data);
+								}, error : function(e){
+									console.log(e);
+								}
+							})
+						}
+					}
+				}
+			}); 
+
+			// 감지 시작
+			observer.observe(target, config);
 		});
 		
 		// summernote 이미지 업로드 function

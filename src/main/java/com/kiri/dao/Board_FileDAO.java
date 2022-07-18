@@ -25,9 +25,9 @@ public class Board_FileDAO {
 	}
 	
 	// 모든 saveName 가져오기
-	public List<String> selectSaveName() throws Exception{
-		return session.selectList("fileMapper.selectSaveName");
-	}
+//	public List<String> selectSaveName() throws Exception{
+//		return session.selectList("fileMapper.selectSaveName");
+//	}
 	
 	// 게시글에 있는 파일 이름 가져오기
 	public List<String> selectFile(int seq_board) throws Exception{

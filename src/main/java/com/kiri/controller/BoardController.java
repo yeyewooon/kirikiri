@@ -61,7 +61,6 @@ public class BoardController {
 		JsonObject jsonObject = service.uploadSummernoteImg(file, realPath);
 		
 		String result = jsonObject.toString();
-		System.out.println(result);
 		return result;
 	}
 	
@@ -82,23 +81,24 @@ public class BoardController {
 	@RequestMapping(value = "/modify") // 게시글 수정 요청
 	public String modify(BoardDTO dto, @RequestParam(value="imgs[]", required=false) String[] imgs) throws Exception {
 		String path = session.getServletContext().getRealPath("boardFile");
-		
-//		List<Map<String, String>> files = (List)session.getAttribute("files");
-//		System.out.println(files);
-//		int result = service.modify(dto, path, files);
-//		if(result > 0) {
-//			session.removeAttribute("files");
-//		}
-		
+				
 		List<String> fileList = new ArrayList<>();
 		if(imgs != null) {
 			for(String image : imgs) {
 				fileList.add(image);
 			}
 		}
-		//service.modify(dto, path, fileList);
+		service.modify(dto, fileList);
 		
 		return "redirect:/board/toDetailView?seq_board="+dto.getSeq_board();
+	}
+	
+	@RequestMapping(value = "/delImg") // 이미지 삭제 요청
+	@ResponseBody
+	public String delImg(String src) throws Exception {
+		String path = session.getServletContext().getRealPath("boardFile");
+		service.delFile(path, src);
+		return "success";
 	}
 	
 	@RequestMapping(value = "/delete") // 게시글 삭제 요청
