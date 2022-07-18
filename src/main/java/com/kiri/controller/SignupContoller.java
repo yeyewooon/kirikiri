@@ -59,11 +59,11 @@ public class SignupContoller {
 	}
 	
 	@RequestMapping("/signup")
-	public String signup(String user_email) throws Exception {
-		System.out.println("이메일 인증 요청이 들어옴!");
-		System.out.println("이메일 인증 이메일 : " + user_email);
-		
-	}
+//	public String signup(String user_email) throws Exception {
+//		System.out.println("이메일 인증 요청이 들어옴!");
+//		System.out.println("이메일 인증 이메일 : " + user_email);
+//		
+//	}
 	
 	@ExceptionHandler
 	public String toError(Exception e) {
