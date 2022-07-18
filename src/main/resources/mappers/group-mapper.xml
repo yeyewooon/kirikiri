@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="tblGroupMapper">
+
+
+   <!-- ///////////////////////////////////////////////////////////////////////////////// -->
+   <!-- 가입신청 넘어올때 인원수빼오기 -->
+   <select id = "applyCount" parameterType = "int" resultType = "int">
+      select group_people from tbl_group where seq_group = #{seq_group}   
+   </select>
+   
+   <!-- 가입신청 넘어올때 해당그룹 멤버수 가져오기 -->
+   <select id = "groupCount" parameterType = "int" resultType = "int">
+      select count(*) from group_member where seq_group = #{seq_group}
+   </select>
+   
+   <!-- 가입신청 목록 가져오기 -->
+   <select id="selectApply" parameterType="int"
+      resultType="com.kiri.dto.MemberDTO">
+      select * from member where user_email in (select user_email from group_apply
+      where seq_group = #{seq_group})
+   </select>
+
+   <!-- 모임 해산하기 -->
+   <delete id="groupDelete" parameterType="int">
+      delete from tbl_group
+      where seq_group = #{seq_group}
+   </delete>
+
+   <!-- 가입신청 거절하기 -->
+   <delete id="denyApply" parameterType="java.util.List">
+      delete from group_apply
+      where user_email in
+      <foreach item="email" collection="userEmails" open="("
+         separator="," close=")">
+         #{email}
+      </foreach>
+   </delete>
+
+   <!-- 가입승인 여러명 받기위한 user_email 뽑기 -->
+   <select id="selectApplyByEmail" parameterType="java.util.List"
+      resultType="com.kiri.dto.Group_ApplyDTO">
+      select *
+      from group_apply
+      where user_email in
+      <foreach item="email" collection="userEmails" open="("
+         separator="," close=")">
+         #{email}
+      </foreach>
+   </select>
+
+   <!-- 가입신청 승인하기 -->
+   <insert id="completeApply"
+      parameterType="com.kiri.dto.Group_MemberDTO">
+      insert into group_member
+      values(seq_member.nextval, #{user_email}, #{seq_group}, #{user_nickname}, #{access})
+   </insert>
+
+   <!-- 해당 모임의 맴버 조회 -->
+   <select id="selectGroupAccess" parameterType="int"
+      resultType="com.kiri.dto.TableJoinDTO">
+      select * from member join group_member using (user_email) where seq_group =
+      #{seq_group} order by 16
+   </select>
+
+   <!-- 모임장 위임 -->
+   <update id="groupAccess" parameterType="com.kiri.dto.Group_MemberDTO">
+      update group_member set "access" =
+      <choose>
+         <when test = "access.equals('모임장')">
+            '일반회원' where user_email = #{user_email}
+         </when>
+         <when test = "access.equals('일반회원')">
+            '모임장' where user_email = #{user_email}
+         </when>
+      </choose>
+   </update>
+
+   <!-- 해당 모임 멤버 강퇴 -->
+   <delete id="groupMemberDelete" parameterType="java.util.List">
+      delete from group_member where user_email in
+      <foreach item="email" collection="userEmails" open="("
+         separator="," close=")">
+         #{email}
+      </foreach>
+   </delete>
+<!-- ////////////////////////////////////////////////////////////////// -->
+<!-- 김영완 -->  
+   <!-- 그룹 생성 -->
+   <insert id="createGroup" parameterType="com.kiri.dto.Tbl_GroupDTO">
+      insert into tbl_group values(seq_group.nextval, #{user_email}, #{group_title}, #{group_info}, #{group_category}, #{group_site}, #{group_people}, #{ori_name,jdbcType = VARCHAR}, #{sys_name,jdbcType = VARCHAR} )
+   </insert>
+   
+   <!--그룹 생성시 group_member에 호스트로 insert -->
+   <insert id="insertGroupHost" parameterType="com.kiri.dto.Group_MemberDTO">
+      insert into group_member values(seq_member.nextval, #{user_email}, seq_group.currval, #{user_nickname}, '주최자')
+   </insert>
+   
+   <!-- seq_group 이용해 해당 그룹 내용 가져오기 -->
+   <select id="selectGroupDetail" parameterType="int" resultType="com.kiri.dto.Tbl_GroupDTO">
+      select * from tbl_group where seq_group = #{seq_group}
+   </select>
+   
+   <!-- 그룹 업데이트 -->
+   <update id="updateGroup" parameterType="com.kiri.dto.Tbl_GroupDTO">
+      update tbl_group set 
+      <choose>
+         <when test="ori_name == null" >
+               group_title = #{group_title},
+               group_info = #{group_info}, 
+               group_category = #{group_category}, 
+               group_site = #{group_site}, 
+               group_people = #{group_people}
+         </when>
+         <otherwise>
+               group_title = #{group_title},
+               group_info = #{group_info}, 
+               group_category = #{group_category}, 
+               group_site = #{group_site}, 
+               group_people = #{group_people}, 
+               ori_name = #{ori_name}, 
+               sys_name = #{sys_name} 
+         </otherwise>
+      </choose>
+      where seq_group = #{seq_group}
+   </update>
+   
+   <!-- 해당 모임의 맴버 조회 -->
+   <select id="selectGroupMember" parameterType="int" resultType="com.kiri.dto.Group_MemberDTO">
+      select * from group_member where seq_group = #{seq_group} order by "access" desc
+   </select>
+   
+   <!-- 해당 모임 맴버 탈퇴 -->
+   <delete id="quitGroupMember" parameterType="com.kiri.dto.Group_MemberDTO">
+      delete from group_member where seq_group = #{seq_group} and user_email = #{user_email}
+   </delete>
+   
+   <!-- 해당 그룹 가입 신청 명단 -->
+   <select id="selectApplyList" parameterType="int" resultType="com.kiri.dto.Group_ApplyDTO">
+      select * from group_apply where seq_group = #{seq_group}
+   </select>
+   
+   <!-- 그룹 가입 신청 -->
+   <insert id="applyGroupMember" parameterType="com.kiri.dto.Group_ApplyDTO">
+      insert into group_apply values(seq_apply.nextval, #{user_email}, #{seq_group}, #{user_nickname}, sysdate)
+   </insert>
+   
+   <!-- 해당 그룹 찜 -->
+   <insert id="insertWishList" parameterType="com.kiri.dto.WishListDTO">
+      insert into wishList values(seq_wishlist.nextval ,#{seq_group}, #{user_email})
+   </insert>
+   
+   <!--  해당 그룹 찜 명단 -->
+   <select id="selectWishList" parameterType="int" resultType="com.kiri.dto.WishListDTO">
+      select * from wishList where seq_group = #{seq_group}
+   </select>
+   
+   <!--  해당 그룹 찜 삭제 -->
+   <delete id="deletetWishList" parameterType="com.kiri.dto.WishListDTO">
+      delete from wishList where seq_group = #{seq_group} and user_email = #{user_email}
+   </delete>
+
+   
+</mapper>

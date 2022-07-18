@@ -107,5 +107,9 @@ public class BoardController {
 		return "redirect:/board/toBoard";
 	}
 	
+	@RequestMapping(value = "/")
+	public String home() {
+		return "mainPage";
+	}
 }
 

@@ -16,6 +16,8 @@
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/boardFile/*" location="/boardFile/" />
 
+	<resources mapping="/group_profile/*" location="/group_profile/"/>
+	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
@@ -23,6 +25,12 @@
 	</beans:bean>
 	
 	<context:component-scan base-package="com.kiri.*" />
+	<context:component-scan base-package="com.group.*" />
+	
+	<!-- multipartResolver -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="maxUploadSize" value="10485760"></beans:property> <!-- 최대파일크기 10MB -->
+	</beans:bean>
 	
 	<!-- multipartResolver -->
 	<!-- 프로퍼티 이용 최대 업로드 사이즈 지정 -->
