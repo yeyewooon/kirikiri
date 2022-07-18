@@ -388,7 +388,7 @@ canvas {
 			<div class="row">
 				<div class="col">
 					<h3>
-						~~님<br> 가입을 환영합니다!!
+						<br> 끼리끼리에 가입을 환영합니다!!
 					</h3>
 				</div>
 			</div>

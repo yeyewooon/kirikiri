@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kiri.service.MailService;
 import com.kiri.service.SignupService;
 
 @RequestMapping("/signup")
@@ -13,6 +14,9 @@ import com.kiri.service.SignupService;
 public class SignupContoller {
 	@Autowired
 	private SignupService service;
+	@Autowired
+	private MailService mailService;
+	
 	
 	@RequestMapping(value = "/toSignup") //회원가입으로
 	public String toSignup() {
@@ -45,11 +49,21 @@ public class SignupContoller {
 		
 	}
 	
-	@RequestMapping(value = "/signup") //회원가입으로
-	public String Signup() {
-		return "/member/signup";
+	@ResponseBody
+	@RequestMapping("/emailAuth")
+	public String emailAuth(String user_email) throws Exception {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println("이메일 인증 이메일 : " + user_email);
+		
+		return mailService.joinEmail(user_email);
 	}
 	
+	@RequestMapping("/signup")
+	public String signup(String user_email) throws Exception {
+		System.out.println("이메일 인증 요청이 들어옴!");
+		System.out.println("이메일 인증 이메일 : " + user_email);
+		
+	}
 	
 	@ExceptionHandler
 	public String toError(Exception e) {

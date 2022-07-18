@@ -128,7 +128,7 @@ body{
     display: none;
 }
 
-#introMessage{
+#user_intro{
     height: 100%;
     width: 100%;
     resize: none;
@@ -212,6 +212,10 @@ body{
 input{
     margin:  5px;
 }
+#user_intro_cnt{
+	text-align : right;
+	margin-top: 5px;
+}
 
 /* 회원단계 1*/
 #signup-1{
@@ -242,7 +246,7 @@ input{
     margin-top: 5px;
 }
 
-.gender{
+.user_gender{
     margin-bottom: 30px;
 }
 
@@ -375,6 +379,10 @@ footer.footer {
 </head>
 <script>
    $(document).ready(function(){
+	   let code ; 
+	   let auth ;
+	   let nicknameConfirm;
+	   
        $("#singupBackBtn").click(function(){ // 뒤로가기 
            back();
       
@@ -400,9 +408,9 @@ footer.footer {
       			 return;
       		
       		 }else if(!emailRegex.test($("#email-domain").val())){
-   	  			 console.log($("#email-domain").val());
        	 		 alert("올바르지 않은 이메일 형식입니다.");
 	       	 	 return;
+	       	 	 
 	      	 }else{
 	      		 
 		      	  let user_email = $("#email-id").val()+"@"+$("#email-domain").val();
@@ -413,19 +421,32 @@ footer.footer {
 	        		, data : {user_email : user_email }
 	        		, dataType : "text"
 	        		, success : function(result){
-	        			console.log(result);
 	        			if(result === "impossibility"){
 	        				alert("사용 중인 이메일입니다.");
 	        				$("#eamail-id").focus();
 	        				
 	        			}else if(result === "possibility"){
 	        				let answer = confirm("사용 가능한 이메일입니다. 해당 이메일로 인증하시겠습니까?");
+	        				
 	        				if(answer){
 	        					$("#emailCheckBox").show();
+	        					$.ajax({
+	        						url : "/signup/emailAuth"
+	        						, type : "post"
+	        						, data : {user_email : user_email }
+	        						, success : function (data) {
+	        							code = data;
+	        							alert('인증번호가 전송되었습니다.');
+	        							$("#authNum").focus();
+	        							
+	        						}, error : function(e){
+	        							console.log(e);
+	        						}			
+	        					});
+	        					
 	        				}else{
 	        					return;
 	        				}
-	        				
 	        			}
 	        	
 	        		}, error : function(e){
@@ -435,7 +456,27 @@ footer.footer {
       	   }
    	   
    	   });
-      
+		
+		$("#certificationBtn").click(function(){
+			if($("#authNum").val() === code){
+				alert("인증에 성공하였습니다!");
+				$("#email-id").attr('readonly',true);
+				$("#email-domain").attr('readonly',true);
+				$('#email-domain-select').attr('disabled',true);
+				auth = "comfirm";
+				return;
+				
+			}else{
+				alert("인증 번호가 다릅니다. 다시 입력해주세요.");
+				$("#authNum").focus();
+				return;
+			}
+			
+		});
+		
+		$("#email_id").change(function(){
+			auth = "deny";
+		});
 		
 		$("#user_nickname").change(function(){
 			$("#nickname-col").empty();
@@ -446,17 +487,15 @@ footer.footer {
 				invalidNickname();
 	       	 	return;
 			}
-			
 		});
-		
 	   
 		$("#nicknameCheck").click(function(){ //이메일 중복체크
-		   	   
   	  		 let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;    
      
   	  		 if(!nicknameRegex.test($("#user_nickname").val())){
   	  			 console.log($("#user_nickname").val());
       	 		 alert("올바르지 않은 닉네임 형식입니다.");
+      	 		 $("#nicknameCheck").focus();
 	       	 	 return;
 	       	 	 
 	      	 }else{
@@ -476,7 +515,7 @@ footer.footer {
 	        			}else if(result === "possibility"){
 	        				alert("사용 가능한 닉네임입니다.");
 	        				validNickname();
-	        				$("#nicknameConfirm").val("confirm");
+	        				nicknameConfirm = "confirm";
 	        			}
 	        	
 	        		}, error : function(e){
@@ -484,7 +523,6 @@ footer.footer {
 	        		}
 	        	})
      	   }
-  	   
   	   });
 		
 	   $("#user_name").change(function(){
@@ -504,13 +542,13 @@ footer.footer {
     	   $("#email-domain").val("");
        });
        
-       $("#user_password").change(function(){ //비밀번호
+       $("#user_pw").change(function(){ //비밀번호
     	   let passwordRegex = /^[a-z0-9!@#$]{8,20}$/
-    	   console.log("aaa");
-    	   if(!passwordRegex.test($("#user_password").val())){
+    	   
+    	   if(!passwordRegex.test($("#user_pw").val())){
     		   invalidPw();
     		   return;
-    	   }else if($("#email-id").val() === $("#user_password").val()){
+    	   }else if($("#email-id").val() === $("#user_pw").val()){
     		   idEqPw();
     		   return;
     	   }else{
@@ -519,7 +557,7 @@ footer.footer {
        });
        
        $("#pwCheck").change(function(){ //비밀번호확인
-    	   if($("#user_password").val() != $("#pwCheck").val()){
+    	   if($("#user_pw").val() != $("#pwCheck").val()){
     		   checkPw();
     	   }else{
     		   $("#check-col").empty();
@@ -527,11 +565,7 @@ footer.footer {
        
        });
        
-       
-       
-       
        $("#nextBtn").click(function(){ //다음으로
-           
     	   let nameRegex = /^[가-힣]+$/;
        	   
       	   let bdRegex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
@@ -541,65 +575,126 @@ footer.footer {
 		   let phone =  $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val(); 
 		   
 		   let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;   
-		   
-		   
-		   
 	       	 	 
            if(!nameRegex.test($("#user_name").val())){
         	   alert("올바르지 않은 이름입니다.");
+        	   $("#user_name").focus();
         	   return;   
-        	   
-           }else if(!emailRegex.test($("#email-domain").val())){
-      	 	   alert("올바르지 않은 이메일 형식입니다.");
- 	       	   return;   
- 	       	   
-           }else if($("#email-id").val() === $("#user_password").val()){
-    		   alert("아이디와 비밀번호를 다르게 설정해주세요.");
-    		   return;
-        	   
-           }else if($("#user_password").val() != $("#pwCheck").val()){
-        	   alert("비밀번호가 다릅니다.");
-        	   return;
-        	   
-           }else if($("#nicknameConfirm").val() !== "confirm"){
-        	   alert("닉네임 중복확인을 해주세요.");
-        	   return;
-        	   
-           }else if($("#month").val() + $("#day").val() === "0230" || $("#month").val() + $("#day").val() === "0231"){
-        	   alert("생일을 정확하게 입력해주세요.");
-        	   $("#day").focus();
-        	   return;
-        	   
-           }else if(!bdRegex.test(bd)){
-        	   alert("생일을 정확하게 입력해주세요.");
-        	   $("#day").focus();
-        	   return;
-        	   
-           }else if(!phoneRegex.test(phone)){
-        	   alert("핸드폰 번호를 정확하게 입력해주세요.");
-        	   $("#phone3").focus();
-        	   return;
-        	   
-           }else if(!$('input:radio[name="gender"]').is(":checked")){
-        	   alert("성별을 선택해주세요.");
-//         	   console.log($('input:radio[name="gender"]:checked').val());
-        	   return;
-		   
-        	   
            
-//         }else if(){
+//            }else if(!emailRegex.test($("#email-domain").val())){
+//       	 	   alert("올바르지 않은 이메일 형식입니다.");
+//       	 	   $("#email-domain").focus();
+//  	       	   return;   
+//  	       	auth = comfirm;
+//            }else if(auth !== "comfirm"){
+//       	 	   alert("이메일 인증을 완료해주세요.");
+//       	 	   $("#email_id").focus();
+//  	       	   return;   
+ 	       	
+//            }else if($("#user_pw").val() === "" || $("#pwCheck").val() === ""){
+//         	   alert("비밀번호를 입력해주세요.");
+//            	   return;
+           	   
+//            }else if($("#email-id").val() === $("#user_pw").val()){
+//     		   alert("아이디와 비밀번호를 다르게 설정해주세요.");
+//     		   return;
+        	   
+//            }else if($("#user_pw").val() != $("#pwCheck").val()){
+//         	   alert("비밀번호가 다릅니다.");
+//         	   $("#pwCheck").focus();
+//         	   return;
+        	   
+//            }else if(nicknameConfirm !== "confirm"){
+//         	   alert("닉네임 중복확인을 해주세요.");
+//         	   $("#user_nickname").focus();
+//         	   return;
+        	   
+//            }else if($("#month").val() + $("#day").val() === "0230" || $("#month").val() + $("#day").val() === "0231"){
+//         	   alert("생일을 정확하게 입력해주세요.");
+//         	   $("#day").focus();
+//         	   return;
+        	   
+//            }else if(!bdRegex.test(bd)){
+//         	   alert("생일을 정확하게 입력해주세요.");
+//         	   $("#day").focus();
+//         	   return;
+        	   
+//            }else if(!phoneRegex.test(phone)){
+//         	   alert("핸드폰 번호를 정확하게 입력해주세요.");
+//         	   $("#phone3").focus();
+//         	   return;
+        	   
+//            }else if(!$('input:radio[name="user_gender"]').is(":checked")){
+//         	   alert("성별을 선택해주세요.");
+//         	   return;
         	   
            }else{
         	   next();
            }
-           
        });
-
+       
+       // 뒷 페이지
+       
        $("#profileSetting").click(function(){ //프로필사진
     	   $("#user_image").show();
        });	
        
+       $("#user_image").change(function(){
+    	   let result = checkFile(this);
+    	   console.log(result);
+    	   if(result){
+    		   let reader = new FileReader();
+        	   reader.readAsDataURL(this.files[0])
+        	   
+        	   reader.onload = function(e){
+        		   $("#p_img").attr("src", e.target.result);
+        	   }
+    	   }
+       });
        
+       $('#user_intro').on('change', function() {  // 자기소개
+           $('#user_intro_cnt').html("("+$(this).val().length+" / 500)");
+           const top = $('#user_intro').prop('scrollHeight');
+           $('#user_intro').scrollTop(top);
+           
+           if($(this).val().length > 500) {
+               $(this).val($(this).val().substring(0, 500));
+               $('#user_intro_cnt').html("(500 / 500)");
+           }
+       });
+       
+       $('input:checkbox[name="hobby"]').click(function(){
+    	   let hobbyCnt = $('input:checkbox[name="hobby"]:checked').length; 
+    	  
+    	   if(hobbyCnt>3){
+    	    alert('취미는 최대 3개까지 선택이 가능합니다.');
+    	    $(this).prop('checked', false);
+    	   }
+    	});
+       
+	   $('input:checkbox[name="area"]').click(function(){
+    	   let areaCnt = $('input:checkbox[name="area"]:checked').length;  
+    	  
+    	   if(areaCnt>3){
+    	    alert('관심지역은 최대 3개까지 선택이 가능합니다.');
+    	    $(this).prop('checked', false);
+    	   }
+    	});
+       
+	   $("#completeBtn").click(function(){
+		  if(!$('input:radio[name="job"]').is(':checked')){
+		   	  alert("직업을 선택해주세요.");
+		   	  return;
+			  
+	      }else if($('input:checkbox[name="hobby"]:checked').length == 0){
+		      alert("취미는 적어도 1개는 선택해주세요.");
+		      return;
+				
+		  }else if($('input:checkbox[name="area"]:checked').length == 0){
+			  alert("관심 지역은 적어도 1개는 선택해주세요.");
+			  return;
+		  } 
+	   });
 
    })
 function back(){ //뒤로가기
@@ -638,7 +733,7 @@ function validPw(){
 	$("#regex-col").empty();
     let span = $('<span>').attr('id', 'password-regex-span').css("color","green").html("사용가능한 비밀번호 입니다.");
     $("#regex-col").append(span);
-    $("#user_password").focus();
+    $("#user_pw").focus();
 }
 
 function invalidPw(){
@@ -674,6 +769,27 @@ function validNickname(){
     $("#user_nickname").focus();
 }
 
+function checkFile(obj) {
+	 let fileKind = obj.value.lastIndexOf('.');
+	 let fileName = obj.value.substring(fileKind+1,obj.length);
+	 let fileType = fileName.toLowerCase();
+     
+	 if(fileType == "jpg" || fileType == "gif" || fileType == "png" || fileType == "jpeg" || fileType == "bmp"){
+		 return true;
+	 }else{
+		 alert("이미지 파일만 선택할 수 있습니다.");
+		 let parentObj = obj.parentNode;
+		 let node = parentObj.replaceChild(obj.cloneNode(true),obj);
+		 $("#user_image").val("");
+		 $("#p_img").attr("src", "/resources/images/profile.jpg");
+		 return false;
+	 }
+	 
+	 if(fileType == "bmp"){
+		 answer = confirm("BMP 파일은 웹상에서 사용하기엔 적절한 이미지 형식이 아닙니다. /n 사용하시겠습니까?");
+		 if(!answer)return false;
+	 }
+	}
 
 </script>
 <body>
@@ -771,7 +887,6 @@ function validNickname(){
       </div>
   </header>
 <!--바디-->
-<input type="text" id="nicknameConfirm" />
 
 <form id="signupForm" action="/signup/signup" method="post">
 <div class="container signupBox">
@@ -877,7 +992,7 @@ function validNickname(){
                         <p>이메일 인증</p>
                     </div>
                     <div class="col-md-5">
-                        <input type="text" id="certificationNum" name="certificationNum" class="form-control">
+                        <input type="text" id="authNum" name="authNum" class="form-control">
                     </div>
                     <div class="col-md-2">
                         <button type="button" class="btn btn-secondary" id="certificationBtn">인증번호 확인</button>
@@ -891,7 +1006,7 @@ function validNickname(){
                 <p>비밀번호</p>
             </div>
             <div class="col-md-7">
-                <input type="text" id="user_password" name="user_password" class="form-control">
+                <input type="password" id="user_pw" name="user_pw" class="form-control">
             </div>
             <div class="col-md-2 p-0 text-align-left-col">
             </div>
@@ -919,7 +1034,7 @@ function validNickname(){
                 <p>비밀번호 확인</p>
             </div>
             <div class="col-md-7" style="text-align: left;" >
-                <input type="text" id="pwCheck" name="pwCheck" class="form-control">
+                <input type="password" id="pwCheck" name="pwCheck" class="form-control">
             </div>
             <div class="col-2"></div>
         </div>
@@ -969,6 +1084,7 @@ function validNickname(){
                 <input type="text" id="year" name="year" class="form-control bthday" maxlength="4" required><label for="year">년</label>
                 <input type="text" id="month" name="month" class="form-control bthday" maxlength="2" required><label for="month">월</label>
                 <input type="text" id="day" name="day" class="form-control bthday" maxlength="2" required><label for="day">일</label>
+                <input type="hidden" id="user_bd" name="user_bd" class="form-control"></intput>
             </div>
         </div> 
         <div class="row" >
@@ -986,7 +1102,7 @@ function validNickname(){
                 </select>
                 <input type="text" id="phone2" name="phone2" class="form-control" maxlength="4" required>
                 <input type="text" id="phone3" name="phone3" class="form-control" maxlength="4" required>
-                <input type="hidden" id="phone" name="phone">
+                <input type="hidden" id="user_phone" name="user_phone">
             </div>
             <div class="col-2"></div>
         </div>
@@ -995,9 +1111,9 @@ function validNickname(){
                 <p>성별</p>
             </div>
             <div class="col-md-7">
-                <input class="gender" type="radio" id="men" name="gender" value="men" required>
+                <input class="user_gender" type="radio" id="men" name="user_gender" value="men" required>
                 <label for="men">남자</label>
-                <input class="gender" type="radio" id="women" name="gender" value="women" required>
+                <input class="user_gender" type="radio" id="women" name="user_gender" value="women" required>
                 <label for="women">여자</label>
             </div>
             <div class="col-2"></div>
@@ -1024,7 +1140,7 @@ function validNickname(){
         </div>
         <div class="row">
             <div class="col">
-                <input type="file" class="form-control" id="user_image" name="user_image">
+                <input type="file" class="form-control" id="user_image" name="user_image" accept="image/jpeg, image/png">
             </div>
         </div>
         <div class="row">
@@ -1032,7 +1148,15 @@ function validNickname(){
                 <p style="margin-top: 50px;">자기소개</p>
             </div>
             <div class="col-7" style="height: 120px;">
-                <textarea class="form-control" name="introMessage" id="introMessage"></textarea>
+                <textarea class="form-control" name="user_intro" id="user_intro" maxlength="500" placeholder="500자 이내로 작성해주세요. 작성하지 않아도 가입은 가능합니다."></textarea>
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+            </div>
+            <div class="col-7" id="user_intro_cnt">
+            	0/500
             </div>
             <div class="col-2"></div>
         </div>
@@ -1055,49 +1179,49 @@ function validNickname(){
             <div class="col-9">
                     <div class="row" >
                         <div class="col">
-                            <input type="checkbox"  id="travel" name="hobby" class="checkbox" value="travel"><label for="travel">아웃도어/여행</label>
-                            <input type="checkbox"  id="sports" name="hobby" class="checkbox" value="sports"><label for="sports">운동/스포츠</label>
-                            <input type="checkbox"  id="fgn-language" name="hobby" class="checkbox" value="fgn-language"><label for="sports">외국어/언어</label>
-                            <input type="checkbox"  id="pets" name="hobby" class="checkbox" value="pets"><label for="pets">반려동물</label>
+                            <input type="checkbox"  id="travel" name="hobby" class="checkbox" value="아웃도어/여행"><label for="travel">아웃도어/여행</label>
+                            <input type="checkbox"  id="sports" name="hobby" class="checkbox" value="운동/스포츠"><label for="sports">운동/스포츠</label>
+                            <input type="checkbox"  id="fgn-language" name="hobby" class="checkbox" value="외국어/언어"><label for="sports">외국어/언어</label>
+                            <input type="checkbox"  id="pets" name="hobby" class="checkbox" value="반려동물"><label for="pets">반려동물</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="checkbox"  id="music" name="hobby" class="checkbox" value="music"><label for="music">음악/악기</label>
-                            <input type="checkbox"  id="making" name="hobby" class="checkbox" value="making"><label for="making">공예/만들기</label>
-                            <input type="checkbox"  id="dance" name="hobby" class="checkbox" value="dance"><label for="dance">댄스/무용</label>
-                            <input type="checkbox"  id="reading" name="hobby" class="checkbox" value="reading"><label for="reading">인문학/책/글</label>
+                            <input type="checkbox"  id="music" name="hobby" class="checkbox" value="음악/악기"><label for="music">음악/악기</label>
+                            <input type="checkbox"  id="making" name="hobby" class="checkbox" value="공예/만들기"><label for="making">공예/만들기</label>
+                            <input type="checkbox"  id="dance" name="hobby" class="checkbox" value="댄스/무용"><label for="dance">댄스/무용</label>
+                            <input type="checkbox"  id="reading" name="hobby" class="checkbox" value="인문학/책/글"><label for="reading">인문학/책/글</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">
-                            <input type="checkbox"  id="photographic" name="hobby" class="checkbox" value="photographic"><label for="photographic">사진/영상</label>
-                            <input type="checkbox"  id="game" name="hobby" class="checkbox" value="game"><label for="game">게임/오락</label>
-                            <input type="checkbox"  id="cooking" name="hobby" class="checkbox" value="cooking"><label for="cooking">요리/제조</label>
-                            <input type="checkbox"  id="culture" name="hobby" class="checkbox" value="culture"><label for="culture">문화/공연/축제</label>
+                            <input type="checkbox"  id="photographic" name="hobby" class="checkbox" value="사진/영상"><label for="photographic">사진/영상</label>
+                            <input type="checkbox"  id="game" name="hobby" class="checkbox" value="게임/오락"><label for="game">게임/오락</label>
+                            <input type="checkbox"  id="cooking" name="hobby" class="checkbox" value="요리/제조"><label for="cooking">요리/제조</label>
+                            <input type="checkbox"  id="culture" name="hobby" class="checkbox" value="문화/공연/축제"><label for="culture">문화/공연/축제</label>
                         </div>
                     </div>
             </div>
         </div>
         <div class="row checkBox" >
             <div class="col-3">
-                <p>선호지역<br>(최대 3개 선택)</p>
+                <p style="margin-top: 10px">선호지역<br>(최대 3개 선택)</p>
             </div>
             <div class="col-9">
                 <div class="row" >
                     <div class="col">
-                        <input type="checkbox"  id="seoul" name="area" class="checkbox" value="서울"><label for="travel">서울</label>
-                        <input type="checkbox"  id="incheon" name="area" class="checkbox" value="인천"><label for="sports">인천</label>
-                        <input type="checkbox"  id="gyeonggi-do" name="area" class="checkbox" value="경기도"><label for="sports">경기도</label>
-                        <input type="checkbox"  id="gangwon-do" name="area" class="checkbox" value="강원도"><label for="pets">강원도</label>
+                        <input type="checkbox" id="seoul" name="area" class="checkbox" value="서울"><label for="seoul">서울</label>
+                        <input type="checkbox" id="incheon" name="area" class="checkbox" value="인천"><label for="incheon">인천</label>
+                        <input type="checkbox" id="gyeonggi-do" name="area" class="checkbox" value="경기도"><label for="gyeonggi-do">경기도</label>
+                        <input type="checkbox" id="gangwon-do" name="area" class="checkbox" value="강원도"><label for="gyeonggi-do">강원도</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <input type="checkbox"  id="chungcheong-do" name="area" class="checkbox" value="충청도"><label for="travel">충청도</label>
-                        <input type="checkbox"  id="gyeongsang-do" name="area" class="checkbox" value="경상도"><label for="sports">경상도</label>
-                        <input type="checkbox"  id="jeolla-do" name="area" class="checkbox" value="전라도"><label for="sports">전라도</label>
-                        <input type="checkbox"  id="jeju-do" name="area" class="checkbox" value="제주도"><label for="pets">제주도</label>
+                        <input type="checkbox" id="chungcheong-do" name="area" class="checkbox" value="충청도"><label for="chungcheong-do">충청도</label>
+                        <input type="checkbox" id="gyeongsang-do" name="area" class="checkbox" value="경상도"><label for="gyeongsang-do">경상도</label>
+                        <input type="checkbox" id="jeolla-do" name="area" class="checkbox" value="전라도"><label for="jeolla-do">전라도</label>
+                        <input type="checkbox" id="jeju-do" name="area" class="checkbox" value="제주도"><label for="jeju-do">제주도</label>
                     </div>
                 </div>
             </div>
@@ -1111,8 +1235,8 @@ function validNickname(){
     </div>
     <div class="row">
         <div class="col">
-            <button type="button" id="singupBackBtn" class="btn btn-secondary">취소</button>
-            <button type="button" id="completeBtn" class="btn btn-primary">확인</button>
+            <button type="button" id="singupBackBtn" class="btn btn-secondary">뒤로가기</button>
+            <button type="button" id="completeBtn" class="btn btn-primary">가입하기</button>
         </div>
     </div>
 </div>
