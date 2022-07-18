@@ -8,4 +8,6 @@ public class Tbl_GroupDTO {
 	private String group_category;
 	private String group_site;
 	private int group_people;
+	private String ori_name;
+	private String sys_name;
 }

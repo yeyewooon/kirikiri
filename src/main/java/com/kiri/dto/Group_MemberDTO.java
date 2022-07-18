@@ -4,5 +4,6 @@ public class Group_MemberDTO {
 	private int seq_member;
 	private String user_email;
 	private int seq_group;
+	private String user_nickname;
 	private String access;
 }
