@@ -1,15 +1,18 @@
 package com.kiri.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kiri.dto.MessageDTO;
 import com.kiri.dto.Tbl_GroupDTO;
 import com.kiri.service.MessageService;
@@ -58,23 +61,29 @@ public class UserController {
     }
     
     // 내가 받은 쪽지 보기
-    public String selectReMessage (String user_receive, Model model) throws Exception{
-       List<MessageDTO> rmsgList = message_service.selectReMessage(user_receive);
+    @RequestMapping(value ="/receiveMsg")
+    public String selectReMessage (MessageDTO MessageDTO, Model model) throws Exception{
+       List<MessageDTO> rmsgList = message_service.selectReMessage(MessageDTO.getUser_receive());
        model.addAttribute("rmsgList",rmsgList);
-       return "";
+       return "/member/receiveMessage";
     }
     
     // 내가 보낸 쪽지 보기
-    public String selectSendMessage(String user_send, Model model) throws Exception{
-       List<MessageDTO> smsgList = message_service.selectSendMessage(user_send);
+    @RequestMapping(value ="/sendMsg")
+    public String selectSendMessage(MessageDTO MessageDTO, Model model) throws Exception{
+       List<MessageDTO> smsgList = message_service.selectSendMessage(MessageDTO.getUser_receive());
        model.addAttribute("smsgList",smsgList);
-       return "";
+       return "/member/sendMessage";
     }
 
-    
-    
-    
-    
+    // 쪽지 삭제
+    @RequestMapping(value = "")
+    @ResponseBody
+    public String deleteMessage(@RequestBody Map<String, Object> param) throws Exception{
+       List<String> message = new ObjectMapper().readValue(param.get("message").toString(),List.class);
+       message_service.deleteMessage(message);
+       return "";
+    }
     
     
     

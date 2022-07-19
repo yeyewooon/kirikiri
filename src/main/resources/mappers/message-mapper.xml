@@ -20,4 +20,17 @@
       select * from message where user_send = #{user_send}
    </select>
 
+   <!-- 쪽지 삭제하기 -->
+   <delete id = "deleteMessage" parameterType = "int">
+         delete from message where seq_message in
+         <foreach item = "message" collection = "message" open = "("
+            separator ="," close=")">
+            #{message}   
+         </foreach>
+   </delete>
+
+
+
+
+
 </mapper>

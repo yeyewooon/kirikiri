@@ -1,6 +1,8 @@
 package com.kiri.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,4 +30,15 @@ public class MessageService {
    public List<MessageDTO> selectSendMessage(String user_send) throws Exception{
       return MessageDAO.selectSendMessage(user_send);
    }
+   
+   // 쪽지 삭제하기
+   public void deleteMessage(List<String> message) throws Exception {
+	  Map<String, Object> param = new HashMap<>();
+	  param.put("message", message);
+	  MessageDAO.deleteMessage(param);
+	}
+   
+   
+   
+   
 }

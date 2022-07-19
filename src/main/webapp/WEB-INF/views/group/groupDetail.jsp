@@ -336,10 +336,7 @@ footer.footer {
   </header>
 
   <!--body-->
-  ${loginSession_id}
   ${memberList}
-  ${applyList}
-  ${wishList}
   <div class="container">
     <!--body-headline-->
     <div class="row">
@@ -715,11 +712,9 @@ footer.footer {
  	 	   		memberList.push("${dto.user_email}");
  	 	    </c:forEach>
  	 	    for (let i = 0; i < memberList.length; i++) {
- 	 	        if(memberList[i] == loginSession_id) {
+ 	 	        if(memberList[i] === loginSession_id) {
  	 	        	// 그룹 활동 버튼
  	 	        	let activeText = this.innerHTML;
- 	 	        	console.log("이거지0");
- 	 	        	console.log(activeText);
  	 	        	if(activeText == "게시판"){
  	 	        		location.href = "https://www.naver.com";
  	 	        	}else if(activeText == "일정") {
@@ -727,12 +722,14 @@ footer.footer {
  	 	        	}else if(activeText == "채팅") {
  	 	        		location.href = "https://www.google.com";
  	 	        	}
- 	 	        }else {
- 	 	        	Swal.fire('모임 맴버만 활동 가능합니다');
  	 	        	return;
  	 	        }
- 	 	        break;
  	 	    }
+	 	 	  Swal.fire(
+	     			  'asdasdasd',
+	     			  'asdasdsadas',
+	     			  'question'
+	     	);
 	    })
 
  	 	// 세션이 모임에 가입되어 있으면 모임 탈퇴하기, 가입 안되어있으면 모입 가입하기

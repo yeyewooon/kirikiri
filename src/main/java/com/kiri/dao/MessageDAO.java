@@ -1,6 +1,7 @@
 package com.kiri.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.SqlSession;
@@ -35,7 +36,10 @@ public class MessageDAO {
       return session.selectList("messageMapper.selectSendMessage", user_send);
    }
    
-   
+   // 쪽지 삭제하기
+   public void deleteMessage(Map<String, Object> param) throws Exception{
+      session.delete("messageMapper.deleteMessage", param);
+   }
    
 
 }
