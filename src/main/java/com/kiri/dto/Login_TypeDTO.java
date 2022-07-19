@@ -6,15 +6,17 @@ public class Login_TypeDTO {
 	private int seq_type;
 	private String user_email;
 	private String type;
+	private String social_id;
 	private Date signup_date;
 	
 	public Login_TypeDTO() {}
 
-	public Login_TypeDTO(int seq_type, String user_email, String type, Date signup_date) {
+	public Login_TypeDTO(int seq_type, String user_email, String type, String social_id, Date signup_date) {
 		super();
 		this.seq_type = seq_type;
 		this.user_email = user_email;
 		this.type = type;
+		this.social_id = social_id;
 		this.signup_date = signup_date;
 	}
 
@@ -50,10 +52,18 @@ public class Login_TypeDTO {
 		this.signup_date = signup_date;
 	}
 
+	public String getSocial_id() {
+		return social_id;
+	}
+
+	public void setSocial_id(String social_id) {
+		this.social_id = social_id;
+	}
+
 	@Override
 	public String toString() {
 		return seq_type + " : " + user_email + " : " + type
-				+ " : " + signup_date;
+				+ " : " + social_id + " : " + signup_date;
 	}
 	
 	

@@ -1176,10 +1176,10 @@ function checkFile(obj) {
     </div>
 
     <div id="userInfoBox-profile">
-        <div class="row" style="text-align: center;">
+        <div class="row" >
             <div class="col">
-                <div>
-                    <img src="/resources/images/kiriLogo.jpg" alt="오류가 발생했습니다.">
+                <div class="profile_imgContainer">
+                    <img id="p_img" name="p_img" src="/resources/images/profile.jpg" alt="오류가 발생했습니다.">
                 </div>
             </div>
         </div>

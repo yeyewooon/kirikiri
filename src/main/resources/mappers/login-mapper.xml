@@ -9,6 +9,10 @@
 		select * from member where user_email = #{user_email} and user_pw = #{user_pw}
 	</select>
 	
+	<select id="socialLogin" parameterType="String" resultType="com.kiri.dto.MemberDTO">
+		select * from member where user_email = #{user_email}
+	</select>
+	
 	<select id="loginType" parameterType="String" resultType="com.kiri.dto.Login_TypeDTO">
 		select * from login_type where user_email = #{user_email}
 	</select>
@@ -20,5 +24,21 @@
 	<insert id="loginLogFailed" parameterType="String">
 		insert into login_log values(#{user_email}, '실패', sysdate )
 	</insert>
+	
+	<select id="findId" parameterType="map" resultType="String">
+		select user_email from member where user_name = #{user_name} and user_phone = #{user_phone}
+	</select>
+	
+	<select id="findPw" parameterType="map" resultType="int">
+		select count(*) from member where user_email = #{user_email} and user_name = #{user_name}
+	</select>
+	
+	<select id="updatePw" parameterType="map" >
+		update member set user_pw = #{user_pw} where user_email = #{user_email}
+	</select>
+	
+	
+	
+	
 	
 </mapper>

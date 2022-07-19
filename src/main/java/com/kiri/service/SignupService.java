@@ -38,6 +38,15 @@ public class SignupService {
 		}
 	}
 	
+	public boolean phoneCheck(String user_phone) throws Exception{ //닉네임체크
+		int result = dao.phoneCheck(user_phone);
+		if(result > 0) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
 	public String uploadProfile(MultipartFile file, String realPath) throws Exception{ // 프로필사진 업로드
 		File realPathFile = new File(realPath);
 		if(!realPathFile.exists()) realPathFile.mkdir();
@@ -60,7 +69,6 @@ public class SignupService {
 			System.out.println(hobbyIndex);
 			map.put("user_email", user_email);
 			map.put("hobby", hobbyIndex);
-			System.out.println(map);
 			dao.insertHobby(map); 
 		}
 	}
@@ -70,11 +78,13 @@ public class SignupService {
 			Map<String, String> map = new HashMap<>();
 			map.put("user_email", user_email);
 			map.put("area", areaIndex);
-			System.out.println(map);
 			dao.insertArea(map); 
 			
 		}
 	}
 	
+	public void generalLoginType(String user_email) throws Exception{ // 로그인타입 지정
+		dao.generalLoginType(user_email);
+	}
 	
 }

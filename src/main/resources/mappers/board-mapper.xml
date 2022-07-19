@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="boardMapper">
+	
+	<!-- 전체 게시글 목록 -->
+	<select id="selectAll" resultType="com.kiri.dto.BoardDTO">
+		select * from board
+			order by seq_board desc
+	</select>
+	
+	<!-- 글 하나 불러오기 -->
+	<select id="selectOne" parameterType="int" resultType="com.kiri.dto.BoardDTO">
+		select * from board
+			where seq_board = #{seq_board}
+	</select>
+	
+	<!-- 조회수 + 1 -->
+	<update id="viewCntUp" parameterType="int">
+		update board set
+			board_count = board_count+1 where seq_board = #{seq_board}
+	</update>
+	
+	<!-- 새로운 seq 생성 -->
+	<select id="selectSeq" resultType="int">
+		select seq_board.nextval from dual
+	</select>
+	
+	<!-- 글쓰기 -->
+	<insert id="write" parameterType="com.kiri.dto.BoardDTO">
+		insert into board
+			values(#{seq_board}, #{user_email}, #{user_nickname}
+				, #{board_category}, #{board_title}, #{board_content}
+				, sysdate, 0)
+	</insert>
+	
+	<!-- 글 수정 -->
+	<update id="modify" parameterType="com.kiri.dto.BoardDTO">
+		update board set
+			board_title = #{board_title}
+			, board_content = #{board_content}
+		where seq_board = #{seq_board}
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from board
+			where seq_board = #{seq_board}
+	</delete>
+</mapper>

@@ -26,7 +26,10 @@
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
    crossorigin="anonymous"></script>
-
+<!-- Bootstrap icons-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet">
 <title>끼리끼리</title>
 <style>
 * {
@@ -689,15 +692,24 @@ footer.footer {
 								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="list-inline-item"><a href="/signup/toSignup">회원가입</a></li>
+								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
 								<li class="list-inline-item">⋅</li>
 								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
 							</c:otherwise>
 						</c:choose>
 						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a></li>
+						<li class="list-inline-item">
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<a href="/group/toCreateGroup">모임 만들기</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/login/toLogin">모임 만들기</a>
+								</c:otherwise>
+							</c:choose>
+						</li>
 						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="#!"
+						<li class="list-inline-item"><a href="privacy"
 							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
 					</ul>
 					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |

@@ -181,7 +181,7 @@ p {
 }
 
 button {
-	margin: 30px;
+	margin: 40px;
 	margin-bottom: 70px;
 	width: 25%;
 	height: 40%;
@@ -190,6 +190,13 @@ button {
 span {
 	color: white;
 	font-size: 0.05rem;
+}
+
+#kiri{
+	width: 300px;
+	height: 300px;
+	margin-top : 40px;
+	margin-bottom: 70px; 
 }
 
 /*풋터 영역*/
@@ -233,7 +240,7 @@ canvas {
     $(document).ready(function(){
 
         $("#toLoginBtn").click(function(){
-            location.href = "/login";
+            location.href = "/login/toLogin";
         });
 
 
@@ -382,14 +389,19 @@ canvas {
 		<div id="userInfoBox">
 			<div class="row">
 				<div class="col">
-					<img src="/resources/images/kirilogo.png" alt="오류발생">
+					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
 					<h3>
-						<br> 끼리끼리에 가입을 환영합니다!!
+						<br> 끼리끼리에 오신 것을 환영합니다!!
 					</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<img src="/resources/images/profile.jpg"  id="kiri" alt="오류가 발생했습니다." />
 				</div>
 			</div>
 		</div>

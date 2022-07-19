@@ -22,6 +22,9 @@ public class LoginService {
 		map.put("user_pw", pw);
 		return dao.login(map);
 	}
+	public MemberDTO socialLogin(String id) throws Exception{  //소셜 로그인 feat.조용진
+		return dao.socialLogin(id);
+	}
 	
 	public Login_TypeDTO loginType(String user_email) throws Exception{  //로그인 타입 feat.조용진
 		return dao.loginType(user_email);
@@ -34,4 +37,37 @@ public class LoginService {
 	public void loginLogFailed(String user_email) throws Exception{ // 로그인 실패로그  feat.조용진
 		dao.loginLogFailed(user_email);
 	}
+	
+	public String findId(String user_name, String user_phone) throws Exception{ //아이디 찾기 시 아이디 존재 여부  feat.조용진
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("user_name", user_name);
+		map.put("user_phone", user_phone);
+		String result = dao.findId(map);
+		System.out.println(result);
+		if(result != null) {
+			return result;
+		}else {
+			return "nonmem";
+		}
+	}
+	
+	public boolean findPw(String user_name, String user_email) throws Exception{  // 비밀번호 찾기 시 아이디 존재여부 feat.조용진
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("user_name", user_name);
+		map.put("user_email", user_email);
+		int result = dao.findPw(map);
+		if(result > 0) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	public void updatePw(String user_email, String user_pw) throws Exception{ // 로그인 성공로그  feat.조용진
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("user_email", user_email);
+		map.put("user_pw", user_pw);
+		dao.updatePw(map); 
+	}
+	
 }	
