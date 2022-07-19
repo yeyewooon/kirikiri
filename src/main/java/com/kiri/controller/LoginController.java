@@ -33,9 +33,9 @@ public class LoginController {
 	@ResponseBody
 	@RequestMapping(value = "/general") 	
 	public String general(String user_id, String user_pw) throws Exception { // 일반로그인
-		String Encryption_pw = ecp.getSHA512(user_pw); 
-		MemberDTO dto = service.login(user_id, Encryption_pw);
-		
+		//String Encryption_pw = ecp.getSHA512(user_pw); 
+		//MemberDTO dto = service.login(user_id, Encryption_pw);
+		MemberDTO dto = service.login(user_id, user_pw);//이거 지우기
 		if(dto != null) { // 널이 아니라면 조회 성공
 			dto.setUser_pw(null);
 			Login_TypeDTO type = service.loginType(user_id);

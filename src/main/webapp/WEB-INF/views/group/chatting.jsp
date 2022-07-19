@@ -130,6 +130,7 @@
 .mymsg{
 	margin-top : 10px;
 	overflow : hidden;
+	margin-left : 35%;
 }
 
 .mymsg .msgBox {
@@ -139,12 +140,11 @@
 	padding: 10px;
 	border-radius: 13px;
 	float: right;
-	margin-left : 20%;
 }
 
 .mymsg .timename{
 	float: right;
-	margin-left : 50%;
+	margin-left : 60%;
 }
 
 .othermsg .msgBox {
@@ -163,7 +163,7 @@
 </head>
 <body>
 	<div class="container chatting">
-	<input type="text" class="d-none" id="nickname" value="${nickname }">
+	<input type="text" class="d-none" id="nickname" value="${user_nickname }">
 		<div class="row title">
 			<div class="col-12 d-flex justify-content-center pt-3">
 				<span style="font-size: 30px; color: navy">${tgList[0].group_title}</span> 
@@ -194,7 +194,7 @@
 				<div class="messages">
 					<c:forEach items="${gcList }" var="gcList">
 						<c:choose>
-							<c:when test="${nickname eq gcList.user_nickname}">
+							<c:when test="${user_nickname eq gcList.user_nickname}">
 								<div class="mymsg">
 									<div class="timename">
 										<span id="time">${gcList.sendDate } &nbsp</span> 
@@ -218,7 +218,7 @@
 					</c:forEach>
 				</div>
 				<div class="inputmsg d-flex justify-content-center align-items-center">
-					<input type="text" id="message" class="form-control w-75 mt-2">
+					<input type="text" id="message" class="form-control w-75 mt-2" autofocus>
 					<button type="button" class="btn btn-outline-primary d-flex align-items-center mt-2 ms-4 h-75"
 						id="send">send</button>
 				</div>
@@ -232,7 +232,7 @@
 		// 그 후 작성하여 보낸 메세지가 요청이 되거나, 다른 접속자가 보낸 메세지를 응답받을 수 있게 만듦.
 		// 웹소켓 객체 생성할때 반드시 서버의 ip 주소값은 실제 ip 주소를 이용
 		// 포트번호 다르면 :포트번호/chat
-		let ws = new WebSocket("ws://192.168.35.109/chat");
+		let ws = new WebSocket("ws://192.168.0.17:8090/chat");
 		let nickname = $("#nickname").val();
 		$("#send").click(function(){
 			sendChat();
@@ -241,6 +241,51 @@
 			if(e.keyCode == 13) sendChat();
 		})
 		
+		// endpoint로부터 전송된 메세지 받기
+		// endpoint에서 sendText() 메서드를 실행하면 onmessage 이벤트가 trigger 됨.
+		ws.onmessage = function(message){
+			console.log(message.data);
+			// 넘어 온 json처럼 생긴 문자열을 실제 json형(객체)으로 변환
+			let msg = JSON.parse(message.data);
+			console.log(msg);
+			otherChat(msg);
+			$(".messages").scrollTop($(".messages")[0].scrollHeight);
+
+		}
+		
+		window.onload=function(){
+			$(".messages").scrollTop($(".messages")[0].scrollHeight);
+		}
+		
+		//server 시간
+		function serverTime(){
+			// 1. 현재 시간(Locale)
+			const curr = new Date();
+
+			// 2. UTC 시간 계산
+			const utc = curr.getTime() + (curr.getTimezoneOffset() * 60 * 1000);
+
+			// 3. UTC to KST (UTC + 9시간)
+			const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
+			const kr_curr = new Date(utc + (KR_TIME_DIFF));
+			const kr_time = kr_curr.toString();
+			var hour = kr_time.substr(16,2);
+			var min = kr_time.substr(19,2);
+			var ampm = null;
+			if(hour<=12){
+				if(hour==0){
+					ampm = '오전 12:' + min; 
+				}else{
+					ampm = '오전 ' + kr_time.substr(16,5);
+				}
+			} else{
+				ampm = '오후 ' + (hour-12) + ":" + min;
+			}
+			
+		 	return ampm + "&nbsp";
+		}
+		
+
 		//채팅 보내는 함수
 		function sendChat(){
 			let message = $("#message").val();
@@ -250,7 +295,7 @@
 				
 				let div_clear = $("<div>").css("clear", "both");
 				
-				let span1 = $("<span>").attr("id", "time").html("00:00 &nbsp");
+				let span1 = $("<span>").attr("id", "time").html(serverTime());
 				let span2 = $("<span>").html(nickname); 
 				let div_tn = $("<div>").attr("class", "timename");
 				div_tn.append(span1, span2);
@@ -266,21 +311,18 @@
 			}
 		}
 		
-		// endpoint로부터 전송된 메세지 받기
-		// endpoint에서 sendText() 메서드를 실행하면 onmessage 이벤트가 trigger 됨.
-		ws.onmessage = function(message){
-			console.log(message.data);
-			// 넘어 온 json처럼 생긴 문자열을 실제 json형(객체)으로 변환
-			let msg = JSON.parse(message.data);
-			console.log(msg);
-			let msgDiv = $("<div>").append(msg.message);
-			$(".messages").append(msgDiv);
-			$(".messages").scrollTop($(".messages")[0].scrollHeight);
+		//메세지 받는 함수
+		function otherChat(msg){
+			let span1 = $("<span>").attr("id", "time").html(serverTime());
+			let span2 = $("<span>").html(msg.user_nickname); 
+			let div_tn = $("<div>").attr("class", "timename");
+			div_tn.append(span1, span2);
+			
+			let div_msgB = $("<div>").attr("class", "msgBox").html(msg.message);
 
-		}
-		
-		window.onload=function(){
-			$(".messages").scrollTop($(".messages")[0].scrollHeight);
+			let div_othermsg = $("<div>").attr("class", "othermsg mt-3");
+			div_othermsg.append(div_tn, div_msgB);
+			$(".messages").append(div_othermsg);
 		}
 		
 	</script>

@@ -329,13 +329,13 @@ public class GroupController {
 	private Group_ChatService gcService;
 
 	@RequestMapping(value = "/toChat") // 채팅 페이지 요청
-	public String chat(String nickname, Model model) throws Exception {
-		nickname = "abc초콜릿"; // session에서 받아온 닉네임
+	public String chat(Model model) throws Exception {
+		//session에서 받아온 닉네임
+		// 현재 세션 아이디
+		String user_nickname = ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname();
 		int seq_group = 1;
-		String user_nickname = null;
-
-		// HttpSession에 nickname을 등록해둘 것. -> 등록하는 부분 있으면 지우기
-		session.setAttribute("nickname", nickname);
+		
+		model.addAttribute("user_nickname", user_nickname);
 
 		// 채팅 했던 부분 불러오기
 		List<Group_ChatDTO> gcList = gcService.selectChat(seq_group);

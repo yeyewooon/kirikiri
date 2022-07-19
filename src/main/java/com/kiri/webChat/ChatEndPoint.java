@@ -29,11 +29,10 @@ public class ChatEndPoint {
 		// 지금 접속한 클라이언트의 session 값을 매개변수 받음.
 		public void onOpen(Session session, EndpointConfig config) {
 			//원래 이거
-//			String user_nickname = (String)config.getUserProperties().get("user_nickname");
-//			System.out.println("접속한 사용자 : "+ user_nickname);
-//			this.user_nickname = user_nickname; // 멤버필드로 셋팅해두기(onMessage메서드에서 사용가능하게끔)
+			String user_nickname = (String)config.getUserProperties().get("user_nickname");
+			System.out.println("접속한 사용자 : "+ user_nickname);
+			this.user_nickname = user_nickname; // 멤버필드로 셋팅해두기(onMessage메서드에서 사용가능하게끔)
 			
-			this.user_nickname = "abc초콜릿";
 			System.out.println("접속됨");
 			clients.add(session); // 멤버필드 list에 새로 접속한 클라이언트 세션 추가
 			for(Session client : clients) {
