@@ -581,7 +581,7 @@ footer.footer {
 					</div>
 					<div class="col-md-7" style="text-align: left;">
 						<input type="text" id="password" name="user_pw"
-							class="form-control" value="${memberdto.user_pw}">
+							class="form-control">
 						<ul class="desc" style="font-size: 0.8rem; padding: 10px">
 							<li>영문, 숫자, 특수문자를 혼합하여 최소 8자리 이상 20자리 이하로 설정해 주세요.</li>
 							<li>기타 일반 정보 등으로부터 추측이 용이한 비밀번호는 피해주세요.</li>

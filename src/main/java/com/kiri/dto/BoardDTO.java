@@ -28,6 +28,7 @@ public class BoardDTO {
 		this.board_date = board_date;
 		this.board_count = board_count;
 	}
+	
 	public int getSeq_board() {
 		return seq_board;
 	}
@@ -76,10 +77,12 @@ public class BoardDTO {
 	public void setBoard_count(int board_count) {
 		this.board_count = board_count;
 	}
+	
 	@Override
 	public String toString() {
 		return "BoardDTO [seq_board=" + seq_board + ", user_email=" + user_email + ", user_nickname=" + user_nickname
 				+ ", board_category=" + board_category + ", board_title=" + board_title + ", board_content="
 				+ board_content + ", board_date=" + board_date + ", board_count=" + board_count + "]";
 	}
+	
 }

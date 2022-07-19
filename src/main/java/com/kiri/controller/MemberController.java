@@ -47,6 +47,7 @@ public class MemberController {
 
 	@RequestMapping(value = "/myPage")
 	public String myPage(Model model) throws Exception { // myPage 로 이동
+		System.out.println("myPage 이동");
 		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
 
 		MemberDTO selectMember = service.selectMember(user_email);
@@ -178,6 +179,17 @@ public class MemberController {
 		 System.out.println(result);
 		return result;
 	}
+	
+	/*
+	 * @RequestMapping(value="/pwCheck") // pw 중복확인
+	 * 
+	 * @ResponseBody public int pwCheck(String user_pw) throws Exception{
+	 * System.out.println("password : " + user_pw);
+	 * 
+	 * int result = service.phoneCheck(user_pw); System.out.println(result); return
+	 * result; }
+	 */
+	
 	
 
 	@RequestMapping(value = "/siteModal") // 선호지역 수정

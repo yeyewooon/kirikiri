@@ -16,27 +16,27 @@ public class BoardDAO {
 	@Autowired
 	private SqlSession session;
 
-	// ³»°¡ ¾´ ±Û Á¤º¸ °¡Á®¿À±â
+	// ì¼ë°˜ê²Œì‹œíŒ ì¡°íšŒ
 	public List<BoardDTO> selectBoardList(String user_email) throws Exception{
 		return session.selectList("myPageMapper.selectBoardList",user_email);
 	}	
 	
-	// ÀüÃ¼ °Ô½Ã±Û Á¤º¸ °¡Á®¿À±â
+	// ì¼ë°˜ê²Œì‹œíŒ ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 	public List<Map<String,Object>> selectTotalBoardList(String user_email) throws Exception{
 		return session.selectList("myPageMapper.selectTotalBoardList",user_email);
 	}
 	
-	// ÀÏ¹İ °Ô½ÃÆÇ °¹¼ö »Ì¾Æ¿À±â
+	// ì¼ë°˜ê²Œì‹œíŒ ì´ ê°¯ìˆ˜
 	public int selectBoardCount(String user_email) throws Exception{
 		return session.selectOne("myPageMapper.selectBoardCount",user_email);
 	}	
 	
-	// ÀÏ¹İ °Ô½ÃÆÇ »èÁ¦
+	// ì¼ë°˜ê²Œì‹œíŒ ì‚­ì œ
 	public int boardDelete(int seq_board) throws Exception{
 		return session.delete("myPageMapper.boardDelete",seq_board);
 	}
 	
-	// °Ë»öÀ¸·Î ÀÏ¹İ±Û Á¤º¸ °¡Á®¿À±â
+	// ì¼íŒê²Œì‹œíŒ ê²€ìƒ‰ìœ¼ë¡œ ì¡°íšŒ
 	public List<BoardDTO> genalSearchList(String category, String keyword,String user_email) throws Exception{
 		
 		Map<String, String> map = new HashMap<String, String>();
@@ -46,5 +46,41 @@ public class BoardDAO {
 		
 		System.out.println(map);
 		return session.selectList("myPageMapper.genalSearchList",map);
+	}
+	
+	/* ììœ  ê²Œì‹œíŒ */
+	// ê²Œì‹œê¸€ ì €ì¥
+	public void write(BoardDTO dto) throws Exception{
+		session.insert("boardMapper.write", dto);
+	}
+	
+	// ìƒˆë¡œìš´ ê²Œì‹œê¸€ ì‹œí€€ìŠ¤ ë²ˆí˜¸ ìƒì„±
+	public int selectSeq() throws Exception{ 
+		return session.selectOne("boardMapper.selectSeq");
+	}
+	
+	// ëª¨ë“  ê²Œì‹œê¸€ ì¡°íšŒ
+	public List<BoardDTO> selectAll() throws Exception{ 
+		return session.selectList("boardMapper.selectAll");
+	}
+	
+	// í•˜ë‚˜ì˜ ê²Œì‹œê¸€ ì¡°íšŒ
+	public BoardDTO selectOne(int seq_board) throws Exception{ 
+		return session.selectOne("boardMapper.selectOne", seq_board);
+	}
+	
+	// ì¡°íšŒìˆ˜ + 1
+	public void updateView_count(int seq_board) throws Exception{
+		session.update("boardMapper.viewCntUp", seq_board);
+	}
+	
+	// ê²Œì‹œê¸€ ìˆ˜ì •
+	public int modify(BoardDTO dto) throws Exception{
+		return session.update("boardMapper.modify", dto);
+	}
+	
+	// ê²Œì‹œê¸€ ì‚­ì œ ìš”ì²­
+	public int delete(int seq_board) throws Exception{
+		return session.delete("boardMapper.delete", seq_board);
 	}
 }

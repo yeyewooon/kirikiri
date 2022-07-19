@@ -17,22 +17,22 @@ public class Group_BoardDAO {
 	@Autowired
 	private SqlSession session;
 
-	// ¸ğÀÓ °Ô½ÃÆÇ ±Û Á¤º¸ °¡Á®¿À±â
+	// ëª¨ì„ê²Œì‹œíŒ ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 	public List<Group_BoardDTO> selectGroupBoardList(String user_email) throws Exception {
 		return session.selectList("myPageMapper.selectGroupBoardList", user_email);
 	}
 
-	// ¸ğÀÓ °Ô½ÃÆÇ °¹¼ö »Ì¾Æ¿À±â
+	// ëª¨ì„ê²Œì‹œíŒ ì´ ê°¯ìˆ˜
 	public int selectGroupBoardCount(String user_email) throws Exception {
 		return session.selectOne("myPageMapper.selectGroupBoardCount", user_email);
 	}
 	
-	// ¸ğÀÓ °Ô½ÃÆÇ »èÁ¦
+	// ëª¨ì„ê²Œì‹œíŒ ì‚­ì œ
 		public int groupBoardDelete(int seq_board) throws Exception{
 			return session.delete("myPageMapper.groupBoardDelete",seq_board);
 		}
 	
-	// °Ë»öÀ¸·Î ¸ğÀÓ±Û Á¤º¸ °¡Á®¿À±â
+	// ì¼ë°˜ê²Œì‹œíŒ ê²€ìƒ‰ìœ¼ë¡œ ì¡°íšŒ
 		public List<Group_BoardDTO> mettingSearchList(String category, String keyword, String user_email) throws Exception{
 			System.out.println(category);
 			Map<String, String> map = new HashMap<String, String>();

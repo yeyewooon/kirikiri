@@ -450,13 +450,38 @@ footer.footer {
 				})
 			</script>
 				<div class="col-md-4" style="text-align: end">
-					<button type="button" class="btn btn-outline-info mt-4 profileBtn"
-						id="profileModify">개인정보 수정</button>
+					<button type="button" class="btn btn-outline-info mt-4 profileBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" >개인정보 수정</button>
 					<button type="button" class="btn btn-outline-info mt-4 profileBtn"
 						id="profileDelete">회원탈퇴</button>
 					<input type="text" class="d-none" id="user_delete" value="${memberdto.user_delete}">
 					<input type="text" class="d-none" id="user_email" value="${memberdto.user_email}">
-				</div>			
+				</div>		
+				<!-- 개인정보 수정 모달 -->
+				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+				  <div class="modal-dialog">
+				    <div class="modal-content">
+				      <div class="modal-header">
+				        <h5 class="modal-title" id="exampleModalLabel">비밀번호 확인</h5>
+				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				      </div>
+				      <div class="modal-body" >
+				      <div class="row">
+				      	<div class="col-3 d-flex justify-content-end"><label style="font-size:20px;">현재 비밀번호 : </label></div>
+				      	<div class="col-5 d-flex justify-content-end">
+					       	<input type="text" id="password" class="" style="height:100%;">				      	
+				      	</div>
+				      	<div class="col-4 d-flex justify-content-center">
+					       	<button type="button" class="btn btn-secondary" id="checkPw" style="width:100px;">확인</button>
+				      	</div>
+				      </div>
+				      </div>
+				      <div class="modal-footer">
+				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+				        <button type="button" class="btn btn-primary" id="profileModify">이동</button>
+				      </div>
+				    </div>
+				  </div>
+				</div>	
 		</div>
 		<hr />
 		<div class="container">
@@ -821,17 +846,24 @@ footer.footer {
 							</h4>
 							<hr id="line" />
 							<div style="height:16px;"></div>
-							<c:forEach items="${selectBoardList}" var="boarddto"
-								varStatus="status" begin="1" end="3">
-								<div class="myList">
-									<span><i class="fa-solid fa-pen-nib listIcon me-3"></i>${boarddto.board_title}</span>
+							<c:if test="${selectBoardList.size() == 0}">
+								<div class="myList" id="myList">
+									<span>내가 쓴 글이 없습니다.</span>
 								</div>
-							</c:forEach>
-							<div class="myWrite mt-3">
-								<span class="towritePage" id="towritePage">더보기 <i
-									class="fa-solid fa-arrow-right"></i>
-								</span>
-							</div>
+							</c:if>
+							<c:if test="${selectBoardList.size() > 1}">
+								<c:forEach items="${selectBoardList}" var="boarddto"
+									varStatus="status" begin="0" end="2">
+									<div class="myList">
+										<span><i class="fa-solid fa-pen-nib listIcon me-3"></i>${boarddto.board_title}</span>
+									</div>
+								</c:forEach>
+								<div class="myWrite mt-3">
+									<span class="towritePage" id="towritePage">더보기 <i
+										class="fa-solid fa-arrow-right"></i>
+									</span>
+								</div>
+							</c:if>
 						</div>
 					</div>
 					<div class="col-md-4">
@@ -959,14 +991,36 @@ footer.footer {
 <script>
 	let towritePage = document.getElementById("towritePage");
 	let profileModify = document.getElementById("profileModify");
+	
+	/* 내가쓴글로 이동 */
 	towritePage.addEventListener("click", function() {
 		let user_email = $("#user_email").val();
 		location.href = "/mem/myWrite?user_email="+user_email;
 	});
-		profileModify.addEventListener("click", function() {
-		let user_email = $("#user_email").val();
-		location.href="/mem/profileModifyPage?user_email="+user_email;
-	});
+	
+	/* 비밀번호 중복확인 */
+/* 	$("#checkPw").on("click",function(){
+		let user_pw = $("#password").val();
+		console.log(user_pw);
+		$.ajax({
+			url:"/mem/pwCheck",
+			type:"post",
+			data:{"user_pw": user_pw},
+			success:function(data){
+				console.log(data);
+			},
+			error:function(e){
+				console.log(e);
+			}
+		})
+	}) */
+	/* 개인정보 페이지 이동 */
+	/* profileModify.addEventListener("click", function() {
+	let user_email = $("#user_email").val();
+	location.href="/mem/profileModifyPage?user_email="+user_email;
+	}); */
+	
+	
 	$("#profileDelete").on("click",function(){
 		let user_delete = $("#user_delete").val();
 		let user_email = $("#user_email").val();

@@ -16,17 +16,17 @@ public class HobbyDAO {
 	@Autowired
 	private SqlSession session;
 	
-	// Hobby Å×ÀÌºí Á¤º¸ °¡Á®¿À±â
+	// Hobby ë¦¬ìŠ¤íŠ¸ ì¡°íšŒ
 	public List<HobbyDTO> selectHobbyList(String user_email) throws Exception{ 
 		return session.selectList("myPageMapper.selectHobbyList",user_email);
 	}
 	
-	// Hobby Å×ÀÌºí insert
+	// Hobby insert
 	public void insertHobby(Map<String,String> hobbyMap) throws Exception{
 		session.insert("myPageMapper.insertHobby", hobbyMap);
 	}
 	
-	// Hobby Å×ÀÌºí delete
+	// Hobby delete
 	public void deleteHobby(String user_email) throws Exception{
 		session.delete("myPageMapper.deleteHobby",user_email);
 	}
