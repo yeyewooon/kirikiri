@@ -29,6 +29,7 @@ public class Tbl_GroupDTO {
 		this.sys_name = sys_name;
 	}
 
+
 	public int getSeq_group() {
 		return seq_group;
 	}
@@ -107,12 +108,6 @@ public class Tbl_GroupDTO {
 				+ ", group_info=" + group_info + ", group_category=" + group_category + ", group_site=" + group_site
 				+ ", group_people=" + group_people + ", ori_name=" + ori_name + ", sys_name=" + sys_name + "]";
 	}
-	
-	
-	
-	
-	
-	
 	
 	
 }

@@ -45,10 +45,6 @@ body {
       font-family: "OTWelcomeRA";
     }
 
-    #mainText {
-      font-family: "양진체";
-    }
-
     /* header 반응형 */
     @media (max-width: 768px) {
       #navLogo {
@@ -211,12 +207,6 @@ body {
       font-style: normal;
     }
 
-    @font-face {
-      font-family: "양진체";
-      src: url("https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff") format("woff");
-      font-weight: normal;
-      font-style: normal;
-    }
 </style>
 
 

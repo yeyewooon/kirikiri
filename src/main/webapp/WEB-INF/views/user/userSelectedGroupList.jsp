@@ -36,13 +36,31 @@
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
 
+<!-- Font -->
+
+   
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
 	crossorigin="anonymous"></script>
 <title>Insert title here</title>
 
 
+
+
+
 <style>
+
+@font-face {
+            font-family: 'MICEGothic Bold';
+            src:
+                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+}
+
+
+
+
 
 /* 네비바  */
 body {
@@ -51,7 +69,7 @@ body {
 
 * {
 	box-sizing: border-box;
-	font-family: "OTWelcomeRA";
+	font-family: "MICEGothic Bold"; 
 }
 
 #mainText {
@@ -181,8 +199,7 @@ ul {
 .card-text-category {
 	width: fit-content;
 	padding: 4px;
-	border: 1px solid #f66a09;
-	background-color: #fea500;
+	background-color: #e26b8b;
 	height: 22px;
 	border-radius: 5px;
 	font-size: 14px;
@@ -213,23 +230,14 @@ footer.footer {
 }
 
 /* 눈누 폰트 */
-@font-face {
+/* @font-face {
 	font-family: "OTWelcomeRA";
 	src:
 		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2")
 		format("woff2");
 	font-weight: normal;
 	font-style: normal;
-}
-
-@font-face {
-	font-family: "양진체";
-	src:
-		url("https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff")
-		format("woff");
-	font-weight: normal;
-	font-style: normal;
-}
+} */
 
 img {
 	max-width: 100%;
@@ -333,7 +341,6 @@ img {
 									게시판</a></li>
 						</ul>
 					</div>
-
 					<!-- logo -->
 					<div class="col-2">
 						<a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0"> <img
@@ -627,7 +634,7 @@ img {
 									<span class="d-none">${dto.seq_group}</span>
 									<div class="card-body">
 										<div
-											class="card-text card-text-category d-flex justify-content-center align-items-center">
+											class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
 											${dto.group_category}</div>
 										<div class="card-text mt-1">
 											<strong>${dto.group_title}</strong>
@@ -650,41 +657,6 @@ img {
 
 	<script>
 
-// 카테고리 설정 스크립트
-
-// $('#locationList').slick({
-//   dots: false,
-//   infinite: true,
-//   speed: 300,
-//   slidesToShow: 6,
-//   slidesToScroll: 6,
-//   responsive: [
-//     {
-//       breakpoint: 1024,
-//       settings: {
-//         slidesToShow: 3,
-//         slidesToScroll: 3,
-//         infinite: true,
-//         dots: false
-//       }
-//     },
-//     {
-//       breakpoint: 600,
-//       settings: {
-//         slidesToShow: 2,
-//         slidesToScroll: 2
-//       }
-//     },
-//     {
-//       breakpoint: 480,
-//       settings: {
-//         slidesToShow: 1,
-//         slidesToScroll: 1
-//       }
-//     }
-//   ]
-// });
-
 
 // 지역 클릭시
 $('#locationBtn').on("click", function() {
@@ -700,7 +672,7 @@ $('#categoryBtn').on("click", function() {
     $('#categoryList').get(0).slick.setPosition();
 });
 
-
+// 슬라이더 함수
 $(window).on('load', function() {
   $('.responsive').slick({
   dots: false,

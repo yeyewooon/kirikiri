@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,10 +33,6 @@
 * {
       box-sizing: border-box;
       font-family: "OTWelcomeRA";
-    }
-
-    #mainText {
-      font-family: "양진체";
     }
 
     /* header 반응형 */
@@ -185,7 +181,7 @@
       width: 400px;
       overflow: auto;
     }
-    
+
     .groupActiveBtn, .groupInfoBtn {
     	cursor : pointer;
     }
@@ -221,13 +217,6 @@
       font-style: normal;
     }
 
-    @font-face {
-      font-family: "양진체";
-      src: url("https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff") format("woff");
-      font-weight: normal;
-      font-style: normal;
-    }
-	
 	.uselessBox {
 		height:40px;
 	}
@@ -410,7 +399,7 @@
       </div>
     </div>
   </div>
-  
+
   <!--세부 정보-->
   <div style="background-color: #f6f7f9;">
     <div class="container mt-2">
@@ -445,7 +434,7 @@
                 <i class="fa-solid fa-check"></i> 연락이 지속적으로 안될시, 강제로 모임에서 탈퇴됩니다.
               </div>
               <div class="uselessBox">
-                
+
               </div>
             </div>
 
@@ -522,12 +511,12 @@
 
     <script>
  	let seq_group = "${tbl_group_dto.seq_group}"; // 현재 모임 번호
- 	let loginSession_id = "${loginSession_id}"; 
+ 	let loginSession_id = "${loginSession_id}";
  	let hostEmail = "${memberList[0].user_email}"; // 주최자 아이디
-	
+
  	console.log(hostEmail);
  	console.log(loginSession_id);
- 	
+
  	$(document).ready(function() {
  		// 해당 세션 id와 주최자가 같으면 모임 관리 페이지 보이게
  		if(loginSession_id == hostEmail) {
@@ -556,9 +545,9 @@
  	 	        	return;
  	 	        }
  	 	        break;
- 	 	    } 
+ 	 	    }
 	    })
-	       
+
  	 	// 세션이 모임에 가입되어 있으면 모임 탈퇴하기, 가입 안되어있으면 모입 가입하기
  		// 맴버 리스트 체크 -> 모임 가입하기인지 모임 탈퇴인지 판별
  		let memberList = new Array(); // 빈 배열 생성
@@ -568,13 +557,13 @@
  	    for (let i = 0; i < memberList.length; i++) {
  	    	console.log(memberList[i]);
  	        if(memberList[i] == loginSession_id) {
- 	        	$("#joinGroupBtn").addClass("d-none"); // 가입 버튼 안보이게 
+ 	        	$("#joinGroupBtn").addClass("d-none"); // 가입 버튼 안보이게
  	        	$("#quitGroupBtn").removeClass("d-none"); // 모임 탈퇴버튼 보이게
- 	        	
+
  	        	// 그룹 활동 버튼
  	        }
- 	    } 
- 	    
+ 	    }
+
  	   // 찜하기 판별 -> 찜 명단에 있으면 찜취소 있으면 찜하기
  	   let wishList = new Array();
 	    <c:forEach items="${wishList}" var="dto">
@@ -585,11 +574,11 @@
 	        	$("#wishListBtn").addClass("d-none");
  	        	$("#wishCancelBtn").removeClass("d-none");
 	        }
-	    } 
- 	    
+	    }
+
  	})
-    
-      	// 모임 탈퇴 
+
+      	// 모임 탈퇴
       	$("#quitGroupBtn").on("click",function() {
       		if(hostEmail == loginSession_id) {
       			alert("탈퇴 못하게 하고 사이트로 이동시켜서 탈퇴시키기");
@@ -605,13 +594,13 @@
       			  confirmButtonText: '네 떠날게요!'
       			}).then((result) => {
       			  if (result.isConfirmed) {
-      				  
+
       				  $.ajax({
       					  url : "/group/quitGroupMember",
       					  type : "post",
       					  data : {"seq_group" : seq_group ,"user_email" : loginSession_id},
       				  	  success : function(data) {
-      				  		  
+
       				  		  if(data == "success") {
       				  			Swal.fire(
       		      			      '모임에서 탈퇴하였습니다',
@@ -626,20 +615,20 @@
       				  		  console.log(e);
       				  	  }
       				  })
-      				  
+
       			  }
       			})
       		}
-      		
+
       	})
-   
-      
+
+
 		// 모임 가입
 		$("#joinGroupBtn").on("click",function(){
 			let curMemberCnt = ${fn:length(memberList)}; // 현재 맴버수 jstl memberList 길이
-			let totalMemberCnt = ${tbl_group_dto.group_people}; // 수용가능 맴버수 
+			let totalMemberCnt = ${tbl_group_dto.group_people}; // 수용가능 맴버수
 			if(curMemberCnt < totalMemberCnt) { // 현재 맴버수 < 수용 맴버수
-				
+
 				// 가입 신청한 명단에 현재 id 세션이 있는지 판별
 				let applyList = new Array();
 		 	    <c:forEach items="${applyList}" var="dto">
@@ -655,7 +644,7 @@
 		 	        			)
 		 	        	return;
 		 	        }
-		 	    } 
+		 	    }
 		 	    // 가입 신청한 명단에 현재 id 세션이 없으면 실행
 				$.ajax({
 					url : "/group/applyGroupMember",
@@ -668,7 +657,7 @@
 								'호스트가 승인을 할 때까지 기다려주세요!',
 								'success'
 							)
-				  		  }	
+				  		  }
 				  	  },
 				  	  error : function(e) {
 				  		  console.log(e);
@@ -684,8 +673,8 @@
 			}
 		})
 
-		
-		// 찜하기 
+
+		// 찜하기
 		$("#wishListBtn").on("click",function() {
 			console.log("찜 하기")
 			$.ajax({
@@ -695,7 +684,7 @@
 				success : function(data) {
 					if(data == "success") {
 						Swal.fire('찜 완료');
-						$("#wishListBtn").addClass("d-none"); // 찜한 즉시 wishList 버튼 사라지게 
+						$("#wishListBtn").addClass("d-none"); // 찜한 즉시 wishList 버튼 사라지게
 		 	        	$("#wishCancelBtn").removeClass("d-none"); // 찜한 취소한 즉시 wishList 버튼 보이게
 		 	        	setTimeout(function() {
 							window.location.href = "";
@@ -706,8 +695,8 @@
 				}
 			})
 		})
-		
-		// 찜하기 취소 
+
+		// 찜하기 취소
 		$("#wishCancelBtn").on("click",function() {
 			console.log("찜취소");
 			$.ajax({
@@ -717,13 +706,13 @@
 				success : function(data) {
 					if(data == "success") {
 						Swal.fire('찜 취소');
-						$("#wishListBtn").removeClass("d-none"); // 찜한 즉시 wishList 버튼 사라지게 
+						$("#wishListBtn").removeClass("d-none"); // 찜한 즉시 wishList 버튼 사라지게
 		 	        	$("#wishCancelBtn").addClass("d-none"); // 찜한 취소한 즉시 wishList 버튼 보이게
 		 	        	setTimeout(function() {
 							window.location.href = "";
 						},800);
 					}
-					
+
 				},
 				error : function(e) {
 					console.log(e);

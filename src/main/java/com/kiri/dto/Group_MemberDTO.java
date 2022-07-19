@@ -10,6 +10,7 @@ public class Group_MemberDTO {
 	public Group_MemberDTO() {
 		super();
 	}
+
 	public Group_MemberDTO(int seq_member, String user_email, int seq_group, String user_nickname, String access) {
 		super();
 		this.seq_member = seq_member;
@@ -53,7 +54,5 @@ public class Group_MemberDTO {
 		return "Group_MemberDTO [seq_member=" + seq_member + ", user_email=" + user_email + ", seq_group=" + seq_group
 				+ ", user_nickname=" + user_nickname + ", access=" + access + "]";
 	}
-	
-	
 	
 }
