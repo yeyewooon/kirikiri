@@ -408,8 +408,6 @@ footer.footer {
                            </div>
                         </c:if>
                      </div>
-
-
                   </div>
                </div>
             </div>

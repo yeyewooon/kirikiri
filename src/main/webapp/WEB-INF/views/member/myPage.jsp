@@ -182,7 +182,7 @@ h4 {
 	margin: 0px 0px 10px 50px;
 }
 
-.myCalendar {
+.myMsg {
 	justify-content: center;
 	align-items: center;
 	margin-top: 50px;
@@ -199,17 +199,10 @@ h4 {
 	justify-content: end;
 }
 
-.wishDelete {
+.wishDelete,.towritePage,.checkMyMsg{
 	cursor: pointer;
 }
 
-.towritePage {
-	cursor: pointer;
-}
-
-.tocalendarPage {
-	cursor: pointer;
-}
 /* footer css 부분 */
 .footer {
 	width: 100%;
@@ -882,10 +875,13 @@ footer.footer {
 							<c:if test="${selectWishList.size() > 0}">
 								<c:forEach items="${selectWishList}" var="wishlistdto">
 									<div class="myList d-flex" id="wishBox">
-										<div class="col-6">
-											<span><i class="fa-solid fa-heart listIcon me-3"></i>${wishlistdto.TITLE}</span>
+										<div class="col-md-2">
+											<i class="fa-solid fa-heart listIcon me-3"></i>
 										</div>
-										<div class="col-6" style="text-align: center;">
+										<div class="col-md-8">
+											<span>${wishlistdto.TITLE}</span>
+										</div>
+										<div class="col-md-2" style="text-align: center;">
 											<i class="fa-solid fa-trash-can wishDelete"></i> <input
 												type="text" id="seq_group" class="seq_group d-none"
 												value="${wishlistdto.SEQ_GROUP}">
@@ -935,13 +931,12 @@ footer.footer {
 					<div class="col-md-4">
 						<div class="bodyBox mb-lg-5">
 							<h4>
-								<i class="fa-solid fa-calendar-days bodyIcon"></i><br />모임 일정
+								<i class="fa-solid fa-envelope bodyIcon"></i><br />쪽지함
 							</h4>
 							<hr id="line" />
-							<div class="d-flex myCalendar">
-								<i class="fa-solid fa-hand-pointer listIcon me-3"></i><span
-									class="tocalendarPage">내 일정 관리하기 <i
-									class="fa-solid fa-arrow-right"></i></span>
+							<div class="d-flex myMsg">
+								<span class="checkMyMsg">내 쪽지 관리하기
+								<i class="fa-solid fa-arrow-right"></i></span>
 							</div>
 						</div>
 					</div>
@@ -989,11 +984,11 @@ footer.footer {
 	</div>
 </body>
 <script>
-	let towritePage = document.getElementById("towritePage");
+	// let towritePage = document.getElementById("towritePage");
 	let profileModify = document.getElementById("profileModify");
 	
 	/* 내가쓴글로 이동 */
-	towritePage.addEventListener("click", function() {
+	$("#towritePage").on("click", function() {
 		let user_email = $("#user_email").val();
 		location.href = "/mem/myWrite?user_email="+user_email;
 	});
@@ -1053,5 +1048,22 @@ footer.footer {
 			  }
 			})
 	})
+	
+	// 내 쪽지 보기 
+	$(".myMsg").on("click", function(){
+		let user_email = $("#user_email").val();
+       	let popUrl = "/user/receiveMsg?user_receive="+user_email;
+        let popOption = "width = 700px, height = 500px, top=300px, left=700px, scrollbars=yes, toolbar=0";
+        window.open(popUrl, "팝업", popOption, "toolbar=0");
+    })
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </script>
 </html>

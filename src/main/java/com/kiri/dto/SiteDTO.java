@@ -4,7 +4,7 @@ public class SiteDTO {
 	private int seq_site;
 	private String user_email;
 	private String area;
-	
+
 	public SiteDTO() {}
 	public SiteDTO(int seq_site, String user_email, String area) {
 		super();
