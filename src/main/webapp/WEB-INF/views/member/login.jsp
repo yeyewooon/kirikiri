@@ -295,7 +295,7 @@
                     </div>
                     <!-- logo -->
                     <div class="col-2">
-                        <a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
+                        <a href="/" id="navLogo" class="mb-2 mb-lg-0">
                             <img id="logoImgs" src="/resources/images/kiri.jpg">
                         </a>
                     </div>
@@ -304,12 +304,11 @@
                             <div class="col-auto">
                                 <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                                     <c:if test="${empty loginSession}">
-                                        <li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
-                                        <li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="/signup/toSignup">회원가입</a></li>
                                     </c:if>
                                 </ul>
                             </div>
-
                             <div class="col-auto user">
                                 <c:if test="${not empty loginSession}">
                                     <div class="dropdown text-end">
