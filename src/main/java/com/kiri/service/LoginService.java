@@ -43,7 +43,7 @@ public class LoginService {
 		map.put("user_name", user_name);
 		map.put("user_phone", user_phone);
 		String result = dao.findId(map);
-		System.out.println(result);
+		
 		if(result != null) {
 			return result;
 		}else {

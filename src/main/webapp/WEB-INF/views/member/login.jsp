@@ -103,7 +103,7 @@ body {
 	text-align: center;
 	margin: auto;
 	background-color: #d2e3ec;
-	margin-bottom: 150px;
+	margin-bottom: 220px;
 	margin-top: 70px;
 }
 
@@ -270,7 +270,6 @@ footer.footer {
     	});
     	
         $("#toLoginBtn").click(function(){
-        	console.log("dd");
         	login();
         });
         
@@ -289,29 +288,42 @@ footer.footer {
  	     });
         	
         $("#btnFindId").click(function(){
-        	$.ajax({
-        		url : "/login/findId"
-        		, type : "post"
-        		, data : {user_name : $("#findId_name").val() , user_phone : $("#find_phone").val() }
-        		, dataType : "text"
-        		, success : function(result){
-        			console.log(result);
-        			if(result !== "nonmem"){
-        				alert("입력하신 정보의 아이디입니다.");
-        				$(".find-box").hide();
-        				let span = $('<span>').css("color","black").html(result);
-        				$("#findId-col").append(span);
-        				$(".findId-box").show();
-        				
-        				
-        				
-        			}else{
-        				alert("해당 정보로 가입된 아이디가 없습니다.");
-        			}
-        		}, error : function(e){
-        			console.log(e);
-        		}
-        	})	
+        	let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
+        	
+        	if( $("#findId_name").val() == "" || $("#find_phone").val() ==""){
+        		alert("아이디 혹은 비밀번호를 입력해주세요.");
+        		return; 
+        		
+        	}else if(!phoneRegex.test($("#find_phone").val())){
+        		alert("유효하지 않은 핸드폰 번호입니다.");
+        		return;
+        		
+        	}else{
+        		$.ajax({
+            		url : "/login/findId"
+            		, type : "post"
+            		, data : {user_name : $("#findId_name").val() , user_phone : $("#find_phone").val() }
+            		, dataType : "text"
+            		, success : function(result){
+            			console.log(result);
+            			if(result !== "nonmem"){
+            				alert("입력하신 정보의 아이디입니다.");
+            				$(".find-box").hide();
+            				let span = $('<span>').css("color","black").html(result);
+            				$("#findId-col").append(span);
+            				$(".findId-box").show();
+            				
+            				
+            				
+            			}else{
+            				alert("해당 정보로 가입된 아이디가 없습니다.");
+            			}
+            		}, error : function(e){
+            			console.log(e);
+            		}
+            	})	
+        	}
+        	
         });
         
         
@@ -378,6 +390,7 @@ footer.footer {
 					, data : {user_email :  $("#findPw_email").val() }
 					, success : function (data) {
 						if(data){
+							$("#findPw-emailCheck-btn").attr("disabled", true);
 							alert("메일로 임시 비밀번호를 발송했습니다. 확인 후 로그인해주세요.");
 							$("#staticBackdrop2").modal("hide");
 							madalClear();
@@ -408,14 +421,17 @@ footer.footer {
     		, data : {user_email : $("#id").val() , user_pw : $("#pw").val() }
     		, dataType : "text"
     		, success : function(result){
-    			console.log(result);
     			if(result === "general"){
     				alert("환영합니다!");
     				location.href = "/"
     				
     			}else if(result === "loginFail"){
     				alert("아이디 혹은 비밀번호가 맞지 않습니다.");
+    				
+    			}else if(result === "error"){
+    				alert("소셜 로그인으로 가입되어 있는 아이디입니다.");
     			}
+    			
     		}, error : function(e){
     			console.log(e);
     		}
@@ -588,9 +604,6 @@ footer.footer {
 					<a class="social" href="${naverUrl}" target="_parent"><img
 						class="social-img" src="/resources/images/naverLogo.JPG"
 						alt="오류가 발생했습니다."></a>
-					<a class="social" href="{google}" target="_parent"><img
-						class="social-img" src="/resources/images/googleLogo.png"
-						alt="오류가 발생했습니다."></a>	
 					<div class="social d-flex align-items-center"
 						onclick="location.href='/signup/toSignup'">
 						<span>회원가입</span>
@@ -765,7 +778,7 @@ footer.footer {
 							</c:choose>
 						</li>
 						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="privacy"
+						<li class="list-inline-item"><a href="/privacy"
 							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
 					</ul>
 					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |

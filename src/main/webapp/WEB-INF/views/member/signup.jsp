@@ -140,7 +140,7 @@ body{
 #user_image{
     margin: auto;
     margin-bottom: 30px;
-    width: 60%;
+    width: 50%;
     border:1px solid black;
     display: none;
 }
@@ -215,6 +215,13 @@ input{
 #user_intro_cnt{
 	text-align : right;
 	margin-top: 5px;
+}
+
+#defaultImgBtn{
+	margin: 9px;
+	height: 50%;
+	width: 15%;
+	display: none;
 }
 
 /* 회원단계 1*/
@@ -387,6 +394,10 @@ footer.footer {
 	   let nicknameConfirm;
 	   let phoneConfirm;
 	   
+	   $("#backPageBtn").click(function(){
+		   location.href = "/signup/toSignupAgree";
+	   })
+	   
        $("#singupBackBtn").click(function(){ // 뒤로가기 
            back();
       
@@ -497,7 +508,7 @@ footer.footer {
 			}
 		});
 	   
-		$("#nicknameCheck").click(function(){ //이메일 중복체크
+		$("#nicknameCheck").click(function(){ //휴대폰 중복체크
   	  		 let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;    
      
   	  		 if(!nicknameRegex.test($("#user_nickname").val())){
@@ -518,10 +529,12 @@ footer.footer {
 	        			if(result === "impossibility"){
 	        				alert("사용 중인 닉네임입니다.");
 	        				$("#user_nickname").focus();
+	        				invalidNickname();
 	        				
 	        			}else if(result === "possibility"){
 	        				alert("사용 가능한 닉네임입니다.");
 	        				nicknameConfirm = "confirm";
+	        				validNickname();
 	        			}
 	        	
 	        		}, error : function(e){
@@ -677,7 +690,8 @@ footer.footer {
        // 뒷 페이지
        
        $("#profileSetting").click(function(){ //프로필사진
-    	   $("#user_image").show();
+    	   $("#user_image").show() ;
+    	   $("#defaultImgBtn").show() ;
        });	
        
        $("#user_image").change(function(){
@@ -686,7 +700,6 @@ footer.footer {
     	   if(result){
     		   let reader = new FileReader();
         	   reader.readAsDataURL(this.files[0])
-        	   
         	   reader.onload = function(e){
         		   $("#p_img").attr("src", e.target.result);
         	   }
@@ -722,6 +735,11 @@ footer.footer {
     	   }
     	});
        
+	   $("#defaultImgBtn").click(function(){
+		   $("#user_image").val("");
+		   $("#p_img").attr("src", "/resources/images/profile.jpg");
+	   }); 
+	   
 	   $("#completeBtn").click(function(){
 		  if(!$('input:radio[name="user_job"]').is(':checked')){
 		   	  alert("직업을 선택해주세요.");
@@ -729,7 +747,7 @@ footer.footer {
 			  
 	      }else if($('input:checkbox[name="hobby"]:checked').length == 0){
 		      alert("취미는 적어도 1개는 선택해주세요.");
-		      return;
+		      return;	
 				
 		  }else if($('input:checkbox[name="area"]:checked').length == 0){
 			  alert("관심 지역은 적어도 1개는 선택해주세요.");
@@ -741,7 +759,8 @@ footer.footer {
 		  $("#signupForm").submit();
 		  
 	   });
-
+		
+	   
    })
 function back(){ //뒤로가기
  	$("#signup-1").css("text-shadow","1px 2px 2px darkblue");
@@ -803,7 +822,7 @@ function checkPw(){
 
 function invalidNickname(){
 	$("#nickname-col").empty();
-    let span = $('<span>').attr('id', 'nickname-regex-span').css("color","red").html("올바르지 않은 아이디 형식입니다.");
+    let span = $('<span>').attr('id', 'nickname-regex-span').css("color","red").html("올바르지 않은 닉네임 형식입니다.");
     $("#nickname-col").append(span);
     $("#user_nickname").focus();
 }
@@ -1178,9 +1197,9 @@ function checkFile(obj) {
     <div id="userInfoBox-profile">
         <div class="row" style="text-align: center;">
             <div class="col">
-                <div>
-                    <img src="/resources/images/kiriLogo.jpg" alt="오류가 발생했습니다.">
-                </div>
+                <div class="profile_imgContainer">
+					<img id="p_img" name="p_img" src="/resources/images/profile.jpg"alt="오류가 발생했습니다.">
+				</div>
             </div>
         </div>
         <div class="row">
@@ -1191,6 +1210,7 @@ function checkFile(obj) {
         <div class="row">
             <div class="col">
                 <input type="file" class="form-control" id="user_image" name="file" accept="image/jpeg, image/png">
+                <button type="button" id="defaultImgBtn" class="btn btn-secondary">기본 이미지설정</button>
             </div>
         </div>
         <div class="row">

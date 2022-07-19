@@ -37,7 +37,7 @@ public class SignupDAO {
 		session.insert("singupMapper.insertArea", map);
 	}
 	
-	public void generalLoginType(String user_email) throws Exception{ // 로그인타입 지정
-		session.selectOne("singupMapper.generalLoginType",user_email);
+	public void generalLoginType(Map<String,String> map) throws Exception{ // 로그인타입 지정
+		session.selectOne("singupMapper.generalLoginType",map);
 	}
 }

@@ -83,8 +83,12 @@ public class SignupService {
 		}
 	}
 	
-	public void generalLoginType(String user_email) throws Exception{ // 로그인타입 지정
-		dao.generalLoginType(user_email);
+	public void generalLoginType(String user_email,String type, String unique_id) throws Exception{ // 로그인타입 지정
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("user_email", user_email);
+		map.put("type", type);
+		map.put("unique_id", unique_id);
+		dao.generalLoginType(map);
 	}
 	
 }

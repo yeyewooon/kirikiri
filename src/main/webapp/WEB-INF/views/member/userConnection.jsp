@@ -23,7 +23,7 @@
 <!-- AOS 라이브러리 불러오기-->
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<title>개인정보처리방침</title>
+<title>계정연동</title>
 <link
 href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
 rel="stylesheet"
@@ -156,9 +156,7 @@ body {
 	text-align: left;
 	border: 1px solid d2e3ec;
 	background-color: white;
-    
 }
-
 
 /*풋터 영역*/
 .footerBox {

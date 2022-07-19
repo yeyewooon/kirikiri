@@ -26,11 +26,15 @@
 	</insert>
 	
 	<select id="findId" parameterType="map" resultType="String">
-		select user_email from member where user_name = #{user_name} and user_phone = #{user_phone}
+		select a.user_email from member a inner join login_type b 
+		on a.user_email = b.user_email 
+		where a.user_name = #{user_name} and a.user_phone = #{user_phone} and b.type = 'general'
 	</select>
 	
 	<select id="findPw" parameterType="map" resultType="int">
-		select count(*) from member where user_email = #{user_email} and user_name = #{user_name}
+		select count(*) from member a inner join login_type b 
+		on a.user_email = b.user_email
+		where a.user_email = #{user_email} and a.user_name = #{user_name} and b.type = 'general'
 	</select>
 	
 	<select id="updatePw" parameterType="map" >
