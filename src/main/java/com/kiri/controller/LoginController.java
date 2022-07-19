@@ -214,10 +214,14 @@ public class LoginController {
         		 dto.setUser_pw(null);
         		 session.setAttribute("loginSession", dto);
         		 return "/";
+        	 }else if(type.getType().equals("general")||type.getSocial_id().equals("general")) {
+        		 
         	 }
+        	 
         			 
-        }else {
-        	
+        }else {// 가입 안되어있으면 회원가입으로 보내기
+        	 session.setAttribute("user", member);
+             return "member/socialSignup";
         }
         
         
@@ -259,7 +263,15 @@ public class LoginController {
                 session.setAttribute("SPRING_SECURITY_CONTEXT", securityContext);
                 return "redirect:/board/list";
         }
-
+        
+	
+	
+	// 로그인 창으로 이동
+	@GetMapping("/customLogin")
+	public void login(String error, String logout, Model model, HttpSession session) {
+	    
+	}
+	
 	// 회원가입 창으로 이동
 	@RequestMapping("socialSignup")
 	public void socialSignup(Model model, HttpSession session) {
@@ -270,12 +282,6 @@ public class LoginController {
 	    //log.info("네이버: " + naverAuthUrl);
 	    // 네이버
 	    //model.addAttribute("url", naverAuthUrl);
-	}
-	
-	// 로그인 창으로 이동
-	@GetMapping("/customLogin")
-	public void login(String error, String logout, Model model, HttpSession session) {
-	    
 	}
 	
 	@ExceptionHandler
