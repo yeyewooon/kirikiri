@@ -148,5 +148,11 @@ public class Tbl_GroupDAO {
    public int deletetWishList(WishListDTO wish_list_dto) throws Exception {
       return session.delete("tblGroupMapper.deletetWishList", wish_list_dto);
    }
-
+   
+////////// 호준
+   
+   // 가입한 모임 정보
+	public List<Map<String, Object>> selectGroupList(String user_email) throws Exception {
+		return session.selectList("myPageMapper.selectGroupList", user_email);
+	}
 }
