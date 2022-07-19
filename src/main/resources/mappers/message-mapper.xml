@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="messageMapper">
+
+   <!-- 쪽지 보내기 -->
+   <insert id = "insertMessage" parameterType = "com.kiri.dto.MessageDTO">
+      insert into message values (seq_message.nextval, #{user_send}, #{user_receive}, #{msgContent}, sysdate, Default)
+   </insert>
+   
+   <!-- 받은 쪽지 조회하기 -->
+   <select id = "selectReMessage" parameterType = "String" resultType = "com.kiri.dto.MessageDTO">
+      select * from message where user_receive = #{user_receive}
+   </select>   
+   
+   <!-- 보낸 쪽지 조회하기 -->
+   <select id = "selectSendMessage" parameterType = "String" resultType = "com.kiri.dto.MessageDTO">
+      select * from message where user_send = #{user_send}
+   </select>
+   
+   <!-- 쪽지 삭제하기 -->
+   <delete id = "deleteMessage" parameterType = "int">
+   		delete from message where seq_message in
+   		<foreach item = "message" collection = "message" open = "("
+   			separator ="," close=")">
+   			#{message}	
+   		</foreach>
+   </delete>
+
+</mapper>

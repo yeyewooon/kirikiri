@@ -1,14 +1,18 @@
 package com.kiri.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kiri.dto.Tbl_GroupDTO;
 import com.kiri.service.UserService;
 
@@ -40,4 +44,5 @@ public class UserController {
         model.addAttribute("groupList", groupList);
         return "/user/userSelectedGroupList";
     }
+    
 }

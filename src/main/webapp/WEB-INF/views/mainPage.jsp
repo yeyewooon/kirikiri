@@ -341,8 +341,8 @@ footer.footer {
                         <li class="nav-item"><a class="nav-link" href=" ">자유게시판</a></li>
                         <c:choose>
                            <c:when test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link" href=" ">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href=" ">회원가입</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/signup">회원가입</a></li>
                            </c:when>
                            <c:otherwise>
                               <li class="nav-item"><a class="nav-link" href=" ">마이페이지</a></li>
@@ -383,9 +383,9 @@ footer.footer {
                         <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link"
-                                 href="/toLogin.mem">로그인</a></li>
+                                 href="/login/toLogin">로그인</a></li>
                               <li class="nav-item"><a class="nav-link"
-                                 href="/toSignUp.mem">회원가입</a></li>
+                                 href="/login/signup"">회원가입</a></li>
                            </c:if>
                         </ul>
                      </div>
