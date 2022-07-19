@@ -1,6 +1,7 @@
 package com.kiri.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import com.kiri.dto.Group_ApplyDTO;
 import com.kiri.dto.Group_ChatDTO;
 import com.kiri.dto.Group_MemberDTO;
 import com.kiri.dto.MemberDTO;
+import com.kiri.dto.SiteDTO;
 import com.kiri.dto.Tbl_GroupDTO;
 import com.kiri.dto.WishListDTO;
 import com.kiri.service.Group_ChatService;
@@ -31,6 +33,8 @@ public class GroupController {
 	@Autowired
 	private Tbl_GroupService tbl_group_service;
 
+	
+	
 	// 2022/07/15 김영완
 	@Autowired
 	private HttpSession session;
@@ -242,21 +246,44 @@ public class GroupController {
 		String loginSession_id = ((MemberDTO) session.getAttribute("loginSession")).getUser_email();
 		// 모임 신청 리스트
 		List<Group_ApplyDTO> applyList = tbl_group_service.selectApplyList(seq_group);
-		System.out.println(applyList.toString());
-
 		// 찜 리스트
 		List<WishListDTO> wishList = tbl_group_service.selectWishList(seq_group);
-		System.out.println(wishList.toString());
-
+		// TableJoinDTO에서 가져옴 
+		Map<String, Object> mapList =  tbl_group_service.selectGroupAccess(seq_group);
+		mapList.get("TableJoinDTO");
+		System.out.println("나와라");
+		System.out.println(mapList.toString());
+		
+		
 		model.addAttribute("tbl_group_dto", tbl_group_dto); // 해당 그룹 내용 가져오기
 		model.addAttribute("memberList", memberList); // 해당 그룹 맴버 목록 가져오기
 		model.addAttribute("applyList", applyList); // 해당 그룹 신청 목록 가져오기
 		model.addAttribute("wishList", wishList); // 해당 그룹 찜 목록 보여주기
 		model.addAttribute("loginSession_id",loginSession_id); // 현재 세션 아이디
-
+		model.addAttribute("mapList", mapList);
 
 		return "/group/groupDetail";
 	}
+	
+	// 그룹 페이지에서 맴버 프로필 조회
+	@ResponseBody
+	@RequestMapping(value="/selectMemberProfile")
+	public Map<String, Object> selectMemberProfile(String user_email) throws Exception {
+		List<MemberDTO> profileList = tbl_group_service.selectMemberProfile(user_email); // 회원 프로필 가져오기
+		List<SiteDTO> siteList = tbl_group_service.selectMemberSite(user_email); // 회원 주소 가져오기 
+		System.out.println(profileList.toString());
+		System.out.println("절취선-----------------------");
+		System.out.println(siteList.toString());
+		
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("profileList", profileList); // 프로필 리스트 
+		map.put("siteList", siteList); // 주소 리스트
+		return map;
+	}
+	
+	
+	
 
 	// 그룹에서 회원 탈퇴
 	@ResponseBody

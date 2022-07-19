@@ -20,7 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kiri.dao.Tbl_GroupDAO;
 import com.kiri.dto.Group_ApplyDTO;
 import com.kiri.dto.Group_MemberDTO;
-
+import com.kiri.dto.MemberDTO;
+import com.kiri.dto.SiteDTO;
 import com.kiri.dto.TableJoinDTO;
 
 
@@ -173,6 +174,17 @@ public class Tbl_GroupService {
       public int deletetWishList(WishListDTO wish_list_dto) throws Exception{
          return tbl_group_dao.deletetWishList(wish_list_dto);
       }
+
+      // 해당 그룹 맴버 프로필 조회
+	public List<MemberDTO> selectMemberProfile(String user_email) {
+		return tbl_group_dao.selectMemberProfile(user_email);
+		
+	}
+
+	// 해당 그룹 맴버 주소 조회
+	public List<SiteDTO> selectMemberSite(String user_email) {
+		return tbl_group_dao.selectMemberSite(user_email);
+	}
 
 
    
