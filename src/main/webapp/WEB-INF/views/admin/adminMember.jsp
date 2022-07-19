@@ -62,7 +62,7 @@
 .sidebar {
 	float: left;
 	width: 20%;
-	height: 1300px;
+	height: 1200px;
 	background-color: #4e78f5;
 }
 
@@ -158,7 +158,7 @@ a {
 .contents {
 	background-color: rgb(224, 230, 243);
 	width: 100%;
-	height: 1300px;
+	height: 1200px;
 }
 
 /*회원관리 색 다르게*/
@@ -174,15 +174,20 @@ a {
 .reportBox {
 	margin: auto;
 	width: 75%;
-	height: 300px;
+	height : max-content;
+	max-height: 200px;
 	background-color: white;
 	overflow-y: scroll;
+}
+
+.reportBox::-webkit-scrollbar {
+	display: none;
 }
 
 .searchBox {
 	margin: auto;
 	width: 75%;
-	height: 80px;
+	height: 70px;
 	background-color: white;
 }
 
@@ -190,11 +195,15 @@ a {
 	margin: auto;
 	width: 75%;
 	height: max-content;
+	max-height : 550px;
 	background-color: white;
 }
 
+.resultBox::-webkit-scrollbar {
+	display: none;
+}
+
 .resultBox span {
-	font-size: larger;
 	height: max-content;
 }
 
@@ -204,13 +213,13 @@ tbody tr {
 	text-align: center;
 }
 
-#spage {
-	display: none;
+td{
+	font-size : 12px;
 }
 
 td>a {
 	color: rgb(103, 103, 103);
-	font-size: 17px;
+	font-size: 12px;
 }
 </style>
 </head>
@@ -248,8 +257,8 @@ td>a {
 		<div class="contents">
 			<div class="row title ">
 				<div class="col d-flex mt-4 ms-4">
-					<h3 style="color: darkblue; text-shadow: 1px 1px 1px dodgerblue;">회원
-						신고 관리</h3>
+					<h4 style="color: darkblue; text-shadow: 1px 1px 1px dodgerblue;">회원
+						신고 관리</h4>
 				</div>
 				<div class="col d-flex me-3 justify-content-end align-items-center">
 					<button type="button" class="btn btn-primary" id="submitBtn">블랙리스트
@@ -259,11 +268,13 @@ td>a {
 				</div>
 			</div>
 			<div class="row reportBox">
+				<span>신고 건수 <span style="color: navy">${reportList.size()}</span>개
+				</span>
 				<table style="margin-bottom: auto">
 					<thead style="background-color: gainsboro; text-align: center;">
 						<tr>
 							<td><input class="form-check-input ms-2 me-1"
-								type="checkbox" id="checkAll" value=""></td>
+								type="checkbox" id="checkAll"></td>
 							<td>이메일</td>
 							<td>신고 사유</td>
 						</tr>
@@ -292,8 +303,8 @@ td>a {
 			</div>
 			<div class="row title mt-2">
 				<div class="col mt-4 ms-4">
-					<h3 style="color: darkblue; text-shadow: 1px 1px 1px dodgerblue;">사용자
-						관리</h3>
+					<h4 style="color: darkblue; text-shadow: 1px 1px 1px dodgerblue;">사용자
+						관리</h4>
 				</div>
 			</div>
 			<div class="row searchBox">
@@ -311,7 +322,7 @@ td>a {
 				</div>
 			</div>
 			<div class="row resultBox mt-3">
-				<span>총 <span style="color: navy">${memCnt}</span>명
+				<span>총 <span id="memCnt" style="color: navy">${memCnt}</span>명
 				</span>
 				<table>
 					<thead style="background-color: gainsboro; text-align: center;">
@@ -334,11 +345,18 @@ td>a {
 								<c:forEach items="${list}" var="dto">
 									<tr>
 										<td><a
-											href="/admin/toDetailMem?user_email=${dto.user_email}">${dto.user_email }</a></td>
+											href="/admin/toDetailMem?user_email=${dto.user_email}"
+											onclick="window.open(this.href, '_blank', 'width=600, height=1000'); return false;">
+											${dto.user_email }</a></td>
 										<td>${dto.user_nickname }</td>
 										<td>${dto.user_phone }</td>
 										<td>${dto.user_gender }</td>
-										<td><i class="fa-solid fa-user-large-slash"></i></td>
+										<c:if test="${dto.user_blacklist eq 'Y'}">
+											<td><i class="fa-solid fa-user-large-slash"></i></td>
+										</c:if>
+										<c:if test="${dto.user_blacklist eq 'N'}">
+											<td><i class="fa-solid fa-user-large"></i></td>
+										</c:if>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -348,7 +366,7 @@ td>a {
 			</div>
 
 			<!-- 검색전 pagination -->
-			<div class="pagination mt-5 justify-content-center" id="page">
+			<div class="pagination mt-4 justify-content-center" id="page">
 				<nav aria-label="Page navigation example">
 					<ul class="pagination">
 						<c:if test="${naviMap.needPrev eq true}">
@@ -372,14 +390,33 @@ td>a {
 		</div>
 	</div>
 	<script>
+	//부분 새로고침 -> 팝업 닫힌후
+	window.call = function (data) {
+	    if(data=="msg"){
+	    	if($("#searchKeyword").val()==""){
+	    		location.reload();
+	    	}else{
+				$("#searchBtn").trigger("click");
+	    
+	    	}
+	    }
+	}; 
+	
 	//검색하는거
 	$("#searchBtn").click(function(){
+		makeSearchTable();
+	})
+	
+	$("#searchKeyword").keyup(function(e){
+		if(e.keyCode == 13)  makeSearchTable(); 
+	})
+	
+	//검색하고 동적쿼리 만들어줌
+	function makeSearchTable(){
 		let searchType;
 		let searchKeyword = $("#searchKeyword").val();
 		
 		if(searchKeyword!=""){ //뭐가 입력됐음
-			$("#page").css("display", "none");
-			$(".resultBox").css({"height" : "600px", "overflow-y" : "scroll"});
 			searchType = $("select[name=searchMem] option:selected").val();
 			$.ajax({
 				url : "/admin/toSearch"
@@ -388,8 +425,9 @@ td>a {
 				, dataType : "json"
 				, success: function(data){
 					console.log(data);
-					$("#spage").css("display", "flex");
 					$("#page").css("display", "none");
+					$(".resultBox").css({"overflow-y" : "scroll"});
+					$("#memCnt").html(data.length);
 					
 					$("#tbody").empty();
 					if(data.length === 0){ //아무것도 안넘어올때
@@ -398,14 +436,22 @@ td>a {
 						tr.append(td);
 						$("#tbody").append(tr);
 					}else{
+						let icon;
 						for(let dto of data){
 							let tr = $("<tr>");
 							let anchor = $("<a>").attr("href", "/admin/toDetailMem?user_email="+dto.user_email).html(dto.user_email);
+							var js_func = "window.open(this.href, '_blank', 'width=600, height=1000'); return false;";
+							var clickEvent = new Function(js_func);
+							anchor.attr('onclick', '').click(clickEvent);
 							let td1 = $("<td>").append(anchor);
 							let td2 = $("<td>").html(dto.user_nickname);
 							let td3 = $("<td>").html(dto.user_phone);
 							let td4 = $("<td>").html(dto.user_gender);
-							let icon = $("<i>").addClass("fa-solid fa-user-large-slash");
+							if(dto.user_blacklist == "Y"){
+								icon = $("<i>").addClass("fa-solid fa-user-large-slash");
+							}else if(dto.user_blacklist == "N"){
+								icon = $("<i>").addClass("fa-solid fa-user-large");
+							}
 							let td5 = $("<td>").append(icon);
 							tr.append(td1, td2, td3, td4, td5);
 							$("#tbody").append(tr);
@@ -418,7 +464,7 @@ td>a {
 			})
 			
 		}
-	})
+	}
 	
 	//신고 삭제버튼 누르면
 	$("#deleteBtn").click(function(){
@@ -426,43 +472,50 @@ td>a {
 		$("input:checkbox[name=seq_report]:checked").each(function(){
 			array.push(this.value);
 		})
-		$.ajax({
-				url : "/admin/toReportDelete"
-				,type : "post"
-				,data : {seqArray : array}
-				, success: function(data){
-					console.log(data);
-					if(data == "success"){
-						Swal.fire({
-							title: '정말 삭제하시겠습니까?',
-							text: "해당 유저를 블랙리스트에 등록하지않고 신고내역이 삭제됩니다.",
-							icon: 'warning',
-							showCancelButton: true,
-							confirmButtonColor: '#3085d6',
-							cancelButtonColor: '#d33',
-							confirmButtonText: '그래도 삭제'
-						}).then((result) => {
-							if (result.isConfirmed) {
-							  Swal.fire(
-							     'Deleted!',
-							     '신고내역이 삭제되었습니다.',
-							     'success'
-							  ).then(function() {
-									location.reload();
-								});
-							 }
-						})
-					}else if(data == "fail"){
-						Swal.fire({
-							  icon: 'error',
-							  title: 'Oops...',
-							  text: '블랙리스트 등록에 실패했습니다.'
-							})
-					}
-				}, error : function(e){
-					console.log(e);
+		if(array.length==0){
+			//아무것도 선택안하고 버튼 눌렀을때 아무것도 안되게하기
+		}else{
+			Swal.fire({
+				title: '정말 삭제하시겠습니까?',
+				text: "해당 유저를 블랙리스트에 등록하지않고 신고내역이 삭제됩니다.",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: '그래도 삭제'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					$.ajax({
+						url : "/admin/toReportDelete"
+						,type : "post"
+						,data : {seqArray : array}
+						, success: function(data){
+							console.log(data);
+							if(data == "success"){
+								Swal.fire(
+										'Deleted!',
+										'신고내역이 삭제되었습니다.',
+									    'success'
+									).then(function() {
+										location.reload();
+									});
+							}else if(data == "fail"){
+								Swal.fire({
+									  icon: 'error',
+									  title: 'Oops...',
+									  text: '블랙리스트 등록에 실패했습니다.'
+									})
+							}
+						}, error : function(e){
+							console.log(e);
+						}
+					})
+					
+				}else{
+					location.reload();
 				}
 			})
+		}
 	})
 	
 	//신고 영역 블랙리스트 등록
@@ -471,6 +524,7 @@ td>a {
 		$("input:checkbox[name=seq_report]:checked").each(function(){
 			array.push(this.value);
 		})
+		console.log(array);
 		$.ajax({
 				url : "/admin/toReport"
 				,type : "post"

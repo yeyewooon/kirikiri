@@ -244,6 +244,8 @@ public class GroupController {
 																							// [0]에 담기게 뽑음)
 		// 현재 세션 아이디
 		String loginSession_id = ((MemberDTO) session.getAttribute("loginSession")).getUser_email();
+		// 현재 세션 닉네임
+		String loginSession_nickName = ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname();
 		// 모임 신청 리스트
 		List<Group_ApplyDTO> applyList = tbl_group_service.selectApplyList(seq_group);
 		// 찜 리스트
@@ -251,16 +253,14 @@ public class GroupController {
 		// TableJoinDTO에서 가져옴 
 		Map<String, Object> mapList =  tbl_group_service.selectGroupAccess(seq_group);
 		mapList.get("TableJoinDTO");
-		System.out.println("나와라");
-		System.out.println(mapList.toString());
-		
 		
 		model.addAttribute("tbl_group_dto", tbl_group_dto); // 해당 그룹 내용 가져오기
 		model.addAttribute("memberList", memberList); // 해당 그룹 맴버 목록 가져오기
 		model.addAttribute("applyList", applyList); // 해당 그룹 신청 목록 가져오기
 		model.addAttribute("wishList", wishList); // 해당 그룹 찜 목록 보여주기
 		model.addAttribute("loginSession_id",loginSession_id); // 현재 세션 아이디
-		model.addAttribute("mapList", mapList);
+		model.addAttribute("loginSession_nickName",loginSession_nickName); // 현재 세션 닉네임
+		model.addAttribute("mapList", mapList); // MemberDTO + GroupMember
 
 		return "/group/groupDetail";
 	}

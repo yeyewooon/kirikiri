@@ -149,15 +149,21 @@ public class Tbl_GroupDAO {
    public int deletetWishList(WishListDTO wish_list_dto) throws Exception {
       return session.delete("tblGroupMapper.deletetWishList", wish_list_dto);
    }
-   
+
    // 해당 그룹 맴버 프로필 조회
    public List<MemberDTO> selectMemberProfile(String user_email) {
 	 return session.selectList("tblGroupMapper.selectMemberProfile", user_email);
    }
-   
+
 	// 해당 그룹 맴버 주소 조회
 	public List<SiteDTO> selectMemberSite(String user_email) {
 		return session.selectList("tblGroupMapper.selectMemberSite", user_email);
 	}
 
+////////// 호준
+
+   // 가입한 모임 정보
+	public List<Map<String, Object>> selectGroupList(String user_email) throws Exception {
+		return session.selectList("myPageMapper.selectGroupList", user_email);
+	}
 }

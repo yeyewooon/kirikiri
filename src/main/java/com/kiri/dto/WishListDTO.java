@@ -4,16 +4,14 @@ public class WishListDTO {
 	private int seq_wishlist;
 	private int seq_group;
 	private String user_email;
-	public WishListDTO() {
-	}
-	
+
+	public WishListDTO() {}
 	public WishListDTO(int seq_wishlist, int seq_group, String user_email) {
 		super();
 		this.seq_wishlist = seq_wishlist;
 		this.seq_group = seq_group;
 		this.user_email = user_email;
 	}
-
 	public int getSeq_wishlist() {
 		return seq_wishlist;
 	}
@@ -32,17 +30,9 @@ public class WishListDTO {
 	public void setUser_email(String user_email) {
 		this.user_email = user_email;
 	}
-
 	@Override
 	public String toString() {
-		return "WishListDTO [seq_wishlist=" + seq_wishlist + ", seq_group=" + seq_group + ", user_email=" + user_email
+		return "WishlistDTO [seq_wishlist=" + seq_wishlist + ", seq_group=" + seq_group + ", user_email=" + user_email
 				+ "]";
 	}
-	
-	
-	
-	
-	
-	
-	
 }

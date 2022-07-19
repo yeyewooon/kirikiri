@@ -12,12 +12,12 @@
    
    <!-- 받은 쪽지 조회하기 -->
    <select id = "selectReMessage" parameterType = "String" resultType = "com.kiri.dto.MessageDTO">
-      select * from message where user_receive = #{user_receive}
+      select * from message where user_receive = #{user_receive} order by 5 desc
    </select>   
    
    <!-- 보낸 쪽지 조회하기 -->
    <select id = "selectSendMessage" parameterType = "String" resultType = "com.kiri.dto.MessageDTO">
-      select * from message where user_send = #{user_send}
+      select * from message where user_send = #{user_send} order by 5 desc
    </select>
 
    <!-- 쪽지 삭제하기 -->

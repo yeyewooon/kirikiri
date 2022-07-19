@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="commentMapper">
+	<!-- 전체 게시글 목록 -->
+	<select id="selectAll" parameterType="int" resultType="com.kiri.dto.Board_CommentDTO">
+		select * from board_comment
+			where seq_board = #{seq_board}
+			order by comment_date asc
+	</select>
+	
+	<!-- 댓글 등록 -->
+	<insert id="write" parameterType="com.kiri.dto.BoardDTO">
+		insert into board_comment
+			values(seq_comment.nextval, #{seq_board}, #{user_email}, #{user_nickname}
+				, #{comment}, sysdate)
+	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="modify" parameterType="com.kiri.dto.BoardDTO">
+		update board_comment 
+			set comment = #{comment} 
+			where seq_comment = #{seq_comment}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from board_comment
+			where seq_comment = #{seq_comment}
+	</delete>
+</mapper>

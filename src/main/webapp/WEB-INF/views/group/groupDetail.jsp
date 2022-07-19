@@ -614,20 +614,19 @@ footer.footer {
     </div>
 
     <script>
-    let totalMemberCnt = ${fn:length(memberList)}; // 전체 맴버 수
-    let realMemberCnt = totalMemberCnt-1; // 주최자를 제외한 맴버수 
+    let realMemberCnt = ${fn:length(memberList)}-1; // 주최자를 제외한 맴버수 
     $(".memberCntSpan").text(realMemberCnt); // 주최자를 제외한 맴버수 
     
     let seq_group = "${tbl_group_dto.seq_group}"; // 현재 모임 번호
  	let loginSession_id = "${loginSession_id}"; // 현재 로그인 세션 아이디
+    let loginSession_nickName = "${loginSession_nickName}"// 현재 로그인 세션 닉네임
  	let hostEmail = "${memberList[0].user_email}"; // 주최자 아이디
-    
-    
+
   	//해당 모임 맴버 프로필 보기
     $(".memberProfileContainer").on("click",function() {
        	let findUserEmail = $(this).find('span').html(); // 공백이 포함되서 나옴
         let user_email = findUserEmail.trim(); // 공백을 없앰
-       	$("#user_receive").val(user_email); // 쪽지 보내기 받는사람 넣어주기
+       	// $("#user_receive").val(user_email); // 
         
         $.ajax ({
         	url : "/group/selectMemberProfile",
@@ -646,6 +645,8 @@ footer.footer {
         		$("#profileIntro").text(data.profileList[0].user_intro); // 해당 회원 소개글 모달값으로 넣어주기 
         		$('.profileModal').modal('show'); // 성공했을때만 모달열리게 
         		$("#receiverName").text(data.profileList[0].user_name) // 해당 회원 이름 메세지 받는 사람에 넣어주기
+        		$("#user_receive").val(data.profileList[0].user_nickname); // 쪽지 보내기 -> 받는사람 닉네임 넣어주기
+        		
         	},
         	error : function(e) {
         		console.log(e);
@@ -668,12 +669,12 @@ footer.footer {
 	  			Swal.fire('내용을 입력해주세요');
 	  			return;
 	  		}
-	  		let user_receive = $("#user_receive").val(); // 받는 사람 이메일 
+	  		let user_receive = $("#user_receive").val(); // 받는 사람 닉네임
 	  		let msgContent = $("#msgContent").val(); // 쪽지 내용 
 	  		$.ajax ({
 	  			url : "/user/insertMessage",
 	  			type : "post",
-				data : {"user_receive" : user_receive, "msgContent" : msgContent, "user_send" : loginSession_id},
+				data : {"user_receive" : user_receive, "msgContent" : msgContent, "user_send" : loginSession_nickName},
 				dataType : "text",
 				success : function(data) {
 					console.log(data);

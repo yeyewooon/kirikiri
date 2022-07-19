@@ -61,51 +61,65 @@
         <thead>
           <tr>
             <th scope="col">삭제</th>
-            <th scope="col">보낸사람</th>
+            <th scope="col">받는사람</th>
             <th scope="col">내용</th>
             <th scope="col">날짜</th>
           </tr>
         </thead>
         <tbody>
+          <c:forEach items="${smsgList}" var="dto">
           <tr>
-            <th scope="row"><input type = "checkbox" value = "1" name = "seq_message"></th>
-            <td>차범근</td>
-            <td>내 아들은 차두리~</td>
-            <td>2022-07-19</td>
+            <th scope="row"><input type = "checkbox" value = "${dto.seq_message}" name="seq_message"></th>
+            <td>${dto.user_receive}</td>
+            <td>${dto.msgContent}</td>
+            <td>${dto.date}</td>
           </tr>
-          <tr>
-            <th scope="row"><input type = "checkbox" value = "2" name = "seq_message"></th>
-            <td>차범근</td>
-            <td>내 아들은 차두리~</td>
-            <td>2022-07-19</td>
-          </tr>
-          <tr>
-            <th scope="row"><input type = "checkbox" value = "3" name = "seq_message"></th>
-            <td>차범근</td>
-            <td>내 아들은 차두리~</td>
-            <td>2022-07-19</td>
-          </tr>
+        </c:forEach>
         </tbody>
       </table>
       <div class = "row">
         <div class = "col-12 d-flex justify-content-end">
             <button type = "button" class = "btn btn-danger ms-2" id = "deleteBtn">삭제</button>
             <button type = "button" class = "btn btn-primary ms-2" id = "closeBtn">닫기</button>
+            <input type="text" value="${smsgList[0].user_send}" id="myId" hidden> 
         </div>
       </div>
       </div>
 </body>
 <script>
+	// 받은 쪽지 클릭
     $(".msgReceive").on("click", function(){
-        location.href="/user/receiveMsg"
+    	let myId = $("#myId").val();
+    	location.href="/user/receiveMsg?user_receive="+myId;
     })
 
+    // 보낸 메세지 삭제
     $("#deleteBtn").on("click", function(){
         let checkBoxArr = [];
       $("input[name=seq_message]:checked").each(function(){         
          checkBoxArr.push($(this).val());
       })
-      console.log(checkBoxArr);
+      var jsonData = {
+         "message" : JSON.stringify(checkBoxArr)
+      };
+      var jsonString = JSON.stringify(jsonData);
+       $.ajax({
+         url:"/user/deleteMsg",
+         headers: {'Content-Type': 'application/json'},
+         type : "post",
+         data: jsonString,
+         success:function(data){
+            Swal.fire({
+                 icon: 'success',
+                 text: '완료되었습니다.',
+               })
+               setTimeout(function() {
+                       window.location.href = "";
+                   },1000);
+         },error : function(e){
+            console.log(e);
+         }
+      })
     })
 
     $("#closeBtn").on("click", function(){

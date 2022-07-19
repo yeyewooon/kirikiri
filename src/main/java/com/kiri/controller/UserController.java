@@ -71,13 +71,14 @@ public class UserController {
     // 내가 보낸 쪽지 보기
     @RequestMapping(value ="/sendMsg")
     public String selectSendMessage(MessageDTO MessageDTO, Model model) throws Exception{
-       List<MessageDTO> smsgList = message_service.selectSendMessage(MessageDTO.getUser_receive());
-       model.addAttribute("smsgList",smsgList);
+    System.out.println(MessageDTO.toString());
+    List<MessageDTO> smsgList = message_service.selectSendMessage(MessageDTO.getUser_send());
+    model.addAttribute("smsgList",smsgList);
        return "/member/sendMessage";
     }
 
     // 쪽지 삭제
-    @RequestMapping(value = "")
+    @RequestMapping(value = "/deleteMsg")
     @ResponseBody
     public String deleteMessage(@RequestBody Map<String, Object> param) throws Exception{
        List<String> message = new ObjectMapper().readValue(param.get("message").toString(),List.class);

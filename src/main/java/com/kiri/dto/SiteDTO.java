@@ -4,9 +4,8 @@ public class SiteDTO {
 	private int seq_site;
 	private String user_email;
 	private String area;
-	public SiteDTO() {
-		super();
-	}
+
+	public SiteDTO() {}
 	public SiteDTO(int seq_site, String user_email, String area) {
 		super();
 		this.seq_site = seq_site;
@@ -35,7 +34,4 @@ public class SiteDTO {
 	public String toString() {
 		return "SiteDTO [seq_site=" + seq_site + ", user_email=" + user_email + ", area=" + area + "]";
 	}
-	
-	
-	
 }

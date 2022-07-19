@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import com.kiri.dto.BlackListDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
-import com.kiri.dto.SearchMemDTO;
 
 @Repository
 public class AdminDAO {
@@ -43,6 +42,19 @@ public class AdminDAO {
 	
 	public void deleteReport(int seq_report) throws Exception{
 		session.delete("adminMapper.deleteReport", seq_report);
+	}
+	public void updateBl(String user_email) throws Exception{
+		session.update("adminMapper.updateBl", user_email);
+	}
+	public MemberDTO selectDetailMem(String user_email) throws Exception{
+		return session.selectOne("adminMapper.selectDetailMem", user_email);
+	}
+	
+	public void updateMem(String user_email, String user_blacklist) {
+		Map<String, String> map = new HashMap<>();
+		map.put("user_email", user_email);
+		map.put("user_blacklist", user_blacklist);
+		session.update("adminMapper.updateMem", map);
 	}
 	
 	public List<MemberDTO> searchMember(String searchType, String searchKeyword) throws Exception{
