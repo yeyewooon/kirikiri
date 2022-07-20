@@ -657,7 +657,7 @@ footer.footer {
 						class="social-img" src="/resources/images/naverLogo.JPG"
 						alt="오류가 발생했습니다."></a>
 					<div class="social d-flex align-items-center"
-						onclick="location.href='/signup/toSignup'">
+						onclick="location.href='/signup/toSignupAgree'">
 						<span>회원가입</span>
 					</div>
 				</div>

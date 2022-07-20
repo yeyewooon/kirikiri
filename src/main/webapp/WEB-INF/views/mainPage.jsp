@@ -386,10 +386,8 @@ footer.footer {
                      <div class="col-auto">
                         <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                            <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link"
-                                 href="/toLogin.mem">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link"
-                                 href="/toSignUp.mem">회원가입</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/signup/toSignup">회원가입</a></li>
                            </c:if>
                         </ul>
                      </div>
@@ -406,7 +404,7 @@ footer.footer {
                               </a>
                               <ul class="dropdown-menu text-small"
                                  aria-labelledby="dropdownUser1">
-                                 <li><a class="dropdown-item" href="#">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
                                  <li><a class="dropdown-item" href="#">모임생성</a></li>
                                  <li><hr class="dropdown-divider"></li>
                                  <li><a class="dropdown-item" href="#">로그아웃</a></li>
@@ -414,8 +412,6 @@ footer.footer {
                            </div>
                         </c:if>
                      </div>
-
-
                   </div>
                </div>
             </div>
