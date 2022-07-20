@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.gson.Gson;
 import com.kiri.dto.BoardDTO;
 import com.kiri.dto.Group_BoardDTO;
@@ -23,16 +22,20 @@ import com.kiri.dto.HobbyDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.SiteDTO;
 import com.kiri.service.MemberService;
+import com.kiri.utills.EncryptionUtils;
 
 @RequestMapping("/mem")
 @Controller
 public class MemberController {
-
 	@Autowired
-	private MemberService service;
+    private MemberService service;
 
-	@Autowired
-	private HttpSession session;
+    @Autowired
+    private HttpSession session;
+
+    @Autowired
+    private EncryptionUtils ecp;
+	
 	
 	@RequestMapping(value = "/welcome")
 	public String welcome() {
