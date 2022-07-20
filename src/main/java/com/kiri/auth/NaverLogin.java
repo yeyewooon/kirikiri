@@ -20,8 +20,8 @@ public class NaverLogin {
     //client_id: 애플리케이션 등록 후 발급받은 클라이언트 아이디
     //response_type: 인증 과정에 대한 구분값. code로 값이 고정돼 있습니다.
     //redirect_uri: 네이버 로그인 인증의 결과를 전달받을 콜백 URL(URL 인코딩). 애플리케이션을 등록할 때 Callback URL에 설정한 정보입니다.
-    private final static String CLIENT_ID = "JGrWhif19UZuK2reaDTs";
-    private final static String CLIENT_SECRET = "BYZrSRGyuQ";
+    private final static String CLIENT_ID = "";
+    private final static String CLIENT_SECRET = "";
     private final static String REDIRECT_URI = "http://localhost:8090/login/naverCallback";
     private final static String SESSION_STATE = "oauth_state";
     
