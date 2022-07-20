@@ -13,6 +13,8 @@
 <script src="https://kit.fontawesome.com/241134516c.js" crossorigin="anonymous"></script>
 <!-- Bootstrap icons-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+<!-- sweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style>
 /* 눈누 폰트 */
 @font-face {
@@ -349,12 +351,12 @@ p{
 label{
     margin: 5px;
 }
-button{
-    margin: 30px;
-    margin-bottom: 70px;
-    width: 14%;
-    height: 30%;
-}
+/* button{ */
+/*     margin: 30px; */
+/*     margin-bottom: 70px; */
+/*     width: 14%; */
+/*     height: 30%; */
+/* } */
 
 span{
     color: white;
@@ -419,11 +421,12 @@ footer.footer {
    	   
    	  		 let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;    
       		 if($("#email-domain").val() === "1"){
-      			 alert("도메인을 선택 혹은 입력해주세요.");
+      			 sweetAlertFail("도메인을 선택 혹은 입력해주세요.");
       			 return;
       		
       		 }else if(!emailRegex.test($("#email-domain").val())){
-       	 		 alert("올바르지 않은 이메일 형식입니다.");
+       	 		sweetAlertFail("올바르지 않은 이메일 형식입니다.");
+       	 		 
 	       	 	 return;
 	       	 	 
 	      	 }else{
@@ -437,32 +440,48 @@ footer.footer {
 	        		, dataType : "text"
 	        		, success : function(result){
 	        			if(result === "impossibility"){
-	        				alert("사용 중인 이메일입니다.");
+	        				sweetAlertFail("사용 중인 이메일입니다.");
 	        				$("#eamail-id").focus();
 	        				
 	        			}else if(result === "possibility"){
-	        				let answer = confirm("사용 가능한 이메일입니다. 해당 이메일로 인증하시겠습니까?");
 	        				
-	        				if(answer){
-	        					alert('인증번호가 전송되었습니다.');
-	        					$("#emailCheckBox").show();
-	        					
-	        					$.ajax({
-	        						url : "/signup/emailAuth"
-	        						, type : "post"
-	        						, data : {user_email : user_email }
-	        						, success : function (data) {
-	        							code = data;
-	        							$("#authNum").focus();
-	        							
-	        						}, error : function(e){
-	        							console.log(e);
-	        						}			
+	        				Swal.fire({
+	        					  title: '사용 가능한 이메일입니다.',
+	        					  text: "해당 이메일로 인증하시겠습니까?",
+	        					  icon: 'question',
+	        					  showCancelButton: true,
+	        					  confirmButtonColor: '#3085d6',
+	        					  cancelButtonColor: '#d33',
+	        					  confirmButtonText: '인증 하기'
+	        					}).then((result) => {
+	        					  if (result.isConfirmed) {
+	        						  $("#emailCheckBox").show();
+	        						  Swal.fire({
+	        							  position: 'left-end',
+	        							  icon: 'success',
+	        							  title: '인증번호가 전송되었습니다.',
+	        							  showConfirmButton: false,
+	        							  timer: 1500
+	        							});
+	        						  $.ajax({
+	  	        						url : "/signup/emailAuth"
+	  	        						, type : "post"
+	  	        						, data : {user_email : user_email }
+	  	        						, success : function (data) {
+	  	        							code = data;
+	  	        							$("#authNum").focus();
+	  	        							
+	  	        						}, error : function(e){
+	  	        							console.log(e);
+	  	        						}			
+	  	        					});
+	        						  
+	        					  };
+	        					  
 	        					});
 	        					
 	        				}else{
 	        					return;
-	        				}
 	        			}
 	        	
 	        		}, error : function(e){
@@ -475,7 +494,13 @@ footer.footer {
 		
 		$("#certificationBtn").click(function(){
 			if($("#authNum").val() === code){
-				alert("인증에 성공하였습니다!");
+				Swal.fire({
+					  position: 'left-end',
+					  icon: 'success',
+					  title: '인증에 성공하였습니다!',
+					  showConfirmButton: false,
+					  timer: 1500
+					});
 				$("#email-id").attr('readonly',true);
 				$("#email-domain").attr('readonly',true);
 				$('#email-domain-select').attr('disabled',true);
@@ -483,7 +508,7 @@ footer.footer {
 				return;
 				
 			}else{
-				alert("인증 번호가 다릅니다. 다시 입력해주세요.");
+				sweetAlertFail("인증 번호가 다릅니다. 다시 입력해주세요.");
 				$("#authNum").focus();
 				return;
 			}
@@ -512,7 +537,7 @@ footer.footer {
   	  		 let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;    
      
   	  		 if(!nicknameRegex.test($("#user_nickname").val())){
-      	 		 alert("올바르지 않은 닉네임 형식입니다.");
+      	 		sweetAlertFail("올바르지 않은 닉네임 형식입니다.");
       	 		 $("#nicknameCheck").focus();
 	       	 	 return;
 	       	 	 
@@ -527,12 +552,12 @@ footer.footer {
 	        		, success : function(result){
 	        			console.log(result);
 	        			if(result === "impossibility"){
-	        				alert("사용 중인 닉네임입니다.");
+	        				sweetAlertFail("사용 중인 닉네임입니다.");
 	        				$("#user_nickname").focus();
 	        				invalidNickname();
 	        				
 	        			}else if(result === "possibility"){
-	        				alert("사용 가능한 닉네임입니다.");
+	        				sweetAlertSuccess("사용 가능한 닉네임입니다.");
 	        				nicknameConfirm = "confirm";
 	        				validNickname();
 	        			}
@@ -590,7 +615,7 @@ footer.footer {
     	   let phone = $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
    
 	  		 if(!phoneRegex.test(phone)){
-    	 		 alert("올바르지 않은 전화번호 형식입니다.");
+    	 		sweetAlertFail("올바르지 않은 전화번호 형식입니다.");
 	       	 	 return;
 	       	 	 
 	      	 }else{
@@ -603,10 +628,10 @@ footer.footer {
 	        		, success : function(result){
 	        			console.log(result);
 	        			if(result === "impossibility"){
-	        				alert("사용 중인 전화번호입니다.");
+	        				sweetAlertFail("사용 중인 전화번호입니다.");
 	        				
 	        			}else if(result === "possibility"){
-	        				alert("사용 가능한 전화번호 입니다.");
+	        				sweetAlertSuccess("사용 가능한 전화번호 입니다.");
 	        				$('#phone1').attr('disabled',true);
 	        				$("#phone2").attr('readonly',true);
 	        				$("#phone3").attr('readonly',true);
@@ -633,53 +658,53 @@ footer.footer {
 		   let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;   
 	       	 	 
            if(!nameRegex.test($("#user_name").val())){
-        	   alert("올바르지 않은 이름입니다.");
+        	   sweetAlertFail("올바르지 않은 이름입니다.");
         	   $("#user_name").focus();
         	   return;   
            
            }else if(!emailRegex.test($("#email-domain").val())){
-      	 	   alert("올바르지 않은 이메일 형식입니다.");
+      	 	   sweetAlertFail("올바르지 않은 이메일 형식입니다.");
       	 	   $("#email-domain").focus();
  	       	   return;   
  	       	auth = comfirm;
            }else if(auth !== "comfirm"){
-      	 	   alert("이메일 인증을 완료해주세요.");
+      	 	   sweetAlertFail("이메일 인증을 완료해주세요.");
       	 	   $("#email_id").focus();
  	       	   return;   
  	       	
            }else if($("#user_pw").val() === "" || $("#pwCheck").val() === ""){
-        	   alert("비밀번호를 입력해주세요.");
+        	   sweetAlertFail("비밀번호를 입력해주세요.");
            	   return;
            	   
            }else if($("#email-id").val() === $("#user_pw").val()){
-    		   alert("아이디와 비밀번호를 다르게 설정해주세요.");
+    		   sweetAlertFail("아이디와 비밀번호를 다르게 설정해주세요.");
     		   return;
         	   
            }else if($("#user_pw").val() != $("#pwCheck").val()){
-        	   alert("비밀번호가 다릅니다.");
+        	   sweetAlertFail("비밀번호가 다릅니다.");
         	   $("#pwCheck").focus();
         	   return;
         	   
            }else if(nicknameConfirm !== "confirm"){
-        	   alert("닉네임 중복확인을 해주세요.");
+        	   sweetAlertFail("닉네임 중복확인을 해주세요.");
         	   $("#user_nickname").focus();
         	   return;
         	   
            }else if($("#month").val() + $("#day").val() === "0230" || $("#month").val() + $("#day").val() === "0231"){
-        	   alert("생일을 정확하게 입력해주세요.");
+        	   sweetAlertFail("생일을 정확하게 입력해주세요.");
         	   $("#day").focus();
         	   return;
         	   
            }else if(!bdRegex.test(bd)){
-        	   alert("생일을 정확하게 입력해주세요.");
+        	   sweetAlertFail("생일을 정확하게 입력해주세요.");
         	   return;
         	   
            }else if(phoneConfirm !== "confirm"){
-        	   alert("핸드폰 중복확인을 해주세요.");
+        	   sweetAlertFail("핸드폰 중복확인을 해주세요.");
         	   return;
         	   
            }else if(!$('input:radio[name="user_gender"]').is(":checked")){
-        	   alert("성별을 선택해주세요.");
+        	   sweetAlertFail("성별을 선택해주세요.");
         	   return;
         	   
            }else{
@@ -721,7 +746,7 @@ footer.footer {
     	   let hobbyCnt = $('input:checkbox[name="hobby"]:checked').length; 
     	  
     	   if(hobbyCnt>3){
-    	    alert('취미는 최대 3개까지 선택이 가능합니다.');
+    	    sweetAlertFail('취미는 최대 3개까지 선택이 가능합니다.');
     	    $(this).prop('checked', false);
     	   }
     	});
@@ -730,7 +755,7 @@ footer.footer {
     	   let areaCnt = $('input:checkbox[name="area"]:checked').length;  
     	  
     	   if(areaCnt>3){
-    	    alert('관심지역은 최대 3개까지 선택이 가능합니다.');
+    		sweetAlertFail('관심지역은 최대 3개까지 선택이 가능합니다.');
     	    $(this).prop('checked', false);
     	   }
     	});
@@ -742,15 +767,15 @@ footer.footer {
 	   
 	   $("#completeBtn").click(function(){
 		  if(!$('input:radio[name="user_job"]').is(':checked')){
-		   	  alert("직업을 선택해주세요.");
+			  sweetAlertFail("직업을 선택해주세요.");
 		   	  return;
 			  
 	      }else if($('input:checkbox[name="hobby"]:checked').length == 0){
-		      alert("취미는 적어도 1개는 선택해주세요.");
+	    	  sweetAlertFail("취미는 적어도 1개는 선택해주세요.");
 		      return;	
 				
 		  }else if($('input:checkbox[name="area"]:checked').length == 0){
-			  alert("관심 지역은 적어도 1개는 선택해주세요.");
+			  sweetAlertFail("관심 지역은 적어도 1개는 선택해주세요.");
 			  return;
 		  }
 		  $("#user_bd").val($("#year").val() + $("#month").val() + $("#day").val());
@@ -854,7 +879,25 @@ function checkFile(obj) {
 		 answer = confirm("BMP 파일은 웹상에서 사용하기엔 적절한 이미지 형식이 아닙니다. /n 사용하시겠습니까?");
 		 if(!answer)return false;
 	 }
-	}
+}
+
+function sweetAlertFail(content){
+	Swal.fire({
+		 icon: 'error',
+		 title: 'Oops...',
+		 text: content,
+		});  	
+};
+
+function sweetAlertSuccess(content){
+	Swal.fire({
+		  position: 'left-end',
+		  icon: 'success',
+		  title: content,
+		  showConfirmButton: false,
+		  timer: 1500
+		});
+};
 
 </script>
 <body>
@@ -1023,14 +1066,14 @@ function checkFile(obj) {
 	                <select name="email-domain-select" id="email-domain-select" class="form-control">
 	                    <option value="1" selected>선택해주세요</option>
 	                    <option value='naver.com'>naver.com</option>
-	                    <option value='hanmail.net'>hanmail.net</option>
+	                    <option value='gmail.com'>gmail.com</option>
 	                    <option value='nate.com'>nate.com</option>
+	                    <option value='hanmail.net'>hanmail.net</option>
 	                    <option value='yahoo.co.kr'>yahoo.co.kr</option>
 	                    <option value='hotmail.com'>hotmail.com</option>
 	                    <option value='empal.com'>empal.com</option>
 	                    <option value='paran.com'>paran.com</option>
 	                    <option value='lycos.co.kr'>lycos.co.kr</option>
-	                    <option value='gmail.com'>gmail.com</option>
 	                    <option value='99'>직접입력</option>
 	                </select>
                 </div>
@@ -1312,54 +1355,62 @@ function checkFile(obj) {
 </div>
 </form>
 
-<!-- Footer-->
-<footer class="footer">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 footer-imgBox">
-                <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-            </div>
-            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-                <ul class="list-inline mb-2">
-                    <li class="list-inline-item"><a href="#!">공지사항</a></li>
-		<li class="list-inline-item">⋅</li>
-		<c:choose>
-			<c:when test="${not empty loginSession}">
-				<li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
+<footer class="footer mt-5">
+	<div class="row">
+		<div class="col-lg-3 footer-imgBox">
+			<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+		</div>
+		<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+			<ul class="list-inline mb-2">
+				<li class="list-inline-item"><a href="#!">공지사항</a></li>
 				<li class="list-inline-item">⋅</li>
-				<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-			</c:when>
-			<c:otherwise>
-				<li class="list-inline-item"><a href="member/toSignup">회원가입</a></li>
+				<c:choose>
+					<c:when test="${not empty loginSession}">
+						<li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+					</c:otherwise>
+				</c:choose>
 				<li class="list-inline-item">⋅</li>
-				<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-			</c:otherwise>
-		</c:choose>
-		<li class="list-inline-item">⋅</li>
-		<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a></li>
-		<li class="list-inline-item">⋅</li>
-		<li class="list-inline-item"><a href="#!"
-			style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-                </ul>
-                <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-                    개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-                <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-                    57 이레빌딩</p>
-                <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-                    2022. All Rights Reserved.</p>
-            </div>
-            <div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-                <ul class="list-inline mb-0">
-                    <li class="list-inline-item me-4"><a href="https://ko-kr.facebook.com"><i
-                            class="bi-facebook fs-3"></i></a></li>
-                    <li class="list-inline-item me-4"><a href="https://twitter.com/?lang=ko"><i
-                            class="bi-twitter fs-3"></i></a></li>
-                    <li class="list-inline-item"><a href="https://www.instagram.com/"><i
-                            class="bi-instagram fs-3"></i></a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+				<li class="list-inline-item">
+					<c:choose>
+						<c:when test="${not empty loginSession}">
+							<a href="/group/toCreateGroup">모임 만들기</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/login/toLogin">모임 만들기</a>
+						</c:otherwise>
+					</c:choose>
+				</li>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item"><a href="privacy"
+					style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+			</ul>
+			<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+				개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+			<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+				57 이레빌딩</p>
+			<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+				2022. All Rights Reserved.</p>
+		</div>
+		<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+			<ul class="list-inline mb-0">
+				<li class="list-inline-item me-4"><a
+					href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+				<li class="list-inline-item me-4"><a
+					href="https://twitter.com/?lang=ko"><i
+						class="bi-twitter fs-3"></i></a></li>
+				<li class="list-inline-item"><a
+					href="https://www.instagram.com/"><i
+						class="bi-instagram fs-3"></i></a></li>
+			</ul>
+		</div>
+	</div>
 </footer>
 </body>
 </html>

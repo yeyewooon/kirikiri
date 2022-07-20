@@ -30,6 +30,7 @@
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <title>끼리끼리</title>
 <style>
 * {
@@ -778,6 +779,7 @@ footer.footer {
       countDownTimer("sample02", "04/01/2024 00:00 AM"); // 2024년 4월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용한다.
       countDownTimer("sample03", "04/01/2024"); // 2024년 4월 1일까지
       countDownTimer("sample04", "04/01/2019"); // 2024년 4월 1일까지
+      
    </script>
 </body>
 </html>

@@ -278,7 +278,11 @@ input {
 .socialInfo{
     text-align: left;
 }
-	
+
+#user_name{
+	display: none;
+}
+
 #nicknameCheck, #idCheck, #certificationBtn, #checkPhone {
 	width: 80%;
 	margin: 0px;
@@ -449,6 +453,17 @@ footer.footer {
        
        });
       
+       $("#user_name").change(function(){
+		   let nameRegex = /^[가-힣]+$/;
+		   
+		   if(!nameRegex.test($("#user_name").val())){
+			   invalidName();
+			   return;
+		   }else{
+			   $("#name-col").empty();
+		   }
+
+	   });
 		
 	   $("#user_nickname").change(function(){
 	   	nicknameConfirm = "deny";
@@ -537,7 +552,7 @@ footer.footer {
        
        
        $("#nextBtn").click(function(){ //다음으로
-       	   
+    	   let nameRegex = /^[가-힣]+$/;
       	   let bdRegex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 		   let bd = $("#year").val() + $("#month").val() + $("#day").val();
 		   
@@ -545,30 +560,37 @@ footer.footer {
 		   let phone =  $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val(); 
 		 
 		   if($("#user_name").val() =="" || $("#user_email").val() == ""){
-			   alert("오류가 발생했습니다. 다시 로그인 해주세요");
+			   sweetAlertFail("오류가 발생했습니다. 다시 로그인 해주세요");
 			   location.href = "/login/toLogin";
 			   return;
 			   
+		   }else if(!nameRegex.test($("#user_name").val())){
+			   sweetAlertFail("이름이 올바르지 않습니다. 새로 작성해주세요.");
+			   invalidName();
+			   $("#user_name_p").hide();
+			   $("#user_name").show();
+			   return;
+			   
 		   }else if(nicknameConfirm !== "confirm"){
-        	   alert("닉네임 중복확인을 해주세요.");
+        	   sweetAlertFail("닉네임 중복확인을 해주세요.");
         	   $("#user_nickname").focus();
         	   return;
         	   
            }else if($("#month").val() + $("#day").val() === "0230" || $("#month").val() + $("#day").val() === "0231"){
-        	   alert("생일을 정확하게 입력해주세요.");
+        	   sweetAlertFail("생일을 정확하게 입력해주세요.");
         	   $("#day").focus();
         	   return;
         	   
            }else if(!bdRegex.test(bd)){
-        	   alert("생일을 정확하게 입력해주세요.");
+        	   sweetAlertFail("생일을 정확하게 입력해주세요.");
         	   return;
         	   
            }else if(phoneConfirm !== "confirm"){
-        	   alert("핸드폰 중복확인을 해주세요.");
+        	   sweetAlertFail("핸드폰 중복확인을 해주세요.");
         	   return;
         	   
            }else if(!$('input:radio[name="user_gender"]').is(":checked")){
-        	   alert("성별을 선택해주세요.");
+        	   sweetAlertFail("성별을 선택해주세요.");
         	   return;
         	   
            }else{
@@ -617,33 +639,33 @@ footer.footer {
     	   let hobbyCnt = $('input:checkbox[name="hobby"]:checked').length; 
     	  
     	   if(hobbyCnt>3){
-    	    alert('취미는 최대 3개까지 선택이 가능합니다.');
+    	    sweetAlertFail('취미는 최대 3개까지 선택이 가능합니다.');
     	    $(this).prop('checked', false);
     	   }
     	});
        
-	   $('input:checkbox[name="area"]').click(function(){
+       $('input:checkbox[name="area"]').click(function(){
     	   let areaCnt = $('input:checkbox[name="area"]:checked').length;  
     	  
     	   if(areaCnt>3){
-    	    alert('관심지역은 최대 3개까지 선택이 가능합니다.');
+    		sweetAlertFail('관심지역은 최대 3개까지 선택이 가능합니다.');
     	    $(this).prop('checked', false);
     	   }
     	});
        
 	   $("#completeBtn").click(function(){
-		  if(!$('input:radio[name="user_job"]').is(':checked')){
-		   	  alert("직업을 선택해주세요.");
-		   	  return;
-			  
-	      }else if($('input:checkbox[name="hobby"]:checked').length == 0){
-		      alert("취미는 적어도 1개는 선택해주세요.");
-		      return;
+		   if(!$('input:radio[name="user_job"]').is(':checked')){
+				  sweetAlertFail("직업을 선택해주세요.");
+			   	  return;
+				  
+	       }else if($('input:checkbox[name="hobby"]:checked').length == 0){
+	    	  sweetAlertFail("취미는 적어도 1개는 선택해주세요.");
+		      return;	
 				
-		  }else if($('input:checkbox[name="area"]:checked').length == 0){
-			  alert("관심 지역은 적어도 1개는 선택해주세요.");
+		   }else if($('input:checkbox[name="area"]:checked').length == 0){
+			  sweetAlertFail("관심 지역은 적어도 1개는 선택해주세요.");
 			  return;
-		  }
+		   }
 		  $("#user_bd").val($("#year").val() + $("#month").val() + $("#day").val());
 		  $("#user_phone").val($("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val());
 		  $("#user_pw").val("${socialUser.user_pw}");
@@ -651,6 +673,7 @@ footer.footer {
 		  $("#signupForm").submit();
 		  
 	   });
+	   
 
    });
 function back(){ //뒤로가기
@@ -676,6 +699,13 @@ function next(){ //다음페이지
     $("#userInfoBox-profile").show();
     $("#singupBackBtn").show();
     $("#completeBtn").show();
+}
+
+function invalidName(){
+	$("#name-col").empty();
+	let span = $('<span>').attr('id', 'name-check-span').css("color","red").html("올바르지 않은 이름입니다.");
+	$("#name-col").append(span);
+	$("#user_name").focus();
 }
 
 function invalidNickname(){
@@ -713,7 +743,23 @@ function checkFile(obj) {
 		 if(!answer)return false;
 	 }
 	}
+function sweetAlertFail(content){
+	Swal.fire({
+		 icon: 'error',
+		 title: 'Oops...',
+		 text: content,
+		});  	
+};
 
+function sweetAlertSuccess(content){
+	Swal.fire({
+		  position: 'left-end',
+		  icon: 'success',
+		  title: content,
+		  showConfirmButton: false,
+		  timer: 1500
+		});
+};
 </script>
 <body>
 	<!--네비바-->
@@ -870,8 +916,8 @@ function checkFile(obj) {
 					<p>이름</p>
 				</div>
 				<div class="col-md-7">
-					<p class="socialInfo">${socialUser.user_name}</p>
-					<input type="hidden" id="user_name" name="user_name" value="${socialUser.user_name}" class="form-control" readonly="readonly">
+					<p class="socialInfo" id="user_name_p">${socialUser.user_name}</p>
+					<input type="text" id="user_name" name="user_name" value="${socialUser.user_name}" class="form-control" readonly="readonly">
 					<input type="hidden" id="user_pw" name="user_pw" value="" class="form-control" readonly="readonly">
 					<input type="hidden" id="type" name="type" value="" class="form-control" readonly="readonly">
 				</div>
@@ -1102,53 +1148,60 @@ function checkFile(obj) {
 </form>			
 
 <!-- Footer-->
-<footer class="footer">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-3 footer-imgBox">
-				<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-			</div>
-			<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-				<ul class="list-inline mb-2">
-					<li class="list-inline-item"><a href="#!">공지사항</a></li>
-					<li class="list-inline-item">⋅</li>
+<footer class="footer mt-5">
+	<div class="row">
+		<div class="col-lg-3 footer-imgBox">
+			<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+		</div>
+		<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+			<ul class="list-inline mb-2">
+				<li class="list-inline-item"><a href="#!">공지사항</a></li>
+				<li class="list-inline-item">⋅</li>
+				<c:choose>
+					<c:when test="${not empty loginSession}">
+						<li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+					</c:otherwise>
+				</c:choose>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item">
 					<c:choose>
 						<c:when test="${not empty loginSession}">
-							<li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+							<a href="/group/toCreateGroup">모임 만들기</a>
 						</c:when>
 						<c:otherwise>
-							<li class="list-inline-item"><a href="member/toSignup">회원가입</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+							<a href="/login/toLogin">모임 만들기</a>
 						</c:otherwise>
 					</c:choose>
-					<li class="list-inline-item">⋅</li>
-					<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a></li>
-					<li class="list-inline-item">⋅</li>
-					<li class="list-inline-item"><a href="#!"
-						style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-				</ul>
-				<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-					개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-				<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-					57 이레빌딩</p>
-				<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-					2022. All Rights Reserved.</p>
-			</div>
-			<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-				<ul class="list-inline mb-0">
-					<li class="list-inline-item me-4"><a
-						href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-					<li class="list-inline-item me-4"><a
-						href="https://twitter.com/?lang=ko"><i
-							class="bi-twitter fs-3"></i></a></li>
-					<li class="list-inline-item"><a
-						href="https://www.instagram.com/"><i
-							class="bi-instagram fs-3"></i></a></li>
-				</ul>
-			</div>
+				</li>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item"><a href="privacy"
+					style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+			</ul>
+			<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+				개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+			<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+				57 이레빌딩</p>
+			<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+				2022. All Rights Reserved.</p>
+		</div>
+		<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+			<ul class="list-inline mb-0">
+				<li class="list-inline-item me-4"><a
+					href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+				<li class="list-inline-item me-4"><a
+					href="https://twitter.com/?lang=ko"><i
+						class="bi-twitter fs-3"></i></a></li>
+				<li class="list-inline-item"><a
+					href="https://www.instagram.com/"><i
+						class="bi-instagram fs-3"></i></a></li>
+			</ul>
 		</div>
 	</div>
 </footer>

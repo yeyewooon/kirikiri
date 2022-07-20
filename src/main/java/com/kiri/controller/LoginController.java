@@ -53,7 +53,7 @@ public class LoginController {
 
 	@ResponseBody
 	@RequestMapping(value = "/general") 	
-	public String general(String user_email, String user_pw) throws Exception { // 일반로그인 feat.조용진
+	public String general(String user_email, String user_pw, String loginType) throws Exception { // 일반로그인 feat.조용진
 		String Encryption_pw = ecp.getSHA512(user_pw); 
 		Login_TypeDTO type = service.loginType(user_email);
 		
@@ -162,7 +162,6 @@ public class LoginController {
         	 
         	 if(type.getType().equals("naver")||type.getunique_id().equals(ecpNaverId)) {
         		 MemberDTO dto = service.socialLogin(naverEmail);
-//        		 dto.setUser_pw(null); soclai로 담김
         		 session.setAttribute("loginSession", dto);
         		 return "redirect:/";
         		 
