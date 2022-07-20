@@ -20,8 +20,8 @@ public class MemberDAO {
 	}
 	
 	// 사진 수정
-	public void modifyProfilePic(MemberDTO dto) {
-		session.update("myPageMapper.modifyProfilePic",dto);
+	public void modifyProfilePic(Map<String,String> map) {
+		session.update("myPageMapper.modifyProfilePic",map);
 	}
 	
 	// 개인정보 수정
@@ -37,6 +37,11 @@ public class MemberDAO {
 	// phone 중복확인
 	public int phoneCheck(String user_phone)throws Exception{
 		return session.selectOne("myPageMapper.phoneCheck",user_phone);
+	}
+	
+	// pw 중복확인
+	public int pwCheck(String user_pw)throws Exception{
+		return session.selectOne("myPageMapper.pwCheck",user_pw);
 	}
 	
 	// 회원탈퇴

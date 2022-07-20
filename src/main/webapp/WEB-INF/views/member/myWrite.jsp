@@ -503,6 +503,7 @@ hr {
 									console.log("dadada : ",data);
 									if(data =='success'){
 										clickedSpan.parent().parent()[0].remove();
+										location.reload();
 									}
 								},
 								error: function(e){
@@ -542,6 +543,7 @@ hr {
 									console.log("dadada : ",data);
 									if(data =='success'){
 										clickedSpan.parent().parent()[0].remove();
+										location.reload();
 									}
 								},
 								error: function(e){

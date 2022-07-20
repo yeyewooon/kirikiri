@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -575,7 +576,9 @@ footer.footer {
 					</div>
 					<div class="col-md-2"></div>
 				</div>
+				
 				<div class="row">
+				<c:choose></c:choose>
 					<div class="col-md-3">
 						<p>비밀번호</p>
 					</div>
@@ -589,6 +592,7 @@ footer.footer {
 							<li>번호를 바꾸시려면 중복확인은 필수 항목입니다.</li>
 						</ul>
 					</div>
+					<input type="text" id="check-pw" value="${memberdto.user_pw}">
 					<div class="col-2"></div>
 				</div>
 				<div class="row">
@@ -801,6 +805,8 @@ footer.footer {
 			let password = $("#password").val();
 			let passwordRegex = /^[a-z0-9!@#$]{8,20}$/;
 			let checkPhone = $(".checkPhone").val();
+			let checkPw = $("#check-pw").val();
+			user_phone = phone1 + phone2 + phone3;
 			console.log("adasdas : ",checkPhone)
 			
 			/* 빈 값 일때 */
@@ -829,6 +835,8 @@ footer.footer {
 				return;
 			}
 			console.log(checked.phone);
+			console.log("user_phone: ", user_phone);
+			console.log("checkPhone: ", checkPhone);
 			if(user_phone !== checkPhone && checked.phone == false){
 				formSweetAlert('중복확인을 해주세요.', $('#phone2'));
 				return;
@@ -836,8 +844,7 @@ footer.footer {
 			
 			/* 빈값의 비밀번호 */
 			if(password === ''){
-				formSweetAlert('비밀번호는 필수 입력항목입니다.', $('#password'));
-				return;
+				$('input[name=user_pw]').attr('value',checkPw);
 			}
 			
 			/* 비밀번호 Regex */

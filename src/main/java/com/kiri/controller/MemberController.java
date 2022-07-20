@@ -14,8 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.google.gson.Gson;
 import com.kiri.dto.BoardDTO;
 import com.kiri.dto.Group_BoardDTO;
@@ -23,6 +23,7 @@ import com.kiri.dto.HobbyDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.SiteDTO;
 import com.kiri.service.MemberService;
+import com.kiri.utills.EncryptionUtils;
 
 @RequestMapping("/mem")
 @Controller
@@ -33,6 +34,9 @@ public class MemberController {
 
 	@Autowired
 	private HttpSession session;
+	
+	@Autowired
+	private EncryptionUtils ecp;
 	
 	@RequestMapping(value = "/welcome")
 	public String welcome() {
@@ -89,9 +93,18 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/modifyProfilePic")
-	public String modifyProfilePic(MemberDTO dto) throws Exception { // 사진 수정
-		System.out.println(dto);
-		service.modifyProfilePic(dto);
+	public String modifyProfilePic(MultipartFile user_image) throws Exception { // 사진 수정
+		System.out.println("user_image : "+user_image);
+		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
+		
+		// 디렉토리 생성
+		if(!user_image.isEmpty()) { 
+			String realPath = session.getServletContext().getRealPath("profile");
+			String profile_image = service.uploadProfile(user_image, realPath);
+			((MemberDTO)session.getAttribute("loginSession")).setUser_image(profile_image);
+			System.out.println(realPath);
+			service.modifyProfilePic(user_email,profile_image);
+		}
 		return "redirect:myPage";
 	}
 
@@ -180,15 +193,15 @@ public class MemberController {
 		return result;
 	}
 	
-	/*
-	 * @RequestMapping(value="/pwCheck") // pw 중복확인
-	 * 
-	 * @ResponseBody public int pwCheck(String user_pw) throws Exception{
-	 * System.out.println("password : " + user_pw);
-	 * 
-	 * int result = service.phoneCheck(user_pw); System.out.println(result); return
-	 * result; }
-	 */
+	@RequestMapping(value="/pwCheck") // pw 중복확인
+	@ResponseBody
+	public int pwCheck(String user_pw) throws Exception{
+		System.out.println("password : " + user_pw);
+		String Encryption_pw = ecp.getSHA512(user_pw); 
+		
+		 int result = service.pwCheck(Encryption_pw);
+		 return result;
+	}
 	
 	
 
