@@ -272,15 +272,23 @@ footer.footer {
     	let authNum;
     	let loginType = "general"
     	
-    	$("input").on("keyup",function(key){         
+    	$("input").on("keyup",function(key){   
     		if(key.keyCode==13) {  
-    			          
-    			 login(general);      
-    		}    
+    			if($("#id").val() == "" || $("#pw").val() == ""){
+        			sweetAlertFail("아이디 혹은 비밀번호를 입력해주세요.");
+        			return;
+        		}else{
+        			login(loginType);     
+        		}
+    		}
     	});
     	
         $("#toLoginBtn").click(function(){
-        	login();
+        	if($("#id").val() == "" || $("#pw").val() == ""){
+    			sweetAlertFail("아이디 혹은 비밀번호를 입력해주세요.");
+    			return;
+    		}
+        	login(loginType);
         });
         
         $("#id").change(function(){
@@ -355,10 +363,10 @@ footer.footer {
             		, success : function(result){
             			console.log(result);
             			if(result === "exist"){
-            				sweetAlertSuccess("인증번호가 발송되었습니다. 해당 메일을 확인 후 인증번호를 입력해주세요.");
             				$(".find-box").hide();
             				$(".findPw-emailCheck-box").show();
             				$("#authNum").focus();
+            				sweetAlertSuccess("인증번호가 발송되었습니다. 해당 메일을 확인 후 인증번호를 입력해주세요.");
             				
             				$.ajax({
         						url : "/login/emailAuthFindPw"
@@ -401,11 +409,10 @@ footer.footer {
 					, data : {user_email :  $("#findPw_email").val() }
 					, success : function (data) {
 						if(data){
-							$("#findPw-emailCheck-btn").attr("disabled", true);
-							sweetAlertSuccess("메일로 임시 비밀번호를 발송했습니다. 확인 후 로그인해주세요.");
 							$("#staticBackdrop2").modal("hide");
 							loginType = "mypage";
 							madalClear();
+							sweetAlertSuccess("메일로 임시 비밀번호를 발송했습니다. 확인 후 로그인해주세요.");
 						}
 						
 					}, error : function(e){

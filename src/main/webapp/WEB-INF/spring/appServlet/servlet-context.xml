@@ -24,7 +24,7 @@
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-	
+	<resources mapping="/profile/*" location="/profile/"/>
 	<context:component-scan base-package="com.kiri.*" />
 	<context:component-scan base-package="com.group.*" />
 

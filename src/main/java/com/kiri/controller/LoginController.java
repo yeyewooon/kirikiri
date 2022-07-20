@@ -64,6 +64,7 @@ public class LoginController {
 			MemberDTO dto = service.login(user_email, Encryption_pw);
 			if(dto != null) { // 널이 아니라면 조회 성공
 				dto.setUser_pw(null);
+				session.setAttribute("loginType", type.getType());
 				session.setAttribute("loginSession", dto);
 				service.loginLogSuccess(user_email);
 				return "general";
@@ -128,6 +129,7 @@ public class LoginController {
 	@RequestMapping(value = "/toLogout")//logout페이지 요청 feat.조용진
 	public String logout() {
 		session.removeAttribute("loginSession");
+		session.removeAttribute("loginType");
 		return "redirect:/";
 	}
 	
@@ -162,6 +164,7 @@ public class LoginController {
         	 
         	 if(type.getType().equals("naver")||type.getunique_id().equals(ecpNaverId)) {
         		 MemberDTO dto = service.socialLogin(naverEmail);
+        		 session.setAttribute("loginType", type.getType());
         		 session.setAttribute("loginSession", dto);
         		 return "redirect:/";
         		 

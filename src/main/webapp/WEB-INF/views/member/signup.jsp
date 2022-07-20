@@ -365,27 +365,26 @@ span{
 
 /*풋터 영역*/
 .footerBox {
-    height: 0px;
+	height: 0px;
 }
 
 footer.footer {
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    background-color: white;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	background-color: white;
 }
-
 .footer a {
-    text-decoration: none;
-    color: black;
-    font-weight: 40px;
-    font-weight: bold;
+	text-decoration: none;
+	color: black;
+	font-weight: 40px;
+	font-weight: bold;
 }
-.footer-imgBox{
-    overflow: hidden;
+.footer-imgBox {
+	overflow: hidden;
 }
-.footer-imgBox > img{
-    width: 100%;
-    height: 100%;
+.footer-imgBox>img {
+	width: 100%;
+	height: 100%;
 }
 </style>
 </head>
