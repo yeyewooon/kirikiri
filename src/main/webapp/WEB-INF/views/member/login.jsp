@@ -430,6 +430,9 @@ footer.footer {
     				
     			}else if(result === "error"){
     				alert("소셜 로그인으로 가입되어 있는 아이디입니다.");
+    				
+    			}else if(result === "nonmem"){
+    				alert("가입이 되지 않은 아이디입니다.");
     			}
     			
     		}, error : function(e){

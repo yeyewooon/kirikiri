@@ -109,7 +109,8 @@ public class SignupContoller {
 			unique_id = "general";
 			
 		}else { //소셜로그인
-			dto.setUser_pw(dto.getUser_pw());
+			dto.setUser_pw("social");
+			unique_id = dto.getUser_pw();
 		}
 		
 		service.signup(dto);

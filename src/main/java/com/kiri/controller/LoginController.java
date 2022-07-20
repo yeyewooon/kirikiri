@@ -57,13 +57,17 @@ public class LoginController {
 		String Encryption_pw = ecp.getSHA512(user_pw); 
 		Login_TypeDTO type = service.loginType(user_email);
 		
-		if(type.getType().equals("general")) { //일반 로그인
+		if(type == null) { //미가입
+			return "nonmem";
+			
+		}else if(type.getType().equals("general")) { //일반 로그인
 			MemberDTO dto = service.login(user_email, Encryption_pw);
 			if(dto != null) { // 널이 아니라면 조회 성공
 				dto.setUser_pw(null);
 				session.setAttribute("loginSession", dto);
 				service.loginLogSuccess(user_email);
 				return "general";
+				
 			}else { // null 로그인 실패 
 				service.loginLogFailed(user_email);
 				return "loginFail";
@@ -84,6 +88,7 @@ public class LoginController {
 		
 		if(result != "nonmem") {
 			return result;
+			
 		}else {
 			return "nonmem";
 		}
@@ -96,6 +101,7 @@ public class LoginController {
 		
 		if(is_result) {
 			return "exist";
+			
 		}else {
 			return "empty";
 		}
@@ -145,31 +151,29 @@ public class LoginController {
         naver.setUser_email(naverEmail); //아이디
         naver.setUser_name(naverName); //이름
         String ecpNaverId = ecp.getSHA512(naverId);
+        
         naver.setUser_pw(ecpNaverId);
         naver.setUser_image(naverProfileImg); //프로필사진
         //네이버 고유id번호
         boolean is_singup = signupService.emailCheck(naverEmail); //가입이 되어있으면 false 반환
-        System.out.println("is_singup : " + is_singup);
         
         if(!is_singup) { //false 조회 된 것 true 조회 안된 것
         	 Login_TypeDTO type = service.loginType(naverEmail);
         	 
         	 if(type.getType().equals("naver")||type.getunique_id().equals(ecpNaverId)) {
         		 MemberDTO dto = service.socialLogin(naverEmail);
-        		 dto.setUser_pw(null);
+//        		 dto.setUser_pw(null); soclai로 담김
         		 session.setAttribute("loginSession", dto);
-        		 return "/";
+        		 return "redirect:/";
         		 
         	 }else if(type.getType().equals("general")||type.getunique_id().equals("general")) { //일반 회원 가입되어 있을 시 네이버로 연동 할지 선택하는 페이지로
         		 return "";
         	 }
         			 
         }else {// 가입 안되어있으면 회원가입으로 보내기
-        	 
         	 session.setAttribute("naverUser", naver);
              return "redirect:/login/socialSignup";
         }
-        
         return "redirect:/toError"; // 위에 조건에서 return 안될 시 에러페이지로
     }   
 	

@@ -115,6 +115,10 @@ body {
 	background-color: white;
 	vertical-align: middle;
 }
+#userInfoBox:nth-child(1,2){
+	text-align: left;
+}
+
 
 #userInfoBox>.row {
 	margin-top: 10px;
@@ -271,6 +275,10 @@ input {
 	margin-left: 15px;
 }
 
+.socialInfo{
+    text-align: left;
+}
+	
 #nicknameCheck, #idCheck, #certificationBtn, #checkPhone {
 	width: 80%;
 	margin: 0px;
@@ -862,7 +870,7 @@ function checkFile(obj) {
 					<p>이름</p>
 				</div>
 				<div class="col-md-7">
-					<p>${socialUser.user_name}</p>
+					<p class="socialInfo">${socialUser.user_name}</p>
 					<input type="hidden" id="user_name" name="user_name" value="${socialUser.user_name}" class="form-control" readonly="readonly">
 					<input type="hidden" id="user_pw" name="user_pw" value="" class="form-control" readonly="readonly">
 					<input type="hidden" id="type" name="type" value="" class="form-control" readonly="readonly">
@@ -879,7 +887,7 @@ function checkFile(obj) {
 					<p>이메일</p>
 				</div>
 				<div class="col-md-7">
-					<p>${socialUser.user_email}</p>
+					<p class="socialInfo">${socialUser.user_email}</p>
 					<input type="hidden" id="user_email" name="user_email" class="form-control" value="${socialUser.user_email}" readonly="readonly">
 				</div>
 				<div class="col-2"></div>
