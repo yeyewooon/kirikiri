@@ -343,6 +343,7 @@ footer.footer {
 			</nav>
 		</div>
 	</header>
+	
 	<!-- header jsp -->
 	<div class="container">
 		<div class="row header">
@@ -379,7 +380,7 @@ footer.footer {
 									id="profile_image">
 							</c:when>
 							<c:otherwise>
-								<img src="/resources/images/${memberdto.user_image}"
+								<img src="/profile/${memberdto.user_image}"
 									id="profile_image">
 							</c:otherwise>
 						</c:choose>

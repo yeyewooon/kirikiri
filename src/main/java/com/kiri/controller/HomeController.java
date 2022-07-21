@@ -37,6 +37,12 @@ public class HomeController {
 	public String toError() {
 		return "error";
 	}
+	
+	@RequestMapping(value = "/privacy")
+	public String privacy() {
+		return "privacy";
+	}
+	
 	@RequestMapping(value = "/toAdmin")
 	public String toAdmin() {
 		return "admin/adminMain";
