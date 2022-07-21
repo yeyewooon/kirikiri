@@ -50,7 +50,6 @@ public class LoginController {
 	    model.addAttribute("naverUrl",naverUrl);
 		return "/member/login";
 	}
-
 	@ResponseBody
 	@RequestMapping(value = "/general") 	
 	public String general(String user_email, String user_pw, String loginType) throws Exception { // 일반로그인 feat.조용진

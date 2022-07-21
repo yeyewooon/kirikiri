@@ -20,8 +20,10 @@ import com.kiri.dto.BoardDTO;
 import com.kiri.dto.Group_BoardDTO;
 import com.kiri.dto.HobbyDTO;
 import com.kiri.dto.MemberDTO;
+import com.kiri.dto.MessageDTO;
 import com.kiri.dto.SiteDTO;
 import com.kiri.service.MemberService;
+import com.kiri.service.MessageService;
 import com.kiri.utills.EncryptionUtils;
 
 @RequestMapping("/mem")
@@ -29,10 +31,10 @@ import com.kiri.utills.EncryptionUtils;
 public class MemberController {
 	@Autowired
     private MemberService service;
-
+	@Autowired
+	private HttpSession session;
     @Autowired
-    private HttpSession session;
-
+    private MessageService message_service;
     @Autowired
     private EncryptionUtils ecp;
 	
@@ -49,10 +51,11 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/myPage")
-	public String myPage(Model model) throws Exception { // myPage 로 이동
+	public String myPage(MessageDTO MessageDTO, Model model) throws Exception { // myPage 로 이동
 		System.out.println("myPage 이동");
 		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
-
+		String user_nickname = ((MemberDTO)session.getAttribute("loginSession")).getUser_nickname();
+		
 		MemberDTO selectMember = service.selectMember(user_email);
 		List<HobbyDTO> selectHobbyList = service.selectHobbyList(user_email);
 		List<SiteDTO> selectSiteList = service.selectSiteList(user_email);
@@ -78,6 +81,10 @@ public class MemberController {
 			String a = selectHobbyList.get(i).getHobby();
 			hobbyData.add(a);
 		}
+		
+		// 받은쪽지 보기
+		List<MessageDTO> rmsgList = message_service.selectReMessage(user_nickname);
+		model.addAttribute("rmsgList",rmsgList); 
 
 		model.addAttribute("date", date);
 		model.addAttribute("hobbyData", hobbyData);

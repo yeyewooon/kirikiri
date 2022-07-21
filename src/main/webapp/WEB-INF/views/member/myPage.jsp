@@ -28,7 +28,6 @@
 	box-sizing: border-box;
 	font-family: "OTWelcomeRA";
 }
-
 #mainText {
 	font-family: "양진체";
 }
@@ -48,46 +47,38 @@
 		display: none;
 	}
 }
-
 /* header */
 #navLogo {
 	width: 150px;
 	height: 100px;
 }
-
 #logoImgs {
 	width: 100%;
 	height: 100%;
 }
-
 @media ( min-width : 768px) {
 	#navibar {
 		display: none;
 	}
 }
-
 /* header 반응형 끝 */
 #logoImg {
 	width: 50%;
 }
-
 .header {
 	background-color: #d2e3ec;
 	justify-content: end;
 	width: 100%;
 }
-
 h2 {
 	margin-top: 100px;
 }
-
 .line {
 	border: 2px solid rgb(57, 88, 122);
 	margin-top: 10px;
 	width: 180px;
 	box-shadow: 3px 2px 2px rgb(25, 104, 184);
 }
-
 /* 프로필사진 영역 */
 #profilePic {
 	border: 0.1rem solid black;
@@ -97,35 +88,28 @@ h2 {
 	border-radius: 50%;
 	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
 }
-
 #profile_image {
 	width: 100%;
 	height: 100%;
 	border-radius: 50%;
 }
-
 #profilePic:hover {
 	transition: 0.8s ease-in;
 	transform: scale(1.1);
 }
-
 #profilePic:not(:hover) {
 	transition: 0.8s ease-out;
 }
-
 .profileName {
 	text-align: center;
 }
-
 .statusMessage {
 	text-align: center;
 }
-
 .profileBtn {
 	color: black;
 	border-color: black;
 }
-
 hr {
 	margin: 50px;
 }
@@ -134,7 +118,6 @@ hr {
 	justify-content: end;
 	width: 100%;
 }
-
 .bodyBox {
 	border: 1px solid black;
 	margin: auto;
@@ -143,21 +126,17 @@ hr {
 	border-radius: 10%;
 	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
 }
-
 .bodyIcon {
 	font-size: 40px;
 	margin-bottom: 15px;
 }
-
 h4 {
 	margin-top: 15px;
 	text-align: center;
 }
-
 #line {
 	margin: 20px 50px 10px 50px;
 }
-
 /* modal 창 영역 */
 .modal-content{
 	width:580px;
@@ -181,57 +160,47 @@ h4 {
 	font-size: 1.1rem;
 	margin: 0px 0px 10px 50px;
 }
-
 .myMsg {
 	justify-content: center;
 	align-items: center;
 	margin-top: 50px;
 }
-
 .fa-crown {
 	margin-left: 10px;
 	color: gold;
 }
-
 .myWrite {
 	display: flex;
 	margin-right: 10px;
 	justify-content: end;
 }
-
 .wishDelete,.towritePage,.checkMyMsg{
 	cursor: pointer;
 }
-
 /* footer css 부분 */
 .footer {
 	width: 100%;
 	height: 200px;
 }
-
 /*풋터 영역*/
 .footerBox {
 	height: 0px;
 }
-
 footer.footer {
 	padding-top: 2rem;
 	padding-bottom: 2rem;
 	background-color: #ffffff;
 }
-
 .footer a {
 	text-decoration: none;
 	color: black;
 	font-weight: 40px;
 	font-weight: bold;
 }
-
 .footer-imgBox>img {
 	width: 100%;
 	height: 100%;
 }
-
 /* 눈누 폰트 */
 @font-face {
 	font-family: "OTWelcomeRA";
@@ -241,7 +210,6 @@ footer.footer {
 	font-weight: normal;
 	font-style: normal;
 }
-
 @font-face {
 	font-family: "양진체";
 	src:
@@ -249,6 +217,24 @@ footer.footer {
 		format("woff");
 	font-weight: normal;
 	font-style: normal;
+}
+
+/*쪽지함*/
+#msgIcon {
+	cursor: pointer;
+}
+
+.msgReceive, .msgSend {
+	cursor: pointer;
+	border: 1px solid black;
+	border-radius: 5px;
+	padding: 4px;
+}
+.table-content{
+	text-align : center;
+}
+.msgModal-footer{
+	border-top: 0px;
 }
 </style>
 <body>
@@ -577,14 +563,12 @@ footer.footer {
 										<script>
 											var maxCount = 3;
 											var count = 0;
-
 											function CountChecked1(field) {
 												if (field.checked) {
 													count += 1;
 												} else {
 													count -= 1;
 												}
-
 												if (count > maxCount) {
 													alert("최대 3개까지만 선택가능합니다!");
 													field.checked = false;
@@ -731,21 +715,18 @@ footer.footer {
 										<script>
 											var maxCount = 3;
 											var count = 0;
-
 											function CountChecked(field) {
 												if (field.checked) {
 													count += 1;
 												} else {
 													count -= 1;
 												}
-
 												if (count > maxCount) {
 													alert("최대 3개까지만 선택가능합니다!");
 													field.checked = false;
 													count -= 1;
 												}
 											}
-
 											/* 관심사 수정 버튼 눌렀을 때 (data check된 상태로 뿌려주기)
 											$("#hobbyModify").on("click",function() {
 												
@@ -775,7 +756,6 @@ footer.footer {
 												 	}
 												}
 											}); */
-
 											// 저장 버튼 눌렀을 때
 											$("#saveBtn").on("click",function() {
 												let checkAccess = $('input[name=hobby]:checked').val();
@@ -936,10 +916,55 @@ footer.footer {
 							</h4>
 							<hr id="line" />
 							<div class="d-flex myMsg">
-								<span class="checkMyMsg">내 쪽지 관리하기
+								<span class="checkMyMsg" data-bs-toggle="modal" data-bs-target="#staticBackdrop">내 쪽지 관리하기
 								<i class="fa-solid fa-arrow-right"></i></span>
 							</div>
 						</div>
+					</div>
+			
+					<!-- Modal -->
+					<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <span  id="staticBackdropLabel" style="font-size: 16px;"><i class="fa-solid fa-envelope-open"></i></span><span class="ms-2">쪽지함보기</span>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+			        	<div class="row mt-2">
+					    	<div class="col-md-12 d-flex">
+					        	<div class="msgReceive d-flex justify-content-center ms-2"><span class="receiveBtn"><i class="fa-solid fa-check"></i></span><span class="ms-1">받은 쪽지함</span></div>
+					        	<div class="msgSend d-flex justify-content-center" style="margin-left: 10px;"><span class="sendBtn d-none"><i class="fa-solid fa-check"></i></span><span class="ms-1">보낸 쪽지함</span></div>
+					       </div>
+					     </div>
+					      <div class="modal-body">
+				            <table class="table table-content">
+						        <thead>
+						          <tr>
+						            <th class="col-1">삭제</th>
+						            <th class="col-2 table-head">보낸사람</th>
+						            <th scope="col">내용</th>
+						            <th scope="col">날짜</th>
+						          </tr>
+						        </thead>
+						        <tbody class = "tbody-content">
+							        <c:forEach items="${rmsgList}" var="dto">
+							          <tr>
+							            <td scope="row"><input type = "checkbox" value = "${dto.seq_message}" name ="seq_message"></td>
+							            <td>${dto.user_send}</td>
+							            <td>${dto.msgContent}</td>
+							            <td>${dto.date}</td>
+							          </tr>
+							        </c:forEach>
+						        </tbody>
+						      </table>
+					      </div>
+					      <div class="modal-footer msgModal-footer">
+            				<button type = "button" class = "btn btn-danger ms-2" id = "deleteBtn">삭제</button>
+            				<button type = "button" class = "btn btn-primary ms-2" id = "closeBtn" data-bs-dismiss="modal">닫기</button>
+					      	<input type="text" value="${memberdto.user_nickname}" id="myId" hidden >
+					      </div>
+					    </div>
+					  </div>
 					</div>
 				</div>
 			</div>
@@ -1049,22 +1074,108 @@ footer.footer {
 			  }
 			})
 	})
-	
-	// 내 쪽지 보기 
-	$(".myMsg").on("click", function(){
-		let user_email = $("#user_email").val();
-       	let popUrl = "/user/receiveMsg?user_receive="+user_email;
-        let popOption = "width = 700px, height = 500px, top=300px, left=700px, scrollbars=yes, toolbar=0";
-        window.open(popUrl, "팝업", popOption, "toolbar=0");
+    
+    // 보낸 쪽지 클릭시 체크되면서 테이블 보여주기
+    $('.msgSend').on("click", function(){
+    	$('.receiveBtn').addClass('d-none');    	
+    	$('.sendBtn').removeClass('d-none');    
+    	let myId = $("#myId").val();
+    	$.ajax({
+    		url : "/user/sendMsg?user_send="+myId,
+    		type : "get",
+    		dataType : "json",
+    		success : function(data){
+    			console.log(data);
+    			$(".tbody-content").empty();
+    			$(".table-head").text("받는사람");
+				if(data.length != 0){
+					for(let dto of data){
+						let tr = $("<tr>");
+						let td = $("<td>");
+						let input = document.createElement("input");
+						input.setAttribute('type','checkbox');
+						input.setAttribute('value', dto.seq_message);
+						input.setAttribute('name', 'seq_message');
+						let td1 = td.append(input);
+						let td2 = $("<td>").html(dto.user_receive);
+						let td3 = $("<td>").html(dto.msgContent);
+						let td4 = $("<td>").html(dto.date);
+						tr.append(td1, td2, td3, td4);
+						$(".tbody-content").append(tr);
+					}
+				}
+    		},error:function(e){
+   				console.log(e); 			
+    		}
+    	})
     })
-	
-	
-	
-	
-	
-	
-	
-	
-	
+    // 받은 쪽지 클릭시 체크되면서 테이블 보여주기
+    $('.msgReceive').on("click", function(){
+    	$('.sendBtn').addClass('d-none');    	
+    	$('.receiveBtn').removeClass('d-none');    
+    	let myId = $("#myId").val();
+    	$.ajax({
+    		url : "/user/receiveMsg?user_receive="+myId,
+    		type : "get",
+    		dataType : "json",
+    		success : function(data){
+    			console.log(data);
+    			$(".tbody-content").empty();
+				$(".table-head").text("보낸사람");
+				if(data.length != 0){
+					for(let dto of data){
+						let tr = $("<tr>");
+						let td = $("<td>");
+						let input = document.createElement("input");
+						input.setAttribute('type','checkbox');
+						input.setAttribute('value', dto.seq_message);
+						input.setAttribute('name', 'seq_message');
+						let td1 = td.append(input);
+						let td2 = $("<td>").html(dto.user_send);
+						let td3 = $("<td>").html(dto.msgContent);
+						let td4 = $("<td>").html(dto.date);
+						tr.append(td1, td2, td3, td4);
+						$(".tbody-content").append(tr);
+					}
+				}
+    		},error:function(e){
+   				console.log(e); 			
+    		}
+    	})
+    })
+
+    // 보낸 메세지 삭제
+    $("#deleteBtn").on("click", function(){
+        let checkBoxArr = [];
+      $("input[name=seq_message]:checked").each(function(){         
+         checkBoxArr.push($(this).val());
+      })
+      var jsonData = {
+         "message" : JSON.stringify(checkBoxArr)
+      };
+      var jsonString = JSON.stringify(jsonData);
+       $.ajax({
+         url:"/user/deleteMsg",
+         headers: {'Content-Type': 'application/json'},
+         type : "post",
+         data: jsonString,
+         success:function(data){
+            Swal.fire({
+                 icon: 'success',
+                 text: '완료되었습니다.',
+               })
+               setTimeout(function() {
+                       window.location.href = "";
+                   },1000);
+         },error : function(e){
+            console.log(e);
+         }
+      })
+    })
+
+    $("#closeBtn").on("click", function(){
+        window.close();
+    })
+
 </script>
 </html>

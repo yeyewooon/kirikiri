@@ -38,48 +38,37 @@ body{
 #navLogo {
     display: none;
 }
-
 #myPageIcon {
     display: none;
 }
-
 #cartIcon {
     display: none;
 }
-
 #menu {
     display: none;
 }
-
 }
-
 /* header */
 .border-bottom{
     background-color: white;
 }
-
 #navLogo {
     width: 150px;
     height: 100px;
 }
-
 #logoImgs {
     width: 100%;
     height: 100%;
 }
-
 @media (min-width : 768px) {
     #navibar {
         display: none;
     }
 }
-
 /* header 반응형 끝 */
-
 #logoImg {
     width: 50%;
 }
-
 /* 바디*/
 .signupBox{
     margin-top: 100px;
@@ -99,12 +88,9 @@ body{
     background-color: white;
     vertical-align: middle;
 }
-
 #userInfoBox > .row{
 	margin-top: 10px;
 }
-
-
 #userInfoBox i {
 	font-size:30px;
 	margin-top: 2px;
@@ -113,14 +99,12 @@ body{
 .bi-arrow-up-square-fill{
 	margin:auto;
 }
-
 #userInfoBox > .row:first-child > img{
     margin-top: 20px;
 }
 #userInfoBox > .row:last-child{
     padding-bottom: 40px;
 }
-
 #userInfoBox-profile{
     padding-top: 10px;
     width: 93%;
@@ -129,7 +113,6 @@ body{
     background-color: white;
     display: none;
 }
-
 #user_intro{
     height: 100%;
     width: 100%;
@@ -146,11 +129,9 @@ body{
     border:1px solid black;
     display: none;
 }
-
 #profileSetting:hover{
 	cursor: pointer;
 }
-
 .profile_imgContainer{
     width: 150px;
     height: 150px;
@@ -175,7 +156,6 @@ body{
     width: 7%;
     height: 40%;
 }
-
 .circleLine:only-child{
     display: inline-block;
 }
@@ -185,7 +165,6 @@ body{
     border-radius: 50%;
     background-color: white;
 }
-
 .circleLine > div[class*=col]{
   margin: 0;
   padding: 0;
@@ -218,14 +197,12 @@ input{
 	text-align : right;
 	margin-top: 5px;
 }
-
 #defaultImgBtn{
 	margin: 9px;
 	height: 50%;
 	width: 15%;
 	display: none;
 }
-
 /* 회원단계 1*/
 #signup-1{
     color: #030087;
@@ -235,18 +212,15 @@ input{
     color: #030087;
     text-shadow: 1px 2px 2px darkblue;
 }
-
 .circelLine-text-right{
     margin-left: 15px;
 }
-
 #nicknameCheck, #idCheck, #certificationBtn, #checkPhone {
     width: 80%;
     margin: 0px;
     padding: 0px;
     height: 90%;
 }
-
 #emailCheck{
 	width: 80%;
     margin: 0px;
@@ -254,20 +228,16 @@ input{
     height: 100%;
     margin-top: 5px;
 }
-
 .user_gender{
     margin-bottom: 30px;
 }
-
 .email-domain-row{
 	display:none;
 }
-
 #email-id{
 	width: 87%;
 	display: inline;
 }
-
 #email-domain-select{
     display: inline;
     width: 83%;
@@ -283,20 +253,15 @@ input{
 	margin-top : 0px;
 	margin-left: 12px; 
 }
-
 #email-btn {
 	display: block;
 }
-
 #emailCheckBox{
     display: none;
 }
-
 #emailCheckBox input{
     width: 100%;
 }
-
-
 #phone2,#phone3,#phone1{
     margin-left: 5px;
     display: inline;
@@ -314,19 +279,16 @@ input{
 .checkBox .col-9:last-child{
     margin-bottom: 40px;
 }
-
 .bthday{
     display: inline-block;
     text-align: left;
     width: 20%;
 }
-
 #password-regex-span, #password-check-span ,#name-check-span, #nickname-regex-span{
 	color: red;
 	margin-left: 10px;
 	font-weight: bold;
 }
-
 .text-align-left-col{
 	text-align: left;
 	margin: auto;
@@ -339,12 +301,10 @@ input{
 #user_pw, #pwCheck{
 	font-family: none;
 }
-
 /*공통 요소*/
 h1{
     margin-top: 30px;
 }
-
 p{
     margin-top: 10px;
 }
@@ -357,17 +317,14 @@ label{
 /*     width: 14%; */
 /*     height: 30%; */
 /* } */
-
 span{
     color: white;
     font-size: 0.05rem;
 }
-
 /*풋터 영역*/
 .footerBox {
 	height: 0px;
 }
-
 footer.footer {
 	padding-top: 2rem;
 	padding-bottom: 2rem;
@@ -577,7 +534,6 @@ footer.footer {
 		   }else{
 			   $("#name-col").empty();
 		   }
-
 	   });
 		
        $("#email-btn").click(function(){ //이메일 직접입력 취소
@@ -810,54 +766,46 @@ function next(){ //다음페이지
     $("#singupBackBtn").show();
     $("#completeBtn").show();
 } 
-
 function invalidName(){
 	$("#name-col").empty();
 	let span = $('<span>').attr('id', 'name-check-span').css("color","red").html("올바르지 않은 이름입니다.");
 	$("#name-col").append(span);
 	$("#user_name").focus();
 }
-
 function validPw(){
 	$("#regex-col").empty();
     let span = $('<span>').attr('id', 'password-regex-span').css("color","green").html("사용가능한 비밀번호 입니다.");
     $("#regex-col").append(span);
     $("#user_pw").focus();
 }
-
 function invalidPw(){
 	$("#regex-col").empty();
     let span = $('<span>').attr('id', 'password-regex-span').css("color","red").html("올바르지 않은 비밀번호 형식입니다.");
     $("#regex-col").append(span);
 }
-
 function idEqPw(){
 	$("#regex-col").empty();
     let span = $('<span>').attr('id', 'password-regex-span').css("color","red").html("아이디와 비밀번호를 다르게 설정해주세요.");
     $("#regex-col").append(span);
 }
-
 function checkPw(){
 	$("#check-col").empty();
     let span = $('<span>').attr('id', 'password-check-span').css("color","red").html("비밀번호가 다릅니다.");
     $("#check-col").append(span);
     $("#checkPw").focus();
 }
-
 function invalidNickname(){
 	$("#nickname-col").empty();
     let span = $('<span>').attr('id', 'nickname-regex-span').css("color","red").html("올바르지 않은 닉네임 형식입니다.");
     $("#nickname-col").append(span);
     $("#user_nickname").focus();
 }
-
 function validNickname(){
 	$("#nickname-col").empty();
     let span = $('<span>').attr('id', 'nickname-regex-span').css("color","green").html("사용 가능한 닉네임입니다.");
     $("#nickname-col").append(span);
     $("#user_nickname").focus();
 }
-
 function checkFile(obj) {
 	 let fileKind = obj.value.lastIndexOf('.');
 	 let fileName = obj.value.substring(fileKind+1,obj.length);
@@ -879,7 +827,6 @@ function checkFile(obj) {
 		 if(!answer)return false;
 	 }
 }
-
 function sweetAlertFail(content){
 	Swal.fire({
 		 icon: 'error',
@@ -887,7 +834,6 @@ function sweetAlertFail(content){
 		 text: content,
 		});  	
 };
-
 function sweetAlertSuccess(content){
 	Swal.fire({
 		  position: 'left-end',
@@ -897,7 +843,6 @@ function sweetAlertSuccess(content){
 		  timer: 1500
 		});
 };
-
 </script>
 <body>
 <!--네비바-->

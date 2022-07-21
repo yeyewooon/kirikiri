@@ -58,14 +58,14 @@ public class Tbl_GroupDAO {
       session.delete("tblGroupMapper.denyApply", param);
    }
 
-   // 해당 그룹 맴버 조회 -> List형이 안맞음 MemberDTO로 돼있었
+   // 해당 그룹 맴버 조회
    public List<MemberDTO> selectGroupAccess(int seq_group) {
       return session.selectList("tblGroupMapper.selectGroupAccess", seq_group);
    }
 
    // 모임장 위임
    public int groupAccess(Group_MemberDTO Group_MemberDTO) throws Exception {
-      return session.update("tblGroupMapper.groupAccess", Group_MemberDTO);
+      return session.update("tblGroupMapper.groupAccess",Group_MemberDTO);
    }
 
    // 그룹 멤버 강퇴

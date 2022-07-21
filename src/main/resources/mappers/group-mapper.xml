@@ -71,11 +71,11 @@
    <update id="groupAccess" parameterType="com.kiri.dto.Group_MemberDTO">
       update group_member set "access" =
       <choose>
-         <when test = "access.equals('모임장')">
-            '일반회원' where user_email = #{user_email}
+         <when test = "access.equals('주최자')">
+            '맴버' where user_email = #{user_email}
          </when>
-         <when test = "access.equals('일반회원')">
-            '모임장' where user_email = #{user_email}
+         <when test = "access.equals('맴버')">
+            '주최자' where user_email = #{user_email}
          </when>
       </choose>
    </update>

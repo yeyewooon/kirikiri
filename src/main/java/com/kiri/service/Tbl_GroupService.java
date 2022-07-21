@@ -44,7 +44,7 @@ public class Tbl_GroupService {
       }
 
 
-      // 모임 가입 승인하기
+      // 모임 가입 승인 및 group_apply 테이블에서 삭제
       @Transactional
       public void completeApply(List<String> userEmails) throws Exception {
          Map<String, Object> param = new HashMap<>();
@@ -53,7 +53,7 @@ public class Tbl_GroupService {
 
          for (Group_ApplyDTO dto : list) {
             Group_MemberDTO member = new Group_MemberDTO(0, dto.getUser_email(), dto.getSeq_group(),
-                  dto.getUser_nickname(), "일반멤버");
+                  dto.getUser_nickname(), "맴버");
             tbl_group_dao.completeApply(member);
          }
 
@@ -75,6 +75,7 @@ public class Tbl_GroupService {
       }
       
       // 그룹 모임장 위임
+      @Transactional
       public int groupAccess(Group_MemberDTO Group_MemberDTO) throws Exception{
          return tbl_group_dao.groupAccess(Group_MemberDTO);
       }
