@@ -12,7 +12,7 @@
 
 	<!-- 프로필 사진 수정 -->
 	<update id="modifyProfilePic"
-		parameterType="com.kiri.dto.MemberDTO">
+		parameterType="map">
 		update member set
 			user_image = #{user_image}
 		where user_email = #{user_email}
@@ -45,6 +45,12 @@
 	<select id="phoneCheck" resultType="int" parameterType="String">
 		select count(*) from member
 			where user_phone = #{user_phone}
+	</select>
+	
+	<!-- pw 중복검사 -->
+	<select id="pwCheck" resultType="int" parameterType="String">
+		select count(*) from member
+			where user_pw = #{user_pw}
 	</select>
 	
 	<!-- 관심사 정보 -->

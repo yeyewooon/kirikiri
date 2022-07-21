@@ -459,6 +459,7 @@ hr {
 				</tbody>
 			</table>
 			<input type = "text" class="d-none" id="user_email" value="${memberdto.user_email}">
+			${totalBoardCount}
 			<nav aria-label="Page navigation example">
 				<ul class="pagination">
 					<li class="page-item"><a class="page-link" href="#"
@@ -474,45 +475,67 @@ hr {
 			</nav>
 		</div>
 		<script>
-			/* 일반 게시글 삭제 */
-			$(".boardDelete").on("click",function(){
-				const clickedSpan = $(this);
-				let seq_board = $(this).parents().siblings("#seq_board").text();
-				let user_email = $("#user_email").val();
-				console.log(user_email);
-				Swal.fire({
-					  title: '정말 삭제하시겠습니까?',
-					  text: "다시 복구 할수 없습니다.!",
-					  icon: 'warning',
-					  showCancelButton: true,
-					  confirmButtonColor: '#3085d6',
-					  cancelButtonColor: '#d33',
-					  confirmButtonText: 'Yes, delete it!'
-					}).then((result) => {
-					  if (result.isConfirmed) {
-					    Swal.fire(
-					      '삭제 완료!',
-					      '희망 모임을 삭제하였습니다.',
-					      'success'
-					    ).then(function() {
-					    	$.ajax({
-								url:"/mem/boardDelete",
-								type:"post",
-								data : {"seq_board":seq_board},
-								success:function(data){
-									console.log("dadada : ",data);
-									if(data =='success'){
-										clickedSpan.parent().parent()[0].remove();
-									}
-								},
-								error: function(e){
-									console.log(e);
+		// 페이지 네이션
+		let active = $(".page-link").text();
+     	 let activePage = "${curPage}";
+      	for (let i = 0; i < active.length; i++) {
+      	  if (active[i] == activePage) {
+	          $(".pageActive" + (i + 1)).css({
+	            "background-color": "#13213c",
+	            color: "white",
+	          });
+	          break;
+	        }
+	      }
+	      $("#searchBtn").on("click", function () {
+	        let searchWord = $("#searchWord").val();
+	        if (searchWord == "") {
+	          location.href = "/modify.pc?curPage=1";
+	        } else if (searchWord != "") {
+	          location.href = "/search.pc?&curPage=1&&searchWord=" + searchWord;
+	        }
+	      });
+		
+		/* 일반 게시글 삭제 */
+		$(".boardDelete").on("click",function(){
+			const clickedSpan = $(this);
+			let seq_board = $(this).parents().siblings("#seq_board").text();
+			let user_email = $("#user_email").val();
+			console.log(user_email);
+			Swal.fire({
+				  title: '정말 삭제하시겠습니까?',
+				  text: "다시 복구 할수 없습니다.!",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: 'Yes, delete it!'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+				    Swal.fire(
+				      '삭제 완료!',
+				      '희망 모임을 삭제하였습니다.',
+				      'success'
+				    ).then(function() {
+				    	$.ajax({
+							url:"/mem/boardDelete",
+							type:"post",
+							data : {"seq_board":seq_board},
+							success:function(data){
+								console.log("dadada : ",data);
+								if(data =='success'){
+									clickedSpan.parent().parent()[0].remove();
+									location.reload();
 								}
-							})
-		                });
-					  }
-					})
+							},
+							error: function(e){
+								console.log(e);
+							}
+						})
+	                });
+				  }
 				})
+			})
 			/* 모임 게시글 삭제 */
 			$(".groupBoardDelete").on("click",function(){
 				const clickedSpan = $(this);
@@ -542,6 +565,7 @@ hr {
 									console.log("dadada : ",data);
 									if(data =='success'){
 										clickedSpan.parent().parent()[0].remove();
+										location.reload();
 									}
 								},
 								error: function(e){

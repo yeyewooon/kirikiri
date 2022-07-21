@@ -1,11 +1,14 @@
 package com.kiri.service;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.kiri.dao.BoardDAO;
 import com.kiri.dao.Group_BoardDAO;
@@ -46,9 +49,26 @@ public class MemberService {
 	}
 	
 	// 사진 수정
-	public void modifyProfilePic(MemberDTO dto) {
-		memberdao.modifyProfilePic(dto);
+	public void modifyProfilePic(String user_email,String profile_image) {
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("user_image", profile_image);
+		map.put("user_email", user_email);
+		
+		memberdao.modifyProfilePic(map);
 	}
+	
+	// 프로필 사진 업로드
+	public String uploadProfile(MultipartFile file, String realPath) throws Exception{ 
+        File realPathFile = new File(realPath);
+        if(!realPathFile.exists()) realPathFile.mkdir();
+        String sys_name = null;
+        if(!file.isEmpty()) {
+            String ori_name = file.getOriginalFilename();
+            sys_name = UUID.randomUUID() + "" + ori_name;
+            file.transferTo(new File(realPath + File.separator + sys_name));
+        }
+        return sys_name;
+    }
 
 	// 개인정보 수정
 	public void profileModify(MemberDTO dto){
@@ -63,6 +83,11 @@ public class MemberService {
 	// phone 중복확인
 	public int phoneCheck(String user_phone) throws Exception{
 		return memberdao.nicknameCheck(user_phone);
+	}
+	
+	// pw 중복확인
+	public int pwCheck(String user_pw) throws Exception{
+		return memberdao.pwCheck(user_pw);
 	}
 	
 	// 회원 탈퇴
@@ -164,6 +189,8 @@ public class MemberService {
 	public int groupBoardDelete(int seq_board) throws Exception{
 		 return group_boarddao.groupBoardDelete(seq_board);
 	}
+	
+	//
 	
 	
 	/* wishList */

@@ -16,7 +16,7 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/boardFile/*" location="/boardFile/" />
-
+	<resources mapping="/profile/*" location="/profile/"/>
 	<resources mapping="/group_profile/*" location="/group_profile/"/>
 	
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
@@ -33,7 +33,7 @@
       <beans:property name="host" value="smtp.gmail.com" />
       <beans:property name="port" value="587" />
       <beans:property name="username" value="emailsender0222@gmail.com" />
-      <beans:property name="password" value="flnliayfzzqjaxuh" />
+      <beans:property name="password" value="vbwawiyeogrpqnmc"/>
       <beans:property name="javaMailProperties">
          <beans:props>
                 <beans:prop key="mail.transport.protocol">smtp</beans:prop>
