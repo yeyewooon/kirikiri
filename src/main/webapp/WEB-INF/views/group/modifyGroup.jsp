@@ -276,16 +276,6 @@ footer.footer {
 	font-style: normal;
 }
 
-@font-face {
-	font-family: "양진체";
-	src:
-		url("https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff")
-		format("woff");
-	font-weight: normal;
-	font-style: normal;
-}
-
-
 .btn-primary {
     color: #fff;
     background-color: #afc9f6;

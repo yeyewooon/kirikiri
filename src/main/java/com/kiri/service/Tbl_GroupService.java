@@ -20,7 +20,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kiri.dao.Tbl_GroupDAO;
 import com.kiri.dto.Group_ApplyDTO;
 import com.kiri.dto.Group_MemberDTO;
-
+import com.kiri.dto.MemberDTO;
+import com.kiri.dto.SiteDTO;
 import com.kiri.dto.TableJoinDTO;
 
 
@@ -53,7 +54,7 @@ public class Tbl_GroupService {
       }
 
 
-      // 모임 가입 승인하기
+      // 모임 가입 승인 및 group_apply 테이블에서 삭제
       @Transactional
       public void completeApply(List<String> userEmails) throws Exception {
          Map<String, Object> param = new HashMap<>();
@@ -62,7 +63,7 @@ public class Tbl_GroupService {
 
          for (Group_ApplyDTO dto : list) {
             Group_MemberDTO member = new Group_MemberDTO(0, dto.getUser_email(), dto.getSeq_group(),
-                  dto.getUser_nickname(), "일반멤버");
+                  dto.getUser_nickname(), "맴버");
             tbl_group_dao.completeApply(member);
          }
 
@@ -84,6 +85,7 @@ public class Tbl_GroupService {
       }
       
       // 그룹 모임장 위임
+      @Transactional
       public int groupAccess(Group_MemberDTO Group_MemberDTO) throws Exception{
          return tbl_group_dao.groupAccess(Group_MemberDTO);
       }
@@ -173,6 +175,17 @@ public class Tbl_GroupService {
       public int deletetWishList(WishListDTO wish_list_dto) throws Exception{
          return tbl_group_dao.deletetWishList(wish_list_dto);
       }
+
+      // 해당 그룹 맴버 프로필 조회
+	public List<MemberDTO> selectMemberProfile(String user_email) {
+		return tbl_group_dao.selectMemberProfile(user_email);
+		
+	}
+
+	// 해당 그룹 맴버 주소 조회
+	public List<SiteDTO> selectMemberSite(String user_email) {
+		return tbl_group_dao.selectMemberSite(user_email);
+	}
 
 
    

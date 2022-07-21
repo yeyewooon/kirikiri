@@ -23,10 +23,19 @@
  	<delete id="deleteReport" parameterType="int">
  		delete from report where seq_report=#{seq_report}
  	</delete>
+ 	<update id="updateBl" parameterType="String">
+ 		update member set user_blacklist='Y' where user_email=#{user_email}
+ 	</update>
  	<select id="searchMember" parameterType="map" resultType="com.kiri.dto.MemberDTO">
  		select * from member where
-			<if test="searchType == 'all'">user_name like '%' || #{searchKeyword} || '%'or user_nickname like '%' || #{searchKeyword} || '%'or user_phone like '%' || #{searchKeyword} || '%' </if>
+			<if test="searchType == 'all'">user_email like '%${searchKeyword}%' or user_nickname like '%${searchKeyword}%'or user_phone like '%${searchKeyword}%' </if>
 			<if test="searchType != 'all'">${searchType} like '%' || #{searchKeyword} || '%'</if>
+			order by 1
  	</select>
- 	
+ 	<select id="selectDetailMem" resultType="com.kiri.dto.MemberDTO" parameterType="String">
+ 		select * from member where user_email = #{user_email}
+ 	</select>
+ 	<update id="updateMem" parameterType="map">
+ 		update member set user_blacklist=#{user_blacklist} where user_email=#{user_email}
+ 	</update>
  </mapper>

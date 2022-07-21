@@ -237,8 +237,8 @@
 		$("#send").click(function(){
 			sendChat();
 		})
-		$("#message").keypress(function(){
-			sendChat();
+		$("#message").keypress(function(e){
+			if(e.keyCode == 13) sendChat();
 		})
 		
 		//채팅 보내는 함수

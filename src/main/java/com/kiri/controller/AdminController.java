@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,7 +20,6 @@ import com.google.gson.Gson;
 import com.kiri.dto.BlackListDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
-import com.kiri.dto.SearchMemDTO;
 import com.kiri.service.AdminService;
 
 @RequestMapping("/admin")
@@ -61,6 +61,7 @@ public class AdminController {
 	            bdto = new BlackListDTO(0, rdto.getUser_email(), null, rdto.getReport_reason());
 	            service.insertBl(bdto);
 	            service.deleteReport(seq_report);
+	            service.updateBl(rdto.getUser_email());
 	        }
 			return "success";
 		}
@@ -92,6 +93,19 @@ public class AdminController {
 		String json = new Gson().toJson(slist);
 		response.setCharacterEncoding("utf-8");
 		response.getWriter().write(json);
+	}
+	
+	@RequestMapping(value="/toDetailMem")
+	public String toDetailMem(String user_email, Model model) throws Exception{
+		MemberDTO memList = service.selectDetailMem(user_email);
+		model.addAttribute("memList", memList);
+		return "admin/memberDetail";
+	}
+	
+	@RequestMapping(value="/toUpdateMem", method=RequestMethod.POST)
+	public void toUpdateMem(HttpServletResponse response, @RequestParam("user_email") String user_email, @RequestParam("user_blacklist") String user_blacklist) throws Exception{
+		service.updateMem(user_email, user_blacklist);
+		response.getWriter().write("success");
 	}
 	
 	@RequestMapping(value = "/toError")

@@ -27,7 +27,6 @@ public class LoginController {
 	public String toLogin() {
 		return "/member/login";
 	}
-	
 	@ResponseBody
 	@RequestMapping(value = "/general") 	
 	public String general(String user_id, String user_pw) throws Exception { // 일반로그인

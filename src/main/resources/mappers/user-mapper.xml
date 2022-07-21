@@ -9,6 +9,17 @@
     <select id = "selectAllGroup" resultType = "com.kiri.dto.Tbl_GroupDTO">
         select * from tbl_group
     </select>
+    
+    <!-- 새로운 그룹 조회 -->
+    <select id = "selectNewGroup" resultType = "com.kiri.dto.Tbl_GroupDTO">
+        select * from tbl_group order by 1 desc
+    </select>
+    
+    <!-- 최고 그룹 조회 -->
+    <select id = "selectBestGroup" resultType = "com.kiri.dto.BestGroupDTO">
+        select * from tbl_group join (select seq_group, count(seq_group) cnt from wishlist group by seq_group) using(seq_group) order by cnt desc
+    </select>
+    
 
     <!-- 카테고리 또는 지역으로 그룹 조회 --> 
     <select id="groupList" parameterType="com.kiri.dto.Tbl_GroupDTO" resultType="com.kiri.dto.Tbl_GroupDTO">

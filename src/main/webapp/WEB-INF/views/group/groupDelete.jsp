@@ -381,6 +381,7 @@ footer.footer {
 	$("#deleteBtn").on("click", function(){
 		let answer = confirm("정말 해산하시겠습니까?");
 		console.log($("#seq_group").val());
+		
 		if(answer){ 
 			let deleteForm = $("<form>").attr({
 				"method" : "post"
