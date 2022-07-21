@@ -159,6 +159,9 @@ h4 {
 }
 
 /* modal 창 영역 */
+.modal-dialog{
+	transform: translate(200PX,50px);
+}
 .modal-content{
 	width:580px;
 }
@@ -169,6 +172,10 @@ h4 {
 #modal label{
 	cursor:pointer;
 	user-select: none;
+}
+.modalBtn{
+	width:100%;
+	height:60px;
 }
 .hobbyWrapper{
 	display:flex;
@@ -182,7 +189,7 @@ h4 {
 	margin: 0px 0px 10px 50px;
 }
 
-.myCalendar {
+.myMsg {
 	justify-content: center;
 	align-items: center;
 	margin-top: 50px;
@@ -199,17 +206,10 @@ h4 {
 	justify-content: end;
 }
 
-.wishDelete {
+.wishDelete,.towritePage,.checkMyMsg{
 	cursor: pointer;
 }
 
-.towritePage {
-	cursor: pointer;
-}
-
-.tocalendarPage {
-	cursor: pointer;
-}
 /* footer css 부분 */
 .footer {
 	width: 100%;
@@ -364,6 +364,7 @@ footer.footer {
 			</nav>
 		</div>
 	</header>
+	
 	<!-- header jsp -->
 	<div class="container">
 		<div class="row header">
@@ -472,31 +473,48 @@ footer.footer {
 			<!-- 개인정보 수정 모달 -->
 			<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
-			    <div class="modal-content">
+			    <div class="modal-content" style="width:300px; height:400px;">
 			      <div class="modal-header">
 			        <h5 class="modal-title" id="exampleModalLabel">비밀번호 확인</h5>
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 			      </div>
 			      <div class="modal-body" >
+			      	  <div class="row">
+			      	  	<span><strong style="font-size:15px;">${memberdto.user_nickname}</strong>님 회원정보 중 개인정보 수정하기 위해 인증절차가 필요합니다.</span>
+			      	  </div>
+			      	  	<hr style="margin:20px;">
 				      <div class="row">
-				      	<div class="col-3 d-flex justify-content-end"><label style="font-size:20px;">현재 비밀번호 : </label></div>
-				      	<div class="col-5 d-flex justify-content-end">
-					       	<input type="text" id="password" class="" style="height:100%;">		
+				      	<div class="col-5 d-flex justify-content-start" style="align-items:center;"><label>현재 비밀번호 : </label></div>
+				      	<div class="col-7 d-flex justify-content-start">
+					       	<input type="password" id="password" class="form-control" style="height:100%; font-family:none;">		
 				      	</div>
-				      	<div class="col-4 d-flex justify-content-center">
-					       	<button type="button" class="btn btn-secondary" id="checkPw" style="width:100px;">확인</button>
-				      	</div>
+				      	<script>
+				      		const test = document.querySelector('#password');
+				      		console.log(test)
+				      		test.addEventListener('change', () => {
+				      			console.log('change')
+				      		})
+				      	</script>
 				      	<div class="mt-3 d-none wrong-check-pw" style="text-align:center;">
 							<span style="color:red; font-size:0.8rem; margin-left:8px;">** 현재 비밀번호와 일치하지 않습니다. **</span>
 						</div>
 						<div class="mt-3 d-none right-check-pw" id="test" style="text-align:center;">
 							<span style="color:green; font-size:0.8rem; margin-left:8px;">** 현재 비밀번호와 일치합니다. **</span>	
 						</div>
+						<div>
+					       	<button type="button" class="btn btn-secondary mt-3" id="checkPw" style="width:100%;">확인</button>
+				      	</div>
 				      </div>
 			      </div>
-			      <div class="modal-footer">
-			        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-			        <button type="button" class="btn btn-primary" id="profileModify" disabled>이동</button>
+			      <div class="modal-footer" style="display:inline; padding:0px;">
+				      <div class="row" style="margin:0px;">
+					      <div class="col-5" style="padding:0px;">
+					        <button type="button" class="btn btn-secondary modalBtn" data-bs-dismiss="modal">취소</button>			      
+					      </div>
+					      <div class="col-7" style="padding:0px;">
+					        <button type="button" class="btn btn-primary modalBtn" id="profileModify" disabled>이동</button>			      
+					      </div>			      
+				      </div>
 			      </div>
 			    </div>
 			  </div>
@@ -901,10 +919,13 @@ footer.footer {
 							<c:if test="${selectWishList.size() > 0}">
 								<c:forEach items="${selectWishList}" var="wishlistdto">
 									<div class="myList d-flex" id="wishBox">
-										<div class="col-6">
-											<span><i class="fa-solid fa-heart listIcon me-3"></i>${wishlistdto.TITLE}</span>
+										<div class="col-md-2">
+											<i class="fa-solid fa-heart listIcon me-3"></i>
 										</div>
-										<div class="col-6" style="text-align: center;">
+										<div class="col-md-8">
+											<span>${wishlistdto.TITLE}</span>
+										</div>
+										<div class="col-md-2" style="text-align: center;">
 											<i class="fa-solid fa-trash-can wishDelete"></i> <input
 												type="text" id="seq_group" class="seq_group d-none"
 												value="${wishlistdto.SEQ_GROUP}">
@@ -986,13 +1007,12 @@ footer.footer {
 					<div class="col-md-4">
 						<div class="bodyBox mb-lg-5">
 							<h4>
-								<i class="fa-solid fa-calendar-days bodyIcon"></i><br />모임 일정
+								<i class="fa-solid fa-envelope bodyIcon"></i><br />쪽지함
 							</h4>
 							<hr id="line" />
-							<div class="d-flex myCalendar">
-								<i class="fa-solid fa-hand-pointer listIcon me-3"></i><span
-									class="tocalendarPage">내 일정 관리하기 <i
-									class="fa-solid fa-arrow-right"></i></span>
+							<div class="d-flex myMsg">
+								<span class="checkMyMsg">내 쪽지 관리하기
+								<i class="fa-solid fa-arrow-right"></i></span>
 							</div>
 						</div>
 					</div>
@@ -1042,7 +1062,7 @@ footer.footer {
 	let towritePage = document.getElementById("towritePage");
 	
 	/* 내가쓴글로 이동 */
-	towritePage.addEventListener("click", function() {
+	$("#towritePage").on("click", function() {
 		let user_email = $("#user_email").val();
 		location.href = "/mem/myWrite?user_email="+user_email;
 	});
@@ -1080,6 +1100,23 @@ footer.footer {
 			  }
 			})
 	})
+	
+	// 내 쪽지 보기 
+	$(".myMsg").on("click", function(){
+		let user_email = $("#user_email").val();
+       	let popUrl = "/user/receiveMsg?user_receive="+user_email;
+        let popOption = "width = 700px, height = 500px, top=300px, left=700px, scrollbars=yes, toolbar=0";
+        window.open(popUrl, "팝업", popOption, "toolbar=0");
+    })
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </script>
 </body>
 

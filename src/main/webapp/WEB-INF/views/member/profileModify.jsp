@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -577,24 +577,35 @@ footer.footer {
 					<div class="col-md-2"></div>
 				</div>
 				
-				<div class="row">
-				<c:choose></c:choose>
-					<div class="col-md-3">
-						<p>비밀번호</p>
-					</div>
-					<div class="col-md-7" style="text-align: left;">
-						<input type="text" id="password" name="user_pw"
-							class="form-control">
-						<ul class="desc" style="font-size: 0.8rem; padding: 10px">
-							<li>영문, 숫자, 특수문자를 혼합하여 최소 8자리 이상 20자리 이하로 설정해 주세요.</li>
-							<li>기타 일반 정보 등으로부터 추측이 용이한 비밀번호는 피해주세요.</li>
-							<li>타사 서비스에서 사용하는 비밀번호와 동일한 비밀번호를 사용하지 마십시오.</li>
-							<li>번호를 바꾸시려면 중복확인은 필수 항목입니다.</li>
-						</ul>
-					</div>
-					<input type="text" id="check-pw" value="${memberdto.user_pw}">
-					<div class="col-2"></div>
-				</div>
+				<c:if test="${loginType eq 'general'}">
+					<div class="row">
+						<div class="col-md-3">
+							<p>비밀번호</p>
+						</div>
+						<div class="col-md-7" style="text-align: left;">
+							<input type="text" id="password" name="user_pw" class="form-control">
+							<ul class="desc" style="font-size: 0.8rem; padding: 10px">
+								<li>영문, 숫자, 특수문자를 혼합하여 최소 8자리 이상 20자리 이하로 설정해 주세요.</li>
+								<li>기타 일반 정보 등으로부터 추측이 용이한 비밀번호는 피해주세요.</li>
+								<li>타사 서비스에서 사용하는 비밀번호와 동일한 비밀번호를 사용하지 마십시오.</li>
+								<li>번호를 바꾸시려면 중복확인은 필수 항목입니다.</li>
+							</ul>
+							<input type="text" class='d-none' value="${memberdto.user_pw}" name="data_password">
+						</div>
+						<div class="col-2"></div>
+					</div>		
+					<div class="row">
+						<div class="col-md-3">
+							<p>비밀번호 확인</p>
+						</div>
+						<div class="col-md-7" style="text-align: left;">
+							<input type="text" id="password-check" class="form-control">
+							<span class="d-none" id="wrong-password-check" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호와 맞지 않습니다. **</span>
+							<span class="d-none" id="right-password-check" style="color:green; font-size:0.8rem; margin-left:8px;">** 비밀번호와 일치합니다. **</span>
+						</div>
+						<div class="col-2"></div>
+					</div>					
+				</c:if>
 				<div class="row">
 					<div class="col-md-3">
 						<p>이메일</p>
@@ -639,6 +650,7 @@ footer.footer {
 					<div class="col-md-2"></div>
 				</div>
 				<script>
+				
 				/* phone 실시간으로 검색후 중복확인 버튼 disabled 속성 제거 */
 				let phone1 = $(".checkPhone1").val();
 				$("#phone1").on("input",function(){
@@ -676,6 +688,7 @@ footer.footer {
 					let user_phone;
 					$("#phoneCheck").on("click",function(){
 						user_phone = phone1 + phone2 + phone3;
+						console.log(user_phone);
 						$.ajax({
 							url:"/mem/phoneCheck",
 							type:"post",
@@ -711,9 +724,9 @@ footer.footer {
 										      '번호가 변경되었습니다.',
 										    )
 										  } else {
-											  $("#phone1").val($(".phone1Check").val());
-											  $("#phone2").val($(".phone2Check").val());
-											  $("#phone3").val($(".phone3Check").val());
+											  $("#phone1").val($(".checkPhone1").val());
+											  $("#phone2").val($(".checkPhone2").val());
+											  $("#phone3").val($(".checkPhone3").val());
 										  }
 										})
 									}
@@ -803,7 +816,7 @@ footer.footer {
 			let nickname = $("#nickname").val();
 			let checkNickname = $(".checkNickname").val();
 			let password = $("#password").val();
-			let passwordRegex = /^[a-z0-9!@#$]{8,20}$/;
+			let passwordRegex = /^$|^[a-z0-9!@#$]{8,20}$/;
 			let checkPhone = $(".checkPhone").val();
 			let checkPw = $("#check-pw").val();
 			user_phone = phone1 + phone2 + phone3;
@@ -842,9 +855,16 @@ footer.footer {
 				return;
 			}
 			
-			/* 빈값의 비밀번호 */
-			if(password === ''){
-				$('input[name=user_pw]').attr('value',checkPw);
+			// 비밀번호 확인
+			
+			if(password == $("#password-check").val()){
+				$("#wrong-password-check").addClass("d-none");
+				$("#right-password-check").removeClass("d-none");
+			}else{
+				$("#right-password-check").addClass("d-none");
+				$("#wrong-password-check").removeClass("d-none");
+				formSweetAlert('비밀번호 확인이랑 일치하지 않습니다.',$("password-check"));
+				return;
 			}
 			
 			/* 비밀번호 Regex */

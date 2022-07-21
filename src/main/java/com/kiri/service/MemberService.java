@@ -57,7 +57,8 @@ public class MemberService {
 		memberdao.modifyProfilePic(map);
 	}
 	
-	public String uploadProfile(MultipartFile file, String realPath) throws Exception{ // 프로필사진 업로드
+	// 프로필 사진 업로드
+	public String uploadProfile(MultipartFile file, String realPath) throws Exception{ 
         File realPathFile = new File(realPath);
         if(!realPathFile.exists()) realPathFile.mkdir();
         String sys_name = null;
@@ -188,6 +189,8 @@ public class MemberService {
 	public int groupBoardDelete(int seq_board) throws Exception{
 		 return group_boarddao.groupBoardDelete(seq_board);
 	}
+	
+	//
 	
 	
 	/* wishList */

@@ -28,15 +28,14 @@ import com.kiri.utills.EncryptionUtils;
 @RequestMapping("/mem")
 @Controller
 public class MemberController {
+	@Autowired
+    private MemberService service;
 
-	@Autowired
-	private MemberService service;
+    @Autowired
+    private HttpSession session;
 
-	@Autowired
-	private HttpSession session;
-	
-	@Autowired
-	private EncryptionUtils ecp;
+    @Autowired
+    private EncryptionUtils ecp;
 	
 	@RequestMapping(value = "/welcome")
 	public String welcome() {
@@ -124,6 +123,8 @@ public class MemberController {
 		String json = new Gson().toJson(selectBoardList);
 	    response.setCharacterEncoding("utf-8");
 	    response.getWriter().write(json);
+	    
+	    
 
 		model.addAttribute("memberdto", selectMember);
 		model.addAttribute("selectBoardCount", selectBoardCount);
@@ -168,8 +169,17 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/profileModify") // 개인정보 수정
-	public String profileModify(MemberDTO dto) throws Exception {
-		System.out.println("ㅁㄴㅇㅁㄴㅇ : "+dto.getUser_phone());
+	public String profileModify(MemberDTO dto, String data_password) throws Exception {
+		System.out.println(dto.toString());
+		System.out.println("ㅁㄴㅇㅁㄴㅇ : "+dto.getUser_pw());
+		System.out.println(data_password);
+		if(dto.getUser_pw() == "") {
+			dto.setUser_pw(data_password);
+			System.out.println("ㅁㄴㅇㅁㄴㅇ :"+dto.getUser_pw());
+		}else {
+			String Encryption_pw = ecp.getSHA512(dto.getUser_pw());
+			dto.setUser_pw(Encryption_pw);			
+		}
 		service.profileModify(dto);
 		return "redirect:myPage";
 	}

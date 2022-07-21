@@ -17,6 +17,7 @@ local.properties
 .project
 build/
 
+
 # External tool builders
 .externalToolBuilders/
 
@@ -84,6 +85,7 @@ build/
 *_BASE_*.txt
 *_LOCAL_*.txt
 *_REMOTE_*.txt
+mail.xml
 
 ### Java ###
 # Compiled class file
