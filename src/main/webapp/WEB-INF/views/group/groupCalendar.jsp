@@ -35,6 +35,13 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 
 <style>
+@font-face {
+    font-family: 'twayair';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 body {
       background-color: #f6f7f9;
@@ -42,11 +49,7 @@ body {
 
     * {
       box-sizing: border-box;
-      font-family: "OTWelcomeRA";
-    }
-
-    #mainText {
-      font-family: "양진체";
+      font-family: "twayair";
     }
 
     /* header 반응형 */
@@ -104,35 +107,6 @@ body {
       font-size: 35px;
       color: navy;
       text-shadow: 3px 3px white;
-    }
-
-    /* 동그라미 세개 */
-    .circleImg {
-      width: 200px;
-      height: 200px;
-      background-color: #faead2;
-      border-radius: 50%;
-    }
-
-    .circleTitle {
-      font-size: 26px;
-      color: #83c8e5;
-    }
-
-    #circle_img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-    }
-
-    /* 네모네모 영역 */
-    .mainImg {
-      object-fit: cover;
-    }
-
-    #bestParty {
-      background-color: #e8f5ed;
-      font-family: "Do Hyeon", sans-serif;
     }
 
     a {
@@ -211,12 +185,6 @@ body {
       font-style: normal;
     }
 
-    @font-face {
-      font-family: "양진체";
-      src: url("https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff") format("woff");
-      font-weight: normal;
-      font-style: normal;
-    }
 </style>
 
 
@@ -424,6 +392,8 @@ body {
 					<div class="col-md-10 col-auto flex-fill" id='calendar'
 						style="min-width: initial; min-height: 80vh;"></div>
 					<!-- Calendar end -->
+					
+					
 				</section>
 			</div>
 		</div>
@@ -665,8 +635,8 @@ body {
 					console.log($("#ycoord").val()); // 37
 
 					// 초기화 작업
-					$("#ycoord").val('37.566826'); // 위도
-					$("#xcoord").val('126.9786567'); // 경도
+					$("#ycoord").val('37.5339071790577'); // 위도
+					$("#xcoord").val('126.896761296215'); // 경도
 					$("#gcal_name").val(''); // 제목
 					$("#gcal_content").val(''); // 내용
 					$("#partyLocation").val(''); // 위치명
@@ -721,6 +691,32 @@ body {
 
 				//마커가 지도 위에 표시되도록 설정합니다
 				marker.setMap(map);
+				
+				var iwContent = '<div style="padding:5px;">끼리끼리</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+<<<<<<< HEAD
+	        	iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+	         
+	         // 인포윈도우를 생성합니다
+	         var infowindow = new kakao.maps.InfoWindow({
+	             content: iwContent,
+	             removable: true
+	         });
+	         kakao.maps.event.addListener(marker, 'click', function () {
+	             // 마커 위에 인포윈도우를 표시합니다
+	             infowindow.open(map, marker);
+	         });
+=======
+			    iwPosition = new kakao.maps.LatLng(37.5339071790577, 126.896761296215); //인포윈도우 표시 위치입니다
+
+				// 인포윈도우를 생성합니다
+				var infowindow = new kakao.maps.InfoWindow({
+				    position : iwPosition, 
+				    content : iwContent 
+				});
+			  
+			// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+			infowindow.open(map, marker); 
+>>>>>>> d855b10be188029964406da5b2968c563b29145e
 
 			},100);
 			
@@ -793,6 +789,7 @@ body {
 									console.log(place.x);
 									console.log(place.y);
 									console.log(place.place_name);
+									console.log(place);
 
 									// swal 라이브러리 이용
 									Swal.fire({

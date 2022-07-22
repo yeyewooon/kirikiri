@@ -117,8 +117,8 @@
         <form id="writeForm" action="/board/write" method="post">
         	<!-- 임시로 아이디, 닉네임 넣어주기 -->
         	<div class="d-none">
-        		<input type="text" name="user_email" value="abc123">
-        		<input type="text" name="user_nickname" value="테스트맨1">
+        		<input type="text" name="user_email" value="b">
+        		<input type="text" name="user_nickname" value="bb">
         	</div>
         	
 	        <div class="row mt-4 text-center">

@@ -243,56 +243,6 @@
     			}
     		})
     	})
-    	
-    	function makeComment(data){
-    		/* json 형식 문자열을 자바스크립트 객체 형식으로 변환 */
-    		let list = JSON.parse(data);
-    		
-    		// 댓글 영역 모두 지워줌
-    		$(".body-comment").empty();
-    		if(list.length == 0){
-    			let div = $("<div>").addClass("col-12 my-3 text-center");
-    			let p = $("<p>").addClass("fs-4").html("등록된 댓글이 없습니다.");
-        		div.append(p);
-        		$(".body-comment").append(div);
-    		}else{
-    			for(let comment of list){
-    				let header = $("<div>").addClass("row align-items-center");
-    				let imgDiv = $("<div>").addClass("col-2 d-flex justify-content-center");
-    				let profileDiv = $("<div>").addClass("profileBox");
-    				let img = $("<img>").attr("src", "/resources/images/profile.jpg");
-    				profileDiv.append(img);
-    				imgDiv.append(profileDiv);
-    				header.append(imgDiv);
-    				
-					/*<!-- 내용 -->
-                    <div class="col-10">
-                        <div class="row mb-1">
-                            <div class="col-auto ms-2">${comment.user_nickname}</div>
-                            <div class="col-lg-7 col-md-5 ms-2">${comment.comment_date}</div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-10">
-                                <input type="text" class="form-control comment" value="${comment.comment}" readonly>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- 댓글 수정/삭제 버튼 -->
-                <c:if test="${comment.user_email eq loginSession.id}">
-                	<div class="col-3 defaultComment">
-                		<button type="button" class="btn btn-warning modify-reply me-2">수정</button>
-                		<button type="button" class="btn btn-danger delete-reply" value="${reply.seq_reply}">삭제</button>
-                	</div>
-                	<div class="col-3 afterComment">
-                		<button type="button" class="btn btn-secondary cancel-reply me-2">취소</button>
-                		<button type="button" class="btn btn-primary complete-reply" value="${reply.seq_reply}">완료</button>
-                	</div>
-                </c:if>*/
-    			}
-    		}
-    	}
     </script>
 </body>
 </html>
