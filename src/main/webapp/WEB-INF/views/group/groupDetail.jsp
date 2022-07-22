@@ -672,6 +672,7 @@ footer.footer {
               Swal.fire('내용을 입력해주세요');
               return;
            }
+           
            let user_receive = $("#user_receive").val(); // 받는 사람 닉네임
            let msgContent = $("#msgContent").val(); // 쪽지 내용 
            $.ajax ({
@@ -684,6 +685,10 @@ footer.footer {
                if(data == "success") {
                   Swal.fire('쪽지 보내기 성공');
                   $('.profileModal').modal('hide'); // 쪽지 보내기 성공시 모달 닫기
+		          console.log($("#msgContent").val());
+		          $("#msgContent").val('');
+		          console.log("================");
+		          console.log($("#msgContent").val());
                }else {
                   Swal.fire('쪽지 보내기 실패');
                }
@@ -691,8 +696,10 @@ footer.footer {
             error : function(e) {
                console.log(e);
             }
-           }) 
-
+           })
+            $("#profileTotalInfo").removeClass("d-none"); // 프로필 내용 보이게
+            $("#msgForm").addClass("d-none"); // 쪽지 양식 Form 안보이게
+            $("#sendMsgBtn").addClass("d-none"); // 쪽지 보내기 버튼 안보이게
         })
      
     // close 버튼 클릭시 

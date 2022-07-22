@@ -671,52 +671,50 @@ body {
 
 		// 지도 찾기 함수
 		const makeMap = function() {
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-			mapOption = {
-				center : new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val()), // 지도의 중심좌표
-				level : 3// 지도의 확대 레벨
-			};
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			  mapOption = { 
+			        center: new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val()), // 지도의 중심좌표
+			        level: 4 // 지도의 확대 레벨
+			    };
 
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			var map = new kakao.maps.Map(mapContainer, mapOption);
 
 			// 마커 또한 모달창이 띄워지고 난 뒤에 다시 생성해야 하므로 setTimeout 걸어줌
 			setTimeout(function() {
-				//마커가 표시될 위치입니다 
-				var markerPosition = new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val());
+				var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
+			    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
+			    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
-				//마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-					position : markerPosition
-				});
+			// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+			    markerPosition = new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val()); // 마커가 표시될 위치입니다
 
-				//마커가 지도 위에 표시되도록 설정합니다
-				marker.setMap(map);
-				
-				var iwContent = '<div style="padding:5px;">끼리끼리</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-<<<<<<< HEAD
-	        	iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-	         
-	         // 인포윈도우를 생성합니다
-	         var infowindow = new kakao.maps.InfoWindow({
-	             content: iwContent,
-	             removable: true
-	         });
-	         kakao.maps.event.addListener(marker, 'click', function () {
-	             // 마커 위에 인포윈도우를 표시합니다
-	             infowindow.open(map, marker);
-	         });
-=======
-			    iwPosition = new kakao.maps.LatLng(37.5339071790577, 126.896761296215); //인포윈도우 표시 위치입니다
+			// 마커를 생성합니다
+			var marker = new kakao.maps.Marker({
+			  position: markerPosition,
+			  image: markerImage // 마커이미지 설정 
+			});
 
-				// 인포윈도우를 생성합니다
-				var infowindow = new kakao.maps.InfoWindow({
-				    position : iwPosition, 
-				    content : iwContent 
-				});
-			  
-			// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-			infowindow.open(map, marker); 
->>>>>>> d855b10be188029964406da5b2968c563b29145e
+			// 마커가 지도 위에 표시되도록 설정합니다
+			marker.setMap(map);  
+
+			// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+			var content = '<div class="customoverlay">' +
+			    '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
+			    '    <span class="title">끼리끼리</span>' +
+			    '  </a>' +
+			    '</div>';
+
+			// 커스텀 오버레이가 표시될 위치입니다 
+			var position = new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val());  
+
+			// 커스텀 오버레이를 생성합니다
+			var customOverlay = new kakao.maps.CustomOverlay({
+			    map: map,
+			    position: position,
+			    content: content,
+			    yAnchor: 1 
+			});
 
 			},100);
 			

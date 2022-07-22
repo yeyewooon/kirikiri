@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.kiri.dto.BlackListDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
+import com.kiri.dto.Tbl_GroupDTO;
 import com.kiri.service.AdminService;
 
 @RequestMapping("/admin")
@@ -107,6 +108,47 @@ public class AdminController {
 		service.updateMem(user_email, user_blacklist);
 		response.getWriter().write("success");
 	}
+	///////////////////////////////////////////////////////////////////////////
+	// 형석
+	// 모임 관리 가기(모임 전체 조회)
+	@RequestMapping(value = "/toGroupAdmin")
+	public String toGroupAdmin(int curPage, Model model) throws Exception{
+		
+		List<Tbl_GroupDTO> groupList = service.selectAllGroup(curPage*10-9, curPage*10);
+		model.addAttribute("groupList", groupList);
+		
+		HashMap<String, Object> map = service.getPageNaviGroup(curPage);
+		model.addAttribute("naviMap", map);
+		
+		int totalCnt = service.selectGroupCnt();
+		model.addAttribute("groupCnt", totalCnt);
+
+		return"admin/adminGroup";
+	}
+	// 모임 검색
+	@RequestMapping(value="/toGroupSearch")
+	@ResponseBody
+	public void toGroupSearch(Model model, HttpServletResponse response, @RequestParam Map<String, Object> searchMap) throws Exception{
+		List<String> searchList = new ArrayList<>();
+		for ( String key : searchMap.keySet() ) {
+			searchList.add(String.valueOf(searchMap.get(key)));
+		}
+		
+		List<Tbl_GroupDTO> slist = service.searchGroup(searchList.get(0), searchList.get(1));
+		
+		String json = new Gson().toJson(slist);
+		response.setCharacterEncoding("utf-8");
+		response.getWriter().write(json);
+	}
+	
+	// 모임 삭제
+	@RequestMapping(value = "/toDeleteGroup")
+	public String deleteGroup(int seq_group) throws Exception{
+		service.deleteGroup(seq_group);
+		System.out.println("그룹 번호 : " + seq_group);
+		return "redirect:/admin/toGroupAdmin?curPage=1";
+	}
+	
 	
 	@RequestMapping(value = "/toError")
 	public String toError() {

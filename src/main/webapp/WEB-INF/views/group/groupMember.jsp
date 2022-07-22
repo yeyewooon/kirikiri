@@ -220,15 +220,15 @@ footer.footer {
 						<div class="collapse navbar-collapse justify-content-end"
 							id="navbarNavDropdown">
 							<ul class="navbar-nav mb-2 mb-lg-0">
-								<li class="nav-item"><a class="nav-link" href=" ">자유게시판</a></li>
+								<li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
 								<c:choose>
 									<c:when test="${empty loginSession}">
-										<li class="nav-item"><a class="nav-link" href=" ">로그인</a></li>
-										<li class="nav-item"><a class="nav-link" href=" ">회원가입</a></li>
+										<li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
+										<li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
 									</c:when>
 									<c:otherwise>
-										<li class="nav-item"><a class="nav-link" href=" ">마이페이지</a></li>
-										<li class="nav-item"><a class="nav-link" href=" ">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+										<li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
 									</c:otherwise>
 								</c:choose>
 							</ul>
@@ -242,14 +242,14 @@ footer.footer {
 				<div class="row w-100 align-items-center">
 					<div class="col-5 d-flex justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link mx-2" href="">자유
+							<li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
 									게시판</a></li>
 						</ul>
 					</div>
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0"> <img
+						<a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
 							id="logoImgs" src="/resources/images/kiri.jpg">
 
 						</a>
@@ -261,9 +261,9 @@ footer.footer {
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
 									<c:if test="${empty loginSession}">
 										<li class="nav-item"><a class="nav-link"
-											href="/toLogin.mem">로그인</a></li>
+											href="/login/toLogin">로그인</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="/toSignUp.mem">회원가입</a></li>
+											href="/signup/toSignupAgree">회원가입</a></li>
 									</c:if>
 								</ul>
 							</div>
@@ -271,7 +271,7 @@ footer.footer {
 							<div class="col-auto user">
 								<c:if test="${not empty loginSession}">
 									<div class="dropdown text-end">
-										<a href="#"
+										<a href="/"
 											class="d-block link-dark text-decoration-none dropdown-toggle"
 											id="dropdownUser1" data-bs-toggle="dropdown"
 											aria-expanded="false"> <img
@@ -280,8 +280,8 @@ footer.footer {
 										</a>
 										<ul class="dropdown-menu text-small"
 											aria-labelledby="dropdownUser1">
-											<li><a class="dropdown-item" href="#">마이페이지</a></li>
-											<li><a class="dropdown-item" href="#">로그아웃</a></li>
+											<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+											<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 										</ul>
 									</div>
 								</c:if>
@@ -352,7 +352,7 @@ footer.footer {
 		</div>
 		<!-- 그룹번호 숨겨서 받기 -->
 		<div class="d-none">
-			<input type="text" value=1 name="seq_group" id="seq_group">
+			<input type="text" value="${seq_group}" name="seq_group" id="seq_group">
 		</div>
 		<div class="row">
 			<div class="col d-flex justify-content-center">
@@ -364,43 +364,63 @@ footer.footer {
 		</div>
 	</div>
 	<!-- Footer-->
-	<footer class="footer mt-5">
-		<div class="row">
-			<div class="col-lg-3 footer-imgBox">
-				<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+		<footer class="footer mt-5">
+			<div class="row">
+				<div class="col-lg-3 footer-imgBox">
+					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+				</div>
+				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+					<ul class="list-inline mb-2">
+						<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+						<li class="list-inline-item">⋅</li>
+						<c:choose>
+							<c:when test="${not empty loginSession}">
+								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+							</c:otherwise>
+						</c:choose>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item">
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<a href="/group/toCreateGroup">모임 만들기</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/login/toLogin">모임 만들기</a>
+								</c:otherwise>
+							</c:choose>
+						</li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/privacy"
+							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+					</ul>
+					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+						57 이레빌딩</p>
+					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+						2022. All Rights Reserved.</p>
+				</div>
+				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item me-4"><a
+							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+						<li class="list-inline-item me-4"><a
+							href="https://twitter.com/?lang=ko"><i
+								class="bi-twitter fs-3"></i></a></li>
+						<li class="list-inline-item"><a
+							href="https://www.instagram.com/"><i
+								class="bi-instagram fs-3"></i></a></li>
+					</ul>
+				</div>
 			</div>
-			<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-				<ul class="list-inline mb-2">
-					<li class="list-inline-item"><a href="#!">공지사항</a></li>
-					<li class="list-inline-item">⋅</li>
-					<li class="list-inline-item"><a href="#!">회원가입</a></li>
-					<li class="list-inline-item">⋅</li>
-					<li class="list-inline-item"><a href="#!">로그인</a></li>
-					<li class="list-inline-item">⋅</li>
-					<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a></li>
-					<li class="list-inline-item">⋅</li>
-					<li class="list-inline-item"><a href="#!"
-						style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-				</ul>
-				<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-					개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-				<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-					57 이레빌딩</p>
-				<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-					2022. All Rights Reserved.</p>
-			</div>
-			<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-				<ul class="list-inline mb-0">
-					<li class="list-inline-item me-4"><a
-						href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-					<li class="list-inline-item me-4"><a
-						href="https://twitter.com/?lang=ko"><i class="bi-twitter fs-3"></i></a></li>
-					<li class="list-inline-item"><a
-						href="https://www.instagram.com/"><i class="bi-instagram fs-3"></i></a></li>
-				</ul>
-			</div>
-		</div>
-	</footer>
+		</footer>
 
 </body>
 <script>

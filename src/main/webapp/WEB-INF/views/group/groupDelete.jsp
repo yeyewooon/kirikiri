@@ -157,7 +157,7 @@ footer.footer {
 </head>
 <body>
 
-	<header class="mb-3 border-bottom">
+<header class="mb-3 border-bottom">
 		<div class="container">
 			<!-- 접혔을 때 nav -->
 			<nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -184,24 +184,20 @@ footer.footer {
 						<div class="collapse navbar-collapse justify-content-end"
 							id="navbarNavDropdown">
 							<ul class="navbar-nav mb-2 mb-lg-0">
-								<li class="nav-item"><a class="nav-link" href=" ">자유게시판</a></li>
+								<li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
 								<c:choose>
 									<c:when test="${empty loginSession}">
-										<li class="nav-item"><a class="nav-link" href=" ">로그인</a></li>
-										<li class="nav-item"><a class="nav-link" href=" ">회원가입</a></li>
+										<li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
+										<li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
 									</c:when>
 									<c:otherwise>
-										<li class="nav-item"><a class="nav-link" href=" ">마이페이지</a></li>
-										<li class="nav-item"><a class="nav-link" href=" ">로그아웃</a></li>
+										<li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+										<li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
 									</c:otherwise>
 								</c:choose>
-
-
 							</ul>
-
 						</div>
 					</div>
-
 				</div>
 			</nav>
 			<!-- 펼쳐졌을 때 nav -->
@@ -210,14 +206,14 @@ footer.footer {
 				<div class="row w-100 align-items-center">
 					<div class="col-5 d-flex justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link mx-2" href="">자유
+							<li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
 									게시판</a></li>
 						</ul>
 					</div>
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0"> <img
+						<a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
 							id="logoImgs" src="/resources/images/kiri.jpg">
 
 						</a>
@@ -229,9 +225,9 @@ footer.footer {
 								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
 									<c:if test="${empty loginSession}">
 										<li class="nav-item"><a class="nav-link"
-											href="/toLogin.mem">로그인</a></li>
+											href="/login/toLogin">로그인</a></li>
 										<li class="nav-item"><a class="nav-link"
-											href="/toSignUp.mem">회원가입</a></li>
+											href="/signup/toSignupAgree">회원가입</a></li>
 									</c:if>
 								</ul>
 							</div>
@@ -239,7 +235,7 @@ footer.footer {
 							<div class="col-auto user">
 								<c:if test="${not empty loginSession}">
 									<div class="dropdown text-end">
-										<a href="#"
+										<a href="/"
 											class="d-block link-dark text-decoration-none dropdown-toggle"
 											id="dropdownUser1" data-bs-toggle="dropdown"
 											aria-expanded="false"> <img
@@ -248,8 +244,8 @@ footer.footer {
 										</a>
 										<ul class="dropdown-menu text-small"
 											aria-labelledby="dropdownUser1">
-											<li><a class="dropdown-item" href="#">마이페이지</a></li>
-											<li><a class="dropdown-item" href="#">로그아웃</a></li>
+											<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+											<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 										</ul>
 									</div>
 								</c:if>
@@ -315,7 +311,7 @@ footer.footer {
 		</div>
 		<!-- 그룹번호 숨겨서 받기 -->
 		<div class="d-none">
-			<input type="text" value=1 name="seq_group" id="seq_group">
+			<input type="text" value="${seq_group}" name="seq_group" id="seq_group">
 		</div>
 		<!-- Footer-->
 		<footer class="footer mt-5">
@@ -325,15 +321,33 @@ footer.footer {
 				</div>
 				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
 					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="#!">공지사항</a></li>
+						<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
 						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="#!">회원가입</a></li>
+						<c:choose>
+							<c:when test="${not empty loginSession}">
+								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+							</c:otherwise>
+						</c:choose>
 						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="#!">로그인</a></li>
+						<li class="list-inline-item">
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<a href="/group/toCreateGroup">모임 만들기</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/login/toLogin">모임 만들기</a>
+								</c:otherwise>
+							</c:choose>
+						</li>
 						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a></li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="#!"
+						<li class="list-inline-item"><a href="/privacy"
 							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
 					</ul>
 					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
