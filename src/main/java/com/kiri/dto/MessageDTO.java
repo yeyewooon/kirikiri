@@ -7,19 +7,16 @@ public class MessageDTO {
    private String user_receive;
    private String msgContent;
    private String date;
-   private int view_count;
    
    public MessageDTO() {}
 
-   public MessageDTO(int seq_message, String user_send, String user_receive, String msgContent, String date,
-         int view_count) {
+   public MessageDTO(int seq_message, String user_send, String user_receive, String msgContent, String date) {
       super();
       this.seq_message = seq_message;
       this.user_send = user_send;
       this.user_receive = user_receive;
       this.msgContent = msgContent;
       this.date = date;
-      this.view_count = view_count;
    }
 
    public int getSeq_message() {
@@ -62,18 +59,10 @@ public class MessageDTO {
       this.date = date;
    }
 
-   public int getView_count() {
-      return view_count;
-   }
-
-   public void setView_count(int view_count) {
-      this.view_count = view_count;
-   }
-
    @Override
    public String toString() {
       return "MessageDTO [seq_message=" + seq_message + ", user_send=" + user_send + ", user_receive=" + user_receive
-            + ", msgContent=" + msgContent + ", date=" + date + ", view_count=" + view_count + "]";
+            + ", msgContent=" + msgContent + ", date=" + date + "]";
    }
 
 

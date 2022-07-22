@@ -352,7 +352,7 @@ footer.footer {
 		</div>
 		<!-- 그룹번호 숨겨서 받기 -->
 		<div class="d-none">
-			<input type="text" value=1 name="seq_group" id="seq_group">
+			<input type="text" value="${seq_group}" name="seq_group" id="seq_group">
 		</div>
 		<div class="row">
 			<div class="col d-flex justify-content-center">
