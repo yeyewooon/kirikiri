@@ -546,10 +546,10 @@
  	 	        	let activeText = this.innerHTML;
  	 	        	if(activeText == "게시판"){
  	 	        		location.href = "https://www.naver.com";
- 	 	        	}else if(activeText = "일정") {
+ 	 	        	}else if(activeText == "일정") {
  	 	        		location.href = "/cal/toGroupCalendar?seq_group="+seq_group;
- 	 	        	}else if(activeText = "채팅") {
- 	 	        		location.href = "https://www.naver.com";
+ 	 	        	}else if(activeText == "채팅") {
+ 	 	        		location.href = "/group/toChat?seq_group="+seq_group;
  	 	        	}
  	 	        }else {
  	 	        	Swal.fire('모임 맴버만 활동 가능합니다');
