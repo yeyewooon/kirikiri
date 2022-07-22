@@ -1,6 +1,8 @@
 package com.kiri.service;
 
 import java.io.File;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +40,7 @@ public class SignupService {
 		}
 	}
 	
-	public boolean phoneCheck(String user_phone) throws Exception{ //닉네임체크
+	public boolean phoneCheck(String user_phone) throws Exception{ //전화번호체크
 		int result = dao.phoneCheck(user_phone);
 		if(result > 0) {
 			return false;
@@ -66,7 +68,6 @@ public class SignupService {
 	public void insertHobby(String user_email, List<String> hobby) throws Exception{ //회원가입 취미
 		for(String hobbyIndex : hobby) {
 			Map<String, String> map = new HashMap<>();
-			System.out.println(hobbyIndex);
 			map.put("user_email", user_email);
 			map.put("hobby", hobbyIndex);
 			dao.insertHobby(map); 
@@ -83,12 +84,33 @@ public class SignupService {
 		}
 	}
 	
-	public void generalLoginType(String user_email,String type, String unique_id) throws Exception{ // 로그인타입 지정
+	public void loginType(String user_email,String type, String unique_id) throws Exception{ // 로그인타입 지정
 		Map<String,String> map = new HashMap<String, String>();
 		map.put("user_email", user_email);
 		map.put("type", type);
 		map.put("unique_id", unique_id);
-		dao.generalLoginType(map);
+		dao.loginType(map);
 	}
+	
+	public void updateLoginType(String user_email, String type, String unique_id) throws Exception{ //로그인 타입  수정
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("user_email", user_email);
+		map.put("type", type);
+		map.put("unique_id", unique_id);
+		
+		dao.updateLoginType(map);
+	}
+	
+	public Map<String,Object> connection(String user_name, String user_email, java.util.Date date, String signup_type, String type) throws Exception{ //로그인 타입  수정
+		Map<String,Object> connection = new HashMap<String, Object>();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		connection.put("userName", user_name);
+		connection.put("userEmail", user_email);
+		connection.put("signupDate", sdf.format(date));
+		connection.put("signupType", signup_type);
+		connection.put("type", type);
+		return connection;
+	}
+	
 	
 }
