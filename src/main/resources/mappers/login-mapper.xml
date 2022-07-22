@@ -5,11 +5,11 @@
    
    
 <mapper namespace="loginMapper">
-	<select id="login" parameterType="map" resultType="com.kiri.dto.MemberDTO">
+	<select id="login" parameterType="map" resultType="com.kiri.dto.MemberDTO">  
 		select * from member where user_email = #{user_email} and user_pw = #{user_pw}
 	</select>
 	
-	<select id="socialLogin" parameterType="String" resultType="com.kiri.dto.MemberDTO">
+	<select id="socialLogin" parameterType="String" resultType="com.kiri.dto.MemberDTO">  
 		select * from member where user_email = #{user_email}
 	</select>
 	
@@ -17,11 +17,11 @@
 		select * from login_type where user_email = #{user_email}
 	</select>
 	
-	<insert id="loginLogSuccess" parameterType="String">
+	<insert id="loginLogSuccess" parameterType="String"> 
 		insert into login_log values(#{user_email}, '성공', sysdate )
 	</insert>
 	
-	<insert id="loginLogFailed" parameterType="String">
+	<insert id="loginLogFailed" parameterType="String">  
 		insert into login_log values(#{user_email}, '실패', sysdate )
 	</insert>
 	
@@ -37,9 +37,9 @@
 		where a.user_email = #{user_email} and a.user_name = #{user_name} and b.type = 'general'
 	</select>
 	
-	<select id="updatePw" parameterType="map" >
+	<update id="updatePw" parameterType="map" >  
 		update member set user_pw = #{user_pw} where user_email = #{user_email}
-	</select>
+	</update>
 	
 	
 	

@@ -84,34 +84,6 @@ body {
 	}
 }
 
-/* body */
-/* 바디*/
-.privacyBox {
-	width: 1000px;
-	height: auto;
-	border: 1px solid d2e3ec;
-	text-align: left;
-	margin: auto;
-	background-color: #d2e3ec;
-	margin-bottom: 150px;
-	margin-top: 70px;
-}
-
-#privacyForm {
-	padding: 20px;
-	margin-top: 3000px;
-	width: 93%;
-	height: 100%;
-	margin: auto;
-	border: 1px solid d2e3ec;
-	background-color: white;
-}
-.privacyBox > span{
-    margin: 15px;
-}
-
-
-
 /* header */
 .border-bottom {
 	background-color: white;
@@ -135,28 +107,29 @@ body {
 
 /* header 반응형 끝 */
 
-/* body영역 */
-.loginBox {
+/* 바디*/
+.privacyBox {
 	width: 1000px;
 	height: auto;
 	border: 1px solid d2e3ec;
-	text-align: center;
-	
+	text-align: left;
+	margin: auto;
 	background-color: #d2e3ec;
 	margin-bottom: 150px;
 	margin-top: 70px;
-    text-align: left ;
 }
 
-#loginForm {
-	padding-top: 20px;
+#privacyForm {
+	padding: 20px;
 	margin-top: 3000px;
 	width: 93%;
 	height: 100%;
-	text-align: left;
+	margin: auto;
 	border: 1px solid d2e3ec;
 	background-color: white;
-    
+}
+.privacyBox > span{
+    margin: 15px;
 }
 
 

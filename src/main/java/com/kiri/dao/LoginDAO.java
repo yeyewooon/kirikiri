@@ -43,7 +43,8 @@ public class LoginDAO {
 	}
 	
 	public void updatePw(Map<String, String> map) throws Exception{ //비밀번호 수정
-		session.selectOne("loginMapper.updatePw",map);
+		session.update("loginMapper.updatePw",map);
 	}
+	
 	
 }

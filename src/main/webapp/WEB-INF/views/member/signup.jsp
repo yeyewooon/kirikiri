@@ -113,6 +113,12 @@ body{
     background-color: white;
     display: none;
 }
+.btnRow button {
+	margin: 30px;
+	margin-bottom: 70px;
+	width: 14%;
+	height: 30%;
+}
 #user_intro{
     height: 100%;
     width: 100%;
@@ -493,7 +499,7 @@ footer.footer {
   	  		 let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;    
      
   	  		 if(!nicknameRegex.test($("#user_nickname").val())){
-      	 		sweetAlertFail("올바르지 않은 닉네임 형식입니다.");
+      	 		 sweetAlertFail("올바르지 않은 닉네임 형식입니다.");
       	 		 $("#nicknameCheck").focus();
 	       	 	 return;
 	       	 	 
@@ -776,7 +782,6 @@ function validPw(){
 	$("#regex-col").empty();
     let span = $('<span>').attr('id', 'password-regex-span').css("color","green").html("사용가능한 비밀번호 입니다.");
     $("#regex-col").append(span);
-    $("#user_pw").focus();
 }
 function invalidPw(){
 	$("#regex-col").empty();
@@ -1284,13 +1289,13 @@ function sweetAlertSuccess(content){
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row btnRow">
         <div class="col">
             <button type="button" id="backPageBtn" class="btn btn-secondary">취소</button>
             <button type="button" id="nextBtn" class="btn btn-primary">확인</button>
         </div>
     </div>
-    <div class="row">
+    <div class="row btnRow">
         <div class="col">
             <button type="button" id="singupBackBtn" class="btn btn-secondary">뒤로가기</button>
             <button type="button" id="completeBtn" class="btn btn-primary">가입하기</button>
