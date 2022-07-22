@@ -34,7 +34,6 @@ public class UserController {
 	// 모든 그룹 리스트 보여주기
 	@RequestMapping(value = "/toViewAllGroupList")
 	public String toUserViewList(Model model) throws Exception {
-		System.out.println("toUserViewList잘들어옴");
 		List<Tbl_GroupDTO> selectAllList = user_service.selectAllGroup();
 		model.addAttribute("selectAllList", selectAllList);
 		return "/user/viewAllGroupList";
@@ -43,12 +42,16 @@ public class UserController {
 	// 카테고리별 지역별 그룹 리스트 보여주기
 	@RequestMapping(value = "/toUserSelectedGroupList")
 	public String userViewList(Tbl_GroupDTO tbl_group_dto, Model model) throws Exception {
-		System.out.println(tbl_group_dto);
-		List<Tbl_GroupDTO> groupList = user_service.groupList(tbl_group_dto);
-		System.out.println(groupList.toString());
-		System.out.println("잘들어옴");
-		model.addAttribute("groupList", groupList);
-		return "/user/userSelectedGroupList";
+		if(tbl_group_dto.getGroup_category() != null) {
+			List<Tbl_GroupDTO> groupList = user_service.groupList(tbl_group_dto); 
+			model.addAttribute("groupList",groupList); 
+			return "/user/categorySelected";
+		}else if(tbl_group_dto.getGroup_site() != null) {
+			List<Tbl_GroupDTO> groupList = user_service.groupList(tbl_group_dto); 
+			model.addAttribute("groupList",groupList); 
+			return "/user/siteSelected";
+		}
+		return "";
 	}
 
 	// 쪽지 보내기
@@ -71,11 +74,8 @@ public class UserController {
 	@RequestMapping(value = "/sendMsg")
 	@ResponseBody
 	public List<MessageDTO> selectSendMessage(MessageDTO MessageDTO, Model model) throws Exception {
-		System.out.println("아이디 : " + MessageDTO.toString());
 		List<MessageDTO> smsgList = message_service.selectSendMessage(MessageDTO.getUser_send());
-
 		return smsgList;
-
 	}
 
 	// 쪽지 삭제

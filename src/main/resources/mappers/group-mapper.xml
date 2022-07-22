@@ -175,8 +175,10 @@
       delete from wishList where seq_group = #{seq_group} and user_email = #{user_email}
    </delete>
 
-   
-   
+   <!-- 해당 아이디 그룹 가입한 갯수 -->
+   <select id="selectGroupCntByEmail" parameterType="String" resultType="int">
+   		select count(*) from group_member where user_email = #{loginSession_id}
+   </select>
    
    
 </mapper>

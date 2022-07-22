@@ -27,48 +27,135 @@
 <script src="https://code.jquery.com/jquery-3.6.0.js"
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
-<!-- AOS 라이브러리 불러오기-->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
 	crossorigin="anonymous"></script>
 <!-- summernote -->
 <!-- include libraries(jQuery, bootstrap) -->
-<link
-	href="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css"
-	rel="stylesheet">
-<script
-	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-<script
-	src="http://netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+<!-- summernote -->
+<script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+<script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- include summernote css/js-->
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.css"
-	rel="stylesheet">
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.11/summernote-bs4.js"></script>
-<!-- include summernote-ko-KR -->
-<script src="/resources/js/summernote-ko-KR.js"></script>
+ <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+ <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>모임 생성 페이지</title>
 
 
 <script>
 // 썸머노트
 $(document).ready(function() {
-	  $('#summernote').summernote({
- 	    	placeholder: 'content',
-	        minHeight: 370,
-	        maxHeight: null,
-	        focus: true, 
-	        lang : 'ko-KR'
-	  });
-	});
+	// /* summernote */
+	  var fontList = ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','EarlyFontDiary', '맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'];
+		$('#summernote').summernote({
+			  height: 450, // 에디터 높이
+			  minHeight: 300, // 최소 높이
+			  maxHeight: 550, // 최대 높이
+			  focus: true, // 에디터 로딩후 포커스를 맞출지 여부
+			  lang: "ko-KR", // 한글 설정
+			  placeholder: '최대 1000자까지 작성 가능합니다.', //placeholder 설정
+			  toolbar: [
+					// [groupName, [list of button]]
+					['fontname', ['fontname']], // 글꼴
+					['fontsize', ['fontsize']], // 글자 크기
+					// 굵기, 기울임꼴, 밑줄, 취소선, 서식 지우기
+				    ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+				 	// 글자 색
+				    ['color', ['forecolor', 'color']],
+				 	// 그림첨부, 링크만들기, 동영상첨부
+				    ['insert',['picture', 'link', 'video']],
+				    // 글머리, 번호매기기, 문단정렬
+				    ['para', ['ul', 'ol', 'paragraph']],
+				    // 줄간격
+				    ['height', ['height']],
+					// 표 만들기
+				    ['table', ['table']],
+				 	// 코드보기, 확대해서보기, 도움말
+				    ['view', ['codeview', 'help']]
+			  ],
+			  // 추가한 글꼴
+			  fontNames: fontList,
+			  // 추가한 폰트 사이즈
+			  fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+			  fontNamesIgnoreCheck: fontList,
+			  callbacks: {
+				  onImageUpload : function(files, editor, welEditable){
+					  // 파일 업로드(다중 업로드를 위해 반복문 사용)
+					  for (var i = files.length - 1; i >= 0; i--) {
+						  uploadSummernoteImageFile(files[i], this);
+					  }
+				  }
+			  }
+		});
+		
+	         // 주기적으로 감지할 대상 요소 선정
+	         let target = document.querySelector(".note-editable");
+	         // DOM의 어떤 부분을 감시할지를 옵션 설정
+	         let config = { 
+	            childList: true, // 자식노드 추가/제거 감지
+	            subtree : true, // 대상 노드의 자식 뿐만 아니라 손자 이후로 모두 감시
+	         };
+	         
+	         // 옵저버 인스턴스 생성, 콜백함수 설정
+	         let observer = new MutationObserver(function(mutationList){ // 타겟에 변화가 일어나면 콜백함수를 실행하게 된다.
+	            console.log(mutationList);
+	            for(let mutation of mutationList){
+	               if(mutation.removedNodes.length == 1){
+	                  if(mutation.removedNodes[0].src != null) {
+	                     let img = mutation.removedNodes[0].src;
+	                     //console.log(img);
+	                     let decode_src = img.replace("http://localhost/boardFile/", "");
+	                     let src = decodeURIComponent(decode_src);
+	                     $.ajax({
+	                        url : "/group/delImg"
+	                        , type : "post"
+	                        , data : {"src" : src}
+	                        , success : function(data){
+	                           console.log(data);
+	                        }, error : function(e){
+	                           console.log(e);
+	                        }
+	                     })
+	                  }
+	               }
+	            }
+	         }); 
+	   // 감지 시작
+	   observer.observe(target, config);
+});
+
+//summernote 이미지 업로드 function
+function uploadSummernoteImageFile(file, editor){
+   data = new FormData();
+   data.append("file", file);
+   $.ajax({
+      data : data
+      , type : "POST"
+      , enctype: "multipart/form-data"
+      , url : "/group/summernoteImg"
+      , contentType : false
+      , processData : false
+      , success : function(data){
+         $(editor).summernote("editor.insertImage", data.url);
+      }, error : function(e){
+         console.log(e);
+      }
+   });
+}
+
 </script>
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
+.dropdown-toggle::after {
+            display: none;
+        }
+
+
 body {
 	background-color: #f6f7f9;
 }
@@ -78,9 +165,6 @@ body {
 	font-family: "OTWelcomeRA";
 }
 
-#mainText {
-	font-family: "양진체";
-}
 
 /* header 반응형 */
 @media ( max-width : 768px) {
@@ -346,7 +430,7 @@ footer.footer {
 
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0"> <img
+						<a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
 							id="logoImgs" src="/resources/images/kiri.jpg" />
 						</a>
 					</div>
@@ -427,7 +511,7 @@ footer.footer {
 							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="게임/오락">게임/오락</button>
 							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="요리/제조">요리/제조</button>
 							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="문화/공연/축제">문화/공연/축제</button>
-							<input type="text" name="group_category" id="group_category">
+							<input type="text" name="group_category" id="group_category" hidden>
 						</div>
 					</div>
 				</div>
@@ -482,9 +566,9 @@ footer.footer {
 						<button type="button" class="btn btn-primary mt-2 group_siteBtn ms-3">지역 선택 완료</button>
 					</div>
 					<!--모임 지역-->
-					<input type="text" id="group_site" name="group_site"> 
-					<input type="text" id="sido1Input" name="sido1Input"> 
-					<input type="text" id="gugun1Input" name="gugun1Input">
+					<input type="text" id="group_site" name="group_site" hidden> 
+					<input type="text" id="sido1Input" name="sido1Input" hidden> 
+					<input type="text" id="gugun1Input" name="gugun1Input" hidden>
 				</div>
 			</div>
 
@@ -538,7 +622,7 @@ footer.footer {
 							<i class="fa-solid fa-plus"></i>
 						</div>
 					</div>
-					<input type="text" name="group_people" id="group_people" value="2">
+					<input type="text" name="group_people" id="group_people" value="2" hidden>
 				</div>
 			</div>
 			<!--이미지-->
@@ -571,15 +655,10 @@ footer.footer {
 	</div>
 	</div>
 
-
-
-
-
-
 	<!--뒤로가기 , 동의 후 등록-->
 	<div class="mainFooter d-flex justify-content-center align-items-center mt-3">
 		<span class="mainFooterBtnBox">
-			<button class="btn btn-outline-warning">뒤로 가기</button>
+			<button class="btn btn-outline-warning" id="backBtn">뒤로 가기</button>
 			<button class="btn btn-primary ms-4" id="registerGroupBtn">동의후 등록</button>
 		</span>
 	</div>
@@ -632,8 +711,8 @@ footer.footer {
 
   // 지역 설정
   $('document').ready(function() {
-	  var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
-	   var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
+	  	var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
+	   	var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
 	    var area2 = ["계양구","남구","남동구","동구","부평구","서구","연수구","중구","강화군","옹진군"];
 	    var area3 = ["대덕구","동구","서구","유성구","중구"];
 	    var area4 = ["광산구","남구","동구",     "북구","서구"];
@@ -756,9 +835,14 @@ footer.footer {
 
   // Form으로 전송
   $("#registerGroupBtn").on("click",function() {
+	  
+	  let totalGroupCntById = "${totalGroupCntById}" //현재 세션의 가입한 모임 갯수
 	  // 구/군 변경시 비교 
 	  let group_site_com = $("#sido1Input").val() + " " +$("#gugun1Input").val();
-	  if($("#group_category").val() == "") {
+	  if(totalGroupCntById >= 3) { // 모임 가입 갯수 판별
+		  Swal.fire("모임은 최대 3개까지 가입 혹은 생성이 가능합니다");
+		  return;
+	  }else if($("#group_category").val() == "") {
 		  Swal.fire("모임주제를 선택해주세요");
 		  return;
 	  }else if($("#group_title").val() == "") {
@@ -788,14 +872,10 @@ footer.footer {
     reader.readAsDataURL(this.files[0]);
    
     reader.onload = function (e) {
-    	 console.log("e.target ", e.target.result);
     	groupDefaultImg.src = e.target.result;
     }
-    
-    console.log($("#groupFile").val());
   }
 
-  // 카테고리 선택
   // 카테고리 선택
     $(".categoryBtn").on("click", function (e) {
       // 클래스 삭제 후
@@ -814,7 +894,6 @@ footer.footer {
 
   // 지역 설정
   let selectBoxChange = function (value) {
-    console.log(value);
     $("#group_site").val(value);
   }
 
@@ -867,21 +946,9 @@ footer.footer {
     }
   }
 
-  // 이미지만 올릴 수 있도록 
-  /* function chk_file_type(obj) {
-			 let file_kind = obj.value.lastIndexOf('.');
-			 let file_name = obj.value.substring(file_kind+1,obj.length);
-			 let file_type = file_name.toLowerCase();
-			 let check_file_type=new Array();​
-			 check_file_type=['jpg','gif','png','jpeg','bmp'];
-			 if(check_file_type.indexOf(file_type)==-1){
-			    alert('이미지 파일만 선택할 수 있습니다.');
-			    let parent_Obj=obj.parentNode
-			    let node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
-			  return false;
-			 }
-			} */
-  
+	$("#backBtn").on("click",function() {
+		location.href = "/";
+	})
   </script>
 </body>
 </html>

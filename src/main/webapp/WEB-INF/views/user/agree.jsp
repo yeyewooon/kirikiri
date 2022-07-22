@@ -282,7 +282,7 @@ $(document).ready(function(){
 					</div>
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0"> <img
+						<a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
 							id="logoImgs" src="/resources/images/kiri.jpg">
 						</a>
 					</div>

@@ -293,7 +293,7 @@ footer.footer {
           </div>
           <!-- logo -->
           <div class="col-2">
-            <a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
+            <a href="/" id="navLogo" class="mb-2 mb-lg-0">
               <img id="logoImgs" src="/resources/images/kiri.jpg" />
             </a>
           </div>
@@ -621,7 +621,10 @@ footer.footer {
     let loginSession_id = "${loginSession_id}"; // 현재 로그인 세션 아이디
     let loginSession_nickName = "${loginSession_nickName}"// 현재 로그인 세션 닉네임
     let hostEmail = "${memberList[0].user_email}"; // 주최자 아이디
-
+	let totalGroupCntById = "${totalGroupCntById}"; // 현재 로그인된 아이디의 모임 가입수
+	console.log(totalGroupCntById);
+	
+	
      //해당 모임 맴버 프로필 보기
     $(".memberProfileContainer").on("click",function() {
           let findUserEmail = $(this).find('span').html(); // 공백이 포함되서 나옴
@@ -672,6 +675,7 @@ footer.footer {
               Swal.fire('내용을 입력해주세요');
               return;
            }
+           
            let user_receive = $("#user_receive").val(); // 받는 사람 닉네임
            let msgContent = $("#msgContent").val(); // 쪽지 내용 
            $.ajax ({
@@ -684,6 +688,10 @@ footer.footer {
                if(data == "success") {
                   Swal.fire('쪽지 보내기 성공');
                   $('.profileModal').modal('hide'); // 쪽지 보내기 성공시 모달 닫기
+                console.log($("#msgContent").val());
+                $("#msgContent").val('');
+                console.log("================");
+                console.log($("#msgContent").val());
                }else {
                   Swal.fire('쪽지 보내기 실패');
                }
@@ -691,8 +699,10 @@ footer.footer {
             error : function(e) {
                console.log(e);
             }
-           }) 
-
+           })
+            $("#profileTotalInfo").removeClass("d-none"); // 프로필 내용 보이게
+            $("#msgForm").addClass("d-none"); // 쪽지 양식 Form 안보이게
+            $("#sendMsgBtn").addClass("d-none"); // 쪽지 보내기 버튼 안보이게
         })
      
     // close 버튼 클릭시 
@@ -811,6 +821,11 @@ footer.footer {
             return;
          }
          
+         // 현재 아이디의 모임가입한 수가 3개가 넘으면 모임 가입 금지
+         if(totalGroupCntById >= 3) {
+        	 Swal.fire('모임은 최대 3개만 가입가능합니다');
+             return;
+         }
          let curMemberCnt = ${fn:length(memberList)}; // 현재 맴버수 jstl memberList 길이
          let totalMemberCnt = ${tbl_group_dto.group_people}; // 수용가능 맴버수
          if(curMemberCnt < totalMemberCnt) { // 현재 맴버수 < 수용 맴버수
