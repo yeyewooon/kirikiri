@@ -456,6 +456,7 @@ footer.footer {
     		, data : {user_email : $("#id").val() , user_pw : $("#pw").val() }
     		, dataType : "text"
     		, success : function(result){
+    			console.log(result);
     			if(result === "general"){
     				Swal.fire({
     					  title: '환영합니다 !',

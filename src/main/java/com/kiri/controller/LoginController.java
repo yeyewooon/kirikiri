@@ -53,7 +53,6 @@ public class LoginController {
 	public String general(String user_email, String user_pw) throws Exception { // 일반로그인 feat.조용진
 		String Encryption_pw = ecp.getSHA512(user_pw); 
 		Login_TypeDTO type = service.loginType(user_email);
-		
 		if(type == null) { //미가입
 			return "nonmem";
 			
