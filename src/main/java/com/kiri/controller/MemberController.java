@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
 import com.kiri.dto.BoardDTO;
@@ -37,7 +38,6 @@ public class MemberController {
     private MessageService message_service;
     @Autowired
     private EncryptionUtils ecp;
-	
 	
 	@RequestMapping(value = "/welcome")
 	public String welcome() {
@@ -99,9 +99,18 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/modifyProfilePic")
-	public String modifyProfilePic(MemberDTO dto) throws Exception { // 사진 수정
-		System.out.println(dto);
-		service.modifyProfilePic(dto);
+	public String modifyProfilePic(MultipartFile user_image) throws Exception { // 사진 수정
+		System.out.println("user_image : "+user_image);
+		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
+		
+		// 디렉토리 생성
+		if(!user_image.isEmpty()) { 
+			String realPath = session.getServletContext().getRealPath("profile");
+			String profile_image = service.uploadProfile(user_image, realPath);
+			((MemberDTO)session.getAttribute("loginSession")).setUser_image(profile_image);
+			System.out.println(realPath);
+			service.modifyProfilePic(user_email,profile_image);
+		}
 		return "redirect:myPage";
 	}
 
@@ -121,6 +130,8 @@ public class MemberController {
 		String json = new Gson().toJson(selectBoardList);
 	    response.setCharacterEncoding("utf-8");
 	    response.getWriter().write(json);
+	    
+	    
 
 		model.addAttribute("memberdto", selectMember);
 		model.addAttribute("selectBoardCount", selectBoardCount);
@@ -165,8 +176,17 @@ public class MemberController {
 	}
 
 	@RequestMapping(value = "/profileModify") // 개인정보 수정
-	public String profileModify(MemberDTO dto) throws Exception {
-		System.out.println("ㅁㄴㅇㅁㄴㅇ : "+dto.getUser_phone());
+	public String profileModify(MemberDTO dto, String data_password) throws Exception {
+		System.out.println(dto.toString());
+		System.out.println("ㅁㄴㅇㅁㄴㅇ : "+dto.getUser_pw());
+		System.out.println(data_password);
+		if(dto.getUser_pw() == "") {
+			dto.setUser_pw(data_password);
+			System.out.println("ㅁㄴㅇㅁㄴㅇ :"+dto.getUser_pw());
+		}else {
+			String Encryption_pw = ecp.getSHA512(dto.getUser_pw());
+			dto.setUser_pw(Encryption_pw);			
+		}
 		service.profileModify(dto);
 		return "redirect:myPage";
 	}
@@ -190,15 +210,15 @@ public class MemberController {
 		return result;
 	}
 	
-	/*
-	 * @RequestMapping(value="/pwCheck") // pw 중복확인
-	 * 
-	 * @ResponseBody public int pwCheck(String user_pw) throws Exception{
-	 * System.out.println("password : " + user_pw);
-	 * 
-	 * int result = service.phoneCheck(user_pw); System.out.println(result); return
-	 * result; }
-	 */
+	@RequestMapping(value="/pwCheck") // pw 중복확인
+	@ResponseBody
+	public int pwCheck(String user_pw) throws Exception{
+		System.out.println("password : " + user_pw);
+		String Encryption_pw = ecp.getSHA512(user_pw); 
+		
+		 int result = service.pwCheck(Encryption_pw);
+		 return result;
+	}
 	
 	
 

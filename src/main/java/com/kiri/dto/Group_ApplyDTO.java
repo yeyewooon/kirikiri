@@ -8,9 +8,9 @@ public class Group_ApplyDTO {
 	private int seq_group;
 	private String user_nickname;
 	private String user_bd;
-	
-	public Group_ApplyDTO() {}
-
+	public Group_ApplyDTO() {
+		super();
+	}
 	public Group_ApplyDTO(int seq_apply, String user_email, int seq_group, String user_nickname, String user_bd) {
 		super();
 		this.seq_apply = seq_apply;
@@ -51,11 +51,9 @@ public class Group_ApplyDTO {
 	public void setUser_nickname(String user_nickname) {
 		this.user_nickname = user_nickname;
 	}
-
 	public String getUser_bd() {
 		return user_bd;
 	}
-
 	public void setUser_bd(String user_bd) {
 		this.user_bd = user_bd;
 	}

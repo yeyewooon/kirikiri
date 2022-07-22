@@ -138,6 +138,9 @@ h4 {
 	margin: 20px 50px 10px 50px;
 }
 /* modal 창 영역 */
+.modal-dialog{
+	transform: translate(200PX,50px);
+}
 .modal-content{
 	width:580px;
 }
@@ -148,6 +151,10 @@ h4 {
 #modal label{
 	cursor:pointer;
 	user-select: none;
+}
+.modalBtn{
+	width:100%;
+	height:60px;
 }
 .hobbyWrapper{
 	display:flex;
@@ -365,8 +372,7 @@ footer.footer {
 				</div>
 			</div>
 			<div class="col-md-4 mt-4">
-				<form action="/mem/modifyProfilePic" method="post"
-					id="modifyPicForm">
+				<form action="/mem/modifyProfilePic" method="post" id="modifyPicForm" enctype="multipart/form-data">
 					<i class="fa-solid fa-wrench me-3"></i><span id="modifyProfilePic"
 						style="cursor: pointer; user-select: none">프로필 사진변경</span>
 					<div>
@@ -376,18 +382,15 @@ footer.footer {
 					<div id="profilePic">
 						<c:choose>
 							<c:when test="${empty memberdto.user_image}">
-								<img src="/resources/images/default_profile.jpg"
-									id="profile_image">
+								<img src="/resources/images/default_profile.jpg" id="profile_image">
 							</c:when>
 							<c:otherwise>
-								<img src="/profile/${memberdto.user_image}"
-									id="profile_image">
+								<img src="/profile/${memberdto.user_image}" id="profile_image">
 							</c:otherwise>
 						</c:choose>
 					</div>
 					<div class="col-12 d-flex justify-content-center mt-3">
-						<input type="file" class="form-control w-5 d-none" id="file"
-							name="user_image">
+						<input type="file" class="form-control w-5 d-none" id="file" name="user_image">
 					</div>
 					<div class="col-12 d-flex justify-content-center mt-3">
 						<input type="text" class="form-control w-5 d-none" value="${memberdto.user_email}"
@@ -404,64 +407,104 @@ footer.footer {
 				</div>
 			</div>
 			<script>
-				// 사용자가 새로운 프로필을 선택했을때 이미지 띄워주기
-				document.getElementById("file").onchange = function() {
-					let reader = new FileReader();
-					reader.readAsDataURL(this.files[0])
-					reader.onload = function(e) {
-						document.getElementById("profile_image").src = e.target.result;
-					}
+			// 사용자가 새로운 프로필을 선택했을때 이미지 띄워주기
+			document.getElementById("file").onchange = function() {
+				let reader = new FileReader();
+				reader.readAsDataURL(this.files[0])
+				reader.onload = function(e) {
+					document.getElementById("profile_image").src = e.target.result;
 				}
-				$("#modifyProfilePic").on("click", function() {
-					if ($("#modifyProfilePic").text() === '프로필 사진변경') {
-						this.textContent = '저장';
-						$("#file").removeClass("d-none");
-					} else {
-						let answer = confirm("사진 변경 하시겠습니까? (사진 값 없이 저장 하실 경우 기본 이미지로 변경됩니다.)");
-						if(answer){
+			}
+			$("#modifyProfilePic").on("click", function() {
+			if ($("#modifyProfilePic").text() === '프로필 사진변경') {
+				this.textContent = '저장';
+				$("#file").removeClass("d-none");
+			} else {
+				Swal.fire({
+					  title: '정말 변경하시겠습니까?',
+					  text: "사진 값 없이 저장하실 경우, 기본 이미지로 변경됩니다.!",
+					  icon: 'warning',
+					  showCancelButton: true,
+					  confirmButtonColor: '#3085d6',
+					  cancelButtonColor: '#d33',
+					  confirmButtonText: '네, 변경할께요.!',
+					  cancelButtonText:'아니요, 변경안할께요.'
+					}).then((result) => {
+					  if (result.isConfirmed) {
+					    Swal.fire(
+					      '변경 완료!',
+					      '프로필 사진을 변경하였습니다.',
+					      'success'
+					    ).then(function() {
 							this.textContent = '프로필 사진변경';
 							$("#file").addClass("d-none");
-							$("#modifyPicForm").submit();							
-						}else{
+							$("#modifyPicForm").submit();														
+		                });
+					  }else{
 							this.textContent = '프로필 사진변경';
 							$("#file").addClass("d-none");
+							location.reload();
 						}
-					}
-				})
+					})
+				}
+			})
 			</script>
-				<div class="col-md-4" style="text-align: end">
-					<button type="button" class="btn btn-outline-info mt-4 profileBtn" data-bs-toggle="modal" data-bs-target="#exampleModal" >개인정보 수정</button>
-					<button type="button" class="btn btn-outline-info mt-4 profileBtn"
-						id="profileDelete">회원탈퇴</button>
-					<input type="text" class="d-none" id="user_delete" value="${memberdto.user_delete}">
-					<input type="text" class="d-none" id="user_email" value="${memberdto.user_email}">
-				</div>		
-				<!-- 개인정보 수정 모달 -->
-				<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-				  <div class="modal-dialog">
-				    <div class="modal-content">
-				      <div class="modal-header">
-				        <h5 class="modal-title" id="exampleModalLabel">비밀번호 확인</h5>
-				        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				      </div>
-				      <div class="modal-body" >
+			<div class="col-md-4" style="text-align: end">
+				<button type="button" class="btn btn-outline-info mt-4 profileBtn" data-bs-toggle="modal" data-bs-target="#exampleModal2" >개인정보 수정</button>
+				<button type="button" class="btn btn-outline-info mt-4 profileBtn"
+					id="profileDelete">회원탈퇴</button>
+				<input type="text" class="d-none" id="user_delete" value="${memberdto.user_delete}">
+				<input type="text" class="d-none" id="user_email" value="${memberdto.user_email}">
+			</div>		
+			<!-- 개인정보 수정 모달 -->
+			<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			  <div class="modal-dialog">
+			    <div class="modal-content" style="width:300px; height:400px;">
+			      <div class="modal-header">
+			        <h5 class="modal-title" id="exampleModalLabel">비밀번호 확인</h5>
+			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			      </div>
+			      <div class="modal-body" >
+			      	  <div class="row">
+			      	  	<span><strong style="font-size:15px;">${memberdto.user_nickname}</strong>님 회원정보 중 개인정보 수정하기 위해 인증절차가 필요합니다.</span>
+			      	  </div>
+			      	  	<hr style="margin:20px;">
 				      <div class="row">
-				      	<div class="col-3 d-flex justify-content-end"><label style="font-size:20px;">현재 비밀번호 : </label></div>
-				      	<div class="col-5 d-flex justify-content-end">
-					       	<input type="text" id="password" class="" style="height:100%;">				      	
+				      	<div class="col-5 d-flex justify-content-start" style="align-items:center;"><label>현재 비밀번호 : </label></div>
+				      	<div class="col-7 d-flex justify-content-start">
+					       	<input type="password" id="password" class="form-control" style="height:100%; font-family:none;">		
 				      	</div>
-				      	<div class="col-4 d-flex justify-content-center">
-					       	<button type="button" class="btn btn-secondary" id="checkPw" style="width:100px;">확인</button>
+				      	<script>
+				      		const test = document.querySelector('#password');
+				      		console.log(test)
+				      		test.addEventListener('change', () => {
+				      			console.log('change')
+				      		})
+				      	</script>
+				      	<div class="mt-3 d-none wrong-check-pw" style="text-align:center;">
+							<span style="color:red; font-size:0.8rem; margin-left:8px;">** 현재 비밀번호와 일치하지 않습니다. **</span>
+						</div>
+						<div class="mt-3 d-none right-check-pw" id="test" style="text-align:center;">
+							<span style="color:green; font-size:0.8rem; margin-left:8px;">** 현재 비밀번호와 일치합니다. **</span>	
+						</div>
+						<div>
+					       	<button type="button" class="btn btn-secondary mt-3" id="checkPw" style="width:100%;">확인</button>
 				      	</div>
 				      </div>
+			      </div>
+			      <div class="modal-footer" style="display:inline; padding:0px;">
+				      <div class="row" style="margin:0px;">
+					      <div class="col-5" style="padding:0px;">
+					        <button type="button" class="btn btn-secondary modalBtn" data-bs-dismiss="modal">취소</button>			      
+					      </div>
+					      <div class="col-7" style="padding:0px;">
+					        <button type="button" class="btn btn-primary modalBtn" id="profileModify" disabled>이동</button>			      
+					      </div>			      
 				      </div>
-				      <div class="modal-footer">
-				        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-				        <button type="button" class="btn btn-primary" id="profileModify">이동</button>
-				      </div>
-				    </div>
-				  </div>
-				</div>	
+			      </div>
+			    </div>
+			  </div>
+			</div>	
 		</div>
 		<hr />
 		<div class="container">
@@ -825,7 +868,7 @@ footer.footer {
 									<span>내가 쓴 글이 없습니다.</span>
 								</div>
 							</c:if>
-							<c:if test="${selectBoardList.size() > 1}">
+							<c:if test="${selectBoardList.size() > 0}">
 								<c:forEach items="${selectBoardList}" var="boarddto"
 									varStatus="status" begin="0" end="2">
 									<div class="myList">
@@ -873,40 +916,72 @@ footer.footer {
 						</div>
 					</div>
 					<script>
-						$(".wishDelete").on("click", function() {
-							let seq_group = $(this).next().val();
-							let parent = $(this).parents(".myList");
-							Swal.fire({
-								  title: '정말 삭제하시겠습니까?',
-								  text: "다시 복구 할수 없습니다.!",
-								  icon: 'warning',
-								  showCancelButton: true,
-								  confirmButtonColor: '#3085d6',
-								  cancelButtonColor: '#d33',
-								  confirmButtonText: 'Yes, delete it!'
-								}).then((result) => {
-								  if (result.isConfirmed) {
-								    Swal.fire(
-								      '삭제 완료!',
-								      '희망 모임을 삭제하였습니다.',
-								      'success'
-								    ).then(function() {
-								    	$.ajax({
-											url : "/mem/wishDelete",
-											type : "post",
-											data : {
-												"seq_group" : seq_group
-											},
-											success : function(data) {
-												parent.remove();
-											},
-											error : function(e) {
-												console.log(e);
-											}
-										})
-					                });
-								  }
-								})
+					//console.log($(".wrongCheckpw"))
+					/* 비밀번호 중복확인 */
+					$("#checkPw").on("click",function(){
+						let user_pw = $("#password").val();
+						$.ajax({
+							url:"/mem/pwCheck",
+							type:"post",
+							data:{"user_pw": user_pw},
+							dataType:"json",
+							success:function(data){
+								if(data == 1){
+									$(".wrong-check-pw").addClass("d-none");
+									$(".right-check-pw").removeClass("d-none");
+									$("#profileModify").attr("disabled",false);
+									return;	
+								}else{
+									$(".right-check-pw").addClass("d-none");
+									$(".wrong-check-pw").removeClass("d-none");
+									$("#profileModify").attr("disabled",true);
+								}
+							},
+							error:function(e){
+								console.log(e);
+							}
+						})
+					})
+					$("#profileModify").on("click",function(){
+						let user_email = $("#user_email").val();
+						location.href="/mem/profileModifyPage?user_email="+user_email;
+					})
+						
+					/* 희망 모임 삭제 */
+					$(".wishDelete").on("click", function() {
+						let seq_group = $(this).next().val();
+						let parent = $(this).parents(".myList");
+						Swal.fire({
+							  title: '정말 삭제하시겠습니까?',
+							  text: "다시 복구 할수 없습니다.!",
+							  icon: 'warning',
+							  showCancelButton: true,
+							  confirmButtonColor: '#3085d6',
+							  cancelButtonColor: '#d33',
+							  confirmButtonText: 'Yes, delete it!'
+							}).then((result) => {
+							  if (result.isConfirmed) {
+							    Swal.fire(
+							      '삭제 완료!',
+							      '희망 모임을 삭제하였습니다.',
+							      'success'
+							    ).then(function() {
+							    	$.ajax({
+										url : "/mem/wishDelete",
+										type : "post",
+										data : {
+											"seq_group" : seq_group
+										},
+										success : function(data) {
+											parent.remove();
+										},
+										error : function(e) {
+											console.log(e);
+										}
+									})
+				                });
+							  }
+							})
 						})
 					</script>
 					<div class="col-md-4">
@@ -1008,10 +1083,8 @@ footer.footer {
 			</div>
 		</footer>
 	</div>
-</body>
-<script>
-	// let towritePage = document.getElementById("towritePage");
-	let profileModify = document.getElementById("profileModify");
+	<script>
+	let towritePage = document.getElementById("towritePage");
 	
 	/* 내가쓴글로 이동 */
 	$("#towritePage").on("click", function() {
@@ -1019,29 +1092,7 @@ footer.footer {
 		location.href = "/mem/myWrite?user_email="+user_email;
 	});
 	
-	/* 비밀번호 중복확인 */
-/* 	$("#checkPw").on("click",function(){
-		let user_pw = $("#password").val();
-		console.log(user_pw);
-		$.ajax({
-			url:"/mem/pwCheck",
-			type:"post",
-			data:{"user_pw": user_pw},
-			success:function(data){
-				console.log(data);
-			},
-			error:function(e){
-				console.log(e);
-			}
-		})
-	}) */
-	/* 개인정보 페이지 이동 */
-	/* profileModify.addEventListener("click", function() {
-	let user_email = $("#user_email").val();
-	location.href="/mem/profileModifyPage?user_email="+user_email;
-	}); */
-	
-	
+	/* 회원 탈퇴 */
 	$("#profileDelete").on("click",function(){
 		let user_delete = $("#user_delete").val();
 		let user_email = $("#user_email").val();
@@ -1178,4 +1229,6 @@ footer.footer {
     })
 
 </script>
+</body>
+
 </html>

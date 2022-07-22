@@ -35,6 +35,14 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 
 <style>
+.customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
+.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #87ceea;background: #87ceea url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
+.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+
+
+
 @font-face {
     font-family: 'twayair';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
@@ -45,7 +53,12 @@
 
 body {
       background-color: #f6f7f9;
+      -ms-overflow-style: none; /*스크롤바 안보이게*/
     }
+
+	::-webkit-scrollbar {
+	  display: none;
+	}
 
     * {
       box-sizing: border-box;
@@ -153,6 +166,44 @@ body {
 		float: left;
 	}
 
+ 	/* 시간 설정*/
+	.timeContainer {
+		background-color : rgb(233, 236, 239);
+		height:40px;
+		border-radius : 6px;
+		border: 1px solid rgb(206, 212, 218);
+	}
+
+	.defaultTime {
+        color: black;
+      }
+
+      #hour-picker, #min-picker{
+        background-color: #0096ff;
+        width: 300px;
+        display: none;
+        border-radius: 10px;
+      }
+
+
+      #defaultHour,#defaultMin,.item,.item2{
+        cursor: pointer;
+      }
+
+      .timeNum {
+        transform:scale(1.0);
+        transition: transform .5s;
+        font-size: 14px;
+        color: #fff;
+      }
+
+      .timeNum:hover {
+        color: black;
+        opacity: 1;
+        transform: scale(1.2, 1.2);
+      }
+
+
 /* footer */
     /*풋터 영역*/
     .footerBox {
@@ -252,7 +303,7 @@ body {
 
           <!-- logo -->
           <div class="col-2">
-            <a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
+            <a href="/" id="navLogo" class="mb-2 mb-lg-0">
               <img id="logoImgs" src="/resources/images/kiri.jpg" />
             </a>
           </div>
@@ -310,7 +361,7 @@ body {
 						<div
 							class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
 							<div class="modal-content">
-								<div class="modal-header">
+								<div class="modal-header text-center">
 									<h5 class="modal-title" id="ModalLabel">일정을 추가하세요!</h5>
 									<button type="button" class="btn-close" data-bs-dismiss="modal"
 										aria-label="Close" onclick="moveSite();"></button>
@@ -329,6 +380,71 @@ body {
 												name="start" disabled> <label
 												for="partyDate">모임날짜</label>
 										</div>
+										<div class="mb-3 partyCal d-flex timeContainer justify-content-center align-items-center" style="margin-left: 10%; margin-right: 10%; height:56px; width:376px;">
+											<div class="defaultTime">
+      											<span class="me-2" id="defaultHour">00</span>:<span class="ms-2" id="defaultMin">00</span>
+    										</div>
+										</div>
+										
+											<!--시간 선택-->
+										    <div id="hour-picker" class="p-4 mt-2" style="margin-left: 10%; margin-right: 10%; width:376px;">
+										      <div class="row pb-2">
+										        <div class="col-2"><span class="item timeNum">00</span></div>
+										        <div class="col-2"><span class="item timeNum">01</span></div>
+										        <div class="col-2"><span class="item timeNum">02</span></div>
+										        <div class="col-2"><span class="item timeNum">03</span></div>
+										        <div class="col-2"><span class="item timeNum">04</span></div>
+										        <div class="col-2"><span class="item timeNum">05</span></div>
+										      </div>
+										      <div class="row pb-2">
+										        <div class="col-2"><span class="item timeNum">06</span></div>
+										        <div class="col-2"><span class="item timeNum">07</span></div>
+										        <div class="col-2"><span class="item timeNum">08</span></div>
+										        <div class="col-2"><span class="item timeNum">09</span></div>
+										        <div class="col-2"><span class="item timeNum">10</span></div>
+										        <div class="col-2"><span class="item timeNum">11</span></div>
+										      </div>
+										      <div class="row pb-2">
+										        <div class="col-2"><span class="item timeNum">12</span></div>
+										        <div class="col-2"><span class="item timeNum">13</span></div>
+										        <div class="col-2"><span class="item timeNum">14</span></div>
+										        <div class="col-2"><span class="item timeNum">15</span></div>
+										        <div class="col-2"><span class="item timeNum">16</span></div>
+										        <div class="col-2"><span class="item timeNum">17</span></div>
+										      </div>
+										      <div class="row">
+										        <div class="col-2"><span class="item timeNum">18</span></div>
+										        <div class="col-2"><span class="item timeNum">19</span></div>
+										        <div class="col-2"><span class="item timeNum">20</span></div>
+										        <div class="col-2"><span class="item timeNum">21</span></div>
+										        <div class="col-2"><span class="item timeNum">22</span></div>
+										        <div class="col-2"><span class="item timeNum">23</span></div>
+										      </div>
+										    </div>
+											<!--분 선택-->
+										    <div id="min-picker" class="p-4 mt-2" style="margin-left: 10%; margin-right: 10%; width:376px;">
+										      <div class="row">
+										        <div class="col-3 text-center"><span class="item2 timeNum">00</span></div>
+										        <div class="col-3 text-center"><span class="item2 timeNum">05</span></div>
+										        <div class="col-3 text-center"><span class="item2 timeNum">10</span></div>
+										        <div class="col-3 text-center"><span class="item2 timeNum">15</span></div>
+										      </div>
+										      <div class="row">
+										        <div class="col-3 text-center"><span class="item2 timeNum">20</span></div>
+										        <div class="col-3 text-center"><span class="item2 timeNum">25</span></div>
+										        <div class="col-3 text-center"><span class="item2 timeNum">30</span></div>
+										        <div class="col-3 text-center"><span class="item2 timeNum">35</span></div>
+										      </div>
+										      <div class="row">
+										        <div class="col-3 text-center"><span class="item2 timeNum">40</span></div>
+										        <div class="col-3 text-center"><span class="item2 timeNum">45</span></div>
+										        <div class="col-3 text-center"><span class="item2 timeNum">50</span></div>
+										        <div class="col-3 text-center"><span class="item2 timeNum">55</span></div>
+										      </div>
+										    </div>
+										    <!-- 시간 넘기기 input  -->
+										    <input type="text" id="hourInput" value="00" name="hour" hidden>
+										    <input type="text" id="minInput" value="00" name="min" hidden>
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
 											<input type="text" class="form-control" id="gcal_name"
@@ -357,7 +473,7 @@ body {
 										<input type="hidden" name="seq_group_cal" id="seq_group_cal" value="" />
 									</form>
 									<div style="margin-left: 10%; margin-right: 10%;">
-										<div id="map" style="width: 360px; height: 300px;"></div>
+										<div id="map" style="width: 378px; height: 300px;"></div>
 									</div>
 								</div>
 								<div class="modal-footer" id="buttonDiv">
@@ -564,6 +680,9 @@ body {
 					let seq_group_cal =""; // 초기화 
 					let seq_group = ${seq_group}; // 현재 모임의 번호
 					seq_group_cal = info.event.extendedProps.seq_group_cal; // extendedProps는 event 함수에서 존재하는 값만 사용 가능 -> 클릭했을 때 해당 seq_group_cal을 찾아줌
+					// 시간 안보이게 
+					$(".timeContainer").addClass("d-none");
+					
 					if(seq_group_cal === undefined) { // 값이 undefined 면 
 						$("#calSubmit").addClass("d-none");
 
@@ -573,7 +692,7 @@ body {
 						calendarModal.show();
 						makeMap();
 					}else {
-						console.log(seq_group_cal);
+
 						// 클릭했을 때 번호가 있을 때
 							$.ajax({
 								url : "/cal/calDetail",
@@ -601,6 +720,8 @@ body {
 										// 삭제 버튼 보이게
 										$("#calDelete").removeClass("d-none");
 									}
+									calendarModal.show(); // 모달 보여주기 
+									makeMap(data[0].gcal_place); // 지도 생성
 									
 								},
 								error : function(e) {
@@ -617,8 +738,7 @@ body {
 									
 								}
 							});
-							calendarModal.show(); // 모달 보여주기 
-							makeMap(); // 지도 생성
+							
 					}
 					
 				},
@@ -670,52 +790,53 @@ body {
 		})
 
 		// 지도 찾기 함수
-		const makeMap = function() {
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-			  mapOption = { 
-			        center: new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val()), // 지도의 중심좌표
-			        level: 4 // 지도의 확대 레벨
-			    };
+		const makeMap = function(defaultVal = "끼리끼리") {
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+			mapOption = {
+				center : new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val()), // 지도의 중심좌표
+				level : 3// 지도의 확대 레벨
+			};
 
 			var map = new kakao.maps.Map(mapContainer, mapOption);
 
 			// 마커 또한 모달창이 띄워지고 난 뒤에 다시 생성해야 하므로 setTimeout 걸어줌
 			setTimeout(function() {
-				var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커이미지의 주소입니다    
-			    imageSize = new kakao.maps.Size(64, 69), // 마커이미지의 크기입니다
-			    imageOption = {offset: new kakao.maps.Point(27, 69)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+				var imageSrc = '/resources/images/mapElephant.png', // 마커이미지의 주소입니다
+			    imageSize = new kakao.maps.Size(50, 50), // 마커이미지의 크기입니다
+			    imageOption = {offset: new kakao.maps.Point(27, 60)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
 
-			// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-			var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-			    markerPosition = new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val()); // 마커가 표시될 위치입니다
+			 // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+					markerPosition = new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val());//마커가 표시될 위치입니다 
 
-			// 마커를 생성합니다
-			var marker = new kakao.maps.Marker({
-			  position: markerPosition,
-			  image: markerImage // 마커이미지 설정 
-			});
+				//마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+					position : markerPosition,
+					image: markerImage // 마커이미지 설정
+				});
 
-			// 마커가 지도 위에 표시되도록 설정합니다
-			marker.setMap(map);  
+				//마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
 
-			// 커스텀 오버레이에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-			var content = '<div class="customoverlay">' +
-			    '  <a href="https://map.kakao.com/link/map/11394059" target="_blank">' +
-			    '    <span class="title">끼리끼리</span>' +
-			    '  </a>' +
-			    '</div>';
-
-			// 커스텀 오버레이가 표시될 위치입니다 
-			var position = new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val());  
-
-			// 커스텀 오버레이를 생성합니다
-			var customOverlay = new kakao.maps.CustomOverlay({
-			    map: map,
-			    position: position,
-			    content: content,
-			    yAnchor: 1 
-			});
-
+				//마커에 표시될 텍스트 
+	        	var iwContent = '<div class="customoverlay">' +
+	            '  <a target="_blank">' +
+	            '  <span class="title">'+ defaultVal +'</span>' +
+	            '  </a>' +
+	            '</div>';
+	        		
+	        	 // 커스텀 오버레이가 표시될 위치입니다
+	            var position = new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val());
+	            
+	         	// 커스텀 오버레이를 생성합니다
+	            var overlay  = new kakao.maps.CustomOverlay({
+	                map: map,
+	                position: position,
+	                content: iwContent,
+	                yAnchor: 1
+	            });
+	         
+	            overlay.setMap(map,marker);
 			},100);
 			
 			// 모달을 열었을 때보다 늦게 코드가 실행되게 해야한다 그래야 api가 적용됨
@@ -729,9 +850,9 @@ body {
 		function searchMap(keyword) {
 
 			// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-			var infowindow = new kakao.maps.InfoWindow({
+			 var infowindow = new kakao.maps.InfoWindow({
 				zIndex : 1
-			});
+			}); 
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 			mapOption = {
 				center : new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord')
@@ -804,7 +925,6 @@ body {
 
 		// 일정 저장
 		$("#calSubmit").on("click", function() {
-			
 			let seq_group = ${seq_group}; // 현재 모임 번호 
 			let title = $("#title").val(); // 모임 유형 
 			let start = $("#start").val(); // 모임 날짜 
@@ -813,51 +933,60 @@ body {
 			let gcal_longitude = $("#xcoord").val(); // 일정 경도
 			let gcal_latitude = $("#ycoord").val(); // 일정 위도 
 			let gcal_place = $("#partyLocation").val(); // 일정 위치
-			
+			let hour = $("#hourInput").val(); // 시간 
+			let min = $("#minInput").val(); // 분 
+			let totalTime = hour + ":" + min; // 전체 시간
+
 			if(gcal_name == "") {
 				Swal.fire('제목을 입력해주세요');
+				return;
 			}else if(gcal_content == "") {
 				Swal.fire('내용을 입력해주세요');
+				return;
 			}else if(gcal_place == "") {
 				Swal.fire('장소를 검색해주세요');
+				return;
+			}else {
+				$.ajax({
+					url : "/cal/calInsert",
+					type : "post",
+					data : {
+						"seq_group" : seq_group,
+						"title" : title,
+						"start" : start,
+						"gcal_name" : gcal_name,
+						"gcal_content" : gcal_content,
+						"gcal_longitude" : gcal_longitude,
+						"gcal_latitude" : gcal_latitude,
+						"gcal_place" : gcal_place,
+						"totalTime" : totalTime
+					},
+					success : function(data) {
+						console.log(data);
+						// 일정 추가되었다고 알림 
+						Swal.fire({
+							position : 'center',
+							icon : 'success',
+							title :'일정이 등록되었습니다',
+							showConfirmButton : false,
+							timer : 900
+						})
+						// 모달창 안보이게 
+						calendarModal.hide();
+						
+						// 0.8 초있다가 페이지 로드
+						setTimeout(function() {
+							window.location.href = "";
+						},1000);
+						
+					},
+					error : function(e) {
+						console.log(e);
+					}
+				}) 
 			}
 
-			$.ajax({
-				url : "/cal/calInsert",
-				type : "post",
-				data : {
-					"seq_group" : seq_group,
-					"title" : title,
-					"start" : start,
-					"gcal_name" : gcal_name,
-					"gcal_content" : gcal_content,
-					"gcal_longitude" : gcal_longitude,
-					"gcal_latitude" : gcal_latitude,
-					"gcal_place" : gcal_place
-				},
-				success : function(data) {
-					console.log(data);
-					// 일정 추가되었다고 알림 
-					Swal.fire({
-						position : 'center',
-						icon : 'success',
-						title :'일정이 등록되었습니다',
-						showConfirmButton : false,
-						timer : 900
-					})
-					// 모달창 안보이게 
-					calendarModal.hide();
-					
-					// 0.8 초있다가 페이지 로드
-					setTimeout(function() {
-						window.location.href = "";
-					},1000);
-					
-				},
-				error : function(e) {
-					console.log(e);
-				}
-			})
+			 
 		})
 		
 		// 일정 삭제
@@ -912,6 +1041,31 @@ body {
 				})
 		})
 		
+
+	// 00 클릭시(시간)
+    $("#defaultHour").on("click",function() {
+      $("#hour-picker").toggle(400);
+    })
+
+    // 시간 선택시
+    $(".item").on("click",function() {
+      $("#defaultHour").html($(this).html()); // 시간 선택
+      $("#hourInput").val($(this).html()); // 안보이는 input에 시간 넣기 
+      $("#hour-picker").toggle(400);
+    })
+
+    // 00 클릭시(분)
+    $("#defaultMin").on("click",function() {
+      $("#min-picker").toggle(400);
+    })
+
+    // 분 선택시
+    $(".item2").on("click",function() {
+      $("#defaultMin").html($(this).html()); // 분 선택
+      $("#minInput").val($(this).html()); // 안보이는 input에 시간 넣기 
+      $("#min-picker").toggle(400);
+    })
+
 	</script>
 </body>
 </html>

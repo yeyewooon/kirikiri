@@ -28,7 +28,6 @@ public class GroupCalendar {
 	// 캘린더 페이지로 이동
 	@RequestMapping(value = "/toGroupCalendar")
 	public String toGroupCalendar(int seq_group, Model model) {
-		System.out.println("잘나옴요" + seq_group);
 		model.addAttribute("seq_group", seq_group);
 		return "/group/groupCalendar";
 	}
@@ -36,11 +35,9 @@ public class GroupCalendar {
 	// 일정 추가
 	@ResponseBody
 	@RequestMapping(value = "/calInsert")
-	public String calInfo(Group_CalendarDTO dto) throws Exception {
-		System.out.println("calInsert 들어옴");
-		System.out.println(dto.getStart());
-
-		System.out.println(dto.toString());
+	public String calInfo(Group_CalendarDTO dto, String totalTime) throws Exception {
+		String originTitle = totalTime + "  " + dto.getTitle(); // title + time 값 
+		dto.setTitle(originTitle); // title + time 값 셋팅
 		service.insert(dto);
 		return "redirect:/calMain";
 	}
@@ -49,8 +46,6 @@ public class GroupCalendar {
 	@ResponseBody
 	@RequestMapping(value = "/calList", produces = "application/json; charset=UTF-8")
 	public String calList(Model model, int seq_group) throws Exception {
-		System.out.println("여기로 들어온듯");
-		System.out.println(seq_group);
 		List<Group_CalendarDTO> list = service.select(seq_group);
 
 		// 00:00:00 삭제 후 다시 setter에 셋팅

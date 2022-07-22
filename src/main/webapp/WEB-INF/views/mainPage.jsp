@@ -14,9 +14,7 @@
 <!--구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-   href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap"
-   rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"
    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
    crossorigin="anonymous"></script>
@@ -35,11 +33,14 @@
 <style>
 * {
    box-sizing: border-box;
-   font-family: 'OTWelcomeRA';
+   font-family: 'MICEGothic Bold';
 }
-
-#mainText {
-   font-family: '양진체';
+@font-face {
+            font-family: 'MICEGothic Bold';
+            src:
+                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
 }
 
 /* header 반응형 */
@@ -186,25 +187,31 @@ a {
    background-color: rgb(245, 245, 245);
 }
 
+.content {
+	width: 100%;
+	margin: 0px;
+	background-color: rgb(245, 245, 245);
+}
+
 .card {
-   width: 18rem;
-   box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
-   cursor:pointer;
+	width: 18rem;
+	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
+	cursor:pointer;
 }
 
 .card>img {
-   width: 100%;
+	width: 100%;
 }
 
 .card-img-top {
-   width: 18rem;
-   height: 13rem;
+	width: 18rem;
+	height: 13rem;
 }
+
 .card-text-category {
 	width: fit-content;
 	padding: 4px;
-	border: 1px solid #f66a09;
-	background-color: #fea500;
+	background-color: #e26b8b;
 	height: 22px;
 	border-radius: 5px;
 	font-size: 14px;
@@ -287,24 +294,7 @@ footer.footer {
    height: 100%;
 }
 
-/* 눈누 폰트 */
-@font-face {
-   font-family: 'OTWelcomeRA';
-   src:
-      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-      format('woff2');
-   font-weight: normal;
-   font-style: normal;
-}
 
-@font-face {
-   font-family: '양진체';
-   src:
-      url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-      format('woff');
-   font-weight: normal;
-   font-style: normal;
-}
 </style>
 </head>
 <body>
@@ -595,7 +585,7 @@ footer.footer {
                   <div class="row">
                      <c:forEach items="${selectAllList}" var="dto" begin="0" end = "5">
                         <div class="col-md-4 d-flex justify-content-center p-4">
-                           <div class="card">
+                           <div class="card" data-aos="flip-up" data-aos-duration="1000">
                            		<c:choose>
 									<c:when test="${dto.sys_name ne null}">
 										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
@@ -606,7 +596,7 @@ footer.footer {
 								</c:choose>
 								<span class="d-none seq_group">${dto.seq_group}</span>
                               <div class="card-body">
-                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center">
+                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
                                     ${dto.group_category}
                                  </div>
                                  <div class="card-text mt-1">
@@ -638,7 +628,7 @@ footer.footer {
                   <div class="row">
                      <c:forEach items="${selectNewList}" var="dto" begin="0" end = "5">
                         <div class="col-md-4 d-flex justify-content-center p-4">
-                           <div class="card">
+                           <div class="card" data-aos="flip-up" data-aos-duration="1000">
                            		<c:choose>
 									<c:when test="${dto.sys_name ne null}">
 										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
@@ -649,7 +639,7 @@ footer.footer {
 								</c:choose>
 								<span class="d-none  seq_group">${dto.seq_group}</span>
                               <div class="card-body">
-                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center">
+                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
                                     ${dto.group_category}
                                  </div>
                                  <div class="card-text mt-1">
@@ -681,7 +671,7 @@ footer.footer {
                   <div class="row">
                      <c:forEach items="${selectBestList}" var="dto" begin="0" end = "5">
                         <div class="col-md-4 d-flex justify-content-center p-4">
-                           <div class="card">
+                           <div class="card" data-aos="flip-up" data-aos-duration="1000">
                            		<c:choose>
 									<c:when test="${dto.sys_name ne null}">
 										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
@@ -692,7 +682,7 @@ footer.footer {
 								</c:choose>
 								<span class="d-none  seq_group">${dto.seq_group}</span>
                               <div class="card-body">
-                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center">
+                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
                                     ${dto.group_category}
                                  </div>
                                  <div class="card-text mt-1">
@@ -779,6 +769,7 @@ footer.footer {
    <!-- AOS 스크립트 시작 -->
    <script>
       AOS.init(); // 자바스크립트로 init()을 해야 동작한다.
+      
       const countDownTimer = function(id, date) {
          var _vDate = new Date(date); // 전달 받은 일자
          var _second = 1000;
@@ -847,7 +838,6 @@ footer.footer {
       $(".more").on("click", function(){
     	  location.href = "/user/toViewAllGroupList";
       })
-      countDownTimer("sample04", "04/01/2019"); // 2024년 4월 1일까지
       
    </script>
 </body>

@@ -92,7 +92,7 @@ public class SignupContoller {
 		String realPath = session.getServletContext().getRealPath("profile");
 		String user_image = service.uploadProfile(file, realPath);
 		String unique_id = dto.getUser_pw();
-				
+		
 		if(dto.getUser_intro().equals("")) {
 			dto.setUser_intro("상태 메세지 없음");
 		}
@@ -110,20 +110,15 @@ public class SignupContoller {
 			
 		}else { //소셜로그인
 			dto.setUser_pw("social");
-			unique_id = dto.getUser_pw();
 		}
 		
 		service.signup(dto);
 		service.insertHobby(dto.getUser_email(), hobby);
 		service.insertArea(dto.getUser_email(), area);
-		service.generalLoginType(dto.getUser_email(), type, unique_id );
+		service.loginType(dto.getUser_email(), type, unique_id );
 		
 		return "redirect:/mem/welcome";
 	}
-	
-	
-	
-	
 	
 	
 	@ExceptionHandler
