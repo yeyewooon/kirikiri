@@ -837,13 +837,13 @@ footer.footer {
 							<hr id="line" />
 							<div style="height:16px;"></div>
 							<c:forEach items="${selectGroupList}" var="Groupdto">
-								<c:if test="${Groupdto.access eq '방장'}">
+								<c:if test="${Groupdto.access eq '주최자'}">
 									<div class="myList">
 										<span><i class="fa-solid fa-people-group listIcon me-3"></i>${Groupdto.TITLE}<i
 											class="fa-solid fa-crown"></i></span>
 									</div>
 								</c:if>
-								<c:if test="${Groupdto.access eq '일반'}">
+								<c:if test="${Groupdto.access eq '맴버'}">
 									<div class="myList">
 										<span><i class="fa-solid fa-people-group listIcon me-3"></i>${Groupdto.TITLE}</span>
 									</div>

@@ -107,11 +107,7 @@ public class Tbl_GroupDAO {
 
    // 그룹 수정
    public void modifyGroup(Tbl_GroupDTO tbl_group_dto) throws Exception {
-      int rs = session.update("tblGroupMapper.updateGroup", tbl_group_dto);
-      if (rs > 0)
-         System.out.println("group 수정 완료");
-      else
-         System.out.println("group 수정 실패");
+      session.update("tblGroupMapper.updateGroup", tbl_group_dto);
    }
 
    // 해당 그룹 맴버 조회
@@ -160,10 +156,18 @@ public class Tbl_GroupDAO {
 		return session.selectList("tblGroupMapper.selectMemberSite", user_email);
 	}
 
+	// 해당 아이디 가입된 그룹 갯수 출력
+	public int selectGroupCntByEmail(String loginSession_id) {
+		int rs = session.selectOne("tblGroupMapper.selectGroupCntByEmail",loginSession_id);
+		return rs;
+	}
+
+	
 ////////// 호준
 
    // 가입한 모임 정보
 	public List<Map<String, Object>> selectGroupList(String user_email) throws Exception {
 		return session.selectList("myPageMapper.selectGroupList", user_email);
 	}
+
 }

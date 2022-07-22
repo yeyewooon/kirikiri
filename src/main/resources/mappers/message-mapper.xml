@@ -7,7 +7,7 @@
 
    <!-- 쪽지 보내기 -->
    <insert id = "insertMessage" parameterType = "com.kiri.dto.MessageDTO">
-      insert into message values (seq_message.nextval, #{user_send}, #{user_receive}, #{msgContent}, sysdate, Default)
+      insert into message values (seq_message.nextval, #{user_send}, #{user_receive}, #{msgContent}, sysdate)
    </insert>
    
    <!-- 받은 쪽지 조회하기 -->
