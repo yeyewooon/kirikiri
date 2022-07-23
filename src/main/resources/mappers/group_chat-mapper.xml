@@ -9,7 +9,7 @@
 			values(seq_chat.nextval, #{seq_group}, #{user_nickname}, #{message}, sysdate)
 	</insert>
 	<select id="selectChat" parameterType="int" resultType="com.kiri.dto.Group_ChatDTO">
-		select seq_chat, seq_group, user_nickname, message, to_char(sendDate, 'am hh:mi') as sendDate from group_chat where seq_group = #{seq_group} order by 5
+		select seq_chat, seq_group, user_nickname, message, to_char(sendDate, 'am hh:mi') as sendDate from group_chat where seq_group = #{seq_group} order by 1
 	</select>
 	<select id="selectGroup" parameterType="int" resultType="com.kiri.dto.Tbl_GroupDTO">
 		select * from tbl_group where seq_group = #{seq_group}

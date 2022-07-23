@@ -614,8 +614,78 @@ footer.footer {
     </div>
 
     <script>
+<<<<<<< HEAD
+ 	let seq_group = "${tbl_group_dto.seq_group}"; // 현재 모임 번호
+ 	let loginSession_id = "${loginSession_id}";
+ 	let hostEmail = "${memberList[0].user_email}"; // 주최자 아이디
+ 	
+ 	console.log(hostEmail);
+ 	console.log(loginSession_id);
+ 	
+ 	$(document).ready(function() {
+ 		// 해당 세션 id와 주최자가 같으면 모임 관리 페이지 보이게
+ 		if(loginSession_id == hostEmail) {
+ 			$(".groupManageBtn").removeClass("d-none");
+ 		}
+
+ 		// 현재 세션 id가 그룹맴버에 있으면 게시판,일정, 채팅 활동가능
+ 		$(".groupActiveBtn").on("click",function() {
+ 			let memberList = new Array(); // 빈 배열 생성
+ 	 	    <c:forEach items="${memberList}" var="dto">
+ 	 	   		memberList.push("${dto.user_email}");
+ 	 	    </c:forEach>
+ 	 	    for (let i = 0; i < memberList.length; i++) {
+ 	 	        if(memberList[i] == loginSession_id) {
+ 	 	        	// 그룹 활동 버튼
+ 	 	        	let activeText = this.innerHTML;
+ 	 	        	if(activeText == "게시판"){
+ 	 	        		location.href = "https://www.naver.com";
+ 	 	        	}else if(activeText == "일정") {
+ 	 	        		location.href = "/cal/toGroupCalendar?seq_group="+seq_group;
+ 	 	        	}else if(activeText == "채팅") {
+ 	 	        		location.href = "/group/toChat?seq_group="+seq_group;
+ 	 	        	}
+ 	 	        }else {
+ 	 	        	Swal.fire('모임 맴버만 활동 가능합니다');
+ 	 	        	return;
+ 	 	        }
+ 	 	        break;
+ 	 	    } 
+	    })
+	       
+ 	 	// 세션이 모임에 가입되어 있으면 모임 탈퇴하기, 가입 안되어있으면 모입 가입하기
+ 		// 맴버 리스트 체크 -> 모임 가입하기인지 모임 탈퇴인지 판별
+ 		let memberList = new Array(); // 빈 배열 생성
+ 	    <c:forEach items="${memberList}" var="dto">
+ 	   		memberList.push("${dto.user_email}");
+ 	    </c:forEach>
+ 	    for (let i = 0; i < memberList.length; i++) {
+ 	    	console.log(memberList[i]);
+ 	        if(memberList[i] == loginSession_id) {
+ 	        	$("#joinGroupBtn").addClass("d-none"); // 가입 버튼 안보이게 
+ 	        	$("#quitGroupBtn").removeClass("d-none"); // 모임 탈퇴버튼 보이게
+ 	        	
+ 	        	// 그룹 활동 버튼
+ 	        }
+ 	    } 
+ 	    
+ 	   // 찜하기 판별 -> 찜 명단에 있으면 찜취소 있으면 찜하기
+ 	   let wishList = new Array();
+	    <c:forEach items="${wishList}" var="dto">
+	   		wishList.push("${dto.user_email}");
+	    </c:forEach>
+	    for (let i = 0; i < wishList.length; i++) {
+	        if(wishList[i] == loginSession_id) { // 찜한 목록과 세션의 아이디
+	        	$("#wishListBtn").addClass("d-none");
+ 	        	$("#wishCancelBtn").removeClass("d-none");
+	        }
+	    } 
+ 	    
+ 	})
+=======
     let realMemberCnt = ${fn:length(memberList)}-1; // 주최자를 제외한 맴버수 
     $(".memberCntSpan").text(realMemberCnt); // 주최자를 제외한 맴버수 
+>>>>>>> 924e8d12d57892c35ecdd9d783ce527e0084ca1c
     
     let seq_group = "${tbl_group_dto.seq_group}"; // 현재 모임 번호
     let loginSession_id = "${loginSession_id}"; // 현재 로그인 세션 아이디
