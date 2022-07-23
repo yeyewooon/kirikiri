@@ -16,6 +16,8 @@ local.properties
 .classpath
 .project
 build/
+src/main/java/com/kiri/utills/SecurityInfo.java
+src/main/webapp/WEB-INF/spring/appServlet/application2.xml
 
 
 # External tool builders

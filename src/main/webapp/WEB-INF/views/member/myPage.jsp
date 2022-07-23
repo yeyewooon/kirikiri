@@ -382,7 +382,7 @@ footer.footer {
 					<div id="profilePic">
 						<c:choose>
 							<c:when test="${empty memberdto.user_image}">
-								<img src="/resources/images/default_profile.jpg" id="profile_image">
+								<img src="/resources/images/profile.jpg" id="profile_image">
 							</c:when>
 							<c:otherwise>
 								<img src="/profile/${memberdto.user_image}" id="profile_image">

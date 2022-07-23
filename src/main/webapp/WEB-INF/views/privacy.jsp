@@ -43,26 +43,20 @@ rel="stylesheet">
 <style>
 /* 눈누 폰트 */
 @font-face {
-	font-family: 'OTWelcomeRA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-		format('woff2');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-
 @font-face {
-	font-family: '양진체';
-	src:
-		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-
 * {
 	box-sizing: border-box;
-	font-family: 'OTWelcomeRA';
+	font-family: 'InfinitySans-RegularA1';
 }
 
 body {
@@ -83,34 +77,6 @@ body {
 		display: none;
 	}
 }
-
-/* body */
-/* 바디*/
-.privacyBox {
-	width: 1000px;
-	height: auto;
-	border: 1px solid d2e3ec;
-	text-align: left;
-	margin: auto;
-	background-color: #d2e3ec;
-	margin-bottom: 150px;
-	margin-top: 70px;
-}
-
-#privacyForm {
-	padding: 20px;
-	margin-top: 3000px;
-	width: 93%;
-	height: 100%;
-	margin: auto;
-	border: 1px solid d2e3ec;
-	background-color: white;
-}
-.privacyBox > span{
-    margin: 15px;
-}
-
-
 
 /* header */
 .border-bottom {
@@ -135,30 +101,30 @@ body {
 
 /* header 반응형 끝 */
 
-/* body영역 */
-.loginBox {
+/* 바디*/
+.privacyBox {
 	width: 1000px;
 	height: auto;
 	border: 1px solid d2e3ec;
-	text-align: center;
-	
+	text-align: left;
+	margin: auto;
 	background-color: #d2e3ec;
 	margin-bottom: 150px;
 	margin-top: 70px;
-    text-align: left ;
 }
 
-#loginForm {
-	padding-top: 20px;
+#privacyForm {
+	padding: 20px;
 	margin-top: 3000px;
 	width: 93%;
 	height: 100%;
-	text-align: left;
+	margin: auto;
 	border: 1px solid d2e3ec;
 	background-color: white;
-    
 }
-
+.privacyBox > span{
+    margin: 15px;
+}
 
 /*풋터 영역*/
 .footerBox {

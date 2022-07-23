@@ -43,29 +43,30 @@ crossorigin="anonymous"></script>
 <link
 href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 rel="stylesheet">
+<!-- sweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
 <style>
 /* 눈누 폰트 */
 @font-face {
-	font-family: 'OTWelcomeRA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-		format('woff2');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-
 @font-face {
-	font-family: '양진체';
-	src:
-		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {
 	box-sizing: border-box;
-	font-family: 'OTWelcomeRA';
+	font-family: 'InfinitySans-RegularA1';
 }
 
 body {
@@ -119,13 +120,12 @@ body {
 	background-color: #d2e3ec;
 	margin-bottom: 150px;
 	margin-top: 70px;
-    text-align: left ;
+    text-align: left;
 }
 
 #privacyForm {
 	padding-top: 10px;
 	margin-top: 30px;
-	width: 93%;
 	height: 100%;
 	text-align: left;
 	border: 1px solid d2e3ec;
@@ -133,7 +133,7 @@ body {
 }
 
 #privacyForm > .row{
-	margin: 30px;
+	margin: 40px;
 }
 
 input[type="checkbox"] {
@@ -145,7 +145,7 @@ input[type="checkbox"] {
 
 label{
 	font-size: 17px;
-	
+	font-family : 'BMJUA';
 }
 
 .term{
@@ -154,12 +154,13 @@ label{
 	height: 100px;
 	overflow: scroll;
 	overflow-x: hidden;
+	color: #222F21;
+	font-size : 15px;
 }
 
 button{
 	margin-bottom: 30px;
 }
-
 
 /*풋터 영역*/
 .footerBox {
@@ -217,7 +218,15 @@ $(document).ready(function(){
 		if(check == 2){
 			location.href = "/signup/toSignup";
 		}else{
-			alert("약관에 모두 동의해주세요.");
+			Swal.fire({
+				  title: '약관에 모두 동의해주세요.',
+				  showClass: {
+				    popup: 'animate__animated animate__fadeInDown'
+				  },
+				  hideClass: {
+				    popup: 'animate__animated animate__fadeOutUp'
+				  }
+				})
 		}
 		
 	})
@@ -325,29 +334,22 @@ $(document).ready(function(){
 	</header>
     <div class="container privacyBox">
         <div id="privacyForm">
-			<div class="row" style="text-align: center; margin: auto;">
-				<div class="col">
-					<div class="profile_imgContainer">
-						<img id="p_img" name="p_img" src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-					</div>
-				</div>
-			</div>
 			<div class="row ">
 				<div class="col d-flex align-items-center">
 					<input type="checkbox" name="checkboxAll">
 					<label for="allCheck">끼리끼리 이용약관, 개인정보 수집 및 이용에 모두 동의합니다.</label>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row mb-0">
 				<div class="col d-flex align-items-center">
 					<input type="checkbox" name="essential" id="termsService">
 					<label for="termsService">끼리끼리 이용약관 동의(필수)</label>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row mt-2 mb-2">
 				<div class="col d-flex align-items-center">
-					<div class="term">
-						여러분을 환영합니다. 끼리끼리 서비스 및 제품(이하 ‘서비스’)을 이용해
+					<div class="term w-100">
+						 여러분을 환영합니다. 끼리끼리 서비스 및 제품(이하 ‘서비스’)을 이용해
 						주셔서 감사합니다. 본 약관은 다양한 끼리끼리 서비스의 이용과 관련하여
 						끼리끼리 서비스를 제공하는 끼리끼리 주식회사(이하 끼리끼리)와 이를 이용하는
 						끼리끼리 서비스 회원(이하 ‘회원’) 또는 비회원과의 관계를 설명하며,
@@ -360,16 +362,16 @@ $(document).ready(function(){
 				</div>
 			</div>
 
-			<div class="row">
+			<div class="row mb-0">
 				<div class="col d-flex align-items-center">
 					<input type="checkbox" name="essential" id="termsPrivacy">
 					<label for="termsPrivacy">개인정보 수집 및 이용 동의(필수)</label>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row mt-2 mb-2">
 				<div class="col d-flex align-items-center">
-					<div class="term">
-						개인정보보호법에 따라 끼리끼리에 회원가입 신청하시는 분께 수집하는
+					<div class="term w-100">
+						 개인정보보호법에 따라 끼리끼리에 회원가입 신청하시는 분께 수집하는
 						개인정보의 항목, 개인정보의 수집 및 이용목적, 개인정보의 보유 및
 						이용기간, 동의 거부권 및 동의 거부 시 불이익에 관한 사항을 안내
 						드리오니 자세히 읽은 후 동의하여 주시기 바랍니다.1. 수집하는

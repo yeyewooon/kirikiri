@@ -14,7 +14,6 @@
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
  <!-- fontAwessome-->
 <script src="https://kit.fontawesome.com/241134516c.js" crossorigin="anonymous"></script>
-
 <!-- Bootstrap icons-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 rel="stylesheet">
@@ -422,7 +421,23 @@ footer.footer {
         	madalClear();
         });
         
-        
+        $("#kakaoBtn").click(function(){
+        	Swal.fire({
+				  title: '카카오 로그인',
+				  text: "아직 회원이 아니시라면 "+
+					    "이메일을 반드시 선택해주셔야 가입이 진행됩니다."+
+				  		"선택하지 않을 시 가입이 불가능합니다.",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '로그인'
+				}).then((result) => {
+				  if (result.isConfirmed) {
+					 location.href = "${kakaoUrl}";
+				  };
+				});
+        });
 
 })// 레디 종료
     
@@ -446,18 +461,31 @@ footer.footer {
     					    left top
     					    no-repeat`
     				}); 
-    				if(loginType === "general"){
-    					location.href = "/";
-    					
-    				}else if(loginType === "mypage"){
-    					location.href = "/mem/myPage";
-    				}
+    				setTimeout(function() {
+    					if(loginType === "general"){
+        					
+        					location.href = "/";
+        					
+        				}else if(loginType === "mypage"){
+        					location.href = "/mem/myPage";
+        				}
+    				},800);
     				
     			}else if(result === "loginFail"){
     				sweetAlertFail("아이디 혹은 비밀번호가 맞지 않습니다.");
     				
     			}else if(result === "error"){
     				Swal.fire('소셜 로그인으로 가입되어 있는 아이디입니다.');
+    				
+    			}else if(result === "blackList"){
+    				Swal.fire('블랙리스트로 등록되었습니다. 고객센터에 문의해주세요.');
+    				
+    			}else if(result === "withdrawal"){
+    				Swal.fire('탈퇴한 회원입니다.');
+    				
+    			}else if(result === "admin"){
+    				Swal.fire('관리자 페이지로 이동합니다.');
+    				location.href = "/toAdmin";
     				
     			}else if(result === "nonmem"){
     				sweetAlertFail("가입이 되지 않은 아이디입니다.");
@@ -650,7 +678,7 @@ footer.footer {
 					</div>
 				</div>
 				<div class="row socialRow justify-content-center align-items-center">
-					<a class="social" href="" target="_parent"><img
+					<a class="social" id="kakaoBtn" target="_parent"><img
 						class="social-img" src="/resources/images/kakoLogo.JPG"
 						alt="오류가 발생했습니다."></a>
 					<a class="social" href="${naverUrl}" target="_parent"><img

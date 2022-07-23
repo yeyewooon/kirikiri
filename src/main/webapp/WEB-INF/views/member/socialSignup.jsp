@@ -21,6 +21,8 @@
 <!-- fontAwessome-->
 <script src="https://kit.fontawesome.com/241134516c.js"
 	crossorigin="anonymous"></script>
+<!-- sweetAlert -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <!-- Bootstrap icons-->
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
@@ -28,26 +30,21 @@
 <style>
 /* 눈누 폰트 */
 @font-face {
-	font-family: 'OTWelcomeRA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-		format('woff2');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-
 @font-face {
-	font-family: '양진체';
-	src:
-		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {
 	box-sizing: border-box;
-	font-family: 'OTWelcomeRA';
+	font-family: 'InfinitySans-RegularA1';
 }
 
 body {
@@ -403,7 +400,7 @@ label {
 	margin: 5px;
 }
 
-button {
+.btnRow button {
 	margin: 30px;
 	margin-bottom: 70px;
 	width: 14%;
@@ -448,6 +445,19 @@ footer.footer {
 	   let nicknameConfirm;
 	   let phoneConfirm;
 	   
+	   if($("#user_email").val() === "" && $("#user_name").val() === ""){
+		   sweetAlertFail("오류가 발생했습니다. 다시 로그인 해주세요");
+		   setTimeout(function() {
+			   location.href = "/login/toLogin";
+		   },2000);
+		   
+	   }else if($("#user_email").val() === ""){
+		   sweetAlertFail("아이디를 필수로 동의하지 않았습니다. 회원 가입을 취소합니다.");
+		   setTimeout(function() {
+			   location.href = "/login/toLogin";
+		   },2000);
+	   }
+	   
        $("#singupBackBtn").click(function(){ // 뒤로가기 
            back();
        
@@ -483,7 +493,7 @@ footer.footer {
   	  		 let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;    
      
   	  		 if(!nicknameRegex.test($("#user_nickname").val())){
-      	 		 alert("올바르지 않은 닉네임 형식입니다.");
+  	  			 sweetAlertFail("올바르지 않은 닉네임 형식입니다.");
       	 		 $("#nicknameCheck").focus();
 	       	 	 return;
 	       	 	 
@@ -497,12 +507,12 @@ footer.footer {
 	        		, dataType : "text"
 	        		, success : function(result){
 	        			if(result === "impossibility"){
-	        				alert("사용 중인 닉네임입니다.");
+	        				sweetAlertFail("사용 중인 닉네임입니다.");
 	        				$("#user_nickname").focus();
 	        				invalidNickname();
 	        				
 	        			}else if(result === "possibility"){
-	        				alert("사용 가능한 닉네임입니다.");
+	        				sweetAlertSuccess("사용 가능한 닉네임입니다.");
 	        				nicknameConfirm = "confirm";
 	        				validNickname();
 	        			}
@@ -520,7 +530,7 @@ footer.footer {
     	   let phone = $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
    
 	  		 if(!phoneRegex.test(phone)){
-    	 		 alert("올바르지 않은 전화번호 형식입니다.");
+	  			 sweetAlertFail("올바르지 않은 전화번호 형식입니다.");
 	       	 	 return;
 	       	 	 
 	      	 }else{
@@ -533,10 +543,10 @@ footer.footer {
 	        		, success : function(result){
 	        			console.log(result);
 	        			if(result === "impossibility"){
-	        				alert("사용 중인 전화번호입니다.");
+	        				sweetAlertFail("사용 중인 전화번호입니다.");
 	        				
 	        			}else if(result === "possibility"){
-	        				alert("사용 가능한 전화번호 입니다.");
+	        				sweetAlertSuccess("사용 가능한 전화번호 입니다.");
 	        				$('#phone1').attr('disabled',true);
 	        				$("#phone2").attr('readonly',true);
 	        				$("#phone3").attr('readonly',true);
@@ -559,16 +569,14 @@ footer.footer {
 		   let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
 		   let phone =  $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val(); 
 		 
-		   if($("#user_name").val() =="" || $("#user_email").val() == ""){
-			   sweetAlertFail("오류가 발생했습니다. 다시 로그인 해주세요");
-			   location.href = "/login/toLogin";
-			   return;
-			   
-		   }else if(!nameRegex.test($("#user_name").val())){
+		   if(!nameRegex.test($("#user_name").val())){
 			   sweetAlertFail("이름이 올바르지 않습니다. 새로 작성해주세요.");
 			   invalidName();
 			   $("#user_name_p").hide();
 			   $("#user_name").show();
+			   $("#user_name").attr("readonly",false);
+			   $("#user_name").val("");
+			   $("#user_name").focus();
 			   return;
 			   
 		   }else if(nicknameConfirm !== "confirm"){
@@ -1132,13 +1140,13 @@ function sweetAlertSuccess(content){
             </div>
         </div>
     </div>
-    <div class="row">
+    <div class="row btnRow">
         <div class="col">
             <button type="button" id="backPageBtn" class="btn btn-secondary">취소</button>
             <button type="button" id="nextBtn" class="btn btn-primary">확인</button>
         </div>
     </div>
-    <div class="row">
+    <div class="row btnRow">
         <div class="col">
             <button type="button" id="singupBackBtn" class="btn btn-secondary">뒤로가기</button>
             <button type="button" id="completeBtn" class="btn btn-primary">가입하기</button>
