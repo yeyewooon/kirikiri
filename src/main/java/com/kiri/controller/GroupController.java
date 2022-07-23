@@ -13,10 +13,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.JsonObject;
 import com.kiri.dto.Group_ApplyDTO;
 import com.kiri.dto.Group_ChatDTO;
 import com.kiri.dto.Group_MemberDTO;
@@ -33,8 +35,6 @@ public class GroupController {
    @Autowired
    private Tbl_GroupService tbl_group_service;
 
-   
-   
    // 2022/07/15 김영완
    @Autowired
    private HttpSession session;
@@ -48,6 +48,7 @@ public class GroupController {
       Map<String, Object> memList = tbl_group_service.selectGroupAccess(seq_group);
       memList.get("TableJoinDTO");
       model.addAttribute("memList", memList);
+      model.addAttribute("seq_group", seq_group);
       // System.out.println(memList);
       return "group/groupMember";
    }
@@ -101,6 +102,7 @@ public class GroupController {
 
       map.get("MemberDTO");
       model.addAttribute("map", map);
+      model.addAttribute("seq_group", seq_group);
       return "group/groupApply";
    }
 
@@ -131,8 +133,9 @@ public class GroupController {
 
    // 모임해산 이동(o)
    @RequestMapping(value = "/toGroupDelete")
-   public String toGroupDelete() {
+   public String toGroupDelete(int seq_group, Model model) {
       // System.out.println("그룹 번호 :" + seq_group);
+	   model.addAttribute("seq_group", seq_group);
       return "group/groupDelete";
    }
 
@@ -150,8 +153,12 @@ public class GroupController {
 
    // 모임 생성페이지로 이동
    @RequestMapping(value = "/toCreateGroup")
-   public String toMakeGroup() {
-      return "/group/createGroup";
+   public String toMakeGroup(Model model) {
+	   // 세션 아이디, 닉네임 session에서 뽑아올 값
+	   String user_email = ((MemberDTO) session.getAttribute("loginSession")).getUser_email();
+	   int totalGroupCntById = tbl_group_service.selectGroupCntByEmail(user_email);
+	   model.addAttribute("totalGroupCntById",totalGroupCntById); // 현재 아이디의 모임 가입한 갯수
+	   return "/group/createGroup";
    }
 
    // 그룹 만들기
@@ -166,11 +173,6 @@ public class GroupController {
       // setter 설정
       tbl_group_dto.setUser_email(user_email);
 
-      // 출력만
-      System.out.println("그룹 만들기 컨트롤러");
-      System.out.println(tbl_group_dto.toString());
-      System.out.println("groupFile : " + groupFile);
-
       // 사진을 넣었다면 실행
       if (!groupFile.isEmpty()) {
          // 그룹 프로필 사진 저장(group_profile)
@@ -183,22 +185,35 @@ public class GroupController {
          tbl_group_dto.setOri_name(ori_name);
       }
 
-      // 그룹 생성(tbl_group)
-      tbl_group_service.createGroup(tbl_group_dto);
-
       // setter 주입 session에서 뽑아 올 값
       group_member_dto.setUser_email(user_email);
       group_member_dto.setUser_nickname(user_nickname);
 
+      // 그룹 생성(tbl_group)
+      tbl_group_service.createGroup(tbl_group_dto);
       // group_member로 삽입시 호스트로 설정
       tbl_group_service.insertGroupHost(group_member_dto);
-
+      
       return "";
    }
 
-   @RequestMapping(value = "/buttonPage")
-   public String buttonPage() throws Exception {
-      return "buttonPage";
+	// 썸머노트 이미지
+	@RequestMapping(value = "/summernoteImg", produces = "application/json") // summernote 이미지 업로드
+	@ResponseBody
+	public String uploadSummernoteImg(@RequestParam("file") MultipartFile file) throws Exception {
+		String realPath = session.getServletContext().getRealPath("boardFile");
+		JsonObject jsonObject = tbl_group_service.uploadSummernoteImg(file, realPath);
+		String result = jsonObject.toString();
+		return result;
+	}
+   
+   //썸머노트 이미지 삭제 요청
+   @RequestMapping(value = "/delImg") 
+   @ResponseBody
+   public String delImg(String src) throws Exception {
+      String path = session.getServletContext().getRealPath("boardFile");
+      tbl_group_service.delFile(path, src);
+      return "success";
    }
 
    // 수정페이지로 이동
@@ -214,33 +229,24 @@ public class GroupController {
       return "/group/modifyGroup";
    }
 
-   // 수정페이지
-   @RequestMapping(value = "/modifyGroup")
-   public String modifyGroup(Tbl_GroupDTO tbl_group_dto, MultipartFile groupFile, HttpSession session)
-         throws Exception {
-      System.out.println("modifyGroup 잘들어옴");
-      System.out.println(tbl_group_dto.toString());
-      int seq_group = tbl_group_dto.getSeq_group();
-      System.out.println(seq_group);
-      System.out.println("groupFile" + groupFile);
-
-      // 사진을 넣었다면 실행
-      if (!groupFile.isEmpty()) {
-         System.out.println("hello!!");
-         // 그룹 프로필 사진 저장(group_profile)
-         String realPath = session.getServletContext().getRealPath("group_profile");
-         System.out.println(realPath);
-         String sys_name = tbl_group_service.uploadProfile(groupFile, realPath);
-         String ori_name = groupFile.getOriginalFilename();
-         // sys_name setter 설정
-         tbl_group_dto.setSys_name(sys_name);
-         // ori_name setter 설정
-         tbl_group_dto.setOri_name(ori_name);
-      }
-
+	// 수정페이지
+	@RequestMapping(value = "/modifyGroup")
+	public String modifyGroup(Tbl_GroupDTO tbl_group_dto, MultipartFile groupFile, HttpSession session) throws Exception {
+		int seq_group = tbl_group_dto.getSeq_group(); // 현재 시퀀스 번호 얻어오기
+		// 사진을 넣었다면 실행
+		if (!groupFile.isEmpty()) {
+			System.out.println("hello!!");
+			// 그룹 프로필 사진 저장(group_profile)
+			String realPath = session.getServletContext().getRealPath("group_profile");
+			String sys_name = tbl_group_service.uploadProfile(groupFile, realPath);
+			String ori_name = groupFile.getOriginalFilename();
+			// sys_name setter 설정
+			tbl_group_dto.setSys_name(sys_name);
+			// ori_name setter 설정
+			tbl_group_dto.setOri_name(ori_name);
+		}
       // 수정
       tbl_group_service.modifyGroup(tbl_group_dto);
-
       return "redirect:/group/toGroupDetail?seq_group=" + seq_group;
    }
 
@@ -271,6 +277,8 @@ public class GroupController {
       // TableJoinDTO에서 가져옴 
       Map<String, Object> mapList =  tbl_group_service.selectGroupAccess(seq_group);
       mapList.get("TableJoinDTO");
+      // 해당 아이디가 가입된 그룹 갯수 출력
+      int totalGroupCntById = tbl_group_service.selectGroupCntByEmail(loginSession_id);
       
       model.addAttribute("tbl_group_dto", tbl_group_dto); // 해당 그룹 내용 가져오기
       model.addAttribute("memberList", memberList); // 해당 그룹 맴버 목록 가져오기
@@ -279,7 +287,7 @@ public class GroupController {
       model.addAttribute("loginSession_id",loginSession_id); // 현재 세션 아이디
       model.addAttribute("loginSession_nickName",loginSession_nickName); // 현재 세션 닉네임
       model.addAttribute("mapList", mapList); // MemberDTO + GroupMember
-
+      model.addAttribute("totalGroupCntById",totalGroupCntById); // 현재 아이디의 모임 가입한 갯수
       return "/group/groupDetail";
    }
    
@@ -289,54 +297,35 @@ public class GroupController {
    public Map<String, Object> selectMemberProfile(String user_email) throws Exception {
       List<MemberDTO> profileList = tbl_group_service.selectMemberProfile(user_email); // 회원 프로필 가져오기
       List<SiteDTO> siteList = tbl_group_service.selectMemberSite(user_email); // 회원 주소 가져오기 
-      System.out.println(profileList.toString());
-      System.out.println("절취선-----------------------");
-      System.out.println(siteList.toString());
-      
-      
       Map<String, Object> map = new HashMap<>();
       map.put("profileList", profileList); // 프로필 리스트 
       map.put("siteList", siteList); // 주소 리스트
       return map;
    }
    
-   
-   
-
    // 그룹에서 회원 탈퇴
    @ResponseBody
    @RequestMapping(value = "/quitGroupMember")
    public String quitGroupMember(Group_MemberDTO group_member_dto) throws Exception {
-      System.out.println(group_member_dto.toString());
-
       int rs = tbl_group_service.quitGroupMember(group_member_dto);
-      if (rs > 0) {
-         System.out.println("탈퇴성공");
-         return "success";
-      } else {
-         System.out.println("탈퇴 실패");
-         return "fail";
-      }
+      if (rs > 0) return "success";
+      else return "fail";
    }
 
    // 그룹 가입 신청
    @ResponseBody
    @RequestMapping(value = "/applyGroupMember")
    public String applyGroupMember(Group_ApplyDTO group_apply_dto) throws Exception {
-      // ((MemberDTO)session.getAttribute("loginSession")).getUser_nickname;
-      // ((MemberDTO)session.getAttribute("loginSession")).getUser_bd;
-
-      group_apply_dto.setUser_nickname("해피해피 합니다"); // 위의 세션에서 nickname 가져와야함
-      // group_apply_dto.setUser_bd(null); // 위의 세션에서 bd 가져와야함
+	   String loginSession_id = ((MemberDTO) session.getAttribute("loginSession")).getUser_email(); // 현재 세션 아이디
+       String loginSession_nickName = ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname(); // 현재 세션 닉네임
+       String loginSession_bd = ((MemberDTO) session.getAttribute("loginSession")).getUser_bd(); // 현재 세션 생일
+       
+      group_apply_dto.setUser_bd(loginSession_bd); // 생일 
+      group_apply_dto.setUser_nickname(loginSession_nickName); // 닉네임 주입
 
       int rs = tbl_group_service.applyGroupMember(group_apply_dto);
-      if (rs > 0) {
-         System.out.println("가입 신청 성공");
-         return "success";
-      } else {
-         System.out.println("가입 신청 실패");
-         return "success";
-      }
+      if (rs > 0) return "success";
+      else return "success";
    }
 
    // 해당 그룹 찜 추가
@@ -344,13 +333,8 @@ public class GroupController {
    @RequestMapping(value = "/insertWishList")
    public String insertWishList(WishListDTO wish_list_dto) throws Exception {
       int rs = tbl_group_service.insertWishList(wish_list_dto);
-      if (rs > 0) {
-         System.out.println("찜 추가 완료");
-         return "success";
-      } else {
-         System.out.println("찜 추가 완료");
-         return "fail";
-      }
+      if (rs > 0) return "success"; // 성공
+      else return "fail"; // 실패
    }
 
    // 해당 그룹 찜 삭제
@@ -358,13 +342,8 @@ public class GroupController {
    @RequestMapping(value = "/deletetWishList")
    public String deletetWishList(WishListDTO wish_list_dto) throws Exception {
       int rs = tbl_group_service.deletetWishList(wish_list_dto);
-      if (rs > 0) {
-         System.out.println("찜 취소 완료");
-         return "success";
-      } else {
-         System.out.println("찜 취소 완료");
-         return "fail";
-      }
+      if (rs > 0)return "success"; // 성공
+      else return "fail"; // 실패
    }
 
 ///////////////////////김예원 채팅////////////////////////////////////////////////

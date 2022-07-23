@@ -22,26 +22,21 @@ rel="stylesheet">
 <style>
 /* 눈누 폰트 */
 @font-face {
-	font-family: 'OTWelcomeRA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-		format('woff2');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-
 @font-face {
-	font-family: '양진체';
-	src:
-		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {
 	box-sizing: border-box;
-	font-family: 'OTWelcomeRA';
+	font-family: 'InfinitySans-RegularA1';
 }
 
 body {
@@ -711,7 +706,7 @@ footer.footer {
 									<label for="name" class="form-label">이름</label>
 								</div>
 								<div class="col-md-9 d-flex justify-content-center">
-									<input type="text" class="form-control" placeholder="ex)홍길동"
+									<input type="text" class="form-control" placeholder="ex) 홍길동"
 										name="findId_name" id="findId_name">
 								</div>
 							</div>
@@ -721,7 +716,7 @@ footer.footer {
 								</div>
 								<div class="col-md-9 d-flex justify-content-center">
 									<input type="text" id="find_phone" name="find_phone"
-										class="form-control" placeholder="ex)01012341234" maxlength="11">
+										class="form-control" placeholder="ex) 01012341234" maxlength="11">
 								</div>
 							</div>
 							<div class="row find-box btns mt-4">
@@ -782,7 +777,7 @@ footer.footer {
 									<label for="findPw_name" class="form-label">이름</label>
 								</div>
 								<div class="col-9 d-flex justify-content-center">
-									<input type="text" class="form-control" placeholder="ex)홍길동"
+									<input type="text" class="form-control" placeholder="ex) 홍길동"
 										name="findPw_name" id="findPw_name">
 								</div>
 							</div>
@@ -792,7 +787,7 @@ footer.footer {
 								</div>
 								<div class="col-9 d-flex justify-content-center">
 									<input type="email" class="form-control" name="findPw_email"
-										id="findPw_email" placeholder="ex)abc@gmail.com">
+										id="findPw_email" placeholder="ex) abc@gmail.com">
 								</div>
 							</div>
 							<div class="row find-box mt-4">
