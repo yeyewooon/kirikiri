@@ -35,14 +35,20 @@
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
 	crossorigin="anonymous"></script>
 <title>Insert title here</title>
 
-
 <style>
+
+@font-face {
+            font-family: 'MICEGothic Bold';
+            src:
+                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+}
 
 /* 네비바  */
 body {
@@ -51,11 +57,7 @@ body {
 
 * {
 	box-sizing: border-box;
-	font-family: "OTWelcomeRA";
-}
-
-#mainText {
-	font-family: "양진체";
+	font-family: "MICEGothic Bold"; 
 }
 
 /* header 반응형 */
@@ -181,8 +183,7 @@ ul {
 .card-text-category {
 	width: fit-content;
 	padding: 4px;
-	border: 1px solid #f66a09;
-	background-color: #fea500;
+	background-color: #e26b8b;
 	height: 22px;
 	border-radius: 5px;
 	font-size: 14px;
@@ -210,25 +211,6 @@ footer.footer {
 .footer-imgBox>img {
 	width: 100%;
 	height: 100%;
-}
-
-/* 눈누 폰트 */
-@font-face {
-	font-family: "OTWelcomeRA";
-	src:
-		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2")
-		format("woff2");
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: "양진체";
-	src:
-		url("https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff")
-		format("woff");
-	font-weight: normal;
-	font-style: normal;
 }
 
 img {
@@ -267,9 +249,10 @@ img {
 	cursor: pointer;
 }
 
-#categoryList {
-	display: none
+#locationList {
+	display :none;
 }
+
 </style>
 
 </head>
@@ -333,10 +316,9 @@ img {
 									게시판</a></li>
 						</ul>
 					</div>
-
 					<!-- logo -->
 					<div class="col-2">
-						<a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0"> <img
+						<a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
 							id="logoImgs" src="/resources/images/kiri.jpg" />
 						</a>
 					</div>
@@ -383,137 +365,121 @@ img {
 			value="locationList">지역</button>
 		<button type="button" class="btn btn-primary" id="categoryBtn"
 			value="categoryList">카테고리</button>
-  <!--지역 설정 슬라이더-->
-   <div id="locationList" class="responsive mt-5">
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic">
-        <img src = "/resources/images/slide/지역9.png">
-      </div>
-      <span class="locationText mt-1">
-        서울특별시
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역2.png">
-      </div>
-      <span class="locationText mt-1">
-        인천광역시
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역3.png">
-      </div>
-      <span class="locationText mt-1">
-        대전광역시
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역4.png">
-      </div>
-      <span class="locationText mt-1">
-        광주광역시
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역5.png">
-      </div>
-      <span class="locationText mt-1">
-        대구광역시
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역6.png">
-      </div>
-      <span class="locationText mt-1">
-        울산광역시
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역22.png">
-      </div>
-      <span class="locationText mt-1">
-        부산광역시
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역8.png">
-      </div>
-      <span class="locationText mt-1">
-        경기도
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역9.png">
-      </div>
-      <span class="locationText mt-1">
-        강원도
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역10.png">
-      </div>
-      <span class="locationText mt-1">
-       	충청북도
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역11.png">
-      </div>
-      <span class="locationText mt-1">
-        충청남도
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역12.png">
-      </div>
-      <span class="locationText mt-1">
-        전라북도
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역14.png">
-      </div>
-      <span class="locationText mt-1">
-        전라남도
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역13.png">
-      </div>
-      <span class="locationText mt-1">
-        경상북도
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-       <img src = "/resources/images/slide/지역15.png">
-      </div>
-      <span class="locationText mt-1">
-        경상남도
-      </span>
-    </div>
-    <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역19.png">
-      </div>
-      <span class="locationText mt-1">
-        제주도
-      </span>
-    </div>
-  </div>
+		<!--지역 설정 슬라이더-->
+		<div id="locationList" class="responsive mt-5">
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic">
+					<img src="/resources/images/slide/지역9.png">
+				</div>
+				<span class="locationText mt-1"> 서울특별시 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역2.png">
+				</div>
+				<span class="locationText mt-1"> 인천광역시 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역3.png">
+				</div>
+				<span class="locationText mt-1"> 대전광역시 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역4.png">
+				</div>
+				<span class="locationText mt-1"> 광주광역시 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역5.png">
+				</div>
+				<span class="locationText mt-1"> 대구광역시 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역6.png">
+				</div>
+				<span class="locationText mt-1"> 울산광역시 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역22.png">
+				</div>
+				<span class="locationText mt-1"> 부산광역시 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역8.png">
+				</div>
+				<span class="locationText mt-1"> 경기도 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역9.png">
+				</div>
+				<span class="locationText mt-1"> 강원도 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역10.png">
+				</div>
+				<span class="locationText mt-1"> 충청북도 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역11.png">
+				</div>
+				<span class="locationText mt-1"> 충청남도 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역12.png">
+				</div>
+				<span class="locationText mt-1"> 전라북도 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역14.png">
+				</div>
+				<span class="locationText mt-1"> 전라남도 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역13.png">
+				</div>
+				<span class="locationText mt-1"> 경상북도 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역15.png">
+				</div>
+				<span class="locationText mt-1"> 경상남도 </span>
+			</div>
+			<div
+				class="locationMapper d-flex flex-column align-items-center justify-content-center">
+				<div class="locationPic" style="font-size: 40px;">
+					<img src="/resources/images/slide/지역19.png">
+				</div>
+				<span class="locationText mt-1"> 제주도 </span>
+			</div>
+		</div>
 		<!--카테고리 설정 슬라이더-->
 		<div id="categoryList" class="responsive mt-5">
 			<div
@@ -597,7 +563,7 @@ img {
 			<div
 				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-balloons"></i>
+					<i class="fa-solid fa-microphone-stand"></i>
 				</div>
 				<span class="categoryText mt-1"> 문화/공연/축제 </span>
 			</div>
@@ -627,7 +593,7 @@ img {
 									<span class="d-none">${dto.seq_group}</span>
 									<div class="card-body">
 										<div
-											class="card-text card-text-category d-flex justify-content-center align-items-center">
+											class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
 											${dto.group_category}</div>
 										<div class="card-text mt-1">
 											<strong>${dto.group_title}</strong>
@@ -650,47 +616,11 @@ img {
 
 	<script>
 
-// 카테고리 설정 스크립트
-
-// $('#locationList').slick({
-//   dots: false,
-//   infinite: true,
-//   speed: 300,
-//   slidesToShow: 6,
-//   slidesToScroll: 6,
-//   responsive: [
-//     {
-//       breakpoint: 1024,
-//       settings: {
-//         slidesToShow: 3,
-//         slidesToScroll: 3,
-//         infinite: true,
-//         dots: false
-//       }
-//     },
-//     {
-//       breakpoint: 600,
-//       settings: {
-//         slidesToShow: 2,
-//         slidesToScroll: 2
-//       }
-//     },
-//     {
-//       breakpoint: 480,
-//       settings: {
-//         slidesToShow: 1,
-//         slidesToScroll: 1
-//       }
-//     }
-//   ]
-// });
-
-
 // 지역 클릭시
 $('#locationBtn').on("click", function() {
     $('#categoryList').css('display', 'none'); // 카테고리 안보이게
     $('#locationList').css('display', 'block'); // 지역 보이게
-    $('#locationList').get(0).slick.setPosition();
+    $('#locationList').get(0).slick.setPosition(); 
 });
 
 // 카테고리 클릭시
@@ -700,7 +630,7 @@ $('#categoryBtn').on("click", function() {
     $('#categoryList').get(0).slick.setPosition();
 });
 
-
+// 슬라이더 함수
 $(window).on('load', function() {
   $('.responsive').slick({
   dots: false,
@@ -753,7 +683,6 @@ $(".card").on("click",function() {
 	console.log("hi");
     let locationText = $(this).find('span').html(); // 공백이 포함되서 나옴
     let group_site = locationText.trim(); // 공백을 없앰
-    console.log(group_site);
     location.href = "/user/toUserSelectedGroupList?group_site="+group_site; 
   })
   
@@ -761,7 +690,6 @@ $(".card").on("click",function() {
   $(".categoryMapper").on("click",function(e) {
     let categoryText = $(this).find('span').html(); // 공백이 포함되서 나옴
     let group_category = categoryText.trim(); // 공백을 없앰
-    console.log(group_category);
     location.href = "/user/toUserSelectedGroupList?group_category="+group_category;
   })
 

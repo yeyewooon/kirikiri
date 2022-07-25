@@ -14,9 +14,7 @@
 <!--구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-   href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap"
-   rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-3.6.0.js"
    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
    crossorigin="anonymous"></script>
@@ -26,16 +24,23 @@
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
    crossorigin="anonymous"></script>
-
+<!-- Bootstrap icons-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <title>끼리끼리</title>
 <style>
 * {
    box-sizing: border-box;
-   font-family: 'OTWelcomeRA';
+   font-family: 'MICEGothic Bold';
 }
-
-#mainText {
-   font-family: '양진체';
+@font-face {
+            font-family: 'MICEGothic Bold';
+            src:
+                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
 }
 
 /* header 반응형 */
@@ -175,29 +180,41 @@ a {
    transform: translate(0, -5px);
 }
 
-/* body content */
-.content {
+/* all, new, best 부분 css */
+.contentAll, .contentNew, .contentBest {
    width: 100%;
    margin: 0px;
    background-color: rgb(245, 245, 245);
 }
 
+.content {
+	width: 100%;
+	margin: 0px;
+	background-color: rgb(245, 245, 245);
+}
+
 .card {
-   width: 18rem;
-   box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
+	width: 18rem;
+	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
+	cursor:pointer;
 }
 
 .card>img {
-   width: 100%;
+	width: 100%;
 }
 
 .card-img-top {
-   width: 18rem;
-   height: 13rem;
+	width: 18rem;
+	height: 13rem;
 }
 
-.imgContainer {
-   text-align: center;
+.card-text-category {
+	width: fit-content;
+	padding: 4px;
+	background-color: #e26b8b;
+	height: 22px;
+	border-radius: 5px;
+	font-size: 14px;
 }
 
 .more {
@@ -206,24 +223,14 @@ a {
    text-align: center;
    margin-top: 20px;
    background-color: lightgray;
-}
-
-.more>a {
-   text-decoration: none;
-   color: black;
+   cursor:pointer;
 }
 
 button {
    margin-top: 50px;
-   background-color: rgb(138, 136, 136);
-   border: none;
-   cursor: pointer;
    outline: none;
-   padding: 0;
    height: 50px;
-   line-height: 32px;
    width: 250px;
-   border-radius: 16px;
 }
 
 /*앱 광고*/
@@ -290,24 +297,7 @@ footer.footer {
    height: 100%;
 }
 
-/* 눈누 폰트 */
-@font-face {
-   font-family: 'OTWelcomeRA';
-   src:
-      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-      format('woff2');
-   font-weight: normal;
-   font-style: normal;
-}
 
-@font-face {
-   font-family: '양진체';
-   src:
-      url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-      format('woff');
-   font-weight: normal;
-   font-style: normal;
-}
 </style>
 </head>
 <body>
@@ -341,8 +331,8 @@ footer.footer {
                         <li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
                         <c:choose>
                            <c:when test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link" href=" ">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href=" ">회원가입</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/signup">회원가입</a></li>
                            </c:when>
                            <c:otherwise>
                               <li class="nav-item"><a class="nav-link" href=" ">마이페이지</a></li>
@@ -385,7 +375,7 @@ footer.footer {
                               <li class="nav-item"><a class="nav-link"
                                  href="/login/toLogin">로그인</a></li>
                               <li class="nav-item"><a class="nav-link"
-                                 href="/toSignUp.mem">회원가입</a></li>
+                                 href="/login/signup">회원가입</a></li>
                            </c:if>
                         </ul>
                      </div>
@@ -402,7 +392,7 @@ footer.footer {
                               </a>
                               <ul class="dropdown-menu text-small"
                                  aria-labelledby="dropdownUser1">
-                                 <li><a class="dropdown-item" href="#">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
                                  <li><a class="dropdown-item" href="#">모임생성</a></li>
                                  <li><hr class="dropdown-divider"></li>
                                  <li><a class="dropdown-item" href="#">로그아웃</a></li>
@@ -487,7 +477,7 @@ footer.footer {
       <!--가입 하기 버튼-->
       <div class="row mt-2">
          <div class="signUpBox col text-center">
-            <button type="button" class="btn btn-outline-primary">가입하기</button>
+            <button type="button" class="btn btn-outline-primary groupSignUp">가입하기</button>
          </div>
       </div>
 
@@ -585,146 +575,204 @@ footer.footer {
       <!-- 모임 나타나기 -->
       <!-- menubar -->
       <div class="row menu ms-0">
-         <div class="col-4 d-flex justify-content-end text">ALL</div>
-         <div class="col-4 d-flex justify-content-center text">NEW</div>
-         <div class="col-4 d-flex justify-content-start text">BEST</div>
+         <div class="col-4 d-flex justify-content-end text allGroup">ALL</div>
+         <div class="col-4 d-flex justify-content-center text newGroup">NEW</div>
+         <div class="col-4 d-flex justify-content-start text bestGroup">BEST</div>
       </div>
-      <!-- 모임 card 캐러셀 -->
-      <div class="row content">
+	<!-- 모임 card 캐러셀 All -->
+      <div class="row contentAll mt-4">
          <div class="col p-0">
             <div class="content2">
                <div class="imgContainer">
                   <div class="row">
-                     <div class="col-md-4 d-flex justify-content-center p-4">
-                        <div class="card">
-                           <img src="/resources/images/profile.jpg" class="card-img-top"
-                              alt="..." />
-                           <div class="card-body">
-                              <p class="card-text">Some quick example text to build on
-                                 the card title and make up the bulk of the card's content.</p>
+                     <c:forEach items="${selectAllList}" var="dto" begin="0" end = "5">
+                        <div class="col-md-4 d-flex justify-content-center p-4">
+                           <div class="card" data-aos="flip-up" data-aos-duration="1000">
+                           		<c:choose>
+									<c:when test="${dto.sys_name ne null}">
+										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+									</c:when>
+									<c:otherwise>
+										<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+									</c:otherwise>
+								</c:choose>
+								<span class="d-none seq_group">${dto.seq_group}</span>
+                              <div class="card-body">
+                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+                                    ${dto.group_category}
+                                 </div>
+                                 <div class="card-text mt-1">
+                                    <strong>${dto.group_title}</strong>
+                                 </div>
+                                 <div class="card-text d-flex justify-content-end">
+                                    <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
+                                 </div>
+                              </div>
                            </div>
                         </div>
-                     </div>
-                     <div class="col-md-4 d-flex justify-content-center p-4">
-                        <div class="card">
-                           <img src="/resources/images/profile.jpg" class="card-img-top"
-                              alt="..." />
-                           <div class="card-body">
-                              <p class="card-text">Some quick example text to build on
-                                 the card title and make up the bulk of the card's content.</p>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4 d-flex justify-content-center p-4">
-                        <div class="card">
-                           <img src="/resources/images/profile.jpg" class="card-img-top"
-                              alt="..." />
-                           <div class="card-body">
-                              <p class="card-text">Some quick example text to build on
-                                 the card title and make up the bulk of the card's content.</p>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="imgContainer">
-                  <div class="row">
-                     <div class="col-md-4 d-flex justify-content-center p-4">
-                        <div class="card">
-                           <img src="/resources/images/profile.jpg" class="card-img-top"
-                              alt="..." />
-                           <div class="card-body">
-                              <p class="card-text">Some quick example text to build on
-                                 the card title and make up the bulk of the card's content.</p>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4 d-flex justify-content-center p-4">
-                        <div class="card">
-                           <img src="/resources/images/profile.jpg" class="card-img-top"
-                              alt="..." />
-                           <div class="card-body">
-                              <p class="card-text">Some quick example text to build on
-                                 the card title and make up the bulk of the card's content.</p>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="col-md-4 d-flex justify-content-center p-4">
-                        <div class="card">
-                           <img src="/resources/images/profile.jpg" class="card-img-top"
-                              alt="..." />
-                           <div class="card-body">
-                              <p class="card-text">Some quick example text to build on
-                                 the card title and make up the bulk of the card's content.</p>
-                           </div>
-                        </div>
-                     </div>
+                     </c:forEach>
                   </div>
                </div>
             </div>
-            <div class="col-12" style="width: 100%">
+             <div class="col-12" style="width: 100%">
                <div class="d-flex justify-content-center align-items-center more">
-                  <a href="">더보기 ▼</a>
+                  <span>더보기</span><span class = "ms-2"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
+              </div>
+            </div>
+         </div>
+      </div>
+      
+      <!-- 모임 card 캐러셀 New -->
+      <div class="row contentNew d-none mt-4">
+         <div class="col p-0">
+            <div class="content2">
+               <div class="imgContainer">
+                  <div class="row">
+                     <c:forEach items="${selectNewList}" var="dto" begin="0" end = "5">
+                        <div class="col-md-4 d-flex justify-content-center p-4">
+                           <div class="card" data-aos="flip-up" data-aos-duration="1000">
+                           		<c:choose>
+									<c:when test="${dto.sys_name ne null}">
+										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+									</c:when>
+									<c:otherwise>
+										<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+									</c:otherwise>
+								</c:choose>
+								<span class="d-none  seq_group">${dto.seq_group}</span>
+                              <div class="card-body">
+                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+                                    ${dto.group_category}
+                                 </div>
+                                 <div class="card-text mt-1">
+                                    <strong>${dto.group_title}</strong>
+                                 </div>
+                                 <div class="card-text d-flex justify-content-end">
+                                    <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </c:forEach>
+                  </div>
                </div>
+            </div>
+             <div class="col-12" style="width: 100%">
+               <div class="d-flex justify-content-center align-items-center more">
+                  <span>더보기</span><span class = "ms-2"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
+              </div>
+            </div>
+         </div>
+      </div>
+      
+      <!-- 모임 card 캐러셀 Best -->
+      <div class="row contentBest d-none mt-4">
+         <div class="col p-0">
+            <div class="content2">
+               <div class="imgContainer">
+                  <div class="row">
+                     <c:forEach items="${selectBestList}" var="dto" begin="0" end = "5">
+                        <div class="col-md-4 d-flex justify-content-center p-4">
+                           <div class="card" data-aos="flip-up" data-aos-duration="1000">
+                           		<c:choose>
+									<c:when test="${dto.sys_name ne null}">
+										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+									</c:when>
+									<c:otherwise>
+										<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+									</c:otherwise>
+								</c:choose>
+								<span class="d-none  seq_group">${dto.seq_group}</span>
+                              <div class="card-body">
+                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+                                    ${dto.group_category}
+                                 </div>
+                                 <div class="card-text mt-1">
+                                    <strong>${dto.group_title}</strong>
+                                 </div>
+                                 <div class="card-text d-flex justify-content-end">
+                                    <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </c:forEach>
+                  </div>
+               </div>
+            </div>
+             <div class="col-12" style="width: 100%">
+               <div class="d-flex justify-content-center align-items-center more">
+                  <span>더보기</span><span class = "ms-2"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
+              </div>
             </div>
          </div>
       </div>
 
-      <!-- Footer-->
-      <footer class="footer mt-5">
-         <div class="row">
-            <div class="col-lg-3 footer-imgBox">
-               <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-            </div>
-            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-               <ul class="list-inline mb-2">
-                  <li class="list-inline-item"><a href="#!">공지사항</a></li>
-                  <li class="list-inline-item">⋅</li>
-                  <c:choose>
-                     <c:when test="${not empty loginSession}">
-                        <li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-                     </c:when>
-                     <c:otherwise>
-                        <li class="list-inline-item"><a href="member/toSignup">회원가입</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-                     </c:otherwise>
-                  </c:choose>
-                  <li class="list-inline-item">⋅</li>
-                  <li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a></li>
-                  <li class="list-inline-item">⋅</li>
-                  <li class="list-inline-item"><a href="#!"
-                     style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-               </ul>
-               <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-                  개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-               <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-                  57 이레빌딩</p>
-               <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-                  2022. All Rights Reserved.</p>
-            </div>
-            <div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-               <ul class="list-inline mb-0">
-                  <li class="list-inline-item me-4"><a
-                     href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-                  <li class="list-inline-item me-4"><a
-                     href="https://twitter.com/?lang=ko"><i
-                        class="bi-twitter fs-3"></i></a></li>
-                  <li class="list-inline-item"><a
-                     href="https://www.instagram.com/"><i
-                        class="bi-instagram fs-3"></i></a></li>
-               </ul>
-            </div>
-         </div>
-      </footer>
-   </div>
+		<!-- Footer-->
+		<footer class="footer mt-5">
+			<div class="row">
+				<div class="col-lg-3 footer-imgBox">
+					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+				</div>
+				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+					<ul class="list-inline mb-2">
+						<li class="list-inline-item"><a href="#!">공지사항</a></li>
+						<li class="list-inline-item">⋅</li>
+						<c:choose>
+							<c:when test="${not empty loginSession}">
+								<li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+							</c:otherwise>
+						</c:choose>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item">
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<a href="/group/toCreateGroup">모임 만들기</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/login/toLogin">모임 만들기</a>
+								</c:otherwise>
+							</c:choose>
+						</li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="privacy"
+							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+					</ul>
+					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+						57 이레빌딩</p>
+					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+						2022. All Rights Reserved.</p>
+				</div>
+				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item me-4"><a
+							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+						<li class="list-inline-item me-4"><a
+							href="https://twitter.com/?lang=ko"><i
+								class="bi-twitter fs-3"></i></a></li>
+						<li class="list-inline-item"><a
+							href="https://www.instagram.com/"><i
+								class="bi-instagram fs-3"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+	</div>
 
 
    <!-- AOS 스크립트 시작 -->
    <script>
       AOS.init(); // 자바스크립트로 init()을 해야 동작한다.
+      
       const countDownTimer = function(id, date) {
          var _vDate = new Date(date); // 전달 받은 일자
          var _second = 1000;
@@ -761,9 +809,43 @@ footer.footer {
       dateObj.setDate(dateObj.getDate() + 1);
 
       countDownTimer("sample01", dateObj); // 내일까지
-      countDownTimer("sample02", "04/01/2024 00:00 AM"); // 2024년 4월 1일까지, 시간을 표시하려면 01:00 AM과 같은 형식을 사용한다.
-      countDownTimer("sample03", "04/01/2024"); // 2024년 4월 1일까지
-      countDownTimer("sample04", "04/01/2019"); // 2024년 4월 1일까지
+
+      
+      
+      
+      // 그룹영역 all, new, best d-none 주고, 풀기
+      $(".allGroup").on("click", function(){
+    	  $(".contentAll").removeClass("d-none");
+    	  $(".contentNew").addClass("d-none");
+    	  $(".contentBest").addClass("d-none");
+      })
+      $(".newGroup").on("click", function(){
+    	  $(".contentAll").addClass("d-none");
+    	  $(".contentNew").removeClass("d-none");
+    	  $(".contentBest").addClass("d-none");
+      })
+      $(".bestGroup").on("click", function(){
+    	  $(".contentAll").addClass("d-none");
+    	  $(".contentNew").addClass("d-none");
+    	  $(".contentBest").removeClass("d-none");
+      })
+      
+      // 모임 card 눌러서 모임상세페이지 가기
+      $(".card").on("click", function(){
+    	  let seq_group = $(this).children('span').text();
+    	  console.log(seq_group);
+    	  location.href = "/group/toGroupDetail?seq_group="+seq_group;
+      })
+      
+      // 그룹영역 더보기 눌러서 페이지 이동
+      $(".more").on("click", function(){
+    	  location.href = "/user/toViewAllGroupList";
+      })
+
+<<<<<<< HEAD
+=======
+      
+>>>>>>> 5195664ed54176bf1cc21944fe318cc66b889488
    </script>
 </body>
 </html>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-   pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
@@ -363,7 +362,7 @@ footer.footer {
             </div>
             <!-- 그룹번호 숨겨서 받기 -->
             <div class="d-none">
-               <input type="text" value=1 name="seq_group" id="seq_group">
+               <input type="text" value="${seq_group}" name="seq_group" id="seq_group">
                <input type="text" value="${count}" name="group_people"
                   id="group_people"> <input type="text"
                   value="${groupCount}" name="groupCount" id="groupCount">

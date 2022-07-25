@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+   
+<mapper namespace="singupMapper">
+	<select id="emailCheck" parameterType="String" resultType="int">
+		select count(*) from member where user_email = #{user_email}
+	</select>
+	
+	<select id="nicknameCheck" parameterType="String" resultType="int">
+		select count(*) from member where user_nickname = #{user_nickname}
+	</select>
+	
+	<select id="phoneCheck" parameterType="String" resultType="int">
+		select count(*) from member where user_phone = #{user_phone}
+	</select>
+	
+	<insert id="signup" parameterType="com.kiri.dto.MemberDTO">
+		insert into member values(#{user_email}, #{user_pw}, #{user_name}, #{user_nickname},
+		#{user_phone}, #{user_bd}, #{user_gender}, #{user_job}, #{user_intro}, #{user_image, jdbcType=VARCHAR}, default, default)
+	</insert>
+	
+	<insert id="insertHobby" parameterType="map">
+		insert into hobby values(seq_hobby.nextval, #{user_email}, #{hobby} )
+	</insert>
+	
+	<insert id="insertArea" parameterType="map">
+		insert into site values(seq_site.nextval, #{user_email}, #{area} )
+	</insert>
+	
+	<insert id="loginType" parameterType="map">
+		insert into login_type values(seq_type.nextval , #{user_email}, #{type}, #{unique_id}, sysdate)
+	</insert>
+	
+	<update id="updateLoginType" parameterType="map">
+		update login_type set
+			<trim suffixOverrides=",">
+				<if test="type != null and !type.equals('')">type = #{type, jdbcType=VARCHAR},</if>	
+				<if test="unique_id != null and !unique_id.equals('')">unique_id = #{unique_id, jdbcType=VARCHAR}</if>
+			</trim>
+		 where user_email = #{user_email}
+	</update>
+	
+</mapper>

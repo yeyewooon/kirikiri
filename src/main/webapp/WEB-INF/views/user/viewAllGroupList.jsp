@@ -13,7 +13,6 @@
   <!-- swal -->
   <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="sweetalert2.min.js"></script>
-
   <!--bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
@@ -36,6 +35,14 @@
 
   <style>
 
+@font-face {
+            font-family: 'MICEGothic Bold';
+            src:
+                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+}
+
     /* 네비바  */
 body {
 	background-color: #f6f7f9;
@@ -43,11 +50,7 @@ body {
 
 * {
 	box-sizing: border-box;
-	font-family: "OTWelcomeRA";
-}
-
-#mainText {
-	font-family: "양진체";
+	font-family: "MICEGothic Bold"; 
 }
 
 /* header 반응형 */
@@ -155,6 +158,7 @@ ul {
 .card {
 	width: 18rem;
 	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
+	cursor:pointer;
 }
 
 .card>img {
@@ -169,8 +173,7 @@ ul {
 .card-text-category {
 	width: fit-content;
 	padding: 4px;
-	border: 1px solid #f66a09;
-	background-color: #fea500;
+	background-color: #e26b8b;
 	height: 22px;
 	border-radius: 5px;
 	font-size: 14px;
@@ -206,15 +209,6 @@ footer.footer {
 	src:
 		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2")
 		format("woff2");
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: "양진체";
-	src:
-		url("https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff")
-		format("woff");
 	font-weight: normal;
 	font-style: normal;
 }
@@ -325,7 +319,7 @@ img {
 
           <!-- logo -->
           <div class="col-2">
-            <a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
+            <a href="/" id="navLogo" class="mb-2 mb-lg-0">
               <img id="logoImgs" src="/resources/images/kiri.jpg" />
             </a>
           </div>
@@ -597,7 +591,7 @@ img {
     </div>
     <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
       <div class="categoryPic" style="font-size: 66px;">
-        <i class="fa-solid fa-balloons"></i>
+        <i class="fa-solid fa-microphone-stand"></i>
       </div>
       <span class="categoryText mt-1">
         문화/공연/축제
@@ -625,7 +619,7 @@ img {
 								</c:choose>
 								<span class="d-none">${dto.seq_group}</span>
                               <div class="card-body">
-                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center">
+                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
                                     ${dto.group_category}
                                  </div>
                                  <div class="card-text mt-1">
@@ -707,7 +701,7 @@ img {
 
 
   <script>
-
+  
 //카테고리 설정 스크립트
 //지역 클릭시
 $('#locationBtn').on("click", function() {

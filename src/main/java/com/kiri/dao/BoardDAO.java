@@ -13,8 +13,41 @@ import com.kiri.vo.Criteria;
 
 @Repository
 public class BoardDAO {
+	
 	@Autowired
 	private SqlSession session;
+
+	// 일반게시판 조회
+	public List<BoardDTO> selectBoardList(String user_email) throws Exception{
+		return session.selectList("myPageMapper.selectBoardList",user_email);
+	}	
+	
+	// 일반게시판 리스트 조회
+	public List<Map<String,Object>> selectTotalBoardList(String user_email) throws Exception{
+		return session.selectList("myPageMapper.selectTotalBoardList",user_email);
+	}
+	
+	// 일반게시판 총 갯수
+	public int selectBoardCount(String user_email) throws Exception{
+		return session.selectOne("myPageMapper.selectBoardCount",user_email);
+	}	
+	
+	// 일반게시판 삭제
+	public int boardDelete(int seq_board) throws Exception{
+		return session.delete("myPageMapper.boardDelete",seq_board);
+	}
+	
+	// 일판게시판 검색으로 조회
+	public List<BoardDTO> genalSearchList(String category, String keyword,String user_email) throws Exception{
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("category", category);
+		map.put("keyword", keyword);
+		map.put("user_email", user_email);
+		
+		System.out.println(map);
+		return session.selectList("myPageMapper.genalSearchList",map);
+	}
 	
 	/* 자유 게시판 */
 	// 게시글 저장

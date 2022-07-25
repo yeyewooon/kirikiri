@@ -190,7 +190,9 @@ a {
 				<i class="logout fa-solid fa-arrow-right-from-bracket"></i>
 			</div>
 		</div>
-		<div class="contents"></div>
+		<div class="contents">
+			
+		</div>
 	</div>
 	<script>
 	

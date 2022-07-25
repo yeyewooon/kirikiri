@@ -7,14 +7,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kiri.auth.KakaoLogin;
+import com.kiri.auth.NaverLogin;
 import com.kiri.dto.Login_TypeDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.service.LoginService;
+import com.kiri.service.MailService;
+import com.kiri.service.SignupService;
 import com.kiri.utills.EncryptionUtils;
 
 @RequestMapping("/login")
@@ -26,56 +30,128 @@ public class LoginController {
 	private LoginService service;
 	@Autowired
 	private HttpSession session;
+	@Autowired
+	private MailService mailService;
+	@Autowired
+	private SignupService signupService;
+	//네이버
+    @Autowired
+    private NaverLogin naverLogin;
+    //카카오
+    @Autowired
+    private KakaoLogin kakaoLogin;
+	
 	
 	@RequestMapping(value = "/toLogin")
-	public String toLogin() {
+	public String toLogin(Model model)throws Exception {
+		String naverUrl = naverLogin.getAuthorizationUrl(session);
+		String kakaoUrl = kakaoLogin.getAuthorizationUrl(session);
+	    model.addAttribute("naverUrl", naverUrl);
+	    model.addAttribute("kakaoUrl", kakaoUrl);
+	    
 		return "/member/login";
 	}
-	
-
-
 	@ResponseBody
 	@RequestMapping(value = "/general") 	
-	public String general(String user_id, String user_pw) throws Exception { // 일반로그인
+	public String general(String user_email, String user_pw) throws Exception { // 일반로그인 feat.조용진
 		String Encryption_pw = ecp.getSHA512(user_pw); 
-		MemberDTO dto = service.login(user_id, Encryption_pw);
+		Login_TypeDTO type = service.loginType(user_email);
 		
-		if(dto != null) { // 널이 아니라면 조회 성공
-			dto.setUser_pw(null);
-			Login_TypeDTO type = service.loginType(user_id);
+		if(type == null) { //미가입
+			return "nonmem";
 			
-			if(type.getType().equals("general")) { //일반 로그인
+		}else if(type.getType().equals("general")) { //일반 로그인
+			MemberDTO dto = service.login(user_email, Encryption_pw);
+			if("N".equals(dto.getUser_blacklist()) && "N".equals(dto.getUser_delete())) {
+				dto.setUser_pw(null);
+				session.setAttribute("loginType", type.getType());
 				session.setAttribute("loginSession", dto);
+				service.loginLogSuccess(user_email);
 				return "general";
 				
-			}else if(type.getType().equals("kakao")) { //카카오로 가입된 아이디
-				return "kakao";
+			}else if("Y".equals(dto.getUser_blacklist())){
+				return "blackList";
 				
-			}else { // 맴버는 조회 되었는데 타입에 오류 발생 
+			}else if("Y".equals(dto.getUser_delete())){
+				return "withdrawal";
+				
+			}else { // null 로그인 실패 
+				service.loginLogFailed(user_email);
+				return "loginFail";
+			}
+			
+			
+		}else if(type.getType().equals("admin")) { //관리자 가입된 아이디
+			MemberDTO dto = service.login(user_email, user_pw);
+			if(dto != null) {
+				dto.setUser_pw(null);
+				session.setAttribute("loginType", type.getType());
+				session.setAttribute("loginSession", dto);
+				return "admin";
+				
+			}else {
 				return "error";
 			}
 			
-		}else { // null 로그인 실패 
-			return "loginFail";
+		}else { // 맴버는 조회 되었는데 타입에 오류 발생 
+			return "error";
 		}
 	}
 	
+	@ResponseBody
+	@RequestMapping(value = "/findId") 	
+	public String findId(String user_name, String user_phone) throws Exception { // 아이디 찾기 feat.조용진
+		String result = service.findId(user_name, user_phone);
+		if(result != "nonmem") {
+			return result;
+			
+		}else {
+			return "nonmem";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/findPw") 	
+	public String findPw(String user_name, String user_email) throws Exception { // 비밀번호 찾기 feat.조용진
+		boolean is_result = service.findPw(user_name, user_email);
+		if(is_result) {
+			return "exist";
+			
+		}else {
+			return "empty";
+		}
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/emailAuthFindPw") 
+	public String emailAuthFindPw(String user_name, String user_email) throws Exception { // 비밀번호 찾기 feat.조용진
+		return mailService.findPw(user_email);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/tempPw") 
+	public boolean tempPw(String user_email) throws Exception { // 비밀번호 수정 feat.조용진
+		String pw = mailService.updatePw(user_email);
+	    String ecpPw = ecp.getSHA512(pw);
+	    service.updatePw(user_email, ecpPw);
+		
+		return true;
+	}
+	
 	@RequestMapping(value = "/toLogout")//logout페이지 요청 feat.조용진
-    public String logout(HttpServletRequest request, HttpServletResponse response) {
-        session.removeAttribute("loginSession");
-        // 쿠키는 보류!
-//        Cookie cookie = new Cookie("visit_cookie", null);
-//        cookie.setMaxAge(0);
-//        cookie.setPath("/");
-//        response.addCookie(cookie);
-        return "redirect:/";
-    }
+	public String logout() {
+		session.removeAttribute("loginSession");
+		session.removeAttribute("loginType");
+		return "redirect:/";
+	}
+	
 	
 	@ExceptionHandler
 	public String toError(Exception e) {
 		System.out.println("예외 발생");
 		e.printStackTrace();
-		return "redirect:/toError";
+		return "redirect:/login/toLogin";
 	}
 	
 	

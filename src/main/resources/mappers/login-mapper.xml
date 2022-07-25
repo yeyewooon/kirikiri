@@ -5,11 +5,44 @@
    
    
 <mapper namespace="loginMapper">
-	<select id="login" parameterType="String" resultType="com.kiri.dto.MemberDTO">
+	<select id="login" parameterType="map" resultType="com.kiri.dto.MemberDTO">  
 		select * from member where user_email = #{user_email} and user_pw = #{user_pw}
+	</select>
+	
+	<select id="socialLogin" parameterType="String" resultType="com.kiri.dto.MemberDTO">  
+		select * from member where user_email = #{user_email}
 	</select>
 	
 	<select id="loginType" parameterType="String" resultType="com.kiri.dto.Login_TypeDTO">
 		select * from login_type where user_email = #{user_email}
 	</select>
+	
+	<insert id="loginLogSuccess" parameterType="String"> 
+		insert into login_log values(#{user_email}, '성공', sysdate )
+	</insert>
+	
+	<insert id="loginLogFailed" parameterType="String">  
+		insert into login_log values(#{user_email}, '실패', sysdate )
+	</insert>
+	
+	<select id="findId" parameterType="map" resultType="String">
+		select a.user_email from member a inner join login_type b 
+		on a.user_email = b.user_email 
+		where a.user_name = #{user_name} and a.user_phone = #{user_phone} and b.type = 'general'
+	</select>
+	
+	<select id="findPw" parameterType="map" resultType="int">
+		select count(*) from member a inner join login_type b 
+		on a.user_email = b.user_email
+		where a.user_email = #{user_email} and a.user_name = #{user_name} and b.type = 'general'
+	</select>
+	
+	<update id="updatePw" parameterType="map" >  
+		update member set user_pw = #{user_pw} where user_email = #{user_email}
+	</update>
+	
+	
+	
+	
+	
 </mapper>

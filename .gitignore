@@ -16,6 +16,9 @@ local.properties
 .classpath
 .project
 build/
+src/main/java/com/kiri/utills/SecurityInfo.java
+src/main/webapp/WEB-INF/spring/appServlet/application2.xml
+
 
 # External tool builders
 .externalToolBuilders/
@@ -84,6 +87,7 @@ build/
 *_BASE_*.txt
 *_LOCAL_*.txt
 *_REMOTE_*.txt
+mail.xml
 
 ### Java ###
 # Compiled class file

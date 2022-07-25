@@ -11,7 +11,7 @@ public class BoardDTO {
 	private String board_category;
 	private String board_title;
 	private String board_content;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+	@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
 	private Date board_date;
 	private int board_count;
 	private int likehit;

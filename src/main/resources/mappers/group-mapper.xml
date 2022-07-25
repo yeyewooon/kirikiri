@@ -64,18 +64,18 @@
    <select id="selectGroupAccess" parameterType="int"
       resultType="com.kiri.dto.TableJoinDTO">
       select * from member join group_member using (user_email) where seq_group =
-      #{seq_group} order by 16
+      #{seq_group} order by 16 desc
    </select>
 
    <!-- 모임장 위임 -->
    <update id="groupAccess" parameterType="com.kiri.dto.Group_MemberDTO">
       update group_member set "access" =
       <choose>
-         <when test = "access.equals('모임장')">
-            '일반회원' where user_email = #{user_email}
+         <when test = "access.equals('주최자')">
+            '맴버' where user_email = #{user_email}
          </when>
-         <when test = "access.equals('일반회원')">
-            '모임장' where user_email = #{user_email}
+         <when test = "access.equals('맴버')">
+            '주최자' where user_email = #{user_email}
          </when>
       </choose>
    </update>
@@ -129,10 +129,21 @@
       where seq_group = #{seq_group}
    </update>
    
-   <!-- 해당 모임의 맴버 조회 -->
+   <!-- 해당 모임의 맴버 전체 조회 -->
    <select id="selectGroupMember" parameterType="int" resultType="com.kiri.dto.Group_MemberDTO">
       select * from group_member where seq_group = #{seq_group} order by "access" desc
    </select>
+   
+   <!-- 해당 모임의 맴버 프로필 조회 -->
+   <select id="selectMemberProfile" parameterType="String" resultType="com.kiri.dto.MemberDTO">
+   	  select * from member where user_email = #{user_email}
+   </select>   
+   
+   <!-- 해당 모임의 맴버 주소 조회 -->
+   <select id="selectMemberSite" parameterType="String" resultType="com.kiri.dto.SiteDTO">
+   	  select * from site where user_email = #{user_email}
+   </select> 
+   
    
    <!-- 해당 모임 맴버 탈퇴 -->
    <delete id="quitGroupMember" parameterType="com.kiri.dto.Group_MemberDTO">
@@ -164,5 +175,10 @@
       delete from wishList where seq_group = #{seq_group} and user_email = #{user_email}
    </delete>
 
+   <!-- 해당 아이디 그룹 가입한 갯수 -->
+   <select id="selectGroupCntByEmail" parameterType="String" resultType="int">
+   		select count(*) from group_member where user_email = #{loginSession_id}
+   </select>
+   
    
 </mapper>

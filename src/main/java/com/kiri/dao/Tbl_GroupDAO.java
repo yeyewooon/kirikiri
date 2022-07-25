@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.kiri.dto.Group_ApplyDTO;
 import com.kiri.dto.Group_MemberDTO;
 import com.kiri.dto.MemberDTO;
+import com.kiri.dto.SiteDTO;
 import com.kiri.dto.TableJoinDTO;
 import com.kiri.dto.Tbl_GroupDTO;
 import com.kiri.dto.WishListDTO;
@@ -23,7 +24,7 @@ public class Tbl_GroupDAO {
 
    @Autowired
    private SqlSession session;
-   
+
    ///////////////////////////////////////////////////////////////////////////////
    // 김형석
 
@@ -57,14 +58,14 @@ public class Tbl_GroupDAO {
       session.delete("tblGroupMapper.denyApply", param);
    }
 
-   // 해당 그룹 맴버 조회 -> List형이 안맞음 MemberDTO로 돼있었
+   // 해당 그룹 맴버 조회
    public List<MemberDTO> selectGroupAccess(int seq_group) {
       return session.selectList("tblGroupMapper.selectGroupAccess", seq_group);
    }
 
    // 모임장 위임
    public int groupAccess(Group_MemberDTO Group_MemberDTO) throws Exception {
-      return session.update("tblGroupMapper.groupAccess", Group_MemberDTO);
+      return session.update("tblGroupMapper.groupAccess",Group_MemberDTO);
    }
 
    // 그룹 멤버 강퇴
@@ -106,11 +107,7 @@ public class Tbl_GroupDAO {
 
    // 그룹 수정
    public void modifyGroup(Tbl_GroupDTO tbl_group_dto) throws Exception {
-      int rs = session.update("tblGroupMapper.updateGroup", tbl_group_dto);
-      if (rs > 0)
-         System.out.println("group 수정 완료");
-      else
-         System.out.println("group 수정 실패");
+      session.update("tblGroupMapper.updateGroup", tbl_group_dto);
    }
 
    // 해당 그룹 맴버 조회
@@ -148,5 +145,29 @@ public class Tbl_GroupDAO {
    public int deletetWishList(WishListDTO wish_list_dto) throws Exception {
       return session.delete("tblGroupMapper.deletetWishList", wish_list_dto);
    }
+
+   // 해당 그룹 맴버 프로필 조회
+   public List<MemberDTO> selectMemberProfile(String user_email) {
+	 return session.selectList("tblGroupMapper.selectMemberProfile", user_email);
+   }
+
+	// 해당 그룹 맴버 주소 조회
+	public List<SiteDTO> selectMemberSite(String user_email) {
+		return session.selectList("tblGroupMapper.selectMemberSite", user_email);
+	}
+
+	// 해당 아이디 가입된 그룹 갯수 출력
+	public int selectGroupCntByEmail(String loginSession_id) {
+		int rs = session.selectOne("tblGroupMapper.selectGroupCntByEmail",loginSession_id);
+		return rs;
+	}
+
+	
+////////// 호준
+
+   // 가입한 모임 정보
+	public List<Map<String, Object>> selectGroupList(String user_email) throws Exception {
+		return session.selectList("myPageMapper.selectGroupList", user_email);
+	}
 
 }

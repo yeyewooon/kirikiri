@@ -31,26 +31,21 @@
 <style>
 /* 눈누 폰트 */
 @font-face {
-	font-family: 'OTWelcomeRA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-		format('woff2');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-
 @font-face {
-	font-family: '양진체';
-	src:
-		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {
 	box-sizing: border-box;
-	font-family: 'OTWelcomeRA';
+	font-family: 'InfinitySans-RegularA1';
 }
 
 body {
@@ -168,10 +163,8 @@ body {
 
 .circelLine-text-right {
 	color: #030087;
-	text-shadow: 1px 2px 2px darkblue;
-}
-
-.circelLine-text-right {
+	text-shadow: 1px 2px 2px white;
+	font-weight: bold;
 	margin-left: 15px;
 }
 
@@ -181,7 +174,7 @@ p {
 }
 
 button {
-	margin: 30px;
+	margin: 40px;
 	margin-bottom: 70px;
 	width: 25%;
 	height: 40%;
@@ -192,6 +185,16 @@ span {
 	font-size: 0.05rem;
 }
 
+#kiri{
+	width: 300px;
+	height: 300px;
+	margin-top : 40px;
+	margin-bottom: 70px; 
+}
+h2{
+	font-family: 'BMJUA';
+	font-size : 40px;
+}
 /*풋터 영역*/
 .footerBox {
 	height: 0px;
@@ -233,7 +236,7 @@ canvas {
     $(document).ready(function(){
 
         $("#toLoginBtn").click(function(){
-            location.href = "/login";
+            location.href = "/login/toLogin";
         });
 
 
@@ -380,16 +383,21 @@ canvas {
 		</div>
 		<!-- info 영역-->
 		<div id="userInfoBox">
-			<div class="row">
+			<div class="row mt-2">
 				<div class="col">
-					<img src="/resources/images/kirilogo.png" alt="오류발생">
+					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col pt-3">
+					<h2>
+						<br> 끼리끼리에 오신 것을 환영합니다!!
+					</h2>
 				</div>
 			</div>
 			<div class="row">
 				<div class="col">
-					<h3>
-						~~님<br> 가입을 환영합니다!!
-					</h3>
+					<img src="/resources/images/profileno.png"  id="kiri" alt="오류가 발생했습니다." />
 				</div>
 			</div>
 		</div>
@@ -406,7 +414,7 @@ canvas {
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 footer-imgBox">
-					<img src="kiri.png" alt="오류가 발생했습니다.">
+					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
 				</div>
 				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
 					<ul class="list-inline mb-2">
@@ -441,7 +449,6 @@ canvas {
 			</div>
 		</div>
 	</footer>
-
 
 	<!--꽃가루-->
 	<div class="buttonContainer d-none">
