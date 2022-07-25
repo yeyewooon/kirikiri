@@ -8,29 +8,29 @@ public class Board_CommentDTO {
 	private int seq_board;
 	private String user_email;
 	private String user_nickname;
-	private String comment;
+	private String comment_content;
 	private String comment_date;
 	
 	public Board_CommentDTO() {}
-	public Board_CommentDTO(int seq_comment, int seq_board, String user_email, String user_nickname, String comment,
+	public Board_CommentDTO(int seq_comment, int seq_board, String user_email, String user_nickname, String comment_content,
 			String comment_date) {
 		super();
 		this.seq_comment = seq_comment;
 		this.seq_board = seq_board;
 		this.user_email = user_email;
 		this.user_nickname = user_nickname;
-		this.comment = comment;
+		this.comment_content = comment_content;
 		this.comment_date = comment_date;
 	}
 	// date -> String 생성자
-	public Board_CommentDTO(int seq_comment, int seq_board, String user_email, String user_nickname, String comment,
+	public Board_CommentDTO(int seq_comment, int seq_board, String user_email, String user_nickname, String comment_content,
 			Date comment_date) {
 		super();
 		this.seq_comment = seq_comment;
 		this.seq_board = seq_board;
 		this.user_email = user_email;
 		this.user_nickname = user_nickname;
-		this.comment = comment;
+		this.comment_content = comment_content;
 		this.comment_date = getStringDate(comment_date);
 	}
 	
@@ -71,10 +71,10 @@ public class Board_CommentDTO {
 		this.user_nickname = user_nickname;
 	}
 	public String getComment() {
-		return comment;
+		return comment_content;
 	}
-	public void setComment(String comment) {
-		this.comment = comment;
+	public void setComment(String comment_content) {
+		this.comment_content = comment_content;
 	}
 	public String getComment_date() {
 		return comment_date;
@@ -86,7 +86,7 @@ public class Board_CommentDTO {
 	@Override
 	public String toString() {
 		return "Board_CommentDTO [seq_comment=" + seq_comment + ", seq_board=" + seq_board + ", user_email="
-				+ user_email + ", user_nickname=" + user_nickname + ", comment=" + comment + ", comment_date="
+				+ user_email + ", user_nickname=" + user_nickname + ", comment_content=" + comment_content + ", comment_date="
 				+ comment_date + "]";
 	}	
 }
