@@ -33,10 +33,10 @@ public class MessageService {
    
    // 쪽지 삭제하기
    public void deleteMessage(List<String> message) throws Exception {
-	  Map<String, Object> param = new HashMap<>();
-	  param.put("message", message);
-	  MessageDAO.deleteMessage(param);
-	}
+     Map<String, Object> param = new HashMap<>();
+     param.put("message", message);
+     MessageDAO.deleteMessage(param);
+   }
    
    
    

@@ -351,21 +351,22 @@ public class GroupController {
    @Autowired
    private Group_ChatService gcService;
 
-   @RequestMapping(value = "/toChat") // 채팅 페이지 요청
-   public String chat(String nickname, Model model) throws Exception {
-      nickname = "abc초콜릿"; // session에서 받아온 닉네임
-      int seq_group = 1;
-      String user_nickname = null;
-
-      // HttpSession에 nickname을 등록해둘 것. -> 등록하는 부분 있으면 지우기
-      session.setAttribute("nickname", nickname);
-
-      // 채팅 했던 부분 불러오기
-      List<Group_ChatDTO> gcList = gcService.selectChat(seq_group);
-      model.addAttribute("gcList", gcList);
-      // 그룹정보 가져오기(채팅방, 사람 수)
-      List<Tbl_GroupDTO> tgList = gcService.selectGroup(seq_group);
-      model.addAttribute("tgList", tgList);
+	@RequestMapping(value = "/toChat") // 채팅 페이지 요청
+	public String chat(Model model, int seq_group) throws Exception {
+		//session에서 받아온 닉네임
+		// 현재 세션 아이디
+		String user_nickname = ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname();
+		System.out.println(user_nickname);
+		
+		model.addAttribute("user_nickname", user_nickname);
+		System.out.println(seq_group);
+		model.addAttribute("seq_group", seq_group);
+		// 채팅 했던 부분 불러오기
+		List<Group_ChatDTO> gcList = gcService.selectChat(seq_group);
+		model.addAttribute("gcList", gcList);
+		// 그룹정보 가져오기(채팅방, 사람 수)
+		List<Tbl_GroupDTO> tgList = gcService.selectGroup(seq_group);
+		model.addAttribute("tgList", tgList);
 
       // 닉네임 리스트 가져와서 프로필 사진 member에서 꺼내오기
       List<Group_MemberDTO> nickList = gcService.selectNick(seq_group);

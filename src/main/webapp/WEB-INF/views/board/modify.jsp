@@ -153,13 +153,30 @@
 	            <div class="col-auto">
 	                <button type="button" id="submitBtn" class="btn btn-primary">수정 완료</button>
 	            </div>
+	            <div class="col-auto">
+	                <button type="button" id="toListBtn" class="btn btn-primary">목록으로</button>
+	            </div>
 	        </div>
+	        <form id="infoForm" method="get">
+	        	<input type="hidden" id="seq_board" name="seq_board" value="${modMap.boardDTO.seq_board}">
+	        	<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
+				<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
+				<input type="hidden" name="type" value="${cri.type}">
+				<input type="hidden" name="keyword" value="${cri.keyword}">
+	        </form>
         </form>
         
 	</div>
 	
 	
 	<script>
+		// 목록으로
+		$("#toListBtn").on("click", function(){
+			$("#infoForm").find("#seq_board").remove();
+			$("#infoForm").attr("action", "/board/toBoard");
+			$("#infoForm").submit();
+		})
+	
 		/* summernote */
 		$(document).ready(function() {
 			var fontList = ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','EarlyFontDiary', '맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'];
@@ -221,7 +238,7 @@
 						if(mutation.removedNodes[0].src != null) {
 							let img = mutation.removedNodes[0].src;
 							//console.log(img);
-							let src = img.replace("http://localhost/boardFile/", "")
+							let src = decodeURIComponent(img.replace("http://localhost/boardFile/", ""));
 							//console.log(src);
 							$.ajax({
 								url : "/board/delImg"

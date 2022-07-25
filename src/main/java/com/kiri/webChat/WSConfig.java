@@ -6,6 +6,8 @@ import javax.websocket.server.HandshakeRequest;
 import javax.websocket.server.ServerEndpointConfig;
 import javax.websocket.server.ServerEndpointConfig.Configurator;
 
+import com.kiri.dto.MemberDTO;
+
 public class WSConfig extends Configurator{
 	@Override
 	public void modifyHandshake(ServerEndpointConfig sec, HandshakeRequest request, HandshakeResponse response) {
@@ -13,7 +15,8 @@ public class WSConfig extends Configurator{
 		// httpsession안에 있는 값을 꺼내기 위해 httpsession 먼저 꺼내기.
 		HttpSession session = (HttpSession)request.getHttpSession();
 		// nickname이라는 key값으로 사용자으 ㅣ닉네임을 셋팅해줌.
-		sec.getUserProperties().put("nickname", session.getAttribute("nickname"));
+		sec.getUserProperties().put("user_nickname", ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname());
+
 		super.modifyHandshake(sec, request, response);
 	}
 }
