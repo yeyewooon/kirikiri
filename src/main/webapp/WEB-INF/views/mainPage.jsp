@@ -809,9 +809,6 @@ footer.footer {
       dateObj.setDate(dateObj.getDate() + 1);
 
       countDownTimer("sample01", dateObj); // 내일까지
-
-      
-      
       
       // 그룹영역 all, new, best d-none 주고, 풀기
       $(".allGroup").on("click", function(){
@@ -842,10 +839,6 @@ footer.footer {
     	  location.href = "/user/toViewAllGroupList";
       })
 
-<<<<<<< HEAD
-=======
-      
->>>>>>> 5195664ed54176bf1cc21944fe318cc66b889488
    </script>
 </body>
 </html>
