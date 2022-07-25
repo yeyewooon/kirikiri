@@ -17,6 +17,7 @@ import com.kiri.service.LoginService;
 import com.kiri.service.MailService;
 import com.kiri.service.SignupService;
 import com.kiri.utills.EncryptionUtils;
+import com.kiri.utills.SecurityInfo;
 
 @RequestMapping("/login")
 @Controller
@@ -53,29 +54,19 @@ public class LoginController {
 	public String general(String user_email, String user_pw) throws Exception { // 일반로그인 feat.조용진
 		String Encryption_pw = ecp.getSHA512(user_pw); 
 		Login_TypeDTO type = service.loginType(user_email);
+		
 		if(type == null) { //미가입
 			return "nonmem";
 			
 		}else if(type.getType().equals("general")) { //일반 로그인
 			MemberDTO dto = service.login(user_email, Encryption_pw);
-			if("N".equals(dto.getUser_blacklist()) && "N".equals(dto.getUser_delete())) {
-				dto.setUser_pw(null);
-				session.setAttribute("loginType", type.getType());
-				session.setAttribute("loginSession", dto);
-				service.loginLogSuccess(user_email);
-				return "general";
-				
-			}else if("Y".equals(dto.getUser_blacklist())){
-				return "blackList";
-				
-			}else if("Y".equals(dto.getUser_delete())){
-				return "withdrawal";
+			if(dto != null) {
+				return service.loginResult(dto, type.getType(), session);
 				
 			}else { // null 로그인 실패 
 				service.loginLogFailed(user_email);
 				return "loginFail";
-			}
-			
+			}	
 			
 		}else if(type.getType().equals("admin")) { //관리자 가입된 아이디
 			MemberDTO dto = service.login(user_email, user_pw);
@@ -136,7 +127,7 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/toLogout")//logout페이지 요청 feat.조용진
-	public String logout() {
+	public String logout() throws Exception {
 		session.removeAttribute("loginSession");
 		session.removeAttribute("loginType");
 		return "redirect:/";

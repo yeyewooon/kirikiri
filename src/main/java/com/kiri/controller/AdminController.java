@@ -108,6 +108,11 @@ public class AdminController {
 		response.getWriter().write("success");
 	}
 	
+	@RequestMapping(value = "/toAdmin")
+	public String toAdmin() {
+		return "admin/adminMain";
+	}
+	
 	@RequestMapping(value = "/toError")
 	public String toError() {
 		return "error";
