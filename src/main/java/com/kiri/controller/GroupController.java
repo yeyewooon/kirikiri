@@ -194,7 +194,7 @@ public class GroupController {
       // group_member로 삽입시 호스트로 설정
       tbl_group_service.insertGroupHost(group_member_dto);
       
-      return "";
+      return "redirect:/";
    }
 
 	// 썸머노트 이미지

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kiri.dto.Group_CalendarDTO;
+import com.kiri.dto.MemberDTO;
 import com.kiri.service.GroupCalendarService;
 
 @RequestMapping("/cal")
@@ -38,6 +39,8 @@ public class GroupCalendar {
 	public String calInfo(Group_CalendarDTO dto, String totalTime) throws Exception {
 		String originTitle = totalTime + "  " + dto.getTitle(); // title + time 값 
 		dto.setTitle(originTitle); // title + time 값 셋팅
+		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
+		dto.setUser_email(user_email);
 		service.insert(dto);
 		return "redirect:/calMain";
 	}

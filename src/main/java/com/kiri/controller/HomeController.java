@@ -22,6 +22,7 @@ public class HomeController {
 	@Autowired
 	private HomeService home_service;
 
+	
 	@RequestMapping(value = "/")
 	public String main(Model model) throws Exception {
 		List<Tbl_GroupDTO> selectAllList = home_service.selectAllGroup();

@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
+import com.kiri.dto.AdminMainDTO;
 import com.kiri.dto.BlackListDTO;
+import com.kiri.dto.Group_CalendarDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
 import com.kiri.service.AdminService;
@@ -108,13 +111,51 @@ public class AdminController {
 		response.getWriter().write("success");
 	}
 	
-	@RequestMapping(value = "/toAdmin")
-	public String toAdmin() {
-		return "admin/adminMain";
-	}
-	
 	@RequestMapping(value = "/toError")
 	public String toError() {
 		return "error";
 	}
+	
+	// 김영완 07_22
+	@RequestMapping(value = "/toAdmin") 
+	public String toAdminMain(Model model) throws Exception {
+		// 카카오맵
+		List<AdminMainDTO> locationList = service.selectAllGroupLocation();
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonLocationList = mapper.writeValueAsString(locationList);
+		
+		// 그룹 수
+		List<AdminMainDTO> cntGroupCalList = service.cntGroupCalendar();
+		
+		// 멤버 수 
+		int cntGroupMember = service.cntGroupMember();
+		System.out.println("cntGroupMember" + cntGroupMember);
+		// 모임 수
+		int cntGroupCnt = service.cntGroupCnt();
+		System.out.println("cntGroupCnt" + cntGroupCnt);
+		
+		// 게시글 수(자유게시판)
+		// int cntBoard = service.cntBoard();
+		//System.out.println("cntBoard" + cntBoard);
+		// 게시글 수(모임게시판)
+		//int cntGroupBoard = service.cntGroupBoard();
+		//System.out.println("cntGroupBoard" + cntGroupBoard);
+		
+		// 일정수
+		int cntGroupCal = service.cntGroupCal();
+		System.out.println("cntGroupCal" + cntGroupCal);
+		
+		model.addAttribute("jsonLocationList",jsonLocationList);
+		model.addAttribute("cntGroupCalList",cntGroupCalList);
+		model.addAttribute("cntGroupMember",cntGroupMember);
+		model.addAttribute("cntGroupCnt",cntGroupCnt);
+		model.addAttribute("cntGroupCal",cntGroupCal);
+		return "/admin/adminMain";
+	}
+	
+
+	
+	
+	
+	
 }
