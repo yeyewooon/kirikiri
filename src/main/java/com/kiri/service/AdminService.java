@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kiri.dao.AdminDAO;
+import com.kiri.dto.AdminMainDTO;
 import com.kiri.dto.BlackListDTO;
+import com.kiri.dto.Group_CalendarDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
 
@@ -56,5 +58,41 @@ public class AdminService {
 	}
 	public HashMap<String, Object> getPageNavi(int curPage) throws Exception {
 		return dao.getPageNavi(curPage);
+	}
+
+	// 김영완 07_22
+	// 카카오맵	
+	public List<AdminMainDTO> selectAllGroupLocation() {
+		return dao.selectAllGroupLocation();
+	}
+
+	// 캘린더수 (도넛 그래프)
+	public List<AdminMainDTO> cntGroupCalendar() {
+		return dao.cntGroupCalendar();
+	}
+
+	// 멤버 수
+	public int cntGroupMember() {
+		return dao.cntGroupMember();
+	}
+
+	// 모임 수
+	public int cntGroupCnt() {
+		return dao.cntGroupCnt();
+	}
+
+	// 게시글 수(자유게시판)
+	public int cntBoard() {
+		return dao.cntBoard();
+	}
+
+	// 게시글 수(모임게시판)
+	public int cntGroupBoard() {
+		return dao.cntGroupBoard();
+	}
+
+	// 일정수
+	public int cntGroupCal() {
+		return dao.cntGroupCal();
 	}
 }

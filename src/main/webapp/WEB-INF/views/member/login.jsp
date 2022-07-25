@@ -494,7 +494,7 @@ footer.footer {
     				
     			}else if(result === "admin"){
     				Swal.fire('관리자 페이지로 이동합니다.');
-    				location.href = "/toAdmin";
+    				location.href = "/admin/toAdmin";
     				
     			}else if(result === "nonmem"){
     				sweetAlertFail("가입이 되지 않은 아이디입니다.");

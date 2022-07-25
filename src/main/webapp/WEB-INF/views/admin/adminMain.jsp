@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,35 +8,38 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
+<!-- bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <!--구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap"
-	rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<!-- AOS 라이브러리 불러오기-->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
+<!-- 제이쿼리 -->
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!-- 아이콘 -->
-<script src="https://kit.fontawesome.com/f9358a6ceb.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 <!--알림창-->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="sweetalert2.min.js"></script>
+<!-- kakaoMap -->
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef0f2eae29928e7e7027600e1cf8f7d&libraries=services"></script>
+<!-- chartjs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js"></script>
 <style>
 * {
 	box-sizing: border-box;
 	font-family: 'OTWelcomeRA';
+}
+body, html {
+	height:100%;
+}
+
+
+
+.container{
+   max-width: -webkit-fill-available;
+   height:100%;
 }
 
 /* 눈누 폰트 */
@@ -59,11 +63,12 @@
 
 /*사이드바*/
 .sidebar {
-	float: left;
-	width: 20%;
-	height: 800px;
-	background-color: #4e78f5;
+   float: left;
+   width: 15%;
+   height: 1200px;
+   background-color: #4e78f5;
 }
+
 
 .sidebar span {
 	font-family: 'BMJUA';
@@ -106,11 +111,11 @@ a {
 
 /*네비바*/
 .navbar {
-	float: right;
-	height: 104px;
-	width: 80%;
-	background-color: white;
-	position: relative;
+   float: right;
+   height: 104px;
+   width: 85%;
+   background-color: #fff/* #e1e7f7; */;
+   position: relative;
 }
 
 .user {
@@ -159,6 +164,28 @@ a {
 	width: 100%;
 	height: 100%;
 }
+
+
+.chart-container {
+  width: 90%;
+  height: 80%;
+  margin: 0 auto;
+}
+
+/* .lineGraphBox {
+  padding-right: 0px;
+  padding-left: 0px;
+} */
+
+
+
+/*카카오 맵*/
+.customoverlay {position:relative;bottom:50px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
+.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
+.customoverlay a {display:block;text-decoration:none;color:#111;text-align:center;border-radius:6px;font-size:14px;font-weight:500;overflow:hidden;background: #d95050;background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:500;}
+.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:18px;height:10px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
+
 </style>
 </head>
 <body>
@@ -190,8 +217,116 @@ a {
 				<i class="logout fa-solid fa-arrow-right-from-bracket"></i>
 			</div>
 		</div>
-		<div class="contents">
+		<div class="contents" style="background-color : #f6f7f9;">
+			<!-- 카드 -->
+			<div class="row mt-2">
+			  <!-- Earnings (Monthly) Card Example -->
+			  <div class="col-xl-3 col-md-3 mb-4">
+			      <div class="card border-left-primary shadow h-100 py-2">
+			          <div class="card-body">
+			              <div class="row no-gutters align-items-center">
+			                  <div class="col mr-2">
+			                      <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+			                          맴버수</div>
+			                      <div class="h5 mb-0 font-weight-bold text-gray-800">${cntGroupMember}명</div>
+			                  </div>
+			                  <div class="col-auto">
+			                    <i class="fa-solid fa-user-group fa-2x"></i>
+			                  </div>
+			              </div>
+			          </div>
+			      </div>
+			  </div>
+			  <!-- Earnings (Annual) Card Example -->
+			  <div class="col-xl-3 col-md-3 mb-4">
+			      <div class="card border-left-success shadow h-100 py-2">
+			          <div class="card-body">
+			              <div class="row no-gutters align-items-center">
+			                  <div class="col mr-2">
+			                      <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+			                          모임수</div>
+			                      <div class="h5 mb-0 font-weight-bold text-gray-800">${cntGroupCnt}개</div>
+			                  </div>
+			                  <div class="col-auto">
+			                      <i class="fa-solid fa-people-roof fa-2x"></i>
+			                  </div>
+			              </div>
+			          </div>
+			      </div>
+			  </div>
+			  <!-- Earnings (Annual) Card Example -->
+			  <div class="col-xl-3 col-md-3 mb-4">
+			    <div class="card border-left-success shadow h-100 py-2">
+			        <div class="card-body">
+			            <div class="row no-gutters align-items-center">
+			                <div class="col mr-2">
+			                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+			                        게시글 수</div>
+			                    <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000개</div>
+			                </div>
+			                <div class="col-auto">
+			                	<i class="fa-solid fa-clipboard fa-2x"></i>
+			                </div>
+			            </div>
+			        </div>
+			    </div>
+			</div>
+			  <!-- Pending Requests Card Example -->
+			  <div class="col-xl-3 col-md-3 mb-4">
+			      <div class="card border-left-warning shadow h-100 py-2">
+			          <div class="card-body">
+			              <div class="row no-gutters align-items-center">
+			                  <div class="col mr-2">
+			                      <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+			                          일정수</div>
+			                      <div class="h5 mb-0 font-weight-bold text-gray-800">${cntGroupCal}개</div>
+			                  </div>
+			                  <div class="col-auto">
+			                      <i class="fa-solid fa-calendar fa-2x"></i>
+			                  </div>
+			              </div>
+			          </div>
+			      </div>
+			  </div>
+			</div>
 			
+			<!-- 라인 그래프 -->
+			<div class="row mt-1">
+		        <div class="col-md-7 col-12 lineGraphBox mt-1" style="border: 1px solid black;">
+		          <div style="background-color: red; color: black; font-size: 18px;" class="d-flex align-items-center">
+		            취미모음
+		          </div>
+		          <div class="chart-container" style="padding: 10px;">
+		            <canvas id="line-chartcanvas" width="500" height="240"></canvas>
+		          </div>
+		        </div>
+		        <div class="col-md-5 col-12 mt-1"  style="border: 1px solid black;">
+		        	<div style="background-color: red; color: black; font-size: 18px;" class="d-flex align-items-center">
+		            	취미모음
+		          	</div>
+		          	<div style="background-color : blue; height : 400px;"></div>
+		        </div>
+      		</div>
+			
+			<!-- 카카오맵, 원형 차트 -->
+			<div class="row mt-3">
+				<div class="col-12 col-md-7 mt-1" style="border: 1px solid black;">
+					<div style="background-color: red; color: black; font-size: 18px;" class="d-flex align-items-center">
+		            	취미모음
+		          	</div>
+					<div id="map" style="width:100%; height:400px;"></div>
+				</div>
+				<div class="col-12 col-md-5 mt-1" style="border: 1px solid black;">
+					<div style="background-color: red; color: black; font-size: 18px;" class="d-flex align-items-center">
+		            	취미모음
+		          	</div>
+					<div style="position: relative; height:360px;">
+  						<canvas id="myChart"></canvas>
+					</div>
+				</div>
+			</div>
+			
+
 		</div>
 	</div>
 	<script>
@@ -218,6 +353,170 @@ a {
                 }
             })
         })
+        
+        $(document).ready(function() {
+        	 // 카카오맵 
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+        		mapOption = { 
+            	center: new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
+            	level: 14 // 지도의 확대 레벨
+        		};
+            var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+
+            // 마커 이미지 생성
+            var imageSrc = '/resources/images/mapElephant.png'; // 마커이미지 주소
+            imageSize = new kakao.maps.Size(34, 36);  // 마커이미지의 크기
+            imageOption = {offset: new kakao.maps.Point(17, 36)}; // 마커의 좌표와 일치시킬 이미지 안에서의 좌표설정
+            
+         	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+            var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
+            
+            var markerTmp;      // 마커
+            var customOverlay;  // 오버레이
+            var contentStr; // 마커 텍스트
+            
+            for(let i = 0; i < ${jsonLocationList}.length; i++) {
+            	markerTmp = new daum.maps.Marker({
+          	        position: new daum.maps.LatLng(${jsonLocationList}[i].gcal_latitude,${jsonLocationList}[i].gcal_longitude),
+          	        image: markerImage,
+          	        map:map
+          		});
+            	
+            	contentStr = "<div class='customoverlay'><a target='_blank'><span class='title'>"+ ${jsonLocationList}[i].group_title +"</span></a></div>";
+         		 
+          	    customOverlay = new kakao.maps.CustomOverlay({
+          	        map: map,
+          	        position: new daum.maps.LatLng(${jsonLocationList}[i].gcal_latitude,${jsonLocationList}[i].gcal_longitude),
+          	        content: contentStr,
+          	        yAnchor: 1 
+          	    });
+            }
+            
+         	  // 지도 타입 변경 컨트롤을 생성한다
+        	  var mapTypeControl = new kakao.maps.MapTypeControl();
+        	  // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
+        	  map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);    
+        	  // 지도에 확대 축소 컨트롤을 생성한다
+        	  var zoomControl = new kakao.maps.ZoomControl();
+        	  // 지도의 우측에 확대 축소 컨트롤을 추가한다
+        	  map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
+        	  
+        	  // 라인 그래프(로그인 방식)
+        	  makeLine();
+        	  // 도넛 그래프(모임 일정 수)
+        	  makeCircle();
+  
+        });
+        
+    	// charjs(Line 차트)
+        const makeLine = function() {
+    		
+          var ctx = $("#line-chartcanvas");
+
+        var data = {
+          labels: ["0시~3시", "3시~6시", "6시~9시", "9시~12시", "12시~15시", "15시~18시", "18시~21시", "21시~24시"],
+          datasets: [
+            {
+              label: "끼리끼리 로그인",
+              data: [30],
+              backgroundColor: "#4e78f5",
+              borderColor: "#4e78f5",
+              fill: false,
+              lineTension: 0,
+              radius: 5
+            }
+          ]
+        };
+
+        //options
+        var options = {
+          responsive: true,
+          title: {
+            display: true,
+            position: "top",
+            text: "Line Graph",
+            fontSize: 18,
+            fontColor: "#111"
+          },
+          legend: {
+            display: true,
+            position: "bottom",
+            labels: {
+              fontColor: "#333",
+              fontSize: 16
+            }
+          }
+        };
+
+        //create Chart class object
+        var chart = new Chart(ctx, {
+            type: "line",
+            data: data,
+            options: options
+          });
+        }
+    	
+   		// chartjs(도넛 차트)
+    	const makeCircle = function() {
+ 
+        	// 그룹 리스트 
+              let groupTitleList = new Array(); // 빈 배열 생성
+              <c:forEach items="${cntGroupCalList}" var="dto">
+              	groupTitleList.push("${dto.group_title}");
+              </c:forEach>
+            
+          	// 해당 그룹의 일정 수 
+          	let groupCalCnt = new Array(); // 빈 배열 생성
+              <c:forEach items="${cntGroupCalList}" var="dto">
+              	groupCalCnt.push("${dto.group_cal_cnt}");
+              </c:forEach>
+    	  
+           // 랜덤 색상
+              let randomColList = new Array();
+                for(let i = 0; i < groupTitleList.length; i++) {
+                  let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+                  randomColList.push(randomColor);
+                }
+
+                var ctx = $('#myChart');
+                var myChart = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: groupTitleList,
+                        datasets: [{
+                            data: groupCalCnt,
+                            backgroundColor: randomColList,  //차트컬러
+                            hoverBorderColor: "rgba(234, 236, 244, 1)",
+                        }],
+                    },
+                    options: {
+                        maintainAspectRatio: false,
+                        tooltips: {
+                            backgroundColor: "rgb(255,255,255)",
+                            bodyFontColor: "#858796",
+                            borderColor: '#dddfeb',
+                            borderWidth: 1,
+                            xPadding: 15,
+                            yPadding: 15,
+                            displayColors: false,
+                            caretPadding: 10,
+                        },
+                        legend: {
+                            display: false
+                        },
+                        cutoutPercentage: 80,
+                    },
+                });
+                
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+        
     </script>
 </body>
 

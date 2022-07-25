@@ -220,45 +220,10 @@ body {
 	text-shadow: 3px 3px white;
 }
 
-/* 동그라미 세개 */
-.circleImg {
-	width: 200px;
-	height: 200px;
-	background-color: #faead2;
-	border-radius: 50%;
-}
-
-.circleTitle {
-	font-size: 26px;
-	color: #83c8e5;
-}
-
-#circle_img {
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
-}
-
-/* 네모네모 영역 */
-.mainImg {
-	object-fit: cover;
-}
-
-#bestParty {
-	background-color: #e8f5ed;
-	font-family: "Do Hyeon", sans-serif;
-}
 
 a {
 	text-decoration: none;
 	color: black;
-}
-
-/*모임영역 카드6개*/
-/* body menu */
-body {
-	/* background-color: #f6f7f9; */
-	
 }
 
 .mainContainer {

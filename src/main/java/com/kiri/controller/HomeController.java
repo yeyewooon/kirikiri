@@ -43,9 +43,4 @@ public class HomeController {
 		return "privacy";
 	}
 	
-	@RequestMapping(value = "/toAdmin")
-	public String toAdmin() {
-		return "admin/adminMain";
-	}
-
 }
