@@ -1,9 +1,13 @@
 package com.kiri.controller;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -56,6 +60,16 @@ public class LoginController {
 		}
 	}
 	
+	@RequestMapping(value = "/toLogout")//logout페이지 요청 feat.조용진
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        session.removeAttribute("loginSession");
+        // 쿠키는 보류!
+//        Cookie cookie = new Cookie("visit_cookie", null);
+//        cookie.setMaxAge(0);
+//        cookie.setPath("/");
+//        response.addCookie(cookie);
+        return "redirect:/";
+    }
 	
 	@ExceptionHandler
 	public String toError(Exception e) {

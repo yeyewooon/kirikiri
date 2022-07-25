@@ -2,7 +2,6 @@ package com.kiri.service;
 
 import java.io.File;
 import java.io.InputStream;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,8 +16,10 @@ import com.google.gson.JsonObject;
 import com.kiri.dao.BoardDAO;
 import com.kiri.dao.Board_CommentDAO;
 import com.kiri.dao.Board_FileDAO;
+import com.kiri.dao.LikeDAO;
 import com.kiri.dto.BoardDTO;
 import com.kiri.dto.Board_FileDTO;
+import com.kiri.vo.Criteria;
 
 @Service
 public class BoardService {
@@ -28,20 +29,41 @@ public class BoardService {
 	private Board_FileDAO fileDAO;
 	@Autowired
 	private Board_CommentDAO commentDAO;
+	@Autowired
+	private LikeDAO likeDAO;
 	
-	// 게시글 전체 조회
-	public List<BoardDTO> selectAll() throws Exception{
-		return boardDAO.selectAll();
-	}
+//	// 게시글 전체 조회
+//	public List<BoardDTO> selectAll() throws Exception{
+//		return boardDAO.selectAll();
+//	}
+	
+//	// 카테고리별 조회
+//	public List<BoardDTO> selectCategory(String category) throws Exception{ 
+//		return boardDAO.selectCategory(category);
+//	}
 	
 	// 게시글 상세 조회
 	public Map<String, Object> getDetail(int seq_board) throws Exception{
 		// 다른 타입의 데이터를 반환하기 위해 map을 이용
 		Map<String, Object> map = new HashMap<>();
-		boardDAO.updateView_count(seq_board); // 조회수 + 1
 		map.put("boardDTO", boardDAO.selectOne(seq_board)); // 게시글 데이터 가져오기
 		map.put("commentList", commentDAO.selectAll(seq_board)); // 댓글 데이터 가져오기
+		map.put("commentCnt", commentDAO.commentCnt(seq_board)); // 댓글 개수
 		return map;
+	}
+	
+	// 조회수 + 1
+	public void viewCntUp(int seq_board) throws Exception{
+		boardDAO.updateView_count(seq_board);
+	}
+	
+	// 좋아요 정보 가져오기
+	public Map<String, Object> like(int seq_board, String user_email) throws Exception{
+		// 좋아요 여부
+		Map<String, Object> map = new HashMap<>();
+		map.put("likeCheck", likeDAO.likeCheck(seq_board, user_email));
+		map.put("likeHit", boardDAO.selectLike(seq_board));
+		return map; 
 	}
 	
 	// 게시글 작성
@@ -68,6 +90,7 @@ public class BoardService {
 		String ori_name = file.getOriginalFilename();
 		String saveName = UUID.randomUUID() + "_" + ori_name;
 		File targetFile = new File(realPath + File.separator + saveName);
+		System.out.println(targetFile.toString());
 		
 		try {
 			System.out.println("이미지 저장 성공");
@@ -100,8 +123,10 @@ public class BoardService {
 	
 	// 첨부 파일 삭제
 	public void delFile(String path, String src) throws Exception {
+		
 		if(src.length() != 0) {
 			File file = new File(path + File.separator + src);
+			System.out.println(file.toString());
 			if(file.exists()) {
 				file.delete();
 				fileDAO.delete(src);
@@ -114,4 +139,27 @@ public class BoardService {
 		boardDAO.delete(seq_board);
 	}
 	
+//	// 게시글 검색
+//	public List<BoardDTO> search(String category, String keyword, String option) throws Exception{
+//		return boardDAO.search(category, keyword, option);
+//	}
+	
+	// 페이징
+//	public int countBoard() {
+//		return boardDAO.countBoard();
+//	}
+//	
+//	public List<BoardDTO> selectBoard(PageVO vo){
+//		return boardDAO.selectBoard(vo);
+//	}
+	
+	// 게시판 목록(페이징)
+	public List<BoardDTO> getListPaging(Criteria cri) throws Exception{
+		return boardDAO.getListPaging(cri);
+	}
+	
+	// 게시글 총 개수
+	public int getTotal(Criteria cri) throws Exception{
+		return boardDAO.getTotal(cri);
+	}
 }

@@ -115,23 +115,29 @@
         </div>
         
         <form id="writeForm" action="/board/write" method="post">
-        	<!-- 임시로 아이디, 닉네임 넣어주기 -->
-        	<div class="d-none">
-        		<input type="text" name="user_email" value="abc123">
-        		<input type="text" name="user_nickname" value="테스트맨1">
-        	</div>
-        	
 	        <div class="row mt-4 text-center">
 	            <div class="col-1">
 	                <label class="form-label fs-5">분류</label>
 	            </div>
 	            <div class="col-2">
-	                <select name="board_category" class="form-select" aria-label="유형">
-	                    <option selected>선택</option>
-	                    <option value="공지">공지</option>
-	                    <option value="일반">일반</option>
-	                    <option value="후기">후기</option>
-	                </select>
+	            	<c:choose>
+	            		<%-- 관리자 계정이라면 공지 쓰기 --%>
+	            		<c:when test="${loginSession.user_email eq 'admin'}">
+	            			<select name="board_category" class="form-select selectBox" aria-label="유형">
+			                    <option selected value="default">선택</option>
+			                    <option value="공지">공지</option>
+			                    <option value="일반">일반</option>
+			                </select>
+	            		</c:when>
+	            		<c:otherwise>
+	            			<select name="board_category" class="form-select selectBox" aria-label="유형">
+			                    <option selected value="default">선택</option>
+			                    <option value="일반">일반</option>
+			                    <option value="후기">후기</option>
+			                </select>
+	            		</c:otherwise>
+	            	</c:choose>
+	                
 	            </div>
 	            <div class="col-1">
 	                <label class="form-label fs-5">제목</label>
@@ -219,9 +225,10 @@
 					if(mutation.removedNodes.length == 1){
 						if(mutation.removedNodes[0].src != null) {
 							let img = mutation.removedNodes[0].src;
-							//console.log(img);
-							let src = img.replace("http://localhost/boardFile/", "")
-							//console.log(src);
+							//console.log("img" + img);
+							//console.log("src : " + src);
+							let src = decodeURIComponent(img.replace("http://localhost/boardFile/", ""));
+							console.log(src);
 							$.ajax({
 								url : "/board/delImg"
 								, type : "post"
@@ -270,6 +277,10 @@
 			}
 			if($("#summernote").summernote("isEmpty")){
 				alert("내용을 입력해 주세요.");
+				return;
+			}
+			if($(".selectBox").val() === "default"){
+				alert("게시글 분류를 선택해 주세요.");
 				return;
 			}
 			

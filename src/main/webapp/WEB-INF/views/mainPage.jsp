@@ -338,7 +338,7 @@ footer.footer {
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href=" ">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
                         <c:choose>
                            <c:when test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link" href=" ">로그인</a></li>
@@ -364,7 +364,7 @@ footer.footer {
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="">자유
+                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
                            게시판</a></li>
                   </ul>
                </div>
@@ -383,7 +383,7 @@ footer.footer {
                         <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link"
-                                 href="/toLogin.mem">로그인</a></li>
+                                 href="/login/toLogin">로그인</a></li>
                               <li class="nav-item"><a class="nav-link"
                                  href="/toSignUp.mem">회원가입</a></li>
                            </c:if>
@@ -410,8 +410,6 @@ footer.footer {
                            </div>
                         </c:if>
                      </div>
-
-
                   </div>
                </div>
             </div>
