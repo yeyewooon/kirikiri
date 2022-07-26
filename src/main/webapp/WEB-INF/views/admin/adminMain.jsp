@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
@@ -56,12 +56,12 @@ body, html {
 
 /* 눈누 폰트 */
 @font-face {
-	font-family: 'BMJUA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+   font-family: 'BMJUA';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
 }
 
 @font-face {
@@ -82,13 +82,13 @@ body, html {
 }
 
 .sidebar span {
-	font-family: 'BMJUA';
+   font-family: 'BMJUA';
 }
 
 .sidebar li {
-	list-style: none;
-	border-bottom: 3px solid rgba(255, 255, 255, 0.63);
-	text-align: center;
+   list-style: none;
+   border-bottom: 3px solid rgba(255, 255, 255, 0.63);
+   text-align: center;
 }
 
 .sidebar a:hover {
@@ -96,9 +96,9 @@ body, html {
 }
 
 .logoHome span {
-	color: white;
-	font-size: x-large;
-	font-weight: 80px;
+   color: white;
+   font-size: x-large;
+   font-weight: 80px;
 }
 
 #logoImg {
@@ -106,14 +106,14 @@ body, html {
 }
 
 i {
-	margin-top: 15px;
-	margin-bottom: 15px;
+   margin-top: 15px;
+   margin-bottom: 15px;
 }
 
 a {
-	text-decoration: none;
-	font-size: larger;
-	color: rgba(255, 255, 255, 0.683);
+   text-decoration: none;
+   font-size: larger;
+   color: rgba(255, 255, 255, 0.683);
 }
 
 /*네비바*/
@@ -126,50 +126,50 @@ a {
 }
 
 .user {
-	border-radius: 50%;
-	width: 50px;
-	height: 50px;
-	position: absolute;
-	right: 20px;
-	background-color: white;
-	border: 1px solid gainsboro;
+   border-radius: 50%;
+   width: 50px;
+   height: 50px;
+   position: absolute;
+   right: 20px;
+   background-color: white;
+   border: 1px solid gainsboro;
 }
 
 .userName {
-	position: absolute;
-	right: 80px;
+   position: absolute;
+   right: 80px;
 }
 
 #user_img {
-	border-radius: 50%;
-	width: 50px;
-	height: 50px;
+   border-radius: 50%;
+   width: 50px;
+   height: 50px;
 }
 
 .logOut {
-	position: absolute;
-	right: 19px;
-	top: 28px;
-	border-radius: 50%;
-	width: 50px;
-	height: 50px;
-	background-color: gray;
-	display: none;
+   position: absolute;
+   right: 19px;
+   top: 28px;
+   border-radius: 50%;
+   width: 50px;
+   height: 50px;
+   background-color: gray;
+   display: none;
 }
 
 .logout {
-	position: absolute;
-	top: -7px;
-	right: 8px;
-	font-size: xx-large;
-	color: white;
+   position: absolute;
+   top: -7px;
+   right: 8px;
+   font-size: xx-large;
+   color: white;
 }
 
 /*content*/
 .contents {
-	background-color: rgb(224, 230, 243);
-	width: 100%;
-	height: 100%;
+   background-color: rgb(224, 230, 243);
+   width: 100%;
+   height: 100%;
 }
 
 .chart-container {
@@ -256,7 +256,7 @@ a {
 				</a></li>
 			</ul>
 		</div>
-		
+
 		<!-- 네비바 -->
 		<div class="navbar">
 			<div class="userName">| &nbsp&nbsp admin</div>
@@ -267,7 +267,7 @@ a {
 				<i class="logout fa-solid fa-arrow-right-from-bracket"></i>
 			</div>
 		</div>
-		
+
 		<!-- 컨텐츠영역 -->
 		<div class="contents" style="background-color: #f6f7f9;">
 			<!-- 카드 -->
@@ -384,7 +384,7 @@ a {
 		</div>
 	</div>
 
-	<script>	
+	<script>
 		//로그아웃 부분
         $(".user").mouseenter(function () {
             $(".logOut").css({ "display": "block", "z-index": "99" });
@@ -406,66 +406,67 @@ a {
                 }
             })
         })
-        
+
         $(document).ready(function() {
-        	 // 카카오맵 
-            var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-        		mapOption = { 
-            	center: new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
-            	level: 14 // 지도의 확대 레벨
-        		};
+
+            // 카카오맵
+            var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+              mapOption = {
+               center: new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
+               level: 14 // 지도의 확대 레벨
+              };
             var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
             // 마커 이미지 생성
             var imageSrc = '/resources/images/mapElephant.png'; // 마커이미지 주소
             imageSize = new kakao.maps.Size(34, 36);  // 마커이미지의 크기
             imageOption = {offset: new kakao.maps.Point(17, 36)}; // 마커의 좌표와 일치시킬 이미지 안에서의 좌표설정
-            
-         	// 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+
+            // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
             var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
             var markerTmp; // 마커
             var customOverlay; // 오버레이
             var contentStr; // 마커 텍스트
-            
+
             for(let i = 0; i < ${jsonLocationList}.length; i++) {
             	markerTmp = new daum.maps.Marker({
           	        position: new daum.maps.LatLng(${jsonLocationList}[i].gcal_latitude,${jsonLocationList}[i].gcal_longitude),
           	        image: markerImage,
           	        map:map
           		});
-            	
+
             	contentStr = "<div class='customoverlay'><a target='_blank'><span class='title'>"+ ${jsonLocationList}[i].group_title +"</span></a></div>"; // 지도 마크업 타이틀
-         		 
+
           	    customOverlay = new kakao.maps.CustomOverlay({
           	        map: map,
           	        position: new daum.maps.LatLng(${jsonLocationList}[i].gcal_latitude,${jsonLocationList}[i].gcal_longitude),
           	        content: contentStr,
-          	        yAnchor: 1 
+          	        yAnchor: 1
           	    });
             }
-            
+
          	  // 지도 타입 변경 컨트롤을 생성한다
         	  var mapTypeControl = new kakao.maps.MapTypeControl();
         	  // 지도의 상단 우측에 지도 타입 변경 컨트롤을 추가한다
-        	  map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);    
+        	  map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
         	  // 지도에 확대 축소 컨트롤을 생성한다
         	  var zoomControl = new kakao.maps.ZoomControl();
         	  // 지도의 우측에 확대 축소 컨트롤을 추가한다
         	  map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
-        	  
+
         	  // 바 그래프(로그인 방식)
         	  makeBar();
         	  // 도넛 그래프(모임 일정 수)
         	  makeCircle();
         	  // 라인 그래프 (당일 로그인 수)
         	  makeLine();
-  
+
         });
-        
+
     	// charjs(지역별 그룹수,Bar 차트)
         const makeBar = function() {
 
-        	// 선호지역 리스트 
+        	// 선호지역 리스트
             let cntPreLocationList = new Array(); // 빈 배열 생성
             <c:forEach items="${cntPreLocationList}" var="dto">
            	 	cntPreLocationList.push("${dto.count}");
@@ -536,21 +537,21 @@ a {
             options: options
           });
         }
-    	
+
    		// chartjs(모임별-일정갯수,도넛차트)
     	const makeCircle = function() {
-        	// 그룹 리스트 
+        	// 그룹 리스트
               let groupTitleList = new Array(); // 빈 배열 생성
               <c:forEach items="${cntGroupCalList}" var="dto">
               	groupTitleList.push("${dto.group_title}");
               </c:forEach>
-            
-          	// 해당 그룹의 일정 수 
+
+          	// 해당 그룹의 일정 수
           	let groupCalCnt = new Array(); // 빈 배열 생성
               <c:forEach items="${cntGroupCalList}" var="dto">
               	groupCalCnt.push("${dto.group_cal_cnt}");
               </c:forEach>
-    	  
+
            // 랜덤 색상
               let randomColList = new Array();
                 for(let i = 0; i < groupTitleList.length; i++) {
@@ -591,27 +592,27 @@ a {
                             displayColors: false,
                             caretPadding: 10,
                         }
-              
+
                     }
                 });
     	}
-    	
+
     	// charjs(로그그래프, Line차트)
         const makeLine = function() {
-        	// 로그인 날짜 리스트 
+        	// 로그인 날짜 리스트
        	 	let loginTimeList = new Array(); // 빈 배열 생성
            	<c:forEach items="${cntLoginLogList}" var="dto">
            		loginTimeList.push("${dto.login_time}");
            	</c:forEach>
-           
-           // 로그인 로그 리스트 
+
+           // 로그인 로그 리스트
            let loginLogList = new Array(); // 빈 배열 생성
            <c:forEach items="${cntLoginLogList}" var="dto">
            		loginLogList.push("${dto.loginCnt}");
            </c:forEach>
-    		
-    		
-    		
+
+
+
           var ctx = $("#line-chartcanvas");
 
           var data = {
