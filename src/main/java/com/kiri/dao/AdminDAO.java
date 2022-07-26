@@ -11,9 +11,11 @@ import org.springframework.stereotype.Repository;
 import com.kiri.dto.AdminMainDTO;
 import com.kiri.dto.BlackListDTO;
 import com.kiri.dto.Group_CalendarDTO;
+import com.kiri.dto.Login_LogDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
 import com.kiri.dto.Tbl_GroupDTO;
+import com.kiri.dto.SiteDTO;
 
 @Repository
 public class AdminDAO {
@@ -230,5 +232,15 @@ public class AdminDAO {
 	// 일정수
 	public int cntGroupCal() {
 		return session.selectOne("adminMapper.cntGroupCal");
+	}
+
+	// 선호지역 수
+	public List<SiteDTO> cntPreLocation() {
+		return session.selectList("adminMapper.cntPreLocation");
+	}
+
+	// 로그인 로그 수 
+	public List<Login_LogDTO> cntLoginLog() {
+		return session.selectList("adminMapper.cntLoginLog");
 	}
 }

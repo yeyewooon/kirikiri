@@ -44,12 +44,10 @@ public class GroupController {
    // 멤버관리 이동(o)
    @RequestMapping(value = "/toGroupMember")
    public String selectGroupAccess(int seq_group, Model model) throws Exception {
-       System.out.println("그룹 번호 : " + seq_group);
       Map<String, Object> memList = tbl_group_service.selectGroupAccess(seq_group);
       memList.get("TableJoinDTO");
       model.addAttribute("memList", memList);
       model.addAttribute("seq_group", seq_group);
-      // System.out.println(memList);
       return "group/groupMember";
    }
 
@@ -95,9 +93,9 @@ public class GroupController {
    public String completeApply(@RequestBody Map<String, Object> param, int group_people, int groupCount)
          throws Exception {
       List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
-      if (userEmails.size() + groupCount < group_people) {
+      if (userEmails.size() + groupCount <= group_people) {
          tbl_group_service.completeApply(userEmails);
-      } else if (userEmails.size() + groupCount >= group_people) {
+      } else if (userEmails.size() + groupCount > group_people) {
          return "error";
       }
 

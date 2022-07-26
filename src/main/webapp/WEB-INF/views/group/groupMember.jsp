@@ -103,7 +103,7 @@
 
 /*테이블*/
 .table {
-	width: 60%;
+	width: 80%;
 	margin: auto;
 	margin-top: 40px;
 	margin-bottom: 40px;
@@ -172,7 +172,7 @@ tr {
 }
 
 footer.footer {
-	padding-top: 2rem;
+	padding-top: 9rem;
 	padding-bottom: 2rem;
 	background-color: #ffffff;
 	width: fit-content;
@@ -309,7 +309,7 @@ footer.footer {
       </div>
    </header>
 
-	<div class="body">
+	<div class="container">
 		<div class="container-btn">
 			<!-- 버튼 그룹 -->
 			<div class="row rowBtn">
@@ -376,7 +376,6 @@ footer.footer {
 					id="deleteBtn">강퇴하기</button>
 			</div>
 		</div>
-	</div>
 	<!-- Footer-->
 		<footer class="footer mt-5">
 			<div class="row">
@@ -435,6 +434,7 @@ footer.footer {
 				</div>
 			</div>
 		</footer>
+	</div>
 
 </body>
 <script>

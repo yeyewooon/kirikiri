@@ -1,50 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+=======
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
 <!-- swal -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="sweetalert2.min.js"></script>
 <!-- bootstrap -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <!--구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap"
-	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap" rel="stylesheet" />
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!-- 아이콘 -->
-<script src="https://kit.fontawesome.com/f9358a6ceb.js"
-	crossorigin="anonymous"></script>
-<!-- summernote -->
+<script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 <!-- include libraries(jQuery, bootstrap) -->
 <!-- summernote -->
 <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
 <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- include summernote css/js-->
- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>모임 생성 페이지</title>
-
-
 <script>
 // 썸머노트
 $(document).ready(function() {
@@ -101,12 +88,10 @@ $(document).ready(function() {
 	         
 	         // 옵저버 인스턴스 생성, 콜백함수 설정
 	         let observer = new MutationObserver(function(mutationList){ // 타겟에 변화가 일어나면 콜백함수를 실행하게 된다.
-	            console.log(mutationList);
 	            for(let mutation of mutationList){
 	               if(mutation.removedNodes.length == 1){
 	                  if(mutation.removedNodes[0].src != null) {
 	                     let img = mutation.removedNodes[0].src;
-	                     //console.log(img);
 	                     let decode_src = img.replace("http://localhost/boardFile/", "");
 	                     let src = decodeURIComponent(decode_src);
 	                     $.ajax({
@@ -114,9 +99,12 @@ $(document).ready(function() {
 	                        , type : "post"
 	                        , data : {"src" : src}
 	                        , success : function(data){
-	                           console.log(data);
 	                        }, error : function(e){
-	                           console.log(e);
+	                        	Swal.fire({
+	  							  icon: 'error',
+	  							  title: '에러가 발생했네요..',
+	  							  text: '관리자에게 문의해주세여!',
+	  							});
 	                        }
 	                     })
 	                  }
@@ -141,21 +129,21 @@ function uploadSummernoteImageFile(file, editor){
       , success : function(data){
          $(editor).summernote("editor.insertImage", data.url);
       }, error : function(e){
-         console.log(e);
+    	  Swal.fire({
+			  icon: 'error',
+			  title: '에러가 발생했네요..',
+			  text: '관리자에게 문의해주세여!',
+			})
       }
    });
 }
-
 </script>
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-
 .dropdown-toggle::after {
-            display: none;
-        }
-
+	display: none;
+}
 
 body {
 	background-color: #f6f7f9;
@@ -163,9 +151,7 @@ body {
 
 * {
 	box-sizing: border-box;
-	font-family: "OTWelcomeRA";
 }
-
 
 /* header 반응형 */
 @media ( max-width : 768px) {
@@ -205,22 +191,17 @@ body {
 	width: 50%;
 }
 
-/*맨위 사진*/
-.topimg {
-	background-color: #d2e3ec;
-	width: 100%;
+/* 네비바 드롭다운 */
+.dropdown-toggle:hover {
+	color: #83bf7b;
+	border-color: aliceblue;
 }
 
-.txtBox div {
-	color: rgba(85, 85, 95, 0.993);
+.dropdown:hover .dropdown-menu {
+	display: block;
+	margin-top: 0;
+	font-weight: bold;
 }
-
-.txtBox>div:first-child {
-	font-size: 35px;
-	color: navy;
-	text-shadow: 3px 3px white;
-}
-
 
 a {
 	text-decoration: none;
@@ -324,141 +305,149 @@ footer.footer {
 	height: 100%;
 }
 
-/* 눈누 폰트 */
-@font-face {
-	font-family: "OTWelcomeRA";
-	src:
-		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2")
-		format("woff2");
-	font-weight: normal;
-	font-style: normal;
-}
-
-
 .btn-primary {
-    color: #fff;
-    background-color: cornflowerblue;
-    border-color: #fff;
+	color: #fff;
+	background-color: cornflowerblue;
+	border-color: #fff;
 }
-
 </style>
 </head>
 <body>
-      <header class="mb-3 border-bottom">
-      <div class="container">
-         <!-- 접혔을 때 nav -->
-         <nav id="navibar" class="navbar navbar-expand-md navbar-light"
-            aria-label="Main navigation">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-10">
-                     <a class="navbar-brand mb-2 mb-lg-0" href="/">
-                        <div class="title-box">
-                           <img id="logoImg" src="/resources/images/kiri.jpg">
-                        </div>
-                     </a>
-                  </div>
-                  <!-- toggle button -->
-                  <div class="col-2 d-flex align-items-center">
-                     <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                     </button>
-                  </div>
-                  <!-- 메뉴 -->
-                  <div class="collapse navbar-collapse justify-content-end"
-                     id="navbarNavDropdown">
-                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
-                           <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
-                     </ul>
-                  </div>
-               </div>
-
-            </div>
-         </nav>
-         <!-- 펼쳐졌을 때 nav -->
-         <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
-            aria-label="Main navigation">
-            <div class="row w-100 align-items-center">
-               <div class="col-5 d-flex justify-content-center">
-                  <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
-                  </ul>
-               </div>
-
-               <!-- logo -->
-               <div class="col-2">
-                  <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
-                     id="logoImgs" src="/resources/images/kiri.jpg">
-
-                  </a>
-               </div>
-
-               <div class="col-5">
-                  <div class="row align-items-center justify-content-center">
-                     <div class="col-auto">
-                        <ul class="navbar-nav mb-2 mb-lg-0 me-2">
-                           <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link"
-                                 href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link"
-                                 href="/signup/toSignupAgree">회원가입</a></li>
-                           </c:if>
-                        </ul>
-                     </div>
-                     <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </nav>
-      </div>
-   </header>
+	<header class="mb-3 border-bottom">
+		<div style="background-color: #fff;">
+			<div class="container">
+				<!-- 접혔을 때 nav -->
+				<nav id="navibar" class="navbar navbar-expand-md navbar-light"
+					aria-label="Main navigation">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-10">
+								<a class="navbar-brand mb-2 mb-lg-0" href="/">
+									<div class="title-box">
+										<img id="logoImg" src="/resources/images/kiri.jpg">
+									</div>
+								</a>
+							</div>
+							<!-- toggle button -->
+							<div class="col-2 d-flex align-items-center">
+								<button class="navbar-toggler" type="button"
+									data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+									aria-controls="navbarNavDropdown" aria-expanded="false"
+									aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+							</div>
+							<!-- 메뉴 -->
+							<div class="collapse navbar-collapse justify-content-end"
+								id="navbarNavDropdown">
+								<ul class="navbar-nav mb-2 mb-lg-0">
+									<li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+									<c:if test="${empty loginSession}">
+										<li class="nav-item"><a class="nav-link"
+											href="/login/toLogin">로그인</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/login/signup">회원가입</a></li>
+									</c:if>
+									<c:if
+										test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/mem/myPage">마이페이지</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/admin/toAdmin">관리자페이지 이동</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/login/toLogout">로그아웃</a></li>
+									</c:if>
+									<c:if
+										test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/mem/myPage">마이페이지</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/login/toLogout">로그아웃</a></li>
+									</c:if>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</nav>
+				<!-- 펼쳐졌을 때 nav -->
+				<nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
+					aria-label="Main navigation">
+					<div class="row w-100 align-items-center">
+						<div class="col-5 d-flex justify-content-center">
+							<ul class="navbar-nav mb-2 mb-lg-0">
+								<li class="nav-item"><a class="nav-link mx-2"
+									href="/board/toBoard">자유 게시판</a></li>
+							</ul>
+						</div>
+						<!-- logo -->
+						<div class="col-2">
+							<a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
+								id="logoImgs" src="/resources/images/kiri.jpg">
+							</a>
+						</div>
+						<div class="col-5">
+							<div class="row align-items-center justify-content-center">
+								<div class="col-auto">
+									<ul class="navbar-nav mb-2 mb-lg-0 me-2">
+										<c:if test="${empty loginSession}">
+											<li class="nav-item"><a class="nav-link"
+												href="/login/toLogin">로그인</a></li>
+											<li class="nav-item"><a class="nav-link"
+												href="/signup/toSignupAgree">회원가입</a></li>
+										</c:if>
+									</ul>
+								</div>
+								<div class="col-auto user">
+									<c:if
+										test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+										<div class="dropdown text-end">
+											<a href="/"
+												class="d-block link-dark text-decoration-none dropdown-toggle"
+												id="dropdownUser1" data-bs-toggle="dropdown"
+												aria-expanded="false"> <img
+												src="/resources/images/profile.jpg" alt="mdo" width="32"
+												height="32" class="rounded-circle">
+											</a>
+											<ul class="dropdown-menu text-small"
+												aria-labelledby="dropdownUser1">
+												<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+												<li><a class="dropdown-item"
+													href="/group/toCreateGroup">모임생성</a></li>
+												<li><hr class="dropdown-divider"></li>
+												<li><a class="dropdown-item" href="/admin/toAdmin">관리자
+														페이지이동</a></li>
+												<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+											</ul>
+										</div>
+									</c:if>
+									<c:if
+										test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+										<div class="dropdown text-end">
+											<a href="/"
+												class="d-block link-dark text-decoration-none dropdown-toggle"
+												id="dropdownUser1" data-bs-toggle="dropdown"
+												aria-expanded="false"> <img
+												src="/resources/images/profile.jpg" alt="mdo" width="32"
+												height="32" class="rounded-circle">
+											</a>
+											<ul class="dropdown-menu text-small"
+												aria-labelledby="dropdownUser1">
+												<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+												<li><a class="dropdown-item"
+													href="/group/toCreateGroup">모임생성</a></li>
+												<li><hr class="dropdown-divider"></li>
+												<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+											</ul>
+										</div>
+									</c:if>
+								</div>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</header>
 	<div class="container w-75 mainContainer">
 		<form action="/group/createGroup" method="post"
 			enctype="multipart/form-data" id="groupForm">
@@ -478,32 +467,56 @@ footer.footer {
 					</span>
 					<div class="row mt-4">
 						<div class="col">
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="아웃도어/여행">아웃도어/여행</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="운동/스포츠">운동/스포츠</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="외국어/언어">외국어/언어</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="반려동물">반려동물</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="아웃도어/여행">아웃도어/여행</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="운동/스포츠">운동/스포츠</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="외국어/언어">외국어/언어</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="반려동물">반려동물</button>
 						</div>
 					</div>
 					<div class="row mt-2">
 						<div class="col">
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="음악/악기">음악/악기</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="공예/만들기">공예/만들기</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="댄스/무용">댄스/무용</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="인문학/책/글">인문학/책/글</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="음악/악기">음악/악기</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="공예/만들기">공예/만들기</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="댄스/무용">댄스/무용</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="인문학/책/글">인문학/책/글</button>
 						</div>
 					</div>
 					<div class="row mt-2">
 						<div class="col">
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="사진/영상">사진/영상</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="게임/오락">게임/오락</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="요리/제조">요리/제조</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="문화/공연/축제">문화/공연/축제</button>
-							<input type="text" name="group_category" id="group_category" hidden>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="사진/영상">사진/영상</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="게임/오락">게임/오락</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="요리/제조">요리/제조</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="문화/공연/축제">문화/공연/축제</button>
+							<input type="text" name="group_category" id="group_category"
+								hidden>
 						</div>
 					</div>
 				</div>
 			</div>
-
 			<!--Basic Info-->
 			<div class="row mt-5">
 				<!--아이콘-->
@@ -513,7 +526,8 @@ footer.footer {
 					</h4>
 				</div>
 				<!--기본 글쓰기 -->
-				<div class="col-9 mainTextBasicInfo d-flex flex-column justify-content-start">
+				<div
+					class="col-9 mainTextBasicInfo d-flex flex-column justify-content-start">
 					<h4>Basic Info</h4>
 					<strong class="mt-2">모임 이름</strong> <span style="font-size: 14px;"
 						class="mt-2">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. 떠오르는 기발한
@@ -532,7 +546,6 @@ footer.footer {
 					</div>
 				</div>
 			</div>
-
 			<!--위치 -->
 			<div class="row mt-5">
 				<!--위치 아이콘-->
@@ -542,23 +555,26 @@ footer.footer {
 					</h4>
 				</div>
 				<!--위치 설정  -->
-				<div class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
+				<div
+					class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
 					<h4>Location</h4>
 					<span style="font-size: 14px;">해당 지역의 사람들이 귀하의 이벤트를 발견하도록 돕고
 						<br> 참석자들에게 위치를 제공해주세요.
 					</span> <span class="mt-2"><strong>지역 설정</strong></span>
 					<div class="selectBox d-flex">
-						<select class="form-select mt-2 w-25" name="sido1" id="sido1" onchange="selectBoxChange1(this.value);"></select> 
-						<select class="form-select mt-2 w-25" name="gugun1" id="gugun1" onchange="selectBoxChange2(this.value);"></select>
-						<button type="button" class="btn btn-primary mt-2 group_siteBtn ms-3">지역 선택 완료</button>
+						<select class="form-select mt-2 w-25" name="sido1" id="sido1"
+							onchange="selectBoxChange1(this.value);"></select> <select
+							class="form-select mt-2 w-25" name="gugun1" id="gugun1"
+							onchange="selectBoxChange2(this.value);"></select>
+						<button type="button"
+							class="btn btn-primary mt-2 group_siteBtn ms-3">지역 선택 완료</button>
 					</div>
 					<!--모임 지역-->
-					<input type="text" id="group_site" name="group_site" hidden> 
-					<input type="text" id="sido1Input" name="sido1Input" hidden> 
+					<input type="text" id="group_site" name="group_site" hidden>
+					<input type="text" id="sido1Input" name="sido1Input" hidden>
 					<input type="text" id="gugun1Input" name="gugun1Input" hidden>
 				</div>
 			</div>
-
 			<!--메인 이미지-->
 			<div class="row mt-5">
 				<!--메인 이미지 아이콘-->
@@ -568,7 +584,8 @@ footer.footer {
 					</h4>
 				</div>
 				<!--이미지 올리기 -->
-				<div class="col-9 mainTextFile d-flex flex-column justify-content-start">
+				<div
+					class="col-9 mainTextFile d-flex flex-column justify-content-start">
 					<h4>Main Image</h4>
 					<span style="font-size: 14px;">썸네일로 보여질 이미지입니다. <br>본인이
 						생각하는 최고의 사진을 넣어주세요!
@@ -577,10 +594,9 @@ footer.footer {
 						<img src="/resources/images/메인사진2(배경).png" id="groupDefaultImg">
 					</div>
 					<input type="file" class="form-control mt-3 w-75" name="groupFile"
-						id="groupFile" accept='image/jpeg,image/gif,image/png'/>
+						id="groupFile" accept='image/jpeg,image/gif,image/png' />
 				</div>
 			</div>
-
 			<!--인원수-->
 			<div class="row mt-5">
 				<!--위치 아이콘-->
@@ -589,8 +605,9 @@ footer.footer {
 						<i class="fa-solid fa-user-group"></i>
 					</h4>
 				</div>
-				<!--위치 설정  -->
-				<div class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
+				<!--위치설정-->
+				<div
+					class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
 					<h4>Member</h4>
 					<span style="font-size: 14px;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
 						인원은 최소 2명부터 최대 10명까지 가능합니다.
@@ -609,7 +626,8 @@ footer.footer {
 							<i class="fa-solid fa-plus"></i>
 						</div>
 					</div>
-					<input type="text" name="group_people" id="group_people" value="2" hidden>
+					<input type="text" name="group_people" id="group_people" value="2"
+						hidden>
 				</div>
 			</div>
 			<!--이미지-->
@@ -621,7 +639,8 @@ footer.footer {
 					</h4>
 				</div>
 				<!--이미지 올리기 -->
-				<div class="col-9 mainTextFile d-flex flex-column justify-content-start">
+				<div
+					class="col-9 mainTextFile d-flex flex-column justify-content-start">
 					<h4>Guideline</h4>
 					<span>
 						<h5>거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
@@ -641,7 +660,6 @@ footer.footer {
 		</form>
 	</div>
 	</div>
-
 	<!--뒤로가기 , 동의 후 등록-->
 	<div class="mainFooter d-flex justify-content-center align-items-center mt-3">
 		<span class="mainFooterBtnBox">
@@ -649,7 +667,6 @@ footer.footer {
 			<button class="btn btn-primary ms-4" id="registerGroupBtn">동의후 등록</button>
 		</span>
 	</div>
-
 	<!-- Footer-->
 	<div class="footerWrapper" style="background-color: #fff;">
 		<div class="container">
@@ -693,9 +710,8 @@ footer.footer {
 			</footer>
 		</div>
 	</div>
+
 	<script>
-
-
   // 지역 설정
   $('document').ready(function() {
 	  	var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];

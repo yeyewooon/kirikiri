@@ -131,7 +131,7 @@
 
 /*테이블*/
 .table {
-   width: 60%;
+   width: 80%;
    margin: auto;
    margin-top: 40px;
    margin-bottom: 40px;
@@ -174,7 +174,7 @@ th, td {
 }
 
 footer.footer {
-   padding-top: 2rem;
+   padding-top: 9rem;
    padding-bottom: 2rem;
    background-color: #ffffff;
    width: fit-content;
@@ -311,7 +311,7 @@ footer.footer {
       </div>
    </header>
 
-   <div class="body">
+   <div class="container">
       <div class="container-btn">
          <!-- 버튼 그룹 -->
          <div class="row rowBtn">
@@ -387,7 +387,6 @@ footer.footer {
             </div>
          </div>
       </div>
-   </div>
    <!-- Footer-->
 		<footer class="footer mt-5">
 			<div class="row">
@@ -446,6 +445,7 @@ footer.footer {
 				</div>
 			</div>
 		</footer>
+   </div>
 
 
 </body>
@@ -491,7 +491,7 @@ $("#groupDelete").on("click", function(){
             if(data == "success"){
                   Swal.fire({
                        icon: 'success',
-                       text: '완료되었습니다.',
+                       text: '승인이 완료되었습니다.',
                      })            
             }else if(data == "error"){
                Swal.fire({
@@ -529,7 +529,7 @@ $("#groupDelete").on("click", function(){
          success:function(data){
             Swal.fire({
                  icon: 'success',
-                 text: '완료되었습니다.',
+                 text: '거절이 완료되었습니다.',
                })   
                setTimeout(function() {
                        window.location.href = "";

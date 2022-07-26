@@ -32,7 +32,9 @@ body,html{
    height: 100%;
    padding: 0px;
 }
-
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
 * {
 	box-sizing: border-box;
 	font-family: 'MICEGothic Bold';
