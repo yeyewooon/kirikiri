@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- 
+
  <mapper namespace="adminMapper">
  	<select id="selectAllMember" parameterType="map" resultType="com.kiri.dto.MemberDTO">
  		select * from (select member.*, row_number() over(order by 1 desc) as num from member)
@@ -18,7 +18,7 @@
  		select * from report where seq_report = #{seq_report}
  	</select>
  	<insert id="insertBl" parameterType="com.kiri.dto.BlackListDTO">
- 		insert into blacklist values(seq_bl.nextval, #{user_email}, sysdate, #{bl_reason})  
+ 		insert into blacklist values(seq_bl.nextval, #{user_email}, sysdate, #{bl_reason})
  	</insert>
  	<delete id="deleteReport" parameterType="int">
  		delete from report where seq_report=#{seq_report}
@@ -38,36 +38,36 @@
  	<update id="updateMem" parameterType="map">
  		update member set user_blacklist=#{user_blacklist} where user_email=#{user_email}
  	</update>
- 	
+
  	<!-- 게시물 관리 -->
- 	
+
  	<!-- 게시물 list 잘라서 가져오기 -->
 	<select id="selectBoard" parameterType="map" resultType="com.kiri.dto.BoardDTO">
-		select * 
-			from (select board.*, row_number() over(order by board_date desc) as num from board) 
+		select *
+			from (select board.*, row_number() over(order by board_date desc) as num from board)
 			where num between #{start} and #{end}
  	</select>
- 	
+
 	<!-- 내가 쓴 일반게시판 글 갯수 가져오기 -->
 	<select id="selectBoardCount" resultType="int">
 		select count(*) from board
 	</select>
-	
+
 	<!-- 내가 쓴 모임게시판 글 갯수 가져오기 -->
 	<select id="selectGroupBoardCount" resultType="int">
 		select count(*) from group_board
 	</select>
-	
+
 	<!-- 일반 조회 -->
  	<select id="selectAllBoard" resultType="com.kiri.dto.BoardDTO">
 		select * from board order by board_date desc
  	</select>
- 	
+
 	<!-- ajax 모임 게시글 -->
 	<select id="selectAllGroupBoard" resultType="com.kiri.dto.Group_BoardDTO">
 		select * from group_board order by written_date desc
  	</select>
- 	
+
  	<!-- 검색으로 일반게시판 글 정보 가져오기 -->
 	<select id="generalSearchList" parameterType="map" resultType="com.kiri.dto.BoardDTO">
 		<if test="category == 'board_all'">
@@ -77,17 +77,17 @@
 		</if>
 		<if test="category == 'board_title'">
 			select * from board where
-					board_title like '%' || #{keyword} ||'%'		
+					board_title like '%' || #{keyword} ||'%'
 		</if>
 		<if test="category == 'board_content'">
 			select * from board where
-					board_content like '%' || #{keyword} ||'%'		
+					board_content like '%' || #{keyword} ||'%'
 		</if>
 	</select>
-	
+
 	<!-- 검색으로 모임게시판 글 정보 가져오기 -->
 	<select id="meetingSearchList" parameterType="map" resultType="com.kiri.dto.Group_BoardDTO">
-		
+
 		<if test="category == 'board_all'">
 			select * from group_board where
 					(title like '%' || #{keyword} ||'%' or
@@ -96,46 +96,46 @@
 		<if test="category == 'title'">
 			select * from group_board where
 					title like '%' || #{keyword} ||'%'
-		</if> 
+		</if>
 		<if test="category == 'content'">
 			select * from group_board where
 					content like '%' || #{keyword} ||'%'
-		</if> 
+		</if>
 	</select>
-	
+
 	<!-- 일반 게시글 삭제 -->
 	<delete id="boardDelete" parameterType="int">
 		delete from board
 			where seq_board=${seq_board}
 	</delete>
-	
+
 	<!-- 모임 게시글 삭제 -->
 	<delete id="groupBoardDelete" parameterType="int">
 		delete from group_board
 			where seq_group_board=${seq_group_board}
 	</delete>
- 	
+
  	<!-- 페이지네이션 BoardCnt -->
  	<select id="getBoardPageNavi" resultType="int">
  		select count(*) as totalCnt from board
  	</select>
- 	
+
  	<!-- 김영완 07_22 -->
  	<!-- 카카오맵 -->
  	<select id="selectAllGroupLocation" resultType="com.kiri.dto.AdminMainDTO">
  		select * from group_calendar join (select seq_group, group_title from tbl_group) using(seq_group)
  	</select>
- 	
+
  	<!-- 도넛 그래프  -->
  	<select id="cntGroupCalendar" resultType="com.kiri.dto.AdminMainDTO">
  		select group_title, count(*) group_cal_cnt from group_calendar join (select seq_group, group_title from tbl_group) using(seq_group) group by group_title
  	</select>
-	 	
- 	<!-- 멤버 수 --> 
+
+ 	<!-- 멤버 수 -->
  	<select id="cntGroupMember" resultType="int">
  		select sum(count(*)) cntMem from group_member group by seq_group
  	</select>
- 	
+
 	<!-- 모임 수 -->
 	<select id="cntGroupCnt" resultType="int">
 		select sum(count(*)) cntGroup from tbl_group group by seq_group
@@ -145,14 +145,32 @@
 	<!-- <select id="cntBoard" resultType="int">
 		select sum(count(*)) cntBoard from board group by seq_board
 	</select> -->
-	
+
 	<!-- 게시글 수(모임게시판) -->
 	<!-- <select id="cntGroupBoard" resultType="int">
 		select sum(count(*)) cntGroupBoard from group_board group by seq_group_board
 	</select> -->
-	
+
 	<!-- 일정수 -->
 	<select id="cntGroupCal" resultType="int">
 		select sum(count(*)) cntCal from group_calendar group by seq_group
+	</select>
+
+	<!-- 선호 지역수 -->
+	<select id="cntPreLocation" resultType="com.kiri.dto.SiteDTO">
+		select area,count(*) as preCnt from site group by area
+	</select>
+
+	<!-- 로그인 로그 수 -->
+	<!-- 김예원 07_26-->
+	<select id="cntLoginLog" resultType="com.kiri.dto.Login_LogDTO">
+			select to_char(b.dt, 'YY-MM-DD') as login_time, nvl(sum(a.cnt),0) loginCnt
+			from (SELECT TO_DATE(login_time, 'YY-MM-DD') AS login_time, count(user_email) cnt FROM login_log
+		          WHERE (login_time >= TO_DATE(SYSDATE-7,'YY-MM-DD')) and login_status = '성공' GROUP BY login_time) a
+		          ,(SELECT TO_DATE(sysdate-6,'YY-MM-DD') + LEVEL - 1 AS dt FROM dual
+		         <![CDATA[CONNECT BY LEVEL < = (TO_DATE(sysdate,'YY-MM-DD') - TO_DATE(sysdate-7,'YY-MM-DD'))) b]]>
+		    where b.dt = a.login_time(+)
+		    group by b.dt
+		    order by b.dt
 	</select>
  </mapper>
