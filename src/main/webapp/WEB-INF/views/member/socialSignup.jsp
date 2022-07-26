@@ -989,8 +989,8 @@ function sweetAlertSuccess(content){
            </div>
            <div class="col-md-9 d-flex justify-content start align-items-center">
                <input type="text" id="year" name="year" class="form-control bthday" maxlength="4" required><label for="year">년</label>
-               <input type="text" id="month" name="month" class="form-control bthday" maxlength="2" required><label for="month">월</label>
-               <input type="text" id="day" name="day" class="form-control bthday" maxlength="2" required><label for="day">일</label>
+               <input type="text" id="month" name="month" class="form-control bthday" maxlength="2" placeholder="ex)01" required><label for="month">월</label>
+               <input type="text" id="day" name="day" class="form-control bthday" maxlength="2" placeholder="ex)01" required><label for="day">일</label>
                <input type="hidden" id="user_bd" name="user_bd" class="form-control"></intput>
            </div>
        </div> 
