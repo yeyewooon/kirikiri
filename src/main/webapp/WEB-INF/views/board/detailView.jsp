@@ -50,6 +50,13 @@
        		max-width: 100%;
        		height: auto;
        	}
+       	.likeBtn{
+       		border: none;
+       		background-color: transparent;
+       	}
+       	.likeBtn img{
+       		width: 50px;
+       	}
 		
 		/* 댓글 영역 */
         .profileBox{
@@ -92,11 +99,11 @@
             <h2 id="title" name="board_title">${detail.boardDTO.board_title}</h2>
         </div>
 
-        <div class="row mt-4 justify-content-between align-items-center">
-            <div class="col-auto">
+        <div class="row mt-4 justify-content-between align-items-center" id="board-head-row">
+            <div class="col-auto" id="board-head-col">
                 <i class="fa-regular fa-clock me-3"> ${detail.boardDTO.board_date}</i>
                 <i class="fa-regular fa-font-awesome me-3"> ${detail.boardDTO.board_count}</i>
-                <i class="fa-regular fa-comment-dots"> 12</i>
+                <i class="fa-regular fa-comment-dots"> ${detail.commentCnt}</i>
             </div>
             <div class="col-auto d-flex justify-content-end">
                 <div class="fw-bold fs-4 me-2">작성자</div>
@@ -111,6 +118,45 @@
             <div id="content">
                 <p>${detail.boardDTO.board_content}</p>
             </div>
+        </div>
+        
+        <!-- 좋아요 영역 -->
+        <div class="row justify-content-center mb-3" id="body-like">
+        	<c:choose>
+        		<%-- 로그인 상태일 때 --%>
+        		<c:when test="${not empty loginSession.user_email}">
+	        		<c:choose>
+	        			<%-- 추천 안누름 --%>
+	        			<c:when test="${like.likeCheck == 0}">
+	        				<div class="col-auto">
+			        			<button class="likeBtn" id="likeBefore" value="${detail.boardDTO.seq_board}">
+			        				<img src="/resources/images/emptyheart.png" alt="좋아요">
+			        			</button>
+			        			<span>${like.likeHit}</span>
+			        		</div>
+	        			</c:when>
+	        			<%-- 추천 누름 --%>
+	        			<c:otherwise>
+	        				<div class="col-auto">
+			        			<button class="likeBtn" id="likeAfter" value="${detail.boardDTO.seq_board}">
+			        				<img src="/resources/images/fullheart.png" alt="좋아요">
+			        			</button>
+			        			<span>${like.likeHit}</span>
+			        		</div>
+	        			</c:otherwise>
+	        		</c:choose>
+	        	</c:when>
+	        	
+	        	<%-- 로그인 x일 때 --%>
+	        	<c:otherwise>
+		        	<div class="col-auto">
+				        <button id="like-notLoginBtn" value="${detail.boardDTO.seq_board}">
+				        	<img src="/resources/images/emptyheart.png" alt="좋아요">
+				        </button>
+				        <span>${like.likeHit}</span>
+					</div>
+	        	</c:otherwise>
+	        </c:choose>
         </div>
 	
 		<!-- 댓글 영역 -->
@@ -143,19 +189,19 @@
 			
 			                        <div class="row">
 			                            <div class="col-9">
-			                                <input type="text" class="form-control comment" value="${comment.comment}" readonly>
+			                                <textarea class="form-control comment" style="resize: none;" readonly>${comment.comment}</textarea>
 			                            </div>
 			                            <!-- 댓글 수정/삭제 버튼 -->
-					                <%-- <c:if test="${comment.user_email eq loginSession.user_email}"> --%>
-					                	<div class="col-3 defaultComment">
-					                		<button type="button" class="btn btn-warning modify-reply me-2">수정</button>
-					                		<button type="button" class="btn btn-danger delete-reply" value="${reply.seq_reply}">삭제</button>
-					                	</div>
-					                	<%-- <div class="col-3 afterComment">
-					                		<button type="button" class="btn btn-secondary cancel-reply me-2">취소</button>
-					                		<button type="button" class="btn btn-primary complete-reply" value="${reply.seq_reply}">완료</button>
-					                	</div> --%>
-					                <%-- </c:if> --%>
+					                	<c:if test="${comment.user_email eq loginSession.user_email}">
+						                	<div class="col-3 defaultComment">
+						                		<button type="button" class="mod-commentBtn btn btn-warning me-2" value="${comment.seq_comment}">수정</button>
+						                		<button type="button" class="del-commentBtn btn btn-danger" value="${comment.seq_comment}">삭제</button>
+						                	</div>
+						                	<div class="col-3 afterComment d-none">
+						                		<button type="button" class="btn btn-secondary mod-cancelBtn me-2">취소</button>
+						                		<button type="button" class="btn btn-primary mod-completeBtn" value="${comment.seq_comment}">완료</button>
+						                	</div>
+					                	</c:if>
 			                        </div>
 			                    </div>
 			                </div>
@@ -184,35 +230,95 @@
        
         <!-- 게시글 수정 / 삭제 버튼 -->
         <div class="row mt-4 justify-content-center">
-            <div class="col-auto">
-                <button type="button" id="modifyBtn" class="btn btn-primary">수정</button>
-            </div>
-            <div class="col-auto">
-                <button type="button" id="deleteBtn" class="btn btn-primary">삭제</button>
-            </div>
+	        <c:if test="${loginSession.user_email eq detail.boardDTO.user_email}">
+	        	 <div class="col-auto">
+	                <button type="button" id="modifyBtn" class="btn btn-primary">수정</button>
+	            </div>
+	            <div class="col-auto">
+	                <button type="button" id="deleteBtn" class="btn btn-primary">삭제</button>
+	            </div>
+	        </c:if>
+	        <div class="col-auto">
+	        	<button type="button" id="toListBtn" class="btn btn-primary">목록으로</button>
+	        </div>
         </div>
+		<form id="infoForm" method="get">
+			<input type="hidden" id="seq_board" name="seq_board" value="${detail.boardDTO.seq_board}">
+			<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
+			<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
+			<input type="hidden" name="type" value="${cri.type}">
+			<input type="hidden" name="keyword" value="${cri.keyword}">
+		</form>
     </div>
     
     <script>
+    	// 목록으로 돌아가기
+    	$("#toListBtn").on("click", function(){
+    		$("#infoForm").find("#seq_board").remove();
+    		$("#infoForm").attr("action", "/board/toBoard");
+    		$("#infoForm").submit();
+    	})
+    	
     	// 게시글 수정
     	$("#modifyBtn").on("click", function(){
-    		location.href = "/board/toModify?seq_board=" + ${detail.boardDTO.seq_board};
+    		//location.href = "/board/toModify?seq_board=" + ${detail.boardDTO.seq_board};
+    		$("#infoForm").attr("action", "/board/toModify");
+    		$("#infoForm").submit();
     	})
     	
     	// 게시글 삭제
     	$("#deleteBtn").on("click", function(){
     		let answer = confirm("삭제된 게시글은 복구가 불가합니다. 정말 삭제하시겠습니까?");
     		if(answer){
-    			/* let deleteForm = $("<form>").attr({
-    				"method" : "post"
-    				, "action" : "/board/delete"
-    			}).css("display", "none");
-    			deleteForm.append($("#seq_board"));
-    			deleteForm.appendTo("body");
-    			deleteForm.submit(); */
     			location.href = "/board/delete?seq_board=" + ${detail.boardDTO.seq_board};
     		}
     	})
+    	
+    	// 좋아요
+    	$("#body-like").on("click", ".likeBtn", function(){
+    		let seq_board = $(this).val();
+    		// 로그인 세션의 id
+    		let user_email = "${loginSession.user_email}";
+    		//let user_email = "abc123";
+    		
+    		if($(this).attr("id") == "likeBefore"){
+    			updateLike(seq_board, user_email);
+    		}else if($(this).attr("id") == "likeAfter"){
+    			//$(this).addClass("d-none");
+    			updateLike(seq_board, user_email);
+    		}
+    	})
+    	
+    	// 로그인 안한 상태에서 하트 클릭시
+    	$("#like-notLoginBtn").on("click", function(){
+    		alert("로그인 후 좋아요를 눌러주세요!");
+    	})
+    	
+    	// 좋아요 함수
+    	function updateLike(seq_board, user_email){
+    		$.ajax({
+    			type : "post"
+    			, url : "/like/boardLike"
+    			, dataType : "json"
+    			, data : {
+    				"seq_board" : seq_board
+    				, "user_email" : user_email
+    			}, success : function(likeCheck){
+    				console.log("ajax의 체크: " + likeCheck);
+    				if(likeCheck == 0){
+    					alert("게시글 추천 완료!");
+    					$("#body-like").load(location.href + " #body-like");
+    				}
+    				else if(likeCheck == 1){
+    					alert("게시글 추천 취소");
+    					$("#body-like").load(location.href + " #body-like");
+    				}
+    			}, error : function(e){
+    				console.log(e);
+    			}
+    		});
+    	}
+    	
     	
     	// 댓글 등록
     	$("#write-commentBtn").on("click", function(){
@@ -230,19 +336,83 @@
     			, data : comment
     			// , dataType : "json"
     			, success : function(data){
-    				//makeComment(data);
     				if(data === "success"){
     					$("#body-comment").load(location.href + " #body-comment");
+    					$("#board-head-row").load(location.href + " #board-head-col");
     				}else{
     					alert("댓글 등록에 실패했습니다.");
     				}
-    				
     			}, error : function(e){
     				console.log(e);
-    				alert("댓글 등록에 실패했습니다.");
     			}
     		})
     	})
+    	
+    	// 댓글 수정
+    	$("#body-comment").on("click", ".mod-commentBtn", function(e){
+    		$(e.target).parent(".defaultComment").addClass("d-none");
+    		$(e.target).parent().next(".afterComment").removeClass("d-none");
+    		$(e.target).parent().prev().children(".comment").attr("readonly", false).focus();
+    	})
+    	
+    	// 댓글 수정 취소
+    	$("#body-comment").on("click", ".mod-cancelBtn", function(e){
+    		$(e.target).parent(".afterComment").addClass("d-none");
+    		$(e.target).parent().prev(".defaultComment").removeClass("d-none");
+    		$(e.target).parent().prev().prev().children(".comment").attr("readonly", true);
+    	})
+    	
+    	// 댓글 수정 완료
+    	$("#body-comment").on("click", ".mod-completeBtn", function(e){
+    		$(e.target).parent(".afterComment").addClass("d-none");
+    		$(e.target).parent().prev(".defaultComment").removeClass("d-none");
+    		$(e.target).parent().prev().prev(".comment").attr("readonly", true);
+    		
+    		let comment = $(e.target).parent().prev().prev().children("textarea").val();
+    		let seq_comment = $(e.target).val();
+    		
+    		$.ajax({
+    			url : "/comment/modify"
+    			, type : "post"
+    			, data : {
+    				seq_comment : seq_comment
+    				, "comment_content" : comment
+    			}, success : function(data){
+    				if(data === "success"){
+    					alert("댓글이 수정되었습니다.");
+        				$("#body-comment").load(location.href + " #body-comment");
+    					$("#board-head-row").load(location.href + " #board-head-col");
+    				}else{
+    					alert("댓글 수정에 실패했습니다.");
+    				}			
+    			}, error : function(e){
+    				console.log(e);
+    			}
+    		})
+    	})
+    	
+    	// 댓글 삭제
+    	$("#body-comment").on("click", ".del-commentBtn", function(e){
+    		let seq_comment = $(e.target).val();
+    		
+    		$.ajax({
+    			url : "/comment/delete"
+    			, type : "post"
+    			, data : { seq_comment : seq_comment }
+    			, success : function(data){
+    				if(data === "success"){
+    					alert("댓글이 삭제되었습니다.");
+        				$("#body-comment").load(location.href + " #body-comment"); 
+        				$("#board-head-row").load(location.href + " #board-head-col");
+    				}else{
+    					alert("댓글 삭제에 실패했습니다.");
+    				}			
+    			}, error : function(e){
+    				console.log(e);
+    			}
+    		})
+    	})
+    	
     </script>
 </body>
 </html>

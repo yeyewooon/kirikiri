@@ -24,12 +24,17 @@ public class Board_CommentDAO {
 	}
 	
 	// 댓글 수정
-	public void modify(Board_CommentDTO dto) throws Exception{
-		session.update("commentMapper.modify", dto);
+	public int modify(Board_CommentDTO dto) throws Exception{
+		return session.update("commentMapper.modify", dto);
 	}
 	
 	// 댓글 삭제
-	public void delete(int seq_comment) throws Exception{
-		session.delete("commentMapper.delete", seq_comment);
+	public int delete(int seq_comment) throws Exception{
+		return session.delete("commentMapper.delete", seq_comment);
+	}
+	
+	// 댓글 개수
+	public int commentCnt(int seq_board) throws Exception{
+		return session.selectOne("commentMapper.commentCnt", seq_board);
 	}
 }

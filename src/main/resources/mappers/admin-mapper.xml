@@ -38,4 +38,41 @@
  	<update id="updateMem" parameterType="map">
  		update member set user_blacklist=#{user_blacklist} where user_email=#{user_email}
  	</update>
+ 	
+ 	<!-- 김영완 07_22 -->
+ 	<!-- 카카오맵 -->
+ 	<select id="selectAllGroupLocation" resultType="com.kiri.dto.AdminMainDTO">
+ 		select * from group_calendar join (select seq_group, group_title from tbl_group) using(seq_group)
+ 	</select>
+ 	
+ 	<!-- 도넛 그래프  -->
+ 	<select id="cntGroupCalendar" resultType="com.kiri.dto.AdminMainDTO">
+ 		select group_title, count(*) group_cal_cnt from group_calendar join (select seq_group, group_title from tbl_group) using(seq_group) group by group_title
+ 	</select>
+	 	
+ 	<!-- 멤버 수 --> 
+ 	<select id="cntGroupMember" resultType="int">
+ 		select sum(count(*)) cntMem from group_member group by seq_group
+ 	</select>
+ 	
+	<!-- 모임 수 -->
+	<select id="cntGroupCnt" resultType="int">
+		select sum(count(*)) cntGroup from tbl_group group by seq_group
+	</select>
+
+	<!-- 게시글 수(자유게시판) -->
+	<!-- <select id="cntBoard" resultType="int">
+		select sum(count(*)) cntBoard from board group by seq_board
+	</select> -->
+	
+	<!-- 게시글 수(모임게시판) -->
+	<!-- <select id="cntGroupBoard" resultType="int">
+		select sum(count(*)) cntGroupBoard from group_board group by seq_group_board
+	</select> -->
+	
+	<!-- 일정수 -->
+	<select id="cntGroupCal" resultType="int">
+		select sum(count(*)) cntCal from group_calendar group by seq_group
+	</select>
+
  </mapper>

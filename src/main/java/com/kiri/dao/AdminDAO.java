@@ -8,7 +8,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kiri.dto.AdminMainDTO;
 import com.kiri.dto.BlackListDTO;
+import com.kiri.dto.Group_CalendarDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
 
@@ -110,5 +112,41 @@ public class AdminDAO {
 		map.put("needNext", needNext);
 
 		return map;
+	}
+
+	// 김영완 07_22
+	// 카카오맵
+	public List<AdminMainDTO> selectAllGroupLocation() {
+		return session.selectList("adminMapper.selectAllGroupLocation");	
+	}
+
+	// 그룹 수(도넛 그래프)
+	public List<AdminMainDTO> cntGroupCalendar() {
+		return session.selectList("adminMapper.cntGroupCalendar");	
+	}
+
+	// 멤버 수
+	public int cntGroupMember() {
+		return session.selectOne("adminMapper.cntGroupMember");
+	}
+
+	// 모임 수
+	public int cntGroupCnt() {
+		return session.selectOne("adminMapper.cntGroupCnt");
+	}
+
+	// 게시글 수(자유게시판)
+	public int cntBoard() {
+		return session.selectOne("adminMapper.cntBoard");
+	}
+
+	// 게시글 수(모임게시판)
+	public int cntGroupBoard() {
+		return session.selectOne("adminMapper.cntGroupBoard");
+	}
+
+	// 일정수
+	public int cntGroupCal() {
+		return session.selectOne("adminMapper.cntGroupCal");
 	}
 }

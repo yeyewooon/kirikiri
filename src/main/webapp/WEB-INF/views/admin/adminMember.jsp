@@ -58,10 +58,16 @@
 	font-style: normal;
 }
 
+.container{
+   max-width: -webkit-fill-available;
+   height:100%;
+   padding : 0px;
+}
+
 /*사이드바*/
 .sidebar {
 	float: left;
-	width: 20%;
+	width: 15%;
 	height: 1200px;
 	background-color: #4e78f5;
 }
@@ -80,10 +86,6 @@
 	color: white;
 }
 
-.logoHome {
-	height: 100px;
-}
-
 .logoHome span {
 	color: white;
 	font-size: x-large;
@@ -91,7 +93,7 @@
 }
 
 #logoImg {
-	width: 80px;
+	width: 70%;
 }
 
 i {
@@ -109,7 +111,7 @@ a {
 .navbar {
 	float: right;
 	height: 104px;
-	width: 80%;
+	width: 85%;
 	background-color: white;
 	position: relative;
 }
@@ -171,6 +173,10 @@ a {
 }
 
 /*content안에*/
+.title{
+	width:75%;
+	margin: auto;
+}
 .reportBox {
 	margin: auto;
 	width: 75%;
@@ -228,7 +234,7 @@ td>a {
 	<div class="container">
 		<div class="sidebar">
 			<ul class="p-2">
-				<li class="logoHome"><a href="/toAdmin"> <img
+				<li class="logoHome"><a href="/admin/toAdmin"> <img
 						src="/resources/images/adminLogo.png" id="logoImg"><br>
 						<span>끼리끼리</span>
 				</a></li>
@@ -255,8 +261,8 @@ td>a {
 			</div>
 		</div>
 		<div class="contents">
-			<div class="row title ">
-				<div class="col d-flex mt-4 ms-4">
+			<div class="row title">
+				<div class="col d-flex mt-4">
 					<h4 style="color: darkblue; text-shadow: 1px 1px 1px dodgerblue;">회원
 						신고 관리</h4>
 				</div>
@@ -302,7 +308,7 @@ td>a {
 				</table>
 			</div>
 			<div class="row title mt-2">
-				<div class="col mt-4 ms-4">
+				<div class="col mt-4">
 					<h4 style="color: darkblue; text-shadow: 1px 1px 1px dodgerblue;">사용자
 						관리</h4>
 				</div>

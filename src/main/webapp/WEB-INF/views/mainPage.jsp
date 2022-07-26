@@ -328,7 +328,7 @@ footer.footer {
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href=" ">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
                         <c:choose>
                            <c:when test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
@@ -354,7 +354,7 @@ footer.footer {
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="">자유
+                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
                            게시판</a></li>
                   </ul>
                </div>
@@ -841,6 +841,10 @@ footer.footer {
       $(".more").on("click", function(){
     	  location.href = "/user/toViewAllGroupList";
       })
+<<<<<<< HEAD
+=======
+
+>>>>>>> 52196161bfcfe5ae04db50bab198f01fcc178cfb
    </script>
 </body>
 </html>

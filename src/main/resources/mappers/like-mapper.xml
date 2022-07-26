@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="likeMapper">
+	
+	<!-- 게시글 좋아요 수 -->
+	<update id="updateLike" parameterType="int">
+		update board
+			set likehit = likehit + 1
+			where seq_board = #{seq_board}
+	</update>
+	
+	<!-- 게시글 좋아요 수 취소 -->
+	<update id="updateLikeCancel" parameterType="int">
+		update board
+			set likehit = likehit - 1
+			where seq_board = #{seq_board}
+	</update>
+	
+	<!-- 좋아요 -->
+	<insert id="likeUp" parameterType="map">
+		insert into board_like(seq_like, seq_board, user_email)
+			values((select nvl(max(seq_like), 0) + 1 from board_like),
+				#{seq_board}, #{user_email})
+	</insert>
+	
+	<!-- 좋아요 취소 -->
+	<delete id="likeDown" parameterType="map">
+		delete from board_like
+			where seq_board = #{seq_board} and user_email = #{user_email}
+	</delete>
+	
+	<!-- 추천 중복방지 select문 -->
+	<select id="likeCheck" parameterType="map" resultType="int">
+		select count(*) from board_like
+			where seq_board = #{seq_board} and user_email = #{user_email}
+	</select>
+	
+</mapper>
