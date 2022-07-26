@@ -7,7 +7,9 @@
 <meta charset="UTF-8">
 <title>로그인</title>
 
-
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	crossorigin="anonymous"></script>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -488,7 +490,7 @@ footer.footer {
     				
     			}else if(result === "admin"){
     				Swal.fire('관리자 페이지로 이동합니다.');
-    				location.href = "/toAdmin";
+    				location.href = "/admin/toAdmin";
     				
     			}else if(result === "nonmem"){
     				sweetAlertFail("가입이 되지 않은 아이디입니다.");

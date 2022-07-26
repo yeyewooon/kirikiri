@@ -25,6 +25,7 @@ public class HomeController {
 	
 	@RequestMapping(value = "/")
 	public String main(Model model) throws Exception {
+		
 		List<Tbl_GroupDTO> selectAllList = home_service.selectAllGroup();
 		List<Tbl_GroupDTO> selectNewList = home_service.selectNewGroup();
 		List<BestGroupDTO> selectBestList = home_service.selectBestGroup();
@@ -43,9 +44,5 @@ public class HomeController {
 		return "privacy";
 	}
 	
-	@RequestMapping(value = "/toAdmin")
-	public String toAdmin() {
-		return "admin/adminMain";
-	}
 
 }

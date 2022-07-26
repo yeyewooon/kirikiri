@@ -1,37 +1,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
-<!--구글 폰트-->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link
-	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap"
-	rel="stylesheet">
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<!-- AOS 라이브러리 불러오기-->
-<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<!-- 아이콘 -->
-<script src="https://kit.fontawesome.com/f9358a6ceb.js"
-	crossorigin="anonymous"></script>
-<!--알림창-->
-<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-<script src="sweetalert2.min.js"></script>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>모임관리</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<!--구글 폰트-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<!-- AOS 라이브러리 불러오기-->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- 아이콘 -->
+<script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
+<!--알림창-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.min.js"></script>
 <style>
+body,html{
+	height : 1100px;
+}
+.container {
+   max-width: -webkit-fill-available;
+   height: 100%;
+   padding: 0px;
+}
+
 * {
 	box-sizing: border-box;
 	font-family: 'MICEGothic Bold';
@@ -59,8 +60,8 @@
 /*사이드바*/
 .sidebar {
 	float: left;
-	width: 20%;
-	height: 1200px;
+	width: 15%;
+	height: 100%;
 	background-color: #4e78f5;
 }
 
@@ -78,9 +79,6 @@
 	color: white;
 }
 
-.logoHome {
-	height: 100px;
-}
 
 .logoHome span {
 	color: white;
@@ -89,7 +87,7 @@
 }
 
 #logoImg {
-	width: 80px;
+	width: 70%;
 }
 
 i {
@@ -107,7 +105,7 @@ a {
 .navbar {
 	float: right;
 	height: 104px;
-	width: 80%;
+	width: 85%;
 	background-color: white;
 	position: relative;
 }
@@ -154,7 +152,7 @@ a {
 
 /*content*/
 .contents {
-	background-color: rgb(224, 230, 243);
+	background-color: #f6f7f9;
 	width: 100%;
 	height: 1200px;
 }
@@ -199,12 +197,12 @@ tbody tr {
 }
 
 td{
-	font-size : 20px;
+	font-size : 12px;
 }
 
 td>a {
 	color: rgb(103, 103, 103);
-	font-size: 20px;
+	font-size: 12px;
 }
 </style>
 </head>
@@ -212,7 +210,7 @@ td>a {
 <div class="container">
 		<div class="sidebar">
 			<ul class="p-2">
-				<li class="logoHome"><a href="/toAdmin"> <img
+				<li class="logoHome sidemenu"><a href="/admin/toAdmin"> <img
 						src="/resources/images/adminLogo.png" id="logoImg"><br>
 						<span>끼리끼리</span>
 				</a></li>
@@ -224,7 +222,7 @@ td>a {
 				<li class="sidemenu"><a href="#"> <i
 						class="fa-solid fa-table"></i><br> <span>게시물 관리</span>
 				</a></li>
-				<li class="sidemenu groupMenu"><a href="#"> <i
+				<li class="sidemenu groupMenu"><a href="/admin/toGroupAdmin?curPage=1"> <i
 						class="fa-solid fa-house-user"></i><br> <span>모임 관리</span>
 				</a></li>
 			</ul>
@@ -263,8 +261,8 @@ td>a {
 				<span style = "font-size:20px;">총 모임<span id="groupCnt" style="color: navy">${groupCnt}</span>개
 				</span>
 				<table class="table table-bordered">
-					<thead style="background-color: gainsboro; text-align: center;">
-						<tr>
+					<thead style="text-align: center;">
+						<tr class="table-info">
 							<td>모임장</td>
 							<td>모임명</td>
 							<td>카테고리</td>
@@ -282,9 +280,9 @@ td>a {
 							</c:when>
 							<c:otherwise>
 								<c:forEach items="${groupList}" var="groupList">
-									<tr>
+									<tr>		
 										<td>${groupList.user_email}</td>
-										<td>${groupList.group_title}</td>
+										<td><a href = "/group/toGroupDetail?seq_group=${groupList.seq_group}">${groupList.group_title}</a></td>
 										<td>${groupList.group_category}</td>
 										<td>${groupList.group_people}</td>
 										<td>${groupList.group_site}</td>
@@ -393,5 +391,26 @@ function makeSearchTable(){
 		
 	}
 }
+//로그아웃 부분
+$(".user").mouseenter(function () {
+    $(".logOut").css({ "display": "block", "z-index": "99" });
+})
+$(".user").mouseleave(function () {
+    $(".logOut").css("display", "none");
+})
+$(".logOut").click(function () {
+    Swal.fire({
+        title: '정말 로그아웃 하시겠습니까?',
+        showConfirmButton: false,
+        showDenyButton: true,
+        showCancelButton: true,
+        denyButtonText: `로그아웃`,
+    }).then((result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isDenied) {
+            Swal.fire('로그아웃 성공', '', 'info')
+        }
+    })
+})
 </script>
 </html>

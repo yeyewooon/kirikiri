@@ -326,20 +326,20 @@ footer.footer {
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
-                        <c:choose>
-                           <c:when test="${empty loginSession}">
+                           <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/signup">회원가입</a></li>
-                           </c:when>
-                           <c:otherwise>
+                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
+                           </c:if>
+                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
                               <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
                               <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:otherwise>
-                        </c:choose>
-
-
+                           </c:if>
                      </ul>
-
                   </div>
                </div>
 
@@ -372,29 +372,40 @@ footer.footer {
                               <li class="nav-item"><a class="nav-link"
                                  href="/login/toLogin">로그인</a></li>
                               <li class="nav-item"><a class="nav-link"
-                                 href="/login/signup">회원가입</a></li>
+                                 href="/signup/toSignupAgree">회원가입</a></li>
                            </c:if>
                         </ul>
                      </div>
                      <div class="col-auto user">
-                         <c:if test="${not empty loginSession}">
-                           <div class="dropdown text-end">
-                              <a href="/"
-                                 class="d-block link-dark text-decoration-none dropdown-toggle"
-                                 id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> <img
-                                 src="/resources/images/profile.jpg" alt="mdo" width="32"
-                                 height="32" class="rounded-circle">
-                              </a>
-                              <ul class="dropdown-menu text-small"
-                                 aria-labelledby="dropdownUser1">
-                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                                 <li><hr class="dropdown-divider"></li>
-                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                              </ul>
-                           </div>
-                        </c:if>
+						<c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+							<div class="dropdown text-end">
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+								</a>
+								<ul class="dropdown-menu text-small"
+								   aria-labelledby="dropdownUser1">
+								   <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+								   <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+								   <li><hr class="dropdown-divider"></li>
+								   <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+								</ul>
+							</div>
+						</c:if> 
+						<c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
+							<div class="dropdown text-end">
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+								</a>
+								<ul class="dropdown-menu text-small"
+								   aria-labelledby="dropdownUser1">
+								   <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+								   <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+								   <li><hr class="dropdown-divider"></li>
+								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+								</ul>
+							</div>
+						</c:if> 
                      </div>
                   </div>
                </div>

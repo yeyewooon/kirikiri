@@ -78,7 +78,6 @@ public class GroupController {
    // 모임가입 이동(o)
    @RequestMapping(value = "/toGroupApply")
    public String groupApply(int seq_group, Model model) throws Exception {
-      // System.out.println("그룹번호 : " + seq_group);
       int count = tbl_group_service.applyCount(seq_group);
       int groupCount = tbl_group_service.groupCount(seq_group);
       model.addAttribute("count", count);
@@ -237,6 +236,7 @@ public class GroupController {
       Tbl_GroupDTO tbl_group_dto = new Tbl_GroupDTO();
       Group_MemberDTO group_member_dto = new Group_MemberDTO();
       Group_ApplyDTO group_apply_dto = new Group_ApplyDTO();
+  
       // 기본 세션아이디 세션닉네임 설정
       String loginSession_id;
       String loginSession_nickName;

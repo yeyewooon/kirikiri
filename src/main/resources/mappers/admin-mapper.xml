@@ -53,7 +53,7 @@
  	</select>
  	
  	<!-- 모임 검색 -->
- 	 	<select id="searchGroup" parameterType="map" resultType="com.kiri.dto.Tbl_GroupDTO">
+ 	<select id="searchGroup" parameterType="map" resultType="com.kiri.dto.Tbl_GroupDTO">
  		select * from tbl_group where
 			<if test="searchType == 'all'">group_title like '%${searchKeyword}%' or group_category like '%${searchKeyword}%' or group_people like '%${searchKeyword}%' or user_email like '%${searchKeyword}%' or group_site like '%${searchKeyword}%' </if>
 			<if test="searchType != 'all'">${searchType} like '%' || #{searchKeyword} || '%'</if>
@@ -64,4 +64,5 @@
  	<delete id = "deleteGroup" parameterType = "int">
  		delete from tbl_group where seq_group = #{seq_group}
  	</delete>
+ 	
  </mapper>
