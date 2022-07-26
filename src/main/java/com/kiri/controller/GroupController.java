@@ -44,36 +44,23 @@ public class GroupController {
    // 멤버관리 이동(o)
    @RequestMapping(value = "/toGroupMember")
    public String selectGroupAccess(int seq_group, Model model) throws Exception {
-       System.out.println("그룹 번호 : " + seq_group);
       Map<String, Object> memList = tbl_group_service.selectGroupAccess(seq_group);
       memList.get("TableJoinDTO");
       model.addAttribute("memList", memList);
       model.addAttribute("seq_group", seq_group);
-      // System.out.println(memList);
       return "group/groupMember";
    }
 
-   // 멤버관리에서 모임장 위임
+   // 멤버관리에서 모임장 위임(o)
    @RequestMapping(value = "/groupAccess")
    @ResponseBody
-   // 로그인세션 받아서 모임장을 일반회원으로 바꾸기 하기 !!
    public String groupAccess(Group_MemberDTO Group_MemberDTO) throws Exception {
-		/*
-		 * System.out.println("직책 : " + Group_MemberDTO.getAccess());
-		 * System.out.println("이메일 : " + Group_MemberDTO.getUser_email());
-		 */
-	   System.out.println(Group_MemberDTO);
       tbl_group_service.groupAccess(Group_MemberDTO);
-    
-      
-      System.out.println("==================================================");
       String email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
       Group_MemberDTO.setUser_email(email);
       Group_MemberDTO.setAccess("주최자");
-      System.out.println(Group_MemberDTO);
-      //System.out.println("이메일 : " + Group_MemberDTO.getUser_email()); 
       tbl_group_service.groupAccess(Group_MemberDTO);
- 
+
       return "success";
    }
 
@@ -89,17 +76,11 @@ public class GroupController {
    // 모임가입 이동(o)
    @RequestMapping(value = "/toGroupApply")
    public String groupApply(int seq_group, Model model) throws Exception {
-      // System.out.println("그룹번호 : " + seq_group);
       int count = tbl_group_service.applyCount(seq_group);
       int groupCount = tbl_group_service.groupCount(seq_group);
-      /*
-       * System.out.println("인원수 : " + count); 
-       * System.out.println("모임에 가입한 인원 : " + groupCount);
-       */
       model.addAttribute("count", count);
       model.addAttribute("groupCount", groupCount);
       Map<String, Object> map = tbl_group_service.selectApply(seq_group);
-
       map.get("MemberDTO");
       model.addAttribute("map", map);
       model.addAttribute("seq_group", seq_group);
@@ -111,11 +92,10 @@ public class GroupController {
    @ResponseBody
    public String completeApply(@RequestBody Map<String, Object> param, int group_people, int groupCount)
          throws Exception {
-      // System.out.println("그룹에 가입한 인원 : " + groupCount);
       List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
-      if (userEmails.size() + groupCount < group_people) {
+      if (userEmails.size() + groupCount <= group_people) {
          tbl_group_service.completeApply(userEmails);
-      } else if (userEmails.size() + groupCount >= group_people) {
+      } else if (userEmails.size() + groupCount > group_people) {
          return "error";
       }
 
@@ -134,17 +114,15 @@ public class GroupController {
    // 모임해산 이동(o)
    @RequestMapping(value = "/toGroupDelete")
    public String toGroupDelete(int seq_group, Model model) {
-      // System.out.println("그룹 번호 :" + seq_group);
 	   model.addAttribute("seq_group", seq_group);
       return "group/groupDelete";
    }
 
    // 모임해산하기(o)
    @RequestMapping(value = "/groupDelete")
-   public String groupDelete(int seq_group) throws Exception {
-
-      System.out.println("그룹번호 : " + seq_group);
+   public String groupDelete(int seq_group, Model model) throws Exception {
       tbl_group_service.groupDelete(seq_group);
+      model.addAttribute("seq_group", seq_group);
       return "redirect:/";
    }
 
@@ -256,6 +234,7 @@ public class GroupController {
       Tbl_GroupDTO tbl_group_dto = new Tbl_GroupDTO();
       Group_MemberDTO group_member_dto = new Group_MemberDTO();
       Group_ApplyDTO group_apply_dto = new Group_ApplyDTO();
+  
       // 기본 세션아이디 세션닉네임 설정
       String loginSession_id;
       String loginSession_nickName;
