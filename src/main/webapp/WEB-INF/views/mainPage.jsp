@@ -841,11 +841,6 @@ footer.footer {
       $(".more").on("click", function(){
     	  location.href = "/user/toViewAllGroupList";
       })
-
-<<<<<<< HEAD
-=======
-      
->>>>>>> 5195664ed54176bf1cc21944fe318cc66b889488
    </script>
 </body>
 </html>

@@ -614,7 +614,6 @@ footer.footer {
     </div>
 
     <script>
-<<<<<<< HEAD
  	let seq_group = "${tbl_group_dto.seq_group}"; // 현재 모임 번호
  	let loginSession_id = "${loginSession_id}";
  	let hostEmail = "${memberList[0].user_email}"; // 주최자 아이디
@@ -682,10 +681,8 @@ footer.footer {
 	    } 
  	    
  	})
-=======
     let realMemberCnt = ${fn:length(memberList)}-1; // 주최자를 제외한 맴버수 
     $(".memberCntSpan").text(realMemberCnt); // 주최자를 제외한 맴버수 
->>>>>>> 924e8d12d57892c35ecdd9d783ce527e0084ca1c
     
     let seq_group = "${tbl_group_dto.seq_group}"; // 현재 모임 번호
     let loginSession_id = "${loginSession_id}"; // 현재 로그인 세션 아이디
