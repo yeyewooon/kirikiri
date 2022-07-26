@@ -538,7 +538,7 @@ footer.footer {
 								<div class="hostImg">
 									<c:choose>
 										<c:when test="${list.user_image ne null}">
-											<img src="/profile/${tbl_group_dto.sys_name}"
+											<img src="/profile/${list.user_image}"
 												id="profile_image">
 										</c:when>
 										<c:otherwise>
@@ -727,7 +727,7 @@ footer.footer {
       $("#msgIcon").on("click",function() {
          // 로그인 세션이 없을 때 
          if(loginSession_id == "youHaveToLogin" || loginSession_nickName == "youHaveToLogin") {
-            alert("로그인하셔야합니다");
+        	Swal.fire('로그인 후 이용가능합니다');
             return;
          }
           $("#profileTotalInfo").addClass("d-none"); // 프로필 내용 안보이게
@@ -864,6 +864,9 @@ footer.footer {
                                  '그 동안 감사했습니다!',
                                  'success'
                                )
+                              setTimeout(function() {
+                                  window.location.href = "";
+                             },800);
                             }else {
                                alert("모임 탈퇴 실패");
                             }

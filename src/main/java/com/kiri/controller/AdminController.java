@@ -195,9 +195,6 @@ public class AdminController {
 		return "success";
 	}
 
-
-
-
 	// 김영완 07_22
 	@RequestMapping(value = "/toAdmin")
 	public String toAdminMain(Model model) throws Exception {

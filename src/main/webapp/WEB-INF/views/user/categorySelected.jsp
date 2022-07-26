@@ -145,7 +145,6 @@ ul {
 
 /* 슬라이드 */
 .locationPic {
-      width: 100px;
       height: 100px;
       overflow: hidden;
     }
@@ -383,28 +382,28 @@ img {
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic">
-					<img src="/resources/images/slide/지역9.png">
+					<img src="/resources/images/slide/지역2.png">
 				</div>
 				<span class="locationText mt-1"> 서울특별시 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역2.png">
+					<img src="/resources/images/slide/지역7.png">
 				</div>
 				<span class="locationText mt-1"> 인천광역시 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역3.png">
+					<img src="/resources/images/slide/지역13.png">
 				</div>
 				<span class="locationText mt-1"> 대전광역시 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역4.png">
+					<img src="/resources/images/slide/지역8.png">
 				</div>
 				<span class="locationText mt-1"> 광주광역시 </span>
 			</div>
@@ -425,63 +424,63 @@ img {
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역22.png">
+					<img src="/resources/images/slide/지역9.png">
 				</div>
 				<span class="locationText mt-1"> 부산광역시 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역8.png">
+					<img src="/resources/images/slide/지역15.png">
 				</div>
 				<span class="locationText mt-1"> 경기도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역9.png">
+					<img src="/resources/images/slide/지역10.png">
 				</div>
 				<span class="locationText mt-1"> 강원도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역10.png">
+					<img src="/resources/images/slide/지역14.png">
 				</div>
 				<span class="locationText mt-1"> 충청북도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역11.png">
+					<img src="/resources/images/slide/지역20.png">
 				</div>
 				<span class="locationText mt-1"> 충청남도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역12.png">
+					<img src="/resources/images/slide/지역6.png">
 				</div>
 				<span class="locationText mt-1"> 전라북도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역14.png">
+					<img src="/resources/images/slide/지역21.png">
 				</div>
 				<span class="locationText mt-1"> 전라남도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역13.png">
+					<img src="/resources/images/slide/지역16.png">
 				</div>
 				<span class="locationText mt-1"> 경상북도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역15.png">
+					<img src="/resources/images/slide/지역12.png">
 				</div>
 				<span class="locationText mt-1"> 경상남도 </span>
 			</div>

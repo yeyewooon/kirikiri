@@ -465,7 +465,7 @@ footer.footer {
             class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
             <div class="circleImg" data-aos="flip-left" data-aos-duration="1000"
                data-aos-delay="200">
-               <img src="/resources/images/chatting.png" id="circle_img">
+               <img src="/resources/images/update_chatting.png" id="circle_img">
             </div>
             <div class="w-100">
                <p class="text-center mt-4 circleTitle">모임간 소통</p>

@@ -376,7 +376,7 @@ a {
 						<div style="height: 344px;"
 							class="d-flex justify-content-center align-items-center mt-3">
 							<canvas id="donutChart1"
-								style="position: relative; height: 28vh; width: 28vw"></canvas>
+								style="height: 200; width: 500"></canvas>
 						</div>
 					</div>
 				</div>
