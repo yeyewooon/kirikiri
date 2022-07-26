@@ -140,9 +140,16 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/toLogout")//logout페이지 요청 feat.조용진
-	public String logout() {
+	public String logout(HttpServletResponse response) {
+		// 쿠키
+		Cookie cookie = new Cookie("postView", null);
+		cookie.setMaxAge(0);
+		cookie.setPath("/");
+		response.addCookie(cookie);
+		
 		session.removeAttribute("loginSession");
 		session.removeAttribute("loginType");
+		
 		return "redirect:/";
 	}
 	

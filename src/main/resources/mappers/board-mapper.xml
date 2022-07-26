@@ -123,7 +123,7 @@
 		]]>
 	</select> -->
 	
-	<select id="getListPaging" parameterType="com.kiri.vo.Criteria" resultType="com.kiri.dto.BoardDTO">
+	<select id="getListPaging" parameterType="com.kiri.utills.Criteria" resultType="com.kiri.dto.BoardDTO">
 		<![CDATA[
 			select * from
 				(select rownum as rn, A.* from
@@ -145,7 +145,7 @@
 	
 	<!-- 게시물 총 개수 -->
 	<!-- seq_board > 0은 의미없는 조건이지만 삽입될 쿼리가 and()형식이라 구문오류 방지를 위해 작성 -->
-	<select id="getTotal" parameterType="com.kiri.vo.Criteria" resultType="int">
+	<select id="getTotal" parameterType="com.kiri.utills.Criteria" resultType="int">
 		select count(*) from board
 		<if test="keyword != null">
 			where seq_board > 0

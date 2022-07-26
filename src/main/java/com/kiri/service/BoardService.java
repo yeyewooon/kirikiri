@@ -19,7 +19,7 @@ import com.kiri.dao.Board_FileDAO;
 import com.kiri.dao.LikeDAO;
 import com.kiri.dto.BoardDTO;
 import com.kiri.dto.Board_FileDTO;
-import com.kiri.vo.Criteria;
+import com.kiri.utills.Criteria;
 
 @Service
 public class BoardService {

@@ -1,4 +1,4 @@
-package com.kiri.vo;
+package com.kiri.utills;
 
 import java.util.Arrays;
 
