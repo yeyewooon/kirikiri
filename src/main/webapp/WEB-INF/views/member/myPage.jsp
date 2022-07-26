@@ -1101,64 +1101,48 @@ footer.footer {
 					</div>
 
 					<!-- Modal -->
-					<div class="modal fade" id="staticBackdrop"
-						data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-						aria-labelledby="staticBackdropLabel" aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered">
-							<div class="modal-content">
-								<div class="modal-header">
-									<span id="staticBackdropLabel" style="font-size: 16px;"><i
-										class="fa-solid fa-envelope-open"></i></span><span class="ms-2">쪽지함보기</span>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="row mt-2">
-									<div class="col-md-12 d-flex">
-										<div class="msgReceive d-flex justify-content-center ms-2">
-											<span class="receiveBtn"><i class="fa-solid fa-check"></i></span><span
-												class="ms-1">받은 쪽지함</span>
-										</div>
-										<div class="msgSend d-flex justify-content-center"
-											style="margin-left: 10px;">
-											<span class="sendBtn d-none"><i
-												class="fa-solid fa-check"></i></span><span class="ms-1">보낸
-												쪽지함</span>
-										</div>
-									</div>
-								</div>
-								<div class="modal-body">
-									<table class="table table-content">
-										<thead>
-											<tr>
-												<th class="col-1">삭제</th>
-												<th class="col-2 table-head">보낸사람</th>
-												<th scope="col">내용</th>
-												<th scope="col">날짜</th>
-											</tr>
-										</thead>
-										<tbody class="tbody-content">
-											<c:forEach items="${rmsgList}" var="dto">
-												<tr>
-													<td scope="row"><input type="checkbox"
-														value="${dto.seq_message}" name="seq_message"></td>
-													<td>${dto.user_send}</td>
-													<td>${dto.msgContent}</td>
-													<td>${dto.date}</td>
-												</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-								</div>
-								<div class="modal-footer msgModal-footer">
-									<button type="button" class="btn btn-danger ms-2"
-										id="deleteBtn">삭제</button>
-									<button type="button" class="btn btn-primary ms-2"
-										id="closeBtn" data-bs-dismiss="modal">닫기</button>
-									<input type="text" value="${memberdto.user_nickname}" id="myId"
-										hidden>
-								</div>
-							</div>
-						</div>
+					<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <span  id="staticBackdropLabel" style="font-size: 16px;"><i class="fa-solid fa-envelope-open"></i></span><span class="ms-2">쪽지함보기</span>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+			        	<div class="row mt-2">
+					    	<div class="col-md-12 d-flex">
+					        	<div class="msgReceive d-flex justify-content-center ms-2"><span class="receiveBtn"><i class="fa-solid fa-check"></i></span><span class="ms-1">받은 쪽지함</span></div>
+					        	<div class="msgSend d-flex justify-content-center" style="margin-left: 10px;"><span class="sendBtn d-none"><i class="fa-solid fa-check"></i></span><span class="ms-1">보낸 쪽지함</span></div>
+					       </div>
+					     </div>
+					      <div class="modal-body">
+				            <table class="table table-content">
+						        <thead>
+						          <tr>
+						            <th class="col-2">삭제</th>
+						            <th class="col-2 table-head">보낸사람</th>
+						            <th scope="col">내용</th>
+						            <th scope="col">날짜</th>
+						          </tr>
+						        </thead>
+						        <tbody class = "tbody-content">
+							        <c:forEach items="${rmsgList}" var="dto">
+							          <tr>
+							            <td scope="row"><input type = "checkbox" value = "${dto.seq_message}" name ="seq_message"></td>
+							            <td>${dto.user_send}</td>
+							            <td>${dto.msgContent}</td>
+							            <td>${dto.date}</td>
+							          </tr>
+							        </c:forEach>
+						        </tbody>
+						      </table>
+					      </div>
+					      <div class="modal-footer msgModal-footer">
+            				<button type = "button" class = "btn btn-danger ms-2" id = "deleteBtn">삭제</button>
+            				<button type = "button" class = "btn btn-primary ms-2" id = "closeBtn" data-bs-dismiss="modal">닫기</button>
+					      	<input type="text" value="${memberdto.user_nickname}" id="myId" hidden >
+					      </div>
+					    </div>
+					  </div>
 					</div>
 				</div>
 			</div>

@@ -73,10 +73,12 @@ public class Tbl_GroupDAO {
       session.delete("tblGroupMapper.groupMemberDelete", param);
    }
 
-   // 모임 해산하기
+   // 모임 해산하기(tbl_group)
    public int groupDelete(int seq_group) throws Exception {
       return session.delete("tblGroupMapper.groupDelete", seq_group);
    }
+   
+   
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
    // 김영완
