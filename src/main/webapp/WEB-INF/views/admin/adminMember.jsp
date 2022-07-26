@@ -80,10 +80,6 @@
 	color: white;
 }
 
-.logoHome {
-	height: 100px;
-}
-
 .logoHome span {
 	color: white;
 	font-size: x-large;
@@ -91,7 +87,7 @@
 }
 
 #logoImg {
-	width: 80px;
+	width: 70%;
 }
 
 i {
@@ -237,7 +233,7 @@ td>a {
 						class="fa-solid fa-users-rectangle"></i><br> <span>회원
 							관리</span>
 				</a></li>
-				<li class="sidemenu"><a href="#"> <i
+				<li class="sidemenu"><a href="/admin/toBoard?curPage=1"> <i
 						class="fa-solid fa-table"></i><br> <span>게시물 관리</span>
 				</a></li>
 				<li class="sidemenu"><a href="/admin/toGroupAdmin?curPage=1"> <i
@@ -289,6 +285,7 @@ td>a {
 							<c:otherwise>
 								<c:forEach items="${reportList }" var="dto">
 									<tr>
+										<td><input type="checkBox" class="check"></td>
 										<td><input class="form-check-input ms-2 me-1 check"
 											type="checkbox" name="seq_report"
 											value="${dto.seq_report }"></td>

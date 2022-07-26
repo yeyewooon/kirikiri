@@ -53,38 +53,38 @@ public class UserController {
 		}
 		return "";
 	}
+	
+	   // 쪽지 보내기
+	   @ResponseBody
+	   @RequestMapping(value = "/insertMessage")
+	   public String sendMessage(MessageDTO MessageDTO) throws Exception {
+	      String rs = message_service.sendMessage(MessageDTO);
+	      return rs;
+	   }
 
-	// 쪽지 보내기
-	@ResponseBody
-	@RequestMapping(value = "/insertMessage")
-	public String sendMessage(MessageDTO MessageDTO) throws Exception {
-		String rs = message_service.sendMessage(MessageDTO);
-		return rs;
-	}
+	   // 내가 받은 쪽지 보기
+	   @RequestMapping(value = "/receiveMsg")
+	   @ResponseBody
+	   public List<MessageDTO> selectReMessage(MessageDTO MessageDTO, Model model) throws Exception {
+	      List<MessageDTO> rmsgList = message_service.selectReMessage(MessageDTO.getUser_receive());
+	      return rmsgList;
+	   }
 
-	// 내가 받은 쪽지 보기
-	@RequestMapping(value = "/receiveMsg")
-	@ResponseBody
-	public List<MessageDTO> selectReMessage(MessageDTO MessageDTO, Model model) throws Exception {
-		List<MessageDTO> rmsgList = message_service.selectReMessage(MessageDTO.getUser_receive());
-		return rmsgList;
-	}
+		// 내가 보낸 쪽지 보기
+		@RequestMapping(value = "/sendMsg")
+		@ResponseBody
+		public List<MessageDTO> selectSendMessage(MessageDTO MessageDTO, Model model) throws Exception {
+			List<MessageDTO> smsgList = message_service.selectSendMessage(MessageDTO.getUser_send());
+			return smsgList;
+		}
 
-	// 내가 보낸 쪽지 보기
-	@RequestMapping(value = "/sendMsg")
-	@ResponseBody
-	public List<MessageDTO> selectSendMessage(MessageDTO MessageDTO, Model model) throws Exception {
-		List<MessageDTO> smsgList = message_service.selectSendMessage(MessageDTO.getUser_send());
-		return smsgList;
-	}
-
-	// 쪽지 삭제
-	@RequestMapping(value = "/deleteMsg")
-	@ResponseBody
-	public String deleteMessage(@RequestBody Map<String, Object> param) throws Exception {
-		List<String> message = new ObjectMapper().readValue(param.get("message").toString(), List.class);
-		message_service.deleteMessage(message);
-		return "";
-	}
+		// 쪽지 삭제
+		@RequestMapping(value = "/deleteMsg")
+		@ResponseBody
+		public String deleteMessage(@RequestBody Map<String, Object> param) throws Exception {
+			List<String> message = new ObjectMapper().readValue(param.get("message").toString(), List.class);
+			message_service.deleteMessage(message);
+			return "";
+		}
 
 }

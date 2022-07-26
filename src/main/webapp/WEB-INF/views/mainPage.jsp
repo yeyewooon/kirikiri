@@ -377,35 +377,35 @@ footer.footer {
                         </ul>
                      </div>
                      <div class="col-auto user">
-						<c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-								</a>
-								<ul class="dropdown-menu text-small"
-								   aria-labelledby="dropdownUser1">
-								   <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-								   <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-								   <li><hr class="dropdown-divider"></li>
-								   <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-								</ul>
-							</div>
-						</c:if> 
-						<c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-								</a>
-								<ul class="dropdown-menu text-small"
-								   aria-labelledby="dropdownUser1">
-								   <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-								   <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-								   <li><hr class="dropdown-divider"></li>
-								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-								</ul>
-							</div>
-						</c:if> 
+                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                     <div class="dropdown text-end">
+                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small"
+                           aria-labelledby="dropdownUser1">
+                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                           <li><hr class="dropdown-divider"></li>
+                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                        </ul>
+                     </div>
+                  </c:if> 
+                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
+                     <div class="dropdown text-end">
+                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small"
+                           aria-labelledby="dropdownUser1">
+                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                           <li><hr class="dropdown-divider"></li>
+                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                        </ul>
+                     </div>
+                  </c:if> 
                      </div>
                   </div>
                </div>
@@ -849,7 +849,6 @@ footer.footer {
       $(".more").on("click", function(){
     	  location.href = "/user/toViewAllGroupList";
       })
-      
    </script>
 </body>
 </html>

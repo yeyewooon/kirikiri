@@ -18,18 +18,18 @@
 <style>
 /* 눈누 폰트 */
 @font-face {
-    font-family: 'OTWelcomeRA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
-    font-family: '양진체';
-    src: url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff') format('woff');
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
     font-weight: normal;
     font-style: normal;
 }
-*{box-sizing: border-box;   font-family: 'OTWelcomeRA';}
+*{box-sizing: border-box;   font-family: 'InfinitySans-RegularA1';}
 body{
     background-color: #d2e3ec;
 }
@@ -212,11 +212,13 @@ input{
 /* 회원단계 1*/
 #signup-1{
     color: #030087;
-    text-shadow: 1px 1px 2px darkblue;
+	text-shadow: 1px 2px 2px white;
+	font-weight: bold;
 }
 .circelLine-text-left{
     color: #030087;
-    text-shadow: 1px 2px 2px darkblue;
+	text-shadow: 1px 2px 2px white;
+	font-weight: bold;
 }
 .circelLine-text-right{
     margin-left: 15px;
@@ -310,9 +312,11 @@ input{
 /*공통 요소*/
 h1{
     margin-top: 30px;
+    font-family: 'BMJUA';
 }
 p{
     margin-top: 10px;
+    font-family: 'BMJUA';
 }
 label{
     margin: 5px;
@@ -326,6 +330,7 @@ label{
 span{
     color: white;
     font-size: 0.05rem;
+    font-family: 'BMJUA';
 }
 /*풋터 영역*/
 .footerBox {
@@ -373,6 +378,7 @@ footer.footer {
               $('#email-domain').val(state);
               if (state == 99) {
                 $('.email-domain-row').show();
+                $('.email-domain-row').css("display", "flex");
                 $('#email-domain').val("");
               } else {
                 $('.email-domain-row').hide();
@@ -980,12 +986,7 @@ function sweetAlertSuccess(content){
     </div>
 <!-- info 영역-->
     <div id="userInfoBox">
-        <div class="row">
-            <div class="col">
-                <img src="/resources/images/kirilogo.png" alt="오류발생">
-            </div>
-        </div>
-        <div class="row">
+        <div class="row mt-5">
             <div class="col-md-3">
                 <p>이름</p>
             </div>
@@ -1026,13 +1027,13 @@ function sweetAlertSuccess(content){
 	                    <option value='99'>직접입력</option>
 	                </select>
                 </div>
-                <div class="row email-domain-row">
-                	<div class="col-md-7 p-0">
-                		<input type="text" id="email-domain" name="email-domain" class="form-control" value="1">
+                <div class="email-domain-row mt-1">
+                	<div class="col-md-10 p-0">
+                		<input type="text" id="email-domain" name="email-domain" class="form-control m-0 p-1" value="1">
                 		<input type="hidden" id="user_email" name="user_email" />
                 	</div>
-                	<div class="col-md-5 d-flex align-items-center">
-                		<i id="email-btn" class="bi bi-arrow-up-square-fill"></i>
+                	<div class="col-md-2 d-flex justify-items-center text-center">
+                		<i id="email-btn" class="fa-solid fa-angle-up m-auto" style="font-size:20px;"></i>
                 	</div>
                 </div>
             </div>
@@ -1140,8 +1141,8 @@ function sweetAlertSuccess(content){
             </div>
             <div class="col-md-9 d-flex justify-content start align-items-center">
                 <input type="text" id="year" name="year" class="form-control bthday" maxlength="4" required><label for="year">년</label>
-                <input type="text" id="month" name="month" class="form-control bthday" maxlength="2" required><label for="month">월</label>
-                <input type="text" id="day" name="day" class="form-control bthday" maxlength="2" required><label for="day">일</label>
+                <input type="text" id="month" name="month" class="form-control bthday" maxlength="2" placeholder="ex) 01" required><label for="month">월</label>
+                <input type="text" id="day" name="day" class="form-control bthday" maxlength="2" placeholder="ex) 01" required><label for="day">일</label>
                 <input type="hidden" id="user_bd" name="user_bd" class="form-control"></intput>
             </div>
         </div> 
@@ -1167,11 +1168,11 @@ function sweetAlertSuccess(content){
             </div>
             <div class="col-2"></div>
         </div>
-        <div class="row justify-content-center" >
+        <div class="row d-flex justify-items-center" >
             <div class="col-md-3">
                 <p>성별</p>
             </div>
-            <div class="col-md-7">
+            <div class="col-md-7 pt-1">
                 <input class="user_gender" type="radio" id="men" name="user_gender" value="남자" required>
                 <label for="men">남자</label>
                 <input class="user_gender" type="radio" id="women" name="user_gender" value="여자" required>

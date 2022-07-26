@@ -6,14 +6,26 @@
 <mapper namespace="boardMapper">
 	
 	<!-- 전체 게시글 목록 -->
-	<select id="selectAll" resultType="com.kiri.dto.BoardDTO">
+<!-- 	<select id="selectAll" resultType="com.kiri.dto.BoardDTO">
 		select * from board
-			order by seq_board desc
-	</select>
+			order by (case when board_category = '공지' then 1 else 2 end), seq_board desc
+	</select> -->
+	
+	<!-- 게시글 카테고리별 정렬 -->
+<!-- 	<select id="selectCategory" parameterType="String" resultType="com.kiri.dto.BoardDTO">
+		select * from board
+			where board_category like '%'||#{category}||'%' order by seq_board desc
+	</select> -->
 	
 	<!-- 글 하나 불러오기 -->
 	<select id="selectOne" parameterType="int" resultType="com.kiri.dto.BoardDTO">
 		select * from board
+			where seq_board = #{seq_board}
+	</select>
+	
+	<!-- 게시글 좋아요 개수 -->
+	<select id="selectLike" parameterType="int" resultType="int">
+		select likehit from board
 			where seq_board = #{seq_board}
 	</select>
 	
@@ -33,7 +45,7 @@
 		insert into board
 			values(#{seq_board}, #{user_email}, #{user_nickname}
 				, #{board_category}, #{board_title}, #{board_content}
-				, sysdate, 0)
+				, sysdate, 0, 0)
 	</insert>
 	
 	<!-- 글 수정 -->
@@ -49,4 +61,99 @@
 		delete from board
 			where seq_board = #{seq_board}
 	</delete>
+	
+	<!-- 검색 -->
+<!-- 	<select id="search" parameterType="map" resultType="com.kiri.dto.BoardDTO">
+		select * from
+			<if test="category == null">
+				board where
+			</if>
+			<if test="category != null">
+				(select * from board
+					where board_category like '%'||#{category}||'%') where
+			</if>
+			<if test="option == 'all'">
+				board_title like '%'||#{keyword}||'%'
+				or user_nickname like '%'||#{keyword}||'%'
+			</if>
+			<if test="option != 'all'">
+				#{option} like '%'||#{keyword}||'%'
+			</if>
+			order by (case when board_category = '공지' then 1 else 2 end), seq_board desc
+	</select> -->
+	
+	<!-- 페이징 -->
+	<!-- 검색 조건문 -->
+	<sql id="criteria">
+		<trim prefix="AND (" suffix=")" prefixOverrides="OR">
+			<foreach collection="typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							board_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							board_content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							user_nickname like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<!-- 게시물 목록(페이징) -->
+<!-- 	<select id="getListPaging" parameterType="com.kiri.vo.Criteria" resultType="com.kiri.dto.BoardDTO">
+		<![CDATA[
+			select * from
+				(select /*+ index_desc(board board_index) */ rownum as rn, board.*
+					from board where rownum <= #{pageNum} * #{amount}
+		]]>
+			<if test="keyword != null">
+				<include refid="criteria"></include>
+			</if>
+			<if test="category != null">
+				and board_category like '%'||#{category}||'%'
+			</if>
+		<![CDATA[
+				)
+			where rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select> -->
+	
+	<select id="getListPaging" parameterType="com.kiri.vo.Criteria" resultType="com.kiri.dto.BoardDTO">
+		<![CDATA[
+			select * from
+				(select rownum as rn, A.* from
+					(select * from board order by
+						(case when board_category = '공지' then 1 else 2 end), seq_board desc) A
+					where rownum <= #{pageNum} * #{amount}
+		]]>
+			<if test="keyword != null">
+				<include refid="criteria"></include>
+			</if>
+			<if test="category != null">
+				and board_category like '%'||#{category}||'%'
+			</if>
+		<![CDATA[
+				)
+			where rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 게시물 총 개수 -->
+	<!-- seq_board > 0은 의미없는 조건이지만 삽입될 쿼리가 and()형식이라 구문오류 방지를 위해 작성 -->
+	<select id="getTotal" parameterType="com.kiri.vo.Criteria" resultType="int">
+		select count(*) from board
+		<if test="keyword != null">
+			where seq_board > 0
+			<include refid="criteria"></include>
+		</if>
+		<if test="category != null">
+			and board_category like '%'||#{category}||'%'
+		</if>
+	</select>
+	
 </mapper>

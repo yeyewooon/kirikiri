@@ -6,22 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-	crossorigin="anonymous"></script>
-<!-- fontAwessome-->
-<script src="https://kit.fontawesome.com/241134516c.js"
-	crossorigin="anonymous"></script>
+<!-- 네이버 -->
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+ <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+ <!-- fontAwessome-->
+<script src="https://kit.fontawesome.com/241134516c.js" crossorigin="anonymous"></script>
 <!-- Bootstrap icons-->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 rel="stylesheet">
@@ -30,26 +22,21 @@ rel="stylesheet">
 <style>
 /* 눈누 폰트 */
 @font-face {
-	font-family: 'OTWelcomeRA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-		format('woff2');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'InfinitySans-RegularA1';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-
 @font-face {
-	font-family: '양진체';
-	src:
-		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'BMJUA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
 
 * {
 	box-sizing: border-box;
-	font-family: 'OTWelcomeRA';
+	font-family: 'InfinitySans-RegularA1';
 }
 
 body {
@@ -716,7 +703,7 @@ footer.footer {
 									<label for="name" class="form-label">이름</label>
 								</div>
 								<div class="col-md-9 d-flex justify-content-center">
-									<input type="text" class="form-control" placeholder="ex)홍길동"
+									<input type="text" class="form-control" placeholder="ex) 홍길동"
 										name="findId_name" id="findId_name">
 								</div>
 							</div>
@@ -726,7 +713,7 @@ footer.footer {
 								</div>
 								<div class="col-md-9 d-flex justify-content-center">
 									<input type="text" id="find_phone" name="find_phone"
-										class="form-control" placeholder="ex)01012341234" maxlength="11">
+										class="form-control" placeholder="ex) 01012341234" maxlength="11">
 								</div>
 							</div>
 							<div class="row find-box btns mt-4">
@@ -787,7 +774,7 @@ footer.footer {
 									<label for="findPw_name" class="form-label">이름</label>
 								</div>
 								<div class="col-9 d-flex justify-content-center">
-									<input type="text" class="form-control" placeholder="ex)홍길동"
+									<input type="text" class="form-control" placeholder="ex) 홍길동"
 										name="findPw_name" id="findPw_name">
 								</div>
 							</div>
@@ -797,7 +784,7 @@ footer.footer {
 								</div>
 								<div class="col-9 d-flex justify-content-center">
 									<input type="email" class="form-control" name="findPw_email"
-										id="findPw_email" placeholder="ex)abc@gmail.com">
+										id="findPw_email" placeholder="ex) abc@gmail.com">
 								</div>
 							</div>
 							<div class="row find-box mt-4">

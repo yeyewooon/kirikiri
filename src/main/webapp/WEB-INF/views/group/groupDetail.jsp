@@ -151,12 +151,12 @@
 }
 
 .groupContent {
-   box-sizing: content-box;
-   word-wrap:break-word;
+	box-sizing: content-box;
+	word-wrap:break-word;
 }
 
 .groupInfo img {
-   width:100%;
+	width:100%;
 }
 /* 모달 프로필  */
 .modalProfileImage {
@@ -251,7 +251,7 @@ footer.footer {
 </head>
 <body>
   <!--네비바-->
-<header class="mb-3 border-bottom">
+      <header class="mb-3 border-bottom">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -652,8 +652,8 @@ footer.footer {
     let loginSession_id = "${loginSession_id}"; // 현재 로그인 세션 아이디
     let loginSession_nickName = "${loginSession_nickName}"// 현재 로그인 세션 닉네임
     let hostEmail = "${memberList[0].user_email}"; // 주최자 아이디
-   let totalGroupCntById = "${totalGroupCntById}"; // 현재 로그인된 아이디의 모임 가입수
-   
+	let totalGroupCntById = "${totalGroupCntById}"; // 현재 로그인된 아이디의 모임 가입수
+	
      //해당 모임 맴버 프로필 보기
     $(".memberProfileContainer").on("click",function() {
           let findUserEmail = $(this).find('span').html(); // 공백이 포함되서 나옴
@@ -952,7 +952,7 @@ footer.footer {
             }
          })
       })
-   
+	
       // 그룹 설명 사진 크기 조절
       $(".groupContent p img").attr('style', "width:440px; height:440px;");
 

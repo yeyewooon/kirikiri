@@ -29,11 +29,24 @@
 <style>
 * {
    box-sizing: border-box;
-   font-family: 'OTWelcomeRA';
+   font-family: 'MICEGothic Bold';
+}
+body, html {
+   height:1100px;
+}
+
+@media ( max-width: 991px ) {
+  body { height:1700px; }
+}
+
+@media ( max-width: 760px ) {
+  body { height:2060px; }
 }
 
 .container{
    max-width: -webkit-fill-available;
+   height:100%;
+   padding : 0px;
 }
 
 /* 눈누 폰트 */
@@ -47,11 +60,11 @@
 }
 
 @font-face {
-   font-family: 'OTWelcomeRA';
+   font-family: 'MICEGothic Bold';
    src:
-      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2')
       format('woff2');
-   font-weight: normal;
+   font-weight: 700;
    font-style: normal;
 }
 
@@ -59,9 +72,10 @@
 .sidebar {
    float: left;
    width: 15%;
-   height: 960px;
+   height: 100%;
    background-color: #4e78f5;
 }
+
 
 .sidebar span {
    font-family: 'BMJUA';
@@ -77,10 +91,6 @@
    color: white;
 }
 
-.logoHome {
-   height: 100px;
-}
-
 .logoHome span {
    color: white;
    font-size: x-large;
@@ -88,7 +98,7 @@
 }
 
 #logoImg {
-   width: 80px;
+   width: 80%;
 }
 
 i {
@@ -158,19 +168,21 @@ a {
    height: 100%;
 }
 
-
 .chart-container {
-  width: 100%;
-  height: 400px;
+  width: 90%;
+  height: 80%;
   margin: 0 auto;
 }
 
+.col-auto i {
+   color:gray;
+}
 
 
 /*카카오 맵*/
 .customoverlay {position:relative;bottom:50px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
 .customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
-.customoverlay a {display:block;text-decoration:none;color:#111;text-align:center;border-radius:6px;font-size:14px;font-weight:500;overflow:hidden;background: #d95050;background: #d95050 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
+.customoverlay a {display:block;text-decoration:none;color:#111;text-align:center;border-radius:6px;font-size:14px;font-weight:500;overflow:hidden;background: #84c9e8;background: #84c9e8 url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
 .customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:500;}
 .customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:18px;height:10px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
 
@@ -180,7 +192,7 @@ a {
    <div class="container">
       <div class="sidebar">
          <ul class="p-2">
-            <li class="logoHome"><a href="/admin/toAdmin"> <img
+            <li class="logoHome sidemenu"><a href="/admin/toAdmin"> <img
                   src="/resources/images/adminLogo.png" id="logoImg"><br>
                   <span>끼리끼리</span>
             </a></li>
@@ -188,10 +200,10 @@ a {
                   class="fa-solid fa-users-rectangle"></i><br> <span>회원
                      관리</span>
             </a></li>
-            <li class="sidemenu"><a href="#"> <i
+            <li class="sidemenu"><a href="/admin/toBoard?curPage=1"> <i
                   class="fa-solid fa-table"></i><br> <span>게시물 관리</span>
             </a></li>
-            <li class="sidemenu"><a href="/admin/toGroupAdmin?curPage=1"> <i
+            <li class="sidemenu"><a href="#"> <i
                   class="fa-solid fa-house-user"></i><br> <span>모임 관리</span>
             </a></li>
          </ul>
@@ -208,15 +220,14 @@ a {
       <div class="contents" style="background-color : #f6f7f9;">
          <!-- 카드 -->
          <div class="row mt-2">
-           <!-- Earnings (Monthly) Card Example -->
            <div class="col-xl-3 col-md-3 mb-4">
-               <div class="card border-left-primary shadow h-100 py-2">
+               <div class="card shadow h-100 py-2" style="border-left : 4px solid #f8696d;">
                    <div class="card-body">
                        <div class="row no-gutters align-items-center">
                            <div class="col mr-2">
-                               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                               <div class="text-xs font-weight-bold text-uppercase mb-1" style="color : #f8696d;">
                                    맴버수</div>
-                               <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+                               <div class="h5 mb-0 font-weight-bold text-gray-800">${cntGroupMember}명</div>
                            </div>
                            <div class="col-auto">
                              <i class="fa-solid fa-user-group fa-2x"></i>
@@ -225,35 +236,33 @@ a {
                    </div>
                </div>
            </div>
-           <!-- Earnings (Annual) Card Example -->
            <div class="col-xl-3 col-md-3 mb-4">
-               <div class="card border-left-success shadow h-100 py-2">
+               <div class="card border-left-success shadow h-100 py-2" style="border-left : 4px solid #fa588a;">
                    <div class="card-body">
                        <div class="row no-gutters align-items-center">
                            <div class="col mr-2">
-                               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                               <div class="text-xs font-weight-bold text-uppercase mb-1" style="color : #fa588a;">
                                    모임수</div>
-                               <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                               <div class="h5 mb-0 font-weight-bold text-gray-800">${cntGroupCnt}개</div>
                            </div>
                            <div class="col-auto">
-                               <i class="fas fa-dollar-sign fa-2x"></i>
+                               <i class="fa-solid fa-people-roof fa-2x"></i>
                            </div>
                        </div>
                    </div>
                </div>
            </div>
-           <!-- Earnings (Annual) Card Example -->
            <div class="col-xl-3 col-md-3 mb-4">
-             <div class="card border-left-success shadow h-100 py-2">
+             <div class="card border-left-success shadow h-100 py-2" style="border-left : 4px solid #a74cf1;">
                  <div class="card-body">
                      <div class="row no-gutters align-items-center">
                          <div class="col mr-2">
-                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                             <div class="text-xs font-weight-bold text-uppercase mb-1" style="color:#a74cf1;">
                                  게시글 수</div>
-                             <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+                             <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000개</div>
                          </div>
                          <div class="col-auto">
-                             <i class="fa-solid fa-people-roof fa-2x"></i>
+                            <i class="fa-solid fa-clipboard fa-2x"></i>
                          </div>
                      </div>
                  </div>
@@ -261,16 +270,16 @@ a {
          </div>
            <!-- Pending Requests Card Example -->
            <div class="col-xl-3 col-md-3 mb-4">
-               <div class="card border-left-warning shadow h-100 py-2">
+               <div class="card border-left-warning shadow h-100 py-2" style="border-left : 4px solid #7774e7;">
                    <div class="card-body">
                        <div class="row no-gutters align-items-center">
                            <div class="col mr-2">
-                               <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                   Pending Requests</div>
-                               <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+                               <div class="text-xs font-weight-bold text-uppercase mb-1" style="color : #7774e7;">
+                                   일정수</div>
+                               <div class="h5 mb-0 font-weight-bold text-gray-800">${cntGroupCal}개</div>
                            </div>
                            <div class="col-auto">
-                               <i class="fas fa-comments fa-2x text-gray-300"></i>
+                               <i class="fa-solid fa-calendar fa-2x"></i>
                            </div>
                        </div>
                    </div>
@@ -278,35 +287,49 @@ a {
            </div>
          </div>
          
-         <!-- 라인 그래프 -->
+         <!-- 차트 -->
          <div class="row">
-            <div class="col-sm-12 col-md-7 mt-1">
-               <div class="chart-container">
-                    <canvas id="line-chartcanvas"></canvas>
+            <div class="col-lg-7">
+               <div class="card shadow mb-4" style="height:340px;">
+                  <div class="card-header py-2 d-flex align-items-center">
+                     <h6 class="m-0 font-weight-bold text-primary">지역별 선호도 수</h6>
                   </div>
+                  <div class="chart-container" style="padding: 10px;">
+                        <canvas id="bar-chartcanvas" width="500" height="180"></canvas>
+                      </div>
+               </div>
+               <div class="card shadow mb-4">
+                  <div class="card-header py-2">
+                     <h6 class="m-0 font-weight-bold text-primary">모임 장소</h6>
+                  </div>
+                  <div id="map" style="width:100%; height:360px;"></div>
+               </div>
             </div>
-            <div class="col-sm-12 col-md-5 mt-1"></div>
-         </div>
-         
-         <!-- 카카오맵 -->
-         <div class="row mt-3">
-            <div class="col-sm-12 col-md-7" style="background-color : #fff;">
-               <div id="map" style="width:100%; height:400px;"></div>
-            </div>
-            <div class="col-sm-12 col-md-5" style="background-color : #fff;">
-               <div style="position: relative; width:100%; height:400px;" class="d-flex justify-content-center">
-                    <canvas id="myChart"></canvas>
+            <div class="col-lg-5">
+               <div class="card shadow mb-4" style="height:340px;">
+                  <div class="card-header py-2">
+                     <h6 class="m-0 font-weight-bold text-primary">일주일 동안 로그 기록</h6>
+                  </div>
+                  <div class="chart-container" style="padding: 10px;">
+                        <canvas id="line-chartcanvas" width="500" height="260"></canvas>
+                      </div>
+               </div>
+               <div class="card shadow mb-4">
+                  <div class="card-header py-2">
+                     <h6 class="m-0 font-weight-bold text-primary">모임별 일정수</h6>
+                  </div>
+                  <div style="height:344px;" class="d-flex justify-content-center align-items-center mt-3">
+                       <canvas id="donutChart1" style="position: relative; height:28vh; width:28vw"></canvas>
+                  </div>
                </div>
             </div>
          </div>
          
-
       </div>
    </div>
    <script>
-   
-
-       //로그아웃 부분
+      
+      //로그아웃 부분
         $(".user").mouseenter(function () {
             $(".logOut").css({ "display": "block", "z-index": "99" });
         })
@@ -333,7 +356,7 @@ a {
             var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
               mapOption = { 
                center: new kakao.maps.LatLng(36.2683, 127.6358), // 지도의 중심좌표
-               level: 13 // 지도의 확대 레벨
+               level: 14 // 지도의 확대 레벨
               };
             var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
 
@@ -375,42 +398,154 @@ a {
              // 지도의 우측에 확대 축소 컨트롤을 추가한다
              map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
              
-             // 라인 그래프(로그인 방식)
-             makeLine();
+             // 바 그래프(로그인 방식)
+             makeBar();
              // 도넛 그래프(모임 일정 수)
              makeCircle();
-             
+             // 라인 그래프 (당일 로그인 수)
+             makeLine();
   
         });
         
-       // charjs(Line 차트)
-        const makeLine = function() {
-          var ctx = $("#line-chartcanvas");
+       // charjs(Bar 차트)
+        const makeBar = function() {
 
-        var data = {
-          labels: ["07/25", "07/26", "07/27", "07/28", "07/29"],
+           // 선호지역 리스트 
+            let cntPreLocationList = new Array(); // 빈 배열 생성
+            <c:forEach items="${cntPreLocationList}" var="dto">
+                  cntPreLocationList.push("${dto.count}");
+            </c:forEach>
+          
+          var ctx = $("#bar-chartcanvas");
+
+          var data = {
+          labels: ["서울","인천","경기도","강원도","충청도","경상도","전라도","제주도"],
           datasets: [
             {
-              label: "네이버 로그인",
-              data: [10, 50, 25, 70, 40],
-              backgroundColor: "#18ce60",
-              borderColor: "#18ce60",
+              label: "끼리끼리 로그인",
+              data: cntPreLocationList,
+              backgroundColor: "#4e78f5",
+              borderColor: "#4e78f5",
               fill: false,
               lineTension: 0,
               radius: 5
-            },
-            {
-              label: "카카오 로그인",
-              data: [20, 35, 40, 60, 50],
-              backgroundColor: "#f7d501",
-              borderColor: "#f7d501",
-              fill: false,
-              lineTension: 0,
-              radius: 5
-            },
+            }
+          ]
+        };
+
+        //options
+        var options = {
+          responsive: true,
+          title: {
+            display: true,
+            position: "top",
+            text: "Line Graph",
+            fontSize: 18,
+            fontColor: "#111"
+          },
+          legend: {
+            display: true,
+            position: "bottom",
+            labels: {
+              fontColor: "#333",
+              fontSize: 16
+            }
+          }
+        };
+
+        //create Chart class object
+        var chart = new Chart(ctx, {
+            type: "bar",
+            data: data,
+            options: options
+          });
+        }
+       
+         // chartjs(모임별-일정갯수)
+       const makeCircle = function() {
+ 
+           // 그룹 리스트 
+              let groupTitleList = new Array(); // 빈 배열 생성
+              <c:forEach items="${cntGroupCalList}" var="dto">
+                 groupTitleList.push("${dto.group_title}");
+              </c:forEach>
+            
+             // 해당 그룹의 일정 수 
+             let groupCalCnt = new Array(); // 빈 배열 생성
+              <c:forEach items="${cntGroupCalList}" var="dto">
+                 groupCalCnt.push("${dto.group_cal_cnt}");
+              </c:forEach>
+         
+           // 랜덤 색상
+              let randomColList = new Array();
+                for(let i = 0; i < groupTitleList.length; i++) {
+                  let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+                  randomColList.push(randomColor);
+                }
+
+                var ctx = $('#donutChart1');
+                var donutChart1 = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: groupTitleList,
+                        datasets: [{
+                            data: groupCalCnt,
+                            backgroundColor: randomColList,  //차트컬러
+                            hoverBorderColor: "rgba(234, 236, 244, 1)",
+                            cutout: "80%",
+                            pointStyle:'Rounded',
+                            pointRadius: 1,
+                        }],
+                    },
+                    options: {
+                       responsive : false,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                               display: true,
+                               position: 'bottom',
+                            }
+                         },
+                        tooltips: {
+                            backgroundColor: "rgb(255,255,255)",
+                            bodyFontColor: "#858796",
+                            borderColor: '#dddfeb',
+                            borderWidth: 1,
+                            xPadding: 15,
+                            yPadding: 15,
+                            displayColors: false,
+                            caretPadding: 10,
+                        }
+              
+                    }
+                });
+       }
+       
+       // charjs(Line 차트)
+        const makeLine = function() {
+         
+           // 로그인 날짜 리스트 
+              let loginTimeList = new Array(); // 빈 배열 생성
+              <c:forEach items="${cntLoginLogList}" var="dto">
+                 loginTimeList.push("${dto.login_time}");
+              </c:forEach>
+           
+           // 로그인 로그 리스트 
+           let loginLogList = new Array(); // 빈 배열 생성
+           <c:forEach items="${cntLoginLogList}" var="dto">
+                 loginLogList.push("${dto.loginCnt}");
+           </c:forEach>
+          
+          
+          
+          var ctx = $("#line-chartcanvas");
+
+          var data = {
+          labels: loginTimeList,
+          datasets: [
             {
               label: "끼리끼리 로그인",
-              data: [30, 50, 30, 20, 80],
+              data: loginLogList,
               backgroundColor: "#4e78f5",
               borderColor: "#4e78f5",
               fill: false,
@@ -447,66 +582,6 @@ a {
             options: options
           });
         }
-       
-         // chartjs(도넛 차트)
-       const makeCircle = function() {
- 
-           // 그룹 리스트 
-              let groupTitleList = new Array(); // 빈 배열 생성
-              <c:forEach items="${cntGroupCalList}" var="dto">
-                 groupTitleList.push("${dto.group_title}");
-              </c:forEach>
-            
-             // 해당 그룹의 일정 수 
-             let groupCalCnt = new Array(); // 빈 배열 생성
-              <c:forEach items="${cntGroupCalList}" var="dto">
-                 groupCalCnt.push("${dto.group_cal_cnt}");
-              </c:forEach>
-         
-           // 랜덤 색상
-              let randomColList = new Array();
-                for(let i = 0; i < groupTitleList.length; i++) {
-                  let randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
-                  randomColList.push(randomColor);
-                }
-
-                var ctx = $('#myChart');
-                var myChart = new Chart(ctx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: groupTitleList,
-                        datasets: [{
-                            data: groupCalCnt,
-                            backgroundColor: randomColList,  //차트컬러
-                            hoverBorderColor: "rgba(234, 236, 244, 1)",
-                        }],
-                    },
-                    options: {
-                        maintainAspectRatio: false,
-                        tooltips: {
-                            backgroundColor: "rgb(255,255,255)",
-                            bodyFontColor: "#858796",
-                            borderColor: '#dddfeb',
-                            borderWidth: 1,
-                            xPadding: 15,
-                            yPadding: 15,
-                            displayColors: false,
-                            caretPadding: 10,
-                        },
-                        legend: {
-                            display: false
-                        },
-                        cutoutPercentage: 80,
-                    },
-                });
-                
-       }
-       
-       
-       
-       
-       
-       
        
         
     </script>

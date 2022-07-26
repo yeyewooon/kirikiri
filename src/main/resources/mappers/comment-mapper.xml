@@ -15,13 +15,13 @@
 	<insert id="write" parameterType="com.kiri.dto.BoardDTO">
 		insert into board_comment
 			values(seq_comment.nextval, #{seq_board}, #{user_email}, #{user_nickname}
-				, #{comment}, sysdate)
+				, #{comment_content}, sysdate)
 	</insert>
 	
 	<!-- 댓글 수정 -->
 	<update id="modify" parameterType="com.kiri.dto.BoardDTO">
 		update board_comment 
-			set comment = #{comment} 
+			set comment_content = #{comment_content} 
 			where seq_comment = #{seq_comment}
 	</update>
 	
@@ -30,4 +30,10 @@
 		delete from board_comment
 			where seq_comment = #{seq_comment}
 	</delete>
+	
+	<!-- 댓글 개수 -->
+	<select id="commentCnt" parameterType="int" resultType="int">
+		select count(*) from board_comment
+			where seq_board = #{seq_board}
+	</select>
 </mapper>
