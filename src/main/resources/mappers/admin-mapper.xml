@@ -75,4 +75,21 @@
 		select sum(count(*)) cntCal from group_calendar group by seq_group
 	</select>
 
+	<!-- 선호 지역수 -->
+	<select id="cntPreLocation" resultType="com.kiri.dto.SiteDTO">
+		select area,count(*) as preCnt from site group by area
+	</select>
+	
+	<!-- 로그인 로그 수 -->
+	<!-- 김예원 07_26-->
+	<select id="cntLoginLog" resultType="com.kiri.dto.Login_LogDTO">
+			select to_char(b.dt, 'YY-MM-DD') as login_time, nvl(sum(a.cnt),0) loginCnt 
+			from (SELECT TO_DATE(login_time, 'YY-MM-DD') AS login_time, count(user_email) cnt FROM login_log
+		          WHERE (login_time >= TO_DATE(SYSDATE-7,'YY-MM-DD')) and login_status = '성공' GROUP BY login_time) a
+		          ,(SELECT TO_DATE(sysdate-6,'YY-MM-DD') + LEVEL - 1 AS dt FROM dual 
+		         <![CDATA[CONNECT BY LEVEL < = (TO_DATE(sysdate,'YY-MM-DD') - TO_DATE(sysdate-7,'YY-MM-DD'))) b]]>
+		    where b.dt = a.login_time(+)
+		    group by b.dt
+		    order by b.dt
+	</select>
  </mapper>

@@ -20,9 +20,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.kiri.dto.AdminMainDTO;
 import com.kiri.dto.BlackListDTO;
-import com.kiri.dto.Group_CalendarDTO;
+import com.kiri.dto.Login_LogDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
+import com.kiri.dto.SiteDTO;
 import com.kiri.service.AdminService;
 
 @RequestMapping("/admin")
@@ -124,32 +125,22 @@ public class AdminController {
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonLocationList = mapper.writeValueAsString(locationList);
 		
-		// 그룹 수
-		List<AdminMainDTO> cntGroupCalList = service.cntGroupCalendar();
-		
-		// 멤버 수 
-		int cntGroupMember = service.cntGroupMember();
-		System.out.println("cntGroupMember" + cntGroupMember);
-		// 모임 수
-		int cntGroupCnt = service.cntGroupCnt();
-		System.out.println("cntGroupCnt" + cntGroupCnt);
-		
-		// 게시글 수(자유게시판)
-		// int cntBoard = service.cntBoard();
-		//System.out.println("cntBoard" + cntBoard);
-		// 게시글 수(모임게시판)
-		//int cntGroupBoard = service.cntGroupBoard();
-		//System.out.println("cntGroupBoard" + cntGroupBoard);
-		
-		// 일정수
-		int cntGroupCal = service.cntGroupCal();
-		System.out.println("cntGroupCal" + cntGroupCal);
-		
+		List<AdminMainDTO> cntGroupCalList = service.cntGroupCalendar(); // 그룹 수
+		int cntGroupMember = service.cntGroupMember(); // 멤버 수 
+		int cntGroupCnt = service.cntGroupCnt(); // 모임 수	
+		// int cntBoard = service.cntBoard(); // 게시글 수(자유게시판)
+		//int cntGroupBoard = service.cntGroupBoard(); // 게시글 수(모임게시판)
+		int cntGroupCal = service.cntGroupCal(); // 일정수
+		List<SiteDTO> cntPreLocationList = service.cntPreLocation(); // 선호지역 수 
+		List<Login_LogDTO> cntLoginLogList = service.cntLoginLog(); // 로그인 로그 수 
+
 		model.addAttribute("jsonLocationList",jsonLocationList);
 		model.addAttribute("cntGroupCalList",cntGroupCalList);
 		model.addAttribute("cntGroupMember",cntGroupMember);
 		model.addAttribute("cntGroupCnt",cntGroupCnt);
 		model.addAttribute("cntGroupCal",cntGroupCal);
+		model.addAttribute("cntPreLocationList",cntPreLocationList);
+		model.addAttribute("cntLoginLogList",cntLoginLogList);
 		return "/admin/adminMain";
 	}
 	

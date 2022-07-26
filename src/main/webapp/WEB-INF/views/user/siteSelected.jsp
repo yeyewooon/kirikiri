@@ -95,28 +95,23 @@ body {
 	}
 }
 
+
+/* 네비바 드롭다운 */
+.dropdown-toggle:hover {
+   color: #83bf7b;
+   border-color: aliceblue;
+}
+
+.dropdown:hover .dropdown-menu {
+   display: block;
+   margin-top: 0;
+   font-weight: bold;
+}
+
 /* header 반응형 끝 */
 #logoImg {
 	width: 50%;
 }
-
-/*맨위 사진*/
-.topimg {
-	background-color: #d2e3ec;
-	width: 100%;
-}
-
-.txtBox div {
-	color: rgba(85, 85, 95, 0.993);
-}
-
-.txtBox>div:first-child {
-	font-size: 35px;
-	color: navy;
-	text-shadow: 3px 3px white;
-}
-
-
 
 .mainIcon i {
 	color: #316f8c;
@@ -260,8 +255,9 @@ img {
 </head>
 
 <body>
-	<!--네비바-->
+	  <!--네비바-->
       <header class="mb-3 border-bottom">
+      <div style="background-color : #fff;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -291,7 +287,7 @@ img {
                         <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/signup">회원가입</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
                            </c:if>
                            <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
                               <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
@@ -374,6 +370,7 @@ img {
                </div>
             </div>
          </nav>
+      </div>
       </div>
    </header>
 	<div class="container">

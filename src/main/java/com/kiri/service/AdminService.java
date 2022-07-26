@@ -10,8 +10,10 @@ import com.kiri.dao.AdminDAO;
 import com.kiri.dto.AdminMainDTO;
 import com.kiri.dto.BlackListDTO;
 import com.kiri.dto.Group_CalendarDTO;
+import com.kiri.dto.Login_LogDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
+import com.kiri.dto.SiteDTO;
 
 @Service
 public class AdminService {
@@ -94,5 +96,15 @@ public class AdminService {
 	// 일정수
 	public int cntGroupCal() {
 		return dao.cntGroupCal();
+	}
+
+	// 선호지역 수 
+	public List<SiteDTO> cntPreLocation() {
+		return dao.cntPreLocation();
+	}
+
+	// 로그인 로그 수 
+	public List<Login_LogDTO> cntLoginLog() {
+		return dao.cntLoginLog();
 	}
 }
