@@ -16,6 +16,7 @@ import com.kiri.dto.BoardDTO;
 import com.kiri.dto.Group_BoardDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
+import com.kiri.dto.Tbl_GroupDTO;
 import com.kiri.dto.SiteDTO;
 
 @Service
@@ -64,10 +65,39 @@ public class AdminService {
 	public void updateMem(String user_email, String user_blacklist) {
 		dao.updateMem(user_email, user_blacklist);
 	}
+	
 	public HashMap<String, Object> getPageNavi(int curPage) throws Exception {
 		return dao.getPageNavi(curPage);
 	}
+	///////////////////////////////////////////////////////////////////////////////////
+	// 형석
+	
+	// 모임 검색
+	public List<Tbl_GroupDTO> searchGroup(String searchType, String searchKeyword) throws Exception{
+		return dao.searchGroup(searchType, searchKeyword);
+	}
+	
+	// 모임 전체 조회
+	public List<Tbl_GroupDTO> selectAllGroup(int start, int end) throws Exception{
+		return dao.selectAllGroup(start, end);
+	}
+	
+	// 모임 삭제
+	public int deleteGroup(int seq_group) throws Exception{
+		return dao.deleteGroup(seq_group);
+	}
+	
+	// 모임 개수
+	public int selectGroupCnt() throws Exception{
+		return dao.selectGroupCnt();
+	}
+	
+	// 모임 페이지네이션
+	public HashMap<String, Object> getPageNaviGroup(int curPage) throws Exception {
+		return dao.getPageNaviGroup(curPage);
+	}
 
+	
 	// 게시물 관리
 
 	// 전체 게시글 curPage로 자르기

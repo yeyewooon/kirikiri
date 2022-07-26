@@ -236,7 +236,7 @@ td>a {
 				<li class="sidemenu"><a href="/admin/toBoard?curPage=1"> <i
 						class="fa-solid fa-table"></i><br> <span>게시물 관리</span>
 				</a></li>
-				<li class="sidemenu"><a href="#"> <i
+				<li class="sidemenu"><a href="/admin/toGroupAdmin?curPage=1"> <i
 						class="fa-solid fa-house-user"></i><br> <span>모임 관리</span>
 				</a></li>
 			</ul>

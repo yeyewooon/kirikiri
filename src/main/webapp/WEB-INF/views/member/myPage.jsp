@@ -1014,7 +1014,7 @@ footer.footer {
 				            <table class="table table-content">
 						        <thead>
 						          <tr>
-						            <th class="col-1">삭제</th>
+						            <th class="col-2">삭제</th>
 						            <th class="col-2 table-head">보낸사람</th>
 						            <th scope="col">내용</th>
 						            <th scope="col">날짜</th>

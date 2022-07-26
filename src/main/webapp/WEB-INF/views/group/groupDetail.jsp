@@ -193,7 +193,17 @@ a:hover {
 	color: black;
 	text-decoration: none;
 }
+/* 네비바 드롭다운 */
+.dropdown-toggle:hover {
+	color: #83bf7b;
+	border-color: aliceblue;
+}
 
+.dropdown:hover .dropdown-menu {
+	display: block;
+	margin-top: 0;
+	font-weight: bold;
+}
 /*풋터 영역*/
 .footerBox {
 	height: 0px;
@@ -891,7 +901,7 @@ footer.footer {
          
          // 현재 아이디의 모임가입한 수가 3개가 넘으면 모임 가입 금지
          if(totalGroupCntById >= 3) {
-        	 Swal.fire('모임은 최대 3개만 가입가능합니다');
+            Swal.fire('모임은 최대 3개만 가입가능합니다');
              return;
          }
          let curMemberCnt = ${fn:length(memberList)}; // 현재 맴버수 jstl memberList 길이

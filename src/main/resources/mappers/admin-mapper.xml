@@ -38,7 +38,33 @@
  	<update id="updateMem" parameterType="map">
  		update member set user_blacklist=#{user_blacklist} where user_email=#{user_email}
  	</update>
-
+ 	
+ 	<!-- //////////////////////////////////////////////////////// -->
+ 	<!-- 형석 -->
+ 	<!-- 모임 전체 조회 -->
+ 	<select id = "selectAllGroup" parameterType = "map" resultType = "com.kiri.dto.Tbl_GroupDTO">
+ 		 		select * from (select tbl_group.*, row_number() over(order by 1 desc) as num from tbl_group)
+				where num between #{start} and #{end}
+ 	</select>
+ 
+ 	<!-- 모임 총 개수, 페이지네이션 -->
+ 	<select id="getPageNaviGroup" resultType="int">
+ 		select count(*) as totalCnt from tbl_group
+ 	</select>
+ 	
+ 	<!-- 모임 검색 -->
+ 	<select id="searchGroup" parameterType="map" resultType="com.kiri.dto.Tbl_GroupDTO">
+ 		select * from tbl_group where
+			<if test="searchType == 'all'">group_title like '%${searchKeyword}%' or group_category like '%${searchKeyword}%' or group_people like '%${searchKeyword}%' or user_email like '%${searchKeyword}%' or group_site like '%${searchKeyword}%' </if>
+			<if test="searchType != 'all'">${searchType} like '%' || #{searchKeyword} || '%'</if>
+			order by 1
+ 	</select>
+ 	
+ 	<!-- 모임 삭제 -->
+ 	<delete id = "deleteGroup" parameterType = "int">
+ 		delete from tbl_group where seq_group = #{seq_group}
+ 	</delete>
+ 	
  	<!-- 게시물 관리 -->
 
  	<!-- 게시물 list 잘라서 가져오기 -->

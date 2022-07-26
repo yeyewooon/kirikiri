@@ -25,6 +25,7 @@ import com.kiri.dto.BoardDTO;
 import com.kiri.dto.Group_BoardDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
+import com.kiri.dto.Tbl_GroupDTO;
 import com.kiri.dto.SiteDTO;
 import com.kiri.service.AdminService;
 
@@ -113,36 +114,74 @@ public class AdminController {
 		service.updateMem(user_email, user_blacklist);
 		response.getWriter().write("success");
 	}
-
 	@RequestMapping(value = "/toError")
 	public String toError() {
 		return "error";
 	}
-
-	@RequestMapping(value = "/toBoard") // 게시물 관리
-	public String toBoard(int curPage, Model model) throws Exception{
-		System.out.println("curPage : "+curPage);
-		System.out.println("게시물 관리 페이지");
-
-		// board curPage로 자라서 list 가져오기
-		List<BoardDTO> list = service.selectBoard(curPage*10-9, curPage*10);
-		model.addAttribute("list",list);
-
-		// board 총 count 가져오기
-		int boardCnt = service.selectBoardCount();
-
-		// group_board 총 count 가져오기
-		int group_boardCnt = service.selectGroupBoardCount();
-
-		int totalCnt = boardCnt + group_boardCnt;
-		System.out.println(totalCnt);
-		model.addAttribute("totalCnt",totalCnt);
-
-		// 페이지 네이션
-		HashMap<String, Object> map = service.getBoardPageNavi(curPage);
-		model.addAttribute("naviMap", map);
-		return "admin/adminBoard";
+	///////////////////////////////////////////////////////////////////////////
+	// 형석
+	// 모임 관리 가기(모임 전체 조회)
+	@RequestMapping(value = "/toGroupAdmin")
+	public String toGroupAdmin(int curPage, Model model) throws Exception{
+	
+	List<Tbl_GroupDTO> groupList = service.selectAllGroup(curPage*10-9, curPage*10);
+	model.addAttribute("groupList", groupList);
+	
+	HashMap<String, Object> map = service.getPageNaviGroup(curPage);
+	model.addAttribute("naviMap", map);
+	
+	int totalCnt = service.selectGroupCnt();
+	model.addAttribute("groupCnt", totalCnt);
+	
+	return"admin/adminGroup";
 	}
+	// 모임 검색
+	@RequestMapping(value="/toGroupSearch")
+	@ResponseBody
+	public void toGroupSearch(Model model, HttpServletResponse response, @RequestParam Map<String, Object> searchMap) throws Exception{
+	List<String> searchList = new ArrayList<>();
+	for ( String key : searchMap.keySet() ) {
+	searchList.add(String.valueOf(searchMap.get(key)));
+	}
+	
+	List<Tbl_GroupDTO> slist = service.searchGroup(searchList.get(0), searchList.get(1));
+	
+	String json = new Gson().toJson(slist);
+	response.setCharacterEncoding("utf-8");
+	response.getWriter().write(json);
+	}
+	
+	// 모임 삭제
+	@RequestMapping(value = "/toDeleteGroup")
+	public String deleteGroup(int seq_group) throws Exception{
+	service.deleteGroup(seq_group);
+	System.out.println("그룹 번호 : " + seq_group);
+	return "redirect:/admin/toGroupAdmin?curPage=1";
+	}
+		@RequestMapping(value = "/toBoard") // 게시물 관리
+		public String toBoard(int curPage, Model model) throws Exception{
+			System.out.println("curPage : "+curPage);
+			System.out.println("게시물 관리 페이지");
+	
+			// board curPage로 자라서 list 가져오기
+			List<BoardDTO> list = service.selectBoard(curPage*10-9, curPage*10);
+			model.addAttribute("list",list);
+	
+			// board 총 count 가져오기
+			int boardCnt = service.selectBoardCount();
+	
+			// group_board 총 count 가져오기
+			int group_boardCnt = service.selectGroupBoardCount();
+	
+			int totalCnt = boardCnt + group_boardCnt;
+			System.out.println(totalCnt);
+			model.addAttribute("totalCnt",totalCnt);
+	
+			// 페이지 네이션
+			HashMap<String, Object> map = service.getBoardPageNavi(curPage);
+			model.addAttribute("naviMap", map);
+			return "admin/adminBoard";
+		}
 
 	@RequestMapping(value = "/generalBoard") // 일반 게시판 조회
 	@ResponseBody

@@ -915,7 +915,7 @@ footer.footer {
 				level : 3// 지도의 확대 레벨
 			};
 
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			var map = new kakao.maps.Map(mapContainer, mapOption);
 
 			// 마커 또한 모달창이 띄워지고 난 뒤에 다시 생성해야 하므로 setTimeout 걸어줌
 			setTimeout(function() {
