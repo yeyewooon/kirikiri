@@ -21,6 +21,15 @@ public class Group_BoardDAO {
 	public List<Group_BoardDTO> selectGroupBoardList(String user_email) throws Exception {
 		return session.selectList("myPageMapper.selectGroupBoardList", user_email);
 	}
+	
+	// ajax로 모임게시판 조회
+	public List<Group_BoardDTO> selectAllGroupBoard(String user_email,int start, int end) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		map.put("user_email", user_email);
+		map.put("start", start);
+		map.put("end", end);
+		return session.selectList("myPageMapper.selectAllGroupBoard", map);
+	}
 
 	// 모임게시판 총 갯수
 	public int selectGroupBoardCount(String user_email) throws Exception {
@@ -28,18 +37,17 @@ public class Group_BoardDAO {
 	}
 	
 	// 모임게시판 삭제
-		public int groupBoardDelete(int seq_board) throws Exception{
-			return session.delete("myPageMapper.groupBoardDelete",seq_board);
-		}
+	public int groupBoardDelete(int seq_board) throws Exception{
+		return session.delete("myPageMapper.groupBoardDelete",seq_board);
+	}
 	
-	// 일반게시판 검색으로 조회
-		public List<Group_BoardDTO> mettingSearchList(String category, String keyword, String user_email) throws Exception{
-			System.out.println(category);
-			Map<String, String> map = new HashMap<String, String>();
-			map.put("category", category);
-			map.put("keyword", keyword);
-			map.put("user_email",user_email);
-			
-			return session.selectList("myPageMapper.mettingSearchList",map);
-		}
+	// 모임게시판 검색으로 조회
+	public List<Group_BoardDTO> meetingSearchList(String category, String keyword, String user_email) throws Exception{
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("category", category);
+		map.put("keyword", keyword);
+		map.put("user_email",user_email);
+		
+		return session.selectList("myPageMapper.meetingSearchList",map);
+	}
 }

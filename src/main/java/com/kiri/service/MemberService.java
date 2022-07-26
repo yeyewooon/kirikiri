@@ -50,6 +50,7 @@ public class MemberService {
 	
 	// 사진 수정
 	public void modifyProfilePic(String user_email,String profile_image) {
+		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("user_image", profile_image);
 		map.put("user_email", user_email);
@@ -155,9 +156,27 @@ public class MemberService {
 		return boarddao.selectBoardList(user_email);
 	}
 	
+	// 전체 게시글 curPage로 자르기 
+	public List<BoardDTO> selectBoard(String user_email, int start, int end ) throws Exception{
+		return boarddao.selectBoard(user_email, start, end);
+	}
+	
+	// ajax 일반게시판 조회
+	public List<BoardDTO> genalBoard(String user_email) throws Exception{
+		return boarddao.genalBoard(user_email);
+	}	
+	
 	// 일반게시판 검색으로 조회
 	public List<BoardDTO> genalSearchList(String category, String keyword, String user_email) throws Exception{
-		return boarddao.genalSearchList(category,keyword,user_email);
+		return boarddao.genalSearchList(category, keyword,user_email);
+	}
+	
+	// 페이지네이션 Navi
+	public HashMap<String, Object> getPageNavi(String user_email, int curPage) throws Exception {
+		return boarddao.getPageNavi(user_email,curPage);
+	}
+	public List<BoardDTO> selectAllBoard(String user_email) throws Exception{
+		return boarddao.selectAllBoard(user_email);
 	}
 
 	// 일반게시판 총 갯수
@@ -176,9 +195,14 @@ public class MemberService {
 		return group_boarddao.selectGroupBoardList(user_email);
 	}
 	
+	// ajax 모임게시판 조회
+	public List<Group_BoardDTO> selectAllGroupBoard(String user_email,int start, int end) throws Exception{
+		return group_boarddao.selectAllGroupBoard(user_email,start, end);
+	}
+	
 	// 모임게시판 검색으로 조회
-	public List<Group_BoardDTO> mettingSearchList(String category, String keyword, String user_email) throws Exception{
-		return group_boarddao.mettingSearchList(category,keyword,user_email);
+	public List<Group_BoardDTO> meetingSearchList(String category, String keyword, String user_email) throws Exception{
+		return group_boarddao.meetingSearchList(category,keyword,user_email);
 	} 
 
 	// 모임게시판 총 갯수
@@ -189,9 +213,6 @@ public class MemberService {
 	public int groupBoardDelete(int seq_board) throws Exception{
 		 return group_boarddao.groupBoardDelete(seq_board);
 	}
-	
-	//
-	
 	
 	/* wishList */
 

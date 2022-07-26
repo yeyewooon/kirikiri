@@ -227,6 +227,7 @@ td>a {
 	color: rgb(103, 103, 103);
 	font-size: 12px;
 }
+
 </style>
 </head>
 
@@ -243,7 +244,7 @@ td>a {
 						class="fa-solid fa-users-rectangle"></i><br> <span>회원
 							관리</span>
 				</a></li>
-				<li class="sidemenu"><a href="#"> <i
+				<li class="sidemenu"><a href="/admin/toBoard?curPage=1"> <i
 						class="fa-solid fa-table"></i><br> <span>게시물 관리</span>
 				</a></li>
 				<li class="sidemenu"><a href="#"> <i
@@ -376,9 +377,8 @@ td>a {
 				<nav aria-label="Page navigation example">
 					<ul class="pagination">
 						<c:if test="${naviMap.needPrev eq true}">
-							<li class="page-item"><a class="page-link"
-								href="/admin/toMember?curPage=${naviMap.startNavi-1}"><i
-									class="fa-solid fa-angle-left"></i></a></li>
+							<li class="page-item"><a class="page-link pageArrow"
+								href="/admin/toMember?curPage=${naviMap.startNavi-1}"><</a></li>
 						</c:if>
 						<c:forEach var="pageNum" begin="${naviMap.startNavi}"
 							end="${naviMap.endNavi }">
@@ -386,9 +386,8 @@ td>a {
 								href="/admin/toMember?curPage=${pageNum }">${pageNum }</a></li>
 						</c:forEach>
 						<c:if test="${naviMap.needNext eq true}">
-							<li class="page-item"><a class="page-link"
-								href="/admin/toMember?curPage=${naviMap.endNavi+1}"><i
-									class="fa-solid fa-angle-right"></i></a></li>
+							<li class="page-item"><a class="page-link pageArrow"
+								href="/admin/toMember?curPage=${naviMap.endNavi+1}">></i></a></li>
 						</c:if>
 					</ul>
 				</nav>
