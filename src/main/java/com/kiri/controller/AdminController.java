@@ -153,10 +153,6 @@ public class AdminController {
 		return "redirect:/admin/toGroupAdmin?curPage=1";
 	}
 	
-	@RequestMapping(value = "/toAdmin")
-	public String toAdmin() {
-		return "admin/adminMain";
-	}
 	
 	@RequestMapping(value = "/toError")
 	public String toError() {
