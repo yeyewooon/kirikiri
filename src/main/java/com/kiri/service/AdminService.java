@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kiri.dao.AdminDAO;
+import com.kiri.dao.Admin_BoardDAO;
 import com.kiri.dto.AdminMainDTO;
 import com.kiri.dto.BlackListDTO;
-import com.kiri.dto.Group_CalendarDTO;
+import com.kiri.dto.BoardDTO;
+import com.kiri.dto.Group_BoardDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
 
@@ -17,6 +19,9 @@ import com.kiri.dto.ReportDTO;
 public class AdminService {
 	@Autowired
 	private AdminDAO dao;
+	
+	@Autowired
+	private Admin_BoardDAO boarddao;
 	
 	public List<MemberDTO> selectAllMember(int start, int end) throws Exception{
 		return dao.selectAllMember(start, end);
@@ -58,6 +63,58 @@ public class AdminService {
 	}
 	public HashMap<String, Object> getPageNavi(int curPage) throws Exception {
 		return dao.getPageNavi(curPage);
+	}
+	
+	// 게시물 관리
+	
+	// 전체 게시글 curPage로 자르기 
+	public List<BoardDTO> selectBoard(int start, int end) throws Exception{
+		return boarddao.selectBoard(start, end);
+	}
+	
+	// 일반게시판 총 갯수
+	public int selectBoardCount() throws Exception {
+		return boarddao.selectBoardCount();
+	}
+	
+	// 모임 게시판 총 갯수 
+	public int selectGroupBoardCount() throws Exception{
+		return boarddao.selectGroupBoardCount();
+	}
+	
+	// 일반 조회
+	public List<BoardDTO> selectAllBoard() throws Exception{
+		return boarddao.selectAllBoard();
+	}
+	
+	// 모임게시판 조회
+	public List<Group_BoardDTO> selectAllGroupBoard() throws Exception{
+		return boarddao.selectAllGroupBoard();
+	}
+	
+	// 일반게시판 검색으로 조회
+	public List<BoardDTO> generalSearchList(String category, String keyword) throws Exception{
+		return boarddao.generalSearchList(category, keyword);
+	}
+	
+	// 모임게시판 검색으로 조회
+	public List<Group_BoardDTO> meetingSearchList(String category, String keyword) throws Exception{
+		return boarddao.meetingSearchList(category,keyword);
+	} 
+	
+	// 일반게시판 삭제
+	public int boardDelete(int seq_board) throws Exception{
+		 return boarddao.boardDelete(seq_board);
+	}
+	
+	// 모임게시판 삭제
+	public int groupBoardDelete(int seq_board) throws Exception{
+		 return boarddao.groupBoardDelete(seq_board);
+	}
+	
+	// 페이지네이션
+	public HashMap<String, Object> getBoardPageNavi(int curPage) throws Exception {
+		return boarddao.getBoardPageNavi(curPage);
 	}
 
 	// 김영완 07_22
