@@ -20,7 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.kiri.dto.AdminMainDTO;
 import com.kiri.dto.BlackListDTO;
-import com.kiri.dto.Group_CalendarDTO;
+import com.kiri.dto.BoardDTO;
+import com.kiri.dto.Group_BoardDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.ReportDTO;
 import com.kiri.service.AdminService;
@@ -116,6 +117,85 @@ public class AdminController {
 		return "error";
 	}
 	
+	@RequestMapping(value = "/toBoard") // 게시물 관리
+	public String toBoard(int curPage, Model model) throws Exception{
+		System.out.println("curPage : "+curPage);
+		System.out.println("게시물 관리 페이지");
+		
+		// board curPage로 자라서 list 가져오기
+		List<BoardDTO> list = service.selectBoard(curPage*10-9, curPage*10);
+		model.addAttribute("list",list);
+		
+		// board 총 count 가져오기 
+		int boardCnt = service.selectBoardCount();
+		
+		// group_board 총 count 가져오기 
+		int group_boardCnt = service.selectGroupBoardCount();
+		
+		int totalCnt = boardCnt + group_boardCnt;
+		System.out.println(totalCnt);
+		model.addAttribute("totalCnt",totalCnt);
+		
+		// 페이지 네이션
+		HashMap<String, Object> map = service.getBoardPageNavi(curPage);
+		model.addAttribute("naviMap", map);
+		return "admin/adminBoard";
+	}
+	
+	@RequestMapping(value = "/generalBoard") // 일반 게시판 조회
+	@ResponseBody
+	public List<BoardDTO> genalBoard(int curPage) throws Exception {
+		System.out.println("일반 게시판 도착");
+		List<BoardDTO> selectAllBoard = service.selectAllBoard();
+		return selectAllBoard;
+	}
+	
+	@RequestMapping(value = "/meetingBoard") // 모임 게시판 조회
+	@ResponseBody
+	public List<Group_BoardDTO> meetingBoard(int curPage) throws Exception {
+		List<Group_BoardDTO> selectGroupBoardList = service.selectAllGroupBoard();
+		return selectGroupBoardList;
+	}
+	
+	@RequestMapping(value = "/normalSearch") // 일반 게시판 검색
+	@ResponseBody
+	public List<BoardDTO> generalSearch(String category, String keyword) throws Exception {
+		System.out.println("일반 게시판 검색 : "+category +" : "+ keyword);
+		List<BoardDTO> boardlist = service.generalSearchList(category, keyword);
+		return boardlist;
+	}
+	
+	@RequestMapping(value = "/meetingSearch") // 모임 게시판 검색
+	@ResponseBody
+	public List<Group_BoardDTO> meetingSearch(String category, String keyword) throws Exception {
+		System.out.println(category + " : "+ keyword);
+		if(category.equals("board_title")) {
+			category = "title";			
+		}else if(category.equals("board_content")) {
+			category = "content";			
+		}
+		
+		List<Group_BoardDTO> meetinglist = service.meetingSearchList(category, keyword);
+		return meetinglist;
+	}
+	
+	@RequestMapping(value="/boardDelete") // 일반 게시판 삭제
+	@ResponseBody
+	public String boardDelete(int seq_board) throws Exception{
+		service.boardDelete(seq_board);
+		return "success";
+	}
+	
+	@RequestMapping(value="/groupBoardDelete") // 모임 게시판 삭제
+	@ResponseBody
+	public String groupBoardDelete(int seq_group_board) throws Exception{
+		service.groupBoardDelete(seq_group_board);
+		return "success";
+	}
+	
+	
+	
+	
 	// 김영완 07_22
 	@RequestMapping(value = "/toAdmin") 
 	public String toAdminMain(Model model) throws Exception {
@@ -152,10 +232,4 @@ public class AdminController {
 		model.addAttribute("cntGroupCal",cntGroupCal);
 		return "/admin/adminMain";
 	}
-	
-
-	
-	
-	
-	
 }

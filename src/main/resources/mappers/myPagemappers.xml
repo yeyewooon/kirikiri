@@ -122,17 +122,29 @@
 			select * from board where
 					board_content like '%' || #{keyword} ||'%' and user_email= #{user_email}		
 		</if>
-		
 	</select>
-	
+	<select id="selectBoard" parameterType="map" resultType="com.kiri.dto.BoardDTO">
+		select * 
+			from 
+		(select board.*, row_number() over(order by board_date desc) as num from board 	where user_email = #{user_email}) 
+			where num between #{start} and #{end}
+ 	</select>
+ 	<select id="selectAllBoard"  resultType="com.kiri.dto.BoardDTO">
+		select * from (select board.*, row_number() over(order by 1 desc) as num from board) where user_email = #{user_email}
+ 	</select>
+	<!-- 일반게시판 총 갯수 -->
+	<select id="getPageNavi" resultType="int">
+ 		select count(*) as totalCnt from board where user_email =#{user_email}
+ 	</select>
 	<!-- 일반 게시글 삭제 -->
 	<delete id="boardDelete" parameterType="int">
 		delete from board
 			where seq_board=${seq_board}
 	</delete>
 	
+	
 	<!-- 검색으로 모임게시판 글 정보 가져오기 -->
-	<select id="mettingSearchList" parameterType="map" resultType="com.kiri.dto.Group_BoardDTO">
+	<select id="meetingSearchList" parameterType="map" resultType="com.kiri.dto.Group_BoardDTO">
 		
 		<if test="category == 'board_all'">
 			select * from group_board where
@@ -156,6 +168,11 @@
 		where user_email = #{user_email}
 	</select>
 	
+	<!-- ajax 모임 게시글 -->
+	<select id="selectAllGroupBoard" parameterType="map" resultType="com.kiri.dto.Group_BoardDTO">
+		select * from (select group_board.*, row_number() over(order by 1 desc) as num from group_board where user_email = #{user_email})
+ 	</select>
+	
 	<!-- 모임 게시글 삭제 -->
 	<delete id="groupBoardDelete" parameterType="int">
 		delete from group_board
@@ -178,7 +195,7 @@
 	<delete id="wishDelete" parameterType="int">
 		delete from wishList where
 		seq_group = #{seq_group}
-	</delete>
+	</delete>	
 
 
 	<!-- myWrite page sql -->

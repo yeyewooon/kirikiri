@@ -100,8 +100,11 @@ public class MemberController {
 
 	@RequestMapping(value = "/modifyProfilePic")
 	public String modifyProfilePic(MultipartFile user_image) throws Exception { // 사진 수정
-		System.out.println("user_image : "+user_image);
+		System.out.println("user_image : "+user_image.getOriginalFilename());
 		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
+		if(user_image.getOriginalFilename().equals("")) {
+			user_image.getOriginalFilename().equals(null);
+		}
 		
 		// 디렉토리 생성
 		if(!user_image.isEmpty()) { 
@@ -109,21 +112,21 @@ public class MemberController {
 			String profile_image = service.uploadProfile(user_image, realPath);
 			((MemberDTO)session.getAttribute("loginSession")).setUser_image(profile_image);
 			System.out.println(realPath);
+			System.out.println("profile_image : "+profile_image);
 			service.modifyProfilePic(user_email,profile_image);
 		}
 		return "redirect:myPage";
 	}
-
+	
 	@RequestMapping(value = "/myWrite")
-	public String myWrite(HttpServletResponse response, Model model) throws Exception { // 내가 쓴글 페이지
+	public String myWrite(HttpServletResponse response, Model model, int curPage) throws Exception { // 내가 쓴글 페이지
 		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
-
+		
 		int selectBoardCount = service.selectBoardCount(user_email);
 		int selectGroupBoardCount = service.selectGroupBoardCount(user_email);
 		MemberDTO selectMember = service.selectMember(user_email);
 		List<BoardDTO> selectBoardList = service.selectBoardList(user_email);
 		List<Group_BoardDTO> selectGroupBoardList = service.selectGroupBoardList(user_email);
-		System.out.println(selectBoardList.get(0).getBoard_date());
 		/* total 게시판 갯수  */
 		int totalBoardCount = selectBoardCount + selectGroupBoardCount;
 		
@@ -131,8 +134,13 @@ public class MemberController {
 	    response.setCharacterEncoding("utf-8");
 	    response.getWriter().write(json);
 	    
-	    
-
+		// 페이지 네이션
+		List<BoardDTO> list = service.selectBoard(user_email,curPage*10-9, curPage*10);
+		model.addAttribute("list", list);
+		  
+		HashMap<String, Object> map = service.getPageNavi(user_email,curPage);
+		model.addAttribute("naviMap", map);
+	  
 		model.addAttribute("memberdto", selectMember);
 		model.addAttribute("selectBoardCount", selectBoardCount);
 		model.addAttribute("selectGroupBoardCount", selectGroupBoardCount);
@@ -247,33 +255,48 @@ public class MemberController {
 		service.wishDelete(seq_group);
 		return "success";
 	}
-
-	@RequestMapping(value = "/genalSearch") // 일반 게시판 검색
+	
+	@RequestMapping(value = "/genalBoard") // 일반 게시판 조회
 	@ResponseBody
-	public List<BoardDTO> genalSearch(String category, String keyword, String user_email) throws Exception {
-		System.out.println(category + " : " + keyword);
-		List<BoardDTO> boardlist = service.genalSearchList(category, keyword,user_email);
-		return boardlist;
+	public List<BoardDTO> genalBoard(String user_email,int curPage) throws Exception {
+		List<BoardDTO> selectAllBoard = service.selectAllBoard(user_email);
+		return selectAllBoard;
 	}
 
-	@RequestMapping(value = "/mettingSearch") // 모임 게시판 검색
+
+	@RequestMapping(value = "/normalSearch") // 일반 게시판 검색
 	@ResponseBody
-	public List<Group_BoardDTO> mettingSearch(String category, String keyword, String user_email) throws Exception {
-		
+	public List<BoardDTO> genalSearch(String category, String keyword, String user_email) throws Exception {
+		System.out.println("일반 게시판 검색 : "+category +" : "+ keyword + user_email);
+		List<BoardDTO> boardlist = service.genalSearchList(category, keyword, user_email);
+		return boardlist;
+	}
+	
+	@RequestMapping(value = "/meetingBoard") // 모임 게시판 조회
+	@ResponseBody
+	public List<Group_BoardDTO> meetingBoard(String user_email,int curPage) throws Exception {
+		List<Group_BoardDTO> selectGroupBoardList = service.selectAllGroupBoard(user_email, curPage*10-9, curPage*10);
+		return selectGroupBoardList;
+	}
+
+	@RequestMapping(value = "/meetingSearch") // 모임 게시판 검색
+	@ResponseBody
+	public List<Group_BoardDTO> meetingSearch(String category, String keyword, String user_email) throws Exception {
+		System.out.println(category + " : "+ keyword);
 		if(category.equals("board_title")) {
 			category = "title";			
 		}else if(category.equals("board_content")) {
 			category = "content";			
 		}
 		
-		System.out.println(category + " : " + keyword);
-		List<Group_BoardDTO> meetinglist = service.mettingSearchList(category, keyword,user_email);
+		List<Group_BoardDTO> meetinglist = service.meetingSearchList(category, keyword,user_email);
 		return meetinglist;
 	}
 	
 	@RequestMapping(value="/boardDelete") // 일반 게시판 삭제
 	@ResponseBody
 	public String boardDelete(int seq_board) throws Exception{
+		System.out.println("seq_board: " + seq_board);
 		service.boardDelete(seq_board);
 		return "success";
 	}

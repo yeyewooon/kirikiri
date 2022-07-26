@@ -80,10 +80,6 @@
 	color: white;
 }
 
-.logoHome {
-	height: 100px;
-}
-
 .logoHome span {
 	color: white;
 	font-size: x-large;
@@ -91,7 +87,7 @@
 }
 
 #logoImg {
-	width: 80px;
+	width: 70%;
 }
 
 i {
@@ -228,7 +224,7 @@ td>a {
 	<div class="container">
 		<div class="sidebar">
 			<ul class="p-2">
-				<li class="logoHome"><a href="/toAdmin"> <img
+				<li class="logoHome"><a href="/admin/toAdmin"> <img
 						src="/resources/images/adminLogo.png" id="logoImg"><br>
 						<span>끼리끼리</span>
 				</a></li>
@@ -289,6 +285,7 @@ td>a {
 							<c:otherwise>
 								<c:forEach items="${reportList }" var="dto">
 									<tr>
+										<td><input type="checkBox" class="check"></td>
 										<td><input class="form-check-input ms-2 me-1 check"
 											type="checkbox" name="seq_report"
 											value="${dto.seq_report }"></td>

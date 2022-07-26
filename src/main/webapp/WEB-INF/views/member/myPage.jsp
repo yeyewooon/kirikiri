@@ -464,7 +464,7 @@ footer.footer {
 			<!-- 개인정보 수정 모달 -->
 			<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
-			    <div class="modal-content" style="width:300px; height:400px;">
+			    <div class="modal-content" style="width:340px; height:400px;">
 			      <div class="modal-header">
 			        <h5 class="modal-title" id="exampleModalLabel">비밀번호 확인</h5>
 			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -475,7 +475,7 @@ footer.footer {
 			      	  </div>
 			      	  	<hr style="margin:20px;">
 				      <div class="row">
-				      	<div class="col-5 d-flex justify-content-start" style="align-items:center;"><label>현재 비밀번호 : </label></div>
+				      	<div class="col-5 d-flex justify-content-center" style="align-items:center; padding:0px;"><label>현재 비밀번호 : </label></div>
 				      	<div class="col-7 d-flex justify-content-start">
 					       	<input type="password" id="password" class="form-control" style="height:100%; font-family:none;">		
 				      	</div>
