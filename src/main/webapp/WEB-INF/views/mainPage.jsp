@@ -720,7 +720,7 @@ footer.footer {
 						<li class="list-inline-item">⋅</li>
 						<c:choose>
 							<c:when test="${not empty loginSession}">
-								<li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
+								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
 								<li class="list-inline-item">⋅</li>
 								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
 							</c:when>
