@@ -91,21 +91,20 @@ body {
 	width: 50%;
 }
 
-/*맨위 사진*/
-.topimg {
-	background-color: #d2e3ec;
-	width: 100%;
+/* 네비바 드롭다운 */
+.dropdown-toggle:hover {
+   color: #83bf7b;
+   border-color: aliceblue;
 }
 
-.txtBox div {
-	color: rgba(85, 85, 95, 0.993);
+.dropdown:hover .dropdown-menu {
+   display: block;
+   margin-top: 0;
+   font-weight: bold;
 }
 
-.txtBox>div:first-child {
-	font-size: 35px;
-	color: navy;
-	text-shadow: 3px 3px white;
-}
+
+
 
 .mainIcon i {
 	color: #316f8c;

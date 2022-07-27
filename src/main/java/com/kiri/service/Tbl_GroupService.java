@@ -94,6 +94,7 @@ public class Tbl_GroupService {
 		return tbl_group_dao.groupDelete(seq_group);
 	}
 
+
 	///////////////////////////////////////////////////////////////////////////////////////
 	// 여기부터 김영완 (7/15)
 	// 그룹 생성

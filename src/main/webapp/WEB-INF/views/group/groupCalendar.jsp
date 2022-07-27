@@ -1,33 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <!-- kakaoMap -->
-<script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef0f2eae29928e7e7027600e1cf8f7d&libraries=services"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef0f2eae29928e7e7027600e1cf8f7d&libraries=services"></script>
 <!-- swal -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="sweetalert2.min.js"></script>
 <!--bootstrap -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
-	crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!-- fullcalendar CDN -->
 <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css' rel='stylesheet' />
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js'></script>
@@ -35,328 +23,398 @@
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/locales-all.min.js'></script>
 
 <style>
-.customoverlay {position:relative;bottom:85px;border-radius:6px;border: 1px solid #ccc;border-bottom:2px solid #ddd;float:left;}
-.customoverlay:nth-of-type(n) {border:0; box-shadow:0px 1px 2px #888;}
-.customoverlay a {display:block;text-decoration:none;color:#000;text-align:center;border-radius:6px;font-size:14px;font-weight:bold;overflow:hidden;background: #87ceea;background: #87ceea url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png) no-repeat right 14px center;}
-.customoverlay .title {display:block;text-align:center;background:#fff;margin-right:35px;padding:10px 15px;font-size:14px;font-weight:bold;}
-.customoverlay:after {content:'';position:absolute;margin-left:-12px;left:50%;bottom:-12px;width:22px;height:12px;background:url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')}
-
-
-
-@font-face {
-    font-family: 'twayair';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+/*카카오맵 마크업*/
+.customoverlay {
+	position: relative;
+	bottom: 85px;
+	border-radius: 6px;
+	border: 1px solid #ccc;
+	border-bottom: 2px solid #ddd;
+	float: left;
 }
 
+.customoverlay:nth-of-type(n) {
+	border: 0;
+	box-shadow: 0px 1px 2px #888;
+}
+
+.customoverlay a {
+	display: block;
+	text-decoration: none;
+	color: #000;
+	text-align: center;
+	border-radius: 6px;
+	font-size: 14px;
+	font-weight: bold;
+	overflow: hidden;
+	background: #87ceea;
+	background: #87ceea
+		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
+		no-repeat right 14px center;
+}
+
+.customoverlay .title {
+	display: block;
+	text-align: center;
+	background: #fff;
+	margin-right: 35px;
+	padding: 10px 15px;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.customoverlay:after {
+	content: '';
+	position: absolute;
+	margin-left: -12px;
+	left: 50%;
+	bottom: -12px;
+	width: 22px;
+	height: 12px;
+	background:
+		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+.customoverlay:after {
+	content: '';
+	position: absolute;
+	margin-left: -12px;
+	left: 50%;
+	bottom: -12px;
+	width: 22px;
+	height: 12px;
+	background:
+		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
+}
+
+@font-face {
+	font-family: 'twayair';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_tway@1.0/twayair.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
 
 body {
-      background-color: #f6f7f9;
-      -ms-overflow-style: none; /*스크롤바 안보이게*/
-    }
+	background-color: #f6f7f9;
+	-ms-overflow-style: none; /*스크롤바 안보이게*/
+}
 
-	::-webkit-scrollbar {
-	  display: none;
+::-webkit-scrollbar {
+	display: none;
+}
+
+* {
+	box-sizing: border-box;
+	font-family: "twayair";
+}
+
+/* header 반응형 */
+@media ( max-width : 768px) {
+	#navLogo {
+		display: none;
 	}
-
-    * {
-      box-sizing: border-box;
-      font-family: "twayair";
-    }
-
-    /* header 반응형 */
-    @media (max-width: 768px) {
-      #navLogo {
-        display: none;
-      }
-
-      #myPageIcon {
-        display: none;
-      }
-
-      #cartIcon {
-        display: none;
-      }
-
-      #menu {
-        display: none;
-      }
-    }
-
-    /* header */
-    #navLogo {
-      width: 150px;
-      height: 100px;
-    }
-
-    #logoImgs {
-      width: 100%;
-      height: 100%;
-    }
-
-    @media (min-width: 768px) {
-      #navibar {
-        display: none;
-      }
-    }
-
-    /* header 반응형 끝 */
-    #logoImg {
-      width: 50%;
-    }
-
-    /*맨위 사진*/
-    .topimg {
-      background-color: #d2e3ec;
-      width: 100%;
-    }
-
-    .txtBox div {
-      color: rgba(85, 85, 95, 0.993);
-    }
-
-    .txtBox>div:first-child {
-      font-size: 35px;
-      color: navy;
-      text-shadow: 3px 3px white;
-    }
-
-    a {
-      text-decoration: none;
-      color: black;
-    }
-
-	/* 캘린더 */
-	.fc-event {
-		margin-top: 5px;
-		cursor: grabbing;
+	#myPageIcon {
+		display: none;
 	}
-	
-	.fc-event-title {
-		cursor: grabbing;
+	#cartIcon {
+		display: none;
 	}
-	
-	#external-events {
-		padding-top: 1%;
+	#menu {
+		display: none;
 	}
-	
-	input[type="text"] {
-		width: 80% !important;
-		margin-top: 20px;
+}
+
+/* header */
+#navLogo {
+	width: 150px;
+	height: 100px;
+}
+
+#logoImgs {
+	width: 100%;
+	height: 100%;
+}
+
+@media ( min-width : 768px) {
+	#navibar {
+		display: none;
 	}
-	
-	.chtingCalForm {
-		width: 50%;
-	}
-	
-	input[type="text"] {
-		text-align: center;
-		width: 90% !important;
-		margin-top: 20px;
-	}
-	
-	#searchLocation {
-		cursor: pointer;
-	}
-	
-	#calendar {
-		width: 80%;
-		height: 88%;
-		float: left;
-	}
+}
 
- 	/* 시간 설정*/
-	.timeContainer {
-		background-color : rgb(233, 236, 239);
-		height:40px;
-		border-radius : 6px;
-		border: 1px solid rgb(206, 212, 218);
-	}
+/* header 반응형 끝 */
+#logoImg {
+	width: 50%;
+}
 
-	.defaultTime {
-        color: black;
-      }
+/* 네비바 드롭다운 */
+.dropdown-toggle:hover {
+	color: #83bf7b;
+	border-color: aliceblue;
+}
 
-      #hour-picker, #min-picker{
-        background-color: #0096ff;
-        width: 300px;
-        display: none;
-        border-radius: 10px;
-      }
+.dropdown:hover .dropdown-menu {
+	display: block;
+	margin-top: 0;
+	font-weight: bold;
+}
 
+a {
+	text-decoration: none;
+	color: black;
+}
 
-      #defaultHour,#defaultMin,.item,.item2{
-        cursor: pointer;
-      }
+/* 캘린더 */
+.fc-event {
+	margin-top: 5px;
+	cursor: grabbing;
+}
 
-      .timeNum {
-        transform:scale(1.0);
-        transition: transform .5s;
-        font-size: 14px;
-        color: #fff;
-      }
+.fc-event-title {
+	cursor: grabbing;
+}
 
-      .timeNum:hover {
-        color: black;
-        opacity: 1;
-        transform: scale(1.2, 1.2);
-      }
+#external-events {
+	padding-top: 1%;
+}
 
+input[type="text"] {
+	width: 80% !important;
+	margin-top: 20px;
+}
+
+.chtingCalForm {
+	width: 50%;
+}
+
+input[type="text"] {
+	text-align: center;
+	width: 90% !important;
+	margin-top: 20px;
+}
+
+#searchLocation {
+	cursor: pointer;
+}
+
+#calendar {
+	width: 80%;
+	height: 88%;
+	float: left;
+}
+
+/* 시간 설정*/
+.timeContainer {
+	background-color: rgb(233, 236, 239);
+	height: 40px;
+	border-radius: 6px;
+	border: 1px solid rgb(206, 212, 218);
+}
+
+.defaultTime {
+	color: black;
+}
+
+#hour-picker, #min-picker {
+	background-color: #0096ff;
+	width: 300px;
+	display: none;
+	border-radius: 10px;
+}
+
+#defaultHour, #defaultMin, .item, .item2 {
+	cursor: pointer;
+}
+
+.timeNum {
+	transform: scale(1.0);
+	transition: transform .5s;
+	font-size: 14px;
+	color: #fff;
+}
+
+.timeNum:hover {
+	color: black;
+	opacity: 1;
+	transform: scale(1.2, 1.2);
+}
 
 /* footer */
-    /*풋터 영역*/
-    .footerBox {
-      height: 0px;
-    }
+/*풋터 영역*/
+.footerBox {
+	height: 0px;
+}
 
-    footer.footer {
-      padding-top: 2rem;
-      padding-bottom: 2rem;
-      background-color: #f6f7f9;
-    }
+footer.footer {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+	background-color: #f6f7f9;
+}
 
-    .footer a {
-      text-decoration: none;
-      color: black;
-      font-weight: 40px;
-      font-weight: bold;
-    }
+.footer a {
+	text-decoration: none;
+	color: black;
+	font-weight: 40px;
+	font-weight: bold;
+}
 
-    .footer-imgBox>img {
-      width: 100%;
-      height: 100%;
-    }
+.footer-imgBox>img {
+	width: 100%;
+	height: 100%;
+}
 
-    /* 눈누 폰트 */
-    @font-face {
-      font-family: "OTWelcomeRA";
-      src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2") format("woff2");
-      font-weight: normal;
-      font-style: normal;
-    }
-
+/* 눈누 폰트 */
+@font-face {
+	font-family: "OTWelcomeRA";
+	src:
+		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2")
+		format("woff2");
+	font-weight: normal;
+	font-style: normal;
+}
 </style>
 
 
 </head>
 <body>
 	<!--네비바-->
-      <header class="mb-3 border-bottom">
-      <div class="container">
-         <!-- 접혔을 때 nav -->
-         <nav id="navibar" class="navbar navbar-expand-md navbar-light"
-            aria-label="Main navigation">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-10">
-                     <a class="navbar-brand mb-2 mb-lg-0" href="/">
-                        <div class="title-box">
-                           <img id="logoImg" src="/resources/images/kiri.jpg">
-                        </div>
-                     </a>
-                  </div>
-                  <!-- toggle button -->
-                  <div class="col-2 d-flex align-items-center">
-                     <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                     </button>
-                  </div>
-                  <!-- 메뉴 -->
-                  <div class="collapse navbar-collapse justify-content-end"
-                     id="navbarNavDropdown">
-                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
-                           <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/signup">회원가입</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
-                     </ul>
-                  </div>
-               </div>
+	<header class="mb-3 border-bottom">
+		<div style="background-color: #fff;">
+			<div class="container">
+				<!-- 접혔을 때 nav -->
+				<nav id="navibar" class="navbar navbar-expand-md navbar-light"
+					aria-label="Main navigation">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col-10">
+								<a class="navbar-brand mb-2 mb-lg-0" href="/">
+									<div class="title-box">
+										<img id="logoImg" src="/resources/images/kiri.jpg">
+									</div>
+								</a>
+							</div>
+							<!-- toggle button -->
+							<div class="col-2 d-flex align-items-center">
+								<button class="navbar-toggler" type="button"
+									data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+									aria-controls="navbarNavDropdown" aria-expanded="false"
+									aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+							</div>
+							<!-- 메뉴 -->
+							<div class="collapse navbar-collapse justify-content-end"
+								id="navbarNavDropdown">
+								<ul class="navbar-nav mb-2 mb-lg-0">
+									<li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+									<c:if test="${empty loginSession}">
+										<li class="nav-item"><a class="nav-link"
+											href="/login/toLogin">로그인</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/signup/toSignupAgree">회원가입</a></li>
+									</c:if>
+									<c:if
+										test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/mem/myPage">마이페이지</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/admin/toAdmin">관리자페이지 이동</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/login/toLogout">로그아웃</a></li>
+									</c:if>
+									<c:if
+										test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+										<li class="nav-item"><a class="nav-link"
+											href="/mem/myPage">마이페이지</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/login/toLogout">로그아웃</a></li>
+									</c:if>
+								</ul>
+							</div>
+						</div>
 
-            </div>
-         </nav>
-         <!-- 펼쳐졌을 때 nav -->
-         <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
-            aria-label="Main navigation">
-            <div class="row w-100 align-items-center">
-               <div class="col-5 d-flex justify-content-center">
-                  <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
-                  </ul>
-               </div>
-
-               <!-- logo -->
-               <div class="col-2">
-                  <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
-                     id="logoImgs" src="/resources/images/kiri.jpg">
-
-                  </a>
-               </div>
-
-               <div class="col-5">
-                  <div class="row align-items-center justify-content-center">
-                     <div class="col-auto">
-                        <ul class="navbar-nav mb-2 mb-lg-0 me-2">
-                           <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link"
-                                 href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link"
-                                 href="/signup/toSignupAgree">회원가입</a></li>
-                           </c:if>
-                        </ul>
-                     </div>
-                     <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </nav>
-      </div>
-   </header>
+					</div>
+				</nav>
+				<!-- 펼쳐졌을 때 nav -->
+				<nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
+					aria-label="Main navigation">
+					<div class="row w-100 align-items-center">
+						<div class="col-5 d-flex justify-content-center">
+							<ul class="navbar-nav mb-2 mb-lg-0">
+								<li class="nav-item"><a class="nav-link mx-2"
+									href="/board/toBoard">자유 게시판</a></li>
+							</ul>
+						</div>
+						<!-- logo -->
+						<div class="col-2">
+							<a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
+								id="logoImgs" src="/resources/images/kiri.jpg">
+							</a>
+						</div>
+						<div class="col-5">
+							<div class="row align-items-center justify-content-center">
+								<div class="col-auto">
+									<ul class="navbar-nav mb-2 mb-lg-0 me-2">
+										<c:if test="${empty loginSession}">
+											<li class="nav-item"><a class="nav-link"
+												href="/login/toLogin">로그인</a></li>
+											<li class="nav-item"><a class="nav-link"
+												href="/signup/toSignupAgree">회원가입</a></li>
+										</c:if>
+									</ul>
+								</div>
+								<div class="col-auto user">
+									<c:if
+										test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+										<div class="dropdown text-end">
+											<a href="/"
+												class="d-block link-dark text-decoration-none dropdown-toggle"
+												id="dropdownUser1" data-bs-toggle="dropdown"
+												aria-expanded="false"> <img
+												src="/resources/images/profile.jpg" alt="mdo" width="32"
+												height="32" class="rounded-circle">
+											</a>
+											<ul class="dropdown-menu text-small"
+												aria-labelledby="dropdownUser1">
+												<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+												<li><a class="dropdown-item"
+													href="/group/toCreateGroup">모임생성</a></li>
+												<li><hr class="dropdown-divider"></li>
+												<li><a class="dropdown-item" href="/admin/toAdmin">관리자
+														페이지이동</a></li>
+												<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+											</ul>
+										</div>
+									</c:if>
+									<c:if
+										test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+										<div class="dropdown text-end">
+											<a href="/"
+												class="d-block link-dark text-decoration-none dropdown-toggle"
+												id="dropdownUser1" data-bs-toggle="dropdown"
+												aria-expanded="false"> <img
+												src="/resources/images/profile.jpg" alt="mdo" width="32"
+												height="32" class="rounded-circle">
+											</a>
+											<ul class="dropdown-menu text-small"
+												aria-labelledby="dropdownUser1">
+												<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+												<li><a class="dropdown-item"
+													href="/group/toCreateGroup">모임생성</a></li>
+												<li><hr class="dropdown-divider"></li>
+												<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+											</ul>
+										</div>
+									</c:if>
+								</div>
+							</div>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</header>
 
 	<!-- 캘린더 -->
 	<div id="wrapper" class="container-fluid mb-5">
@@ -378,84 +436,161 @@ body {
 										aria-label="Close" onclick="moveSite();"></button>
 								</div>
 								<div class="modal-body">
-									<form id="calForm" name="calForm" action="/calForm" method="post">
+									<form id="calForm" name="calForm" action="/calForm"
+										method="post">
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
 											<input type="text" class="form-control" id="title"
-												name="title" disabled> <label
-												for="partyCategory">모임유형</label>
+												name="title" disabled> <label for="partyCategory">모임유형</label>
 										</div>
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
 											<input type="text" class="form-control" id="start"
-												name="start" disabled> <label
-												for="partyDate">모임날짜</label>
+												name="start" disabled> <label for="partyDate">모임날짜</label>
 										</div>
-										<div class="mb-3 partyCal d-flex timeContainer justify-content-center align-items-center" style="margin-left: 10%; margin-right: 10%; height:56px; width:376px;">
+										<div
+											class="mb-3 partyCal d-flex timeContainer justify-content-center align-items-center"
+											style="margin-left: 10%; margin-right: 10%; height: 56px; width: 376px;">
 											<div class="defaultTime">
-      											<span class="me-2" id="defaultHour">00</span>:<span class="ms-2" id="defaultMin">00</span>
-    										</div>
+												<span class="me-2" id="defaultHour">00</span>:<span
+													class="ms-2" id="defaultMin">00</span>
+											</div>
 										</div>
-										
-											<!--시간 선택-->
-										    <div id="hour-picker" class="p-4 mt-2" style="margin-left: 10%; margin-right: 10%; width:376px;">
-										      <div class="row pb-2">
-										        <div class="col-2"><span class="item timeNum">00</span></div>
-										        <div class="col-2"><span class="item timeNum">01</span></div>
-										        <div class="col-2"><span class="item timeNum">02</span></div>
-										        <div class="col-2"><span class="item timeNum">03</span></div>
-										        <div class="col-2"><span class="item timeNum">04</span></div>
-										        <div class="col-2"><span class="item timeNum">05</span></div>
-										      </div>
-										      <div class="row pb-2">
-										        <div class="col-2"><span class="item timeNum">06</span></div>
-										        <div class="col-2"><span class="item timeNum">07</span></div>
-										        <div class="col-2"><span class="item timeNum">08</span></div>
-										        <div class="col-2"><span class="item timeNum">09</span></div>
-										        <div class="col-2"><span class="item timeNum">10</span></div>
-										        <div class="col-2"><span class="item timeNum">11</span></div>
-										      </div>
-										      <div class="row pb-2">
-										        <div class="col-2"><span class="item timeNum">12</span></div>
-										        <div class="col-2"><span class="item timeNum">13</span></div>
-										        <div class="col-2"><span class="item timeNum">14</span></div>
-										        <div class="col-2"><span class="item timeNum">15</span></div>
-										        <div class="col-2"><span class="item timeNum">16</span></div>
-										        <div class="col-2"><span class="item timeNum">17</span></div>
-										      </div>
-										      <div class="row">
-										        <div class="col-2"><span class="item timeNum">18</span></div>
-										        <div class="col-2"><span class="item timeNum">19</span></div>
-										        <div class="col-2"><span class="item timeNum">20</span></div>
-										        <div class="col-2"><span class="item timeNum">21</span></div>
-										        <div class="col-2"><span class="item timeNum">22</span></div>
-										        <div class="col-2"><span class="item timeNum">23</span></div>
-										      </div>
-										    </div>
-											<!--분 선택-->
-										    <div id="min-picker" class="p-4 mt-2" style="margin-left: 10%; margin-right: 10%; width:376px;">
-										      <div class="row">
-										        <div class="col-3 text-center"><span class="item2 timeNum">00</span></div>
-										        <div class="col-3 text-center"><span class="item2 timeNum">05</span></div>
-										        <div class="col-3 text-center"><span class="item2 timeNum">10</span></div>
-										        <div class="col-3 text-center"><span class="item2 timeNum">15</span></div>
-										      </div>
-										      <div class="row">
-										        <div class="col-3 text-center"><span class="item2 timeNum">20</span></div>
-										        <div class="col-3 text-center"><span class="item2 timeNum">25</span></div>
-										        <div class="col-3 text-center"><span class="item2 timeNum">30</span></div>
-										        <div class="col-3 text-center"><span class="item2 timeNum">35</span></div>
-										      </div>
-										      <div class="row">
-										        <div class="col-3 text-center"><span class="item2 timeNum">40</span></div>
-										        <div class="col-3 text-center"><span class="item2 timeNum">45</span></div>
-										        <div class="col-3 text-center"><span class="item2 timeNum">50</span></div>
-										        <div class="col-3 text-center"><span class="item2 timeNum">55</span></div>
-										      </div>
-										    </div>
-										    <!-- 시간 넘기기 input  -->
-										    <input type="text" id="hourInput" value="00" name="hour" hidden>
-										    <input type="text" id="minInput" value="00" name="min" hidden>
+
+										<!--시간 선택-->
+										<div id="hour-picker" class="p-4 mt-2"
+											style="margin-left: 10%; margin-right: 10%; width: 376px;">
+											<div class="row pb-2">
+												<div class="col-2">
+													<span class="item timeNum">00</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">01</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">02</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">03</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">04</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">05</span>
+												</div>
+											</div>
+											<div class="row pb-2">
+												<div class="col-2">
+													<span class="item timeNum">06</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">07</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">08</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">09</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">10</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">11</span>
+												</div>
+											</div>
+											<div class="row pb-2">
+												<div class="col-2">
+													<span class="item timeNum">12</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">13</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">14</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">15</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">16</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">17</span>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-2">
+													<span class="item timeNum">18</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">19</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">20</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">21</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">22</span>
+												</div>
+												<div class="col-2">
+													<span class="item timeNum">23</span>
+												</div>
+											</div>
+										</div>
+										<!--분 선택-->
+										<div id="min-picker" class="p-4 mt-2"
+											style="margin-left: 10%; margin-right: 10%; width: 376px;">
+											<div class="row">
+												<div class="col-3 text-center">
+													<span class="item2 timeNum">00</span>
+												</div>
+												<div class="col-3 text-center">
+													<span class="item2 timeNum">05</span>
+												</div>
+												<div class="col-3 text-center">
+													<span class="item2 timeNum">10</span>
+												</div>
+												<div class="col-3 text-center">
+													<span class="item2 timeNum">15</span>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-3 text-center">
+													<span class="item2 timeNum">20</span>
+												</div>
+												<div class="col-3 text-center">
+													<span class="item2 timeNum">25</span>
+												</div>
+												<div class="col-3 text-center">
+													<span class="item2 timeNum">30</span>
+												</div>
+												<div class="col-3 text-center">
+													<span class="item2 timeNum">35</span>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-3 text-center">
+													<span class="item2 timeNum">40</span>
+												</div>
+												<div class="col-3 text-center">
+													<span class="item2 timeNum">45</span>
+												</div>
+												<div class="col-3 text-center">
+													<span class="item2 timeNum">50</span>
+												</div>
+												<div class="col-3 text-center">
+													<span class="item2 timeNum">55</span>
+												</div>
+											</div>
+										</div>
+										<!-- 시간 넘기기 input  -->
+										<input type="text" id="hourInput" value="00" name="hour"
+											hidden> <input type="text" id="minInput" value="00"
+											name="min" hidden>
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
 											<input type="text" class="form-control" id="gcal_name"
@@ -476,19 +611,22 @@ body {
 
 										<div style="display: flex; justify-content: center">
 											<input class="chtingCal" type="hidden" type="text">
-										</div>			
+										</div>
 										<!-- 카카오맵 기본 좌표 kh 당산 -->
-										<input type="hidden" name="xcoord" id="xcoord" value="126.896761296215" /> 
-										<input type="hidden" name="ycoord"id="ycoord" value="37.5339071790577" /> 
-										<input type="hidden" name="placeName" id="placeName" value="강남" /> 
-										<input type="hidden" name="seq_group_cal" id="seq_group_cal" value="" />
+										<input type="hidden" name="xcoord" id="xcoord"
+											value="126.896761296215" /> <input type="hidden"
+											name="ycoord" id="ycoord" value="37.5339071790577" /> <input
+											type="hidden" name="placeName" id="placeName" value="강남" />
+										<input type="hidden" name="seq_group_cal" id="seq_group_cal"
+											value="" />
 									</form>
 									<div style="margin-left: 10%; margin-right: 10%;">
 										<div id="map" style="width: 378px; height: 300px;"></div>
 									</div>
 								</div>
 								<div class="modal-footer" id="buttonDiv">
-									<button type="button" class="btn btn-secondary" onclick="moveSite();">닫기</button>
+									<button type="button" class="btn btn-secondary"
+										onclick="moveSite();">닫기</button>
 									<button type="button" class="btn btn-primary" id="calSubmit">저장</button>
 									<button type="button" class="btn btn-success" id="calDelete">삭제</button>
 									<button type="button" class="btn btn-danger searchBtn">검색</button>
@@ -514,73 +652,59 @@ body {
 							<div class='fc-event-main text-center'>여행</div>
 						</div>
 					</div>
-
 					<!--캘린더 자체 생성-->
 					<div class="col-md-10 col-auto flex-fill" id='calendar'
 						style="min-width: initial; min-height: 80vh;"></div>
 					<!-- Calendar end -->
-					
-					
 				</section>
 			</div>
 		</div>
 	</div>
-	
-	<!-- Footer-->
-  <div class="footerWrapper" style="background-color: #fff;">
-    <div class="container">
-      <footer class="footer" style="background-color: #fff;">
-        <div class="row">
-          <div class="col-lg-3 footer-imgBox">
-            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
-          </div>
-          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item"><a href="#!">공지사항</a></li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item"><a href="#!">회원가입</a></li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item"><a href="#!">로그인</a></li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item">
-                <a href="#!">책임의 한계 및 법적고지</a>
-              </li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item">
-                <a href="#!" style="color: red; font-weight: bold">개인정보처리방침</a>
-              </li>
-            </ul>
-            <p class="text-muted small mb-4 mb-lg-0">
-              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
-              사업자등록번호 : 22-02-22
-            </p>
-            <p class="text-muted small mb-4 mb-lg-0">
-              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
-            </p>
-            <p class="text-muted small mb-4 mb-lg-0">
-              &copy; Your Website 2022. All Rights Reserved.
-            </p>
-          </div>
-          <div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-            <ul class="list-inline mb-0">
-              <li class="list-inline-item me-4">
-                <a href="#!"><i class="bi-facebook fs-3"></i></a>
-              </li>
-              <li class="list-inline-item me-4">
-                <a href="#!"><i class="bi-twitter fs-3"></i></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#!"><i class="bi-instagram fs-3"></i></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </div>
 
+	<!-- Footer-->
+	<div class="footerWrapper" style="background-color: #fff;">
+		<div class="container">
+			<footer class="footer" style="background-color: #fff;">
+				<div class="row">
+					<div class="col-lg-3 footer-imgBox">
+						<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+					</div>
+					<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+						<ul class="list-inline mb-2">
+							<li class="list-inline-item"><a href="#!">공지사항</a></li>
+							<li class="list-inline-item">⋅</li>
+							<li class="list-inline-item"><a href="#!">회원가입</a></li>
+							<li class="list-inline-item">⋅</li>
+							<li class="list-inline-item"><a href="#!">로그인</a></li>
+							<li class="list-inline-item">⋅</li>
+							<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a>
+							</li>
+							<li class="list-inline-item">⋅</li>
+							<li class="list-inline-item"><a href="#!"
+								style="color: red; font-weight: bold">개인정보처리방침</a></li>
+						</ul>
+						<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+							개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+						<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+							57 이레빌딩</p>
+						<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+							2022. All Rights Reserved.</p>
+					</div>
+					<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+						<ul class="list-inline mb-0">
+							<li class="list-inline-item me-4"><a href="#!"><i
+									class="bi-facebook fs-3"></i></a></li>
+							<li class="list-inline-item me-4"><a href="#!"><i
+									class="bi-twitter fs-3"></i></a></li>
+							<li class="list-inline-item"><a href="#!"><i
+									class="bi-instagram fs-3"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
 	<script>
-		
 		// 다시 홈으로 돌아오는 함수
 		let moveSite = function() {
 			window.location.href = "";
@@ -634,7 +758,6 @@ body {
 						data: {"seq_group" : seq_group},
 						success : function(response) {
 						for (i = 0; i < response.length; i++) {
-							// console.log(response[i].seq_group_cal);
 							calendar.addEvent({
 								title : response[i].title,
 								start : response[i].start,
@@ -643,8 +766,11 @@ body {
 						}
 					},
 					error : function(e) {
-						console.log(e);
-						console.log("에러입니다");
+						Swal.fire({
+							  icon: 'error',
+							  title: '에러가 발생했네요..',
+							  text: '관리자에게 문의해주세여!',
+							});
 					}
 				}) ],
 
@@ -662,9 +788,7 @@ body {
 						type: 'get',
 						data : {"start" : start, "seq_group_cal" : seq_group_cal, "seq_group" : seq_group},
 						success : function(data) {
-							console.log(data);
 							if(data === "success") {
-								console.log("수정 성공!");
 								Swal.fire({
 									  position: 'center',
 									  icon: 'success',
@@ -675,7 +799,6 @@ body {
 							}
 						},
 						error : function(e) {
-							console.log(e);
 							Swal.fire({
 								  icon: 'error',
 								  title: '에러가 발생했네요..',
@@ -684,7 +807,6 @@ body {
 						}
 					})
 				},
-				
 				
 				// 일정 클릭시
 				eventClick : function(info) {
@@ -735,9 +857,7 @@ body {
 									makeMap(data[0].gcal_place); // 지도 생성
 									
 								},
-								error : function(e) {
-									console.log(e);
-									console.log("해당 값 불러오기 실패");
+								error : function(e) {	
 									// 초기화 작업
 									$("#ycoord").val('37.566826'); // 위도
 									$("#xcoord").val('126.9786567'); // 경도
@@ -747,6 +867,11 @@ body {
 									$("#title").val('');
 									$("#start").val('');
 									
+									Swal.fire({
+										  icon: 'error',
+										  title: '에러가 발생했네요..',
+										  text: '관리자에게 문의해주세여!',
+										})
 								}
 							});
 							
@@ -756,14 +881,9 @@ body {
 
 				// 일정을 달력에 가져다 놓았을 때
 				drop : function(info) { // 드래그 엔 드롭 성공시
-
 					// 데이터값 입력
 					$("#title").val(info.draggedEl.innerText);
 					$("#start").val(info.dateStr);
-
-					console.log(info.dateStr);
-					console.log($("#xcoord").val()); // 126
-					console.log($("#ycoord").val()); // 37
 
 					// 초기화 작업
 					$("#ycoord").val('37.5339071790577'); // 위도
@@ -775,7 +895,6 @@ body {
 					if($("calDelete").hasClass("d-none") === false) {
 						// 삭제 버튼 안보이게 
 						$("#calDelete").addClass("d-none");
-
 						// 저장 버튼 보이게
 						$("#calSubmit").removeClass("d-none");
 					}
@@ -808,7 +927,7 @@ body {
 				level : 3// 지도의 확대 레벨
 			};
 
-			var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+			var map = new kakao.maps.Map(mapContainer, mapOption);
 
 			// 마커 또한 모달창이 띄워지고 난 뒤에 다시 생성해야 하므로 setTimeout 걸어줌
 			setTimeout(function() {
@@ -916,11 +1035,7 @@ body {
 									$('#xcoord').val(place.x); // 경도 
 									$('#ycoord').val(place.y); // 위도 
 									$("#partyLocation").val(place.place_name); // 마커로 찍은 장소를 input에 넣어주기
-									console.log(place.x);
-									console.log(place.y);
-									console.log(place.place_name);
-									console.log(place);
-
+									
 									// swal 라이브러리 이용
 									Swal.fire({
 										position : 'center',
@@ -973,7 +1088,6 @@ body {
 						"totalTime" : totalTime
 					},
 					success : function(data) {
-						console.log(data);
 						// 일정 추가되었다고 알림 
 						Swal.fire({
 							position : 'center',
@@ -992,7 +1106,11 @@ body {
 						
 					},
 					error : function(e) {
-						console.log(e);
+						Swal.fire({
+							  icon: 'error',
+							  title: '에러가 발생했네요..',
+							  text: '관리자에게 문의해주세여!',
+							})
 					}
 				}) 
 			}
@@ -1044,7 +1162,11 @@ body {
 					  			
 					  	  },
 					  	  error : function(e) {
-					  		  console.log(e);
+					  		Swal.fire({
+								  icon: 'error',
+								  title: '에러가 발생했네요..',
+								  text: '관리자에게 문의해주세여!',
+								})
 					  	  }
 					  })
 					 

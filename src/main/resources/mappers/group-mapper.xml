@@ -25,12 +25,12 @@
       where seq_group = #{seq_group})
    </select>
 
-   <!-- 모임 해산하기 -->
+   <!-- 모임 해산하기(tbl_group) -->
    <delete id="groupDelete" parameterType="int">
       delete from tbl_group
       where seq_group = #{seq_group}
    </delete>
-
+	
    <!-- 가입신청 거절하기 -->
    <delete id="denyApply" parameterType="java.util.List">
       delete from group_apply

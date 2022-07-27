@@ -271,9 +271,6 @@ button {
 .downLoadSmallText {
    font-size: 10px;
 }
-p{
-   text-align : center;
-}
 /*풋터 영역*/
 .footerBox {
    height: 0px;
@@ -309,7 +306,7 @@ footer.footer {
             <div class="container-fluid">
                <div class="row">
                   <div class="col-10">
-                     <a class="navbar-brand mb-2 mb-lg-0" href="#">
+                     <a class="navbar-brand mb-2 mb-lg-0" href="/">
                         <div class="title-box">
                            <img id="logoImg" src="/resources/images/kiri.jpg">
                         </div>
@@ -328,21 +325,21 @@ footer.footer {
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
-                        <c:choose>
-                           <c:when test="${empty loginSession}">
+                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                           <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/signup">회원가입</a></li>
-                           </c:when>
-                           <c:otherwise>
-                              <li class="nav-item"><a class="nav-link" href=" ">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href=" ">로그아웃</a></li>
-                           </c:otherwise>
-                        </c:choose>
-
-
+                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
+                           </c:if>
+                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
+                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
                      </ul>
-
                   </div>
                </div>
 
@@ -361,7 +358,7 @@ footer.footer {
 
                <!-- logo -->
                <div class="col-2">
-                  <a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0"> <img
+                  <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
                      id="logoImgs" src="/resources/images/kiri.jpg">
 
                   </a>
@@ -375,30 +372,40 @@ footer.footer {
                               <li class="nav-item"><a class="nav-link"
                                  href="/login/toLogin">로그인</a></li>
                               <li class="nav-item"><a class="nav-link"
-                                 href="/login/signup">회원가입</a></li>
+                                 href="/signup/toSignupAgree">회원가입</a></li>
                            </c:if>
                         </ul>
                      </div>
-
                      <div class="col-auto user">
-                        <c:if test="${not empty loginSession}">
-                           <div class="dropdown text-end">
-                              <a href="#"
-                                 class="d-block link-dark text-decoration-none dropdown-toggle"
-                                 id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> <img
-                                 src="/resources/images/profile.jpg" alt="mdo" width="32"
-                                 height="32" class="rounded-circle">
-                              </a>
-                              <ul class="dropdown-menu text-small"
-                                 aria-labelledby="dropdownUser1">
-                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                                 <li><a class="dropdown-item" href="#">모임생성</a></li>
-                                 <li><hr class="dropdown-divider"></li>
-                                 <li><a class="dropdown-item" href="#">로그아웃</a></li>
-                              </ul>
-                           </div>
-                        </c:if>
+                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                     <div class="dropdown text-end">
+                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small"
+                           aria-labelledby="dropdownUser1">
+                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                           <li><hr class="dropdown-divider"></li>
+                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                        </ul>
+                     </div>
+                  </c:if> 
+                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
+                     <div class="dropdown text-end">
+                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small"
+                           aria-labelledby="dropdownUser1">
+                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                           <li><hr class="dropdown-divider"></li>
+                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                        </ul>
+                     </div>
+                  </c:if> 
                      </div>
                   </div>
                </div>
@@ -477,7 +484,9 @@ footer.footer {
       <!--가입 하기 버튼-->
       <div class="row mt-2">
          <div class="signUpBox col text-center">
+         	<a href = "/user/toViewAllGroupList">
             <button type="button" class="btn btn-outline-primary groupSignUp">가입하기</button>
+         	</a>
          </div>
       </div>
 
@@ -490,7 +499,7 @@ footer.footer {
                   <div class="fs-3">글 제목</div>
                   <div class="my-4">모임 후기 샬라샬라 적어요 샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라</div>
                   <div>
-                     <a href="#">글 보러 가기</a>
+                     <a href="/board/toBoard">글 보러 가기</a>
                   </div>
                </div>
                <div class="mainImg col-lg-6 ms-auto d-flex align-items-center">
@@ -498,7 +507,7 @@ footer.footer {
                </div>
             </div>
          </div>
-
+<!-- 게시물 뽑아오기 하기 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
          <div class="content-2 mt-3" data-aos="fade-right"
             data-aos-duration="1000">
             <div class="row g-0 mt-5 align-items-center">
@@ -510,7 +519,7 @@ footer.footer {
                   <div class="fs-3">글 제목</div>
                   <div class="my-4">모임 후기 샬라샬라 적어요 샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라</div>
                   <div>
-                     <a href="#">글 보러 가기</a>
+                     <a href="">글 보러 가기</a>
                   </div>
                </div>
             </div>
@@ -707,16 +716,15 @@ footer.footer {
             </div>
          </div>
       </div>
-
 		<!-- Footer-->
 		<footer class="footer mt-5">
 			<div class="row">
 				<div class="col-lg-3 footer-imgBox">
 					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
 				</div>
-				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+				<div class="col-lg-6 h-100 my-auto">
 					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="#!">공지사항</a></li>
+						<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
 						<li class="list-inline-item">⋅</li>
 						<c:choose>
 							<c:when test="${not empty loginSession}">
@@ -742,7 +750,7 @@ footer.footer {
 							</c:choose>
 						</li>
 						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="privacy"
+						<li class="list-inline-item"><a href="/privacy"
 							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
 					</ul>
 					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
@@ -752,7 +760,7 @@ footer.footer {
 					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
 						2022. All Rights Reserved.</p>
 				</div>
-				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+				<div class="col-lg-3 h-100 my-auto">
 					<ul class="list-inline mb-0">
 						<li class="list-inline-item me-4"><a
 							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
@@ -841,7 +849,6 @@ footer.footer {
       $(".more").on("click", function(){
     	  location.href = "/user/toViewAllGroupList";
       })
-
    </script>
 </body>
 </html>

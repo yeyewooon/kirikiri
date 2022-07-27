@@ -32,18 +32,16 @@
 <style>
 * {
 	box-sizing: border-box;
-	font-family: 'OTWelcomeRA';
+	font-family: 'KOTRAHOPE';
 	font-size : 11px;
 }
 
 /* 눈누 폰트 */
 @font-face {
-	font-family: 'OTWelcomeRA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-		format('woff2');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'KOTRAHOPE';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .chatting {
@@ -220,7 +218,12 @@
 							<tr class="userTable">
 								<td>
 									<div class="profile me-2">
-										<img src="${profileList[status.index]}" id="profile_img">
+										<c:if test="${profileList[status.index] eq null}" >
+											<img src="/resources/images/profile.jpg" id="profile_img">
+										</c:if>
+										<c:if test="${profileList[status.index] ne null}" >
+											<img src="${profileList[status.index]}" id="profile_img">
+										</c:if>
 									</div>
 								</td>
 								<td>${user.user_nickname}</td>
