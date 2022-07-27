@@ -222,30 +222,6 @@ a {
 	font-size: 14px;
 	font-weight: 500;
 }
-.customoverlay a {
-	display: block;
-	text-decoration: none;
-	color: #111;
-	text-align: center;
-	border-radius: 6px;
-	font-size: 14px;
-	font-weight: 500;
-	overflow: hidden;
-	background: #84c9e8;
-	background: #84c9e8
-		url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/arrow_white.png)
-		no-repeat right 14px center;
-}
-
-.customoverlay .title {
-	display: block;
-	text-align: center;
-	background: #fff;
-	margin-right: 35px;
-	padding: 10px 15px;
-	font-size: 14px;
-	font-weight: 500;
-}
 
 .customoverlay:after {
 	content: '';

@@ -75,18 +75,6 @@
 		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
 }
 
-.customoverlay:after {
-	content: '';
-	position: absolute;
-	margin-left: -12px;
-	left: 50%;
-	bottom: -12px;
-	width: 22px;
-	height: 12px;
-	background:
-		url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
-}
-
 @font-face {
 	font-family: 'twayair';
 	src:

@@ -258,6 +258,7 @@ img {
 <body>
   <!--네비바-->
       <header class="mb-3 border-bottom">
+      <div style="background-color : #fff;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -287,7 +288,7 @@ img {
                         <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/signup">회원가입</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
                            </c:if>
                            <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
                               <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
@@ -370,6 +371,7 @@ img {
                </div>
             </div>
          </nav>
+      </div>
       </div>
    </header>
 

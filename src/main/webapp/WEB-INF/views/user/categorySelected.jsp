@@ -143,10 +143,6 @@ ul {
 
 
 
-
-
-
-
 /* 슬라이드 */
 .locationPic {
       width: 100px;

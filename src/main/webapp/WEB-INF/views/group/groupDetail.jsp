@@ -151,7 +151,10 @@
 
 .groupInfo img {
    width:100%;
+   box-sizing: content-box;
+   word-wrap: break-word;
 }
+
 /* 모달 프로필  */
 .modalProfileImage {
 	width: 100px;

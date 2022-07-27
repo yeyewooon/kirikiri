@@ -193,9 +193,6 @@ h2 {
 #authNum, #authNum {
 	height: 60%;
 }
-.socialRow:hover{
-	
-}
 
 .social {
 	width: 100px;
