@@ -38,11 +38,9 @@ public class GroupBoardController {
 	@RequestMapping(value = "/toBoard") // board 페이지 요청
 	public String toBoard(Integer seq_group, Model model, Criteria cri) throws Exception {
 		
-		//System.out.println("seq_group : " + seq_group);
 		cri.setSeq_group(seq_group);
-		//System.out.println(cri.toString());
 		model.addAttribute("list", service.getListPaging(cri));
-		//System.out.println("list: "+service.getListPaging(cri));
+		model.addAttribute("noticeList", service.getNotice());
 		int total = service.getTotal(cri);
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
 		model.addAttribute("pageMaker", pageMake);
@@ -162,9 +160,10 @@ public class GroupBoardController {
 	}
 	
 	@RequestMapping(value = "/delete") // 게시글 삭제 요청
-	public String delete(int seq_group_board) throws Exception{
+	public String delete(int seq_group, int seq_group_board) throws Exception{
+		//System.out.println(seq_group);
 		service.delete(seq_group_board);
-		return "redirect:/Gboard/toBoard";
+		return "redirect:/Gboard/toBoard?seq_group="+seq_group;
 	}
 	
 	@RequestMapping(value = "/")

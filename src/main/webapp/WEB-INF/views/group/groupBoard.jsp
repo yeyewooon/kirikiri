@@ -278,7 +278,6 @@
 				<div class="col-auto">
 		            <c:choose>
 		            	<c:when test="${loginSession.user_email eq 'admin'}">
-		            		<%-- value="${list.Group_BoardDTO.seq_group}" --%>
 		            		<button type="button" id="writeBtn" class="btn" style="background-color: #fce2e1;" value="${pageMaker.cri.seq_group}">모임장 글쓰기</button>
 		            	</c:when>
 		            	<c:otherwise>
@@ -302,7 +301,7 @@
 			<!-- 유형별 정렬 -->
 			<div class="row justify-content-center">
 				<ul class="sortBox">
-					<a href="/group/toBoard"><li>전체</li></a>
+					<a href="/Gboard/toBoard?seq_group=${pageMaker.cri.seq_group}"><li>전체</li></a>
 					<a href="#"><li>공지</li></a>
 					<a href="#"><li>일반</li></a>
 					<a href="#"><li>모임</li></a>
@@ -324,24 +323,30 @@
 	                    </thead>
 	                    <tbody>
 	                    	<c:choose>
-	                    		<c:when test="${list.size() == 0}">
+	                    		<c:when test="${list.size() == 0 && noticeList.size() == 0}">
 	                    			<tr>
 	                    				<td colspan="5">등록된 게시글이 없습니다.</td>
 	                    			</tr>
 	                    		</c:when>
 	                    		<c:otherwise>
+	                    			<c:forEach items="${noticeList}" var="notice">
+	                    				<tr>
+		                    					<td class="col-2">
+			                    					<i class="fa-solid fa-bullhorn"></i>
+		                    					</td>
+		                    					<td class="col-5 text-start">
+		                    						<a class="move" href="${notice.seq_group_board}">
+		                    							${notice.gboard_title}
+		                    						</a>
+		                    					</td>
+		                    					<td class="col-2">${notice.user_nickname}</td>
+		                    					<td class="col-2">${notice.written_date}</td>
+		                    					<td class="col-1">${notice.view_count}</td>
+		                    			</tr>
+                   					</c:forEach>
 	                    			<c:forEach items="${list}" var="dto">
 	                    				<tr>
-	                    					<td class="col-2">
-		                    					<c:choose>
-		                    						<c:when test="${dto.gboard_category eq '공지'}">
-		                    							<i class="fa-solid fa-bullhorn"></i>
-		                    						</c:when>
-		                    						<c:otherwise>
-		                    							${dto.gboard_category}
-		                    						</c:otherwise>
-		                    					</c:choose>
-	                    					</td>
+	                    					<td class="col-2">${dto.gboard_category}</td>
 	                    					<td class="col-5 text-start">
 	                    						<%-- /board/toDetailView?seq_board=${dto.seq_board} --%>
 	                    						<a class="move" href="${dto.seq_group_board}">

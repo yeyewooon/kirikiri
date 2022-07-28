@@ -435,9 +435,10 @@
         <!-- 댓글 등록 -->
         <form id="commentForm" action="/comment/writeG" method="post">
 	        <div class="row mt-4 p-0 py-3" style="background-color: #f5fafc; border-radius: 10px">
+	       		<input class="d-none" id="seq_group" name="seq_group" value="${detail.boardDTO.seq_group}">
 	        	<input class="d-none" id="seq_board" name="seq_group_board" value="${detail.boardDTO.seq_group_board}">
 				<div class="col-10">
-					<textarea id="inputComment" name="comment" style="resize: none;" class="form-control" placeholder="댓글을 입력하세요"></textarea>
+					<textarea id="inputComment" name="comment_content" style="resize: none;" class="form-control" placeholder="댓글을 입력하세요"></textarea>
 				</div>
 				<div class="col-2">
 					<button type="button" id="write-commentBtn" class="btn w-100 h-100" style="background-color: #d2e3ec;">등록</button>
@@ -558,14 +559,14 @@
     			confirmButtonText: '네, 삭제할래요.'
     		}).then((result) => {
     			if (result.isConfirmed) {
-    				location.href = "/Gboard/delete?seq_group_board=" + ${detail.boardDTO.seq_group_board};
+    				location.href = "/Gboard/delete?seq_group="+${detail.boardDTO.seq_group}+"&seq_group_board=" + ${detail.boardDTO.seq_group_board};
     			}
     		})
     	})
     	
     	// 좋아요
     	$("#body-like").on("click", ".likeBtn", function(){
-    		let seq_board = $(this).val();
+    		let seq_group_board = $(this).val();
     		// 로그인 세션의 id
     		let user_email = "${loginSession.user_email}";
     		
@@ -588,7 +589,7 @@
     			, url : "/like/boardLikeG"
     			, dataType : "json"
     			, data : {
-    				"seq_group_board" : seq_board
+    				"seq_group_board" : seq_group_board
     				, "user_email" : user_email
     			}, success : function(likeCheck){
     				console.log("ajax의 체크: " + likeCheck);
@@ -684,7 +685,7 @@
     		
     		let comment = $(e.target).parents(".commentHead").next().find("textarea").val();
     		let seq_group_comment = $(e.target).parent().val();
-    		console.log(seq_comment);
+    		console.log(seq_group_comment);
     		
     		Swal.fire({
     			title: '댓글을 수정하시겠어요?',

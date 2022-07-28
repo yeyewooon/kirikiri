@@ -144,4 +144,9 @@ public class Group_BoardService {
 	public int getTotal(Criteria cri) throws Exception {
 		return boardDAO.getTotal(cri);
 	}
+	
+	// 공지 3개 얻어오기
+	public List<Group_BoardDTO> getNotice() throws Exception{
+		return boardDAO.getNotice();
+	}
 }
