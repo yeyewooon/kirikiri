@@ -45,6 +45,15 @@
         box-sizing: border-box;
         font-family: "MICEGothic Bold";
       }
+      .container{
+	   max-width: -webkit-fill-available;
+	   height:100%;
+	   padding : 0px;
+	}
+	body, html {
+	   height:1100px;
+	}
+
 
       /* 눈누 폰트 */
       @font-face {
@@ -66,8 +75,8 @@
       /*사이드바*/
       .sidebar {
         float: left;
-        width: 20%;
-        height: 1200px;
+        width: 15%;
+        height: 100%;
         background-color: #4e78f5;
       }
 
@@ -268,7 +277,7 @@
             </h4>
           </div>
         </div>
-        <form id="searchForm">
+        <form id="searchForm" onSubmit="return false;">
 	        <div class="row searchBox">
 	          <div class="d-flex align-items-center m-auto w-75">
 	            <select name="boardNameCategory" class="form-select title w-25 me-3">
@@ -280,20 +289,23 @@
 	              <option value="board_title">title</option>
 	              <option value="board_content">content</option>
 	            </select>
-	            <input class="form-control keyword me-2" name="keyword" id="searchKeyword" type="search" placeholder="검색" aria-label="Search"/>
-	            <button class="btn btn-outline-primary" type="button" id="searchBtn">
-	              Search
-	            </button>
+	            <input class="form-control keyword me-2" name="keyword" id="searchKeyword" type="text" placeholder="검색" aria-label="Search"/>
+	            <button class="btn btn-outline-primary" type="button" id="searchBtn">Search</button>
 	          </div>
 	        </div>
         </form>
+        <div class="row mt-3" style="font-size:15px;">
+        	<div class="col-md-12 d-flex justify-content-end" style="align-items: center;">
+	        	<i class="fa-solid fa-book me-2"></i>
+	        	<a href="" style="text-decoration:none; color:black;" onclick="window.open(this.href, '_blank', 'width=1000, height=1000'); return false;"><span style="padding-right:30px;">Notice</span></a>        	
+        	</div>
+        </div>
         <div class="row resultBox mt-3">
           <table>
             <thead style="background-color: gainsboro; text-align: center">
               <tr>
                 <th scope="col">유형</th>
 				<th scope="col">제목</th>
-				<th scope="col">내용</th>
 				<th scope="col">작성일</th>
 				<th scope="col">조회수</th>
 				<th scope="col">삭제</th>
@@ -307,11 +319,10 @@
                   </tr>
                 </c:when>
                 <c:otherwise>
-                  <c:forEach items="${list}" var="dto">
-                    <tr>
+                  <c:forEach items="${list}" var="dto">  
+                    <tr class="tr">
 	                    <td>일반</td>
-						<td>${dto.board_title}</td>
-						<td>${dto.board_content}</td>
+						<td><a href="/board/toDetailView?seq_board=${dto.seq_board}" onclick="window.open(this.href, '_blank', 'width=1000, height=800'); return false;">${dto.board_title}</a></td>
 						<td>${dto.board_date}</td>
 						<td>${dto.board_count}</td>
 						<td id="icon"><span class="text-center boardDelete" style="cursor:pointer;"
@@ -325,13 +336,13 @@
           </table>
         </div>
 
-    <!-- 검색전 pagination -->
+    <!-- 검색전 pagination -->    
 		<div class="pagination mt-4 justify-content-center" id="page">
 			<nav aria-label="Page navigation example">
 				<ul class="pagination">
 					<c:if test="${naviMap.needPrev eq true}">
 						<li class="page-item"><a class="page-link"
-							href="/admin/adminBoard?curPage=${naviMap.startNavi-1}"><i
+							href="/admin/toBoard?curPage=${naviMap.startNavi-1}"><i
 								class="fa-solid fa-angle-left"></i></a></li>
 					</c:if>
 					<c:forEach var="pageNum" begin="${naviMap.startNavi}" end="${naviMap.endNavi}">
@@ -339,7 +350,7 @@
 					</c:forEach>
 					<c:if test="${naviMap.needNext eq true}">
 						<li class="page-item"><a class="page-link"
-							href="/admin/adminBoard?curPage=${naviMap.endNavi+1}"><i
+							href="/admin/toBoard?curPage=${naviMap.endNavi+1}"><i
 								class="fa-solid fa-angle-right"></i></a></li>
 					</c:if>
 				</ul>
@@ -348,6 +359,12 @@
       </div>
     </div>
     <script>
+	   //검색하는거 enter 키
+	   $(".keyword").on("keyup", function(key) {
+	     if (key.keyCode == 13) {
+	       $("#searchBtn").click();
+	     }
+	   });
       /* 첫 번째 selectBox 모임, 일반 구분 */
       let selectedCategory = "normal";
       $(".title").on("change", function () {
@@ -376,7 +393,6 @@
         });
       }
 
-
       /* 검색 기능 */
       $("#searchBtn").on("click", function () {
         let data = $("#searchForm").serialize();
@@ -385,10 +401,10 @@
         let url;
         let type;
         if (selectedCategory === "normal") {
-          url = "/admin/normalSearch";
+          url = "/admin/normalSearch?curPage=" + curPage;
           type = "일반";
         } else {
-          url = "/admin/meetingSearch";
+          url = "/admin/meetingSearch?curPage=" + curPage;
           type = "모임";
         }
         $.ajax({
@@ -405,13 +421,6 @@
           },
         });
       });
-      
-      //검색하는거 enter 키
-      $("#searchKeyword").on("keyup", function (key) {
-        if (key.keyCode == 13) {
-          $("#searchBtn").click();
-        }
-      });
 
       // 동적으로 함수로 다른 값 파라미터 받고 함수로 만들기
       function makeDynamicEl(data, curPage, type ,keyword) {
@@ -424,9 +433,11 @@
           tr.append(td);
           tr.appendTo("tbody");
         } else {
+          
           const startPage = 1;
           const endPage = Math.ceil(data.length / 10);
           const ul = $(".pagination");
+          
 
           if (curPage > startPage) {
             const li = $("<li>");
@@ -480,7 +491,7 @@
 			} else {
 				endIdx = data.length;
 			}
-
+		
           for (let i=startIdx; i < endIdx; i++) {
         	const dto = data[i];
             let tr = $("<tr>");
@@ -490,24 +501,29 @@
             let td4;
             let td5;
             let td6;
-            let td7;
+            let a;
             let span = $("<span>");
             if (type === "일반") {
-              td2 = $("<td>").append(dto.board_title);
-              td3 = $("<td>").append(dto.board_content);
-              td4 = $("<td>").append(dto.board_date);
-              td5 = $("<td>").append(dto.board_count);
-              td6 = $("<td>");
-              td6.attr("id", "icon");
+              td2 = $("<td>");
+              a = $("<a>");
+              a.attr('href','/board/toDetailView?seq_board=' + dto.seq_board)
+              a.attr('onclick',"window.open(this.href, '_blank', 'width=1000, height=800'); return false;");
+              a.append(dto.board_title);
+              a.appendTo(td2);
+              
+              td3 = $("<td>").append(dto.board_date);
+              td4 = $("<td>").append(dto.board_count);
+              td5 = $("<td>");
+              td5.attr("id", "icon");
 
               let i = $("<i>");
               i.addClass("fa-solid fa-trash");
               span.append(i);
-              td6.append(span);
+              td5.append(span);
 
-              td7 = $("<td>").append(dto.seq_board);
-              td7.addClass("d-none");
-              td7.attr("id", "seq_board");
+              td6 = $("<td>").append(dto.seq_board);
+              td6.addClass("d-none");
+              td6.attr("id", "seq_board");
 
               span.addClass("text-center boardDelete");
               span.css("cursor", "pointer");
@@ -515,21 +531,26 @@
                 boardDelete(this, "/admin/boardDelete", "seq_board");
               });
             } else if (type === "모임") {
-              td2 = $("<td>").append(dto.title);
-              td3 = $("<td>").append(dto.content);
-              td4 = $("<td>").append(dto.written_date);
-              td5 = $("<td>").append(dto.view_count);
-              td6 = $("<td>");
-              td6.attr('id', 'icon');
+           	  td2 = $("<td>");
+              a = $("<a>");
+              a.attr('href','/group_board/toDetailView?seq_board=' + dto.seq_board)
+              a.attr('onclick',"window.open(this.href, '_blank', 'width=1000, height=800'); return false;");
+              a.append(dto.title);
+              a.appendTo(td2);
+              
+              td3 = $("<td>").append(dto.written_date);
+              td4 = $("<td>").append(dto.view_count);
+              td5 = $("<td>");
+              td5.attr('id', 'icon');
 
               let i = $("<i>");
               i.addClass("fa-solid fa-trash");
               span.append(i);
-              td6.append(span);
+              td5.append(span);
 
-              td7 = $("<td>").append(dto.seq_group_board);
-              td7.addClass("d-none");
-              td7.attr('id', 'seq_group_board');
+              td6 = $("<td>").append(dto.seq_group_board);
+              td6.addClass("d-none");
+              td6.attr('id', 'seq_group_board');
 
               span.addClass("text-center boardGroupDelete");
               span.css("cursor", "pointer");
@@ -538,7 +559,7 @@
               });
             }
 
-            tr.append(td1, td2, td3, td4, td5, td6, td7);
+            tr.append(td1, td2, td3, td4, td5, td6);
             tr.appendTo("tbody");
           }
         }

@@ -193,7 +193,7 @@ footer.footer {
 </style>
 </head>
 <body>
-	<!-- page Benu -->
+	<!-- page menu -->
 	<!--네비바-->
         <header class="mb-3 border-bottom">
       <div class="container">
@@ -497,84 +497,72 @@ footer.footer {
 					endIdx = data.length;
 				}
 				
-				for(let i = startIdx; i < endIdx; i++){
-					const dto = data[i];
-					console.log(dto)
-					let tr = $("<tr>");
-					let td1 = $("<td>").append(type);
-					let td2;
-					let td3;
-					let td4;
-					let td5;
-					let td6;
-					let td7;
-					let span = $("<span>");
-					let a;
-					
-					if (type === '일반') {
-						td2 = $("<td>").append(dto.board_title);
-						
-						td3 = $("<td>");
-						a = $("<a>");
-						a.attr('href','/board/toDetailView?seq_board='+dto.seq_board);
-						a.css({
-							'text-decoration':'none',
-							'color':'black'
-						});
-						a.append(dto.board_content);
-						a.appendTo(td3);
-						
-						td4 = $("<td>").append(dto.board_date);
-						td5 = $("<td>").append(dto.board_count);
-						td6 = $("<td>");
-						td6.attr('id','icon');
-						
-						let i = $("<i>");
-						i.addClass('fa-solid fa-trash');
-						span.append(i);
-						td6.append(span);
-						
-						td7 = $("<td>").append(dto.seq_board);
-						td7.addClass('d-none');
-						td7.attr('id','seq_board');
-						
-						span.addClass('text-center boardDelete');
-						span.css('cursor','pointer');
-						span.on("click", function() {
-							boardDelete(this, "/mem/boardDelete", "seq_board")
-						});
-					} else if (type === '모임') {
-						td2 = $("<td>").append(dto.title);
-						
-						td3 = $("<td>");
-						a = $("<a>");
-						a.attr('href','/board/toDetailView?seq_group_board='+dto.seq_group_board);
-						a.css({
-							'text-decoration':'none',
-							'color':'black'
-						});
-						a.append(dto.content);
-						a.appendTo(td3);
-						td4 = $("<td>").append(dto.written_date);
-						td5 = $("<td>").append(dto.view_count);
-						td6 = $("<td>");
-						td6.attr('id','icon');
-						
-						let i = $("<i>");
-						i.addClass('fa-solid fa-trash');
-						span.append(i);
-						td6.append(span);
-						
-						td7 = $("<td>").append(dto.seq_group_board);
-						td7.addClass('d-none');
-						td7.attr('id','seq_group_board');
-						
-						span.addClass('text-center boardGroupDelete');
-						span.css('cursor','pointer');
-						span.on("click", function() {
-							boardDelete(this, "/mem/groupBoardDelete", "seq_groud_board")
-						});
-					}
+				 for (let i=startIdx; i < endIdx; i++) {
+			        	const dto = data[i];
+			            let tr = $("<tr>");
+			            let td1 = $("<td>").append(type);
+			            let td2;
+			            let td3;
+			            let td4;
+			            let td5;
+			            let td6;
+			            let a;
+			            let span = $("<span>");
+			            if (type === "일반") {
+			                td2 = $("<td>");
+			                a = $("<a>");
+			                a.attr('href','/board/toMyDetailWrite?seq_board=' + dto.seq_board)
+			                a.append(dto.board_title);
+			                a.appendTo(td2);
+			                
+			                td3 = $("<td>").append(dto.board_date);
+			                td4 = $("<td>").append(dto.board_count);
+			                td5 = $("<td>");
+			                td5.attr("id", "icon");
+
+			                let i = $("<i>");
+			                i.addClass("fa-solid fa-trash");
+			                span.append(i);
+			                td5.append(span);
+
+			                td6 = $("<td>").append(dto.seq_board);
+			                td6.addClass("d-none");
+			                td6.attr("id", "seq_board");
+
+			                span.addClass("text-center boardDelete");
+			                span.css("cursor", "pointer");
+			                span.on("click", function () {
+			                  boardDelete(this, "/admin/boardDelete", "seq_board");
+			                });
+			              } else if (type === "모임") {
+			            	  
+			             	td2 = $("<td>");
+			                a = $("<a>");
+			                a.attr('href','/group_board/toMyDetailWrite?seq_board=' + dto.seq_board)
+			                a.append(dto.title);
+			                a.appendTo(td2);
+			                
+			                td3 = $("<td>").append(dto.written_date);
+			                td4 = $("<td>").append(dto.view_count);
+			                td5 = $("<td>");
+			                td5.attr('id', 'icon');
+
+			                let i = $("<i>");
+			                i.addClass("fa-solid fa-trash");
+			                span.append(i);
+			                td5.append(span);
+
+			                td6 = $("<td>").append(dto.seq_group_board);
+			                td6.addClass("d-none");
+			                td6.attr('id', 'seq_group_board');
+
+			                span.addClass("text-center boardGroupDelete");
+			                span.css("cursor", "pointer");
+			                span.on("click", function () {
+			                  boardDelete(this, "/admin/groupBoardDelete", "seq_groud_board");
+			                });
+			              }
+
 					
 					tr.append(td1, td2, td3, td4, td5, td6, td7);
 					tr.appendTo("tbody");
@@ -636,20 +624,18 @@ footer.footer {
 				id="tableBox">
 				<thead>
 					<tr>
-						<th scope="col">유형</th>
+		                <th scope="col">유형</th>
 						<th scope="col">제목</th>
-						<th scope="col">내용</th>
 						<th scope="col">작성일</th>
 						<th scope="col">조회수</th>
 						<th scope="col">삭제</th>
-					</tr>
+             		</tr>
 				</thead>
 				<tbody>
 					 <c:forEach items="${list}" var="selectBoardList">
 					 	<tr>
 					 		<td>일반</td>
-							<td>${selectBoardList.board_title}</td>
-							<td><a href="/board/toDetailView?seq_board=${selectBoardList.seq_board}" style="text-decoration:none; color:black;">${selectBoardList.board_content}</a></td>
+							<td><a href="/board/toWriteDetail?seq_board=${selectBoardList.seq_board}" style="color:black; text-decoration:none;"  onclick="window.open(this.href, '_blank', 'width=1000, height=800'); return false;">${selectBoardList.board_title}</a></td>
 							<td>${selectBoardList.board_date}</td>
 							<td>${selectBoardList.board_count}</td>
 							<td id="icon"><span class="text-center boardDelete" style="cursor:pointer;"

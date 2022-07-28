@@ -36,7 +36,7 @@ public class BoardController {
 	/* 자유 게시판 */
 	@RequestMapping(value = "/toBoard") // board 페이지 요청
 	public String toBoard(HttpServletRequest request, HttpServletResponse response, Model model, Criteria cri) throws Exception {
-		
+		System.out.println(cri);
 		model.addAttribute("list", service.getListPaging(cri));
 		int total = service.getTotal(cri);
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);

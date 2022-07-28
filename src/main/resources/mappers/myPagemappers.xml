@@ -9,12 +9,17 @@
 		select * from member
 		where user_email=#{user_email}
 	</select>
+	
+	<select id="selectLoginType" resultType="com.kiri.dto.Login_TypeDTO">
+		select * from login_type
+			where user_email=#{user_email}
+	</select>
 
 	<!-- 프로필 사진 수정 -->
 	<update id="modifyProfilePic"
 		parameterType="map">
 		update member set
-			user_image = #{user_image}
+			user_image = #{user_image, jdbcType = VARCHAR}
 		where user_email = #{user_email}
 	</update>
 
@@ -48,9 +53,9 @@
 	</select>
 	
 	<!-- pw 중복검사 -->
-	<select id="pwCheck" resultType="int" parameterType="String">
+	<select id="pwCheck" resultType="int" parameterType="map">
 		select count(*) from member
-			where user_pw = #{user_pw}
+			where user_pw = #{user_pw} and user_email = #{user_email}
 	</select>
 	
 	<!-- 관심사 정보 -->

@@ -248,7 +248,7 @@
 	            </div>
 	        </c:if>
 	        <div class="col-auto">
-	        	<button type="button" id="toListBtn" class="btn btn-primary">목록으로</button>
+	        	<button type="button" id="toListBtn" class="btn btn-primary">뒤로가기</button>
 	        </div>
         </div>
 		<form id="infoForm" method="get">
@@ -264,7 +264,7 @@
     	// 목록으로 돌아가기
     	$("#toListBtn").on("click", function(){
     		$("#infoForm").find("#seq_board").remove();
-    		$("#infoForm").attr("action", "/board/toBoard");
+    		$("#infoForm").attr("action", "/mem/toWrite");
     		$("#infoForm").submit();
     	})
     	

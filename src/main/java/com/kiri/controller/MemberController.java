@@ -20,6 +20,7 @@ import com.google.gson.Gson;
 import com.kiri.dto.BoardDTO;
 import com.kiri.dto.Group_BoardDTO;
 import com.kiri.dto.HobbyDTO;
+import com.kiri.dto.Login_TypeDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.MessageDTO;
 import com.kiri.dto.SiteDTO;
@@ -57,11 +58,13 @@ public class MemberController {
 		String user_nickname = ((MemberDTO)session.getAttribute("loginSession")).getUser_nickname();
 		
 		MemberDTO selectMember = service.selectMember(user_email);
+		Login_TypeDTO loginType = service.selectLoginType(user_email); 
 		List<HobbyDTO> selectHobbyList = service.selectHobbyList(user_email);
 		List<SiteDTO> selectSiteList = service.selectSiteList(user_email);
 		List<Map<String, Object>> selectGroupList = service.selectGroupList(user_email);
 		List<Map<String, Object>> selectWishList = service.selectWishList(user_email);
 		List<BoardDTO> selectBoardList = service.selectBoardList(user_email);
+		System.out.println("loginType : "+loginType);
 
 		// 생년월일 자르기
 		String date = selectMember.getUser_bd().substring(0, 10);
@@ -92,6 +95,7 @@ public class MemberController {
 		model.addAttribute("memberdto", selectMember);
 		model.addAttribute("hobbyList", selectHobbyList);
 		model.addAttribute("siteList", selectSiteList);
+		model.addAttribute("loginType",loginType);
 		model.addAttribute("selectGroupList", selectGroupList);
 		model.addAttribute("selectWishList", selectWishList);
 		model.addAttribute("selectBoardList", selectBoardList);
@@ -101,11 +105,13 @@ public class MemberController {
 	@RequestMapping(value = "/modifyProfilePic")
 	public String modifyProfilePic(MultipartFile user_image) throws Exception { // 사진 수정
 		System.out.println("user_image : "+user_image.getOriginalFilename());
-		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
-		if(user_image.getOriginalFilename().equals("")) {
-			user_image.getOriginalFilename().equals(null);
-		}
+		MemberDTO dto = ((MemberDTO)session.getAttribute("loginSession"));
+		String user_email = dto.getUser_email();
 		
+		if(user_image.getSize()== 0) {
+			dto.setUser_image(null);
+			service.modifyProfilePic(user_email,null);
+		}
 		// 디렉토리 생성
 		if(!user_image.isEmpty()) { 
 			String realPath = session.getServletContext().getRealPath("profile");
@@ -149,7 +155,25 @@ public class MemberController {
 		model.addAttribute("selectGroupBoardList", selectGroupBoardList);
 		return "member/myWrite";
 	}
-
+	
+	/*
+	 * @RequestMapping(value = "/toWriteDetail") // 게시글 상세페이지 요청 public String
+	 * toDetailView(int seq_board, HttpServletResponse response, Model model,
+	 * Criteria cri) throws Exception{ String user_email =
+	 * ((MemberDTO)session.getAttribute("loginSession")).getUser_email(); // 조회수 로직
+	 * // 쿠키 가져옴 // System.out.println("cookie : " + cookie); //
+	 * if(!(cookie.contains(String.valueOf(seq_board)))) { // cookie += seq_board +
+	 * "/"; // service.viewCntUp(seq_board); // } // Cookie newCookie = new
+	 * Cookie("visit_cookie", cookie); // newCookie.setPath("/"); //
+	 * response.addCookie(newCookie);
+	 * 
+	 * // 게시글 정보 얻기 Map<String, Object> map = service.getDetail(seq_board);
+	 * model.addAttribute("detail", map); // 좋아요 여부, 개수 model.addAttribute("like",
+	 * service.like(seq_board, user_email)); // criteria 인스턴스 전달
+	 * model.addAttribute("cri", cri);
+	 * 
+	 * return "member/myWriteDetail"; }
+	 */
 	@RequestMapping(value = "/profileModifyPage")
 	public String profileModify(String user_email, Model model) throws Exception { // profileModify 페이지 이동
 		System.out.println(user_email);
@@ -185,17 +209,15 @@ public class MemberController {
 
 	@RequestMapping(value = "/profileModify") // 개인정보 수정
 	public String profileModify(MemberDTO dto, String data_password) throws Exception {
-		System.out.println(dto.toString());
-		System.out.println("ㅁㄴㅇㅁㄴㅇ : "+dto.getUser_pw());
-		System.out.println(data_password);
+		
 		if(dto.getUser_pw() == "") {
 			dto.setUser_pw(data_password);
-			System.out.println("ㅁㄴㅇㅁㄴㅇ :"+dto.getUser_pw());
 		}else {
 			String Encryption_pw = ecp.getSHA512(dto.getUser_pw());
-			dto.setUser_pw(Encryption_pw);			
+			dto.setUser_pw(Encryption_pw);
 		}
 		service.profileModify(dto);
+		session.setAttribute("loginSession", dto);
 		return "redirect:myPage";
 	}
 	
@@ -220,11 +242,10 @@ public class MemberController {
 	
 	@RequestMapping(value="/pwCheck") // pw 중복확인
 	@ResponseBody
-	public int pwCheck(String user_pw) throws Exception{
-		System.out.println("password : " + user_pw);
+	public int pwCheck(String user_pw, String user_email) throws Exception{
 		String Encryption_pw = ecp.getSHA512(user_pw); 
 		
-		 int result = service.pwCheck(Encryption_pw);
+		 int result = service.pwCheck(Encryption_pw, user_email);
 		 return result;
 	}
 	
@@ -312,7 +333,6 @@ public class MemberController {
 	@RequestMapping(value = "/profileDelete") // 회원 탈퇴
 	@ResponseBody
 	public String profileDelete(String user_email) throws Exception {
-		System.out.println("�� ��û");
 		String user_delete = "Y";
 
 		Map<String, String> memberdto = new HashMap<String, String>();
@@ -320,6 +340,6 @@ public class MemberController {
 		memberdto.put("user_delete", user_delete);
 		System.out.println(memberdto);
 		service.profileDelete(memberdto);
-		return "/";
+		return "/login/toLogout";
 	}
 }

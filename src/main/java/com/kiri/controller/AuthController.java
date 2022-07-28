@@ -73,7 +73,7 @@ public class AuthController {
         if(!is_singup) { //false 조회 된 것 true 조회 안된 것
         	 Login_TypeDTO type = service.loginType(naverEmail);
         	 
-        	 if(type.getType().equals("naver") && type.getunique_id().equals(ecpNaverId)) {
+        	 if(type.getType().equals("naver") && type.getUnique_id().equals(ecpNaverId)) {
         		 MemberDTO dto = service.socialLogin(naverEmail);
         		 if("N".equals(dto.getUser_blacklist()) && "N".equals(dto.getUser_delete())){
         			 session.setAttribute("loginType", type.getType());
@@ -92,7 +92,7 @@ public class AuthController {
 	       		}
         		 
         		 //일반 회원 가입 네이버로 연동 할지 선택 
-        	 }else if(type.getType().equals("general") && !type.getunique_id().equals(ecpNaverId)) {
+        	 }else if(type.getType().equals("general") && !type.getUnique_id().equals(ecpNaverId)) {
         		 MemberDTO dto = service.socialLogin(naverEmail);
         		 signupService.updateLoginType(dto.getUser_email(), null, ecpNaverId);// 수정중
         		 Map<String,Object> connection =signupService.connection(dto.getUser_name(), dto.getUser_email(), type.getSignup_date(), "일반", "네이버");
@@ -101,7 +101,7 @@ public class AuthController {
         		 return "redirect:/auth/toConnetion";
         		 
         		//일반 회원 가입, 네이버로 연동 하려다가 취소했을 때
-        	 }else if(type.getType().equals("general") && type.getunique_id().equals(ecpNaverId)) {
+        	 }else if(type.getType().equals("general") && type.getUnique_id().equals(ecpNaverId)) {
         		 MemberDTO dto = service.socialLogin(naverEmail);
         		 Map<String,Object> connection =signupService.connection(dto.getUser_name(), dto.getUser_email(), type.getSignup_date(), "일반", "네이버");
         		 session.setAttribute("connection", connection);
@@ -149,7 +149,7 @@ public class AuthController {
 			
 			Login_TypeDTO type = service.loginType(kakaoEmail);
        	 
-	       	if(type.getType().equals("kakao") && type.getunique_id().equals("kakao")) {
+	       	if(type.getType().equals("kakao") && type.getUnique_id().equals("kakao")) {
 	       		MemberDTO dto = service.socialLogin(kakaoEmail);
 	       		if("N".equals(dto.getUser_blacklist()) && "N".equals(dto.getUser_delete())){
 	       			session.setAttribute("loginType", type.getType());
@@ -169,7 +169,7 @@ public class AuthController {
 	       		}
 	       		 
 	       		 //일반 회원 가입 카카오로 연동 할지 선택 
-	       	}else if(type.getType().equals("general") && !type.getunique_id().equals("kakao")) {
+	       	}else if(type.getType().equals("general") && !type.getUnique_id().equals("kakao")) {
 	       		 MemberDTO dto = service.socialLogin(kakaoEmail);
 	       		 signupService.updateLoginType(dto.getUser_email(), null, "kakao");
 	       		 Map<String,Object> connection =signupService.connection(dto.getUser_name(), dto.getUser_email(), type.getSignup_date(), "일반", "카카오");
@@ -178,7 +178,7 @@ public class AuthController {
 	       		 return "redirect:/auth/toConnetion";
 	       		 
 	       		//일반 회원 가입, 네이버로 연동 하려다가 취소했을 때
-	       	}else if(type.getType().equals("general") && type.getunique_id().equals("kakao")) {
+	       	}else if(type.getType().equals("general") && type.getUnique_id().equals("kakao")) {
 	       		 MemberDTO dto = service.socialLogin(kakaoEmail);
 	       		 Map<String,Object> connection =signupService.connection(dto.getUser_name(), dto.getUser_email(), type.getSignup_date(), "일반", "카카오");
 	       		 session.setAttribute("connection", connection);

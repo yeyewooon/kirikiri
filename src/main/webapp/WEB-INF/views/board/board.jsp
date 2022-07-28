@@ -149,7 +149,7 @@
 		                    						</c:otherwise>
 		                    					</c:choose>
 	                    					</td>
-	                    					<td class="col-5 text-start">
+	                    					<td class="col-5 text-center">
 	                    						<%-- /board/toDetailView?seq_board=${dto.seq_board} --%>
 	                    						<a class="move" href="${dto.seq_board}">
 	                    							${dto.board_title}

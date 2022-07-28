@@ -160,18 +160,13 @@ h4 {
 	text-align:left;
 	padding:0px;
 }
-.myList {
-	font-size: 1.1rem;
-	margin: 0px 0px 10px 50px;
-}
 .myMsg {
 	justify-content: center;
 	align-items: center;
 	margin-top: 50px;
 }
-.fa-crown {
-	margin-left: 10px;
-	color: gold;
+.myList{
+	margin-bottom:15px;
 }
 .myWrite {
 	display: flex;
@@ -375,7 +370,6 @@ footer.footer {
 				<div class="col-12 ms-5 mt-1">
 					<i class="fa-solid fa-cake-candles icon m-2"></i><span>${date}</span>
 				</div>
-
 				<div class="col-12 ms-5 mt-1 mb-5">
 					<i class="fa-solid fa-envelope icon m-2"></i><span>${memberdto.user_email}</span>
 				</div>
@@ -455,13 +449,21 @@ footer.footer {
 			})
 			</script>
 			<div class="col-md-4" style="text-align: end">
-				<button type="button" class="btn btn-outline-info mt-4 profileBtn" data-bs-toggle="modal" data-bs-target="#exampleModal2" >개인정보 수정</button>
+			<c:choose>
+				<c:when test="${loginType eq 'general'}">
+					<button type="button" class="btn btn-outline-info mt-4 profileBtn" data-bs-toggle="modal" data-bs-target="#exampleModal2" >개인정보 수정</button>			
+				</c:when>
+				<c:otherwise>
+					<button type="button" class="btn btn-outline-info mt-4 profileBtn" id="profileModify">개인정보 수정</button>
+				</c:otherwise>				
+			</c:choose>
 				<button type="button" class="btn btn-outline-info mt-4 profileBtn"
 					id="profileDelete">회원탈퇴</button>
 				<input type="text" class="d-none" id="user_delete" value="${memberdto.user_delete}">
 				<input type="text" class="d-none" id="user_email" value="${memberdto.user_email}">
 			</div>		
 			<!-- 개인정보 수정 모달 -->
+			
 			<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 			  <div class="modal-dialog">
 			    <div class="modal-content" style="width:340px; height:400px;">
@@ -523,13 +525,15 @@ footer.footer {
 							</h4>
 							<hr id="line" />
 							<div class="d-flex justify-content-end me-4">
-								<i class="fa-solid fa-wrench me-4" data-bs-toggle="modal"
+								<i class="fa-solid fa-pencil me-4" data-bs-toggle="modal"
 									data-bs-target="#exampleModal1" id="siteModify"
 									style="cursor: pointer;"></i>
 							</div>
 							<c:forEach items="${siteList}" var="sitedto">
-								<div class="myList">
-									<span><i class="fa-solid fa-location-dot listIcon me-3"></i>${sitedto.area}</span>
+								<div class="row myList">
+									<div class="col-3 d-flex justify-content-end"><i class="fa-solid fa-location-dot listIcon me-3"></i></div>
+									<div class="col-7 d-flex justify-content-start"><span>${sitedto.area}</span></div>
+									<div class="col-2 d-flex justify-content-end"></div>
 								</div>
 							</c:forEach>
 							
@@ -652,13 +656,17 @@ footer.footer {
 							</h4>
 							<hr id="line" />
 							<div class="d-flex justify-content-end me-4">
-								<i class="fa-solid fa-wrench me-4" data-bs-toggle="modal"
+								<i class="fa-solid fa-pencil me-4" data-bs-toggle="modal"
 									data-bs-target="#exampleModal" id="hobbyModify"
 									style="cursor: pointer;"></i>
 							</div>
 							<c:forEach items="${hobbyList}" var="hobbydto">
-								<div class="myList">
-									<span><i class="fa-solid fa-thumbs-up listIcon me-3"></i>${hobbydto.hobby}</span>
+								<div class="row myList">
+									<div class="col-3 d-flex justify-content-end"><i class="fa-solid fa-thumbs-up listIcon me-3"></i></div>
+									<div class="col-7 d-flex justify-content-start">
+										<span>${hobbydto.hobby}</span>
+									</div>
+									<div class="col-2"></div>
 								</div>
 							</c:forEach>
 
@@ -835,20 +843,40 @@ footer.footer {
 							</h4>
 							<hr id="line" />
 							<div style="height:16px;"></div>
-							<c:forEach items="${selectGroupList}" var="Groupdto">
-								<c:if test="${Groupdto.access eq '주최자'}">
-									<div class="myList">
-										<span><i class="fa-solid fa-people-group listIcon me-3"></i><a href="/group/toGroupDetail?seq_group=${Groupdto.SEQ_GROUP}" style="text-decoration:none; color:black;">${Groupdto.TITLE}</a><i
-											class="fa-solid fa-crown"></i></span>
+							<c:if test="${selectGroupList.size() == 0}">
+								<div class="row myList" id="myList">
+									<div class="col-3 d-flex justify-content-end"></div>
+									<div class="col-7 d-flex justify-content-start">
+										<span> 가입한 모임이 없습니다.</span>									
 									</div>
-								</c:if>
-								<c:if test="${Groupdto.access eq '맴버'}">
-									<div class="myList">
-										<span><i class="fa-solid fa-people-group listIcon me-3"></i><a href="/group/toGroupDetail?seq_group=${Groupdto.SEQ_GROUP}" style="text-decoration:none; color:black;">${Groupdto.TITLE}</a></span>
-									</div>
-								</c:if>
-
-							</c:forEach>
+									<div class="col-2 d-flex justify-content-start"></div>
+								</div>
+							</c:if>
+							<c:if test="${selectGroupList.size() > 0}">
+								<c:forEach items="${selectGroupList}" var="Groupdto">
+									<c:if test="${Groupdto.access eq '주최자'}">
+										<div class="row">
+											<div class="col-3 d-flex justify-content-end" style="padding:none;"><i class="fa-solid fa-people-group listIcon"></i></div>
+											<div class="col-7 d-flex justify-content-start">
+												<i class="fa-solid fa-crown me-3" style="color:gold;"></i>
+												<span><a href="/group/toGroupDetail?seq_group=${Groupdto.SEQ_GROUP}" style="text-decoration:none; color:black;">${Groupdto.TITLE}</a></span>
+											</div>
+											<div class="col-2"></div>
+										</div>
+									</c:if>
+									<c:if test="${Groupdto.access eq '맴버'}">
+										<div class="row">
+											<div class="col-3 d-flex justify-content-end">
+												<i class="fa-solid fa-people-group listIcon"></i>
+											</div>
+											<div class="col-7 d-flex justify-content-start">
+												<span><a href="/group/toGroupDetail?seq_group=${Groupdto.SEQ_GROUP}" style="text-decoration:none; color:black;">${Groupdto.TITLE}</a></span>
+											</div>
+											<div class="col-2"></div>
+										</div>
+									</c:if>
+								</c:forEach>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -863,15 +891,22 @@ footer.footer {
 							<hr id="line" />
 							<div style="height:16px;"></div>
 							<c:if test="${selectBoardList.size() == 0}">
-								<div class="myList" id="myList">
-									<span>내가 쓴 글이 없습니다.</span>
+								<div class="row myList" id="myList">
+									<div class="col-3 d-flex justify-content-end"></div>
+									<div class="col-7 d-flex justify-content-start">
+										<span>내가 쓴 글이 없습니다.</span>									
+									</div>
+									<div class="col-2 d-flex justify-content-start"></div>
 								</div>
 							</c:if>
 							<c:if test="${selectBoardList.size() > 0}">
-								<c:forEach items="${selectBoardList}" var="boarddto"
-									varStatus="status" begin="0" end="2">
-									<div class="myList">
-										<span><i class="fa-solid fa-pen-nib listIcon me-3"></i>${boarddto.board_title}</span>
+								<c:forEach items="${selectBoardList}" var="boarddto" varStatus="status" begin="0" end="2">
+									<div class="row myList">
+										<div class="col-3 d-flex justify-content-end"><i class="fa-solid fa-pen-nib listIcon me-3"></i></div>
+										<div class="col-7 d-felx justify-content-start">
+											<span>${boarddto.board_title}</span>
+										</div>
+										<div class="col-2 d-felx justify-content-start"></div>
 									</div>
 								</c:forEach>
 								<div class="myWrite mt-3">
@@ -890,21 +925,24 @@ footer.footer {
 							<hr id="line" />
 							<div style="height:16px;"></div>
 							<c:if test="${selectWishList.size() == 0}">
-								<div class="myList" id="myList">
-									<span>찜한 모임이 없습니다.</span>
+								<div class="row myList" id="myList">
+									<div class="col-3 d-flex justify-content-end"></div>
+									<div class="col-7 d-flex justify-content-start">
+										<span>찜한 모임이 없습니다.</span>									
+									</div>
+									<div class="col-2 d-flex justify-content-start"></div>
 								</div>
 							</c:if>
-
 							<c:if test="${selectWishList.size() > 0}">
-								<c:forEach items="${selectWishList}" var="wishlistdto">
-									<div class="myList d-flex" id="wishBox">
-										<div class="col-md-2">
-											<i class="fa-solid fa-heart listIcon me-3"></i>
+								<c:forEach items="${selectWishList}" var="wishlistdto" begin="0" end="2">
+									<div class="row myList" id="wishBox">
+										<div class="col-3 d-flex justify-content-end">
+											<i class="fa-solid fa-heart listIcon"></i>
 										</div>
-										<div class="col-md-8">
+										<div class="col-6 d-flex justify-content-start">
 											<span>${wishlistdto.TITLE}</span>
 										</div>
-										<div class="col-md-2" style="text-align: center;">
+										<div class="col-3 d-flex justify-content-start">
 											<i class="fa-solid fa-trash-can wishDelete"></i> <input
 												type="text" id="seq_group" class="seq_group d-none"
 												value="${wishlistdto.SEQ_GROUP}">
@@ -919,10 +957,11 @@ footer.footer {
 					/* 비밀번호 중복확인 */
 					$("#checkPw").on("click",function(){
 						let user_pw = $("#password").val();
+						let user_email = $("#user_email").val();
 						$.ajax({
 							url:"/mem/pwCheck",
 							type:"post",
-							data:{"user_pw": user_pw},
+							data:{"user_pw": user_pw, "user_email": user_email},
 							dataType:"json",
 							success:function(data){
 								if(data == 1){

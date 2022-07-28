@@ -133,7 +133,6 @@ public class AdminController {
 		int group_boardCnt = service.selectGroupBoardCount();
 		
 		int totalCnt = boardCnt + group_boardCnt;
-		System.out.println(totalCnt);
 		model.addAttribute("totalCnt",totalCnt);
 		
 		// 페이지 네이션
