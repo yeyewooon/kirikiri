@@ -5,18 +5,6 @@
    
 <mapper namespace="boardMapper">
 	
-	<!-- 전체 게시글 목록 -->
-<!-- 	<select id="selectAll" resultType="com.kiri.dto.BoardDTO">
-		select * from board
-			order by (case when board_category = '공지' then 1 else 2 end), seq_board desc
-	</select> -->
-	
-	<!-- 게시글 카테고리별 정렬 -->
-<!-- 	<select id="selectCategory" parameterType="String" resultType="com.kiri.dto.BoardDTO">
-		select * from board
-			where board_category like '%'||#{category}||'%' order by seq_board desc
-	</select> -->
-	
 	<!-- 글 하나 불러오기 -->
 	<select id="selectOne" parameterType="int" resultType="com.kiri.dto.BoardDTO">
 		select * from board
@@ -110,11 +98,11 @@
 				(select /*+ index_desc(board board_index) */ rownum as rn, board.*
 					from board where
 						<if test="category != '공지'">
-						board_category not like '%'|| '공지' ||'%' and
+							board_category not like '%'|| '공지' ||'%' and
 						</if>
-		<![CDATA[
+			<![CDATA[
               			rownum <= #{pageNum} * #{amount}
-		]]>
+			]]>
 			<if test="keyword != null">
 				<include refid="criteria"></include>
 			</if>
@@ -125,6 +113,17 @@
 				)
 			where rn > (#{pageNum} -1) * #{amount}
 		]]>
+	</select>
+	
+	<!-- 공지사항 상단 3개 정렬 -->
+	<select id="getNotice" resultType="com.kiri.dto.BoardDTO">
+		select * from
+			(select * from board
+				where board_category='공지'
+				order by seq_board desc)
+			<![CDATA[
+			where ROWNUM <=3 order by seq_board desc
+			]]>
 	</select>
 	
 <!-- 	<select id="getListPaging" parameterType="com.kiri.utills.Criteria" resultType="com.kiri.dto.BoardDTO">

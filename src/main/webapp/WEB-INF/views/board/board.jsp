@@ -277,7 +277,7 @@
 			<div class="row mt-4 justify-content-end">
 				<div class="col-auto">
 		            <c:choose>
-		            	<c:when test="${loginSession.user_email eq 'admin'}">
+		            	<c:when test="${loginType eq 'admin'}">
 		            		<button type="button" id="writeBtn" class="btn" style="background-color: #fce2e1;">관리자 글쓰기</button>
 		            	</c:when>
 		            	<c:otherwise>
@@ -323,24 +323,30 @@
 	                    </thead>
 	                    <tbody>
 	                    	<c:choose>
-	                    		<c:when test="${list.size() == 0}">
+	                    		<c:when test="${list.size() == 0 && noticeList.size() == 0}">
 	                    			<tr>
 	                    				<td colspan="5">등록된 게시글이 없습니다.</td>
 	                    			</tr>
 	                    		</c:when>
 	                    		<c:otherwise>
+	                    			<c:forEach items="${noticeList}" var="notice">
+	                    				<tr>
+		                    					<td class="col-2">
+			                    					<i class="fa-solid fa-bullhorn"></i>
+		                    					</td>
+		                    					<td class="col-5 text-start">
+		                    						<a class="move" href="${notice.seq_board}">
+		                    							${notice.board_title}
+		                    						</a>
+		                    					</td>
+		                    					<td class="col-2">${notice.user_nickname}</td>
+		                    					<td class="col-2">${notice.board_date}</td>
+		                    					<td class="col-1">${notice.board_count}</td>
+		                    			</tr>
+                   					</c:forEach>
 	                    			<c:forEach items="${list}" var="dto">
 	                    				<tr>
-	                    					<td class="col-2">
-		                    					<c:choose>
-		                    						<c:when test="${dto.board_category eq '공지'}">
-		                    							<i class="fa-solid fa-bullhorn"></i>
-		                    						</c:when>
-		                    						<c:otherwise>
-		                    							${dto.board_category}
-		                    						</c:otherwise>
-		                    					</c:choose>
-	                    					</td>
+	                    					<td class="col-2">${dto.board_category}</td>
 	                    					<td class="col-5 text-start">
 	                    						<%-- /board/toDetailView?seq_board=${dto.seq_board} --%>
 	                    						<a class="move" href="${dto.seq_board}">

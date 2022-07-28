@@ -180,4 +180,9 @@ public class BoardDAO {
 	public int getTotal(Criteria cri) throws Exception{
 		return session.selectOne("boardMapper.getTotal", cri);
 	}
+	
+	// 공지사항 상단 3개 정렬
+	public List<BoardDTO> getNotice() throws Exception{
+		return session.selectList("boardMapper.getNotice");
+	}
 }

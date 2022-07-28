@@ -295,6 +295,7 @@
         	
         	<div class="d-none">
         		<input type="text" id="seq_group_board" name="seq_group_board" value="${modMap.boardDTO.seq_group_board}">
+        		<input type="text" id="seq_group" name="seq_group" value="${modMap.boardDTO.seq_group}">
         	</div>
 	        <div class="row mt-4 text-center">
 	            <div class="col-1">

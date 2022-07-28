@@ -13,6 +13,7 @@ public class Group_Board_FileDAO {
 	private SqlSession session;
 	// 파일 db 넣기
 	public void uploadFile(Group_Board_FileDTO dto) throws Exception{
+		System.out.println(dto.toString());
 		session.insert("fileMapper.insertG", dto);
 	}
 	

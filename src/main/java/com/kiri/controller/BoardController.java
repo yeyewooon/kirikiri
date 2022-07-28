@@ -39,6 +39,7 @@ public class BoardController {
 	public String toBoard(Model model, Criteria cri) throws Exception {
 		
 		model.addAttribute("list", service.getListPaging(cri));
+		model.addAttribute("noticeList", service.getNotice());
 		int total = service.getTotal(cri);
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
 		model.addAttribute("pageMaker", pageMake);
