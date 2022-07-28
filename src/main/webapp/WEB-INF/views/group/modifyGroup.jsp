@@ -7,31 +7,20 @@
 <head>
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="icon" href="/favicon.ico" type="image/x-icon">
-
 <!-- swal -->
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="sweetalert2.min.js"></script>
 <!-- bootstrap -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-	rel="stylesheet" />
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-	crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <!--구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap"
-	rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap" rel="stylesheet" />
 <!-- jquery -->
-<script src="https://code.jquery.com/jquery-3.6.0.js"
-	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!-- 아이콘 -->
-<script src="https://kit.fontawesome.com/f9358a6ceb.js"
-	crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 <!-- summernote -->
 <!-- include libraries(jQuery, bootstrap) -->
 <!-- summernote -->
@@ -39,12 +28,10 @@
 <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
 <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 <!-- include summernote css/js-->
- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>모임 생성 페이지</title>
-
-
 <script>
 //썸머노트
 $(document).ready(function() {
@@ -90,10 +77,8 @@ $(document).ready(function() {
 				  }
 			  }
 		});
-		
 	         // 주기적으로 감지할 대상 요소 선정
 	         let target = document.querySelector(".note-editable");
-	         console.log(target);
 	         // DOM의 어떤 부분을 감시할지를 옵션 설정
 	         let config = { 
 	            childList: true, // 자식노드 추가/제거 감지
@@ -102,12 +87,10 @@ $(document).ready(function() {
 	         
 	         // 옵저버 인스턴스 생성, 콜백함수 설정
 	         let observer = new MutationObserver(function(mutationList){ // 타겟에 변화가 일어나면 콜백함수를 실행하게 된다.
-	            console.log(mutationList);
 	            for(let mutation of mutationList){
 	               if(mutation.removedNodes.length == 1){
 	                  if(mutation.removedNodes[0].src != null) {
 	                     let img = mutation.removedNodes[0].src;
-	                     //console.log(img);
 	                     let decode_src = img.replace("http://localhost/boardFile/", "");
 	                     let src = decodeURIComponent(decode_src);
 	                     $.ajax({
@@ -115,9 +98,12 @@ $(document).ready(function() {
 	                        , type : "post"
 	                        , data : {"src" : src}
 	                        , success : function(data){
-	                           console.log(data);
 	                        }, error : function(e){
-	                           console.log(e);
+	                        	Swal.fire({
+	  							  icon: 'error',
+	  							  title: '에러가 발생했네요..',
+	  							  text: '관리자에게 문의해주세여!',
+	  							});
 	                        }
 	                     })
 	                  }
@@ -126,8 +112,6 @@ $(document).ready(function() {
 	         }); 
 	         // 감지 시작
 	         observer.observe(target, config);
-			
-
 });
 
 //summernote 이미지 업로드 function
@@ -144,7 +128,11 @@ function uploadSummernoteImageFile(file, editor){
       , success : function(data){
          $(editor).summernote("editor.insertImage", data.url);
       }, error : function(e){
-         console.log(e);
+    	  Swal.fire({
+			  icon: 'error',
+			  title: '에러가 발생했네요..',
+			  text: '관리자에게 문의해주세여!',
+			});
       }
    });
 }
@@ -204,46 +192,6 @@ body {
 	width: 50%;
 }
 
-/*맨위 사진*/
-.topimg {
-	background-color: #d2e3ec;
-	width: 100%;
-}
-
-.txtBox div {
-	color: rgba(85, 85, 95, 0.993);
-}
-
-.txtBox>div:first-child {
-	font-size: 35px;
-	color: navy;
-	text-shadow: 3px 3px white;
-}
-
-/* 동그라미 세개 */
-.circleImg {
-	width: 200px;
-	height: 200px;
-	background-color: #faead2;
-	border-radius: 50%;
-}
-
-.circleTitle {
-	font-size: 26px;
-	color: #83c8e5;
-}
-
-#circle_img {
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
-}
-
-/* 네모네모 영역 */
-.mainImg {
-	object-fit: cover;
-}
-
 #bestParty {
 	background-color: #e8f5ed;
 	font-family: "Do Hyeon", sans-serif;
@@ -252,13 +200,6 @@ body {
 a {
 	text-decoration: none;
 	color: black;
-}
-
-/*모임영역 카드6개*/
-/* body menu */
-body {
-	/* background-color: #f6f7f9; */
-	
 }
 
 .mainContainer {
@@ -360,13 +301,13 @@ footer.footer {
 
 .btn-primary {
     color: #fff;
-    background-color: #afc9f6;
     border-color: #fff;
+	background-color: #4dabf7;
 }
 
 .btn-primary:hover {
-	border-color: #fff;
-	background-color: cornflowerblue;
+	background-color: #4263eb;
+    border-color: #fff;
 }
 
 
@@ -376,6 +317,7 @@ footer.footer {
 <body>
 	<!--네비바-->
       <header class="mb-3 border-bottom">
+      <div style= "background-color : #fff;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -405,7 +347,7 @@ footer.footer {
                         <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/signup">회원가입</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
                            </c:if>
                            <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
                               <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
@@ -489,6 +431,7 @@ footer.footer {
             </div>
          </nav>
       </div>
+     </div>
    </header>
 	<div class="container w-75 mainContainer">
 		<form action="/group/modifyGroup" method="post"
@@ -502,37 +445,65 @@ footer.footer {
 					</h2>
 				</div>
 				<!-- seq_group 몰래 넣기 -->
-				<input type="text" name="seq_group" id="seq_group" value="${tbl_group_dto.seq_group}" hidden>
+				<input type="text" name="seq_group" id="seq_group"
+					value="${tbl_group_dto.seq_group}" hidden>
 				<!--관심사 버튼  -->
-				<div class="col-9 mainTextInterest d-flex flex-column justify-content-start">
+				<div
+					class="col-9 mainTextInterest d-flex flex-column justify-content-start">
 					<h2>Interests</h2>
 					<span style="font-size: 14px;">주제가 구체적일수록 비슷한 관심사를 가진 사람들에게
-						그룹을 <br>홍보하기가 더 쉬워집니다. 주제는 1개만 선택 가능합니다.<br><br>
-						기존에 선택하셨던 주제는 <strong>${tbl_group_dto.group_category}</strong> 입니다.
+						그룹을 <br>홍보하기가 더 쉬워집니다. 주제는 1개만 선택 가능합니다.<br>
+					<br> 기존에 선택하셨던 주제는 <strong>${tbl_group_dto.group_category}</strong>
+						입니다.
 					</span>
 					<div class="row mt-4">
 						<div class="col">
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="아웃도어/여행">아웃도어/여행</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="운동/스포츠">운동/스포츠</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="외국어/언어">외국어/언어</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="반려동물">반려동물</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="아웃도어/여행">아웃도어/여행</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="운동/스포츠">운동/스포츠</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="외국어/언어">외국어/언어</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="반려동물">반려동물</button>
 						</div>
 					</div>
 					<div class="row mt-2">
 						<div class="col">
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="음악/악기">음악/악기</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="공예/만들기">공예/만들기</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="댄스/무용">댄스/무용</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="인문학/책/글">인문학/책/글</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="음악/악기">음악/악기</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="공예/만들기">공예/만들기</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="댄스/무용">댄스/무용</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="인문학/책/글">인문학/책/글</button>
 						</div>
 					</div>
 					<div class="row mt-2">
 						<div class="col">
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="사진/영상">사진/영상</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="게임/오락">게임/오락</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="요리/제조">요리/제조</button>
-							<button type="button" class="btn btn-outline-primary rounded-pill categoryBtn" value="문화/공연/축제">문화/공연/축제</button>
-							<input type="text" name="group_category" id="group_category" value="${tbl_group_dto.group_category}">
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="사진/영상">사진/영상</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="게임/오락">게임/오락</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="요리/제조">요리/제조</button>
+							<button type="button"
+								class="btn btn-outline-primary rounded-pill categoryBtn"
+								value="문화/공연/축제">문화/공연/축제</button>
+							<input type="text" name="group_category" id="group_category"
+								value="${tbl_group_dto.group_category}" hidden>
 						</div>
 					</div>
 				</div>
@@ -547,7 +518,8 @@ footer.footer {
 					</h2>
 				</div>
 				<!--기본 글쓰기 -->
-				<div class="col-9 mainTextBasicInfo d-flex flex-column justify-content-start">
+				<div
+					class="col-9 mainTextBasicInfo d-flex flex-column justify-content-start">
 					<h2>Basic Info</h2>
 					<strong class="mt-2">모임 이름</strong> <span style="font-size: 14px;"
 						class="mt-2">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. 떠오르는 기발한
@@ -555,7 +527,8 @@ footer.footer {
 					</span>
 					<div class="form-floating mb-3 mt-1">
 						<input type="text" class="form-control" id="group_title"
-							placeholder="모임 이름" name="group_title" value="${tbl_group_dto.group_title}">
+							placeholder="모임 이름" name="group_title"
+							value="${tbl_group_dto.group_title}">
 					</div>
 					<strong class="mt-3">모집 내용</strong> <span style="font-size: 14px;"
 						class="mt-2">모집내용은 회원들에게 그룹을 홍보할 때 표시됩니다. <br>변경사항이
@@ -578,21 +551,27 @@ footer.footer {
 					</h2>
 				</div>
 				<!--위치 설정  -->
-				<div class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
+				<div
+					class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
 					<h3>Location</h3>
 					<span style="font-size: 14px;">해당 지역의 사람들이 귀하의 이벤트를 발견하도록 돕고
-						<br> 참석자들에게 위치를 제공해주세요.<br><br>
-						기존에 선택하셨던 위치는 <strong>${tbl_group_dto.group_site}</strong> 입니다.
+						<br> 참석자들에게 위치를 제공해주세요.<br>
+					<br> 기존에 선택하셨던 위치는 <strong>${tbl_group_dto.group_site}</strong>
+						입니다.
 					</span> <span class="mt-2"><strong>새로운 지역 설정</strong></span>
 					<div class="selectBox d-flex">
-						<select class="form-select mt-2 w-25" name="sido1" id="sido1" onchange="selectBoxChange1(this.value);"></select> 
-						<select class="form-select mt-2 w-25 ms-3" name="gugun1" id="gugun1" onchange="selectBoxChange2(this.value);"></select>
-						<button type="button" class="btn btn-primary mt-2 group_siteBtn ms-3">지역 선택 완료</button>
+						<select class="form-select mt-2 w-25" name="sido1" id="sido1"
+							onchange="selectBoxChange1(this.value);"></select> <select
+							class="form-select mt-2 w-25 ms-3" name="gugun1" id="gugun1"
+							onchange="selectBoxChange2(this.value);"></select>
+						<button type="button"
+							class="btn btn-primary mt-2 group_siteBtn ms-3">지역 선택 완료</button>
 					</div>
 					<!--모임 지역-->
-					<input type="text" id="group_site" name="group_site" value="${tbl_group_dto.group_site}"> 
-					<input type="text" id="sido1Input" name="sido1Input"> 
-					<input type="text" id="gugun1Input" name="gugun1Input">
+					<input type="text" id="group_site" name="group_site"
+						value="${tbl_group_dto.group_site}" hidden> <input
+						type="text" id="sido1Input" name="sido1Input" hidden> <input
+						type="text" id="gugun1Input" name="gugun1Input" hidden>
 				</div>
 			</div>
 
@@ -605,23 +584,26 @@ footer.footer {
 					</h2>
 				</div>
 				<!--이미지 올리기 -->
-				<div class="col-9 mainTextFile d-flex flex-column justify-content-start">
+				<div
+					class="col-9 mainTextFile d-flex flex-column justify-content-start">
 					<h2>Main Image</h2>
 					<span style="font-size: 14px;">썸네일로 보여질 이미지입니다. <br>본인이
 						생각하는 최고의 사진을 넣어주세요!
 					</span>
 					<div class="imgBox mt-4">
-					<c:choose>
+						<c:choose>
 							<c:when test="${tbl_group_dto.sys_name ne null}">
-								<img src="/group_profile/${tbl_group_dto.sys_name}" id="profile_image">
+								<img src="/group_profile/${tbl_group_dto.sys_name}"
+									id="profile_image">
 							</c:when>
 							<c:otherwise>
 								<img src="/resources/images/메인사진2(배경).png" id="profile_image">
 							</c:otherwise>
-					</c:choose>
+						</c:choose>
 					</div>
 					<input type="file" class="form-control mt-3 w-75" name="groupFile"
-						id="groupFile" accept='image/jpeg,image/gif,image/png' onchange="chk_file_type(this)"/>
+						id="groupFile" accept='image/jpeg,image/gif,image/png'
+						onchange="chk_file_type(this)" />
 				</div>
 			</div>
 
@@ -634,11 +616,13 @@ footer.footer {
 					</h2>
 				</div>
 				<!--위치 설정  -->
-				<div class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
+				<div
+					class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
 					<h2>Member</h2>
 					<span style="font-size: 14px;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
-						인원은 최소 2명부터 최대 10명까지 가능합니다.<br><br>
-					현재 모임의 맴버수는 <strong>${fn:length(memberList)}명</strong> 입니다.
+						인원은 최소 2명부터 최대 10명까지 가능합니다.<br>
+					<br> 현재 모임의 맴버수는 <strong>${fn:length(memberList)}명</strong>
+						입니다.
 					</span> <strong class="mt-3">인원 설정</strong>
 					<div class="memberCntBox d-flex mt-2 ">
 						<div
@@ -654,7 +638,8 @@ footer.footer {
 							<i class="fa-solid fa-plus"></i>
 						</div>
 					</div>
-					<input type="text" name="group_people" id="group_people" value="${tbl_group_dto.group_people}">
+					<input type="text" name="group_people" id="group_people"
+						value="${tbl_group_dto.group_people}" hidden>
 				</div>
 			</div>
 			<!--이미지-->
@@ -666,7 +651,8 @@ footer.footer {
 					</h2>
 				</div>
 				<!--이미지 올리기 -->
-				<div class="col-9 mainTextFile d-flex flex-column justify-content-start">
+				<div
+					class="col-9 mainTextFile d-flex flex-column justify-content-start">
 					<h2>Guideline</h2>
 					<span>
 						<h5>거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
@@ -686,7 +672,6 @@ footer.footer {
 		</form>
 	</div>
 	</div>
-
 	<!--뒤로가기 , 동의 후 등록-->
 	<div class="mainFooter d-flex justify-content-center align-items-center mt-3">
 		<span class="mainFooterBtnBox">
@@ -694,7 +679,6 @@ footer.footer {
 			<button class="btn btn-primary ms-4" id="modifyGroupBtn">동의 후 수정</button>
 		</span>
 	</div>
-
 	<!-- Footer-->
 	<div class="footerWrapper" style="background-color: #fff;">
 		<div class="container">
@@ -739,26 +723,6 @@ footer.footer {
 		</div>
 	</div>
 	<script>
-
-   // 파일 타입 설정
-   /* function chk_file_type(obj) {
-		 let file_kind = obj.value.lastIndexOf('.');
-		 let file_name = obj.value.substring(file_kind+1,obj.length);
-		 let file_type = file_name.toLowerCase();
-		 let check_file_type=new Array();​
-		 check_file_type=['jpg','gif','png','jpeg','bmp'];
-		 if(check_file_type.indexOf(file_type)==-1){
-		    alert('이미지 파일만 선택할 수 있습니다.');
-		    let parent_Obj=obj.parentNode
-		    let node=parent_Obj.replaceChild(obj.cloneNode(true),obj);
-		  return false;
-		 }
-		}	 */
-	
-	
-	
-	
-	
   // 지역 설정
   $('document').ready(function() {
 	  var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
@@ -903,9 +867,6 @@ footer.footer {
 	      Swal.fire('지역 선택을 완료를 눌러주세요');
 	      return;
 	  }
-	  
-	  console.log($(".group_info").val());
-	 
 	 $("#groupForm").submit();
   })
   
@@ -919,11 +880,8 @@ footer.footer {
     reader.readAsDataURL(this.files[0]);
    
     reader.onload = function (e) {
-    	 console.log("e.target ", e.target.result);
     	 profile_image.src = e.target.result;
     }
-    
-    console.log($("#groupFile").val());
   }
 
   // 카테고리 선택
@@ -945,7 +903,6 @@ footer.footer {
 
   // 지역 설정
   let selectBoxChange = function (value) {
-    console.log(value);
     $("#group_site").val(value);
   }
 
@@ -960,8 +917,6 @@ footer.footer {
       countUp();
       cntCondition();
     } else if ($(this).attr("id") === "minusBtn") {
-    	console.log(curMemberCnt);
-    	console.log(memberCnt);
     	if(curMemberCnt > memberCnt-1){
     		Swal.fire({
     	        icon: 'error',
