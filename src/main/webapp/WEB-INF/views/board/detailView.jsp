@@ -438,7 +438,7 @@
 	        	<input class="d-none" id="seq_board" name="seq_board" value="${detail.boardDTO.seq_board}">
 				<div class="col-10">
 					<!-- <input class="form-control" type="text" style="height: 60px" placeholder="댓글을 입력하세요."> -->
-					<textarea id="inputComment" name="comment" style="resize: none;" class="form-control" placeholder="댓글을 입력하세요"></textarea>
+					<textarea id="inputComment" name="comment_content" style="resize: none;" class="form-control" placeholder="댓글을 입력하세요"></textarea>
 				</div>
 				<div class="col-2">
 					<button type="button" id="write-commentBtn" class="btn w-100 h-100" style="background-color: #d2e3ec;">등록</button>

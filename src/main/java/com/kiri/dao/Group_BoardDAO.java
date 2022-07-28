@@ -97,5 +97,9 @@ public class Group_BoardDAO {
 	public int delete(int seq_group_board) throws Exception{
 		return session.delete("groupBoardMapper.delete", seq_group_board);
 	}
-
+	
+	// 공지 3개
+	public List<Group_BoardDTO> getNotice() throws Exception{
+		return session.selectList("groupBoardMapper.getNotice");
+	}
 }

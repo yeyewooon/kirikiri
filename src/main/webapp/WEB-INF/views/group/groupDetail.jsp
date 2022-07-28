@@ -1031,7 +1031,7 @@ footer.footer {
                    // 그룹 활동 버튼
                    let activeText = this.innerHTML;
                    if(activeText == "게시판"){
-                      location.href = "#";
+                      location.href = "/Gboard/toBoard?seq_group="+seq_group;
                    }else if(activeText == "일정") {
                       location.href = "/cal/toGroupCalendar?seq_group="+seq_group;
                    }else if(activeText == "채팅") {

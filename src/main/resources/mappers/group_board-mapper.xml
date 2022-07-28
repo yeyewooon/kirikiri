@@ -28,15 +28,15 @@
 	
 	<!-- 게시물 목록(페이징) -->	
 	<select id="getListPaging" parameterType="com.kiri.utills.Criteria" resultType="com.kiri.dto.Group_BoardDTO">
-		<![CDATA[
 			select * from
-				(select rownum as rn, A.* from
-					(select * from group_board 
-						where seq_group = #{seq_group}
-						order by
-						(case when gboard_category = '공지' then 1 else 2 end), seq_group_board desc) A
-					where rownum <= #{pageNum} * #{amount}
-		]]>
+				(select /*+ index_desc(group_board gboard_index) */ rownum as rn, group_board.*
+					from group_board where
+						<if test="category != '공지'">
+							gboard_category not like '%'|| '공지' ||'%' and
+						</if>
+			<![CDATA[
+						rownum <= #{pageNum} * #{amount}
+			]]>
 			<if test="keyword != null">
 				<include refid="criteria"></include>
 			</if>
@@ -49,17 +49,30 @@
 		]]>
 	</select>
 	
+	<!-- 공지사항 상단 3개 정렬 -->
+	<select id="getNotice" resultType="com.kiri.dto.Group_BoardDTO">
+		select * from
+			(select * from group_board
+				where gboard_category='공지'
+				order by seq_group_board desc)
+			<![CDATA[
+			where ROWNUM <=3 order by seq_group_board desc
+			]]>
+	</select>
+	
 	<!-- 게시물 총 개수 -->
 	<!-- seq_board > 0은 의미없는 조건이지만 삽입될 쿼리가 and()형식이라 구문오류 방지를 위해 작성 -->
 	<select id="getTotal" parameterType="com.kiri.utills.Criteria" resultType="int">
 		select count(*) from group_board where seq_group = #{seq_group}
+		<if test="category != '공지'">
+			 and gboard_category not like '%'|| '공지' ||'%'
+		</if>
 		<if test="keyword != null">
 			<include refid="criteria"></include>
 		</if>
 		<if test="category != null">
 			and gboard_category like '%'||#{category}||'%'
 		</if>
-		
 	</select>
 	
 	<!-- 글 하나 불러오기 -->

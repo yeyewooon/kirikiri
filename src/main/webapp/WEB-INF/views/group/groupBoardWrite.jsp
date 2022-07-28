@@ -308,13 +308,16 @@
 	            			<select name="gboard_category" class="form-select selectBox" aria-label="유형">
 			                    <option selected value="default">선택</option>
 			                    <option value="공지">공지</option>
-			                    <option value="일반">일반</option>
+			                    <option value="잡담">잡담</option>
+			                    <option value="모집">모집</option>
+			                    <option value="후기">후기</option>
 			                </select>
 	            		</c:when>
 	            		<c:otherwise>
 	            			<select name="gboard_category" class="form-select selectBox" aria-label="유형">
 			                    <option selected value="default">선택</option>
-			                    <option value="일반">일반</option>
+			                    <option value="잡담">잡담</option>
+			                    <option value="모집">모집</option>
 			                    <option value="후기">후기</option>
 			                </select>
 	            		</c:otherwise>
