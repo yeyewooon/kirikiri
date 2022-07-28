@@ -55,24 +55,24 @@ public class AdminController {
 
 	}
 
-	@RequestMapping(value="/toReport") //신고하기->블랙리스트테이블로 등록
-	@ResponseBody
-	public String toReport(@RequestParam(value="seqArray[]") List<Integer> seqArray) throws Exception{
-		ReportDTO rdto = new ReportDTO();
-		BlackListDTO bdto = new BlackListDTO();
-		if(seqArray.size()==0) {
-			return "fail";
-		}else {
-			for(int seq_report : seqArray) {
-	            rdto = service.selectReportBySeq(seq_report);
-	            bdto = new BlackListDTO(0, rdto.getUser_email(), null, rdto.getReport_reason());
-	            service.insertBl(bdto);
-	            service.deleteReport(seq_report);
-	            service.updateBl(rdto.getUser_email());
-	        }
-			return "success";
-		}
-	}
+	   @RequestMapping(value="/toReport") //신고하기->블랙리스트테이블로 등록
+	   @ResponseBody
+	   public String toReport(@RequestParam(value="seqArray[]") List<Integer> seqArray) throws Exception{
+	      ReportDTO rdto = new ReportDTO();
+	      BlackListDTO bdto = new BlackListDTO();
+	      if(seqArray.size()==0) {
+	         return "fail";
+	      }else {
+	         for(int seq_report : seqArray) {
+	               rdto = service.selectReportBySeq(seq_report);
+	               bdto = new BlackListDTO(0, rdto.getReport_receive(), null, rdto.getReport_reason());
+	               service.insertBl(bdto);
+	               service.deleteReport(seq_report);
+	               service.updateBl(rdto.getReport_receive());
+	           }
+	         return "success";
+	      }
+	   }
 
 	@RequestMapping(value="/toReportDelete") //신고 삭제-> 블랙리스트등록XX
 	@ResponseBody
@@ -243,18 +243,20 @@ public class AdminController {
 		String jsonLocationList = mapper.writeValueAsString(locationList);
 
 		List<AdminMainDTO> cntGroupCalList = service.cntGroupCalendar(); // 그룹 수
-		int cntGroupMember = service.cntGroupMember(); // 멤버 수
+		int cntMember = service.cntMember() - 1; // 멤버 수(관리자 제외)
 		int cntGroupCnt = service.cntGroupCnt(); // 모임 수
-		// int cntBoard = service.cntBoard(); // 게시글 수(자유게시판)
-		//int cntGroupBoard = service.cntGroupBoard(); // 게시글 수(모임게시판)
+		int cntBoard =  service.cntBoard(); // 게시글 수(자유게시판)
+		int cntGroupBoard =  service.cntGroupBoard(); // 게시글 수(모임게시판)
+		int totalBoardCnt = cntBoard + cntGroupBoard; // 전체 게시글 수 
 		int cntGroupCal = service.cntGroupCal(); // 일정수
 		List<SiteDTO> cntPreLocationList = service.cntPreLocation(); // 선호지역 수
 		List<Login_LogDTO> cntLoginLogList = service.cntLoginLog(); // 로그인 로그 수
 
 		model.addAttribute("jsonLocationList",jsonLocationList);
 		model.addAttribute("cntGroupCalList",cntGroupCalList);
-		model.addAttribute("cntGroupMember",cntGroupMember);
+		model.addAttribute("cntMember",cntMember);
 		model.addAttribute("cntGroupCnt",cntGroupCnt);
+		model.addAttribute("totalBoardCnt",totalBoardCnt);
 		model.addAttribute("cntGroupCal",cntGroupCal);
 		model.addAttribute("cntPreLocationList",cntPreLocationList);
 		model.addAttribute("cntLoginLogList",cntLoginLogList);

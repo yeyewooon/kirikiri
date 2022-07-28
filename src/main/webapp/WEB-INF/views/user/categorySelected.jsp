@@ -575,7 +575,7 @@ img {
 			<div
 				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-microphone-stand"></i>
+					<i class="fa-solid fa-hands-clapping"></i>
 				</div>
 				<span class="categoryText mt-1"> 문화/공연/축제 </span>
 			</div>

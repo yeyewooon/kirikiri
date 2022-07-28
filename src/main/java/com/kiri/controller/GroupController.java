@@ -346,17 +346,23 @@ public class GroupController {
 		// 채팅 했던 부분 불러오기
 		List<Group_ChatDTO> gcList = gcService.selectChat(seq_group);
 		model.addAttribute("gcList", gcList);
+		System.out.println("그룹 채팅");
+		System.out.println(gcList.toString());
 		// 그룹정보 가져오기(채팅방, 사람 수)
 		List<Tbl_GroupDTO> tgList = gcService.selectGroup(seq_group);
 		model.addAttribute("tgList", tgList);
-
+		System.out.println("채팅방, 사람 수");
+		System.out.println(tgList.toString());
+		
       // 닉네임 리스트 가져와서 프로필 사진 member에서 꺼내오기
       List<Group_MemberDTO> nickList = gcService.selectNick(seq_group);
+      System.out.println("닉리스트" + nickList.toString());
       List<String> profileList = new ArrayList<>();
-
       for (Group_MemberDTO dto : nickList) {
          user_nickname = dto.getUser_nickname();
+         System.out.println(user_nickname);
          MemberDTO mdto = gcService.getProfileImg(user_nickname);
+         System.out.println(mdto.getUser_image());
          profileList.add(mdto.getUser_image());
       }
 

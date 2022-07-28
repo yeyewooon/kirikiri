@@ -240,7 +240,7 @@ a {
 	<div class="container">
 		<div class="sidebar">
 			<ul class="p-2">
-				<li class="logoHome sidemenu"><a href="/toAdmin"> <img
+				<li class="logoHome sidemenu"><a href="/admin/toAdmin"> <img
 						src="/resources/images/adminLogo.png" id="logoImg"><br>
 						<span>끼리끼리</span>
 				</a></li>
@@ -279,8 +279,8 @@ a {
 							<div class="row no-gutters align-items-center">
 								<div class="col mr-2">
 									<div class="text-xs font-weight-bold text-uppercase mb-1"
-										style="color: #f8696d;">맴버수</div>
-									<div class="h5 mb-0 font-weight-bold text-gray-800">${cntGroupMember}명</div>
+										style="color: #f8696d;">회원수</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800">${cntMember}명</div>
 								</div>
 								<div class="col-auto">
 									<i class="fa-solid fa-user-group fa-2x"></i>
@@ -314,7 +314,7 @@ a {
 								<div class="col mr-2">
 									<div class="text-xs font-weight-bold text-uppercase mb-1"
 										style="color: #a74cf1;">게시글 수</div>
-									<div class="h5 mb-0 font-weight-bold text-gray-800">$215,000개</div>
+									<div class="h5 mb-0 font-weight-bold text-gray-800">${totalBoardCnt}개</div>
 								</div>
 								<div class="col-auto">
 									<i class="fa-solid fa-clipboard fa-2x"></i>
@@ -400,10 +400,30 @@ a {
                 showCancelButton: true,
                 denyButtonText: `로그아웃`,
             }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isDenied) {
-                    Swal.fire('로그아웃 성공', '', 'info')
+            	if (result.isDenied) {
+            		Swal.fire({
+                	      icon:'success',
+                	      title: '메인화면으로 이동합니다!',
+                	      html: ' <b></b>' + '초뒤에 페이지가 이동됩니다.',
+                	      timer: 1000,
+                	      timerProgressBar: true,
+                	      didOpen: () => {
+                	        Swal.showLoading()
+                	        const b = Swal.getHtmlContainer().querySelector('b')
+                	        timerInterval = setInterval(() => {
+                	          b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
+                	        }, 100)
+                	      },
+                	      willClose: () => {
+                	        clearInterval(timerInterval)
+                	      }
+                	    })
+                	     setTimeout(function() {
+                	    	 	location.href = "/login/toLogout";
+                             },1200);
+                	 
                 }
+            
             })
         })
 

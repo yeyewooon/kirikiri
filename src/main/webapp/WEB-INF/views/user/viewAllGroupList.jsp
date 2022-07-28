@@ -154,7 +154,7 @@ ul {
 }
 
 .card {
-	width: 18rem;
+	width: 390px;
 	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
 	cursor:pointer;
 }
@@ -597,7 +597,7 @@ img {
     </div>
     <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
       <div class="categoryPic" style="font-size: 66px;">
-        <i class="fa-solid fa-microphone-stand"></i>
+        <i class="fa-solid fa-hands-clapping"></i>
       </div>
       <span class="categoryText mt-1">
         문화/공연/축제
@@ -605,7 +605,6 @@ img {
     </div>
 </div>
 
-	<div style="border-top : 1px solid black;">
 	<!-- 모임 card 캐러셀 -->
       <div class="row content mt-4">
          <div class="col p-0">
@@ -643,7 +642,6 @@ img {
             </div>
          </div>
       </div>
-	</div>
 
 
 

@@ -525,33 +525,41 @@ footer.footer {
    
    // 그룹 멤버 강퇴
    $("#deleteBtn").on("click", function(){
+     let checkAccess = $('input[name=checkUser_email]:checked').parent().prev().children('.checkAccess').val();
       let checkBoxArr = [];
-      $("input[name=checkUser_email]:checked").each(function(){         
-         checkBoxArr.push($(this).val());
-      })
-      
-      var jsonData = {
-         "userEmails" : JSON.stringify(checkBoxArr)
-      };
-      var jsonString = JSON.stringify(jsonData);
-      
-       $.ajax({
-         url:"/group/deleteMember",
-         headers: {'Content-Type': 'application/json'},
-         type : "post",
-         data: jsonString,
-         success:function(data){
+         $("input[name=checkUser_email]:checked").each(function(){ 
+           if(checkAccess != '주최자'){
+            checkBoxArr.push($(this).val());         
+            var jsonData = {
+               "userEmails" : JSON.stringify(checkBoxArr)
+            };
+            var jsonString = JSON.stringify(jsonData);
+            
+             $.ajax({
+               url:"/group/deleteMember",
+               headers: {'Content-Type': 'application/json'},
+               type : "post",
+               data: jsonString,
+               success:function(data){
+                  Swal.fire({
+                       icon: 'success',
+                       text: '멤버강퇴가 완료되었습니다.',
+                     })   
+                     setTimeout(function() {
+                             window.location.href = "";
+                         },3000);
+               },error : function(e){
+                  console.log(e);         
+               }
+            })
+         }else{
             Swal.fire({
-                 icon: 'success',
-                 text: '멤버강퇴가 완료되었습니다.',
-               })   
-               setTimeout(function() {
-                       window.location.href = "";
-                   },3000);
-         },error : function(e){
-            console.log(e);         
+                    icon: 'warning',
+                    text: '주최자는 강퇴할 수 없습니다.',
+                  })   
          }
       })
+      
    })
    
 </script>

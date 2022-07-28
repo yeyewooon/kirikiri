@@ -282,7 +282,8 @@ td>a {
 						<tr>
 							<td><input class="form-check-input ms-2 me-1"
 								type="checkbox" id="checkAll"></td>
-							<td>이메일</td>
+							<td>신고자</td>
+							<td>문제아</td>
 							<td>신고 사유</td>
 						</tr>
 					</thead>
@@ -299,7 +300,8 @@ td>a {
 										<td><input class="form-check-input ms-2 me-1 check"
 											type="checkbox" name="seq_report"
 											value="${dto.seq_report }"></td>
-										<td>${dto.user_email }</td>
+										<td>${dto.report_send }</td>
+										<td>${dto.report_receive }</td>
 										<td>${dto.report_reason }</td>
 									</tr>
 								</c:forEach>
