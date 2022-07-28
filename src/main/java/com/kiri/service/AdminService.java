@@ -162,8 +162,8 @@ public class AdminService {
 	}
 
 	// 멤버 수
-	public int cntGroupMember() {
-		return dao.cntGroupMember();
+	public int cntMember() {
+		return dao.cntMember();
 	}
 
 	// 모임 수

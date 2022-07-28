@@ -836,21 +836,27 @@ footer.footer {
 
   // Form으로 전송
   $("#registerGroupBtn").on("click",function() {
-	  
 	  let totalGroupCntById = "${totalGroupCntById}" //현재 세션의 가입한 모임 갯수
 	  // 구/군 변경시 비교 
 	  let group_site_com = $("#sido1Input").val() + " " +$("#gugun1Input").val();
 	  if(totalGroupCntById >= 3) { // 모임 가입 갯수 판별
-		  Swal.fire("모임은 최대 3개까지 가입 혹은 생성이 가능합니다");
+		  Swal.fire({
+		        icon: 'error',
+		        title: '모임 생성 불가!',
+		        text: '모임은 최대 3개까지 가입 혹은 생성이 가능합니다!',
+		      });
 		  return;
 	  }else if($("#group_category").val() == "") {
-		  Swal.fire("모임주제를 선택해주세요");
+		  Swal.fire("모임 주제를 선택해주세요");
 		  return;
 	  }else if($("#group_title").val() == "") {
-		  Swal.fire("모임 제목을 선택해주세요");
+		  Swal.fire("모임 이름을 선택해주세요");
 		  return;
 	  }else if($(".group_info").val() == "") {
 		  Swal.fire("모임 내용을 적어주세요");
+		  return;
+	  }else if($(".group_info").val() > 1000) {
+		  Swal.fire("내용은 1000자 이내로만 가능합니다");
 		  return;
 	  }else if($("#group_site").val() == "" || $("#sido1Input").val() == "") {
 		  Swal.fire('지역 선택을 완료를 눌러주세요');
@@ -859,8 +865,16 @@ footer.footer {
 	      Swal.fire('지역 선택을 완료를 눌러주세요');
 	      return;
 	  }
-	  
-	 $("#groupForm").submit();
+	 
+	  Swal.fire(
+		      '그룹 생성 성공',
+		      '이제 회원들을 모집해보세요!',
+		      'success'
+		);
+	  setTimeout(function() {
+		  $("#groupForm").submit();
+     },1000);
+	 
   })
   
   // 이미지 선택

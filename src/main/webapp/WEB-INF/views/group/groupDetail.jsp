@@ -35,6 +35,10 @@
 	box-sizing: border-box;
 }
 
+body {
+  background-color: #ffffff;
+}
+
 /* header 반응형 */
 @media ( max-width : 768px) {
 	#navLogo {
@@ -85,22 +89,43 @@
 	font-weight: bold;
 }
 
+
+.groupHeaderInfo {
+  height: 480px;
+}
+
 /* body menu */
 .groupImgBox {
-	background-color: yellowgreen;
-	height: 340px;
-	width: 500px;
+	background-color: #fafafa;
+	width: 100%;
+  height: 80%;
 	border-radius: 10px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px ;
+  border: 1px solid #e0e3e8;
 }
 
 .groupImgBox img {
-	height: 340px;
-	width: 500px;
+	height: 100%;
+	width: 100%;
 	border-radius: 10px;
+	border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px ;
+}
+
+.groupTitleTextBox {
+  width: 100%;
+  height: 20%;
+  background-color: #fff;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px ;
+  border: 1px solid #e0e3e8;
+  border-top: 0px;
+  word-break:break-all;
 }
 
 .groupActiveBtnBox {
-	width: 480px;
+	width: 700px;
 	height: 40px;
 }
 
@@ -113,19 +138,20 @@
 }
 
 .groupInfo {
-	width: 480px;
+	width: 600px;
 	word-break: break-all;
 }
 
 .hostImg {
-	width: 80px;
-	height: 80px;
+	width: 100px;
+	height: 100px;
 	border-radius: 50%;
+	background-color : #fafafa;
 }
 
 .hostImg img {
-	width: 80px;
-	height: 80px;
+	width: 100px;
+	height: 100px;
 	border-radius: 50%;
 }
 
@@ -145,21 +171,20 @@
 }
 
 .groupContent {
-	box-sizing: content-box;
-	word-wrap: break-word;
+   box-sizing: content-box;
+   word-wrap:break-word;
 }
 
 .groupInfo img {
    width:100%;
-   box-sizing: content-box;
-   word-wrap: break-word;
+   height: 400px;
 }
 
 /* 모달 프로필  */
 .modalProfileImage {
 	width: 100px;
 	height: 100px;
-	background-color: red;
+	background-color: #ebe1c8;
 	border-radius: 50%;
 }
 
@@ -195,6 +220,9 @@ a:visited {
 a:hover {
 	color: black;
 	text-decoration: none;
+}
+#siren_icon{
+	cursor:pointer;
 }
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
@@ -232,6 +260,78 @@ footer.footer {
 
 .uselessBox {
 	height: 40px;
+}
+
+/* 새로 시작 */
+.infoSumLogo i {
+  color: #6f767c;
+}
+
+#groupTitleHeader {
+  height: 400px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  word-break:break-all;
+  border: 1px solid #e0e3e8;;
+  position:fixed;
+  width: 400px;
+}
+
+#hiddenGroupInfo {
+  display: none;
+}
+
+@media ( max-width: 768px ) {
+  #groupTitleHeader {
+    height: 390px;
+    width: 458px;
+    display: none;
+   }
+   #hiddenGroupInfo {
+    display: block;
+  }
+
+}
+
+
+
+#groupTitleBottom {
+  border-radius: 10px;
+  word-break:break-all;
+}
+
+.groupTitleHeaderImgBox {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.groupTitleHeaderImgBox img{
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.categoryContainer {
+  height: 66px;
+}
+
+@media ( max-width: 768px ) {
+  .categoryContainer {
+    height: 110px;
+  }
+
+  .joinContainer {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+.categoryText:hover {
+  color: red;
+
 }
 </style>
 
@@ -291,7 +391,6 @@ footer.footer {
 							</ul>
 						</div>
 					</div>
-
 				</div>
 			</nav>
 			<!-- 펼쳐졌을 때 nav -->
@@ -304,12 +403,10 @@ footer.footer {
 								href="/board/toBoard">자유 게시판</a></li>
 						</ul>
 					</div>
-
 					<!-- logo -->
 					<div class="col-2">
 						<a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
 							id="logoImgs" src="/resources/images/kiri.jpg">
-
 						</a>
 					</div>
 
@@ -378,9 +475,9 @@ footer.footer {
 	<div class="container">
 		<!--body-headline-->
 		<div class="row">
-			<div class="col-md-7 d-flex justify-content-center mt-2">
-				<div class="groupImgBox">
-					<c:choose>
+			<div class="groupHeaderInfo col-sm-12 col-md-7 mt-2">
+				<div class="groupImgBox d-flex justify-content-center">
+          			<c:choose>
 						<c:when test="${tbl_group_dto.sys_name ne null}">
 							<img src="/group_profile/${tbl_group_dto.sys_name}"
 								id="profile_image">
@@ -389,180 +486,239 @@ footer.footer {
 							<img src="/resources/images/메인사진2(배경).png" id="profile_image">
 						</c:otherwise>
 					</c:choose>
-				</div>
+        	</div>
+        <div class="groupTitleTextBox d-flex align-items-center">
+        	<div class="container">
+			    <div class="row d-flex">
+			      <div class="col-10 d-flex">
+			        <div class="ms-3" style="font-size : 22px;">
+			        <span><strong>[${tbl_group_dto.group_site}]</strong></span>
+			        <strong>${tbl_group_dto.group_title}</strong>
+			        </div>
+			      </div>
+			      <div class="col-2 d-flex">
+			        <button type=" button" class="" id="wishListBtn" style="border:0; outline:0; background-color : #fff; font-size :24px;">♡</button>
+			        <button type=" button" class="ms-2 d-none" id="wishCancelBtn" style="border:0; outline:0; color:red; background-color : #fff; font-size :24px;">♥</button>
+			      </div>
+			    </div>
+			 </div>
+  		</div>
 			</div>
-			<div class="col-md-5 mt-2">
-				<div class="groupInfoSumTitle mt-1">
-					<h3>${tbl_group_dto.group_title}</h3>
-				</div>
-				<div class="groupInfoSumBox mt-3">
-					<div class="groupInfoSum d-flex align-items-center mt-1"
-						style="font-size: 16px;">
-						<div class="infoSumLogo">
-							<i class="fa-solid fa-location-dot"></i>
-						</div>
-						<div class="infoSumContent ms-2">위치 :
-							${tbl_group_dto.group_site}, 대한민국</div>
-					</div>
-					<div class="groupInfoSum d-flex align-items-center mt-1"
-						style="font-size: 16px;">
-						<div class="infoSumLogo">
-							<i class="fa-solid fa-tags"></i>
-						</div>
-						<div class="infoSumContent ms-2">카테고리 :
-							${tbl_group_dto.group_category}</div>
-					</div>
-					<div class="groupInfoSum d-flex align-items-center mt-1"
-						style="font-size: 16px;">
-						<div class="infoSumLogo">
-							<i class="fa-solid fa-user-group"></i>
-						</div>
-						<div class="infoSumContent ms-2">회원 :
-							${fn:length(memberList)}명 / ${tbl_group_dto.group_people}명</div>
-					</div>
-					<div class="groupInfoSum d-flex align-items-center mt-1"
-						style="font-size: 16px;">
-						<div class="infoSumLogo">
-							<i class="fa-solid fa-user-tie"></i>
-						</div>
-						<div class="infoSumContent ms-2">호스트 :
-							${memberList[0].user_nickname}</div>
-					</div>
-					<div class="groupInfoSum d-flex align-items-center mt-1"
-						style="font-size: 16px;">
-						<div class="infoSumLogo">
-							<i class="fa-solid fa-heart"></i>
-						</div>
-						<div class="infoSumContent ms-2">찜 : ${fn:length(wishList)}</div>
-					</div>
-				</div>
-			</div>
+      <!-- 우측 카드-->
+			<div class="col-sm-12 col-md-5 mt-2">
+          <div class="row" style="padding:34px; padding-top: 0px;">
+            <!--호스트 프로필-->
+            <div class="col-md-12 col-sm-12" id="groupTitleHeader">
+              <div class="d-flex align-items-center mt-" style="height: 32%; border-bottom: 1px solid #ebeff0;; padding: 4px;">
+                <div class="groupTitleHeaderImgBox">
+					<c:choose>
+						<c:when test="${mapList.TableJoinDTO[0].user_image ne null}">
+							<img src="/profile/${mapList.TableJoinDTO[0].user_image}"
+								id="profile_image">
+						</c:when>
+						<c:otherwise>
+							<img src="/resources/images/메인사진2(배경).png" id="profile_image">
+						</c:otherwise>
+					</c:choose>
+                </div>
+                <div class="hostInfo d-flex flex-column ms-3">
+                  <div>${memberList[0].user_nickname}</div>
+                  <div style="font-size: 16px;">안녕하세요? 모임 주최자 ${memberList[0].user_nickname}입니다! </div>
+                </div>
+              </div>
+              <!--위치 카테고리 회원 찜 -->
+              <div class="d-flex flex-column justify-content-center" style="padding: 4px;">
+                <div class="groupInfoSum mt-3" style="font-size: 16px;">
+                  <div class="row">
+                    <div class="col-12 d-flex">
+                      <div class="infoSumLogo">
+                        <i class="fa-solid fa-location-dot"></i>
+                      </div>
+                      <div class="infoSumContent ms-2">
+                        위치 : ${tbl_group_dto.group_site}, 대한민국
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="groupInfoSum mt-3" style="font-size: 16px;">
+                  <div class="row">
+                    <div class="col-12 d-flex">
+                      <div class="infoSumLogo">
+                        <i class="fa-solid fa-tags"></i>
+                      </div>
+                      <div class="infoSumContent ms-2">
+                        카테고리 : ${tbl_group_dto.group_category}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="groupInfoSum mt-3" style="font-size: 16px;">
+                  <div class="row">
+                    <div class="col-12 d-flex">
+                      <div class="infoSumLogo">
+                        <i class="fa-solid fa-user-group"></i>
+                      </div>
+                      <div class="infoSumContent ms-2">
+                        회원 :  ${fn:length(memberList)}명 / ${tbl_group_dto.group_people}명
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="groupInfoSum mt-3" style="font-size: 16px;">
+                  <div class="row">
+                    <div class="col-12 d-flex">
+                      <div class="infoSumLogo">
+                        <i class="fa-solid fa-heart"></i>
+                      </div>
+                      <div class="infoSumContent ms-2">
+                        찜 : ${fn:length(wishList)}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--버튼 디브-->
+                <div class="mt-3" style="border-top: 1px solid #e0e3e8;;">
+                  <div class="d-flex align-items-center justify-content-center mt-3 joinContainer">
+                    <button type=" button" class="btn btn-primary ms-2 d-none mt-2" style="width:90%;"
+                      id="quitGroupBtn">모임 탈퇴하기</button>
+                    <button type=" button" class="btn btn-primary ms-2 mt-2" style="width:90%;"
+                      id="joinGroupBtn">모임 가입하기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row mt-2" id="hiddenGroupInfo">
+              <div class="col-md-3 d-flex align-items-center">
+                <div style="width:26px;"><i class="fa-solid fa-location-dot"></i></div>
+                <div>위치 : 대한민국</div>
+              </div>
+              <div class="col-md-3 mt-1 d-flex align-items-center">
+                <div style="width:26px;"><i class="fa-solid fa-tags"></i></div>
+                <div>카테고리 : ${tbl_group_dto.group_category}</div>
+              </div>
+              <div class="col-md-3 mt-1 d-flex align-items-center">
+                <div style="width:26px;"><i class="fa-solid fa-user-group"></i></div>
+                <div>회원 : ${fn:length(memberList)}명 / ${tbl_group_dto.group_people}명</div>
+              </div>
+              <div class="col-md-3 mt-1 d-flex align-items-center">
+                <div style="width:26px;"><i class="fa-solid fa-heart"></i></div>
+                <div>찜 : ${fn:length(wishList)}</div>
+              </div>
+              <!--버튼 디브-->
+              <div class="mt-3" style="border-top: 1px solid #e0e3e8;;">
+                <div class="d-flex align-items-center justify-content-center mt-3 joinContainer">
+                  <button type=" button" class="btn btn-outline-info"
+                    id="wishListBtn">찜 하기</button>
+                  <button type=" button" class="btn btn-outline-info ms-2 d-none"
+                    id="wishCancelBtn">찜 취소</button>
+                  <button type=" button" class="btn btn-primary ms-2 d-none"
+                    id="quitGroupBtn">모임 탈퇴하기</button>
+                  <button type=" button" class="btn btn-primary ms-2"
+                    id="joinGroupBtn">모임 가입하기</button>
+                </div>
+              </div>
+            </div>
+          </div>
+			 </div>
 		</div>
 	</div>
 	<!--버튼 클릭-->
-	<div class="mt-3" style="border-top: 1px solid #e0e3e8;">
+	<div class="mt-4 categoryContainer">
 		<div class="container">
 			<!-- 이용 -->
 			<div class="row mt-2">
-				<div class="col-md-7 d-flex justify-content-center mt-1">
-					<div
-						class="groupActiveBtnBox d-flex justify-content-evenly align-items-center ">
-						<div class="groupInfoBtn">상세 정보</div>
-						<div class="groupActiveBtn">게시판</div>
-						<div class="groupActiveBtn">일정</div>
-						<div class="groupActiveBtn">채팅</div>
-						<div class="groupActiveBtn groupManageBtn d-none">
-							<a
-								href="/group/toGroupMember?seq_group=${tbl_group_dto.seq_group}">모임
-								관리</a>
+				<div class="col-sm-12 col-md-7 d-flex justify-content-center mt-1" style="border-bottom: 1px solid #e0e3e8;">
+					<div class="groupActiveBtnBox d-flex justify-content-evenly align-items-center " style="color:grey;">
+						<div class="groupInfoBtn categoryText groupDetailInfo">상세정보</div>
+            			<div class="groupInfoBtn categoryText groupCautionInfo">주의사항</div>
+            			<div class="groupInfoBtn categoryText groupMemInfo">멤버정보</div>
+						<div class="groupActiveBtn categoryText">게시판</div>
+						<div class="groupActiveBtn categoryText">일정</div>
+						<div class="groupActiveBtn categoryText">채팅</div>
+						<div class="groupActiveBtn groupManageBtn d-none categoryText">
+							<a href="/group/toGroupMember?seq_group=${tbl_group_dto.seq_group}">모임관리</a>
 						</div>
 					</div>
 				</div>
-				<div class="col-md-5 d-flex align-items-center mt-1">
-					<button type=" button" class="btn btn-outline-info"
-						id="wishListBtn">찜 하기</button>
-					<button type=" button" class="btn btn-outline-info ms-2 d-none"
-						id="wishCancelBtn">찜 취소</button>
-					<button type=" button" class="btn btn-primary ms-2 d-none"
-						id="quitGroupBtn">모임 탈퇴하기</button>
-					<button type=" button" class="btn btn-primary ms-2"
-						id="joinGroupBtn">모임 가입하기</button>
-				</div>
+
 			</div>
 		</div>
 	</div>
 
 	<!--세부 정보-->
-	<div style="background-color: #f6f7f9;">
-		<div class="container mt-2">
-			<div class="row mt-2">
-				<div class="col-md-7 d-flex justify-content-center mt-2">
+	<div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-7 d-flex justify-content-center">
 					<!--상세 정보 내용-->
-					<div class="groupInfo mt-3">
-						<div class="groupContent">${tbl_group_dto.group_info}</div>
-						<!--코로나 안전조치-->
-						<div class="covidCautionBox mt-4" style="background-color: #fff;">
-							<div>
-								<strong><i class="fa-solid fa-virus-covid"></i></strong><span
-									class="ms-2">코로나 안전조치</span>
-							</div>
-							<div class="mt-1 ms-4">이벤트 주최자는 본 이벤트를 위해 안전 조치를 시해하고 있습니다.
-								"끼리끼리"는 이러한 예방 조치를 준수하는지 확인할 책임이 없으며 개별적으로 확인하지도 않습니다.</div>
-						</div>
-						<!--주의 사항-->
-						<div class="cautionBox mt-4 ms-3">
-							<div class="mt-3">
-								<h7> <i class="fa-solid fa-message"></i> <span class="ms-2">주최자
-									전달 메세지</span> </i></h7>
-							</div>
-							<div class="mt-1 ms-3">
-								<i class="fa-solid fa-check"></i> 인종, 언어, 성별 차별을 금지합니다.
-							</div>
-							<div class="mt-1 ms-3">
-								<i class="fa-solid fa-check"></i> 다른 모임 비방을 금지합니다.
-							</div>
-							<div class="mt-1 ms-3">
-								<i class="fa-solid fa-check"></i> 모임 분란 행위는 모임에서 탈퇴됩니다.
-							</div>
-							<div class="mt-1 ms-3">
-								<i class="fa-solid fa-check"></i> 연락이 지속적으로 안될시, 강제로 모임에서 탈퇴됩니다.
-							</div>
-							<div class="uselessBox"></div>
-						</div>
-
+					<div class="groupInfo mt-3" style="width:100%;">
+            			<span style=" font-size: 20px; background: linear-gradient(to top, #FFE400 20%, transparent 30%)">상세정보</span>
+						<div class="groupContent mt-4">${tbl_group_dto.group_info}</div>
 					</div>
 				</div>
-				<!-- 우측 주최자 맴버 사진 -->
-				<div class="col-md-5 mt-2 groupMemberrInfo">
-					<!-- 주최자 -->
-					<div class="ms-2 mt-3">
-						<span style="font-size: 21px;">호스트</span>
-					</div>
-					<div class="d-flex mt-1 memberProfileContainer">
-						<div class="hostImg">
-							<c:choose>
-								<c:when test="${mapList.TableJoinDTO[0].user_image ne null}">
-									<img src="/profile/${tbl_group_dto.sys_name}"
-										id="profile_image">
-								</c:when>
-								<c:otherwise>
-									<img src="/resources/images/메인사진2(배경).png" id="profile_image">
-								</c:otherwise>
-							</c:choose>
-						</div>
-						<div class="hostInfo d-flex align-items-center ms-3">
-							<span class="d-none">${mapList.TableJoinDTO[0].user_email}</span>
-							<div class="">${mapList.TableJoinDTO[0].user_nickname}<br>
-							</div>
-						</div>
-					</div>
+        <!--주의사항-->
+        <div class="row mt-2">
+          <div class="col-md-7 mt-3 cautionContainer" style="border-top: 1px solid #e0e3e8;">
+            <div class="mt-3">
+              <span style=" font-size: 20px; background: linear-gradient(to top, #FFE400 20%, transparent 30%)">주의사항</span>
+                <div class="mt-3">
+                  <h7> <i class="fa-solid fa-message"></i> <span class="ms-2">주최자
+                    전달 메세지</span> </i></h7>
+                </div>
+                <div class="mt-1 ms-3">
+                  <i class="fa-solid fa-check"></i> 인종, 언어, 성별 차별을 금지합니다.
+                </div>
+                <div class="mt-1 ms-3">
+                  <i class="fa-solid fa-check"></i> 다른 모임 비방을 금지합니다.
+                </div>
+                <div class="mt-1 ms-3">
+                  <i class="fa-solid fa-check"></i> 모임 분란 행위는 모임에서 탈퇴됩니다.
+                </div>
+                <div class="mt-1 ms-3">
+                  <i class="fa-solid fa-check"></i> 연락이 지속적으로 안될시, 강제로 모임에서 탈퇴됩니다.
+                </div>
+                <div class="uselessBox"></div>
+            </div>
+          </div>
+        </div>
 
-					<!-- 맴버 -->
-					<div class="ms-2 mt-4 d-flex">
-						<div class="d-flex align-items-end" style="font-size: 20px;">
-							맴버(<span class="memberCntSpan"></span>)명
-						</div>
-					</div>
-					<div class="row" style="width: 280px;">
-						<c:forEach items="${mapList.TableJoinDTO}" var="list" begin="1"
-							end="${fn:length(memberList)}">
-							<div class="col-4 col-md-4 mt-1 memberProfileContainer">
-								<span class="d-none">${list.user_email}</span>
-								<div class="hostImg">
-									<c:choose>
-										<c:when test="${list.user_image ne null}">
-											<img src="/profile/${tbl_group_dto.sys_name}"
-												id="profile_image">
-										</c:when>
-										<c:otherwise>
-											<img src="/resources/images/메인사진2(배경).png" id="profile_image">
-										</c:otherwise>
-									</c:choose>
-								</div>
-							</div>
-						</c:forEach>
-					</div>
-				</div>
+        <!--멤버정보-->
+        <div class="row mt-2">
+          <div class="col-md-7" style="border-top: 1px solid #e0e3e8;">
+            <div class="mt-3">
+              <span style=" font-size: 20px; background: linear-gradient(to top, #FFE400 20%, transparent 30%)">멤버정보</span>
+              <div class="groupMemberrInfo">
+                <!-- 맴버 -->
+                <div class="mt-4 d-flex">
+                  <div class="d-flex align-items-end" style="font-size: 16px;">
+                    멤버(<span class="memberCntSpan"></span>)명
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <c:forEach items="${mapList.TableJoinDTO}" var="list" begin="0"
+                    end="${fn:length(memberList)}">
+                    <div class="col-3 col-md-3 mt-1 memberProfileContainer">
+                      <span class="d-none">${list.user_email}</span>
+                      <div class="hostImg">
+                        <c:choose>
+                          <c:when test="${list.user_image ne null}">
+                            <img src="/profile/${list.user_image}"
+                              id="profile_image">
+                          </c:when>
+                          <c:otherwise>
+                            <img src="/resources/images/메인사진2(배경).png" id="profile_image">
+                          </c:otherwise>
+                        </c:choose>
+                      </div>
+                      <div class="d-flex justify-content-center" style="width:100px;">${list.user_nickname}</div>
+                    </div>
+                  </c:forEach>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
 
 				<!-- Profile Modal -->
 				<div class="modal fade profileModal" id="staticBackdrop"
@@ -591,6 +747,7 @@ footer.footer {
 										<div class="modalProfileName">
 											<div class="mt-1" style="font-size: 20px;">
 												<span id="profileName"></span>(<span id="profileNickname"></span>)
+												<span id = "siren_icon"><img src = "/resources/images/group/siren_icon.png"></span>
 											</div>
 											<div class="mt-1" style="font-size: 14px;">회원</div>
 										</div>
@@ -633,12 +790,35 @@ footer.footer {
 										</div>
 									</div>
 								</div>
+						<!-- 신고아이콘 클릭시 활성화 -->
+                        <div class="d-none" id="reportForm">
+                           <div class="row">
+                              <div class="col-md-12">
+                                 <div>
+                                    <i class="fa-solid fa-envelope"></i><span class="ms-2">신고자</span>(<span id="reportName"></span>)
+                                 </div>
+                                 <input type="text" class="form-control mt-2"
+                                    id="report_receive" readonly>
+                              </div>
+                           </div>
+                           <div class="row mt-2">
+                              <div class="col-md-12">
+                                 <div>
+                                    <i class="fa-solid fa-comment"></i><span class="ms-2">신고이유</span>
+                                 </div>
+                                 <textarea class="form-control mt-2" id="reportContent" rows="3"
+                                    style="resize: none;"></textarea>
+                              </div>
+                           </div>
+                        </div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-bs-dismiss="modal" id="closeBtn">Close</button>
 								<button type="button" class="btn btn-success d-none closeXmark"
 									id="sendMsgBtn">쪽지 보내기</button>
+                        		<button type="button" class="btn btn-danger d-none closeXmark"
+                           			id="reportBtn">신고하기</button>
 							</div>
 						</div>
 					</div>
@@ -692,21 +872,57 @@ footer.footer {
 	</div>
 
 	<script>
-    let realMemberCnt = ${fn:length(memberList)}-1; // 주최자를 제외한 맴버수 
-    $(".memberCntSpan").text(realMemberCnt); // 주최자를 제외한 맴버수 
-    
+
+
+
+	// width 사이즈 감지
+	  window.onresize = function(){
+	    let widthSize = document.documentElement.clientWidth;
+	    console.log(widthSize);
+	      if(widthSize >1200  && widthSize <= 1900 ) {
+	        $(window).scroll(function(){
+	         $("#groupTitleHeader").css("margin-top",Math.max(-154,0-$(this).scrollTop()));
+	      });
+	      }else if(widthSize > 1000 && widthSize <= 1200) {
+	        $("#groupTitleHeader").css("margin-top",Math.max(-180,0-$(this).scrollTop()));
+	      }
+	      else if(widthSize >768 && widthSize <= 1000 ){
+	        $("#groupTitleHeader").css("margin-top",Math.max(-220,0-$(this).scrollTop()));
+	      }
+	  }
+
+	// 특정위치로 이동
+	$(".categoryText").on("click",function(e) {
+		let selectedWord = $(this).html();
+		console.log(selectedWord);
+		if(selectedWord == "상세정보") {
+			var offset = $(".groupInfo").offset(); //해당 위치 반환
+			$("html, body").animate({scrollTop: offset.top},400);
+		}else if(selectedWord == "주의사항") {
+			var offset = $(".cautionContainer").offset(); //해당 위치 반환
+			$("html, body").animate({scrollTop: offset.top},400);
+		}else if(selectedWord == "멤버정보") {
+			var offset = $(".groupMemberrInfo").offset(); //해당 위치 반환
+			$("html, body").animate({scrollTop: offset.top},400);
+		}
+
+	})
+
+    let realMemberCnt = ${fn:length(memberList)}; // 주최자를 제외한 맴버수
+    $(".memberCntSpan").text(realMemberCnt); // 주최자를 제외한 맴버수
+
     let seq_group = "${tbl_group_dto.seq_group}"; // 현재 모임 번호
     let loginSession_id = "${loginSession_id}"; // 현재 로그인 세션 아이디
     let loginSession_nickName = "${loginSession_nickName}"// 현재 로그인 세션 닉네임
     let hostEmail = "${memberList[0].user_email}"; // 주최자 아이디
-   let totalGroupCntById = "${totalGroupCntById}"; // 현재 로그인된 아이디의 모임 가입수
-   
+   	let totalGroupCntById = "${totalGroupCntById}"; // 현재 로그인된 아이디의 모임 가입수
+
      //해당 모임 맴버 프로필 보기
     $(".memberProfileContainer").on("click",function() {
-          let findUserEmail = $(this).find('span').html(); // 공백이 포함되서 나옴
+        let findUserEmail = $(this).find('span').html(); // 공백이 포함되서 나옴
         let user_email = findUserEmail.trim(); // 공백을 없앰
-          // $("#user_receive").val(user_email); // 
-        
+          // $("#user_receive").val(user_email); //
+
         $.ajax ({
            url : "/group/selectMemberProfile",
            type : "post",
@@ -715,16 +931,18 @@ footer.footer {
            success : function(data) {
               // 회원의 사진이 있을 때만 넣기
               if(data.profileList[0].user_image != null) {
-                 document.getElementById("memberProfileImg").src = "/profile/";
-              } 
-              $("#profileName").text(data.profileList[0].user_name); // 해당 회원 이름 모달값으로 넣어주기 
-              $("#profileNickname").text(data.profileList[0].user_nickname); // 해당 회원 닉네임 모달값으로 넣어주기 
-              $("#profileLocation").text(data.siteList[0].area); // 해당 회원 선호 지역 모달값으로 넣어주기 
-              $("#profileGender").text(data.profileList[0].user_gender); // 해당 회원 성별 모달값으로 넣어주기 
-              $("#profileIntro").text(data.profileList[0].user_intro); // 해당 회원 소개글 모달값으로 넣어주기 
-              $('.profileModal').modal('show'); // 성공했을때만 모달열리게 
+                 document.getElementById("memberProfileImg").src = "/profile/"+data.profileList[0].user_image;
+              }
+              $("#profileName").text(data.profileList[0].user_name); // 해당 회원 이름 모달값으로 넣어주기
+              $("#profileNickname").text(data.profileList[0].user_nickname); // 해당 회원 닉네임 모달값으로 넣어주기
+              $("#profileLocation").text(data.siteList[0].area); // 해당 회원 선호 지역 모달값으로 넣어주기
+              $("#profileGender").text(data.profileList[0].user_gender); // 해당 회원 성별 모달값으로 넣어주기
+              $("#profileIntro").text(data.profileList[0].user_intro); // 해당 회원 소개글 모달값으로 넣어주기
+              $('.profileModal').modal('show'); // 성공했을때만 모달열리게
               $("#receiverName").text(data.profileList[0].user_name) // 해당 회원 이름 메세지 받는 사람에 넣어주기
+              $("#reportName").text('${loginSession.user_name}'); // 해당 회원 이름 신고자에 넣어주기
               $("#user_receive").val(data.profileList[0].user_nickname); // 쪽지 보내기 -> 받는사람 닉네임 넣어주기
+              $("#report_receive").val(data.profileList[0].user_nickname); // 신고하기 -> 신고자 닉네임 넣어주기
            },
            error : function(e) {
         	   Swal.fire({
@@ -735,28 +953,28 @@ footer.footer {
            }
         })
       })
-    
+
       // 쪽지보내기 아이콘 클릭시
       $("#msgIcon").on("click",function() {
-         // 로그인 세션이 없을 때 
+         // 로그인 세션이 없을 때
          if(loginSession_id == "youHaveToLogin" || loginSession_nickName == "youHaveToLogin") {
-            alert("로그인하셔야합니다");
+        	Swal.fire('로그인 후 이용가능합니다');
             return;
          }
           $("#profileTotalInfo").addClass("d-none"); // 프로필 내용 안보이게
           $("#msgForm").removeClass("d-none"); // 쪽지 양식 Form 보이게
           $("#sendMsgBtn").removeClass("d-none"); // 쪽지 보내기 버튼 보이게
         })
-           
-     //쪽지보내기 버튼 클릭    
+
+     //쪽지보내기 버튼 클릭
         $("#sendMsgBtn").on("click",function() {
            if($("#msgContent").val() == "") {
               Swal.fire('내용을 입력해주세요');
               return;
            }
-           
+
            let user_receive = $("#user_receive").val(); // 받는 사람 닉네임
-           let msgContent = $("#msgContent").val(); // 쪽지 내용 
+           let msgContent = $("#msgContent").val(); // 쪽지 내용
            $.ajax ({
               url : "/user/insertMessage",
               type : "post",
@@ -783,14 +1001,19 @@ footer.footer {
             $("#msgForm").addClass("d-none"); // 쪽지 양식 Form 안보이게
             $("#sendMsgBtn").addClass("d-none"); // 쪽지 보내기 버튼 안보이게
         })
-     
-    // close 버튼 클릭시 
+
+    // close 버튼 클릭시
        $("#closeBtn,#closeXmark").on("click",function() {
           $("#profileTotalInfo").removeClass("d-none"); // 프로필 내용 보이게
-          $("#msgForm").addClass("d-none"); // 쪽지 양식 Form 보이게
-          $("#sendMsgBtn").addClass("d-none"); // 쪽지 보내기 버튼 보이게
+          $(".modal-title").removeClass("d-none"); // 회원프로필 타이틀 보이게
+          $(".msg-title").addClass("d-none"); // 쪽지보내기 타이틀 안보이게
+          $(".report-title").addClass("d-none"); // 신고하기 타이틀 안보이게
+          $("#msgForm").addClass("d-none"); // 쪽지 양식 Form 안보이게
+          $("#sendMsgBtn").addClass("d-none"); // 쪽지 보내기 버튼 안보이게
+          $("#reportForm").addClass("d-none"); // 신고 양식 Form 안보이게
+          $("#reportBtn").addClass("d-none"); // 신고하기 버튼 안보이게
        })
-        
+
     $(document).ready(function() {
        // 해당 세션 id와 주최자가 같으면 모임 관리 페이지 보이게
        if(loginSession_id == hostEmail) {
@@ -808,11 +1031,11 @@ footer.footer {
                    // 그룹 활동 버튼
                    let activeText = this.innerHTML;
                    if(activeText == "게시판"){
-                      location.href = "#";
+                      location.href = "/Gboard/toBoard?seq_group="+seq_group;
                    }else if(activeText == "일정") {
                       location.href = "/cal/toGroupCalendar?seq_group="+seq_group;
                    }else if(activeText == "채팅") {
-                      location.href = "/group/toChat?seq_group="+seq_group;
+                	   window.open("/group/toChat?seq_group="+seq_group, "PopupWin", "width=500,height=600");
                    }
                    return;
                 }
@@ -877,6 +1100,9 @@ footer.footer {
                                  '그 동안 감사했습니다!',
                                  'success'
                                )
+                              setTimeout(function() {
+                                  window.location.href = "";
+                             },800);
                             }else {
                                alert("모임 탈퇴 실패");
                             }
@@ -896,12 +1122,12 @@ footer.footer {
          })
       // 모임 가입
       $("#joinGroupBtn").on("click",function(){
-         // 만약에 현재 로그인 세션이 없다면 
+         // 만약에 현재 로그인 세션이 없다면
          if(loginSession_id == "youHaveToLogin" || loginSession_nickName == "youHaveToLogin") {
             Swal.fire('회원가입을 하시고 이용해주세요');
             return;
          }
-         
+
          // 현재 아이디의 모임가입한 수가 3개가 넘으면 모임 가입 금지
          if(totalGroupCntById >= 3) {
             Swal.fire('모임은 최대 3개만 가입가능합니다');
@@ -959,7 +1185,7 @@ footer.footer {
 
       // 찜하기
       $("#wishListBtn").on("click",function() {
-         // 만약에 현재 로그인 세션이 없다면 
+         // 만약에 현재 로그인 세션이 없다면
          if(loginSession_id == "youHaveToLogin" || loginSession_nickName == "youHaveToLogin") {
             Swal.fire('회원가입을 하시고 이용해주세요');
             return;
@@ -1012,9 +1238,78 @@ footer.footer {
             }
          })
       })
-   
+
       // 그룹 설명 사진 크기 조절
-      $(".groupContent p img").attr('style', "width:440px; height:440px;");
+      $(".groupContent p img").attr('style', "width:100%; height:440px;");
+
+ // 신고하기 아이콘 클릭시 모달창 신고하는걸로 바꾸기
+    $("#siren_icon").on("click", function(){
+         // 로그인 세션이 없을 때
+         if(loginSession_id == "youHaveToLogin" || loginSession_nickName == "youHaveToLogin") {
+        	 Swal.fire('로그인 후 이용가능합니다');
+            return;
+         }
+          $("#profileTotalInfo").addClass("d-none"); // 프로필 내용 안보이게
+          $(".modal-title").addClass("d-none"); // 회원프로필 타이틀 안보이게
+          $(".report-title").removeClass("d-none"); // 신고하기 타이틀 보이게
+          $("#reportForm").removeClass("d-none"); // 신고 양식 Form 보이게
+          $("#reportBtn").removeClass("d-none"); // 쪽지 보내기 버튼 보이게
+    })
+
+    //신고하기 버튼 클릭
+         $("#reportBtn").on("click",function() {
+            if($("#reportContent").val() == "") {
+               Swal.fire('내용을 입력해주세요');
+               return;
+            }
+            let report_receive = $("#report_receive").val(); // 받는 사람 닉네임
+            let reportContent = $("#reportContent").val(); // 쪽지 내용
+            console.log("신고당하는 사람 : " + report_receive);
+            console.log("신고 내용 : " + reportContent);
+            console.log("신고 하는사람 : " + loginSession_nickName);
+          Swal.fire({
+             title: '정말 신고하시겠습니까?',
+             text: "유저 신고는 신중히 부탁드립니다.",
+             icon: 'warning',
+             showCancelButton: true,
+             confirmButtonColor: '#3085d6',
+             cancelButtonColor: '#d33',
+             confirmButtonText: '신고하기'
+          }).then((result) => {
+             if (result.isConfirmed) {
+             $.ajax ({
+                  url : "/user/insertreport",
+                   type : "post",
+                   data : {"report_send" : loginSession_nickName, "report_receive" : report_receive, "report_reason" : reportContent},
+                   dataType : "text",
+                   success : function(data) {
+                      if(data == "success") {
+                         Swal.fire('신고하기 성공');
+                         $('.profileModal').modal('hide'); // 쪽지 보내기 성공시 모달 닫기
+                       $("#reportContent").val('');
+                      }else {
+                         Swal.fire('신고하기 실패');
+                      }
+                   },
+                   error : function(e) {
+                      Swal.fire({
+                        icon: 'error',
+                        title: '에러가 발생했네요..',
+                        text: '관리자에게 문의해주세여!',
+                      });
+                   }
+                  })
+             }
+             $("#profileTotalInfo").removeClass("d-none"); // 프로필 내용 보이게
+             $("#reportForm").addClass("d-none"); // 신고 양식 Form 안보이게
+             $("#reportBtn").addClass("d-none"); // 신고하기 버튼 안보이게
+         })
+         })
+
+
+
+
+
 
     </script>
 </body>

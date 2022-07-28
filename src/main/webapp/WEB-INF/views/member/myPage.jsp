@@ -1020,30 +1020,31 @@ footer.footer {
 					<script>
 					//console.log($(".wrongCheckpw"))
 					/* 비밀번호 중복확인 */
-					$("#checkPw").on("click",function(){
-						let user_pw = $("#password").val();
-						$.ajax({
-							url:"/mem/pwCheck",
-							type:"post",
-							data:{"user_pw": user_pw},
-							dataType:"json",
-							success:function(data){
-								if(data == 1){
-									$(".wrong-check-pw").addClass("d-none");
-									$(".right-check-pw").removeClass("d-none");
-									$("#profileModify").attr("disabled",false);
-									return;	
-								}else{
-									$(".right-check-pw").addClass("d-none");
-									$(".wrong-check-pw").removeClass("d-none");
-									$("#profileModify").attr("disabled",true);
-								}
-							},
-							error:function(e){
-								console.log(e);
-							}
-						})
-					})
+					 $("#checkPw").on("click",function(){
+		                  let user_pw = $("#password").val();
+		                  let user_email = $("#user_email").val();
+		                  $.ajax({
+		                     url:"/mem/pwCheck",
+		                     type:"post",
+		                     data:{"user_pw": user_pw, "user_email": user_email},
+		                     dataType:"json",
+		                     success:function(data){
+		                        if(data == 1){
+		                           $(".wrong-check-pw").addClass("d-none");
+		                           $(".right-check-pw").removeClass("d-none");
+		                           $("#profileModify").attr("disabled",false);
+		                           return;   
+		                        }else{
+		                           $(".right-check-pw").addClass("d-none");
+		                           $(".wrong-check-pw").removeClass("d-none");
+		                           $("#profileModify").attr("disabled",true);
+		                        }
+		                     },
+		                     error:function(e){
+		                        console.log(e);
+		                     }
+		                  })
+               		})
 					$("#profileModify").on("click",function(){
 						let user_email = $("#user_email").val();
 						location.href="/mem/profileModifyPage?user_email="+user_email;
