@@ -4,7 +4,8 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="commentMapper">
-	<!-- 전체 게시글 목록 -->
+	<!-- 자유게시판 -->
+	<!-- 전체 댓글 목록 -->
 	<select id="selectAll" parameterType="int" resultType="com.kiri.dto.Board_CommentDTO">
 		select * from board_comment
 			where seq_board = #{seq_board}
@@ -35,5 +36,39 @@
 	<select id="commentCnt" parameterType="int" resultType="int">
 		select count(*) from board_comment
 			where seq_board = #{seq_board}
+	</select>
+	
+	<!-- 그룹 게시판 -->
+	<!-- 전체 댓글 목록 -->
+	<select id="selectAllG" parameterType="int" resultType="com.kiri.dto.Group_Board_CommentDTO">
+		select * from group_board_comment
+			where seq_group_board = #{seq_group_board}
+			order by comment_date asc
+	</select>
+	
+	<!-- 댓글 등록 -->
+	<insert id="writeG" parameterType="com.kiri.dto.Group_Board_CommentDTO">
+		insert into group_board_comment
+			values(seq_group_comment.nextval, #{seq_group_board}, #{seq_group}, #{user_email}, #{user_nickname}
+				, #{comment_content}, sysdate)
+	</insert>
+	
+	<!-- 댓글 수정 -->
+	<update id="modifyG" parameterType="com.kiri.dto.Group_Board_CommentDTO">
+		update group_board_comment 
+			set comment_content = #{comment_content} 
+			where seq_group_comment = #{seq_group_comment}
+	</update>
+	
+	<!-- 댓글 삭제 -->
+	<delete id="deleteG" parameterType="int">
+		delete from group_board_comment
+			where seq_group_comment = #{seq_group_comment}
+	</delete>
+	
+	<!-- 댓글 개수 -->
+	<select id="commentCntG" parameterType="int" resultType="int">
+		select count(*) from group_board_comment
+			where seq_group_board = #{seq_group_board}
 	</select>
 </mapper>

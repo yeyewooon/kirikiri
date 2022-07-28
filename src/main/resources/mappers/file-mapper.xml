@@ -17,15 +17,28 @@
 			where sys_name = #{saveName}
 	</delete>
 	
+	<!-- 그룹 게시판 -->
+	<!-- 파일 업로드 -->
+	<insert id="insertG" parameterType="com.kiri.dto.Group_Board_FileDTO">
+		insert into group_board_file
+			values(seq_group_file.nextval, #{seq_group_board}, #{seq_group}, #{sys_name})
+	</insert>
+	<!-- 파일 삭제 -->
+	<delete id="deleteG" parameterType="String">
+		delete from group_board_file
+			where sys_name = #{saveName}
+	</delete>
+	
 	<!-- 모든 saveName 가져오기 -->
+<!-- 	
 	<select id="selectSaveName" resultType="String">
 		select sys_name from board_file
-	</select>
+	</select> -->
 	
 	<!-- 게시글에 있는 파일 이름 가져오기 -->
 	<!-- 게시글 수정할 때 지워줄 파일 검사하기 위해 가져옴  -->
-	<select id="selectFile" parameterType="int" resultType="String">
+	<!-- <select id="selectFile" parameterType="int" resultType="String">
 		select sys_name from board_file
 			where seq_board = #{seq_board}
-	</select>
+	</select> -->
 </mapper>

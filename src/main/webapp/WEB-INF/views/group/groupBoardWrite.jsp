@@ -16,7 +16,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="sweetalert2.min.js"></script>
 <meta charset="UTF-8">
-<title>글 작성</title>
+<title>그룹 글 작성</title>
     <style>
     	/* header 반응형 */
 		@media ( max-width : 768px) {
@@ -295,7 +295,8 @@
             <h1>글쓰기</h1>
         </div>
         
-        <form id="writeForm" action="/board/write" method="post">
+        <form id="writeForm" action="/Gboard/write" method="post">
+        	<input type="hidden" id="seq_group" name="seq_group" value="${seq_group}">
 	        <div class="row mt-4 text-center">
 	            <div class="col-1">
 	                <label class="form-label fs-5">분류</label>
@@ -304,14 +305,14 @@
 	            	<c:choose>
 	            		<%-- 관리자 계정이라면 공지 쓰기 --%>
 	            		<c:when test="${loginSession.user_email eq 'admin'}">
-	            			<select name="board_category" class="form-select selectBox" aria-label="유형">
+	            			<select name="gboard_category" class="form-select selectBox" aria-label="유형">
 			                    <option selected value="default">선택</option>
 			                    <option value="공지">공지</option>
 			                    <option value="일반">일반</option>
 			                </select>
 	            		</c:when>
 	            		<c:otherwise>
-	            			<select name="board_category" class="form-select selectBox" aria-label="유형">
+	            			<select name="gboard_category" class="form-select selectBox" aria-label="유형">
 			                    <option selected value="default">선택</option>
 			                    <option value="일반">일반</option>
 			                    <option value="후기">후기</option>
@@ -324,12 +325,12 @@
 	                <label class="form-label fs-5">제목</label>
 	            </div>
 	            <div class="col-8">
-	                <input type="text" id="title" name="board_title" class="form-control" placeholder="제목을 입력하세요.">
+	                <input type="text" id="title" name="gboard_title" class="form-control" placeholder="제목을 입력하세요.">
 	            </div>
 	        </div>
 			
 	        <div class="row mt-4">
-				<textarea id="summernote" name="board_content"></textarea>
+				<textarea id="summernote" name="gboard_content"></textarea>
 	        </div>
 	        
 	        <div class="row my-4 justify-content-center">
@@ -468,10 +469,10 @@
 							let img = mutation.removedNodes[0].src;
 							//console.log("img" + img);
 							//console.log("src : " + src);
-							let src = decodeURIComponent(img.replace("http://localhost/boardFile/", ""));
+							let src = decodeURIComponent(img.replace("http://localhost/groupBoardFile/", ""));
 							console.log(src);
 							$.ajax({
-								url : "/board/delImg"
+								url : "/Gboard/delImg"
 								, type : "post"
 								, data : {"src" : src}
 								, success : function(data){
@@ -496,7 +497,7 @@
 				data : data
 				, type : "POST"
 				, enctype: "multipart/form-data"
-				, url : "/board/summernoteImg"
+				, url : "/Gboard/summernoteImg"
 				, contentType : false
 				, processData : false
 				, success : function(data){
@@ -541,7 +542,7 @@
 			let regImg = /(<img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>)/g;
 			let src;
 			while(regImg.test(content)){
-				src = RegExp.$2.replace("/boardFile/", "");
+				src = RegExp.$2.replace("/groupBoardFile/", "");
 				imgArr.push(src);
 			}
 			console.log(imgArr);
@@ -572,7 +573,7 @@
 		
 		// 취소 버튼
 		$("#cancelBtn").on("click", function(){
-			location.href = "/board/toBoard";
+			location.href = "/Gboard/toBoard?seq_group" + ${seq_group};
 		})
 		
 	</script>

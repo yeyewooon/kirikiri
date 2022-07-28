@@ -61,7 +61,9 @@ public class BoardService {
 	public Map<String, Object> like(int seq_board, String user_email) throws Exception{
 		// 좋아요 여부
 		Map<String, Object> map = new HashMap<>();
-		map.put("likeCheck", likeDAO.likeCheck(seq_board, user_email));
+		if(user_email != null) {
+			map.put("likeCheck", likeDAO.likeCheck(seq_board, user_email));
+		}
 		map.put("likeHit", boardDAO.selectLike(seq_board));
 		return map; 
 	}

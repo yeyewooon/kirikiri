@@ -19,7 +19,10 @@ public class Criteria {
     /* 카테고리 */
     private String category;
     
-    /* 기본 생성자 -> 기봅 세팅 : pageNum = 1, amount = 10 */
+    /* seq_group */
+    private int seq_group;
+
+	/* 기본 생성자 -> 기봅 세팅 : pageNum = 1, amount = 10 */
     public Criteria() {
         this(1,10);
     }
@@ -79,13 +82,19 @@ public class Criteria {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	
+	public int getSeq_group() {
+		return seq_group;
+	}
+
+	public void setSeq_group(int seq_group) {
+		this.seq_group = seq_group;
+	}
 
 	@Override
 	public String toString() {
 		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", keyword=" + keyword + ", type=" + type
-				+ ", typeArr=" + Arrays.toString(typeArr) + ", category=" + category + "]";
+				+ ", typeArr=" + Arrays.toString(typeArr) + ", category=" + category + ", seq_group=" + seq_group + "]";
 	}
-
-	
 	
 }
