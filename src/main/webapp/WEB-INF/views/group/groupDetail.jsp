@@ -145,22 +145,16 @@
 }
 
 .groupContent {
-<<<<<<< HEAD
-   box-sizing: content-box;
-   word-wrap:break-word;
-}
-
-.groupInfo img {
-   width:100%;
-=======
 	box-sizing: content-box;
 	word-wrap: break-word;
 }
 
 .groupInfo img {
-	width: 100%;
->>>>>>> cbb724d96575bd52d7d21c4629de0da95a405a21
+   width:100%;
+   box-sizing: content-box;
+   word-wrap: break-word;
 }
+
 /* 모달 프로필  */
 .modalProfileImage {
 	width: 100px;
