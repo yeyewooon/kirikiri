@@ -246,7 +246,7 @@ public class AdminController {
       String jsonLocationList = mapper.writeValueAsString(locationList);
 
       List<AdminMainDTO> cntGroupCalList = service.cntGroupCalendar(); // 그룹 수
-      int cntMember = service.cntMember(); // 멤버 수
+      //int cntMember = service.cntMember(); // 멤버 수
       int cntGroupCnt = service.cntGroupCnt(); // 모임 수
       // int cntBoard = service.cntBoard(); // 게시글 수(자유게시판)
       //int cntGroupBoard = service.cntGroupBoard(); // 게시글 수(모임게시판)
@@ -256,7 +256,7 @@ public class AdminController {
 
       model.addAttribute("jsonLocationList",jsonLocationList);
       model.addAttribute("cntGroupCalList",cntGroupCalList);
-      model.addAttribute("cntMember",cntMember);
+      //model.addAttribute("cntMember",cntMember);
       model.addAttribute("cntGroupCnt",cntGroupCnt);
       model.addAttribute("cntGroupCal",cntGroupCal);
       model.addAttribute("cntPreLocationList",cntPreLocationList);

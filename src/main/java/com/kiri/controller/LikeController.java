@@ -32,4 +32,22 @@ public class LikeController {
 		}
 		return likeCheck;
 	}
+	
+	/*=======모임============================================================================*/
+	
+	@RequestMapping("/boardLikeG")
+	@ResponseBody
+	public int likeUpG(int seq_group_board, String user_email) throws Exception{
+		// 중복 방지
+		int likeCheck = service.groupLikeCheck(seq_group_board, user_email);
+		if(likeCheck == 0) {
+			// 좋아요 처음 누름
+			service.groupLikeUp(seq_group_board, user_email); // like 테이블 삽입
+			service.groupUpdateLike(seq_group_board); // board 테이블 hit+1
+		}else if(likeCheck == 1) {
+			service.groupLikeDown(seq_group_board, user_email);
+			service.groupUpdateLikeCancel(seq_group_board); // board 테이블 hit-1
+		}
+		return likeCheck;
+	}
 }

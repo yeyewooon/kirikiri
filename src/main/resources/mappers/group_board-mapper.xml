@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<mapper namespace="groupBoardMapper">
+	<!-- 페이징 -->
+	<!-- 검색 조건문 -->
+	<sql id="criteria">
+		<trim prefix="AND (" suffix=")" prefixOverrides="OR">
+			<foreach collection="typeArr" item="type">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							gboard_title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							gboard_content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							user_nickname like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+	</sql>
+	
+	<!-- 게시물 목록(페이징) -->	
+	<select id="getListPaging" parameterType="com.kiri.utills.Criteria" resultType="com.kiri.dto.Group_BoardDTO">
+		<![CDATA[
+			select * from
+				(select rownum as rn, A.* from
+					(select * from group_board 
+						where seq_group = #{seq_group}
+						order by
+						(case when gboard_category = '공지' then 1 else 2 end), seq_group_board desc) A
+					where rownum <= #{pageNum} * #{amount}
+		]]>
+			<if test="keyword != null">
+				<include refid="criteria"></include>
+			</if>
+			<if test="category != null">
+				and gboard_category like '%'||#{category}||'%'
+			</if>
+		<![CDATA[
+				)
+			where rn > (#{pageNum} -1) * #{amount}
+		]]>
+	</select>
+	
+	<!-- 게시물 총 개수 -->
+	<!-- seq_board > 0은 의미없는 조건이지만 삽입될 쿼리가 and()형식이라 구문오류 방지를 위해 작성 -->
+	<select id="getTotal" parameterType="com.kiri.utills.Criteria" resultType="int">
+		select count(*) from group_board where seq_group = #{seq_group}
+		<if test="keyword != null">
+			<include refid="criteria"></include>
+		</if>
+		<if test="category != null">
+			and gboard_category like '%'||#{category}||'%'
+		</if>
+		
+	</select>
+	
+	<!-- 글 하나 불러오기 -->
+	<select id="selectOne" parameterType="int" resultType="com.kiri.dto.Group_BoardDTO">
+		select * from group_board
+			where seq_group_board = #{seq_group_board}
+	</select>
+	
+	<!-- 게시글 좋아요 개수 -->
+	<select id="selectLike" parameterType="int" resultType="int">
+		select likehit from group_board
+			where seq_group_board = #{seq_group_board}
+	</select>
+	
+	<!-- 조회수 + 1 -->
+	<update id="viewCntUp" parameterType="int">
+		update group_board set
+			view_count = view_count+1
+			where seq_group_board = #{seq_group_board}
+	</update>
+	
+	<!-- 새로운 seq 생성 -->
+	<select id="selectSeq" resultType="int">
+		select seq_group_board.nextval from dual
+	</select>
+	
+	<!-- 글쓰기 -->
+	<insert id="write" parameterType="com.kiri.dto.Group_BoardDTO">
+		insert into group_board
+			values(#{seq_group_board}, #{seq_group}, #{user_email}, #{user_nickname}
+				, #{gboard_category}, #{gboard_title}, #{gboard_content}
+				, sysdate, 0, 0)
+	</insert>
+	
+	<!-- 글 수정 -->
+	<update id="modify" parameterType="com.kiri.dto.Group_BoardDTO">
+		update group_board set
+			gboard_title = #{gboard_title}
+			, gboard_content = #{gboard_content}
+		where seq_group_board = #{seq_group_board}
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="delete" parameterType="int">
+		delete from group_board
+			where seq_group_board = #{seq_group_board}
+	</delete>
+	
+</mapper>
