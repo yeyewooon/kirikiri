@@ -4,7 +4,7 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
    
 <mapper namespace="likeMapper">
-	
+	<!-- 자유게시판 -->
 	<!-- 게시글 좋아요 수 -->
 	<update id="updateLike" parameterType="int">
 		update board
@@ -36,6 +36,40 @@
 	<select id="likeCheck" parameterType="map" resultType="int">
 		select count(*) from board_like
 			where seq_board = #{seq_board} and user_email = #{user_email}
+	</select>
+	
+	<!-- 모임게시판 -->
+	<!-- 게시글 좋아요 수 -->
+	<update id="updateLikeG" parameterType="int">
+		update group_board
+			set likehit = likehit + 1
+			where seq_group_board = #{seq_group_board}
+	</update>
+	
+	<!-- 게시글 좋아요 수 취소 -->
+	<update id="updateLikeCancelG" parameterType="int">
+		update group_board
+			set likehit = likehit - 1
+			where seq_group_board = #{seq_group_board}
+	</update>
+	
+	<!-- 좋아요 -->
+	<insert id="likeUpG" parameterType="map">
+		insert into group_board_like(seq_gboard_like, seq_group_board, user_email)
+			values((select nvl(max(seq_gboard_like), 0) + 1 from group_board_like),
+				#{seq_group_board}, #{user_email})
+	</insert>
+	
+	<!-- 좋아요 취소 -->
+	<delete id="likeDownG" parameterType="map">
+		delete from group_board_like
+			where seq_group_board = #{seq_group_board} and user_email = #{user_email}
+	</delete>
+	
+	<!-- 추천 중복방지 select문 -->
+	<select id="likeCheckG" parameterType="map" resultType="int">
+		select count(*) from group_board_like
+			where seq_group_board = #{seq_group_board} and user_email = #{user_email}
 	</select>
 	
 </mapper>

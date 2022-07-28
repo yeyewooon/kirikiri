@@ -15,7 +15,7 @@
     <!-- swal -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="sweetalert2.min.js"></script>
-<title>게시글 상세보기</title>
+<title>그룹 게시글 상세보기</title>
     
     <style>
     	/* header 반응형 */
@@ -295,17 +295,17 @@
    
     <div class="container my-5 py-5" style="width: 70%;">
         <div class="row text-center">
-            <div class="col-auto my-3 fs-5 py-1" id="category">${detail.boardDTO.board_category}</div>
+            <div class="col-auto my-3 fs-5 py-1" id="category">${detail.boardDTO.gboard_category}</div>
         </div>
 
         <div class="row mt-3 mb-0">
-            <h2 id="title" name="board_title">${detail.boardDTO.board_title}</h2>
+            <h2 id="title" name="gboard_title">${detail.boardDTO.gboard_title}</h2>
         </div>
 
         <div class="row mt-4 justify-content-between align-items-center">
             <div class="col-auto" id="board-head-col">
-                <i class="fa-regular fa-clock me-3"> ${detail.boardDTO.board_date}</i>
-                <i class="fa-regular fa-font-awesome me-3"> ${detail.boardDTO.board_count}</i>
+                <i class="fa-regular fa-clock me-3"> ${detail.boardDTO.written_date}</i>
+                <i class="fa-regular fa-font-awesome me-3"> ${detail.boardDTO.view_count}</i>
                 <i class="fa-regular fa-comment-dots"> ${detail.commentCnt}</i>
             </div>
             <div class="col-auto d-flex justify-content-end">
@@ -319,7 +319,7 @@
 		<!-- 내용 -->
         <div class="row my-3">
             <div id="content">
-                <p>${detail.boardDTO.board_content}</p>
+                <p>${detail.boardDTO.gboard_content}</p>
             </div>
         </div>
         
@@ -332,7 +332,7 @@
 	        			<%-- 추천 안누름 --%>
 	        			<c:when test="${like.likeCheck == 0}">
 	        				<div class="col-auto">
-			        			<button class="likeBtn" id="likeBefore" value="${detail.boardDTO.seq_board}">
+			        			<button class="likeBtn" id="likeBefore" value="${detail.boardDTO.seq_group_board}">
 			        				<img src="/resources/images/emptyheart.png" alt="좋아요">
 			        			</button>
 			        			<span>버튼을 눌러서 게시글에 공감해 보세요!</span>
@@ -341,7 +341,7 @@
 	        			<%-- 추천 누름 --%>
 	        			<c:otherwise>
 	        				<div class="col-auto">
-			        			<button class="likeBtn" id="likeAfter" value="${detail.boardDTO.seq_board}">
+			        			<button class="likeBtn" id="likeAfter" value="${detail.boardDTO.seq_group_board}">
 			        				<img src="/resources/images/fullheart.png" alt="좋아요">
 			        			</button>
 			        			<span>이미 좋아요 한 게시물이에요</span>
@@ -353,7 +353,7 @@
 	        	<%-- 로그인 x일 때 --%>
 	        	<c:otherwise>
 		        	<div class="col-auto">
-				        <button class="likeBtn" id="like-notLoginBtn" value="${detail.boardDTO.seq_board}">
+				        <button id="like-notLoginBtn" value="${detail.boardDTO.seq_group_board}">
 				        	<img src="/resources/images/emptyheart.png" alt="좋아요">
 				        </button>
 				        <span>${like.likeHit}</span>
@@ -388,6 +388,7 @@
 			                            <img src="/resources/images/profile.jpg">
 			                        </div>
 			                    </div>
+								
 								<!-- 내용 -->
 			                    <div class="col-10">
 			                        <div class="row mb-1 commentHead">
@@ -398,16 +399,16 @@
 					                	<c:if test="${comment.user_email eq loginSession.user_email}">
 						                	<%-- 수정/삭제 --%>
 						                	<div class="col-auto defaultComment">
-						                		<button type="button" class="mod-commentBtn me-2" value="${comment.seq_comment}">
+						                		<button type="button" class="mod-commentBtn me-2" value="${comment.seq_group_comment}">
 						                			<i class="fa-solid fa-eraser"></i>
 						                		</button>
-						                		<button type="button" class="del-commentBtn" value="${comment.seq_comment}">
+						                		<button type="button" class="del-commentBtn" value="${comment.seq_group_comment}">
 						                			<i class="fa-solid fa-trash-can"></i>
 						                		</button>
 						                	</div>
 						                	<%-- 완료/취소 --%>
 						                	<div class="col-auto afterComment d-none">
-						                		<button type="button" class="mod-completeBtn" value="${comment.seq_comment}">
+						                		<button type="button" class="mod-completeBtn" value="${comment.seq_group_comment}">
 						                			<i class="fa-solid fa-circle-check"></i>
 						                		</button>
 						                		<button type="button" class="mod-cancelBtn me-2">
@@ -421,7 +422,6 @@
 			                            <div class="col-12">
 			                                <textarea class="form-control comment" style="resize: none; background-color: transparent;" readonly>${comment.comment_content}</textarea>
 			                            </div>
-			                            
 			                        </div>
 			                    </div>
 			                </div>
@@ -433,16 +433,14 @@
         </div>
 
         <!-- 댓글 등록 -->
-        <form id="commentForm" action="/comment/write" method="post">
+        <form id="commentForm" action="/comment/writeG" method="post">
 	        <div class="row mt-4 p-0 py-3" style="background-color: #f5fafc; border-radius: 10px">
-	        	<input class="d-none" id="seq_board" name="seq_board" value="${detail.boardDTO.seq_board}">
+	        	<input class="d-none" id="seq_board" name="seq_group_board" value="${detail.boardDTO.seq_group_board}">
 				<div class="col-10">
-					<!-- <input class="form-control" type="text" style="height: 60px" placeholder="댓글을 입력하세요."> -->
 					<textarea id="inputComment" name="comment" style="resize: none;" class="form-control" placeholder="댓글을 입력하세요"></textarea>
 				</div>
 				<div class="col-2">
 					<button type="button" id="write-commentBtn" class="btn w-100 h-100" style="background-color: #d2e3ec;">등록</button>
-					<!-- <button type="button" id="testBtn" class="btn btn-primary w-100 h-100 fs-5">테스트</button> -->
 				</div>
 	        </div>
         </form>
@@ -463,7 +461,8 @@
 	        </div>
         </div>
 		<form id="infoForm" method="get">
-			<input type="hidden" id="seq_board" name="seq_board" value="${detail.boardDTO.seq_board}">
+			<input type="hidden" id="seq_group" name="seq_group" value="${detail.boardDTO.seq_group}">
+			<input type="hidden" id="seq_group_board" name="seq_group_board" value="${detail.boardDTO.seq_group_board}">
 			<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
 			<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
 			<input type="hidden" name="type" value="${cri.type}">
@@ -536,15 +535,14 @@
     <script>
     	// 목록으로 돌아가기
     	$("#toListBtn").on("click", function(){
-    		$("#infoForm").find("#seq_board").remove();
-    		$("#infoForm").attr("action", "/board/toBoard");
+    		$("#infoForm").find("#seq_group_board").remove();
+    		$("#infoForm").attr("action", "/Gboard/toBoard");
     		$("#infoForm").submit();
     	})
     	
     	// 게시글 수정
     	$("#modifyBtn").on("click", function(){
-    		//location.href = "/board/toModify?seq_board=" + ${detail.boardDTO.seq_board};
-    		$("#infoForm").attr("action", "/board/toModify");
+    		$("#infoForm").attr("action", "/Gboard/toModify");
     		$("#infoForm").submit();
     	})
     	
@@ -560,7 +558,7 @@
     			confirmButtonText: '네, 삭제할래요.'
     		}).then((result) => {
     			if (result.isConfirmed) {
-    				location.href = "/board/delete?seq_board=" + ${detail.boardDTO.seq_board};
+    				location.href = "/Gboard/delete?seq_group_board=" + ${detail.boardDTO.seq_group_board};
     			}
     		})
     	})
@@ -570,13 +568,11 @@
     		let seq_board = $(this).val();
     		// 로그인 세션의 id
     		let user_email = "${loginSession.user_email}";
-    		//let user_email = "abc123";
     		
     		if($(this).attr("id") == "likeBefore"){
-    			updateLike(seq_board, user_email);
+    			updateLike(seq_group_board, user_email);
     		}else if($(this).attr("id") == "likeAfter"){
-    			//$(this).addClass("d-none");
-    			updateLike(seq_board, user_email);
+    			updateLike(seq_group_board, user_email);
     		}
     	})
     	
@@ -586,13 +582,13 @@
     	})
     	
     	// 좋아요 함수
-    	function updateLike(seq_board, user_email){
+    	function updateLike(seq_group_board, user_email){
     		$.ajax({
     			type : "post"
-    			, url : "/like/boardLike"
+    			, url : "/like/boardLikeG"
     			, dataType : "json"
     			, data : {
-    				"seq_board" : seq_board
+    				"seq_group_board" : seq_board
     				, "user_email" : user_email
     			}, success : function(likeCheck){
     				console.log("ajax의 체크: " + likeCheck);
@@ -633,37 +629,12 @@
 				})
     			return;
     		}
-    		if("${loginSession}" == null){
-    			let timerInterval;
-    			Swal.fire({
-    				icon: 'warning'
-    				, title: '웁쓰...'
-    				, html: '로그인 후 댓글을 작성해 주세요!<br><b></b> 초 후에 로그인 페이지로 이동합니다.'
-    				, timer: 2000
-    				, timerProgressBar: true
-    				, didOpen: () => {
-    					Swal.showLoading();
-    					const b = Swal.getHtmlContainer().querySelector('b')
-    					timerInterval = setInterval(() => {
-    						b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
-    					}, 100)
-					}, willClose: () => {
-    					clearInterval(timerInterval)
-						}
-    			}).then((result) => {
-					location.href = "/login/toLogin";
-				})
-    			
-    			
-    		}
     		
     		let comment = $("#commentForm").serialize();
     		$("#inputComment").val(""); // 댓글 입력창 초기화
     		
-    		
-    		
     		$.ajax({
-    			url : "/comment/write"
+    			url : "/comment/writeG"
     			, type : "post"
     			, data : comment
     			// , dataType : "json"
@@ -712,7 +683,7 @@
     		$(e.target).parents(".commentHead").next().find(".comment").attr("readonly", true);
     		
     		let comment = $(e.target).parents(".commentHead").next().find("textarea").val();
-    		let seq_comment = $(e.target).parent().val();
+    		let seq_group_comment = $(e.target).parent().val();
     		console.log(seq_comment);
     		
     		Swal.fire({
@@ -723,10 +694,10 @@
     		}).then((result) => {
     			if (result.isConfirmed) {
     				$.ajax({
-    	    			url : "/comment/modify"
+    	    			url : "/comment/modifyG"
     	    			, type : "post"
     	    			, data : {
-    	    				seq_comment : seq_comment
+    	    				"seq_group_comment" : seq_group_comment
     	    				, "comment_content" : comment
     	    			}, success : function(data){
     	    				if(data === "success"){
@@ -746,7 +717,7 @@
     	
     	// 댓글 삭제
     	$("#body-comment").on("click", ".del-commentBtn", function(e){
-    		let seq_comment = $(e.target).parent().val();
+    		let seq_group_comment = $(e.target).parent().val();
     		Swal.fire({
     			title: '정말 삭제하시겠어요?',
     			text: "삭제한 댓글은 복구가 불가능해요.",
@@ -759,9 +730,9 @@
     			if (result.isConfirmed) {
     				
     				$.ajax({
-    	    			url : "/comment/delete"
+    	    			url : "/comment/deleteG"
     	    			, type : "post"
-    	    			, data : { seq_comment : seq_comment }
+    	    			, data : { seq_group_comment : seq_group_comment }
     	    			, success : function(data){
     	    				if(data === "success"){
     	    					Swal.fire('삭제 완료!', '', 'success');

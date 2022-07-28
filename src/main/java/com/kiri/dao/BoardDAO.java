@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kiri.dto.BoardDTO;
-import com.kiri.vo.Criteria;
+import com.kiri.utills.Criteria;
 
 @Repository
 public class BoardDAO {

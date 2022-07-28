@@ -162,7 +162,7 @@ ul {
 }
 
 .card {
-	width: 18rem;
+	width: 390px;
 	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
 	cursor:pointer;
 }

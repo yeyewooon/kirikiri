@@ -179,6 +179,7 @@ body {
    width:100%;
    height: 400px;
 }
+
 /* 모달 프로필  */
 .modalProfileImage {
 	width: 100px;
@@ -330,7 +331,7 @@ footer.footer {
 
 .categoryText:hover {
   color: red;
-  
+
 }
 </style>
 
@@ -710,6 +711,7 @@ footer.footer {
                           </c:otherwise>
                         </c:choose>
                       </div>
+                      <div class="d-flex justify-content-center" style="width:100px;">${list.user_nickname}</div>
                     </div>
                   </c:forEach>
                 </div>
@@ -816,7 +818,7 @@ footer.footer {
 								<button type="button" class="btn btn-success d-none closeXmark"
 									id="sendMsgBtn">쪽지 보내기</button>
                         		<button type="button" class="btn btn-danger d-none closeXmark"
-                           			id="reportBtn">신고하기</button>									
+                           			id="reportBtn">신고하기</button>
 							</div>
 						</div>
 					</div>
@@ -870,9 +872,9 @@ footer.footer {
 	</div>
 
 	<script>
-	
-	
-	
+
+
+
 	// width 사이즈 감지
 	  window.onresize = function(){
 	    let widthSize = document.documentElement.clientWidth;
@@ -888,24 +890,24 @@ footer.footer {
 	        $("#groupTitleHeader").css("margin-top",Math.max(-220,0-$(this).scrollTop()));
 	      }
 	  }
-	
-	// 특정위치로 이동 
+
+	// 특정위치로 이동
 	$(".categoryText").on("click",function(e) {
 		let selectedWord = $(this).html();
 		console.log(selectedWord);
-		if(selectedWord == "상세정보") {	
+		if(selectedWord == "상세정보") {
 			var offset = $(".groupInfo").offset(); //해당 위치 반환
-			$("html, body").animate({scrollTop: offset.top},400); 
+			$("html, body").animate({scrollTop: offset.top},400);
 		}else if(selectedWord == "주의사항") {
 			var offset = $(".cautionContainer").offset(); //해당 위치 반환
-			$("html, body").animate({scrollTop: offset.top},400); 
+			$("html, body").animate({scrollTop: offset.top},400);
 		}else if(selectedWord == "멤버정보") {
 			var offset = $(".groupMemberrInfo").offset(); //해당 위치 반환
-			$("html, body").animate({scrollTop: offset.top},400); 
+			$("html, body").animate({scrollTop: offset.top},400);
 		}
-	
+
 	})
-	
+
     let realMemberCnt = ${fn:length(memberList)}; // 주최자를 제외한 맴버수
     $(".memberCntSpan").text(realMemberCnt); // 주최자를 제외한 맴버수
 
@@ -931,12 +933,12 @@ footer.footer {
               if(data.profileList[0].user_image != null) {
                  document.getElementById("memberProfileImg").src = "/profile/"+data.profileList[0].user_image;
               }
-              $("#profileName").text(data.profileList[0].user_name); // 해당 회원 이름 모달값으로 넣어주기 
-              $("#profileNickname").text(data.profileList[0].user_nickname); // 해당 회원 닉네임 모달값으로 넣어주기 
-              $("#profileLocation").text(data.siteList[0].area); // 해당 회원 선호 지역 모달값으로 넣어주기 
-              $("#profileGender").text(data.profileList[0].user_gender); // 해당 회원 성별 모달값으로 넣어주기 
-              $("#profileIntro").text(data.profileList[0].user_intro); // 해당 회원 소개글 모달값으로 넣어주기 
-              $('.profileModal').modal('show'); // 성공했을때만 모달열리게 
+              $("#profileName").text(data.profileList[0].user_name); // 해당 회원 이름 모달값으로 넣어주기
+              $("#profileNickname").text(data.profileList[0].user_nickname); // 해당 회원 닉네임 모달값으로 넣어주기
+              $("#profileLocation").text(data.siteList[0].area); // 해당 회원 선호 지역 모달값으로 넣어주기
+              $("#profileGender").text(data.profileList[0].user_gender); // 해당 회원 성별 모달값으로 넣어주기
+              $("#profileIntro").text(data.profileList[0].user_intro); // 해당 회원 소개글 모달값으로 넣어주기
+              $('.profileModal').modal('show'); // 성공했을때만 모달열리게
               $("#receiverName").text(data.profileList[0].user_name) // 해당 회원 이름 메세지 받는 사람에 넣어주기
               $("#reportName").text('${loginSession.user_name}'); // 해당 회원 이름 신고자에 넣어주기
               $("#user_receive").val(data.profileList[0].user_nickname); // 쪽지 보내기 -> 받는사람 닉네임 넣어주기
@@ -1000,7 +1002,7 @@ footer.footer {
             $("#sendMsgBtn").addClass("d-none"); // 쪽지 보내기 버튼 안보이게
         })
 
-    // close 버튼 클릭시 
+    // close 버튼 클릭시
        $("#closeBtn,#closeXmark").on("click",function() {
           $("#profileTotalInfo").removeClass("d-none"); // 프로필 내용 보이게
           $(".modal-title").removeClass("d-none"); // 회원프로필 타이틀 보이게
@@ -1239,12 +1241,12 @@ footer.footer {
 
       // 그룹 설명 사진 크기 조절
       $(".groupContent p img").attr('style', "width:100%; height:440px;");
-   
+
  // 신고하기 아이콘 클릭시 모달창 신고하는걸로 바꾸기
     $("#siren_icon").on("click", function(){
-         // 로그인 세션이 없을 때 
+         // 로그인 세션이 없을 때
          if(loginSession_id == "youHaveToLogin" || loginSession_nickName == "youHaveToLogin") {
-            alert("로그인하셔야합니다");
+        	 Swal.fire('로그인 후 이용가능합니다');
             return;
          }
           $("#profileTotalInfo").addClass("d-none"); // 프로필 내용 안보이게
@@ -1253,15 +1255,15 @@ footer.footer {
           $("#reportForm").removeClass("d-none"); // 신고 양식 Form 보이게
           $("#reportBtn").removeClass("d-none"); // 쪽지 보내기 버튼 보이게
     })
-    
-    //신고하기 버튼 클릭    
+
+    //신고하기 버튼 클릭
          $("#reportBtn").on("click",function() {
             if($("#reportContent").val() == "") {
                Swal.fire('내용을 입력해주세요');
                return;
-            }          
+            }
             let report_receive = $("#report_receive").val(); // 받는 사람 닉네임
-            let reportContent = $("#reportContent").val(); // 쪽지 내용 
+            let reportContent = $("#reportContent").val(); // 쪽지 내용
             console.log("신고당하는 사람 : " + report_receive);
             console.log("신고 내용 : " + reportContent);
             console.log("신고 하는사람 : " + loginSession_nickName);
@@ -1296,18 +1298,18 @@ footer.footer {
                         text: '관리자에게 문의해주세여!',
                       });
                    }
-                  })    
+                  })
              }
              $("#profileTotalInfo").removeClass("d-none"); // 프로필 내용 보이게
              $("#reportForm").addClass("d-none"); // 신고 양식 Form 안보이게
              $("#reportBtn").addClass("d-none"); // 신고하기 버튼 안보이게
          })
-         })   		
-   
-   
-   
-   
-   
+         })
+
+
+
+
+
 
     </script>
 </body>

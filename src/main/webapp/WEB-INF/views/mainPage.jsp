@@ -194,7 +194,7 @@ a {
 }
 
 .card {
-	width: 18rem;
+	width: 380px;
 	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
 	cursor:pointer;
 }
@@ -593,7 +593,7 @@ footer.footer {
          <div class="col p-0">
             <div class="content2">
                <div class="imgContainer">
-                  <div class="row">
+                  <div class="row" style="padding : 18px;">
                      <c:forEach items="${selectAllList}" var="dto" begin="0" end = "5">
                         <div class="col-md-4 d-flex justify-content-center p-4">
                            <div class="card" data-aos="flip-up" data-aos-duration="1000">
