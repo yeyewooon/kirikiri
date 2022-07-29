@@ -27,7 +27,8 @@
   <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-
+	<!-- Bootstrap icons-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
   <!-- 아이콘 -->
   <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
@@ -42,12 +43,13 @@
             font-weight: 700;
             font-style: normal;
 }
-
-    /* 네비바  */
-body {
-	background-color: #f6f7f9;
+@font-face {
+    font-family: 'Katuri';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-
+/* 네비바  */
 * {
 	box-sizing: border-box;
 	font-family: "MICEGothic Bold"; 
@@ -103,33 +105,6 @@ body {
    font-weight: bold;
 }
 
-
-
-
-.mainIcon i {
-	color: #316f8c;
-}
-
-.imgBox {
-	width: 240px;
-	height: 240px;
-	background-color: yellowgreen;
-	border-radius: 4px;
-}
-
-.imgBox img {
-	width: 240px;
-	height: 240px;
-}
-
-.mainFooter {
-	height: 70px;
-}
-
-#search-addon {
-	cursor: pointer;
-}
-
 ul {
 	list-style: none;
 	padding: 0;
@@ -145,20 +120,34 @@ ul {
       width: 100%;
       height: 100%;
   } 
+.locationText, .categoryText{
+	font-family : katuri;
+}  
+  
 
 /* body content */
 .content {
 	width: 100%;
-	margin: 0px;
-	background-color: rgb(245, 245, 245);
+	margin-top: 40px;
+    margin-bottom: 0px;
+	background-color: #fbfbdf;
+	border-top: 5px solid #ffd766;
+	border-bottom: 5px solid #ffd766;
+	padding-right: 100px;
+    padding-left: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-left: 0px;
 }
 
 .card {
-	width: 390px;
-	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
-	cursor:pointer;
+	width:350px;
+    border: 3px solid #d5f1d5;
+    cursor: pointer;
 }
-
+.card-body{
+	background-color : #f4fdef;
+}
 .card>img {
 	width: 100%;
 }
@@ -179,6 +168,9 @@ ul {
 
 /* footer */
 /*풋터 영역*/
+.footerWrapper{
+	background-color: #f9fafe;
+}
 .footerBox {
 	height: 0px;
 }
@@ -186,7 +178,6 @@ ul {
 footer.footer {
 	padding-top: 2rem;
 	padding-bottom: 2rem;
-	background-color: #f6f7f9;
 }
 
 .footer a {
@@ -197,20 +188,15 @@ footer.footer {
 }
 
 .footer-imgBox>img {
-	width: 100%;
 	height: 100%;
+	text-align:center;
+}
+.footer-imgBox {
+	height: 100%;
+	text-align:center;
 }
 
-/* 눈누 폰트 */
-@font-face {
-	font-family: "OTWelcomeRA";
-	src:
-		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2")
-		format("woff2");
-	font-weight: normal;
-	font-style: normal;
-}
-
+/*슬라이드*/
 img {
 	max-width: 100%;
 	height: auto;
@@ -254,7 +240,7 @@ img {
 
 
 
-/* 지역,카테고리 */
+/* 지역,카테고리 버튼*/
 #locationBtn, #categoryBtn{
 	cursor:pointer;
 }
@@ -316,7 +302,7 @@ img {
 }
 
 .b05_3d_roll:hover div:nth-child(2) {
-    background-color: #000000;
+    background-color: #8D9EE0;
     transition: all 0.2s ease;
     -webkit-transition: all 0.2s ease;
     -moz-transition: all 0.2s ease;
@@ -336,13 +322,11 @@ body {
     margin: 0;
     border: 0;
     overflow-x: none;
-    background-color: #ffffff;
     font-family: Roboto Condensed, sans-serif;
     font-size: 15px;
     font-smooth: always;
     -webkit-font-smoothing: antialiased;
 }
-
 
 @media screen and (max-width: 1260px) {
     .back {
@@ -375,7 +359,9 @@ body {
 .button_base:hover {
     cursor: pointer;
 }
-
+.slick-prev:before, .slick-next:before {
+    color: coral;
+}
 
 </style>
 
@@ -499,14 +485,19 @@ body {
    </header>
 
 <div class="container">
+	<div class = "row">
+		<div class = "col-md-12 d-flex justify-content-start">
+			<div class = "mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
+		</div>
+	</div>
 	<div class="back row">
 	    <div class="col-md-4 button_base b05_3d_roll locationBtn" id="locationBtn">
-	        <div>지역</div>
-	        <div>지역</div>
+	        <div style = "font-family:katuri;">지역</div>
+	        <div style = "font-family:katuri;">지역</div>
 	    </div>
 	    <div class="col-md-4 button_base b05_3d_roll categoryBtn" id="categoryBtn">
-	        <div>카테고리</div>
-	        <div>카테고리</div>
+	        <div style = "font-family:katuri;">카테고리</div>
+	        <div style = "font-family:katuri;">카테고리</div>
 	    </div>
 	    <div class="col-md-4">
 	    </div>
@@ -741,55 +732,53 @@ body {
       </span>
     </div>
 </div>
-
+</div>
 	<!-- 모임 card 캐러셀 -->
       <div class="row content mt-4">
          <div class="col p-0">
             <div class="content2">
                <div class="imgContainer">
-                  <div class="row" style="background-color: #f6f7f9;">
-                     <c:forEach items="${selectAllList}" var="dto">
-                        <div class="col-md-4 d-flex justify-content-center p-4">
-                           <div class="card">
-                           		<c:choose>
-									<c:when test="${dto.sys_name ne null}">
-										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
-									</c:when>
-									<c:otherwise>
-										<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
-									</c:otherwise>
-								</c:choose>
-								<span class="d-none">${dto.seq_group}</span>
-                              <div class="card-body">
-                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
-                                    ${dto.group_category}
-                                 </div>
-                                 <div class="card-text mt-1">
-                                    <strong>${dto.group_title}</strong>
-                                 </div>
-                                 <div class="card-text d-flex justify-content-end">
-                                    <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
-                                 </div>
-                              </div>
-                           </div>
-                        </div>
-                     </c:forEach>
+                  <div class="row">
+                  	<c:if test = "${selectAllList.size() == 0}">
+                  		<div>아직 개설된 모임이 없습니다.</div>
+                  	</c:if>
+                  	<c:if test = "${selectAllList.size() > 0}">
+						<c:forEach items="${selectAllList}" var="dto">
+	                        <div class="col-md-3 d-flex justify-content-center p-4">
+	                           <div class="card">
+	                           		<c:choose>
+										<c:when test="${dto.sys_name ne null}">
+											<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+										</c:when>
+										<c:otherwise>
+											<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+										</c:otherwise>
+									</c:choose>
+									<span class="d-none">${dto.seq_group}</span>
+	                              <div class="card-body">
+	                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+	                                    ${dto.group_category}
+	                                 </div>
+	                                 <div class="card-text mt-3 mb-3">
+	                                    <span style = "font-size:25px; font-family:Katuri;">${dto.group_title}</span>
+	                                 </div>
+	                                 <div class="card-text d-flex justify-content-end">
+	                                    <span><i class="fa-solid fa-location-dot" style="color:#00145a"></i><span class="ms-2" style = "color:#00145a; font-family:Katuri;">${dto.group_site}</span></span>
+	                                 </div>
+	                              </div>
+	                           </div>
+	                        </div>
+                     	</c:forEach>
+                  	</c:if>
                   </div>
                </div>
             </div>
          </div>
       </div>
-
-
-
-</div>
-
-
-
   <!-- Footer-->
-  <!-- <div class="footerWrapper" style="background-color: #fff;">
+  <div class="footerWrapper">
     <div class="container">
-      <footer class="footer" style="background-color: #fff;">
+      <footer class="footer">
         <div class="row">
           <div class="col-lg-3 footer-imgBox">
             <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
@@ -821,7 +810,7 @@ body {
               &copy; Your Website 2022. All Rights Reserved.
             </p>
           </div>
-          <div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
             <ul class="list-inline mb-0">
               <li class="list-inline-item me-4">
                 <a href="#!"><i class="bi-facebook fs-3"></i></a>
@@ -837,7 +826,7 @@ body {
         </div>
       </footer>
     </div>
-  </div> -->
+  </div> 
 
 
 

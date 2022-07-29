@@ -293,7 +293,48 @@ footer.footer {
    width: 100%;
    height: 100%;
 }
-
+/*모임생성 버튼*/
+@import url(https://fonts.googleapis.com/css?family=Roboto:700);
+.button {
+  background: #3D4C53;
+  width : 200px;
+  height : 50px;
+  overflow: hidden;
+  text-align : center;
+  transition : .2s;
+  cursor : pointer;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,.2);
+}
+.btnTwo {
+  position : relative;
+  width : 200px;
+  height : 100px;
+  margin-top: -100px;
+  padding-top: 2px;
+  background : #26A69A;
+  left : -250px;
+  transition : .3s;
+}
+.btnText {
+  color : white;
+  padding-top: 13px;
+  transition : .3s;
+}
+.btnText2 {
+  margin-top : 60px;
+  margin-right : -130px;
+  color : #FFF;
+}
+.button:hover .btnTwo{ /*When hovering over .button change .btnTwo*/
+  left: -130px;
+}
+.button:hover .btnText{ /*When hovering over .button change .btnText*/
+  margin-left : 65px;
+}
+.button:active { /*Clicked and held*/
+  box-shadow: 0px 5px 6px rgba(0,0,0,0.3);
+}
 
 </style>
 </head>
@@ -427,8 +468,15 @@ footer.footer {
                즐거운 시간을 보내세요.</div>
             <div class="mt-4 w-75">취미가 없고 지루한 일상이 싫다면 모임을 가입하세요. 즐거운 모임으로
                새로운 세상을 찾아요.</div>
+			<div class = "mt-4">
+				<div class="button">
+				    <p class="btnText">모임생성?</p>
+				    <div class="btnTwo">
+				    <p class="btnText2">고!</p>
+				    </div>
+				 </div>
+			</div>
          </div>
-
       </div>
 
       <!--동그라미세개-->
@@ -777,8 +825,19 @@ footer.footer {
 	</div>
 
 
-   <!-- AOS 스크립트 시작 -->
    <script>
+   <!-- 모임생성 고! 버튼 -->
+   $(".button").on("click", function(){
+ 	   if("${loginSession}" != ""){
+		   location.href = "/group/toCreateGroup";
+	   }else{
+    	  Swal.fire({
+                 icon: 'warning',
+                 text: '로그인 후 사용하실수 있습니다..',
+               })  		   
+	   } 
+   })
+   <!-- AOS 스크립트 시작 -->
       AOS.init(); // 자바스크립트로 init()을 해야 동작한다.
       
       const countDownTimer = function(id, date) {
