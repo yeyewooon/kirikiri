@@ -32,18 +32,16 @@
 <style>
 * {
 	box-sizing: border-box;
-	font-family: 'OTWelcomeRA';
+	font-family: 'KOTRAHOPE';
 	font-size : 11px;
 }
 
 /* 눈누 폰트 */
 @font-face {
-	font-family: 'OTWelcomeRA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-		format('woff2');
-	font-weight: normal;
-	font-style: normal;
+    font-family: 'KOTRAHOPE';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/KOTRAHOPE.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
 }
 
 .chatting {
@@ -220,7 +218,12 @@
 							<tr class="userTable">
 								<td>
 									<div class="profile me-2">
-										<img src="${profileList[status.index]}" id="profile_img">
+										<c:if test="${profileList[status.index] eq null}" >
+											<img src="/resources/images/profile.jpg" id="profile_img">
+										</c:if>
+										<c:if test="${profileList[status.index] ne null}" >
+											<img src="${profileList[status.index]}" id="profile_img">
+										</c:if>
 									</div>
 								</td>
 								<td>${user.user_nickname}</td>
@@ -341,7 +344,7 @@
 		// 웹소켓 객체 생성할때 반드시 서버의 ip 주소값은 실제 ip 주소를 이용
 		// 포트번호 다르면 :포트번호/chat 39.120.220.2:11111
 		var seq_group = $("#seq_group").val();
-		let ws = new WebSocket("ws://39.120.220.2:11111/chat/"+seq_group);
+		let ws = new WebSocket("ws://192.168.0.4/chat/"+seq_group);
 		let nickname = $("#nickname").val();
 		
 		//이모티콘 나오게 하기
@@ -455,7 +458,7 @@
 		
 		//이모티콘 보내는 함수
 		function sendEmoji(imgCls){
-			let url = 'http://39.120.220.2:11111/';
+			let url = 'http://192.168.0.4/';
 			let emojiSrc = $(imgCls).prop("src").indexOf(url)+url.length-1; // /resources 시작하는 index번호
 			let realSrc = $(imgCls).prop("src").slice(emojiSrc);
 			console.log(realSrc);

@@ -26,10 +26,11 @@
 <style>
 * {
 	box-sizing: border-box;
-	font-family: "OTWelcomeRA";
+	font-family: "InfinitySans-RegularA1";
 }
+
 #mainText {
-	font-family: "양진체";
+	font-family: "BMJUA";
 }
 /* benu */
 /* header 반응형 */
@@ -52,10 +53,12 @@
 	width: 150px;
 	height: 100px;
 }
+
 #logoImgs {
 	width: 100%;
 	height: 100%;
 }
+
 @media ( min-width : 768px) {
 	#navibar {
 		display: none;
@@ -65,14 +68,17 @@
 #logoImg {
 	width: 50%;
 }
+
 .header {
 	background-color: #d2e3ec;
 	justify-content: end;
 	width: 100%;
 }
+
 h2 {
 	margin-top: 100px;
 }
+
 .line {
 	border: 2px solid rgb(57, 88, 122);
 	margin-top: 10px;
@@ -88,28 +94,41 @@ h2 {
 	border-radius: 50%;
 	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
 }
+
 #profile_image {
 	width: 100%;
 	height: 100%;
 	border-radius: 50%;
 }
+
 #profilePic:hover {
 	transition: 0.8s ease-in;
 	transform: scale(1.1);
 }
+
 #profilePic:not(:hover) {
 	transition: 0.8s ease-out;
 }
+
+.modifyPro {
+	margin-top: 30px;
+	color: gray;
+}
+
 .profileName {
 	text-align: center;
 }
+
 .statusMessage {
 	text-align: center;
+	font-size: 25px;
 }
+
 .profileBtn {
 	color: black;
 	border-color: black;
 }
+
 hr {
 	margin: 50px;
 }
@@ -118,6 +137,7 @@ hr {
 	justify-content: end;
 	width: 100%;
 }
+
 .bodyBox {
 	border: 1px solid black;
 	margin: auto;
@@ -126,59 +146,71 @@ hr {
 	border-radius: 10%;
 	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
 }
+
 .bodyIcon {
 	font-size: 40px;
 	margin-bottom: 15px;
 }
+
 h4 {
 	margin-top: 15px;
 	text-align: center;
 }
+
 #line {
 	margin: 20px 50px 10px 50px;
 }
 /* modal 창 영역 */
-.modal-content{
-	width:580px;
+.modal-content {
+	width: 580px;
 }
-#modal{
-	width:100%;
-	height:150px;
+
+#modal {
+	width: 100%;
+	height: 150px;
 }
-#modal label{
-	cursor:pointer;
+
+#modal label {
+	cursor: pointer;
 	user-select: none;
 }
-.modalBtn{
-	width:100%;
-	height:60px;
+
+.modalBtn {
+	width: 100%;
+	height: 60px;
 }
-.hobbyWrapper{
-	display:flex;
-	flex-direction : column;
-	justify-content:space-evenly;
-	text-align:left;
-	padding:0px;
+
+.hobbyWrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	text-align: left;
+	padding: 0px;
 }
+
 .myList {
 	font-size: 1.1rem;
 	margin: 0px 0px 10px 50px;
 }
+
 .myMsg {
 	justify-content: center;
 	align-items: center;
-	margin-top: 50px;
+	margin-top: 30px;
 }
+
 .fa-crown {
 	margin-left: 10px;
 	color: gold;
 }
+
 .myWrite {
 	display: flex;
 	margin-right: 10px;
 	justify-content: end;
 }
-.wishDelete,.towritePage,.checkMyMsg{
+
+.wishDelete, .towritePage, .checkMyMsg {
 	cursor: pointer;
 }
 /* footer css 부분 */
@@ -190,35 +222,39 @@ h4 {
 .footerBox {
 	height: 0px;
 }
+
 footer.footer {
 	padding-top: 2rem;
 	padding-bottom: 2rem;
 	background-color: #ffffff;
 }
+
 .footer a {
 	text-decoration: none;
 	color: black;
 	font-weight: 40px;
 	font-weight: bold;
 }
+
 .footer-imgBox>img {
 	width: 100%;
 	height: 100%;
 }
 /* 눈누 폰트 */
 @font-face {
-	font-family: "OTWelcomeRA";
+	font-family: 'InfinitySans-RegularA1';
 	src:
-		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2")
-		format("woff2");
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+		format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
+
 @font-face {
-	font-family: "양진체";
+	font-family: 'BMJUA';
 	src:
-		url("https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff")
-		format("woff");
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
+		format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -234,138 +270,165 @@ footer.footer {
 	border-radius: 5px;
 	padding: 4px;
 }
-.table-content{
-	text-align : center;
+
+.table-content {
+	text-align: center;
 }
-.msgModal-footer{
+
+.msgModal-footer {
 	border-top: 0px;
+}
+
+.myList>span {
+	align-items: center;
+	text-align: center;
 }
 </style>
 <body>
 	<!-- page Benu -->
 	<!--네비바-->
-      <header class="mb-3 border-bottom">
-      <div class="container">
-         <!-- 접혔을 때 nav -->
-         <nav id="navibar" class="navbar navbar-expand-md navbar-light"
-            aria-label="Main navigation">
-            <div class="container-fluid">
-               <div class="row">
-                  <div class="col-10">
-                     <a class="navbar-brand mb-2 mb-lg-0" href="/">
-                        <div class="title-box">
-                           <img id="logoImg" src="/resources/images/kiri.jpg">
-                        </div>
-                     </a>
-                  </div>
-                  <!-- toggle button -->
-                  <div class="col-2 d-flex align-items-center">
-                     <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                        aria-controls="navbarNavDropdown" aria-expanded="false"
-                        aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                     </button>
-                  </div>
-                  <!-- 메뉴 -->
-                  <div class="collapse navbar-collapse justify-content-end"
-                     id="navbarNavDropdown">
-                     <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
-                           <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
-                     </ul>
-                  </div>
-               </div>
+	<header class="mb-3 border-bottom">
+		<div class="container">
+			<!-- 접혔을 때 nav -->
+			<nav id="navibar" class="navbar navbar-expand-md navbar-light"
+				aria-label="Main navigation">
+				<div class="container-fluid">
+					<div class="row">
+						<div class="col-10">
+							<a class="navbar-brand mb-2 mb-lg-0" href="/">
+								<div class="title-box">
+									<img id="logoImg" src="/resources/images/kiri.jpg">
+								</div>
+							</a>
+						</div>
+						<!-- toggle button -->
+						<div class="col-2 d-flex align-items-center">
+							<button class="navbar-toggler" type="button"
+								data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+								aria-controls="navbarNavDropdown" aria-expanded="false"
+								aria-label="Toggle navigation">
+								<span class="navbar-toggler-icon"></span>
+							</button>
+						</div>
+						<!-- 메뉴 -->
+						<div class="collapse navbar-collapse justify-content-end"
+							id="navbarNavDropdown">
+							<ul class="navbar-nav mb-2 mb-lg-0">
+								<li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+								<c:if test="${empty loginSession}">
+									<li class="nav-item"><a class="nav-link"
+										href="/login/toLogin">로그인</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href="/signup/toSignupAgree">회원가입</a></li>
+								</c:if>
+								<c:if
+									test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+									<li class="nav-item"><a class="nav-link"
+										href="/mem/myPage">마이페이지</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href="/admin/toAdmin">관리자페이지 이동</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href="/login/toLogout">로그아웃</a></li>
+								</c:if>
+								<c:if
+									test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+									<li class="nav-item"><a class="nav-link"
+										href="/mem/myPage">마이페이지</a></li>
+									<li class="nav-item"><a class="nav-link"
+										href="/login/toLogout">로그아웃</a></li>
+								</c:if>
+							</ul>
+						</div>
+					</div>
 
-            </div>
-         </nav>
-         <!-- 펼쳐졌을 때 nav -->
-         <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
-            aria-label="Main navigation">
-            <div class="row w-100 align-items-center">
-               <div class="col-5 d-flex justify-content-center">
-                  <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
-                  </ul>
-               </div>
+				</div>
+			</nav>
+			<!-- 펼쳐졌을 때 nav -->
+			<nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
+				aria-label="Main navigation">
+				<div class="row w-100 align-items-center">
+					<div class="col-5 d-flex justify-content-center">
+						<ul class="navbar-nav mb-2 mb-lg-0">
+							<li class="nav-item"><a class="nav-link mx-2"
+								href="/board/toBoard">자유 게시판</a></li>
+						</ul>
+					</div>
 
-               <!-- logo -->
-               <div class="col-2">
-                  <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
-                     id="logoImgs" src="/resources/images/kiri.jpg">
+					<!-- logo -->
+					<div class="col-2">
+						<a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
+							id="logoImgs" src="/resources/images/kiri.jpg">
 
-                  </a>
-               </div>
+						</a>
+					</div>
 
-               <div class="col-5">
-                  <div class="row align-items-center justify-content-center">
-                     <div class="col-auto">
-                        <ul class="navbar-nav mb-2 mb-lg-0 me-2">
-                           <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link"
-                                 href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link"
-                                 href="/signup/toSignupAgree">회원가입</a></li>
-                           </c:if>
-                        </ul>
-                     </div>
-                     <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </nav>
-      </div>
-   </header>
-	
+					<div class="col-5">
+						<div class="row align-items-center justify-content-center">
+							<div class="col-auto">
+								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
+									<c:if test="${empty loginSession}">
+										<li class="nav-item"><a class="nav-link"
+											href="/login/toLogin">로그인</a></li>
+										<li class="nav-item"><a class="nav-link"
+											href="/signup/toSignupAgree">회원가입</a></li>
+									</c:if>
+								</ul>
+							</div>
+							<div class="col-auto user">
+								<c:if
+									test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+									<div class="dropdown text-end">
+										<a href="/"
+											class="d-block link-dark text-decoration-none dropdown-toggle"
+											id="dropdownUser1" data-bs-toggle="dropdown"
+											aria-expanded="false"> <img
+											src="/resources/images/profile.jpg" alt="mdo" width="32"
+											height="32" class="rounded-circle">
+										</a>
+										<ul class="dropdown-menu text-small"
+											aria-labelledby="dropdownUser1">
+											<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+											<li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+											<li><hr class="dropdown-divider"></li>
+											<li><a class="dropdown-item" href="/admin/toAdmin">관리자
+													페이지이동</a></li>
+											<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+										</ul>
+									</div>
+								</c:if>
+								<c:if
+									test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+									<div class="dropdown text-end">
+										<a href="/"
+											class="d-block link-dark text-decoration-none dropdown-toggle"
+											id="dropdownUser1" data-bs-toggle="dropdown"
+											aria-expanded="false"> <img
+											src="/resources/images/profile.jpg" alt="mdo" width="32"
+											height="32" class="rounded-circle">
+										</a>
+										<ul class="dropdown-menu text-small"
+											aria-labelledby="dropdownUser1">
+											<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+											<li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+											<li><hr class="dropdown-divider"></li>
+											<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+										</ul>
+									</div>
+								</c:if>
+							</div>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+	</header>
+
 	<!-- header jsp -->
 	<div class="container">
-		<div class="row header">
-			<div class="col-md-4 hidden-md">
-				<div class="col-md-12 ms-5">
-					<h2>MyPage</h2>
+		<div class="row header d-flex">
+			<div class="col-md-3 hidden-md m-auto">
+				<div class="col-md-12 ms-5 mt-1">
+					<h3>My Profile</h3>
 					<div class="line"></div>
 				</div>
 				<div class="col-12 ms-5 mt-3">
@@ -380,10 +443,14 @@ footer.footer {
 					<i class="fa-solid fa-envelope icon m-2"></i><span>${memberdto.user_email}</span>
 				</div>
 			</div>
-			<div class="col-md-4 mt-4">
-				<form action="/mem/modifyProfilePic" method="post" id="modifyPicForm" enctype="multipart/form-data">
-					<i class="fa-solid fa-wrench me-3"></i><span id="modifyProfilePic"
-						style="cursor: pointer; user-select: none">프로필 사진변경</span>
+			<div class="col-md-6 mt-4 justify-content-center ">
+				<form action="/mem/modifyProfilePic" method="post"
+					id="modifyPicForm" enctype="multipart/form-data">
+					<div class="modifyPro mb-4 text-center">
+						<i class="fa-solid fa-folder-plus me-3"></i> 
+						<span id="modifyProfilePic" style="cursor: pointer; user-select: none">프로필 사진 변경</span>
+
+					</div>
 					<div>
 						<input type="text" class="d-none" name="${memberdto}"
 							value="${memberdto}">
@@ -391,22 +458,24 @@ footer.footer {
 					<div id="profilePic">
 						<c:choose>
 							<c:when test="${empty memberdto.user_image}">
-								<img src="/resources/images/default_profile.jpg" id="profile_image">
+								<img src="/resources/images/default_profile.jpg"
+									id="profile_image">
 							</c:when>
 							<c:otherwise>
 								<img src="/profile/${memberdto.user_image}" id="profile_image">
 							</c:otherwise>
 						</c:choose>
 					</div>
-					<div class="col-12 d-flex justify-content-center mt-3">
-						<input type="file" class="form-control w-5 d-none" id="file" name="user_image">
+					<div class="col-12 d-flex justify-content-center mt-4">
+						<input type="file" class="form-control w-5 d-none" id="file"
+							name="user_image">
 					</div>
 				</form>
 				<div class="profileName" id="">
-					<span style="font-size: 15px"><strong
-						style="font-size: 20px">${memberdto.user_nickname} </strong>님</span>
+					<span style="font-size: 20px"><strong
+						style="font-size: 25px">${memberdto.user_nickname} </strong>님</span>
 				</div>
-				<div class="statusMessage mb-3 mt-3" id="statusMessage">
+				<div class="statusMessage mb-5 mt-2" id="statusMessage">
 					<i class="fa-solid fa-quote-left"></i> <span>${memberdto.user_intro}</span>
 					<i class="fa-solid fa-quote-right"></i>
 				</div>
@@ -421,7 +490,7 @@ footer.footer {
 				}
 			}
 			$("#modifyProfilePic").on("click", function() {
-			if ($("#modifyProfilePic").text() === '프로필 사진변경') {
+			if ($("#modifyProfilePic").text() === '프로필 사진 변경') {
 				this.textContent = '저장';
 				$("#file").removeClass("d-none");
 			} else {
@@ -454,62 +523,82 @@ footer.footer {
 				}
 			})
 			</script>
-			<div class="col-md-4" style="text-align: end">
-				<button type="button" class="btn btn-outline-info mt-4 profileBtn" data-bs-toggle="modal" data-bs-target="#exampleModal2" >개인정보 수정</button>
-				<button type="button" class="btn btn-outline-info mt-4 profileBtn"
-					id="profileDelete">회원탈퇴</button>
-				<input type="text" class="d-none" id="user_delete" value="${memberdto.user_delete}">
-				<input type="text" class="d-none" id="user_email" value="${memberdto.user_email}">
-			</div>		
+			<div class="col-md-3 pe-4" style="text-align: end;">
+				<button type="button"
+					class="btn btn-outline-primary mt-4 profileBtn"
+					data-bs-toggle="modal" data-bs-target="#exampleModal2">개인정보
+					수정</button>
+				<button type="button"
+					class="btn btn-outline-primary mt-4 profileBtn" id="profileDelete">회원탈퇴</button>
+				<input type="text" class="d-none" id="user_delete"
+					value="${memberdto.user_delete}"> <input type="text"
+					class="d-none" id="user_email" value="${memberdto.user_email}">
+			</div>
 			<!-- 개인정보 수정 모달 -->
-			<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-			  <div class="modal-dialog">
-			    <div class="modal-content" style="width:340px; height:400px;">
-			      <div class="modal-header">
-			        <h5 class="modal-title" id="exampleModalLabel">비밀번호 확인</h5>
-			        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-			      </div>
-			      <div class="modal-body" >
-			      	  <div class="row">
-			      	  	<span style="text-align:center;"><strong style="font-size:20px;">${memberdto.user_nickname}</strong>님 회원정보 중 개인정보 수정하기 위해 인증절차가 필요합니다.</span>
-			      	  </div>
-			      	  	<hr style="margin:20px;">
-				      <div class="row">
-				      	<div class="col-5 d-flex justify-content-center" style="align-items:center; padding:0px;"><label>현재 비밀번호 : </label></div>
-				      	<div class="col-7 d-flex justify-content-start">
-					       	<input type="password" id="password" class="form-control" style="height:100%; font-family:none;">		
-				      	</div>
-				      	<script>
+			<div class="modal fade" id="exampleModal2" tabindex="-1"
+				aria-labelledby="exampleModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content" style="width: 340px; height: 400px;">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLabel">비밀번호 확인</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal"
+								aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<span style="text-align: center;"><strong
+									style="font-size: 20px;">${memberdto.user_nickname}</strong>님
+									회원정보 중 개인정보 수정하기 위해 인증절차가 필요합니다.</span>
+							</div>
+							<hr style="margin: 20px;">
+							<div class="row">
+								<div class="col-5 d-flex justify-content-center"
+									style="align-items: center; padding: 0px;">
+									<label>현재 비밀번호 : </label>
+								</div>
+								<div class="col-7 d-flex justify-content-start">
+									<input type="password" id="password" class="form-control"
+										style="height: 100%; font-family: none;">
+								</div>
+								<script>
 				      		const test = document.querySelector('#password');
 				      		console.log(test)
 				      		test.addEventListener('change', () => {
 				      			console.log('change')
 				      		})
 				      	</script>
-				      	<div>
-					       	<button type="button" class="btn btn-secondary mt-3" id="checkPw" style="width:100%;">확인</button>
-				      	</div>
-				      	<div class="mt-3 d-none wrong-check-pw" style="text-align:center;">
-							<span style="color:red; font-size:0.8rem; margin-left:8px;">** 현재 비밀번호와 일치하지 않습니다. **</span>
+								<div>
+									<button type="button" class="btn btn-secondary mt-3"
+										id="checkPw" style="width: 100%;">확인</button>
+								</div>
+								<div class="mt-3 d-none wrong-check-pw"
+									style="text-align: center;">
+									<span style="color: red; font-size: 0.8rem; margin-left: 8px;">**
+										현재 비밀번호와 일치하지 않습니다. **</span>
+								</div>
+								<div class="mt-3 d-none right-check-pw" id="test"
+									style="text-align: center;">
+									<span
+										style="color: green; font-size: 0.8rem; margin-left: 8px;">**
+										현재 비밀번호와 일치합니다. **</span>
+								</div>
+							</div>
 						</div>
-						<div class="mt-3 d-none right-check-pw" id="test" style="text-align:center;">
-							<span style="color:green; font-size:0.8rem; margin-left:8px;">** 현재 비밀번호와 일치합니다. **</span>	
+						<div class="modal-footer" style="display: inline; padding: 0px;">
+							<div class="row" style="margin: 0px;">
+								<div class="col-5" style="padding: 0px;">
+									<button type="button" class="btn btn-secondary modalBtn"
+										data-bs-dismiss="modal">취소</button>
+								</div>
+								<div class="col-7" style="padding: 0px;">
+									<button type="button" class="btn btn-primary modalBtn"
+										id="profileModify" disabled>이동</button>
+								</div>
+							</div>
 						</div>
-				      </div>
-			      </div>
-			      <div class="modal-footer" style="display:inline; padding:0px;">
-				      <div class="row" style="margin:0px;">
-					      <div class="col-5" style="padding:0px;">
-					        <button type="button" class="btn btn-secondary modalBtn" data-bs-dismiss="modal">취소</button>			      
-					      </div>
-					      <div class="col-7" style="padding:0px;">
-					        <button type="button" class="btn btn-primary modalBtn" id="profileModify" disabled>이동</button>			      
-					      </div>			      
-				      </div>
-			      </div>
-			    </div>
-			  </div>
-			</div>	
+					</div>
+				</div>
+			</div>
 		</div>
 		<hr />
 		<div class="container">
@@ -532,77 +621,78 @@ footer.footer {
 									<span><i class="fa-solid fa-location-dot listIcon me-3"></i>${sitedto.area}</span>
 								</div>
 							</c:forEach>
-							
+
 						</div>
 					</div>
 					<div class="modal fade" id="exampleModal1" tabindex="-1"
-								aria-labelledby="exampleModalLabel" aria-hidden="true">
-								<div class="modal-dialog">
-									<div class="modal-content" style="width:300px;">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">선호지역(최대 3개
-												선택)</h5>
-											<button type="button" class="btn-close"
-												data-bs-dismiss="modal" aria-label="Close"></button>
-										</div>
-											<div class="modal-body">
-												<div class="col" id="modal">
-													<div class="row" style="height:100%;">
-														<div class="col-6 hobbyWrapper ps-2">
-														<input type="text" class="d-none" id="user_email" value="${memberdto.user_email}">
-															<div>
-																<input onclick="CountChecked1(this)" type="checkbox"
-																	id="서울" name="site" class="checkbox me-1" value="서울">
-																<label for="서울">서울</label>
-															</div>
-															<div>
-																<input onclick="CountChecked1(this)" type="checkbox" id="인천"
-																	name="site" class="checkbox me-1" value="인천"> 
-																<label for="강원도">인천</label>
-															</div>
-															<div>
-																<input onclick="CountChecked1(this)" type="checkbox" id="경기도"
-																	name="site" class="checkbox me-1" value="경기도"> 
-																<label for="경기도">경기도</label> 
-															</div>															
-															<div>
-																<input onclick="CountChecked1(this)" type="checkbox" id="강원도"
-																	name="site" class="checkbox me-1" value="강원도"> 
-																<label for="강원도">강원도</label>
-															</div>
-														</div>
-														<div class="col-6 hobbyWrapper">
-															<div>
-																<input onclick="CountChecked1(this)" type="checkbox"
-																	id="충정도" name="site" class="checkbox me-1" value="충정도">
-																<label for="충정도">충정도</label>															
-															</div>
-															<div>
-																<input onclick="CountChecked1(this)" type="checkbox" id="경상도"
-																	name="site" class="checkbox me-1" value="경상도">
-																<label for="경상도">경상도</label>	
-															</div>
-															<div>
-																<input onclick="CountChecked1(this)" type="checkbox" id="전라도"
-																	name="site" class="checkbox me-1" value="전라도">
-																<label for="전라도">전라도</label>															
-															</div>
-															<div>
-																<input onclick="CountChecked1(this)" type="checkbox"
-																	id="제주특별자치도" name="site" class="checkbox me-1" value="제주특별자치도">
-																<label for="제주특별자치도">제주도</label>															
-															</div>
-														</div>
-														
-													</div>
+						aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content" style="width: 300px;">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">선호지역(최대 3개
+										선택)</h5>
+									<button type="button" class="btn-close" data-bs-dismiss="modal"
+										aria-label="Close"></button>
+								</div>
+								<div class="modal-body">
+									<div class="col" id="modal">
+										<div class="row" style="height: 100%;">
+											<div class="col-6 hobbyWrapper ps-2">
+												<input type="text" class="d-none" id="user_email"
+													value="${memberdto.user_email}">
+												<div>
+													<input onclick="CountChecked1(this)" type="checkbox"
+														id="서울" name="site" class="checkbox me-1" value="서울">
+													<label for="서울">서울</label>
 												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-bs-dismiss="modal">닫기</button>
-													<button type="button" class="btn btn-primary" id="saveSiteBtn">저장</button>
+												<div>
+													<input onclick="CountChecked1(this)" type="checkbox"
+														id="인천" name="site" class="checkbox me-1" value="인천">
+													<label for="강원도">인천</label>
+												</div>
+												<div>
+													<input onclick="CountChecked1(this)" type="checkbox"
+														id="경기도" name="site" class="checkbox me-1" value="경기도">
+													<label for="경기도">경기도</label>
+												</div>
+												<div>
+													<input onclick="CountChecked1(this)" type="checkbox"
+														id="강원도" name="site" class="checkbox me-1" value="강원도">
+													<label for="강원도">강원도</label>
 												</div>
 											</div>
-										<script>
+											<div class="col-6 hobbyWrapper">
+												<div>
+													<input onclick="CountChecked1(this)" type="checkbox"
+														id="충정도" name="site" class="checkbox me-1" value="충정도">
+													<label for="충정도">충정도</label>
+												</div>
+												<div>
+													<input onclick="CountChecked1(this)" type="checkbox"
+														id="경상도" name="site" class="checkbox me-1" value="경상도">
+													<label for="경상도">경상도</label>
+												</div>
+												<div>
+													<input onclick="CountChecked1(this)" type="checkbox"
+														id="전라도" name="site" class="checkbox me-1" value="전라도">
+													<label for="전라도">전라도</label>
+												</div>
+												<div>
+													<input onclick="CountChecked1(this)" type="checkbox"
+														id="제주특별자치도" name="site" class="checkbox me-1"
+														value="제주특별자치도"> <label for="제주특별자치도">제주도</label>
+												</div>
+											</div>
+
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn btn-secondary"
+											data-bs-dismiss="modal">닫기</button>
+										<button type="button" class="btn btn-primary" id="saveSiteBtn">저장</button>
+									</div>
+								</div>
+								<script>
 											var maxCount = 3;
 											var count = 0;
 											function CountChecked1(field) {
@@ -642,9 +732,9 @@ footer.footer {
 												})
 											});
 										</script>
-									</div>
-								</div>
 							</div>
+						</div>
+					</div>
 					<div class="col-md-4">
 						<div class="bodyBox mb-lg-5">
 							<h4>
@@ -674,86 +764,87 @@ footer.footer {
 											<button type="button" class="btn-close"
 												data-bs-dismiss="modal" aria-label="Close"></button>
 										</div>
-											<div class="modal-body">
-												<div class="col" id="modal">
-													<div class="row" style="height:100%;">
-														<div class="col-3 hobbyWrapper ps-2">
-														<input type="text" class="d-none" id="user_email" value="${memberdto.user_email}">
-															<div>
-																<input onclick="CountChecked(this)" type="checkbox"
-																	id="아웃도어/여행" name="hobby" class="checkbox me-1" value="아웃도어/여행">
-																<label for="아웃도어/여행">아웃도어/여행</label>
-															</div>
-															<div>
-																<input onclick="CountChecked(this)" type="checkbox" id="운동/스포츠"
-																	name="hobby" class="checkbox me-1" value="운동/스포츠"> 
-																<label for="운동/스포츠">운동/스포츠</label>
-															</div>
-															<div>
-																<input onclick="CountChecked(this)" type="checkbox" id="외국어/언어"
-																	name="hobby" class="checkbox me-1" value="외국어/언어"> 
-																<label for="외국어/언어">외국어/언어</label> 
-															</div>															
+										<div class="modal-body">
+											<div class="col" id="modal">
+												<div class="row" style="height: 100%;">
+													<div class="col-3 hobbyWrapper ps-2">
+														<input type="text" class="d-none" id="user_email"
+															value="${memberdto.user_email}">
+														<div>
+															<input onclick="CountChecked(this)" type="checkbox"
+																id="아웃도어/여행" name="hobby" class="checkbox me-1"
+																value="아웃도어/여행"> <label for="아웃도어/여행">아웃도어/여행</label>
 														</div>
-														<div class="col-3 hobbyWrapper">
-															<div>
-																<input onclick="CountChecked(this)" type="checkbox" id="반려동물"
-																	name="hobby" class="checkbox me-1" value="반려동물"> 
-																<label for="반려동물">반려동물</label>
-															</div>
-															<div>
-																<input onclick="CountChecked(this)" type="checkbox"
-																	id="음악/악기" name="hobby" class="checkbox me-1" value="음악/악기">
-																<label for="음악/악기">음악/악기</label>															
-															</div>
-															<div>
-																<input onclick="CountChecked(this)" type="checkbox" id="공예/만들기"
-																	name="hobby" class="checkbox me-1" value="공예/만들기">
-																<label for="공예/만들기">공예/만들기</label>															
-															</div>
+														<div>
+															<input onclick="CountChecked(this)" type="checkbox"
+																id="운동/스포츠" name="hobby" class="checkbox me-1"
+																value="운동/스포츠"> <label for="운동/스포츠">운동/스포츠</label>
 														</div>
-														<div class="col-3 hobbyWrapper">
-															<div>
-																<input onclick="CountChecked(this)" type="checkbox" id="댄스/무용"
-																	name="hobby" class="checkbox me-1" value="댄스/무용">
-																<label for="댄스/무용">댄스/무용</label>															
-															</div>
-															<div>
-																<input onclick="CountChecked(this)" type="checkbox" id="인문학/책/글"
-																	name="hobby" class="checkbox me-1" value="인문학/책/글">
-																<label for="인문학/책/글">인문학/책/글</label>															
-															</div>
-															<div>
-																<input onclick="CountChecked(this)" type="checkbox"
-																	id="사진/영상" name="hobby" class="checkbox me-1" value="사진/영상">
-																<label for="사진/영상">사진/영상</label>															
-															</div>
+														<div>
+															<input onclick="CountChecked(this)" type="checkbox"
+																id="외국어/언어" name="hobby" class="checkbox me-1"
+																value="외국어/언어"> <label for="외국어/언어">외국어/언어</label>
 														</div>
-														<div class="col-3 hobbyWrapper">
-															<div>
-																<input onclick="CountChecked(this)" type="checkbox" id="게임/오락"
-																	name="hobby" class="checkbox me-1" value="게임/오락">
-																<label for="게임/오락">게임/오락</label>															
-															</div>
-															<div>
-																<input onclick="CountChecked(this)" type="checkbox" id="요리/제조"
-																	name="hobby" class="checkbox me-1" value="요리/제조">
-																<label for="요리/제조">요리/제조</label>															
-															</div>
-															<div>																
-																<input type="checkbox" id="문화/공연/축제" name="hobby" class="checkbox me-1"
-																	value="문화/공연/축제">
-																<label for="문화/공연/축제">문화/공연/축제</label>
-															</div>
+													</div>
+													<div class="col-3 hobbyWrapper">
+														<div>
+															<input onclick="CountChecked(this)" type="checkbox"
+																id="반려동물" name="hobby" class="checkbox me-1"
+																value="반려동물"> <label for="반려동물">반려동물</label>
+														</div>
+														<div>
+															<input onclick="CountChecked(this)" type="checkbox"
+																id="음악/악기" name="hobby" class="checkbox me-1"
+																value="음악/악기"> <label for="음악/악기">음악/악기</label>
+														</div>
+														<div>
+															<input onclick="CountChecked(this)" type="checkbox"
+																id="공예/만들기" name="hobby" class="checkbox me-1"
+																value="공예/만들기"> <label for="공예/만들기">공예/만들기</label>
+														</div>
+													</div>
+													<div class="col-3 hobbyWrapper">
+														<div>
+															<input onclick="CountChecked(this)" type="checkbox"
+																id="댄스/무용" name="hobby" class="checkbox me-1"
+																value="댄스/무용"> <label for="댄스/무용">댄스/무용</label>
+														</div>
+														<div>
+															<input onclick="CountChecked(this)" type="checkbox"
+																id="인문학/책/글" name="hobby" class="checkbox me-1"
+																value="인문학/책/글"> <label for="인문학/책/글">인문학/책/글</label>
+														</div>
+														<div>
+															<input onclick="CountChecked(this)" type="checkbox"
+																id="사진/영상" name="hobby" class="checkbox me-1"
+																value="사진/영상"> <label for="사진/영상">사진/영상</label>
+														</div>
+													</div>
+													<div class="col-3 hobbyWrapper">
+														<div>
+															<input onclick="CountChecked(this)" type="checkbox"
+																id="게임/오락" name="hobby" class="checkbox me-1"
+																value="게임/오락"> <label for="게임/오락">게임/오락</label>
+														</div>
+														<div>
+															<input onclick="CountChecked(this)" type="checkbox"
+																id="요리/제조" name="hobby" class="checkbox me-1"
+																value="요리/제조"> <label for="요리/제조">요리/제조</label>
+														</div>
+														<div>
+															<input type="checkbox" id="문화/공연/축제" name="hobby"
+																class="checkbox me-1" value="문화/공연/축제"> <label
+																for="문화/공연/축제">문화/공연/축제</label>
 														</div>
 													</div>
 												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary"
-														data-bs-dismiss="modal">닫기</button>
-													<button type="button" class="btn btn-primary" id="saveBtn">저장</button>
-												</div>
 											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary"
+													data-bs-dismiss="modal">닫기</button>
+												<button type="button" class="btn btn-primary" id="saveBtn">저장</button>
+											</div>
+										</div>
 										<script>
 											var maxCount = 3;
 											var count = 0;
@@ -834,21 +925,33 @@ footer.footer {
 								<i class="fa-solid fa-people-group bodyIcon"></i><br />가입한 모임
 							</h4>
 							<hr id="line" />
-							<div style="height:16px;"></div>
-							<c:forEach items="${selectGroupList}" var="Groupdto">
-								<c:if test="${Groupdto.access eq '주최자'}">
-									<div class="myList">
-										<span><i class="fa-solid fa-people-group listIcon me-3"></i><a href="/group/toGroupDetail?seq_group=${Groupdto.SEQ_GROUP}" style="text-decoration:none; color:black;">${Groupdto.TITLE}</a><i
-											class="fa-solid fa-crown"></i></span>
-									</div>
-								</c:if>
-								<c:if test="${Groupdto.access eq '맴버'}">
-									<div class="myList">
-										<span><i class="fa-solid fa-people-group listIcon me-3"></i><a href="/group/toGroupDetail?seq_group=${Groupdto.SEQ_GROUP}" style="text-decoration:none; color:black;">${Groupdto.TITLE}</a></span>
-									</div>
-								</c:if>
-
-							</c:forEach>
+							<div style="height: 16px;"></div>
+							<c:if test="${selectGroupList.size() == 0}">
+								<div class="myList" id="myList">
+									<span style="padding: 15px;">가입한 모임이 없습니다.</span>
+								</div>
+							</c:if>
+							<c:if test="${selectGroupList.size() > 0}">
+								<c:forEach items="${selectGroupList}" var="Groupdto">
+									<c:if test="${Groupdto.access eq '주최자'}">
+										<div class="myList">
+											<span><i
+												class="fa-solid fa-people-group listIcon me-3"></i><a
+												href="/group/toGroupDetail?seq_group=${Groupdto.SEQ_GROUP}"
+												style="text-decoration: none; color: black;">${Groupdto.TITLE}</a><i
+												class="fa-solid fa-crown"></i></span>
+										</div>
+									</c:if>
+									<c:if test="${Groupdto.access eq '맴버'}">
+										<div class="myList">
+											<span><i
+												class="fa-solid fa-people-group listIcon me-3"></i><a
+												href="/group/toGroupDetail?seq_group=${Groupdto.SEQ_GROUP}"
+												style="text-decoration: none; color: black;">${Groupdto.TITLE}</a></span>
+										</div>
+									</c:if>
+								</c:forEach>
+							</c:if>
 						</div>
 					</div>
 				</div>
@@ -861,10 +964,10 @@ footer.footer {
 								<i class="fa-solid fa-file-pen bodyIcon"></i><br />내가 쓴 글
 							</h4>
 							<hr id="line" />
-							<div style="height:16px;"></div>
+							<div style="height: 16px;"></div>
 							<c:if test="${selectBoardList.size() == 0}">
 								<div class="myList" id="myList">
-									<span>내가 쓴 글이 없습니다.</span>
+									<span style="padding: 20px;">내가 쓴 글이 없습니다.</span>
 								</div>
 							</c:if>
 							<c:if test="${selectBoardList.size() > 0}">
@@ -888,10 +991,10 @@ footer.footer {
 								<i class="fa-solid fa-heart bodyIcon"></i><br />희망 모임
 							</h4>
 							<hr id="line" />
-							<div style="height:16px;"></div>
+							<div style="height: 16px;"></div>
 							<c:if test="${selectWishList.size() == 0}">
 								<div class="myList" id="myList">
-									<span>찜한 모임이 없습니다.</span>
+									<span style="padding: 20px;">찜한 모임이 없습니다.</span>
 								</div>
 							</c:if>
 
@@ -917,30 +1020,31 @@ footer.footer {
 					<script>
 					//console.log($(".wrongCheckpw"))
 					/* 비밀번호 중복확인 */
-					$("#checkPw").on("click",function(){
-						let user_pw = $("#password").val();
-						$.ajax({
-							url:"/mem/pwCheck",
-							type:"post",
-							data:{"user_pw": user_pw},
-							dataType:"json",
-							success:function(data){
-								if(data == 1){
-									$(".wrong-check-pw").addClass("d-none");
-									$(".right-check-pw").removeClass("d-none");
-									$("#profileModify").attr("disabled",false);
-									return;	
-								}else{
-									$(".right-check-pw").addClass("d-none");
-									$(".wrong-check-pw").removeClass("d-none");
-									$("#profileModify").attr("disabled",true);
-								}
-							},
-							error:function(e){
-								console.log(e);
-							}
-						})
-					})
+					 $("#checkPw").on("click",function(){
+		                  let user_pw = $("#password").val();
+		                  let user_email = $("#user_email").val();
+		                  $.ajax({
+		                     url:"/mem/pwCheck",
+		                     type:"post",
+		                     data:{"user_pw": user_pw, "user_email": user_email},
+		                     dataType:"json",
+		                     success:function(data){
+		                        if(data == 1){
+		                           $(".wrong-check-pw").addClass("d-none");
+		                           $(".right-check-pw").removeClass("d-none");
+		                           $("#profileModify").attr("disabled",false);
+		                           return;   
+		                        }else{
+		                           $(".right-check-pw").addClass("d-none");
+		                           $(".wrong-check-pw").removeClass("d-none");
+		                           $("#profileModify").attr("disabled",true);
+		                        }
+		                     },
+		                     error:function(e){
+		                        console.log(e);
+		                     }
+		                  })
+               		})
 					$("#profileModify").on("click",function(){
 						let user_email = $("#user_email").val();
 						location.href="/mem/profileModifyPage?user_email="+user_email;
@@ -990,12 +1094,13 @@ footer.footer {
 							</h4>
 							<hr id="line" />
 							<div class="d-flex myMsg">
-								<span class="checkMyMsg" data-bs-toggle="modal" data-bs-target="#staticBackdrop">내 쪽지 관리하기
-								<i class="fa-solid fa-arrow-right"></i></span>
+								<span class="checkMyMsg" data-bs-toggle="modal"
+									data-bs-target="#staticBackdrop">내 쪽지 관리하기 <i
+									class="fa-solid fa-arrow-right"></i></span>
 							</div>
 						</div>
 					</div>
-			
+
 					<!-- Modal -->
 					<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 					  <div class="modal-dialog modal-dialog-centered">
@@ -1060,22 +1165,21 @@ footer.footer {
 								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+								<li class="list-inline-item"><a
+									href="/signup/toSignupAgree">회원가입</a></li>
 								<li class="list-inline-item">⋅</li>
 								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
 							</c:otherwise>
 						</c:choose>
 						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item">
-							<c:choose>
+						<li class="list-inline-item"><c:choose>
 								<c:when test="${not empty loginSession}">
 									<a href="/group/toCreateGroup">모임 만들기</a>
 								</c:when>
 								<c:otherwise>
 									<a href="/login/toLogin">모임 만들기</a>
 								</c:otherwise>
-							</c:choose>
-						</li>
+							</c:choose></li>
 						<li class="list-inline-item">⋅</li>
 						<li class="list-inline-item"><a href="privacy"
 							style="color: red; font-weight: bold;">개인정보처리방침</a></li>

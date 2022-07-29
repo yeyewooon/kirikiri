@@ -159,27 +159,27 @@
 
  	<!-- 멤버 수 -->
  	<select id="cntMember" resultType="int">
- 		select sum(count(*)) cntMem from member group by user_email
- 	</select>
+       select sum(count(*)) cntMem from member group by user_email
+    </select>
 
 	<!-- 모임 수 -->
 	<select id="cntGroupCnt" resultType="int">
-		select sum(count(*)) cntGroup from tbl_group group by seq_group
+		select nvl(sum(count(*)),0) cntGroup from tbl_group group by seq_group
 	</select>
 
 	<!-- 게시글 수(자유게시판) -->
-	<!-- <select id="cntBoard" resultType="int">
-		select sum(count(*)) cntBoard from board group by seq_board
-	</select> -->
+	<select id="cntBoard" resultType="int">
+		select nvl(sum(count(*)),0) cntBoard from board group by seq_board
+	</select> 
 
 	<!-- 게시글 수(모임게시판) -->
-	<!-- <select id="cntGroupBoard" resultType="int">
-		select sum(count(*)) cntGroupBoard from group_board group by seq_group_board
-	</select> -->
+	<select id="cntGroupBoard" resultType="int">
+		select nvl(sum(count(*)),0) cntGroupBoard from group_board group by seq_group_board
+	</select>
 
 	<!-- 일정수 -->
 	<select id="cntGroupCal" resultType="int">
-		select sum(count(*)) cntCal from group_calendar group by seq_group
+		select nvl(sum(count(*)),0) cntCal from group_calendar group by seq_group
 	</select>
 
 	<!-- 선호 지역수 -->

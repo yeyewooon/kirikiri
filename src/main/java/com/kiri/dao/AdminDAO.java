@@ -216,22 +216,30 @@ public class AdminDAO {
 
 	// 모임 수
 	public int cntGroupCnt() {
-		return session.selectOne("adminMapper.cntGroupCnt");
+		int rs = session.selectOne("adminMapper.cntGroupCnt");
+		if(rs < 0) return 0;
+		else return rs;
 	}
 
 	// 게시글 수(자유게시판)
 	public int cntBoard() {
-		return session.selectOne("adminMapper.cntBoard");
+		int rs = session.selectOne("adminMapper.cntBoard");
+		if(rs < 0) return 0;
+		else return rs;
 	}
 
 	// 게시글 수(모임게시판)
 	public int cntGroupBoard() {
-		return session.selectOne("adminMapper.cntGroupBoard");
+		int rs = session.selectOne("adminMapper.cntGroupBoard");
+		if(rs < 0) return 0;
+		else return rs;
 	}
 
 	// 일정수
 	public int cntGroupCal() {
-		return session.selectOne("adminMapper.cntGroupCal");
+		int rs = session.selectOne("adminMapper.cntGroupCal");
+		if(rs < 0) return 0;
+		else return rs;
 	}
 
 	// 선호지역 수

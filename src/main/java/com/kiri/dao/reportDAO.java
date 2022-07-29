@@ -9,18 +9,18 @@ import com.kiri.dto.ReportDTO;
 
 @Repository
 public class reportDAO {
-	@Autowired 
-	private BasicDataSource bds;
-	   
-	@Autowired
-	private SqlSession session;
-	
-	// 신고하기
-	public String insertReport(ReportDTO ReportDTO) throws Exception{
-		int rs = session.insert("reportMapper.insertReport", ReportDTO);
-		if(rs > 0) return "success";
-		else return "fail";
-	}
-	   
-	   
+   @Autowired 
+   private BasicDataSource bds;
+      
+   @Autowired
+   private SqlSession session;
+   
+   // 신고하기
+   public String insertReport(ReportDTO ReportDTO) throws Exception{
+      int rs = session.insert("reportMapper.insertReport", ReportDTO);
+      if(rs > 0) return "success";
+      else return "fail";
+   }
+      
+      
 }

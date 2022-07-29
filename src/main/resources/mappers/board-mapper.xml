@@ -5,18 +5,6 @@
    
 <mapper namespace="boardMapper">
 	
-	<!-- 전체 게시글 목록 -->
-<!-- 	<select id="selectAll" resultType="com.kiri.dto.BoardDTO">
-		select * from board
-			order by (case when board_category = '공지' then 1 else 2 end), seq_board desc
-	</select> -->
-	
-	<!-- 게시글 카테고리별 정렬 -->
-<!-- 	<select id="selectCategory" parameterType="String" resultType="com.kiri.dto.BoardDTO">
-		select * from board
-			where board_category like '%'||#{category}||'%' order by seq_board desc
-	</select> -->
-	
 	<!-- 글 하나 불러오기 -->
 	<select id="selectOne" parameterType="int" resultType="com.kiri.dto.BoardDTO">
 		select * from board
@@ -105,12 +93,16 @@
 	</sql>
 	
 	<!-- 게시물 목록(페이징) -->
-<!-- 	<select id="getListPaging" parameterType="com.kiri.vo.Criteria" resultType="com.kiri.dto.BoardDTO">
-		<![CDATA[
+	<select id="getListPaging" parameterType="com.kiri.utills.Criteria" resultType="com.kiri.dto.BoardDTO">
 			select * from
 				(select /*+ index_desc(board board_index) */ rownum as rn, board.*
-					from board where rownum <= #{pageNum} * #{amount}
-		]]>
+					from board where
+						<if test="category != '공지'">
+							board_category not like '%'|| '공지' ||'%' and
+						</if>
+			<![CDATA[
+              			rownum <= #{pageNum} * #{amount}
+			]]>
 			<if test="keyword != null">
 				<include refid="criteria"></include>
 			</if>
@@ -121,9 +113,20 @@
 				)
 			where rn > (#{pageNum} -1) * #{amount}
 		]]>
-	</select> -->
+	</select>
 	
-	<select id="getListPaging" parameterType="com.kiri.vo.Criteria" resultType="com.kiri.dto.BoardDTO">
+	<!-- 공지사항 상단 3개 정렬 -->
+	<select id="getNotice" resultType="com.kiri.dto.BoardDTO">
+		select * from
+			(select * from board
+				where board_category='공지'
+				order by seq_board desc)
+			<![CDATA[
+			where ROWNUM <=3 order by seq_board desc
+			]]>
+	</select>
+	
+<!-- 	<select id="getListPaging" parameterType="com.kiri.utills.Criteria" resultType="com.kiri.dto.BoardDTO">
 		<![CDATA[
 			select * from
 				(select rownum as rn, A.* from
@@ -141,14 +144,16 @@
 				)
 			where rn > (#{pageNum} -1) * #{amount}
 		]]>
-	</select>
+	</select> -->
 	
 	<!-- 게시물 총 개수 -->
 	<!-- seq_board > 0은 의미없는 조건이지만 삽입될 쿼리가 and()형식이라 구문오류 방지를 위해 작성 -->
-	<select id="getTotal" parameterType="com.kiri.vo.Criteria" resultType="int">
-		select count(*) from board
+	<select id="getTotal" parameterType="com.kiri.utills.Criteria" resultType="int">
+		select count(*) from board where seq_board > 0
+		<if test="category != '공지'">
+			 and board_category not like '%'|| '공지' ||'%'
+		</if>
 		<if test="keyword != null">
-			where seq_board > 0
 			<include refid="criteria"></include>
 		</if>
 		<if test="category != null">

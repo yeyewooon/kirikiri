@@ -35,7 +35,7 @@ public class UserController {
 	
 	@Autowired
 	private ReportService report_service;
-
+	
 	// 모든 그룹 리스트 보여주기
 	@RequestMapping(value = "/toViewAllGroupList")
 	public String toUserViewList(Model model) throws Exception {

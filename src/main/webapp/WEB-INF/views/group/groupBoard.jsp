@@ -12,9 +12,9 @@
   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
   crossorigin="anonymous"></script>
 <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
-<title>자유 게시판</title>
+<title>그룹 게시판</title>
 
-    <style>
+	<style>
     	/* header 반응형 */
 		@media ( max-width : 768px) {
 		   #navLogo {
@@ -150,7 +150,7 @@
             font-weight: 700;
             font-style: normal;
         }
-    </style>
+	</style>
 </head>
 <body>
 	<header class="border-bottom">
@@ -271,17 +271,17 @@
 
     <div class="container">
         <div id="head" class="row text-center align-items-center">
-            <h1>자유 게시판</h1>
+            <h1>그룹 게시판</h1>
         </div>
 		<div class="container" style="width: 90%">
 			<div class="row mt-4 justify-content-end">
 				<div class="col-auto">
 		            <c:choose>
-		            	<c:when test="${loginType eq 'admin'}">
-		            		<button type="button" id="writeBtn" class="btn" style="background-color: #fce2e1;">관리자 글쓰기</button>
+		            	<c:when test="${loginSession.user_email eq 'admin'}">
+		            		<button type="button" id="writeBtn" class="btn" style="background-color: #fce2e1;" value="${pageMaker.cri.seq_group}">모임장 글쓰기</button>
 		            	</c:when>
 		            	<c:otherwise>
-		            		<button type="button" id="writeBtn" class="btn" style="background-color: #fce2e1;">글쓰기</button>
+		            		<button type="button" id="writeBtn" class="btn" style="background-color: #fce2e1;" value="${pageMaker.cri.seq_group}">글쓰기</button>
 		            	</c:otherwise>
 		            </c:choose>
 				</div>
@@ -292,8 +292,8 @@
 				<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="/">Home</a></li>
-						<li class="breadcrumb-item"><a href="#">게시판</a></li>
-						<li class="breadcrumb-item text-dark" aria-current="page">자유게시판</li>
+						<li class="breadcrumb-item"><a href="#">모임</a></li>
+						<li class="breadcrumb-item text-dark" aria-current="page">모임 게시판</li>
 					</ol>
 				</nav>
 			</div>
@@ -301,10 +301,10 @@
 			<!-- 유형별 정렬 -->
 			<div class="row justify-content-center">
 				<ul class="sortBox">
-					<a href="/board/toBoard"><li>전체</li></a>
+					<a href="/Gboard/toBoard?seq_group=${pageMaker.cri.seq_group}"><li>전체</li></a>
 					<a href="#"><li>공지</li></a>
 					<a href="#"><li>일반</li></a>
-					<a href="#"><li>후기</li></a>
+					<a href="#"><li>모임</li></a>
 				</ul>
 			</div>
 			
@@ -335,27 +335,27 @@
 			                    					<i class="fa-solid fa-bullhorn"></i>
 		                    					</td>
 		                    					<td class="col-5 text-start">
-		                    						<a class="move" href="${notice.seq_board}">
-		                    							${notice.board_title}
+		                    						<a class="move" href="${notice.seq_group_board}">
+		                    							${notice.gboard_title}
 		                    						</a>
 		                    					</td>
 		                    					<td class="col-2">${notice.user_nickname}</td>
-		                    					<td class="col-2">${notice.board_date}</td>
-		                    					<td class="col-1">${notice.board_count}</td>
+		                    					<td class="col-2">${notice.written_date}</td>
+		                    					<td class="col-1">${notice.view_count}</td>
 		                    			</tr>
                    					</c:forEach>
 	                    			<c:forEach items="${list}" var="dto">
 	                    				<tr>
-	                    					<td class="col-2">${dto.board_category}</td>
+	                    					<td class="col-2">${dto.gboard_category}</td>
 	                    					<td class="col-5 text-start">
 	                    						<%-- /board/toDetailView?seq_board=${dto.seq_board} --%>
-	                    						<a class="move" href="${dto.seq_board}">
-	                    							${dto.board_title}
+	                    						<a class="move" href="${dto.seq_group_board}">
+	                    							${dto.gboard_title}
 	                    						</a>
 	                    					</td>
 	                    					<td class="col-2">${dto.user_nickname}</td>
-	                    					<td class="col-2">${dto.board_date}</td>
-	                    					<td class="col-1">${dto.board_count}</td>
+	                    					<td class="col-2">${dto.written_date}</td>
+	                    					<td class="col-1">${dto.view_count}</td>
 	                    				</tr>
 	                    			</c:forEach>
 	                    		</c:otherwise>
@@ -393,6 +393,7 @@
 	        	</div>
 	        </div>
 	        <form id="moveForm" method="get">
+	        	<input type="hidden" name="seq_group" value="${pageMaker.cri.seq_group}">
 	        	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 	        	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
 				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
@@ -500,8 +501,8 @@
     	$(".move").on("click", function(e){
     		e.preventDefault();
     		
-    		$("#moveForm").append("<input type='hidden' name='seq_board' value='" + $(this).attr("href")+"'>");
-    		$("#moveForm").attr("action", "/board/toDetailView");
+    		$("#moveForm").append("<input type='hidden' name='seq_group_board' value='" + $(this).attr("href")+"'>");
+    		$("#moveForm").attr("action", "/Gboard/toDetailView");
     		$("#moveForm").submit();
     	});
     	
@@ -509,13 +510,14 @@
     	$(".pageInfo a").on("click", function(e){
     		e.preventDefault();
     		$("#moveForm").find("input[name='pageNum']").val($(this).attr("href"));
-    		$("#moveForm").attr("action", "/board/toBoard");
+    		$("#moveForm").attr("action", "/Gboard/toBoard");
     		$("#moveForm").submit();
     	});
     	
  		// 글쓰기 요청
 	    $("#writeBtn").on("click", function(){ 
-			location.href = "/board/toWrite";
+	    	let seq_group = $(this).val();
+			location.href = "/Gboard/toWrite?seq_group=" + seq_group;
 		})
 		
 		// 정렬
@@ -552,11 +554,10 @@
 			$("#moveForm").find("input[name='keyword']").val(keyword);
 			$("#moveForm").find("input[name='pageNum']").val(1);
 			$("#moveForm").submit();
-			
 		})
 		
 		// 게시글 목록 ajax
-		function makeDynamicEl(data){
+		/* function makeDynamicEl(data){
 			$("tbody").empty();
 			if(data.length == 0){ // 검색 결과 없음
 				let tr = $("<tr>");
@@ -585,7 +586,7 @@
 					$(".fa-bullhorn").parents("tr").css("backgroundColor", "pink");
 				}	
 			}
-		}
+		} */
  		
     </script>
 </body>

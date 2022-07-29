@@ -16,7 +16,7 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script src="sweetalert2.min.js"></script>
 <meta charset="UTF-8">
-<title>글 작성</title>
+<title>그룹 글 수정 페이지</title>
     <style>
     	/* header 반응형 */
 		@media ( max-width : 768px) {
@@ -58,7 +58,6 @@
 		
     	* {
             box-sizing: border-box;
-            /*font-family: 'OTWelcomeRA';*/
         }
         
         /* header 반응형 */
@@ -108,14 +107,12 @@
             background-color: #d2e3ec;
             height: 100px;
         }
-        /* #head>h1{
-        	font-family: 'OTWelcomeRA';
+        #head>h1{
             margin-top: 20px;
         }
         label {
-        	font-family: 'OTWelcomeRA';
             margin-top: 5px;
-        } */
+        }
         
         /*풋터 영역*/
 		.footerBox {
@@ -139,8 +136,7 @@
 		   width: 100%;
 		   height: 100%;
 		}
-		
-		
+        
         /* 눈누 폰트 */
 		@font-face {
 			font-family: 'OTWelcomeRA';
@@ -292,44 +288,48 @@
 
 	<div class="container">
         <div id="head" class="row text-center align-items-center mb-5">
-            <h1>글쓰기</h1>
+            <h1>글 수정</h1>
         </div>
         
-        <form id="writeForm" action="/board/write" method="post">
+        <form id="modifyForm" action="/Gboard/modify" method="post">
+        	
+        	<div class="d-none">
+        		<input type="text" id="seq_group_board" name="seq_group_board" value="${modMap.boardDTO.seq_group_board}">
+        		<input type="text" id="seq_group" name="seq_group" value="${modMap.boardDTO.seq_group}">
+        	</div>
 	        <div class="row mt-4 text-center">
 	            <div class="col-1">
 	                <label class="form-label fs-5">분류</label>
 	            </div>
 	            <div class="col-2">
-	            	<c:choose>
+	                <c:choose>
 	            		<%-- 관리자 계정이라면 공지 쓰기 --%>
 	            		<c:when test="${loginSession.user_email eq 'admin'}">
-	            			<select name="board_category" class="form-select selectBox" aria-label="유형">
-			                    <option selected value="default">선택</option>
-			                    <option value="공지">공지</option>
-			                    <option value="일반">일반</option>
+	            			<select name="board_category" class="form-select selectBox" aria-label="유형" disabled>
+			                    <option value="default">선택</option>
+			                    <option value="공지" <c:out value="${modMap.boardDTO.gboard_category eq '공지' ? 'selected' : ''}"/>>공지</option>
+			                    <option value="일반" <c:out value="${modMap.boardDTO.gboard_category eq '일반' ? 'selected' : ''}"/>>일반</option>
 			                </select>
 	            		</c:when>
 	            		<c:otherwise>
-	            			<select name="board_category" class="form-select selectBox" aria-label="유형">
-			                    <option selected value="default">선택</option>
-			                    <option value="일반">일반</option>
-			                    <option value="후기">후기</option>
+	            			<select name="board_category" class="form-select selectBox" aria-label="유형" disabled>
+			                    <option value="default">선택</option>
+			                    <option value="일반" <c:out value="${modMap.boardDTO.gboard_category eq '일반' ? 'selected' : ''}"/>>일반</option>
+			                    <option value="후기" <c:out value="${modMap.boardDTO.gboard_category eq '후기' ? 'selected' : ''}"/>>후기</option>
 			                </select>
 	            		</c:otherwise>
 	            	</c:choose>
-	                
 	            </div>
 	            <div class="col-1">
 	                <label class="form-label fs-5">제목</label>
 	            </div>
 	            <div class="col-8">
-	                <input type="text" id="title" name="board_title" class="form-control" placeholder="제목을 입력하세요.">
+	                <input type="text" id="title" name="gboard_title" class="form-control" value="${modMap.boardDTO.gboard_title}">
 	            </div>
 	        </div>
 			
 	        <div class="row mt-4">
-				<textarea id="summernote" name="board_content"></textarea>
+				<textarea id="summernote" name="gboard_content">${modMap.boardDTO.gboard_content}</textarea>
 	        </div>
 	        
 	        <div class="row my-4 justify-content-center">
@@ -337,10 +337,18 @@
 	                <button type="button" id="cancelBtn" class="btn btn-secondary">취소</button>
 	            </div>
 	            <div class="col-auto">
-	                <button type="button" id="submitBtn" class="btn btn-primary">작성 완료</button>
+	                <button type="button" id="submitBtn" class="btn btn-primary">수정 완료</button>
 	            </div>
 	        </div>
         </form>
+        <form id="infoForm" method="get">
+			<input type="hidden" id="seq_group_board" name="seq_group_board" value="${modMap.boardDTO.seq_group_board}">
+			<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
+			<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
+			<input type="hidden" name="type" value="${cri.type}">
+			<input type="hidden" name="keyword" value="${cri.keyword}">
+		</form>
+        
 	</div>
 	
 	<!-- Footer-->
@@ -466,12 +474,11 @@
 					if(mutation.removedNodes.length == 1){
 						if(mutation.removedNodes[0].src != null) {
 							let img = mutation.removedNodes[0].src;
-							//console.log("img" + img);
-							//console.log("src : " + src);
-							let src = decodeURIComponent(img.replace("http://localhost/boardFile/", ""));
-							console.log(src);
+							//console.log(img);
+							let src = decodeURIComponent(img.replace("http://localhost/groupBoardFile/", ""));
+							//console.log(src);
 							$.ajax({
-								url : "/board/delImg"
+								url : "/Gboard/delImg"
 								, type : "post"
 								, data : {"src" : src}
 								, success : function(data){
@@ -484,6 +491,7 @@
 					}
 				}
 			}); 
+
 			// 감지 시작
 			observer.observe(target, config);
 		});
@@ -496,7 +504,7 @@
 				data : data
 				, type : "POST"
 				, enctype: "multipart/form-data"
-				, url : "/board/summernoteImg"
+				, url : "/Gboard/summernoteImg"
 				, contentType : false
 				, processData : false
 				, success : function(data){
@@ -510,7 +518,6 @@
 		let imgArr = new Array();
 		// 작성 완료 버튼
 		$("#submitBtn").on("click", function(){
-			
 			if($("#title").val() === ""){
 				Swal.fire({
 					icon: 'warning'
@@ -541,7 +548,7 @@
 			let regImg = /(<img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>)/g;
 			let src;
 			while(regImg.test(content)){
-				src = RegExp.$2.replace("/boardFile/", "");
+				src = RegExp.$2.replace("/groupBoardFile/", "");
 				imgArr.push(src);
 			}
 			console.log(imgArr);
@@ -555,24 +562,24 @@
 						, "name" : "imgs[]"
 						, "value" : imgArr[i]
 					});
-					$("#writeForm").append(inputImg);
+					$("#modifyForm").append(inputImg);
 				};
 			}
 			
 			Swal.fire({
 				icon: 'success'
-				, title: '게시글이 등록되었어요!'
+				, title: '게시글 수정 완료!'
 				, showConfirmButton: true
 			}).then((result) =>{
 				if(result.isConfirmed){
-					$("#writeForm").submit();
+					$("#modifyForm").submit();
 				}
 			});
 		});
 		
 		// 취소 버튼
 		$("#cancelBtn").on("click", function(){
-			location.href = "/board/toBoard";
+			location.href = "/Gboard/toDetailView?seq_group_board="+${modMap.boardDTO.seq_group_board};
 		})
 		
 	</script>

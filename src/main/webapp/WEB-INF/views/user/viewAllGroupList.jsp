@@ -137,7 +137,6 @@ ul {
 
 /* 슬라이드 */
 .locationPic {
-      width: 100px;
       height: 100px;
       overflow: hidden;
     }
@@ -442,15 +441,12 @@ body {
                            게시판</a></li>
                   </ul>
                </div>
-
                <!-- logo -->
                <div class="col-2">
                   <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
                      id="logoImgs" src="/resources/images/kiri.jpg">
-
                   </a>
                </div>
-
                <div class="col-5">
                   <div class="row align-items-center justify-content-center">
                      <div class="col-auto">
@@ -502,8 +498,6 @@ body {
       </div>
    </header>
 
-
-
 <div class="container">
 	<div class="back row">
 	    <div class="col-md-4 button_base b05_3d_roll locationBtn" id="locationBtn">
@@ -521,7 +515,7 @@ body {
       <div id="locationList" class="responsive mt-5">
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic">
-        <img src = "/resources/images/slide/지역9.png">
+        <img src = "/resources/images/slide/지역2.png">
       </div>
       <span class="locationText mt-1">
         서울특별시
@@ -529,7 +523,7 @@ body {
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic" style="font-size: 66px;">
-        <img src = "/resources/images/slide/지역2.png">
+        <img src = "/resources/images/slide/지역7.png">
       </div>
       <span class="locationText mt-1">
         인천광역시
@@ -537,7 +531,7 @@ body {
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic" style="font-size: 66px;">
-        <img src = "/resources/images/slide/지역3.png">
+        <img src = "/resources/images/slide/지역13.png">
       </div>
       <span class="locationText mt-1">
         대전광역시
@@ -545,7 +539,7 @@ body {
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic" style="font-size: 66px;">
-        <img src = "/resources/images/slide/지역4.png">
+        <img src = "/resources/images/slide/지역8.png">
       </div>
       <span class="locationText mt-1">
         광주광역시
@@ -569,7 +563,7 @@ body {
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic" style="font-size: 66px;">
-        <img src = "/resources/images/slide/지역22.png">
+        <img src = "/resources/images/slide/지역9.png">
       </div>
       <span class="locationText mt-1">
         부산광역시
@@ -577,7 +571,7 @@ body {
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic" style="font-size: 66px;">
-        <img src = "/resources/images/slide/지역8.png">
+        <img src = "/resources/images/slide/지역15.png">
       </div>
       <span class="locationText mt-1">
         경기도
@@ -585,7 +579,7 @@ body {
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic" style="font-size: 66px;">
-        <img src = "/resources/images/slide/지역9.png">
+        <img src = "/resources/images/slide/지역10.png">
       </div>
       <span class="locationText mt-1">
         강원도
@@ -593,7 +587,7 @@ body {
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic" style="font-size: 66px;">
-        <img src = "/resources/images/slide/지역10.png">
+        <img src = "/resources/images/slide/지역14.png">
       </div>
       <span class="locationText mt-1">
        	충청북도
@@ -601,7 +595,7 @@ body {
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic" style="font-size: 66px;">
-        <img src = "/resources/images/slide/지역11.png">
+        <img src = "/resources/images/slide/지역20.png">
       </div>
       <span class="locationText mt-1">
         충청남도
@@ -609,7 +603,7 @@ body {
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic" style="font-size: 66px;">
-        <img src = "/resources/images/slide/지역12.png">
+        <img src = "/resources/images/slide/지역6.png">
       </div>
       <span class="locationText mt-1">
         전라북도
@@ -617,7 +611,7 @@ body {
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic" style="font-size: 66px;">
-        <img src = "/resources/images/slide/지역14.png">
+        <img src = "/resources/images/slide/지역21.png">
       </div>
       <span class="locationText mt-1">
         전라남도
@@ -625,7 +619,7 @@ body {
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic" style="font-size: 66px;">
-        <img src = "/resources/images/slide/지역13.png">
+        <img src = "/resources/images/slide/지역16.png">
       </div>
       <span class="locationText mt-1">
         경상북도
@@ -633,7 +627,7 @@ body {
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic" style="font-size: 66px;">
-       <img src = "/resources/images/slide/지역15.png">
+       <img src = "/resources/images/slide/지역12.png">
       </div>
       <span class="locationText mt-1">
         경상남도
@@ -740,14 +734,13 @@ body {
     </div>
     <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
       <div class="categoryPic" style="font-size: 66px;">
-        <i class="fa-solid fa-microphone-stand"></i>
+        <i class="fa-solid fa-hands-clapping"></i>
       </div>
       <span class="categoryText mt-1">
         문화/공연/축제
       </span>
     </div>
 </div>
-
 
 	<!-- 모임 card 캐러셀 -->
       <div class="row content mt-4">
@@ -786,7 +779,6 @@ body {
             </div>
          </div>
       </div>
-
 
 
 
