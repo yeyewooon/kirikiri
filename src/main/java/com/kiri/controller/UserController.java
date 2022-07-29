@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kiri.dto.MessageDTO;
+import com.kiri.dto.ReportDTO;
 import com.kiri.dto.Tbl_GroupDTO;
 import com.kiri.service.MessageService;
+import com.kiri.service.ReportService;
 import com.kiri.service.UserService;
 
 @RequestMapping("/user")
@@ -30,6 +32,9 @@ public class UserController {
 
 	@Autowired
 	private MessageService message_service;
+	
+	@Autowired
+	private ReportService report_service;
 
 	// 모든 그룹 리스트 보여주기
 	@RequestMapping(value = "/toViewAllGroupList")
@@ -86,5 +91,13 @@ public class UserController {
 			message_service.deleteMessage(message);
 			return "";
 		}
+		
+		// 신고하기
+		@ResponseBody
+		@RequestMapping(value = "/insertreport")
+		public String insertReport(ReportDTO ReportDTO) throws Exception {
+			String rs = report_service.insertReport(ReportDTO);
+			return rs;
+		}	
 
 }

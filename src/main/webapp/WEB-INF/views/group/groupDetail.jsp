@@ -193,6 +193,10 @@ a:hover {
 	color: black;
 	text-decoration: none;
 }
+
+#siren_icon{
+	cursor:pointer;
+}
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
 	color: #83bf7b;
@@ -569,6 +573,8 @@ footer.footer {
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">회원 프로필</h5>
+								<h5 class="modal-title msg-title d-none" id="exampleModalLabel">쪽지 보내기</h5>
+								<h5 class="modal-title report-title d-none" id="exampleModalLabel">신고하기</h5>
 								<button type="button" class="btn-close" id="closeXmark"
 									data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
@@ -588,6 +594,7 @@ footer.footer {
 										<div class="modalProfileName">
 											<div class="mt-1" style="font-size: 20px;">
 												<span id="profileName"></span>(<span id="profileNickname"></span>)
+												<span id = "siren_icon"><img src = "/resources/images/group/siren_icon.png"></span>
 											</div>
 											<div class="mt-1" style="font-size: 14px;">회원</div>
 										</div>
@@ -607,6 +614,7 @@ footer.footer {
 										</div>
 									</div>
 								</div>
+								
 								<!-- 쪽지보내기 버튼 클릭시 활성화 -->
 								<div class="d-none" id="msgForm">
 									<div class="row">
@@ -630,19 +638,43 @@ footer.footer {
 										</div>
 									</div>
 								</div>
+								<!-- 신고아이콘 클릭시 활성화 -->
+								<div class="d-none" id="reportForm">
+									<div class="row">
+										<div class="col-md-12">
+											<div>
+												<i class="fa-solid fa-envelope"></i><span class="ms-2">신고자</span>(<span id="reportName"></span>)
+											</div>
+											<input type="text" class="form-control mt-2"
+												id="report_receive" readonly>
+										</div>
+									</div>
+									<div class="row mt-2">
+										<div class="col-md-12">
+											<div>
+												<i class="fa-solid fa-comment"></i><span class="ms-2">신고이유</span>
+											</div>
+											<textarea class="form-control mt-2" id="reportContent" rows="3"
+												style="resize: none;"></textarea>
+										</div>
+									</div>
+								</div>
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary"
 									data-bs-dismiss="modal" id="closeBtn">Close</button>
 								<button type="button" class="btn btn-success d-none closeXmark"
 									id="sendMsgBtn">쪽지 보내기</button>
+								<button type="button" class="btn btn-danger d-none closeXmark"
+									id="reportBtn">신고하기</button>
+							</div>
+							
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 	<!-- Footer-->
 	<div class="footerWrapper" style="background-color: #fff;">
@@ -721,7 +753,9 @@ footer.footer {
               $("#profileIntro").text(data.profileList[0].user_intro); // 해당 회원 소개글 모달값으로 넣어주기 
               $('.profileModal').modal('show'); // 성공했을때만 모달열리게 
               $("#receiverName").text(data.profileList[0].user_name) // 해당 회원 이름 메세지 받는 사람에 넣어주기
+              $("#reportName").text('${loginSession.user_name}'); // 해당 회원 이름 신고자에 넣어주기
               $("#user_receive").val(data.profileList[0].user_nickname); // 쪽지 보내기 -> 받는사람 닉네임 넣어주기
+              $("#report_receive").val(data.profileList[0].user_nickname); // 신고하기 -> 신고자 닉네임 넣어주기
            },
            error : function(e) {
         	   Swal.fire({
@@ -741,6 +775,8 @@ footer.footer {
             return;
          }
           $("#profileTotalInfo").addClass("d-none"); // 프로필 내용 안보이게
+          $(".modal-title").addClass("d-none"); // 회원프로필 타이틀 안보이게
+          $(".msg-title").removeClass("d-none"); // 쪽지보내기 타이틀 보이게
           $("#msgForm").removeClass("d-none"); // 쪽지 양식 Form 보이게
           $("#sendMsgBtn").removeClass("d-none"); // 쪽지 보내기 버튼 보이게
         })
@@ -784,8 +820,13 @@ footer.footer {
     // close 버튼 클릭시 
        $("#closeBtn,#closeXmark").on("click",function() {
           $("#profileTotalInfo").removeClass("d-none"); // 프로필 내용 보이게
-          $("#msgForm").addClass("d-none"); // 쪽지 양식 Form 보이게
-          $("#sendMsgBtn").addClass("d-none"); // 쪽지 보내기 버튼 보이게
+          $(".modal-title").removeClass("d-none"); // 회원프로필 타이틀 보이게
+          $(".msg-title").addClass("d-none"); // 쪽지보내기 타이틀 안보이게
+          $(".report-title").addClass("d-none"); // 신고하기 타이틀 안보이게
+          $("#msgForm").addClass("d-none"); // 쪽지 양식 Form 안보이게
+          $("#sendMsgBtn").addClass("d-none"); // 쪽지 보내기 버튼 안보이게
+          $("#reportForm").addClass("d-none"); // 신고 양식 Form 안보이게
+          $("#reportBtn").addClass("d-none"); // 신고하기 버튼 안보이게
        })
         
     $(document).ready(function() {
@@ -1012,7 +1053,70 @@ footer.footer {
 	
       // 그룹 설명 사진 크기 조절
       $(".groupContent p img").attr('style', "width:440px; height:440px;");
-
+	
+	// 신고하기 아이콘 클릭시 모달창 신고하는걸로 바꾸기
+	$("#siren_icon").on("click", function(){
+        // 로그인 세션이 없을 때 
+        if(loginSession_id == "youHaveToLogin" || loginSession_nickName == "youHaveToLogin") {
+           alert("로그인하셔야합니다");
+           return;
+        }
+         $("#profileTotalInfo").addClass("d-none"); // 프로필 내용 안보이게
+         $(".modal-title").addClass("d-none"); // 회원프로필 타이틀 안보이게
+         $(".report-title").removeClass("d-none"); // 신고하기 타이틀 보이게
+         $("#reportForm").removeClass("d-none"); // 신고 양식 Form 보이게
+         $("#reportBtn").removeClass("d-none"); // 쪽지 보내기 버튼 보이게
+	})
+	
+	//신고하기 버튼 클릭    
+        $("#reportBtn").on("click",function() {
+           if($("#reportContent").val() == "") {
+              Swal.fire('내용을 입력해주세요');
+              return;
+           }          
+           let report_receive = $("#report_receive").val(); // 받는 사람 닉네임
+           let reportContent = $("#reportContent").val(); // 쪽지 내용 
+           console.log("신고당하는 사람 : " + report_receive);
+           console.log("신고 내용 : " + reportContent);
+           console.log("신고 하는사람 : " + loginSession_nickName);
+			/* Swal.fire({
+				title: '정말 신고하시겠습니까?',
+				text: "유저 신고는 신중히 부탁드립니다.",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#3085d6',
+				cancelButtonColor: '#d33',
+				confirmButtonText: '신고하기'
+			}).then((result) => {
+				if (result.isConfirmed) {
+				$.ajax ({
+			        url : "/user/insertreport",
+		            type : "post",
+		            data : {"report_send" : loginSession_nickName, "report_receive" : report_receive, "report_reason" : reportContent},
+		            dataType : "text",
+		            success : function(data) {
+		               if(data == "success") {
+		                  Swal.fire('신고하기 성공');
+		                  $('.profileModal').modal('hide'); // 쪽지 보내기 성공시 모달 닫기
+		                $("#reportContent").val('');
+		               }else {
+		                  Swal.fire('신고하기 실패');
+		               }
+		            },
+		            error : function(e) {
+		            	Swal.fire({
+							  icon: 'error',
+							  title: '에러가 발생했네요..',
+							  text: '관리자에게 문의해주세여!',
+							});
+		            }
+		           }) 	
+				}
+            $("#profileTotalInfo").removeClass("d-none"); // 프로필 내용 보이게
+            $("#reportForm").addClass("d-none"); // 신고 양식 Form 안보이게
+            $("#reportBtn").addClass("d-none"); // 신고하기 버튼 안보이게
+        }) */
+        })
     </script>
 </body>
 </html>

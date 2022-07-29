@@ -155,7 +155,7 @@ ul {
 }
 
 .card {
-	width: 18rem;
+	width: 390px;
 	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
 	cursor:pointer;
 }
@@ -251,6 +251,133 @@ img {
 #categoryList {
 	display: none
 }
+
+
+
+
+/* 지역,카테고리 */
+#locationBtn, #categoryBtn{
+	cursor:pointer;
+}
+.b05_3d_roll {
+    perspective: 500px;
+    -webkit-perspective: 500px;
+    -moz-perspective: 500px;
+}
+
+.b05_3d_roll div {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: #8D9EE0 solid 2px;
+    pointer-events: none;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.b05_3d_roll div:nth-child(1) {
+    color: #ffffff;
+    background-color: #8D9EE0;
+    transform: rotateX(90deg);
+    -webkit-transform: rotateX(90deg);
+    -moz-transform: rotateX(90deg);
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transform-origin: 50% 50% -25px;
+    -webkit-transform-origin: 50% 50% -25px;
+    -moz-transform-origin: 50% 50% -25px;
+}
+
+.b05_3d_roll div:nth-child(2) {
+    color: #8D9EE0;
+    background-color: #ffffff;
+    transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transform-origin: 50% 50% -25px;
+    -webkit-transform-origin: 50% 50% -25px;
+    -moz-transform-origin: 50% 50% -25px;
+}
+
+.b05_3d_roll:hover div:nth-child(1) {
+    color: #ffffff;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+}
+
+.b05_3d_roll:hover div:nth-child(2) {
+    background-color: #000000;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transform: rotateX(-90deg);
+    -webkit-transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+}
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+.preserve-3d {
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    overflow-x: none;
+    background-color: #ffffff;
+    font-family: Roboto Condensed, sans-serif;
+    font-size: 15px;
+    font-smooth: always;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+@media screen and (max-width: 1260px) {
+    .back {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .back {
+        width: 100%;
+    }
+}
+
+.button_base {
+    margin: 0;
+    border: 0;
+    font-size: 18px;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-user-select: none;
+    cursor: default;
+}
+
+.button_base:hover {
+    cursor: pointer;
+}
+
+
 </style>
 
 </head>
@@ -378,8 +505,18 @@ img {
 
 
 <div class="container">
-  <button type="button" class="btn btn-primary" id="locationBtn" value="locationList">지역</button>
-  <button type="button" class="btn btn-primary" id="categoryBtn" value="categoryList">카테고리</button>
+	<div class="back row">
+	    <div class="col-md-4 button_base b05_3d_roll locationBtn" id="locationBtn">
+	        <div>지역</div>
+	        <div>지역</div>
+	    </div>
+	    <div class="col-md-4 button_base b05_3d_roll categoryBtn" id="categoryBtn">
+	        <div>카테고리</div>
+	        <div>카테고리</div>
+	    </div>
+	    <div class="col-md-4">
+	    </div>
+	</div>
   <!--지역 설정 슬라이더-->
       <div id="locationList" class="responsive mt-5">
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
@@ -720,6 +857,8 @@ $('#locationBtn').on("click", function() {
    $('#categoryList').css('display', 'none'); // 카테고리 안보이게
    $('#locationList').css('display', 'block'); // 지역 보이게
    $('#locationList').get(0).slick.setPosition();
+   $('.locationBtn').children().eq(1).css({'background-color':'#8D9EE0', 'color':'white'});
+   $('.categoryBtn').children().eq(1).css({'background-color':'white', 'color':'#8D9EE0'});
 });
 
 //카테고리 클릭시
@@ -727,6 +866,8 @@ $('#categoryBtn').on("click", function() {
    $('#categoryList').css('display', 'block'); // 카테고리 보이게
    $('#locationList').css('display', 'none'); // 지역 안보이게
    $('#categoryList').get(0).slick.setPosition();
+   $('.categoryBtn').children().eq(1).css({'background-color':'#8D9EE0', 'color':'white'});
+   $('.locationBtn').children().eq(1).css({'background-color':'white', 'color':'#8D9EE0'});
 });
 
 

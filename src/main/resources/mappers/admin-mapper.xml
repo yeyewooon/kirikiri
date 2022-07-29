@@ -158,8 +158,8 @@
  	</select>
 
  	<!-- 멤버 수 -->
- 	<select id="cntGroupMember" resultType="int">
- 		select sum(count(*)) cntMem from group_member group by seq_group
+ 	<select id="cntMember" resultType="int">
+ 		select sum(count(*)) cntMem from member group by user_email
  	</select>
 
 	<!-- 모임 수 -->

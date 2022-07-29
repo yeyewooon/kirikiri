@@ -636,26 +636,23 @@ footer.footer {
 				id="tableBox">
 				<thead>
 					<tr>
-						<th scope="col">유형</th>
-						<th scope="col">제목</th>
-						<th scope="col">내용</th>
-						<th scope="col">작성일</th>
-						<th scope="col">조회수</th>
-						<th scope="col">삭제</th>
-					</tr>
+                   		<th scope="col">유형</th>
+                  		<th scope="col">제목</th>
+                 		<th scope="col">작성일</th>
+                  		<th scope="col">조회수</th>
+                  		<th scope="col">삭제</th>
+                   </tr>
 				</thead>
 				<tbody>
 					 <c:forEach items="${list}" var="selectBoardList">
 					 	<tr>
-					 		<td>일반</td>
-							<td>${selectBoardList.board_title}</td>
-							<td><a href="/board/toDetailView?seq_board=${selectBoardList.seq_board}" style="text-decoration:none; color:black;">${selectBoardList.board_content}</a></td>
-							<td>${selectBoardList.board_date}</td>
-							<td>${selectBoardList.board_count}</td>
-							<td id="icon"><span class="text-center boardDelete" style="cursor:pointer;"
-								id="boardDelete"><i class="fa-solid fa-trash"></i></span></td>
-							<td class="d-none" id="seq_board">${selectBoardList.seq_board}</td>
-						</tr>
+                      		<td>일반</td>
+                     		<td><a href="/board/toDetailView?seq_board=${selectBoardList.seq_board}" style="color:black; text-decoration:none;"  onclick="window.open(this.href, '_blank', 'width=1000, height=800'); return false;">${selectBoardList.board_title}</a></td>
+                     		<td>${selectBoardList.board_date}</td>
+                     		<td>${selectBoardList.board_count}</td>
+                     		<td id="icon"><span class="text-center boardDelete" style="cursor:pointer;" id="boardDelete"><i class="fa-solid fa-trash"></i></span></td>
+                     		<td class="d-none" id="seq_board">${selectBoardList.seq_board}</td>
+                  		</tr>
 					</c:forEach>
 				</tbody>
 			</table>

@@ -240,7 +240,7 @@ a {
 	<div class="container">
 		<div class="sidebar">
 			<ul class="p-2">
-				<li class="logoHome sidemenu"><a href="/toAdmin"> <img
+				<li class="logoHome sidemenu"><a href="/admin/toAdmin"> <img
 						src="/resources/images/adminLogo.png" id="logoImg"><br>
 						<span>끼리끼리</span>
 				</a></li>

@@ -65,13 +65,16 @@ public class GroupController {
    }
 
    // 멤버관리에서 멤버 강퇴(o)
-   @RequestMapping(value = "/deleteMember")
-   @ResponseBody
-   public String groupMemberDelete(@RequestBody Map<String, Object> param) throws Exception {
-      List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
-      tbl_group_service.groupMemberDelete(userEmails);
-      return String.valueOf(userEmails);
-   }
+	
+	 @RequestMapping(value = "/deleteMember")
+	 @ResponseBody 
+	 public String groupMemberDelete(@RequestBody Map<String, Object> param) throws Exception { 
+		 List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
+		 tbl_group_service.groupMemberDelete(userEmails);
+	  
+	  return String.valueOf(userEmails); 
+	 }
+	 
 
    // 모임가입 이동(o)
    @RequestMapping(value = "/toGroupApply")

@@ -101,9 +101,14 @@
     margin-bottom: 10px;
 }
 /*버튼 색 지정*/
-.btn-primary{
-background-color:cornflowerblue;
-border-color:cornflowerblue;
+.btn-primary {/*버튼 4개*/
+   background-color: cornflowerblue;
+   border-color: cornflowerblue;
+}
+.btn-primary:hover{ /*버튼 4개*/
+	color: #fff;
+    background-color: #5680CC;
+    border-color: #5680CC;
 }
 
 /*모임 해산 문구 및 사진*/
@@ -279,19 +284,19 @@ footer.footer {
 			<div class="row rowBtn">
 					<div class="col-md-3 btnBox">
 						<button type="button" class="btn btn-primary btn-lg"
-							id="groupApply">가입 신청</button>
+							id="groupApply" style="font-weight: bold;">가입 신청</button>
 					</div>
 					<div class="col-md-3 btnBox">
 						<button type="button" class="btn btn-primary btn-lg"
-							id="groupMember">멤버 관리</button>
+							id="groupMember" style="font-weight: bold;">멤버 관리</button>
 					</div>
 					<div class="col-md-3 btnBox">
 						<button type="button" class="btn btn-primary btn-lg"
-							id="groupModify">모임 수정</button>
+							id="groupModify" style="font-weight: bold;">모임 수정</button>
 					</div>
 					<div class="col-md-3 btnBox">
 						<button type="button" class="btn btn-primary btn-lg"
-							id="groupDelete">모임 해산</button>
+							id="groupDelete" style="font-weight: bold;">모임 해산</button>
 					</div>
 			</div>
 			<!-- 해산 문구 및 사진 -->
@@ -407,19 +412,27 @@ footer.footer {
 	
 	// 모임 해산시키기
 	$("#deleteBtn").on("click", function(){
-		let answer = confirm("정말 해산하시겠습니까?");
-		console.log($("#seq_group").val());
-		
-		if(answer){ 
-			let deleteForm = $("<form>").attr({
-				"method" : "post"
-				, "action" : "/group/groupDelete"
-			}).css("display", "none");
-			deleteForm.append($("#seq_group"));
-			deleteForm.appendTo("body");
-			deleteForm.submit();
-		}
-	})
+			Swal.fire({
+			  title: '모임을 해산하시겠습니까???',
+			  text: "해산하시면 다시 복구시킬 수 없습니다.",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '해산하기',
+			  cancelButtonText: '다시생각하기'
+			}).then((result) => {
+			  if (result.value) {
+				  let deleteForm = $("<form>").attr({
+						"method" : "post"
+						, "action" : "/group/groupDelete"
+					}).css("display", "none");
+					deleteForm.append($("#seq_group"));
+					deleteForm.appendTo("body");
+					deleteForm.submit(); 
+			  }
+			})
+		})
 
 </script>
 </html>

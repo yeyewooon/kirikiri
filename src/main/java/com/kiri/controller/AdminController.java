@@ -65,10 +65,10 @@ public class AdminController {
 		}else {
 			for(int seq_report : seqArray) {
 	            rdto = service.selectReportBySeq(seq_report);
-	            bdto = new BlackListDTO(0, rdto.getUser_email(), null, rdto.getReport_reason());
+	            bdto = new BlackListDTO(0, rdto.getReport_receive(), null, rdto.getReport_reason());
 	            service.insertBl(bdto);
 	            service.deleteReport(seq_report);
-	            service.updateBl(rdto.getUser_email());
+	            service.updateBl(rdto.getReport_receive());
 	        }
 			return "success";
 		}
@@ -124,7 +124,7 @@ public class AdminController {
 	@RequestMapping(value = "/toGroupAdmin")
 	public String toGroupAdmin(int curPage, Model model) throws Exception{
 	
-	List<Tbl_GroupDTO> groupList = service.selectAllGroup(curPage*10-9, curPage*10);
+	List<Tbl_GroupDTO> groupList = service.selectAllGroup(curPage*7-6, curPage*7);
 	model.addAttribute("groupList", groupList);
 	
 	HashMap<String, Object> map = service.getPageNaviGroup(curPage);
@@ -246,7 +246,7 @@ public class AdminController {
 		String jsonLocationList = mapper.writeValueAsString(locationList);
 
 		List<AdminMainDTO> cntGroupCalList = service.cntGroupCalendar(); // 그룹 수
-		int cntGroupMember = service.cntGroupMember(); // 멤버 수
+		int cntMember = service.cntMember(); // 멤버 수
 		int cntGroupCnt = service.cntGroupCnt(); // 모임 수
 		// int cntBoard = service.cntBoard(); // 게시글 수(자유게시판)
 		//int cntGroupBoard = service.cntGroupBoard(); // 게시글 수(모임게시판)
@@ -256,7 +256,7 @@ public class AdminController {
 
 		model.addAttribute("jsonLocationList",jsonLocationList);
 		model.addAttribute("cntGroupCalList",cntGroupCalList);
-		model.addAttribute("cntGroupMember",cntGroupMember);
+		model.addAttribute("cntMember",cntMember);
 		model.addAttribute("cntGroupCnt",cntGroupCnt);
 		model.addAttribute("cntGroupCal",cntGroupCal);
 		model.addAttribute("cntPreLocationList",cntPreLocationList);
