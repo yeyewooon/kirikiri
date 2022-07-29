@@ -728,6 +728,8 @@ footer.footer {
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">회원 프로필</h5>
+								<h5 class="modal-title msg-title d-none" id="exampleModalLabel">쪽지 보내기</h5>
+								<h5 class="modal-title report-title d-none" id="exampleModalLabel">신고하기</h5>
 								<button type="button" class="btn-close" id="closeXmark"
 									data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
@@ -767,6 +769,7 @@ footer.footer {
 										</div>
 									</div>
 								</div>
+								
 								<!-- 쪽지보내기 버튼 클릭시 활성화 -->
 								<div class="d-none" id="msgForm">
 									<div class="row">
@@ -817,15 +820,16 @@ footer.footer {
 									data-bs-dismiss="modal" id="closeBtn">Close</button>
 								<button type="button" class="btn btn-success d-none closeXmark"
 									id="sendMsgBtn">쪽지 보내기</button>
-                        		<button type="button" class="btn btn-danger d-none closeXmark"
-                           			id="reportBtn">신고하기</button>
+								<button type="button" class="btn btn-danger d-none closeXmark"
+									id="reportBtn">신고하기</button>
+							</div>
+							
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
 	<!-- Footer-->
 	<div class="footerWrapper" style="background-color: #fff;">
@@ -962,6 +966,8 @@ footer.footer {
             return;
          }
           $("#profileTotalInfo").addClass("d-none"); // 프로필 내용 안보이게
+          $(".modal-title").addClass("d-none"); // 회원프로필 타이틀 안보이게
+          $(".msg-title").removeClass("d-none"); // 쪽지보내기 타이틀 보이게
           $("#msgForm").removeClass("d-none"); // 쪽지 양식 Form 보이게
           $("#sendMsgBtn").removeClass("d-none"); // 쪽지 보내기 버튼 보이게
         })

@@ -105,28 +105,49 @@
    margin-top: 10px;
     margin-bottom: 10px;
 }
-.btn-success {
-   color: #fff;
-   background-color: #51c9db;
-   border-color: #51c9db;
+.btn-primary {/*버튼 4개*/
+   background-color: cornflowerblue;
+   border-color: cornflowerblue;
+}
+.btn-primary:hover{ /*버튼 4개*/
+	color: #fff;
+    background-color: #5680CC;
+    border-color: #5680CC;
 }
 
-.btn-success:hover {
-   color: #fff;
-   background-color: #46ADBD;
-   border-color: #46ADBD;
+.btn-success{ /*가입 승인*/
+	color: #fff;
+    background-color: #50C7D9;
+    border-color: #50C7D9;
+}
+.btn-success:hover{ /*가입 승인*/
+	color: #fff;
+    background-color: #3A919E;
+    border-color: #3A919E;
+}
+.btn-check:focus+.btn-success, .btn-success:focus{ /*가입 승인*/
+	color: #fff;
+    background-color: #3A919E;
+    border-color: #3A919E;
+    box-shadow: 0 0 0 0.25rem rgb(48 145 158 / 50%);
 }
 
-.btn-secondary {
+.btn-secondary {/*가입 거절*/
    color: #fff;
    background-color: #f06345;
    border-color: #f06345;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover {/*가입 거절*/
    color: #fff;
    background-color: #D4583D;
    border-color: #D4583D;
+}
+.btn-check:focus+.btn-secondary, .btn-secondary:focus{ /*가입 거절*/
+	color: #fff;
+    background-color: #D4583D;
+    border-color: #D4583D;
+    box-shadow: 0 0 0 0.25rem rgb(212 88 61 / 50%);
 }
 
 /*테이블*/
@@ -150,12 +171,6 @@ th, td {
    margin-top: 50px;
 }
 
-/*버튼 색 지정*/
-.btn-primary {
-   background-color: cornflowerblue;
-   border-color: cornflowerblue;
-}
-
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
    color: #83bf7b;
@@ -167,7 +182,6 @@ th, td {
    margin-top: 0;
    font-weight: bold;
 }
-
 /*풋터 영역*/
 .footerBox {
    height: 0px;
@@ -317,19 +331,19 @@ footer.footer {
          <div class="row rowBtn">
             <div class="col-md-3 btnBox">
                <button type="button" class="btn btn-primary btn-lg"
-                  id="groupApply">가입 신청</button>
+                  id="groupApply" style = "font-weight: bold;">가입 신청</button>
             </div>
             <div class="col-md-3 btnBox">
                <button type="button" class="btn btn-primary btn-lg"
-                  id="groupMember">멤버 관리</button>
+                  id="groupMember" style = "font-weight: bold;">멤버 관리</button>
             </div>
             <div class="col-md-3 btnBox">
                <button type="button" class="btn btn-primary btn-lg"
-                  id="groupModify">모임 수정</button>
+                  id="groupModify" style = "font-weight: bold;">모임 수정</button>
             </div>
             <div class="col-md-3 btnBox">
                <button type="button" class="btn btn-primary btn-lg"
-                  id="groupDelete">모임 해산</button>
+                  id="groupDelete" style = "font-weight: bold;">모임 해산</button>
             </div>
          </div>
 
@@ -476,37 +490,43 @@ $("#groupDelete").on("click", function(){
       $("input[name=checkUser_email]:checked").each(function(){         
          checkBoxArr.push($(this).val());
       })
-      
-      var jsonData = {
-         "userEmails" : JSON.stringify(checkBoxArr)
-      };
-      var jsonString = JSON.stringify(jsonData);
-      
-       $.ajax({
-         url:"/group/completeApply?&group_people="+count+"&groupCount="+groupCount,
-         headers: {'Content-Type': 'application/json'},
-         type : "post",
-         data: jsonString,
-         success:function(data){
-            if(data == "success"){
-                  Swal.fire({
-                       icon: 'success',
-                       text: '승인이 완료되었습니다.',
-                     })            
-            }else if(data == "error"){
-               Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: '인원수를 확인해주세요!',
-                  })
-            }
-            setTimeout(function() {
-                    window.location.href = "";
-                },3000);
-         },error : function(e){
-            console.log(e);      
-         }
-      })
+      if(checkBoxArr.length < 1){
+          Swal.fire({
+              icon: 'warning',
+              text: '선택된 항목이 없습니다..',
+            })  
+      }else{
+	      var jsonData = {
+	         "userEmails" : JSON.stringify(checkBoxArr)
+	      };
+	      var jsonString = JSON.stringify(jsonData);
+	      
+	       $.ajax({
+	         url:"/group/completeApply?&group_people="+count+"&groupCount="+groupCount,
+	         headers: {'Content-Type': 'application/json'},
+	         type : "post",
+	         data: jsonString,
+	         success:function(data){
+	            if(data == "success"){
+	                  Swal.fire({
+	                       icon: 'success',
+	                       text: '승인이 완료되었습니다.',
+	                     })            
+	            }else if(data == "error"){
+	               Swal.fire({
+	                    icon: 'error',
+	                    title: 'Oops...',
+	                    text: '인원수를 확인해주세요!',
+	                  })
+	            }
+	            setTimeout(function() {
+	                    window.location.href = "";
+	                },2000);
+	         },error : function(e){
+	            console.log(e);      
+	         }
+	      })  	  
+      }
    })
    
    // 그룹 승인 거절하기
@@ -515,29 +535,36 @@ $("#groupDelete").on("click", function(){
       $("input[name=checkUser_email]:checked").each(function(){         
          checkBoxArr.push($(this).val());
       })
-      
-      var jsonData = {
-         "userEmails" : JSON.stringify(checkBoxArr)
-      };
-      var jsonString = JSON.stringify(jsonData);
-      
-       $.ajax({
-         url:"/group/denyApply",
-         headers: {'Content-Type': 'application/json'},
-         type : "post",
-         data: jsonString,
-         success:function(data){
-            Swal.fire({
-                 icon: 'success',
-                 text: '거절이 완료되었습니다.',
-               })   
-               setTimeout(function() {
-                       window.location.href = "";
-                   },3000);
-         },error : function(e){
-            console.log(e);         
-         }
-      })
+      if(checkBoxArr.length < 1){
+          Swal.fire({
+              icon: 'warning',
+              text: '선택된 항목이 없습니다.',
+            })  
+      }else{
+	      var jsonData = {
+	         "userEmails" : JSON.stringify(checkBoxArr)
+	      };
+	      var jsonString = JSON.stringify(jsonData);
+	      
+	       $.ajax({
+	         url:"/group/denyApply",
+	         headers: {'Content-Type': 'application/json'},
+	         type : "post",
+	         data: jsonString,
+	         success:function(data){
+	            Swal.fire({
+	                 icon: 'success',
+	                 text: '거절이 완료되었습니다.',
+	               })   
+	               setTimeout(function() {
+	                       window.location.href = "";
+	                   },3000);
+	         },error : function(e){
+	            console.log(e);         
+	         }
+	      })
+    	  
+      }
    })
    
 </script>
