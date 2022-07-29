@@ -150,7 +150,7 @@ public class AdminDAO {
 	// 모임 페이지네이션
 	public HashMap<String, Object> getPageNaviGroup(int curPage) throws Exception {
 		int totalCnt = session.selectOne("adminMapper.getPageNaviGroup"); // 전체 게시글의 개수
-		int recordCntPerPage = 10; // 한 페이지에 몇개의 데이터(게시글)을 띄워줄지
+		int recordCntPerPage = 7; // 한 페이지에 몇개의 데이터(게시글)을 띄워줄지
 		int naviCntPerPage = 3; // 네비바에 몇개 단위로 페이징을 구성할지
 		int pageTotalCnt = 0; // 총 몇 페이지가 나올지
 

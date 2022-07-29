@@ -32,7 +32,7 @@ public class UserController {
 
 	@Autowired
 	private MessageService message_service;
-
+	
 	@Autowired
 	private ReportService report_service;
 	
@@ -92,13 +92,12 @@ public class UserController {
 			return "";
 		}
 		
-      // 신고하기
-      @ResponseBody
-      @RequestMapping(value = "/insertreport")
-      public String insertReport(ReportDTO ReportDTO) throws Exception {
-    	 System.out.println(ReportDTO.toString());
-         String rs = report_service.insertReport(ReportDTO);
-         return rs;
-      }   
+		// 신고하기
+		@ResponseBody
+		@RequestMapping(value = "/insertreport")
+		public String insertReport(ReportDTO ReportDTO) throws Exception {
+			String rs = report_service.insertReport(ReportDTO);
+			return rs;
+		}	
 
 }

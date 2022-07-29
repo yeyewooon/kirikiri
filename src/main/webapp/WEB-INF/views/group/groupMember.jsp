@@ -117,33 +117,48 @@ tr {
 	text-align: center;
 }
 /*버튼 색 지정*/
-.btn-primary {
-	background-color: cornflowerblue;
-	border-color: cornflowerblue;
+.btn-primary {/*버튼 4개*/
+   background-color: cornflowerblue;
+   border-color: cornflowerblue;
+}
+.btn-primary:hover{ /*버튼 4개*/
+	color: #fff;
+    background-color: #5680CC;
+    border-color: #5680CC;
+}
+.btn-success{ /*가입 승인*/
+	color: #fff;
+    background-color: #50C7D9;
+    border-color: #50C7D9;
+}
+.btn-success:hover{ /*가입 승인*/
+	color: #fff;
+    background-color: #3A919E;
+    border-color: #3A919E;
+}
+.btn-check:focus+.btn-success, .btn-success:focus{ /*가입 승인*/
+	color: #fff;
+    background-color: #3A919E;
+    border-color: #3A919E;
+    box-shadow: 0 0 0 0.25rem rgb(48 145 158 / 50%);
 }
 
-.btn-success {
-	color: #fff;
-	background-color: #51c9db;
-	border-color: #51c9db;
+.btn-secondary {/*가입 거절*/
+   color: #fff;
+   background-color: #f06345;
+   border-color: #f06345;
 }
 
-.btn-success:hover {
-	color: #fff;
-	background-color: #46ADBD;
-	border-color: #46ADBD;
+.btn-secondary:hover {/*가입 거절*/
+   color: #fff;
+   background-color: #D4583D;
+   border-color: #D4583D;
 }
-
-.btn-danger {
+.btn-check:focus+.btn-secondary, .btn-secondary:focus{ /*가입 거절*/
 	color: #fff;
-	background-color: #f06345;
-	border-color: #f06345;
-}
-
-.btn-danger:hover {
-	color: #fff;
-	background-color: #D4583D;
-	border-color: #D4583D;
+    background-color: #D4583D;
+    border-color: #D4583D;
+    box-shadow: 0 0 0 0.25rem rgb(212 88 61 / 50%);
 }
 
 /*테이블 배경 및 범위*/
@@ -151,8 +166,6 @@ tr {
 	margin: auto;
 	margin-top: 50px;
 }
-
-;
 
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
@@ -315,19 +328,19 @@ footer.footer {
 			<div class="row rowBtn">
 				<div class="col-md-3 btnBox">
 					<button type="button" class="btn btn-primary btn-lg"
-						id="groupApply">가입 신청</button>
+						id="groupApply" style="font-weight: bold;">가입 신청</button>
 				</div>
 				<div class="col-md-3 btnBox">
 					<button type="button" class="btn btn-primary btn-lg"
-						id="groupMember">멤버 관리</button>
+						id="groupMember" style="font-weight: bold;">멤버 관리</button>
 				</div>
 				<div class="col-md-3 btnBox">
 					<button type="button" class="btn btn-primary btn-lg"
-						id="groupModify">모임 수정</button>
+						id="groupModify" style="font-weight: bold;">모임 수정</button>
 				</div>
 				<div class="col-md-3 btnBox">
 					<button type="button" class="btn btn-primary btn-lg"
-						id="groupDelete">모임 해산</button>
+						id="groupDelete" style="font-weight: bold;">모임 해산</button>
 				</div>
 			</div>
 			<!-- 테이블 -->
@@ -344,15 +357,15 @@ footer.footer {
 								<th class="col-1">강퇴</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody class = "tbody">
 							<c:forEach items="${memList.TableJoinDTO}" var="list">
-								<tr>
-									<td>${list.access}</td>
+								<tr class = "tr">
+									<td class = "access">${list.access}</td>
 									<td>${list.user_nickname}</td>
 									<td>${list.user_intro}</td>
 									<td>${list.user_gender}</td>
 									<td><input class="form-check-input checkAccess"
-										type="checkbox" onclick='checkOnlyOne(this)' id="checkAccess"
+										type="checkbox" id="checkAccess"
 										name="checkAccess" value="${list.access}"></td>
 									<td><input class="form-check-input checkUser_email"
 										id="checkUser_email" type="checkbox" name="checkUser_email"
@@ -454,112 +467,135 @@ footer.footer {
    $("#groupDelete").on("click", function(){
       location.href = "/group/toGroupDelete?seq_group="+$("#seq_group").val();
    })   
-
-   // 중복체크 막기
-   function checkOnlyOne(element) {
-        
-        const checkboxes 
-            = document.getElementsByName("checkAccess");
-        
-        checkboxes.forEach((cb) => {
-          cb.checked = false;
-        })
-        
-        element.checked = true;
-      }
    
    
+	$("input[type=checkbox]").on("change", function(){ //뭔가 체크박스가 눌렷을때
+		var tr = $(this).parent().parent();
+		let trAccess = tr.children('td').eq(4).children('input'); //직책
+		let trEmail = tr.children('td').eq(5).children('input');  //이메일
+		if(this.checked) {
+			const checkboxes = $("input[name='checkAccess']");
+			for(let ind = 0; ind < checkboxes.length; ind++){
+				checkboxes[ind].checked = false;
+				}
+              this.checked = true;
+		} else {
+              this.checked = false;
+		}
+	if($(trAccess).prop("checked")){ //직책이 체크됐을때
+		for(let i=0; i<3; i++){
+			tr.parent().children().eq(i).children('td').eq(5).children('input[type=checkbox]').prop("checked", false);
+		}				
+	}else if($(trEmail).prop("checked")){ // 이메일이 체크됐을때
+		for(let i=0; i<3; i++){
+			tr.parent().children().eq(i).children('td').eq(4).children('input[type=checkbox]').prop("checked", false);
+		}
+	}
+ 		})
+   		
        // 그룹 권한 수정
       $("#modifyBtn").on("click", function(){
          let checkAccess = $('input[name=checkAccess]:checked').val();
          let checkEmail = $('input[name=checkAccess]:checked').parent().next().children('input').val();
-         console.log(checkAccess);
-         console.log(checkEmail);
-         
-            $.ajax({
-            url : "/group/groupAccess",
-            type : "post",
-            data : {user_email : checkEmail,
-                  access : checkAccess},
-            success: function(data){
-               if(data == "success"){
-            	    let timerInterval
-            	    Swal.fire({
-            	      icon:'success',
-            	      title: '주최자 위임이 완료되었습니다!',
-            	      html: ' <b></b>' + '초뒤에 페이지가 이동됩니다.',
-            	      timer: 5000,
-            	      timerProgressBar: true,
-            	      didOpen: () => {
-            	        Swal.showLoading()
-            	        const b = Swal.getHtmlContainer().querySelector('b')
-            	        timerInterval = setInterval(() => {
-            	          b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
-            	        }, 100)
-            	      },
-            	      willClose: () => {
-            	        clearInterval(timerInterval)
-            	      }
-            	    }).then((result) => {
-            	      /* Read more about handling dismissals below */
-            	      if (result.dismiss === Swal.DismissReason.timer) {
-            	        console.log('I was closed by the timer')
-            	      }
-            	      window.location.href = "/";
-            	    })
-               }else{
-                  Swal.fire({
-                       icon: 'error',
-                       title: 'Oops...',
-                       text: '다시 확인해주세요!',
-                     })
-                     setTimeout(function() {
-                             window.location.href = "";
-                         },2000);
-               }
-            },error:function(e){
-               console.log(e);
-            }
-         })   
+		 
+         if(checkEmail != ""){
+	    	  Swal.fire({
+	                 icon: 'warning',
+	                 text: '버튼을 잘 선택해주세요.',
+	               })  
+         }else{
+ 	         $.ajax({
+	            url : "/group/groupAccess",
+	            type : "post",
+	            data : {user_email : checkEmail,
+	                  access : checkAccess},
+	            success: function(data){
+	               if(data == "success"){
+	            	    let timerInterval
+	            	    Swal.fire({
+	            	      icon:'success',
+	            	      title: '주최자 위임이 완료되었습니다!',
+	            	      html: ' <b></b>' + '초뒤에 페이지가 이동됩니다.',
+	            	      timer: 5000,
+	            	      timerProgressBar: true,
+	            	      didOpen: () => {
+	            	        Swal.showLoading()
+	            	        const b = Swal.getHtmlContainer().querySelector('b')
+	            	        timerInterval = setInterval(() => {
+	            	          b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
+	            	        }, 100)
+	            	      },
+	            	      willClose: () => {
+	            	        clearInterval(timerInterval)
+	            	      }
+	            	    }).then((result) => {
+	            	      /* Read more about handling dismissals below */
+	            	      if (result.dismiss === Swal.DismissReason.timer) {
+	            	        console.log('I was closed by the timer')
+	            	      }
+	            	      window.location.href = "/";
+	            	    })
+	               }else{
+	                  Swal.fire({
+	                       icon: 'error',
+	                       title: 'Oops...',
+	                       text: '다시 확인해주세요!',
+	                     })
+	                     setTimeout(function() {
+	                             window.location.href = "";
+	                         },2000);
+	               }
+	            },error:function(e){
+	               console.log(e);
+	            }
+	         })    	 
+         }
       })
    
    // 그룹 멤버 강퇴
    $("#deleteBtn").on("click", function(){
-     let checkAccess = $('input[name=checkUser_email]:checked').parent().prev().children('.checkAccess').val();
-      let checkBoxArr = [];
-         $("input[name=checkUser_email]:checked").each(function(){ 
-           if(checkAccess != '주최자'){
-            checkBoxArr.push($(this).val());         
-            var jsonData = {
-               "userEmails" : JSON.stringify(checkBoxArr)
-            };
-            var jsonString = JSON.stringify(jsonData);
-            
-             $.ajax({
-               url:"/group/deleteMember",
-               headers: {'Content-Type': 'application/json'},
-               type : "post",
-               data: jsonString,
-               success:function(data){
-                  Swal.fire({
-                       icon: 'success',
-                       text: '멤버강퇴가 완료되었습니다.',
-                     })   
-                     setTimeout(function() {
-                             window.location.href = "";
-                         },3000);
-               },error : function(e){
-                  console.log(e);         
-               }
-            })
-         }else{
-            Swal.fire({
-                    icon: 'warning',
-                    text: '주최자는 강퇴할 수 없습니다.',
-                  })   
-         }
-      })
-      
+	  let checkAccess = $('input[name=checkUser_email]:checked').parent().prev().children('.checkAccess').val();
+	  console.log(checkAccess);
+	  if(checkAccess != ""){
+    	  Swal.fire({
+              icon: 'warning',
+              text: '버튼을 잘 선택해주세요.',
+            })  
+	  }else{
+	      let checkBoxArr = [];
+		      $("input[name=checkUser_email]:checked").each(function(){ 
+		    	 if(checkAccess != '주최자'){
+		         checkBoxArr.push($(this).val());    	  
+			      var jsonData = {
+			         "userEmails" : JSON.stringify(checkBoxArr)
+			      };
+			      var jsonString = JSON.stringify(jsonData);
+			      
+			       $.ajax({
+			         url:"/group/deleteMember",
+			         headers: {'Content-Type': 'application/json'},
+			         type : "post",
+			         data: jsonString,
+			         success:function(data){
+			            Swal.fire({
+			                 icon: 'success',
+			                 text: '멤버강퇴가 완료되었습니다.',
+			               })   
+			               setTimeout(function() {
+			                       window.location.href = "";
+			                   },3000);
+			         },error : function(e){
+			            console.log(e);         
+			         }
+			      })
+		      }else{
+		    	  Swal.fire({
+		                 icon: 'warning',
+		                 text: '주최자는 강퇴할 수 없습니다.',
+		               })   
+		      }
+	      })  
+	  }    
    })
    
 </script>
