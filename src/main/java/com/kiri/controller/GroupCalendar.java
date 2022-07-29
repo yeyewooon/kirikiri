@@ -1,5 +1,8 @@
 package com.kiri.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -36,10 +39,8 @@ public class GroupCalendar {
 	// 일정 추가
 	@ResponseBody
 	@RequestMapping(value = "/calInsert")
-	public String calInfo(Group_CalendarDTO dto, String totalTime) throws Exception {
-		String originTitle = totalTime + "  " + dto.getTitle(); // title + time 값 
-		dto.setTitle(originTitle); // title + time 값 셋팅
-		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
+	public String calInfo(Group_CalendarDTO dto) throws Exception {
+		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email(); // 현재 세션 값
 		dto.setUser_email(user_email);
 		service.insert(dto);
 		return "redirect:/calMain";
@@ -50,12 +51,10 @@ public class GroupCalendar {
 	@RequestMapping(value = "/calList", produces = "application/json; charset=UTF-8")
 	public String calList(Model model, int seq_group) throws Exception {
 		List<Group_CalendarDTO> list = service.select(seq_group);
-
 		// 00:00:00 삭제 후 다시 setter에 셋팅
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).setStart(list.get(i).getStart().substring(0, 10));
 		}
-
 		// list를 json으로 변경
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonList = objectMapper.writeValueAsString(list);
@@ -68,15 +67,11 @@ public class GroupCalendar {
 	@ResponseBody
 	@RequestMapping(value = "/calDetail", produces = "application/json; charset=UTF-8")
 	public List<Group_CalendarDTO> calDetail(@RequestParam("seq_group_cal") int seq_group_cal) throws Exception {
-
-		System.out.println("일정 상세 페이지" + seq_group_cal);
 		List<Group_CalendarDTO> list = service.selectDetail(seq_group_cal);
-
 		// 00:00:00 삭제 후 다시 setter에 셋팅
 		for (int i = 0; i < list.size(); i++) {
 			list.get(i).setStart(list.get(i).getStart().substring(0, 10));
 		}
-
 		return list;
 	}
 
@@ -87,27 +82,54 @@ public class GroupCalendar {
 		System.out.println("삭제 페이지 입니다");
 		System.out.println(seq_group_cal);
 		int rs = service.calDelete(seq_group_cal);
-		if (rs > 0) {
-			System.out.println("일정 삭제 완료");
-			return "success";
-		} else {
-			System.out.println("일정 삭제 실패");
-			return "fail";
-		}
+		if (rs > 0) return "success";
+		else return "fail";
 	}
 
-	// 일정 수정 calModify
+	// 일정 옮기기 calMove
+	@ResponseBody
+	@RequestMapping(value = "/calMove")
+	public String calMove(Group_CalendarDTO dto, int modifyDays) throws Exception {
+		SimpleDateFormat sdfYMDHms = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+		SimpleDateFormat sdfYMD = new SimpleDateFormat("yyyy-MM-dd");
+		
+		String findTime = null; 
+		List<Group_CalendarDTO> list = service.findEndByGroupSeq(dto.getSeq_group_cal()); // 마지막 날짜 얻어오기 
+		for(Group_CalendarDTO endTime : list) {
+			findTime = endTime.getEnd();
+		}
+		findTime = findTime.substring(0, 10); // 마지막 날짜 00:00:00 자르기
+	
+		//String을 날짜 연산을 위해 Date 객체로 변경
+		Date date = sdfYMD.parse(findTime); 
+		
+		//날짜 연산을 위한 Calendar객체 생성 후 date 대입
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		
+		//마지막 날짜 + 추가된 날짜 
+		cal.add(Calendar.DATE, modifyDays); 
+		String endDate = sdfYMD.format(cal.getTime());
+		dto.setEnd(endDate); // dto에 마지막 날짜 셋팅
+
+		int rs = service.calMove(dto);
+		if (rs > 0) return "success";
+		else return "fail";
+	
+	}
+	
+	// 일정 수정
 	@ResponseBody
 	@RequestMapping(value = "/calModify")
-	public String calModify(Group_CalendarDTO dto) throws Exception {
-		int rs = service.calModify(dto);
-		if (rs > 0) {
-			System.out.println("업데이트 성공");
-			return "success";
-		} else {
-			System.out.println("업데이트 실패");
-			return "fail";
+	public int calModify(Group_CalendarDTO dto, String modifyTime) throws Exception {
+		// 수정 시간 판단
+		if(modifyTime.equals("00:00")) {
+			dto.setGroup_time(dto.getGroup_time());
+		}else {
+			dto.setGroup_time(modifyTime);
 		}
+		// 일정 수정
+		return service.calModify(dto);
 	}
 
 	@ExceptionHandler // 에러 처리

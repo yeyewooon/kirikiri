@@ -157,7 +157,7 @@ footer.footer {
 </head>
 <body>
 
-   <header class="mb-3 border-bottom">
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"

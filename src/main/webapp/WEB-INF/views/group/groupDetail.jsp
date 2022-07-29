@@ -235,28 +235,36 @@ a:hover {
 	margin-top: 0;
 	font-weight: bold;
 }
+
 /*풋터 영역*/
+.footerWrapper{
+   background-color: #fff;
+}
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	background-color: #f6f7f9;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	width: 100%;
-	height: 100%;
+   height: 100%;
+   text-align:center;
 }
+.footer-imgBox {
+   height: 100%;
+   text-align:center;
+}
+
 
 .uselessBox {
 	height: 40px;
@@ -274,7 +282,8 @@ footer.footer {
   word-break:break-all;
   border: 1px solid #e0e3e8;;
   position:fixed;
-  width: 400px;
+  width: 480px;
+  background-color : #fafafa;
 }
 
 #hiddenGroupInfo {
@@ -293,8 +302,6 @@ footer.footer {
 
 }
 
-
-
 #groupTitleBottom {
   border-radius: 10px;
   word-break:break-all;
@@ -305,7 +312,6 @@ footer.footer {
   height: 100px;
   border-radius: 50%;
   background-color: #fff;
-  cursor: pointer;
 }
 
 .groupTitleHeaderImgBox img{
@@ -338,7 +344,7 @@ footer.footer {
 </head>
 <body>
 	<!--네비바-->
-	<header class="mb-3 border-bottom">
+	<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
 		<div class="container">
 			<!-- 접혔을 때 nav -->
 			<nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -475,7 +481,7 @@ footer.footer {
 	<div class="container">
 		<!--body-headline-->
 		<div class="row">
-			<div class="groupHeaderInfo col-sm-12 col-md-7 mt-2">
+			<div class="groupHeaderInfo col-sm-12 col-md-7 mt-4">
 				<div class="groupImgBox d-flex justify-content-center">
           			<c:choose>
 						<c:when test="${tbl_group_dto.sys_name ne null}">
@@ -497,15 +503,15 @@ footer.footer {
 			        </div>
 			      </div>
 			      <div class="col-2 d-flex">
-			        <button type=" button" class="" id="wishListBtn" style="border:0; outline:0; background-color : #fff; font-size :24px;">♡</button>
-			        <button type=" button" class="ms-2 d-none" id="wishCancelBtn" style="border:0; outline:0; color:red; background-color : #fff; font-size :24px;">♥</button>
+			        <button type=" button" class="" id="wishListBtn" style="border:0; outline:0; background-color : #fff; font-size :24px;"><i class="fa-regular fa-heart"></i></button>
+			        <button type=" button" class="ms-2 d-none" id="wishCancelBtn" style="border:0; outline:0; color:red; background-color : #fff; font-size :24px;"><i class="fa-solid fa-heart"></i></button>
 			      </div>
 			    </div>
 			 </div>
   		</div>
 			</div>
       <!-- 우측 카드-->
-			<div class="col-sm-12 col-md-5 mt-2">
+			<div class="col-sm-12 col-md-5 mt-4">
           <div class="row" style="padding:34px; padding-top: 0px;">
             <!--호스트 프로필-->
             <div class="col-md-12 col-sm-12" id="groupTitleHeader">
@@ -521,7 +527,7 @@ footer.footer {
 						</c:otherwise>
 					</c:choose>
                 </div>
-                <div class="hostInfo d-flex flex-column ms-3">
+                <div class="hostInfo d-flex flex-column ms-4">
                   <div>${memberList[0].user_nickname}</div>
                   <div style="font-size: 16px;">안녕하세요? 모임 주최자 ${memberList[0].user_nickname}입니다! </div>
                 </div>
@@ -608,10 +614,6 @@ footer.footer {
               <!--버튼 디브-->
               <div class="mt-3" style="border-top: 1px solid #e0e3e8;;">
                 <div class="d-flex align-items-center justify-content-center mt-3 joinContainer">
-                  <button type=" button" class="btn btn-outline-info"
-                    id="wishListBtn">찜 하기</button>
-                  <button type=" button" class="btn btn-outline-info ms-2 d-none"
-                    id="wishCancelBtn">찜 취소</button>
                   <button type=" button" class="btn btn-primary ms-2 d-none"
                     id="quitGroupBtn">모임 탈퇴하기</button>
                   <button type=" button" class="btn btn-primary ms-2"
@@ -828,9 +830,9 @@ footer.footer {
 	</div>
 
 	<!-- Footer-->
-	<div class="footerWrapper" style="background-color: #fff;">
+	<div class="footerWrapper" style="margin-top:50px; border-top : 1px solid #e0e3e8;">
 		<div class="container">
-			<footer class="footer" style="background-color: #fff;">
+			<footer class="footer">
 				<div class="row">
 					<div class="col-lg-3 footer-imgBox">
 						<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
@@ -856,7 +858,7 @@ footer.footer {
 						<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
 							2022. All Rights Reserved.</p>
 					</div>
-					<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+					<div class="col-lg-3 h-100 text-center text-lg-start my-auto">
 						<ul class="list-inline mb-0">
 							<li class="list-inline-item me-4"><a href="#!"><i
 									class="bi-facebook fs-3"></i></a></li>
@@ -870,7 +872,6 @@ footer.footer {
 			</footer>
 		</div>
 	</div>
-
 	<script>
 
 

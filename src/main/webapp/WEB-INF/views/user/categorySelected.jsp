@@ -255,7 +255,7 @@ img {
 
 <body>
 	<!--네비바-->
-      <header class="mb-3 border-bottom">
+      <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div style="background-color : #fff;">
       <div class="container">
          <!-- 접혔을 때 nav -->

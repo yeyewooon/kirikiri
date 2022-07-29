@@ -193,12 +193,12 @@ input[type="text"] {
 }
 
 /* 시간 설정*/
-.timeContainer {
-	background-color: rgb(233, 236, 239);
+.groupDefaultTimeContainer, .timeContainer{
 	height: 40px;
 	border-radius: 6px;
 	border: 1px solid rgb(206, 212, 218);
 }
+
 
 .defaultTime {
 	color: black;
@@ -261,13 +261,18 @@ footer.footer {
 	font-weight: normal;
 	font-style: normal;
 }
+
+.fc-event-time {
+	display:none;
+}
+
 </style>
 
 
 </head>
 <body>
 	<!--네비바-->
-	<header class="mb-3 border-bottom">
+	<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
 		<div style="background-color: #fff;">
 			<div class="container">
 				<!-- 접혔을 때 nav -->
@@ -429,22 +434,31 @@ footer.footer {
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
 											<input type="text" class="form-control" id="title"
-												name="title" disabled> <label for="partyCategory">모임유형</label>
+												name="title"> <label for="partyTitle">제목</label>
 										</div>
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
-											<input type="text" class="form-control" id="start"
-												name="start" disabled> <label for="partyDate">모임날짜</label>
+											<input type="text" class="form-control" id="showDate"
+												name="showDate" disabled> <label for="partyDate">모임날짜</label>
+											<input type="text" name="start" id="start" hidden>
+											<input type="text" name="end" id="end" hidden>
 										</div>
 										<div
-											class="mb-3 partyCal d-flex timeContainer justify-content-center align-items-center"
+											class="mb-3 partyCal d-flex flex-column timeContainer"
 											style="margin-left: 10%; margin-right: 10%; height: 56px; width: 376px;">
-											<div class="defaultTime">
+											<div class="mt-1" style="color: #8793a1; font-size : 13px; margin-left:11px;">시간</div>
+											<div class="defaultTime text-center">
 												<span class="me-2" id="defaultHour">00</span>:<span
 													class="ms-2" id="defaultMin">00</span>
 											</div>
 										</div>
-
+										<div
+											class="mb-3 partyCal d-flex flex-column groupDefaultTimeContainer"
+											style="margin-left: 10%; margin-right: 10%; height: 56px; width: 376px; background-color: rgb(233, 236, 239);">
+											<div class="mt-1" style="color: #8793a1; font-size : 13px; margin-left:11px;">시간</div>
+											<div class="gDefaultTime text-center"></div>
+										</div>
+										<input type="text" name="group_time" class="d-none" id="hiddenGroupDefaultTime" >
 										<!--시간 선택-->
 										<div id="hour-picker" class="p-4 mt-2"
 											style="margin-left: 10%; margin-right: 10%; width: 376px;">
@@ -581,11 +595,6 @@ footer.footer {
 											name="min" hidden>
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
-											<input type="text" class="form-control" id="gcal_name"
-												name="gcal_name"> <label for="partyTitle">제목</label>
-										</div>
-										<div class="form-floating mb-3 partyCal"
-											style="margin-left: 10%;">
 											<input type="text" class="form-control" id="gcal_content"
 												name="gcal_content"> <label for="partyContent">내용</label>
 										</div>
@@ -614,35 +623,21 @@ footer.footer {
 								</div>
 								<div class="modal-footer" id="buttonDiv">
 									<button type="button" class="btn btn-secondary"
-										onclick="moveSite();">닫기</button>
+										onclick="moveSite();">취소</button>
 									<button type="button" class="btn btn-primary" id="calSubmit">저장</button>
 									<button type="button" class="btn btn-success" id="calDelete">삭제</button>
-									<button type="button" class="btn btn-danger searchBtn">검색</button>
+									<button type="button" class="btn btn-warning" id="calModify">수정</button>
+									<button type="button" class="btn btn-warning d-none" id="calModifySubmit">수정 제출</button>
 								</div>
 							</div>
 						</div>
 					</div>
 					<!-- Calendar 일정 생성기-->
-					<div class="col-md-2 col-5" id='external-events'>
-						<p>
-							<strong>일정 생성하기</strong>
-						</p>
-						<div
-							class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-							<div class='fc-event-main text-center'>정모</div>
-						</div>
-						<div
-							class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-							<div class='fc-event-main text-center'>회식</div>
-						</div>
-						<div
-							class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-							<div class='fc-event-main text-center'>여행</div>
-						</div>
+					<div class="" id='external-events'>
 					</div>
 					<!--캘린더 자체 생성-->
-					<div class="col-md-10 col-auto flex-fill" id='calendar'
-						style="min-width: initial; min-height: 80vh;"></div>
+					<div class="col-md-12 col-auto flex-fill" id='calendar'
+						style="min-width: initial; min-height: 60vh;"></div>
 					<!-- Calendar end -->
 				</section>
 			</div>
@@ -725,7 +720,6 @@ footer.footer {
 			
 			// full-calendar 생성하기
 			var calendar = new FullCalendar.Calendar(calendarEl, {
-
 				// 해더에 표시할 툴바(기본설정)
 				headerToolbar : {
 					left : 'today',
@@ -736,8 +730,8 @@ footer.footer {
 				locale : 'ko', // 한국어 설정
 				editable : true, // 수정 가능
 				droppable : true, // 드래그 가능
-				
-				selectable : false, // 빈 공간 클릭 허용
+				draggable : true,
+				selectable : true, // 빈 공간 클릭 허용
 				events : [ 
 					$.ajax({
 						url : '/cal/calList',
@@ -747,8 +741,9 @@ footer.footer {
 						success : function(response) {
 						for (i = 0; i < response.length; i++) {
 							calendar.addEvent({
-								title : response[i].title,
-								start : response[i].start,
+								title : response[i].group_time + " " + response[i].title,
+								start : response[i].start, // 시작 날짜 
+								end : response[i].end, // 끝 날짜 
 								seq_group_cal : response[i].seq_group_cal // 번호도 생성 해줘야 가져올 수 있음
 							})
 						}
@@ -762,19 +757,65 @@ footer.footer {
 					}
 				}) ],
 
+				// 날짜 클릭시 혹은 드래그
+				select: function (info) {
+					
+					console.log(info.startStr); // 실제 데이터에 들어가는값(시작일)
+					console.log(info.endStr); // 실제 데이터에 들어가는값(마직말일)
+					
+					// 마지막 날짜 설정 (현재날짜에서 +1이 되어서)
+					let endDate = info.endStr;
+					endDate = endDate.replace(/-/g, ""); // 현재 날짜(String -> -빼기)
+					endDate = (Number(endDate)) - 1;
+					endDate = endDate.toString();
+					endDate = endDate.slice(0,4) + '-' + endDate.slice(4, 6) + '-' + endDate.slice(6,8);
+
+					// 시작 끝 날짜 삽입(보여주기 식)
+					$("#showDate").val(info.startStr + " ~ " + endDate);
+					
+					// 초기화 작업
+					$("#ycoord").val('37.5339071790577'); // 위도
+					$("#xcoord").val('126.896761296215'); // 경도
+					$("#title").val(''); // 제목
+					$("#gcal_content").val(''); // 내용
+					$("#partyLocation").val(''); // 위치명
+					$("#start").val(info.startStr); // 시작 날짜 넣어주기 
+					$("#end").val(info.endStr); // 끝 날짜 넣어주기 
+					$(".groupDefaultTimeContainer").addClass("d-none"); // 디폴트 시간 
+					
+					
+					if($("calDelete").hasClass("d-none") === false) {
+						// 삭제 버튼 안보이게 
+						$("#calDelete").addClass("d-none");
+						// 저장 버튼 보이게
+						$("#calSubmit").removeClass("d-none");
+					}
+
+					// 모달 보여주기 
+					calendarModal.show();
+					// 기존 맵 지우기
+					$('#map').empty()
+					// 모달 띄워준 뒤에 맵이 생성되야 함 
+					makeMap();
+					// 캘린더 랜더링
+					calendar.render();
+				},
+					
 				// 일정 옮겼을 때 
 				eventDrop:function(events) {
+					console.log(events);
 					let seq_group = ${seq_group}; // 현재 모임의 일정 번호
 					let seq_group_cal = events.event.extendedProps.seq_group_cal; // 클릭한 일정의 번호 
 					let year = (events.event._instance.range.start.getFullYear()); //옮긴 달력의 날짜
 	                let month = events.event._instance.range.start.getMonth() + 1; //옮긴 달력의 날짜
 	                let day = events.event._instance.range.start.getDate(); //옮긴 달력의 날짜
 	                let start = year + "-" + month + "-" + day; // 변경된 날짜
+	                let modifyDays = events.delta.days; // 기존의 일정으로 부터 바뀐 날짜
 	                
-					$.ajax ({
-						url : "/cal/calModify",
+					 $.ajax ({
+						url : "/cal/calMove",
 						type: 'get',
-						data : {"start" : start, "seq_group_cal" : seq_group_cal, "seq_group" : seq_group},
+						data : {"start" : start, "seq_group_cal" : seq_group_cal, "seq_group" : seq_group, "modifyDays" : modifyDays},
 						success : function(data) {
 							if(data === "success") {
 								Swal.fire({
@@ -793,7 +834,7 @@ footer.footer {
 								  text: '관리자에게 문의해주세여!',
 								})
 						}
-					})
+					}) 
 				},
 				
 				// 일정 클릭시
@@ -801,6 +842,8 @@ footer.footer {
 					let seq_group_cal =""; // 초기화 
 					let seq_group = ${seq_group}; // 현재 모임의 번호
 					seq_group_cal = info.event.extendedProps.seq_group_cal; // extendedProps는 event 함수에서 존재하는 값만 사용 가능 -> 클릭했을 때 해당 seq_group_cal을 찾아줌
+					
+					
 					// 시간 안보이게 
 					$(".timeContainer").addClass("d-none");
 					
@@ -821,15 +864,24 @@ footer.footer {
 								data : {"seq_group_cal" : seq_group_cal, "seq_group" : seq_group},
 								dataType : "json",
 								success : function(data) {
-									
+									// 마지막 날짜 설정 (현재날짜에서 +1이 되어서)
+									let endDate = data[0].end;
+									endDate = endDate.replace(/-/g, ""); // 현재 날짜(String -> -빼기)
+									endDate = endDate.substr(0, 8); // 날짜만 가져오기 00:00:00 빼기
+									endDate = (Number(endDate)) - 1;
+									endDate = endDate.toString();
+									endDate = endDate.slice(0,4) + '-' + endDate.slice(4, 6) + '-' + endDate.slice(6,8);
+
 									// 받아온 값들을 input에 셋팅
-									$("#title").val(data[0].title);
-									$("#start").val(data[0].start);
-									$("#gcal_name").val(data[0].gcal_name);
-									$("#gcal_content").val(data[0].gcal_content);
-									$("#partyLocation").val(data[0].gcal_place);
+									$("#title").val(data[0].title); // 일정 제목 
+									$("#showDate").val(data[0].start + " ~ " + endDate); // 일정 날짜
+									$("#gcal_content").val(data[0].gcal_content); // 일정 내용 
+									$("#partyLocation").val(data[0].gcal_place); // 일정 위치 
 									$("#ycoord").val(data[0].gcal_latitude);
 									$("#xcoord").val(data[0].gcal_longitude);
+									$(".gDefaultTime").text(data[0].group_time); // 일정 시간 넣어두기
+									$("#hiddenGroupDefaultTime").val(data[0].group_time);// 일정 시간 넣어두기 
+									$(".groupDefaultTimeContainer").removeClass("d-none"); // 디폴트 시간 
 									
 									// seq_group_cal을 modal에 넣어준다 
 									$("#seq_group_cal").val(seq_group_cal);
@@ -849,7 +901,6 @@ footer.footer {
 									// 초기화 작업
 									$("#ycoord").val('37.566826'); // 위도
 									$("#xcoord").val('126.9786567'); // 경도
-									$("#gcal_name").val(''); // 제목
 									$("#gcal_content").val(''); // 내용
 									$("#partyLocation").val(''); // 위치명
 									$("#title").val('');
@@ -867,45 +918,27 @@ footer.footer {
 					
 				},
 
-				// 일정을 달력에 가져다 놓았을 때
-				drop : function(info) { // 드래그 엔 드롭 성공시
-					// 데이터값 입력
-					$("#title").val(info.draggedEl.innerText);
-					$("#start").val(info.dateStr);
-
-					// 초기화 작업
-					$("#ycoord").val('37.5339071790577'); // 위도
-					$("#xcoord").val('126.896761296215'); // 경도
-					$("#gcal_name").val(''); // 제목
-					$("#gcal_content").val(''); // 내용
-					$("#partyLocation").val(''); // 위치명
-
-					if($("calDelete").hasClass("d-none") === false) {
-						// 삭제 버튼 안보이게 
-						$("#calDelete").addClass("d-none");
-						// 저장 버튼 보이게
-						$("#calSubmit").removeClass("d-none");
-					}
-
-					// 모달 보여주기 
-					calendarModal.show();
-					// 기존 맵 지우기
-					$('#map').empty()
-					// 모달 띄워준 뒤에 맵이 생성되야 함 
-					makeMap();
-				}
 			});
 
 			// 캘린더 랜더링
 			calendar.render();
 		});
 
-		// 카카오맵 api
+		
+		$(".keyword").keyup(function(e){
+			if(e.keyCode == 13) {
+				let keyword = $(".keyword").val();
+				// 지도 찾기 호출
+				searchMap(keyword);
+			} 
+		})
+		
+	/* 	// 카카오맵 api
 		$(".searchBtn").on("click", function() {
 			let keyword = $(".keyword").val();
 			// 지도 찾기 호출
 			searchMap(keyword);
-		})
+		}) */
 
 		// 지도 찾기 함수
 		const makeMap = function(defaultVal = "끼리끼리") {
@@ -1040,18 +1073,18 @@ footer.footer {
 		// 일정 저장
 		$("#calSubmit").on("click", function() {
 			let seq_group = ${seq_group}; // 현재 모임 번호 
-			let title = $("#title").val(); // 모임 유형 
-			let start = $("#start").val(); // 모임 날짜 
-			let gcal_name = $("#gcal_name").val(); // 일정 제목 
+			let title = $("#title").val(); //  일정 제목 
+			let start = $("#start").val(); // 모임 날짜 시작 
+			let end = $("#end").val(); // 모임 날짜 끝 
 			let gcal_content = $("#gcal_content").val(); // 일정 내용
 			let gcal_longitude = $("#xcoord").val(); // 일정 경도
 			let gcal_latitude = $("#ycoord").val(); // 일정 위도 
 			let gcal_place = $("#partyLocation").val(); // 일정 위치
 			let hour = $("#hourInput").val(); // 시간 
 			let min = $("#minInput").val(); // 분 
-			let totalTime = hour + ":" + min; // 전체 시간
+			let group_time = hour + ":" + min; // 전체 시간
 
-			if(gcal_name == "") {
+			if(title == "") {
 				Swal.fire('제목을 입력해주세요');
 				return;
 			}else if(gcal_content == "") {
@@ -1061,19 +1094,19 @@ footer.footer {
 				Swal.fire('장소를 검색해주세요');
 				return;
 			}else {
-				$.ajax({
+				 $.ajax({
 					url : "/cal/calInsert",
 					type : "post",
 					data : {
 						"seq_group" : seq_group,
 						"title" : title,
 						"start" : start,
-						"gcal_name" : gcal_name,
+						"end" : end,
 						"gcal_content" : gcal_content,
 						"gcal_longitude" : gcal_longitude,
 						"gcal_latitude" : gcal_latitude,
 						"gcal_place" : gcal_place,
-						"totalTime" : totalTime
+						"group_time" : group_time
 					},
 					success : function(data) {
 						// 일정 추가되었다고 알림 
@@ -1100,10 +1133,8 @@ footer.footer {
 							  text: '관리자에게 문의해주세여!',
 							})
 					}
-				}) 
-			}
-
-			 
+				})  
+			} 
 		})
 		
 		// 일정 삭제
@@ -1161,6 +1192,88 @@ footer.footer {
 				  }
 				})
 		})
+		
+		// 일정 수정
+		$("#calModify").on("click",function() {
+			$("#calModifySubmit").removeClass("d-none"); // 수정 제출 보이게
+			$("#calModify").addClass("d-none"); // 수정 버튼 안보이게 
+			let group_time = $(".gDefaultTime").text();
+			$("#defaultHour").html(group_time.substr(0,2)); // 시간 div 창에 넣어주기  
+			$("#defaultMin").html(group_time.substr(3,5));  // 분 div 창에 넣어주기 
+			$(".groupDefaultTimeContainer").addClass("d-none"); // 그룹 디폴트 타임 선택 박스 안보이게 
+			$(".timeContainer").removeClass("d-none");  // 기존 타임 선택 박스 보이게
+			
+		})
+		
+		$("#calModifySubmit").on("click",function() {
+			let seq_group_cal = $("#seq_group_cal").val(); // 일정 번호
+			let seq_group = ${seq_group}; // 현재 모임 번호 
+			let title = $("#title").val(); //  일정 제목 
+			let start = $("#start").val(); // 모임 날짜 시작 
+			let end = $("#end").val(); // 모임 날짜 끝 
+			let gcal_content = $("#gcal_content").val(); // 일정 내용
+			let gcal_longitude = $("#xcoord").val(); // 일정 경도
+			let gcal_latitude = $("#ycoord").val(); // 일정 위도 
+			let gcal_place = $("#partyLocation").val(); // 일정 위치
+			
+			let hour = $("#hourInput").val(); // 시간 
+			let min = $("#minInput").val(); // 분 
+			let modifyTime = hour+":"+min; // 바뀐 시간 */
+			let group_time = $("#hiddenGroupDefaultTime").val() // 기존 시간
+			
+			if(title == "") {
+				Swal.fire('제목을 입력해주세요');
+				return;
+			}else if(gcal_content == "") {
+				Swal.fire('내용을 입력해주세요');
+				return;
+			}else if(gcal_place == "") {
+				Swal.fire('장소를 검색해주세요');
+				return;
+			}else {
+				 $.ajax({
+					url : "/cal/calModify",
+					type : "post",
+					dataType : "json",
+					data : {
+						"seq_group_cal" : seq_group_cal,
+						"seq_group" : seq_group,
+						"title" : title,
+						"start" : start,
+						"end" : end,
+						"gcal_content" : gcal_content,
+						"gcal_longitude" : gcal_longitude,
+						"gcal_latitude" : gcal_latitude,
+						"gcal_place" : gcal_place,
+						"group_time" : group_time,
+						"modifyTime" : modifyTime
+					},
+					success : function(data) {
+						if(data >= 1) {
+							Swal.fire('일정 내용 수정 완료!');
+							setTimeout(function() {
+                                window.location.href = "";
+                           },800);
+						}	
+					},
+					error : function(e) {
+						Swal.fire({
+							  icon: 'error',
+							  title: '에러가 발생했네요..',
+							  text: '관리자에게 문의해주세여!',
+							})
+					}
+				})  
+			}
+		})
+		
+		
+		
+		
+		
+		
+		
+		
 		
 
 	// 00 클릭시(시간)
