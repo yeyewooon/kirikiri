@@ -29,6 +29,7 @@ public class LoginService {
 		
 		if("N".equals(dto.getUser_blacklist()) && "N".equals(dto.getUser_delete())) {
 			dto.setUser_pw(null);
+			System.out.println(type);
 			session.setAttribute("loginType", type);
 			session.setAttribute("loginSession", dto);
 			loginLogSuccess(dto.getUser_email());

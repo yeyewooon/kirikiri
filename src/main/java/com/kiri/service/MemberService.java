@@ -73,6 +73,7 @@ public class MemberService {
 
 	// 개인정보 수정
 	public void profileModify(MemberDTO dto){
+		
 		memberdao.profileModify(dto);
 	}
 	
@@ -87,9 +88,9 @@ public class MemberService {
 	}
 	
 	// pw 중복확인
-	public int pwCheck(String user_pw) throws Exception{
-		return memberdao.pwCheck(user_pw);
-	}
+   public int pwCheck(String user_pw, String user_email) throws Exception{
+      return memberdao.pwCheck(user_pw, user_email);
+   }
 	
 	// 회원 탈퇴
 	public void profileDelete(Map<String,String> memberdto) throws Exception{

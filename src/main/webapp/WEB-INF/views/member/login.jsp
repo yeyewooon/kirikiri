@@ -6,9 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
-<!-- 네이버 -->
-<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
@@ -160,6 +157,20 @@ h2 {
 	font-weight: bold;
 }
 
+.profile_imgContainer{
+    width: 150px;
+    height: 150px;
+    border: 1px solid lightblue;
+    border-radius: 50%;
+    text-align: center;
+    overflow: hidden;
+    margin: auto;
+}
+#p_img{
+    width: 100%;
+    height: 100%;
+}
+
 
 /* 모달 */
 .modal-header {
@@ -174,7 +185,7 @@ h2 {
 }
 
 #findPw-emailCheck-btn{
-	width: 80%;
+	width: 88%;
 	height: 47%;
 	margin-top: 18px;
 }
@@ -244,10 +255,10 @@ footer.footer {
 
 .footer-imgBox {
 	overflow: hidden;
+	text-align: center;
 }
 
 .footer-imgBox>img {
-	width: 100%;
 	height: 100%;
 }
 </style>
@@ -376,7 +387,7 @@ footer.footer {
         	}
         });
         
-        $("#findPw-emailCheck-btn").click(function(){
+        $("#findPw-emailCheck-btn").click(function(e){
         	
         	if($("#authNum").val() === ""){
         		sweetAlertFail("인증번호를 입력해주세요.");
@@ -387,6 +398,7 @@ footer.footer {
         		$(".find-box").hide();
 				$(".findPw-emailCheck-box").show();
 				$("#authNum").focus();
+				$("#staticBackdrop2").modal("hide");
 				
 				$.ajax({
 					url : "/login/tempPw"
@@ -394,7 +406,7 @@ footer.footer {
 					, data : {user_email :  $("#findPw_email").val() }
 					, success : function (data) {
 						if(data){
-							$("#staticBackdrop2").modal("hide");
+							
 							loginType = "mypage";
 							madalClear();
 							sweetAlertSuccess("메일로 임시 비밀번호를 발송했습니다. 확인 후 로그인해주세요.");
@@ -442,18 +454,7 @@ footer.footer {
     		, dataType : "text"
     		, success : function(result){
     			if(result === "general"){
-    				Swal.fire({
-    					  title: '환영합니다 !',
-    					  width: 600,
-    					  padding: '3em',
-    					  color: '#716add',
-    					  background: '#fff url(/images/trees.png)',
-    					  backdrop: `
-    					    rgba(0,0,123,0.4)
-    					    url("/images/nyan-cat.gif")
-    					    left top
-    					    no-repeat`
-    				}); 
+    				sweetAlertSuccess("환영합니다.");
     				setTimeout(function() {
     					if(loginType === "general"){
         					
@@ -644,16 +645,18 @@ footer.footer {
 	<!-- 로그인영역-->
 	<form id="generalLogin" action="/login/general" method="post">
 		<div id="loginForm">
+			<div class="row" >
+                <div class="col">
+                    <div class="profile_imgContainer">
+                        <img id="p_img" name="p_img" src="/resources/images/profile.jpg" alt="오류가 발생했습니다.">
+                    </div>
+                </div>
+            </div>
 			<div class="row">
-				<div class="col">
-					<img src="/resources/images/kirilogo.png" alt="오류발생">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col">
-					<h2>
-						<Strong>Login</Strong><br> Welcome Back!
-					</h2>
+				<div class="col mb-4">
+					<p style="font-size: 50px;">
+						Login
+					</p>
 				</div>
 			</div>
 			<div class="row">
@@ -682,7 +685,7 @@ footer.footer {
 			</div>
 			<div class="row">
 				<div class="col">
-					<button type="button" id="toLoginBtn" class="btn btn-primary">로그인</button>
+					<button type="button" id="toLoginBtn" class="btn btn-outline-primary">로그인</button>
 				</div>
 			</div>
 			<div class="row socialRow justify-content-center align-items-center">
@@ -829,58 +832,67 @@ footer.footer {
 			</div>
 		</div>
 	</div>
+	
 </div>
-
- <!-- Footer-->
- <footer class="footer">
-	 <div class="container">
-		 <div class="row">
-			 <div class="col-lg-3 footer-imgBox">
-				 <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-			 </div>
-			 <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-				 <ul class="list-inline mb-2">
-					 <li class="list-inline-item"><a href="#!">공지사항</a></li>
-					 <li class="list-inline-item">⋅</li>
-					 <c:choose>
-						 <c:when test="${not empty loginSession}">
-							 <li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
-							 <li class="list-inline-item">⋅</li>
-							 <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-						 </c:when>
-						 <c:otherwise>
-							 <li class="list-inline-item"><a href="/signup/toSignup">회원가입</a></li>
-							 <li class="list-inline-item">⋅</li>
-							 <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-						 </c:otherwise>
-					 </c:choose>
-					 <li class="list-inline-item">⋅</li>
-					 <li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a></li>
-					 <li class="list-inline-item">⋅</li>
-					 <li class="list-inline-item"><a href="#!"
-						 style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-				 </ul>
-				 <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-					 개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-				 <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-					 57 이레빌딩</p>
-				 <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-					 2022. All Rights Reserved.</p>
-			 </div>
-			 <div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-				 <ul class="list-inline mb-0">
-					 <li class="list-inline-item me-4"><a
-						 href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-					 <li class="list-inline-item me-4"><a
-						 href="https://twitter.com/?lang=ko"><i
-							 class="bi-twitter fs-3"></i></a></li>
-					 <li class="list-inline-item"><a
-						 href="https://www.instagram.com/"><i
-							 class="bi-instagram fs-3"></i></a></li>
-				 </ul>
-			 </div>
-		 </div>
-	 </div>
- </footer>
+    <!-- Footer-->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 footer-imgBox">
+					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+				</div>
+				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+					<ul class="list-inline mb-2">
+						<li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
+						<li class="list-inline-item">⋅</li>
+						<c:choose>
+							<c:when test="${not empty loginSession}">
+								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="list-inline-item"><a href="/signup/toSignup">회원가입</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+							</c:otherwise>
+						</c:choose>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item">
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<a href="/group/toCreateGroup">모임 만들기</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/login/toLogin">모임 만들기</a>
+								</c:otherwise>
+							</c:choose>
+						</li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/privacy"
+							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+					</ul>
+					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+						57 이레빌딩</p>
+					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+						2022. All Rights Reserved.</p>
+				</div>
+				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item me-4"><a
+							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+						<li class="list-inline-item me-4"><a
+							href="https://twitter.com/?lang=ko"><i
+								class="bi-twitter fs-3"></i></a></li>
+						<li class="list-inline-item"><a
+							href="https://www.instagram.com/"><i
+								class="bi-instagram fs-3"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

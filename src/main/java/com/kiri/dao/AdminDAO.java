@@ -150,7 +150,7 @@ public class AdminDAO {
 	// 모임 페이지네이션
 	public HashMap<String, Object> getPageNaviGroup(int curPage) throws Exception {
 		int totalCnt = session.selectOne("adminMapper.getPageNaviGroup"); // 전체 게시글의 개수
-		int recordCntPerPage = 10; // 한 페이지에 몇개의 데이터(게시글)을 띄워줄지
+		int recordCntPerPage = 7; // 한 페이지에 몇개의 데이터(게시글)을 띄워줄지
 		int naviCntPerPage = 3; // 네비바에 몇개 단위로 페이징을 구성할지
 		int pageTotalCnt = 0; // 총 몇 페이지가 나올지
 
@@ -210,28 +210,36 @@ public class AdminDAO {
 	}
 
 	// 멤버 수
-	public int cntGroupMember() {
-		return session.selectOne("adminMapper.cntGroupMember");
+	public int cntMember() {
+		return session.selectOne("adminMapper.cntMember");
 	}
 
 	// 모임 수
 	public int cntGroupCnt() {
-		return session.selectOne("adminMapper.cntGroupCnt");
+		int rs = session.selectOne("adminMapper.cntGroupCnt");
+		if(rs < 0) return 0;
+		else return rs;
 	}
 
 	// 게시글 수(자유게시판)
 	public int cntBoard() {
-		return session.selectOne("adminMapper.cntBoard");
+		int rs = session.selectOne("adminMapper.cntBoard");
+		if(rs < 0) return 0;
+		else return rs;
 	}
 
 	// 게시글 수(모임게시판)
 	public int cntGroupBoard() {
-		return session.selectOne("adminMapper.cntGroupBoard");
+		int rs = session.selectOne("adminMapper.cntGroupBoard");
+		if(rs < 0) return 0;
+		else return rs;
 	}
 
 	// 일정수
 	public int cntGroupCal() {
-		return session.selectOne("adminMapper.cntGroupCal");
+		int rs = session.selectOne("adminMapper.cntGroupCal");
+		if(rs < 0) return 0;
+		else return rs;
 	}
 
 	// 선호지역 수

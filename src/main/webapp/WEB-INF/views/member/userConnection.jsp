@@ -144,7 +144,7 @@ h2{
 .btn{
     width: 30%;
     margin: 15px;
-    height: 100%;
+    height: 70%;
     border: 1px solid #d2e3ec;
     margin-bottom: 70px;
 }
@@ -193,7 +193,7 @@ p{
     margin-right: 10px;
     border-radius: 10px;
     width: 20%;
-    height: 40%;
+    height: 60%;
 }
 
 
@@ -243,7 +243,7 @@ footer.footer {
 		$("#generalBtn").click(function(){
 			
 			Swal.fire({
-				  title: '일반 회원',
+				  title: '뒤로가기',
 				  text: "로그인 페이지로 돌아가서 다시 로그인 하시겠습니까?",
 				  icon: 'question',
 				  showCancelButton: true,

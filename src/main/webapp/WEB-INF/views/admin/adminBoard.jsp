@@ -244,7 +244,7 @@
             </a>
           </li>
           <li class="sidemenu">
-            <a href="#">
+            <a href="/admin/toGroupAdmin?curPage=1">
               <i class="fa-solid fa-house-user"></i><br />
               <span>모임 관리</span>
             </a>

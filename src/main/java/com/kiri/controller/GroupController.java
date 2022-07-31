@@ -65,13 +65,16 @@ public class GroupController {
    }
 
    // 멤버관리에서 멤버 강퇴(o)
-   @RequestMapping(value = "/deleteMember")
-   @ResponseBody
-   public String groupMemberDelete(@RequestBody Map<String, Object> param) throws Exception {
-      List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
-      tbl_group_service.groupMemberDelete(userEmails);
-      return String.valueOf(userEmails);
-   }
+	
+	 @RequestMapping(value = "/deleteMember")
+	 @ResponseBody 
+	 public String groupMemberDelete(@RequestBody Map<String, Object> param) throws Exception { 
+		 List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
+		 tbl_group_service.groupMemberDelete(userEmails);
+	  
+	  return String.valueOf(userEmails); 
+	 }
+	 
 
    // 모임가입 이동(o)
    @RequestMapping(value = "/toGroupApply")
@@ -258,6 +261,9 @@ public class GroupController {
       mapList.get("TableJoinDTO");
       // 해당 아이디가 가입된 그룹 갯수 출력
       int totalGroupCntById = tbl_group_service.selectGroupCntByEmail(loginSession_id);
+      System.out.println("asdasdasd");
+      System.out.println(mapList.get("TableJoinDTO"));
+      
       
       model.addAttribute("tbl_group_dto", tbl_group_dto); // 해당 그룹 내용 가져오기
       model.addAttribute("memberList", memberList); // 해당 그룹 맴버 목록 가져오기
@@ -343,17 +349,23 @@ public class GroupController {
 		// 채팅 했던 부분 불러오기
 		List<Group_ChatDTO> gcList = gcService.selectChat(seq_group);
 		model.addAttribute("gcList", gcList);
+		System.out.println("그룹 채팅");
+		System.out.println(gcList.toString());
 		// 그룹정보 가져오기(채팅방, 사람 수)
 		List<Tbl_GroupDTO> tgList = gcService.selectGroup(seq_group);
 		model.addAttribute("tgList", tgList);
-
+		System.out.println("채팅방, 사람 수");
+		System.out.println(tgList.toString());
+		
       // 닉네임 리스트 가져와서 프로필 사진 member에서 꺼내오기
       List<Group_MemberDTO> nickList = gcService.selectNick(seq_group);
+      System.out.println("닉리스트" + nickList.toString());
       List<String> profileList = new ArrayList<>();
-
       for (Group_MemberDTO dto : nickList) {
          user_nickname = dto.getUser_nickname();
+         System.out.println(user_nickname);
          MemberDTO mdto = gcService.getProfileImg(user_nickname);
+         System.out.println(mdto.getUser_image());
          profileList.add(mdto.getUser_image());
       }
 

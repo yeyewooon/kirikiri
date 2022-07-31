@@ -32,7 +32,7 @@
 <style>
 * {
 	box-sizing: border-box;
-	font-family: 'KOTRAHOPE';
+	font-family: 'Bazzi';
 	font-size : 11px;
 }
 
@@ -43,15 +43,21 @@
     font-weight: normal;
     font-style: normal;
 }
+@font-face {
+    font-family: 'Bazzi';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/Bazzi.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 .chatting {
-	border: 1px solid darkgrey;
+	border: 2px solid darkgrey;
 	height: 590px;
 	border-radius: 10px;
 }
 
 .title {
-	border-bottom: 1px solid darkgrey;
+	border-bottom: 2px solid darkgrey;
 	height: 10%;
 	background-color: #d2e3ec;
 	border-start-start-radius: 10px;
@@ -63,7 +69,7 @@
 }
 
 .users {
-	border-right: 1px solid darkgrey;
+	border-right: 2px solid darkgrey;
 	height: 100%;
 	background-color: rgb(246, 246, 246);
 }
@@ -73,7 +79,8 @@
 	text-align: center;
 	padding-top: 8px;
 	color: darkolivegreen;
-	border-bottom: 1px solid gray;
+	border-bottom: 2px solid darkolivegreen;
+	font-family: 'KOTRAHOPE';
 }
 
 .userTable{
@@ -86,7 +93,7 @@
 
 .profile {
 	border-radius: 50%;
-	background-color: orange;
+	background-color: white;
 	width: 25px;
 	height: 25px;
 }
@@ -196,7 +203,19 @@
 	width : 70px;
 	margin : 7px;
 }
-
+.selectBtn{
+	border-top : none;
+	border-bottom : none;
+	border-right : 2px solid gainsboro;
+	border-left : 2px solid gainsboro;
+	background-color : transparent;
+	padding : 2px;
+	margin : 0;
+	border-radius : 5px;
+}
+hr{
+	margin-top : 0;
+}
 </style>
 </head>
 <body>
@@ -205,8 +224,8 @@
 		<input type="text" class="d-none" id="seq_group" value="${seq_group }">
 		<div class="row title">
 			<div class="col-12 d-flex justify-content-center pt-3">
-				<span style="font-size: 30px; color: navy">${tgList[0].group_title}</span> 
-				<span style="font-size: 28px;">&nbsp;채팅</span>
+				<span style="font-size: 32px; color: navy; font-family: 'KOTRAHOPE';">${tgList[0].group_title}</span> 
+				<span style="font-size: 30px; font-family: 'KOTRAHOPE';">&nbsp;채팅</span>
 			</div>
 		</div>
 		<div class="row contentBox">
@@ -274,36 +293,69 @@
 				</div>
 				<div class="emojiBox">
 					<div class="row">
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피.png">
+						<div class="col-2 pe-0">
+							<button type="button" id="rupi" class="selectBtn"><img src="/resources/images/루피아이콘.png" style="width:25px;border-radius : 5px;"></button></div>
+						<div class="col-2 ps-0">
+							<button type="button" id="ogu" class="selectBtn"><img src="/resources/images/아기오구아이콘.png" style="width:25px;height:25px;"></button>
 						</div>
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피1.png">
-						</div>
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피2.png">
-						</div>
+						<div class="col-10"></div>
 					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피3.png">
+					<hr>
+					<div class="rupi">
+						<div class="row">
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피1.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피2.png">
+							</div>
 						</div>
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피4.png">
+						<div class="row">
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피3.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피4.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피5.png">
+							</div>
 						</div>
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피5.png">
+						<div class="row">
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피6.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피7.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피8.png">
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피6.png">
+						<div class="row">
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피9.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피10.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피11.png">
+							</div>
 						</div>
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피7.png">
-						</div>
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피8.png">
+						<div class="row">
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피12.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피13.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/루피14.png">
+							</div>
 						</div>
 					</div>
 					<div class="row">
