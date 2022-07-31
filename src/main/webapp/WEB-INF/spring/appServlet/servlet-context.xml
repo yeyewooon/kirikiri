@@ -66,7 +66,8 @@
 			<exclude-mapping path="/board/toBoard"/>
 			<exclude-mapping path="/board/toDetailView"/>
 			<exclude-mapping path="/mem/welcome"/>
-			
+			<exclude-mapping path="/user/toViewAllGroupList"/>
+			<exclude-mapping path="/user/toUserSelectedGroupList"/>
 			<exclude-mapping path="/toError"/>
 			<beans:bean class="com.kiri.utills.LoginInterceptor"/>
 		</interceptor>

@@ -158,6 +158,7 @@ ul {
 }
 .card-body{
 	background-color : #f4fdef;
+	padding-bottom:0px;	
 }
 .card>img {
 	width: 100%;
@@ -167,7 +168,9 @@ ul {
 	width: 18rem;
 	height: 13rem;
 }
-
+.card-text{
+	height:48px;
+}
 .card-text-category {
 	width: fit-content;
 	padding: 4px;
@@ -175,6 +178,11 @@ ul {
 	height: 22px;
 	border-radius: 5px;
 	font-size: 14px;
+}
+.card-text-site{
+	height:30px;
+	margin: 0px;
+    margin-top: 30px;
 }
 
 /* footer */
@@ -722,7 +730,7 @@ body {
 						</c:if>
 						<c:if test = "${groupList.size() > 0}">
 							<c:forEach items="${groupList}" var="dto">
-								<div class="col-md-4 d-flex justify-content-center p-4">
+								<div class="col-md-3 d-flex justify-content-center p-4">
 									<div class="card">
 										<c:choose>
 											<c:when test="${dto.sys_name ne null}">
@@ -737,12 +745,12 @@ body {
 										<span class="d-none">${dto.seq_group}</span>
 										<div class="card-body">
 											<div
-												class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+												class="card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
 												${dto.group_category}</div>
-											<div class="card-text mt-1">
-												<strong>${dto.group_title}</strong>
+											<div class="card-text mb-9">
+												<span style = "font-size:25px; font-family:Katuri;">${dto.group_title}</span>
 											</div>
-											<div class="card-text d-flex justify-content-end">
+											<div class="card-text-site d-flex justify-content-end">
 												<span><i class="fa-solid fa-location-dot" style="color:#00145a"></i><span class="ms-2" style = "color:#00145a; font-family:Katuri;">${dto.group_site}</span></span>
 											</div>
 										</div>
