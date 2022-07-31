@@ -125,7 +125,7 @@ ul {
 	margin-top:200px;
 }
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
@@ -134,10 +134,10 @@ footer.footer {
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
@@ -221,7 +221,7 @@ footer.footer {
 </style>
 </head>
 <body>
-	<header class="mb-3 border-bottom">
+	<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -302,7 +302,7 @@ footer.footer {
                      <div class="col-auto user">
 						<c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
 							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
 								</a>
 								<ul class="dropdown-menu text-small"
@@ -314,10 +314,10 @@ footer.footer {
 								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 								</ul>
 							</div>
-						</c:if> 
+						</c:if>
 						<c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
 							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
 								</a>
 								<ul class="dropdown-menu text-small"
@@ -328,7 +328,7 @@ footer.footer {
 								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 								</ul>
 							</div>
-						</c:if> 
+						</c:if>
                      </div>
                   </div>
                </div>
@@ -464,28 +464,28 @@ footer.footer {
         </div>
       </footer>
     </div>
-  </div> 
+  </div>
 
 </body>
 <script>
    // 멤버관리 이동
    $("#groupMember").on("click", function(){
       location.href = "/group/toGroupMember?seq_group="+$("#seq_group").val();
-   })   
+   })
    // 모임가입 이동
    $("#groupApply").on("click", function(){
       location.href = "/group/toGroupApply?seq_group="+$("#seq_group").val();
-   })   
+   })
    // 모임수정 이동
    $("#groupModify").on("click", function(){
       location.href = "/group/toModifyGroup?seq_group="+$("#seq_group").val();
-   })   
+   })
    // 모임해산 이동
    $("#groupDelete").on("click", function(){
       location.href = "/group/toGroupDelete?seq_group="+$("#seq_group").val();
-   })   
-   
-   
+   })
+
+
 	$("input[type=checkbox]").on("change", function(){ //뭔가 체크박스가 눌렷을때
 		var tr = $(this).parent().parent();
 		let trAccess = tr.children('td').eq(4).children('input'); //직책
@@ -502,24 +502,24 @@ footer.footer {
 	if($(trAccess).prop("checked")){ //직책이 체크됐을때
 		for(let i=0; i<3; i++){
 			tr.parent().children().eq(i).children('td').eq(5).children('input[type=checkbox]').prop("checked", false);
-		}				
+		}
 	}else if($(trEmail).prop("checked")){ // 이메일이 체크됐을때
 		for(let i=0; i<3; i++){
 			tr.parent().children().eq(i).children('td').eq(4).children('input[type=checkbox]').prop("checked", false);
 		}
 	}
  		})
-   		
+
        // 그룹 권한 수정
       $("#modifyBtn").on("click", function(){
          let checkAccess = $('input[name=checkAccess]:checked').val();
          let checkEmail = $('input[name=checkAccess]:checked').parent().next().children('input').val();
-		 
+
          if(checkEmail != ""){
 	    	  Swal.fire({
 	                 icon: 'warning',
 	                 text: '버튼을 잘 선택해주세요.',
-	               })  
+	               })
          }else{
  	         $.ajax({
 	            url : "/group/groupAccess",
@@ -565,10 +565,10 @@ footer.footer {
 	            },error:function(e){
 	               console.log(e);
 	            }
-	         })    	 
+	         })
          }
       })
-   
+
    // 그룹 멤버 강퇴
    $("#deleteBtn").on("click", function(){
 	  let checkAccess = $('input[name=checkUser_email]:checked').parent().prev().children('.checkAccess').val();
@@ -577,17 +577,17 @@ footer.footer {
     	  Swal.fire({
               icon: 'warning',
               text: '버튼을 잘 선택해주세요.',
-            })  
+            })
 	  }else{
 	      let checkBoxArr = [];
-		      $("input[name=checkUser_email]:checked").each(function(){ 
+		      $("input[name=checkUser_email]:checked").each(function(){
 		    	 if(checkAccess != '주최자'){
-		         checkBoxArr.push($(this).val());    	  
+		         checkBoxArr.push($(this).val());
 			      var jsonData = {
 			         "userEmails" : JSON.stringify(checkBoxArr)
 			      };
 			      var jsonString = JSON.stringify(jsonData);
-			      
+
 			       $.ajax({
 			         url:"/group/deleteMember",
 			         headers: {'Content-Type': 'application/json'},
@@ -597,23 +597,23 @@ footer.footer {
 			            Swal.fire({
 			                 icon: 'success',
 			                 text: '멤버강퇴가 완료되었습니다.',
-			               })   
+			               })
 			               setTimeout(function() {
 			                       window.location.href = "";
 			                   },3000);
 			         },error : function(e){
-			            console.log(e);         
+			            console.log(e);
 			         }
 			      })
 		      }else{
 		    	  Swal.fire({
 		                 icon: 'warning',
 		                 text: '주최자는 강퇴할 수 없습니다.',
-		               })   
+		               })
 		      }
-	      })  
-	  }    
+	      })
+	  }
    })
-   
+
 </script>
 </html>

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -33,84 +33,87 @@
 <script>
 // 썸머노트
 $(document).ready(function() {
-	// /* summernote */
-	  var fontList = ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','EarlyFontDiary', '맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'];
-		$('#summernote').summernote({
-			  height: 450, // 에디터 높이
-			  minHeight: 300, // 최소 높이
-			  maxHeight: 550, // 최대 높이
-			  focus: true, // 에디터 로딩후 포커스를 맞출지 여부
-			  lang: "ko-KR", // 한글 설정
-			  placeholder: '최대 1000자까지 작성 가능합니다.', //placeholder 설정
-			  toolbar: [
-					// [groupName, [list of button]]
-					['fontname', ['fontname']], // 글꼴
-					['fontsize', ['fontsize']], // 글자 크기
-					// 굵기, 기울임꼴, 밑줄, 취소선, 서식 지우기
-				    ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-				 	// 글자 색
-				    ['color', ['forecolor', 'color']],
-				 	// 그림첨부, 링크만들기, 동영상첨부
-				    ['insert',['picture', 'link', 'video']],
-				    // 글머리, 번호매기기, 문단정렬
-				    ['para', ['ul', 'ol', 'paragraph']],
-				    // 줄간격
-				    ['height', ['height']],
-					// 표 만들기
-				    ['table', ['table']],
-				 	// 코드보기, 확대해서보기, 도움말
-				    ['view', ['codeview', 'help']]
-			  ],
-			  // 추가한 글꼴
-			  fontNames: fontList,
-			  // 추가한 폰트 사이즈
-			  fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-			  fontNamesIgnoreCheck: fontList,
-			  callbacks: {
-				  onImageUpload : function(files, editor, welEditable){
-					  // 파일 업로드(다중 업로드를 위해 반복문 사용)
-					  for (var i = files.length - 1; i >= 0; i--) {
-						  uploadSummernoteImageFile(files[i], this);
-					  }
-				  }
-			  }
-		});
-		
-	         // 주기적으로 감지할 대상 요소 선정
-	         let target = document.querySelector(".note-editable");
-	         // DOM의 어떤 부분을 감시할지를 옵션 설정
-	         let config = { 
-	            childList: true, // 자식노드 추가/제거 감지
-	            subtree : true, // 대상 노드의 자식 뿐만 아니라 손자 이후로 모두 감시
-	         };
-	         
-	         // 옵저버 인스턴스 생성, 콜백함수 설정
-	         let observer = new MutationObserver(function(mutationList){ // 타겟에 변화가 일어나면 콜백함수를 실행하게 된다.
-	            for(let mutation of mutationList){
-	               if(mutation.removedNodes.length == 1){
-	                  if(mutation.removedNodes[0].src != null) {
-	                     let img = mutation.removedNodes[0].src;
-	                     let decode_src = img.replace("http://localhost/boardFile/", "");
-	                     let src = decodeURIComponent(decode_src);
-	                     $.ajax({
-	                        url : "/group/delImg"
-	                        , type : "post"
-	                        , data : {"src" : src}
-	                        , success : function(data){
-	                        }, error : function(e){
-	                        	Swal.fire({
-	  							  icon: 'error',
-	  							  title: '에러가 발생했네요..',
-	  							  text: '관리자에게 문의해주세여!',
-	  							});
-	                        }
-	                     })
-	                  }
-	               }
-	            }
-	         }); 
-	   // 감지 시작
-	   observer.observe(target, config);
+   // /* summernote */
+     var fontList = ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','EarlyFontDiary', '맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'];
+      $('#summernote').summernote({
+           height: 450, // 에디터 높이
+           minHeight: 300, // 최소 높이
+           maxHeight: 550, // 최대 높이
+           focus: true, // 에디터 로딩후 포커스를 맞출지 여부
+           lang: "ko-KR", // 한글 설정
+           placeholder: '최대 1000자까지 작성 가능합니다.', //placeholder 설정
+           toolbar: [
+               // [groupName, [list of button]]
+               ['fontname', ['fontname']], // 글꼴
+               ['fontsize', ['fontsize']], // 글자 크기
+               // 굵기, 기울임꼴, 밑줄, 취소선, 서식 지우기
+                ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+                // 글자 색
+                ['color', ['forecolor', 'color']],
+                // 그림첨부, 링크만들기, 동영상첨부
+                ['insert',['picture', 'link', 'video']],
+                // 글머리, 번호매기기, 문단정렬
+                ['para', ['ul', 'ol', 'paragraph']],
+                // 줄간격
+                ['height', ['height']],
+               // 표 만들기
+                ['table', ['table']],
+                // 코드보기, 확대해서보기, 도움말
+                ['view', ['codeview', 'help']]
+           ],
+           // 추가한 글꼴
+           fontNames: fontList,
+           // 추가한 폰트 사이즈
+           fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+           fontNamesIgnoreCheck: fontList,
+           callbacks: {
+              onImageUpload : function(files, editor, welEditable){
+                 // 파일 업로드(다중 업로드를 위해 반복문 사용)
+                 for (var i = files.length - 1; i >= 0; i--) {
+                    uploadSummernoteImageFile(files[i], this);
+                 }
+              },
+			      onKeyup: function(e) {
+				     	fn_checkByte(this); // 글자수 바이트 체크 
+				    }
+           }
+      });
+
+            // 주기적으로 감지할 대상 요소 선정
+            let target = document.querySelector(".note-editable");
+            // DOM의 어떤 부분을 감시할지를 옵션 설정
+            let config = {
+               childList: true, // 자식노드 추가/제거 감지
+               subtree : true, // 대상 노드의 자식 뿐만 아니라 손자 이후로 모두 감시
+            };
+
+            // 옵저버 인스턴스 생성, 콜백함수 설정
+            let observer = new MutationObserver(function(mutationList){ // 타겟에 변화가 일어나면 콜백함수를 실행하게 된다.
+               for(let mutation of mutationList){
+                  if(mutation.removedNodes.length == 1){
+                     if(mutation.removedNodes[0].src != null) {
+                        let img = mutation.removedNodes[0].src;
+                        let decode_src = img.replace("http://localhost/boardFile/", "");
+                        let src = decodeURIComponent(decode_src);
+                        $.ajax({
+                           url : "/group/delImg"
+                           , type : "post"
+                           , data : {"src" : src}
+                           , success : function(data){
+                           }, error : function(e){
+                              Swal.fire({
+                            icon: 'error',
+                            title: '에러가 발생했네요..',
+                            text: '관리자에게 문의해주세여!',
+                          });
+                           }
+                        })
+                     }
+                  }
+               }
+            });
+      // 감지 시작
+      observer.observe(target, config);
 });
 
 //summernote 이미지 업로드 function
@@ -127,11 +130,11 @@ function uploadSummernoteImageFile(file, editor){
       , success : function(data){
          $(editor).summernote("editor.insertImage", data.url);
       }, error : function(e){
-    	  Swal.fire({
-			  icon: 'error',
-			  title: '에러가 발생했네요..',
-			  text: '관리자에게 문의해주세여!',
-			})
+         Swal.fire({
+           icon: 'error',
+           title: '에러가 발생했네요..',
+           text: '관리자에게 문의해주세여!',
+         })
       }
    });
 }
@@ -154,7 +157,7 @@ function uploadSummernoteImageFile(file, editor){
    font-style: normal;
 }
 .dropdown-toggle::after {
-	display: none;
+   display: none;
 }
 
 body {
@@ -162,45 +165,45 @@ body {
 }
 
 * {
-	box-sizing: border-box;
+   box-sizing: border-box;
 }
 
 /* header 반응형 */
 @media ( max-width : 768px) {
-	#navLogo {
-		display: none;
-	}
-	#myPageIcon {
-		display: none;
-	}
-	#cartIcon {
-		display: none;
-	}
-	#menu {
-		display: none;
-	}
+   #navLogo {
+      display: none;
+   }
+   #myPageIcon {
+      display: none;
+   }
+   #cartIcon {
+      display: none;
+   }
+   #menu {
+      display: none;
+   }
 }
 
 /* header */
 #navLogo {
-	width: 150px;
-	height: 100px;
+   width: 150px;
+   height: 100px;
 }
 
 #logoImgs {
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 
 @media ( min-width : 768px) {
-	#navibar {
-		display: none;
-	}
+   #navibar {
+      display: none;
+   }
 }
 
 /* header 반응형 끝 */
 #logoImg {
-	width: 50%;
+   width: 50%;
 }
 
 /*타이틀*/
@@ -258,6 +261,7 @@ body {
 .note-editable{
 	background-color:white;
 }
+
 /*지역선택 버튼*/
 .btn-primary:hover {
     color: #fff;
@@ -295,52 +299,46 @@ body {
 }
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
-	color: #83bf7b;
-	border-color: aliceblue;
+   color: #83bf7b;
+   border-color: aliceblue;
 }
 
 .dropdown:hover .dropdown-menu {
-	display: block;
-	margin-top: 0;
-	font-weight: bold;
+   display: block;
+   margin-top: 0;
+   font-weight: bold;
 }
 
 a {
-	text-decoration: none;
-	color: black;
+   text-decoration: none;
+   color: black;
 }
 
 .mainContainer {
-	margin-top: 40px;
+   margin-top: 40px;
 }
 
 .mainIcon i {
-	color: #316f8c;
+   color: #316f8c;
 }
 
 
 
 .mainFooter {
-	height: 70px;
+   height: 70px;
 }
 
 #search-addon {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 ul {
-	list-style: none;
-	padding: 0;
+   list-style: none;
+   padding: 0;
 }
 
 .mainFooterBtnBox {
-	margin-left: 30%;
-}
-
-.footer {
-	height: 200px;
-	background-color: black;
-	color: #fff;
+   margin-left: 30%;
 }
 
 .memberCntBox {
@@ -351,50 +349,56 @@ ul {
 }
 
 .plusBtn, .minusBtn {
-	width: 35px;
-	color: #fff;
+   width: 35px;
+   color: #fff;
 }
 
 .plusBtn, .minusBtn:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .memberCnt {
-	width: 70px;
-	color: #fff;
+   width: 70px;
+   color: #fff;
 }
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
-	color: #83bf7b;
-	border-color: aliceblue;
+   color: #83bf7b;
+   border-color: aliceblue;
 }
 
 .dropdown:hover .dropdown-menu {
-	display: block;
-	margin-top: 0;
-	font-weight: bold;
+   display: block;
+   margin-top: 0;
+   font-weight: bold;
 }
 /*풋터 영역*/
+.footerWrapper{
+   background-color: #fff;
+}
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	background-color: #f6f7f9;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	width: 100%;
-	height: 100%;
+   height: 100%;
+   text-align:center;
+}
+.footer-imgBox {
+   height: 100%;
+   text-align:center;
 }
 </style>
 </head>
@@ -622,17 +626,20 @@ footer.footer {
 						class="mt-2">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. 떠오르는 기발한
 						이름이 있나요? <br> 마음이 바뀌면 나중에 다시 변경할 수 있습니다.
 					</span>
-					<div class="form-floating mb-3 mt-1">
+					<div class="mb-3 mt-2">
 						<input type="text" class="form-control" id="group_title"
-							placeholder="모임 이름" name="group_title">
+							placeholder="최대 24자까지 작성 가능합니다." name="group_title" maxlength='24'>
 					</div>
 					<strong style = "font-family:InfinitySans-RegularA1;"class="mt-2">모집 내용</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
 						class="mt-2">모집내용은 회원들에게 그룹을 홍보할 때 표시됩니다. <br>변경사항이
-						있다면 나중에 언제든지 업데이트가 가능합니다.
+						있다면 나중에 언제든지 업데이트가 가능합니다. 내용은 최대 1750자까지 입력 가능합니다.
 					</span>
 					<div class="form-floating mb-3 mt-2">
 						<textarea id="summernote" name="group_info" class="group_info"></textarea>
+						<sup class="d-none">(<span id="nowByte">0</span>/4000bytes)</sup>
+						<sup>(<span id="nowText">0</span>/1750자)</sup>
 					</div>
+					
 				</div>
 			</div>
 			<!--위치 -->
@@ -681,7 +688,7 @@ footer.footer {
 					</span>
 					<div class = "row">
 						<div class=" col-md-9 imgBox mt-4">
-							<img style = "width:100%"src="/resources/images/메인사진2(배경).png" id="groupDefaultImg">
+							<img style = "width:100%; height:400px;" src="/resources/images/메인사진2(배경).png" id="groupDefaultImg">
 						</div>
 						<input type="file" class="form-control mt-3 w-75" name="groupFile"
 							id="groupFile" accept='image/jpeg,image/gif,image/png' />
@@ -759,27 +766,44 @@ footer.footer {
 		</span>
 	</div>
 	<!-- Footer-->
-	<div class="footerWrapper" style="background-color: #fff;">
+	<div class="footerWrapper" style="margin-top:50px; border-top : 1px solid #e0e3e8;">
 		<div class="container">
-			<footer class="footer" style="background-color: #fff;">
+			<footer class="footer">
 				<div class="row">
 					<div class="col-lg-3 footer-imgBox">
 						<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
 					</div>
 					<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
 						<ul class="list-inline mb-2">
-							<li class="list-inline-item"><a href="#!">공지사항</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">회원가입</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">로그인</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a>
-							</li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!"
-								style="color: red; font-weight: bold">개인정보처리방침</a></li>
-						</ul>
+                  <li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <c:choose>
+                     <c:when test="${not empty loginSession}">
+                        <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+                     </c:when>
+                     <c:otherwise>
+                        <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+                     </c:otherwise>
+                  </c:choose>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item">
+                     <c:choose>
+                        <c:when test="${not empty loginSession}">
+                           <a href="/group/toCreateGroup">모임 만들기</a>
+                        </c:when>
+                        <c:otherwise>
+                           <a href="/login/toLogin">모임 만들기</a>
+                        </c:otherwise>
+                     </c:choose>
+                  </li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item"><a href="/privacy"
+                     style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+               </ul>
 						<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
 							개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
 						<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
@@ -787,7 +811,7 @@ footer.footer {
 						<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
 							2022. All Rights Reserved.</p>
 					</div>
-					<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+					<div class="col-lg-3 h-100 text-center text-lg-start my-auto">
 						<ul class="list-inline mb-0">
 							<li class="list-inline-item me-4"><a href="#!"><i
 									class="bi-facebook fs-3"></i></a></li>
@@ -802,52 +826,52 @@ footer.footer {
 		</div>
 	</div>
 
-	<script>
+   <script>
   // 지역 설정
   $('document').ready(function() {
-	  	var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
-	   	var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
-	    var area2 = ["계양구","남구","남동구","동구","부평구","서구","연수구","중구","강화군","옹진군"];
-	    var area3 = ["대덕구","동구","서구","유성구","중구"];
-	    var area4 = ["광산구","남구","동구",     "북구","서구"];
-	    var area5 = ["남구","달서구","동구","북구","서구","수성구","중구","달성군"];
-	    var area6 = ["남구","동구","북구","중구","울주군"];
-	    var area7 = ["강서구","금정구","남구","동구","동래구","부산진구","북구","사상구","사하구","서구","수영구","연제구","영도구","중구","해운대구","기장군"];
-	    var area8 = ["고양시","과천시","광명시","광주시","구리시","군포시","김포시","남양주시","동두천시","부천시","성남시","수원시","시흥시","안산시","안성시","안양시","양주시","오산시","용인시","의왕시","의정부시","이천시","파주시","평택시","포천시","하남시","화성시","가평군","양평군","여주군","연천군"];
-	    var area9 = ["강릉시","동해시","삼척시","속초시","원주시","춘천시","태백시","고성군","양구군","양양군","영월군","인제군","정선군","철원군","평창군","홍천군","화천군","횡성군"];
-	    var area10 = ["제천시","청주시","충주시","괴산군","단양군","보은군","영동군","옥천군","음성군","증평군","진천군","청원군"];
-	    var area11 = ["계룡시","공주시","논산시","보령시","서산시","아산시","천안시","금산군","당진군","부여군","서천군","연기군","예산군","청양군","태안군","홍성군"];
-	    var area12 = ["군산시","김제시","남원시","익산시","전주시","정읍시","고창군","무주군","부안군","순창군","완주군","임실군","장수군","진안군"];
-	    var area13 = ["광양시","나주시","목포시","순천시","여수시","강진군","고흥군","곡성군","구례군","담양군","무안군","보성군","신안군","영광군","영암군","완도군","장성군","장흥군","진도군","함평군","해남군","화순군"];
-	    var area14 = ["경산시","경주시","구미시","김천시","문경시","상주시","안동시","영주시","영천시","포항시","고령군","군위군","봉화군","성주군","영덕군","영양군","예천군","울릉군","울진군","의성군","청도군","청송군","칠곡군"];
-	    var area15 = ["거제시","김해시","마산시","밀양시","사천시","양산시","진주시","진해시","창원시","통영시","거창군","고성군","남해군","산청군","의령군","창녕군","하동군","함안군","함양군","합천군"];
-	    var area16 = ["서귀포시","제주시","남제주군","북제주군"];
+        var area0 = ["시/도 선택","서울특별시","인천광역시","대전광역시","광주광역시","대구광역시","울산광역시","부산광역시","경기도","강원도","충청북도","충청남도","전라북도","전라남도","경상북도","경상남도","제주도"];
+         var area1 = ["강남구","강동구","강북구","강서구","관악구","광진구","구로구","금천구","노원구","도봉구","동대문구","동작구","마포구","서대문구","서초구","성동구","성북구","송파구","양천구","영등포구","용산구","은평구","종로구","중구","중랑구"];
+       var area2 = ["계양구","남구","남동구","동구","부평구","서구","연수구","중구","강화군","옹진군"];
+       var area3 = ["대덕구","동구","서구","유성구","중구"];
+       var area4 = ["광산구","남구","동구",     "북구","서구"];
+       var area5 = ["남구","달서구","동구","북구","서구","수성구","중구","달성군"];
+       var area6 = ["남구","동구","북구","중구","울주군"];
+       var area7 = ["강서구","금정구","남구","동구","동래구","부산진구","북구","사상구","사하구","서구","수영구","연제구","영도구","중구","해운대구","기장군"];
+       var area8 = ["고양시","과천시","광명시","광주시","구리시","군포시","김포시","남양주시","동두천시","부천시","성남시","수원시","시흥시","안산시","안성시","안양시","양주시","오산시","용인시","의왕시","의정부시","이천시","파주시","평택시","포천시","하남시","화성시","가평군","양평군","여주군","연천군"];
+       var area9 = ["강릉시","동해시","삼척시","속초시","원주시","춘천시","태백시","고성군","양구군","양양군","영월군","인제군","정선군","철원군","평창군","홍천군","화천군","횡성군"];
+       var area10 = ["제천시","청주시","충주시","괴산군","단양군","보은군","영동군","옥천군","음성군","증평군","진천군","청원군"];
+       var area11 = ["계룡시","공주시","논산시","보령시","서산시","아산시","천안시","금산군","당진군","부여군","서천군","연기군","예산군","청양군","태안군","홍성군"];
+       var area12 = ["군산시","김제시","남원시","익산시","전주시","정읍시","고창군","무주군","부안군","순창군","완주군","임실군","장수군","진안군"];
+       var area13 = ["광양시","나주시","목포시","순천시","여수시","강진군","고흥군","곡성군","구례군","담양군","무안군","보성군","신안군","영광군","영암군","완도군","장성군","장흥군","진도군","함평군","해남군","화순군"];
+       var area14 = ["경산시","경주시","구미시","김천시","문경시","상주시","안동시","영주시","영천시","포항시","고령군","군위군","봉화군","성주군","영덕군","영양군","예천군","울릉군","울진군","의성군","청도군","청송군","칠곡군"];
+       var area15 = ["거제시","김해시","마산시","밀양시","사천시","양산시","진주시","진해시","창원시","통영시","거창군","고성군","남해군","산청군","의령군","창녕군","하동군","함안군","함양군","합천군"];
+       var area16 = ["서귀포시","제주시","남제주군","북제주군"];
 
-	  // 시/도 선택 박스 초기화
-	  $("select[name^=sido]").each(function() {
-	   $selsido = $(this);
-	   $.each(eval(area0), function() {
-	    $selsido.append("<option value='"+this+"'>"+this+"</option>");
-	   });
-	   $selsido.next().append("<option value=''>구/군 선택</option>");
-	  });
+     // 시/도 선택 박스 초기화
+     $("select[name^=sido]").each(function() {
+      $selsido = $(this);
+      $.each(eval(area0), function() {
+       $selsido.append("<option value='"+this+"'>"+this+"</option>");
+      });
+      $selsido.next().append("<option value=''>구/군 선택</option>");
+     });
 
-	  // 시/도 선택시 구/군 설정
-	  $("select[name^=sido]").change(function() {
-	   var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
-	   var $gugun = $(this).next(); // 선택영역 군구 객체
-	   $("option",$gugun).remove(); // 구군 초기화
+     // 시/도 선택시 구/군 설정
+     $("select[name^=sido]").change(function() {
+      var area = "area"+$("option",$(this)).index($("option:selected",$(this))); // 선택지역의 구군 Array
+      var $gugun = $(this).next(); // 선택영역 군구 객체
+      $("option",$gugun).remove(); // 구군 초기화
 
-	   if(area == "area0")
-	    $gugun.append("<option value=''>구/군 선택</option>");
-	   else {
-	    $.each(eval(area), function() {
-	     $gugun.append("<option value='"+this+"'>"+this+"</option>");
-	    });
-	   }
-	  });
-	 });
-  
+      if(area == "area0")
+       $gugun.append("<option value=''>구/군 선택</option>");
+      else {
+       $.each(eval(area), function() {
+        $gugun.append("<option value='"+this+"'>"+this+"</option>");
+       });
+      }
+     });
+    });
+
 //리팩토링 필요
   // 지역 설정
   let sido1 = "";
@@ -925,51 +949,84 @@ footer.footer {
     )
     }
   })
-  
+
+ 	
+  //textarea 바이트 수 체크하는 함수
+	function fn_checkByte(obj){
+	    const maxByte = 3000; //최대 100바이트
+	    const text_val = obj.value; //입력한 문자
+	    const text_len = text_val.length; //입력한 문자수
+	    let totalByte=0;
+	    
+	    for(let i=0; i<text_len; i++){
+	    	const each_char = text_val.charAt(i);
+	        const uni_char = escape(each_char); //유니코드 형식으로 변환
+	        if(uni_char.length>4){
+	        	// 한글 : 2Byte
+	            totalByte += 2;
+	        }else{
+	        	// 영문,숫자,특수문자 : 1Byte
+	            totalByte += 1;
+	        }
+	    }
+	    if(totalByte>maxByte){
+	    		alert('사진포함 최대 1750자까지만 입력가능합니다.');
+	        	document.getElementById("nowByte").innerText = totalByte;
+	            document.getElementById("nowByte").style.color = "red";
+	            document.getElementById("nowText").innerText = text_len;            
+	        }else{
+	        	document.getElementById("nowByte").innerText = totalByte;
+	            document.getElementById("nowByte").style.color = "green";
+	            document.getElementById("nowText").innerText = text_len;
+	        }
+	    }
 
   // Form으로 전송
   $("#registerGroupBtn").on("click",function() {
-	  let totalGroupCntById = "${totalGroupCntById}" //현재 세션의 가입한 모임 갯수
-	  // 구/군 변경시 비교 
-	  let group_site_com = $("#sido1Input").val() + " " +$("#gugun1Input").val();
-	  if(totalGroupCntById >= 3) { // 모임 가입 갯수 판별
-		  Swal.fire({
-		        icon: 'error',
-		        title: '모임 생성 불가!',
-		        text: '모임은 최대 3개까지 가입 혹은 생성이 가능합니다!',
-		      });
-		  return;
-	  }else if($("#group_category").val() == "") {
-		  Swal.fire("모임 주제를 선택해주세요");
-		  return;
-	  }else if($("#group_title").val() == "") {
-		  Swal.fire("모임 이름을 선택해주세요");
-		  return;
-	  }else if($(".group_info").val() == "") {
-		  Swal.fire("모임 내용을 적어주세요");
-		  return;
-	  }else if($(".group_info").val() > 1000) {
-		  Swal.fire("내용은 1000자 이내로만 가능합니다");
-		  return;
-	  }else if($("#group_site").val() == "" || $("#sido1Input").val() == "") {
-		  Swal.fire('지역 선택을 완료를 눌러주세요');
-		  return;
-	  }else if(group_site_com != $("#group_site").val()) { // 구/군 변경시 비교 대상
-	      Swal.fire('지역 선택을 완료를 눌러주세요');
-	      return;
-	  }
-	 
-	  Swal.fire(
-		      '그룹 생성 성공',
-		      '이제 회원들을 모집해보세요!',
-		      'success'
-		);
-	  setTimeout(function() {
-		  $("#groupForm").submit();
-     },1000);
-	 
+     let totalGroupCntById = "${totalGroupCntById}" //현재 세션의 가입한 모임 갯수
+     // 구/군 변경시 비교
+     let group_site_com = $("#sido1Input").val() + " " +$("#gugun1Input").val();
+     
+     let groupInfoByteCnt = $("#nowByte").html();
+     if(totalGroupCntById >= 3) { // 모임 가입 갯수 판별
+        Swal.fire({
+              icon: 'error',
+              title: '모임 생성 불가!',
+              text: '모임은 최대 3개까지 가입 혹은 생성이 가능합니다!',
+            });
+        return;
+     }else if($("#group_category").val() == "") {
+        Swal.fire("모임 주제를 선택해주세요");
+        return;
+     }else if($("#group_title").val() == "") {
+        Swal.fire("모임 이름을 입력해주세요");
+        return;
+     }else if($(".group_info").val() == "") {
+        Swal.fire("모임 내용을 입력해주세요");
+        return;
+     }else if(groupInfoByteCnt >= 3000) {
+        Swal.fire("내용은 사진 포함1750자 이내로만 가능합니다");
+        return;
+     }else if($("#group_site").val() == "" || $("#sido1Input").val() == "") {
+        Swal.fire('지역 선택을 완료를 눌러주세요');
+        return;
+     }else if(group_site_com != $("#group_site").val()) { // 구/군 변경시 비교 대상
+         Swal.fire('지역 선택을 완료를 눌러주세요');
+         return;
+     }
+
+     Swal.fire(
+            '그룹 생성 성공',
+            '이제 회원들을 모집해보세요!',
+            'success'
+      );
+
+      setTimeout(function() {
+        $("#groupForm").submit();
+     },1000); 
+
   })
-  
+
   // 이미지 선택
   let groupFile = document.getElementById("groupFile");
   let groupDefaultImg = document.getElementById("groupDefaultImg");
@@ -978,9 +1035,9 @@ footer.footer {
   groupFile.onchange = function () {
     let reader = new FileReader();
     reader.readAsDataURL(this.files[0]);
-   
+
     reader.onload = function (e) {
-    	groupDefaultImg.src = e.target.result;
+       groupDefaultImg.src = e.target.result;
     }
   }
 
@@ -1054,9 +1111,9 @@ footer.footer {
     }
   }
 
-	$("#backBtn").on("click",function() {
-		location.href = "/";
-	})
+   $("#backBtn").on("click",function() {
+      location.href = "/";
+   })
   </script>
 </body>
 </html>
