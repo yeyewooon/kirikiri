@@ -14,6 +14,8 @@
 <!--bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<!-- Bootstrap icons-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!-- fullcalendar CDN -->
@@ -228,28 +230,32 @@ input[type="text"] {
 	transform: scale(1.2, 1.2);
 }
 
-/* footer */
-/*풋터 영역*/
+.footerWrapper{
+   background-color: #fff;
+}
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	background-color: #f6f7f9;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	width: 100%;
-	height: 100%;
+   height: 100%;
+   text-align:center;
+}
+.footer-imgBox {
+   height: 100%;
+   text-align:center;
 }
 
 /* 눈누 폰트 */
@@ -434,7 +440,7 @@ footer.footer {
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
 											<input type="text" class="form-control" id="title"
-												name="title"> <label for="partyTitle">제목</label>
+												name="title" maxlength='30' placeholder="최대 30자까지 가능합니다"> <label for="partyTitle">제목</label>
 										</div>
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
@@ -595,8 +601,8 @@ footer.footer {
 											name="min" hidden>
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
-											<input type="text" class="form-control" id="gcal_content"
-												name="gcal_content"> <label for="partyContent">내용</label>
+											<input type="text" class="form-control" id="gcal_content" placeholder="최대 30자까지 가능합니다"
+												name="gcal_content" maxlength='30'> <label for="partyContent">내용</label>
 										</div>
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
@@ -622,12 +628,12 @@ footer.footer {
 									</div>
 								</div>
 								<div class="modal-footer" id="buttonDiv">
-									<button type="button" class="btn btn-secondary"
-										onclick="moveSite();">취소</button>
-									<button type="button" class="btn btn-primary" id="calSubmit">저장</button>
-									<button type="button" class="btn btn-success" id="calDelete">삭제</button>
-									<button type="button" class="btn btn-warning" id="calModify">수정</button>
-									<button type="button" class="btn btn-warning d-none" id="calModifySubmit">수정 제출</button>
+									<button type="button" class="btn btn-secondary "
+										onclick="moveSite()">취소</button>
+									<button type="button" class="btn btn-outline-success " id="calSubmit">저장</button>
+									<button type="button" class="btn btn-danger" id="calDelete">삭제</button>
+									<button type="button" class="btn btn-outline-warning" id="calModify">수정</button>
+									<button type="button" class="btn btn-outline-warning d-none" id="calModifySubmit">수정 완료</button>
 								</div>
 							</div>
 						</div>
@@ -645,48 +651,57 @@ footer.footer {
 	</div>
 
 	<!-- Footer-->
-	<div class="footerWrapper" style="background-color: #fff;">
-		<div class="container">
-			<footer class="footer" style="background-color: #fff;">
-				<div class="row">
-					<div class="col-lg-3 footer-imgBox">
-						<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
-					</div>
-					<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-						<ul class="list-inline mb-2">
-							<li class="list-inline-item"><a href="#!">공지사항</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">회원가입</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">로그인</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a>
-							</li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!"
-								style="color: red; font-weight: bold">개인정보처리방침</a></li>
-						</ul>
-						<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-							개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-						<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-							57 이레빌딩</p>
-						<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-							2022. All Rights Reserved.</p>
-					</div>
-					<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-						<ul class="list-inline mb-0">
-							<li class="list-inline-item me-4"><a href="#!"><i
-									class="bi-facebook fs-3"></i></a></li>
-							<li class="list-inline-item me-4"><a href="#!"><i
-									class="bi-twitter fs-3"></i></a></li>
-							<li class="list-inline-item"><a href="#!"><i
-									class="bi-instagram fs-3"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
+  <div class="footerWrapper">
+    <div class="container">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-lg-3 footer-imgBox">
+            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-2">
+              <li class="list-inline-item"><a href="#!">공지사항</a></li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item"><a href="#!">회원가입</a></li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item"><a href="#!">로그인</a></li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item">
+                <a href="#!">책임의 한계 및 법적고지</a>
+              </li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item">
+                <a href="#!" style="color: red; font-weight: bold">개인정보처리방침</a>
+              </li>
+            </ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
+              사업자등록번호 : 22-02-22
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2022. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-4">
+                <a href="#!"><i class="bi-facebook fs-3"></i></a>
+              </li>
+              <li class="list-inline-item me-4">
+                <a href="#!"><i class="bi-twitter fs-3"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#!"><i class="bi-instagram fs-3"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div> 
 	<script>
 		// 다시 홈으로 돌아오는 함수
 		let moveSite = function() {
@@ -759,10 +774,6 @@ footer.footer {
 
 				// 날짜 클릭시 혹은 드래그
 				select: function (info) {
-					
-					console.log(info.startStr); // 실제 데이터에 들어가는값(시작일)
-					console.log(info.endStr); // 실제 데이터에 들어가는값(마직말일)
-					
 					// 마지막 날짜 설정 (현재날짜에서 +1이 되어서)
 					let endDate = info.endStr;
 					endDate = endDate.replace(/-/g, ""); // 현재 날짜(String -> -빼기)
@@ -789,6 +800,8 @@ footer.footer {
 						$("#calDelete").addClass("d-none");
 						// 저장 버튼 보이게
 						$("#calSubmit").removeClass("d-none");
+						// 수정 버튼 안보이게 
+						$("#calModify").addClass("d-none"); 
 					}
 
 					// 모달 보여주기 
@@ -925,6 +938,7 @@ footer.footer {
 		});
 
 		
+		// 지도 검색 엔터 이벤트
 		$(".keyword").keyup(function(e){
 			if(e.keyCode == 13) {
 				let keyword = $(".keyword").val();
@@ -933,6 +947,13 @@ footer.footer {
 			} 
 		})
 		
+		// 이벤트 발생
+		const searchPlace = function() {
+			let keyword = $(".keyword").val();
+			searchMap(keyword);
+		}
+		
+		
 	/* 	// 카카오맵 api
 		$(".searchBtn").on("click", function() {
 			let keyword = $(".keyword").val();
@@ -940,135 +961,7 @@ footer.footer {
 			searchMap(keyword);
 		}) */
 
-		// 지도 찾기 함수
-		const makeMap = function(defaultVal = "끼리끼리") {
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-			mapOption = {
-				center : new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val()), // 지도의 중심좌표
-				level : 3// 지도의 확대 레벨
-			};
-
-			var map = new kakao.maps.Map(mapContainer, mapOption);
-
-			// 마커 또한 모달창이 띄워지고 난 뒤에 다시 생성해야 하므로 setTimeout 걸어줌
-			setTimeout(function() {
-				var imageSrc = '/resources/images/mapElephant.png', // 마커이미지의 주소입니다
-			    imageSize = new kakao.maps.Size(50, 50), // 마커이미지의 크기입니다
-			    imageOption = {offset: new kakao.maps.Point(27, 60)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
-
-			 // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
-			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
-					markerPosition = new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val());//마커가 표시될 위치입니다 
-
-				//마커를 생성합니다
-				var marker = new kakao.maps.Marker({
-					position : markerPosition,
-					image: markerImage // 마커이미지 설정
-				});
-
-				//마커가 지도 위에 표시되도록 설정합니다
-				marker.setMap(map);
-
-				//마커에 표시될 텍스트 
-	        	var iwContent = '<div class="customoverlay">' +
-	            '  <a target="_blank">' +
-	            '  <span class="title">'+ defaultVal +'</span>' +
-	            '  </a>' +
-	            '</div>';
-	        		
-	        	 // 커스텀 오버레이가 표시될 위치입니다
-	            var position = new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val());
-	            
-	         	// 커스텀 오버레이를 생성합니다
-	            var overlay  = new kakao.maps.CustomOverlay({
-	                map: map,
-	                position: position,
-	                content: iwContent,
-	                yAnchor: 1
-	            });
-	         
-	            overlay.setMap(map,marker);
-			},100);
-			
-			// 모달을 열었을 때보다 늦게 코드가 실행되게 해야한다 그래야 api가 적용됨
-			setTimeout(function() {
-				map.relayout();
-				map.setCenter(new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val()));
-			}, 200);
-		}
-
-		// 검색 했을 때 메서드
-		function searchMap(keyword) {
-
-			// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
-			 var infowindow = new kakao.maps.InfoWindow({
-				zIndex : 1
-			}); 
-			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-			mapOption = {
-				center : new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord')
-						.val()), // 지도의 중심좌표
-				level : 3
-			// 지도의 확대 레벨
-			};
-
-			// 지도를 생성합니다
-			var map = new kakao.maps.Map(mapContainer, mapOption);
-			// 장소 검색 객체를 생성합니다
-			var ps = new kakao.maps.services.Places();
-			// 키워드로 장소를 검색합니다
-			ps.keywordSearch(keyword, placesSearchCB);
-
-			// 키워드 검색 완료 시 호출되는 콜백함수 입니다
-			function placesSearchCB(data, status, pagination) {
-				if (status === kakao.maps.services.Status.OK) {
-					// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
-					// LatLngBounds 객체에 좌표를 추가합니다
-					var bounds = new kakao.maps.LatLngBounds();
-					for (var i = 0; i < data.length; i++) {
-						displayMarker(data[i]);
-						bounds.extend(new kakao.maps.LatLng(data[i].y,
-								data[i].x));
-					}
-					// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
-					map.setBounds(bounds);
-				}else {
-					Swal.fire({
-	                    icon: 'error',
-	                    title: '장소검색 실패!',
-	                    text: '검색하신 키워드에 대한 정보가 없습니다',
-	                    footer: 'ex) KH 당산'
-	                })
-				}
-			}
-			// 지도에 마커를 표시하는 함수입니다
-			function displayMarker(place) {
-				// 마커를 생성하고 지도에 표시합니다
-				var marker = new kakao.maps.Marker({
-					map : map,
-					position : new kakao.maps.LatLng(place.y, place.x)
-				});
-
-				// 마커에 클릭이벤트를 등록합니다
-				kakao.maps.event.addListener(marker,'click',function() {// 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
-									infowindow.setContent('<div style="padding:5px;font-size:12px;">'+ place.place_name+'</div>');
-									infowindow.open(map, marker);
-									$('#xcoord').val(place.x); // 경도 
-									$('#ycoord').val(place.y); // 위도 
-									$("#partyLocation").val(place.place_name); // 마커로 찍은 장소를 input에 넣어주기
-									
-									// swal 라이브러리 이용
-									Swal.fire({
-										position : 'center',
-										icon : 'success',
-										title : place.place_name
-												+ '로 모임 장소를 선택했습니다.',
-										showConfirmButton : false,
-										timer : 1500
-									})
-								});
-			}
-		}
+		
 
 		// 일정 저장
 		$("#calSubmit").on("click", function() {
@@ -1205,6 +1098,7 @@ footer.footer {
 			
 		})
 		
+		// 일정 수정 버튼 클릭시 
 		$("#calModifySubmit").on("click",function() {
 			let seq_group_cal = $("#seq_group_cal").val(); // 일정 번호
 			let seq_group = ${seq_group}; // 현재 모임 번호 
@@ -1268,37 +1162,160 @@ footer.footer {
 		})
 		
 		
-		
-		
-		
-		
-		
-		
+		// 지도 찾기 함수
+		const makeMap = function(defaultVal = "끼리끼리") {
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+			mapOption = {
+				center : new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val()), // 지도의 중심좌표
+				level : 3// 지도의 확대 레벨
+			};
+
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+
+			// 마커 또한 모달창이 띄워지고 난 뒤에 다시 생성해야 하므로 setTimeout 걸어줌
+			setTimeout(function() {
+				var imageSrc = '/resources/images/mapElephant.png', // 마커이미지의 주소입니다
+			    imageSize = new kakao.maps.Size(50, 50), // 마커이미지의 크기입니다
+			    imageOption = {offset: new kakao.maps.Point(27, 60)}; // 마커이미지의 옵션입니다. 마커의 좌표와 일치시킬 이미지 안에서의 좌표를 설정합니다.
+
+			 // 마커의 이미지정보를 가지고 있는 마커이미지를 생성합니다
+			    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+					markerPosition = new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val());//마커가 표시될 위치입니다 
+
+				//마커를 생성합니다
+				var marker = new kakao.maps.Marker({
+					position : markerPosition,
+					image: markerImage // 마커이미지 설정
+				});
+
+				//마커가 지도 위에 표시되도록 설정합니다
+				marker.setMap(map);
+
+				//마커에 표시될 텍스트 
+	        	var iwContent = '<div class="customoverlay">' +
+	            '  <a target="_blank">' +
+	            '  <span class="title">'+ defaultVal +'</span>' +
+	            '  </a>' +
+	            '</div>';
+	        		
+	        	 // 커스텀 오버레이가 표시될 위치입니다
+	            var position = new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val());
+	            
+	         	// 커스텀 오버레이를 생성합니다
+	            var overlay  = new kakao.maps.CustomOverlay({
+	                map: map,
+	                position: position,
+	                content: iwContent,
+	                yAnchor: 1
+	            });
+	         
+	            overlay.setMap(map,marker);
+			},100);
+			
+			// 모달을 열었을 때보다 늦게 코드가 실행되게 해야한다 그래야 api가 적용됨
+			setTimeout(function() {
+				map.relayout();
+				map.setCenter(new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord').val()));
+			}, 200);
+		}
+
+		// 검색 했을 때 메서드
+		function searchMap(keyword) {
+
+			// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+			 var infowindow = new kakao.maps.InfoWindow({
+				zIndex : 1
+			}); 
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+			mapOption = {
+				center : new kakao.maps.LatLng($('#ycoord').val(), $('#xcoord')
+						.val()), // 지도의 중심좌표
+				level : 3
+			// 지도의 확대 레벨
+			};
+
+			// 지도를 생성합니다
+			var map = new kakao.maps.Map(mapContainer, mapOption);
+			// 장소 검색 객체를 생성합니다
+			var ps = new kakao.maps.services.Places();
+			// 키워드로 장소를 검색합니다
+			ps.keywordSearch(keyword, placesSearchCB);
+
+			// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+			function placesSearchCB(data, status, pagination) {
+				if (status === kakao.maps.services.Status.OK) {
+					// 검색된 장소 위치를 기준으로 지도 범위를 재설정하기위해
+					// LatLngBounds 객체에 좌표를 추가합니다
+					var bounds = new kakao.maps.LatLngBounds();
+					for (var i = 0; i < data.length; i++) {
+						displayMarker(data[i]);
+						bounds.extend(new kakao.maps.LatLng(data[i].y,
+								data[i].x));
+					}
+					// 검색된 장소 위치를 기준으로 지도 범위를 재설정합니다
+					map.setBounds(bounds);
+				}else {
+					Swal.fire({
+	                    icon: 'error',
+	                    title: '장소검색 실패!',
+	                    text: '검색하신 키워드에 대한 정보가 없습니다',
+	                    footer: 'ex) KH 당산'
+	                })
+				}
+			}
+			// 지도에 마커를 표시하는 함수입니다
+			function displayMarker(place) {
+				// 마커를 생성하고 지도에 표시합니다
+				var marker = new kakao.maps.Marker({
+					map : map,
+					position : new kakao.maps.LatLng(place.y, place.x)
+				});
+
+				// 마커에 클릭이벤트를 등록합니다
+				kakao.maps.event.addListener(marker,'click',function() {// 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+									infowindow.setContent('<div style="padding:5px;font-size:12px;">'+ place.place_name+'</div>');
+									infowindow.open(map, marker);
+									$('#xcoord').val(place.x); // 경도 
+									$('#ycoord').val(place.y); // 위도 
+									$("#partyLocation").val(place.place_name); // 마커로 찍은 장소를 input에 넣어주기
+									
+									// swal 라이브러리 이용
+									Swal.fire({
+										position : 'center',
+										icon : 'success',
+										title : place.place_name
+												+ '로 모임 장소를 선택했습니다.',
+										showConfirmButton : false,
+										timer : 1500
+									})
+								});
+			}
+		}
 		
 
-	// 00 클릭시(시간)
-    $("#defaultHour").on("click",function() {
-      $("#hour-picker").toggle(400);
-    })
-
-    // 시간 선택시
-    $(".item").on("click",function() {
-      $("#defaultHour").html($(this).html()); // 시간 선택
-      $("#hourInput").val($(this).html()); // 안보이는 input에 시간 넣기 
-      $("#hour-picker").toggle(400);
-    })
-
-    // 00 클릭시(분)
-    $("#defaultMin").on("click",function() {
-      $("#min-picker").toggle(400);
-    })
-
-    // 분 선택시
-    $(".item2").on("click",function() {
-      $("#defaultMin").html($(this).html()); // 분 선택
-      $("#minInput").val($(this).html()); // 안보이는 input에 시간 넣기 
-      $("#min-picker").toggle(400);
-    })
+		// 00 클릭시(시간)
+	    $("#defaultHour").on("click",function() {
+	      $("#hour-picker").toggle(400);
+	    })
+	
+	    // 시간 선택시
+	    $(".item").on("click",function() {
+	      $("#defaultHour").html($(this).html()); // 시간 선택
+	      $("#hourInput").val($(this).html()); // 안보이는 input에 시간 넣기 
+	      $("#hour-picker").toggle(400);
+	    })
+	
+	    // 00 클릭시(분)
+	    $("#defaultMin").on("click",function() {
+	      $("#min-picker").toggle(400);
+	    })
+	
+	    // 분 선택시
+	    $(".item2").on("click",function() {
+	      $("#defaultMin").html($(this).html()); // 분 선택
+	      $("#minInput").val($(this).html()); // 안보이는 input에 시간 넣기 
+	      $("#min-picker").toggle(400);
+	    })
 
 	</script>
 </body>

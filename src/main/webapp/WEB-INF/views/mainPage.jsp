@@ -827,8 +827,9 @@ footer.footer {
 
    <script>
    <!-- 모임생성 고! 버튼 -->
-   $(".button").on("click", function(){
- 	   if("${loginSession}" != ""){
+	let check = "${loginSession.user_email}";
+    $(".button").on("click", function(){
+ 	   if(check != ""){
 		   location.href = "/group/toCreateGroup";
 	   }else{
     	  Swal.fire({

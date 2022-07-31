@@ -147,6 +147,7 @@ public class GroupController {
    public String makeGroup(Tbl_GroupDTO tbl_group_dto, MultipartFile groupFile, HttpSession session) throws Exception {
       Group_MemberDTO group_member_dto = new Group_MemberDTO();
 
+      System.out.println(tbl_group_dto.toString());
       // 세션 아이디, 닉네임 session에서 뽑아올 값
       String user_email = ((MemberDTO) session.getAttribute("loginSession")).getUser_email();
       String user_nickname = ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname();

@@ -180,28 +180,32 @@ tr {
 }
 
 /*풋터 영역*/
+.footerWrapper{
+   background-color: #fff;
+}
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 9rem;
-	padding-bottom: 2rem;
-	background-color: #ffffff;
-	width: fit-content;
-	margin: auto;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	width: 100%;
-	height: 100%;
+   height: 100%;
+   text-align:center;
+}
+.footer-imgBox {
+   height: 100%;
+   text-align:center;
 }
 </style>
 </head>

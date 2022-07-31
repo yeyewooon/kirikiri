@@ -55,7 +55,7 @@ public class Tbl_GroupService {
 
 		for (Group_ApplyDTO dto : list) {
 			Group_MemberDTO member = new Group_MemberDTO(0, dto.getUser_email(), dto.getSeq_group(),
-					dto.getUser_nickname(), "맴버");
+					dto.getUser_nickname(), "멤버");
 			tbl_group_dao.completeApply(member);
 		}
 

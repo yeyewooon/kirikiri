@@ -14,49 +14,49 @@
 <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 <title>그룹 게시판</title>
 
-	<style>
-    	/* header 반응형 */
-		@media ( max-width : 768px) {
-		   #navLogo {
-		      display: none;
-		   }
-		   #myPageIcon {
-		      display: none;
-		   }
-		   #cartIcon {
-		      display: none;
-		   }
-		   #menu {
-		      display: none;
-		   }
-		}
-		
-		/* header */
-		#navLogo {
-		   width: 150px;
-		   height: 100px;
-		}
-		
-		#logoImgs {
-		   width: 100%;
-		   height: 100%;
-		}
-		
-		@media ( min-width : 768px) {
-		   #navibar {
-		      display: none;
-		   }
-		}
-		
-		#logoImg {
-		   width: 50%;
-		}
-		/* header 반응형 끝 */
-	
-		/* 게시글 영역 */
-		
+   <style>
+       /* header 반응형 */
+      @media ( max-width : 768px) {
+         #navLogo {
+            display: none;
+         }
+         #myPageIcon {
+            display: none;
+         }
+         #cartIcon {
+            display: none;
+         }
+         #menu {
+            display: none;
+         }
+      }
+      
+      /* header */
+      #navLogo {
+         width: 150px;
+         height: 100px;
+      }
+      
+      #logoImgs {
+         width: 100%;
+         height: 100%;
+      }
+      
+      @media ( min-width : 768px) {
+         #navibar {
+            display: none;
+         }
+      }
+      
+      #logoImg {
+         width: 50%;
+      }
+      /* header 반응형 끝 */
+   
+      /* 게시글 영역 */
+      
         #head{
-        	font-family: 'MICEGothic Bold';
+           font-family: 'MICEGothic Bold';
             background-color: #d2e3ec;
             height: 100px;
         }
@@ -65,95 +65,95 @@
 
         }
         #searchBtn img{
-        	width: 23px;
-        	height: 24px;
+           width: 23px;
+           height: 24px;
         }
         
         #boardList a{
-        	text-decoration: none;
-        	color: black;
+           text-decoration: none;
+           color: black;
         }
         /* 버튼 색상 */
         .btn-primary{
-        	
+           
         }
         
         /* 게시글 구분 선택 */
         .sortBox{
-        	height: 50px;
-        	line-height: 50px;
-        	list-style: none;
-        	margin: 0;
-        	padding: 0;
+           height: 50px;
+           line-height: 50px;
+           list-style: none;
+           margin: 0;
+           padding: 0;
         }
         .sortBox li{
-        	box-sizing: border-box;
-        	width: 25%;
-        	float: left;
-        	background-color: #fce2e1;
-        	border: 1px solid white;
-        	text-align: center;
+           box-sizing: border-box;
+           width: 25%;
+           float: left;
+           background-color: #fce2e1;
+           border: 1px solid white;
+           text-align: center;
         }
         .sortBox li:hover{
-        	background-color: #d2e3ec9e;
+           background-color: #d2e3ec9e;
         }
         .sortBox a{
-        	color: black;
-        	text-decoration: none;
+           color: black;
+           text-decoration: none;
         }
         
         /* breadcrumb */
         .breadcrumb a{
-        	text-decoration: none;
-        	color: #a6a6a6;
+           text-decoration: none;
+           color: #a6a6a6;
         }
         .breadcrumb a:hover{
-        	text-decoration: underline;
+           text-decoration: underline;
         }
         
         /* 페이징 */
-		.page-item.active .page-link{
-			background-color: #d2e3ec;
-			border-color: #bfced6;
-		}
-		.page-link{
-			color: black;
-		}
-		
-		/*풋터 영역*/
-		.footerBox {
-		   height: 0px;
-		}
-		
-		footer.footer {
-		   padding-top: 2rem;
-		   padding-bottom: 2rem;
-		   background-color: #ffffff;
-		}
-		
-		.footer a {
-		   text-decoration: none;
-		   color: black;
-		   font-weight: 40px;
-		   font-weight: bold;
-		}
-		
-		.footer-imgBox>img {
-		   width: 100%;
-		   height: 100%;
-		}
-		
-		/* 폰트 */
-		@font-face {
+      .page-item.active .page-link{
+         background-color: #d2e3ec;
+         border-color: #bfced6;
+      }
+      .page-link{
+         color: black;
+      }
+      
+      /*풋터 영역*/
+      .footerBox {
+         height: 0px;
+      }
+      
+      footer.footer {
+         padding-top: 2rem;
+         padding-bottom: 2rem;
+         background-color: #ffffff;
+      }
+      
+      .footer a {
+         text-decoration: none;
+         color: black;
+         font-weight: 40px;
+         font-weight: bold;
+      }
+      
+      .footer-imgBox>img {
+         width: 100%;
+         height: 100%;
+      }
+      
+      /* 폰트 */
+      @font-face {
             font-family: 'MICEGothic Bold';
             src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
             font-weight: 700;
             font-style: normal;
         }
-	</style>
+   </style>
 </head>
 <body>
-	<header class="border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
+   <header class="border-bottom">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -273,321 +273,321 @@
         <div id="head" class="row text-center align-items-center">
             <h1>그룹 게시판</h1>
         </div>
-		<div class="container" style="width: 90%">
-			<div class="row mt-4 justify-content-end">
-				<div class="col-auto">
-		            <c:choose>
-		            	<c:when test="${loginSession.user_email eq 'admin'}">
-		            		<button type="button" id="writeBtn" class="btn" style="background-color: #fce2e1;" value="${pageMaker.cri.seq_group}">모임장 글쓰기</button>
-		            	</c:when>
-		            	<c:otherwise>
-		            		<button type="button" id="writeBtn" class="btn" style="background-color: #fce2e1;" value="${pageMaker.cri.seq_group}">글쓰기</button>
-		            	</c:otherwise>
-		            </c:choose>
-				</div>
-			</div>
-			
-			<!-- breadcrumb -->
-			<div class="row">
-				<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="/">Home</a></li>
-						<li class="breadcrumb-item"><a href="#">모임</a></li>
-						<li class="breadcrumb-item text-dark" aria-current="page">모임 게시판</li>
-					</ol>
-				</nav>
-			</div>
-			
-			<!-- 유형별 정렬 -->
-			<div class="row justify-content-center">
-				<ul class="sortBox">
-					<a href="/Gboard/toBoard?seq_group=${pageMaker.cri.seq_group}"><li>전체</li></a>
-					<a href="#"><li>공지</li></a>
-					<a href="#"><li>일반</li></a>
-					<a href="#"><li>모임</li></a>
-				</ul>
-			</div>
-			
-			<!-- 게시글 -->
-	        <div class="row mt-3" id="boardList">
-	            <div class="col">
-	                <table class="table table-hover text-center">
-	                    <thead>
-	                      <tr>
-	                        <th class="col-2">구분</th>
-	                        <th class="col-4">제목</th>
-	                        <th class="col-2">닉네임</th>
-	                        <th class="col-2">작성일</th>
-	                        <th class="col-2">조회</th>
-	                      </tr>
-	                    </thead>
-	                    <tbody>
-	                    	<c:choose>
-	                    		<c:when test="${list.size() == 0 && noticeList.size() == 0}">
-	                    			<tr>
-	                    				<td colspan="5">등록된 게시글이 없습니다.</td>
-	                    			</tr>
-	                    		</c:when>
-	                    		<c:otherwise>
-	                    			<c:forEach items="${noticeList}" var="notice">
-	                    				<tr>
-		                    					<td class="col-2">
-			                    					<i class="fa-solid fa-bullhorn"></i>
-		                    					</td>
-		                    					<td class="col-5 text-start">
-		                    						<a class="move" href="${notice.seq_group_board}">
-		                    							${notice.gboard_title}
-		                    						</a>
-		                    					</td>
-		                    					<td class="col-2">${notice.user_nickname}</td>
-		                    					<td class="col-2">${notice.written_date}</td>
-		                    					<td class="col-1">${notice.view_count}</td>
-		                    			</tr>
-                   					</c:forEach>
-	                    			<c:forEach items="${list}" var="dto">
-	                    				<tr>
-	                    					<td class="col-2">${dto.gboard_category}</td>
-	                    					<td class="col-5 text-start">
-	                    						<%-- /board/toDetailView?seq_board=${dto.seq_board} --%>
-	                    						<a class="move" href="${dto.seq_group_board}">
-	                    							${dto.gboard_title}
-	                    						</a>
-	                    					</td>
-	                    					<td class="col-2">${dto.user_nickname}</td>
-	                    					<td class="col-2">${dto.written_date}</td>
-	                    					<td class="col-1">${dto.view_count}</td>
-	                    				</tr>
-	                    			</c:forEach>
-	                    		</c:otherwise>
-	                    	</c:choose>
-	                    </tbody>
-					</table>
-	            </div>
-	        </div>
-	        
-	        <!-- 페이징 -->
-	        <div class="row mt-4 pageInfo_wrap">
-	        	<div class="pageInfo_area">
-					<ul id="pageInfo" class="pageInfo pagination justify-content-center">
-						<!-- 이전 페이지 버튼 -->
-						<c:if test="${pageMaker.prev}">
-							<li class="pageInfo_btn previous page-item">
-								<a class="page-link" href="${pageMaker.startPage-1}">&laquo;</a>
-							</li>
-						</c:if>
-						
-						<!-- 각 번호 페이지 버튼 -->
-						<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-							<li class="pageInfo_btn page-item ${pageMaker.cri.pageNum == num ? 'active':''}">
-								<a class="page-link" href="${num}">${num}</a>
-							</li>
-						</c:forEach>
-						
-						<!-- 다음 페이지 버튼 -->
-						<c:if test="${pageMaker.next}">
-		                    <li class="pageInfo_btn next page-item">
-		                    	<a class="page-link" href="${pageMaker.endPage + 1 }">&raquo;</a>
-		                    </li>
-		                </c:if> 
-					</ul>
-	        	</div>
-	        </div>
-	        <form id="moveForm" method="get">
-	        	<input type="hidden" name="seq_group" value="${pageMaker.cri.seq_group}">
-	        	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-	        	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-				<input type="hidden" name="type" value="${pageMaker.cri.type}">
-				<input type="hidden" name="category" value="${pageMaker.cri.category}">
-	        </form>
-	        
-	        <!-- 검색 -->
-			<div class="search_wrap">
-				<div class="search_area row mt-4 justify-content-center">
-					<div class="col-auto">
-						<select id="type" name="type" class="form-select" aria-label="유형">
-							<option value="TCW" <c:out value="${pageMaker.cri.type eq 'TCW' ? 'selected' : ''}"/>>전체</option>
-							<option value="T" <c:out value="${pageMaker.cri.type eq 'T' ? 'selected' : ''}"/>>제목</option>
-							<option value="C" <c:out value="${pageMaker.cri.type eq 'C' ? 'selected' : ''}"/>>내용</option>
-							<option value="W" <c:out value="${pageMaker.cri.type eq 'W' ? 'selected' : ''}"/>>작성자</option>
-							<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC' ? 'selected' : ''}"/>>제목 + 내용</option>
-							<option value="TW" <c:out value="${pageMaker.cri.type eq 'TW' ? 'selected' : ''}"/>>제목 + 작성자</option>
-						</select>
-					</div>
-					<div class="col-5">
-						<input type="text" id="keyword" name="keyword" value="${pageMaker.cri.keyword}" class="form-control" placeholder="검색">
-					</div>
-					<div class="col-auto">
-						<button type="button" id="searchBtn" class="btn btn-primary">
-							<img src="/resources/images/searchIcon.png">
-						</button>
-					</div>
-				</div>
-			</div>
-		</div>
+      <div class="container" style="width: 90%">
+         <div class="row mt-4 justify-content-end">
+            <div class="col-auto">
+                  <c:choose>
+                     <c:when test="${loginSession.user_email eq 'admin'}">
+                        <button type="button" id="writeBtn" class="btn" style="background-color: #fce2e1;" value="${pageMaker.cri.seq_group}">모임장 글쓰기</button>
+                     </c:when>
+                     <c:otherwise>
+                        <button type="button" id="writeBtn" class="btn" style="background-color: #fce2e1;" value="${pageMaker.cri.seq_group}">글쓰기</button>
+                     </c:otherwise>
+                  </c:choose>
+            </div>
+         </div>
+         
+         <!-- breadcrumb -->
+         <div class="row">
+            <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+               <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="/">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#">모임</a></li>
+                  <li class="breadcrumb-item text-dark" aria-current="page">모임 게시판</li>
+               </ol>
+            </nav>
+         </div>
+         
+         <!-- 유형별 정렬 -->
+         <div class="row justify-content-center">
+            <ul class="sortBox">
+               <a href="/Gboard/toBoard?seq_group=${pageMaker.cri.seq_group}"><li>전체</li></a>
+               <a href="#"><li>공지</li></a>
+               <a href="#"><li>일반</li></a>
+               <a href="#"><li>모임</li></a>
+            </ul>
+         </div>
+         
+         <!-- 게시글 -->
+           <div class="row mt-3" id="boardList">
+               <div class="col">
+                   <table class="table table-hover text-center">
+                       <thead>
+                         <tr>
+                           <th class="col-2">구분</th>
+                           <th class="col-4">제목</th>
+                           <th class="col-2">닉네임</th>
+                           <th class="col-2">작성일</th>
+                           <th class="col-2">조회</th>
+                         </tr>
+                       </thead>
+                       <tbody>
+                          <c:choose>
+                             <c:when test="${list.size() == 0 && noticeList.size() == 0}">
+                                <tr>
+                                   <td colspan="5">등록된 게시글이 없습니다.</td>
+                                </tr>
+                             </c:when>
+                             <c:otherwise>
+                                <c:forEach items="${noticeList}" var="notice">
+                                   <tr>
+                                         <td class="col-2">
+                                            <i class="fa-solid fa-bullhorn"></i>
+                                         </td>
+                                         <td class="col-5 text-start">
+                                            <a class="move" href="${notice.seq_group_board}">
+                                               ${notice.gboard_title}
+                                            </a>
+                                         </td>
+                                         <td class="col-2">${notice.user_nickname}</td>
+                                         <td class="col-2">${notice.written_date}</td>
+                                         <td class="col-1">${notice.view_count}</td>
+                                   </tr>
+                                  </c:forEach>
+                                <c:forEach items="${list}" var="dto">
+                                   <tr>
+                                      <td class="col-2">${dto.gboard_category}</td>
+                                      <td class="col-5 text-start">
+                                         <%-- /board/toDetailView?seq_board=${dto.seq_board} --%>
+                                         <a class="move" href="${dto.seq_group_board}">
+                                            ${dto.gboard_title}
+                                         </a>
+                                      </td>
+                                      <td class="col-2">${dto.user_nickname}</td>
+                                      <td class="col-2">${dto.written_date}</td>
+                                      <td class="col-1">${dto.view_count}</td>
+                                   </tr>
+                                </c:forEach>
+                             </c:otherwise>
+                          </c:choose>
+                       </tbody>
+               </table>
+               </div>
+           </div>
+           
+           <!-- 페이징 -->
+           <div class="row mt-4 pageInfo_wrap">
+              <div class="pageInfo_area">
+               <ul id="pageInfo" class="pageInfo pagination justify-content-center">
+                  <!-- 이전 페이지 버튼 -->
+                  <c:if test="${pageMaker.prev}">
+                     <li class="pageInfo_btn previous page-item">
+                        <a class="page-link" href="${pageMaker.startPage-1}">&laquo;</a>
+                     </li>
+                  </c:if>
+                  
+                  <!-- 각 번호 페이지 버튼 -->
+                  <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+                     <li class="pageInfo_btn page-item ${pageMaker.cri.pageNum == num ? 'active':''}">
+                        <a class="page-link" href="${num}">${num}</a>
+                     </li>
+                  </c:forEach>
+                  
+                  <!-- 다음 페이지 버튼 -->
+                  <c:if test="${pageMaker.next}">
+                          <li class="pageInfo_btn next page-item">
+                             <a class="page-link" href="${pageMaker.endPage + 1 }">&raquo;</a>
+                          </li>
+                      </c:if> 
+               </ul>
+              </div>
+           </div>
+           <form id="moveForm" method="get">
+              <input type="hidden" name="seq_group" value="${pageMaker.cri.seq_group}">
+              <input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+              <input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+            <input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+            <input type="hidden" name="type" value="${pageMaker.cri.type}">
+            <input type="hidden" name="category" value="${pageMaker.cri.category}">
+           </form>
+           
+           <!-- 검색 -->
+         <div class="search_wrap">
+            <div class="search_area row mt-4 justify-content-center">
+               <div class="col-auto">
+                  <select id="type" name="type" class="form-select" aria-label="유형">
+                     <option value="TCW" <c:out value="${pageMaker.cri.type eq 'TCW' ? 'selected' : ''}"/>>전체</option>
+                     <option value="T" <c:out value="${pageMaker.cri.type eq 'T' ? 'selected' : ''}"/>>제목</option>
+                     <option value="C" <c:out value="${pageMaker.cri.type eq 'C' ? 'selected' : ''}"/>>내용</option>
+                     <option value="W" <c:out value="${pageMaker.cri.type eq 'W' ? 'selected' : ''}"/>>작성자</option>
+                     <option value="TC" <c:out value="${pageMaker.cri.type eq 'TC' ? 'selected' : ''}"/>>제목 + 내용</option>
+                     <option value="TW" <c:out value="${pageMaker.cri.type eq 'TW' ? 'selected' : ''}"/>>제목 + 작성자</option>
+                  </select>
+               </div>
+               <div class="col-5">
+                  <input type="text" id="keyword" name="keyword" value="${pageMaker.cri.keyword}" class="form-control" placeholder="검색">
+               </div>
+               <div class="col-auto">
+                  <button type="button" id="searchBtn" class="btn btn-primary">
+                     <img src="/resources/images/searchIcon.png">
+                  </button>
+               </div>
+            </div>
+         </div>
+      </div>
     
-    	
+       
     </div>
     
     <!-- Footer-->
     <div class="container">
-		<footer class="footer mt-5">
-			<div class="row">
-				<div class="col-lg-3 footer-imgBox">
-					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-				</div>
-				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="#!">공지사항</a></li>
-						<li class="list-inline-item">⋅</li>
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-							</c:otherwise>
-						</c:choose>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item">
-							<c:choose>
-								<c:when test="${not empty loginSession}">
-									<a href="/group/toCreateGroup">모임 만들기</a>
-								</c:when>
-								<c:otherwise>
-									<a href="/login/toLogin">모임 만들기</a>
-								</c:otherwise>
-							</c:choose>
-						</li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item">
-							<a href="privacy" style="color: red; font-weight: bold;">개인정보처리방침</a>
-						</li>
-					</ul>
-					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-						57 이레빌딩</p>
-					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-						2022. All Rights Reserved.</p>
-				</div>
-				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-					<ul class="list-inline mb-0">
-						<li class="list-inline-item me-4"><a
-							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-						<li class="list-inline-item me-4"><a
-							href="https://twitter.com/?lang=ko"><i
-								class="bi-twitter fs-3"></i></a></li>
-						<li class="list-inline-item"><a
-							href="https://www.instagram.com/"><i
-								class="bi-instagram fs-3"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</footer>
-	</div>
+      <footer class="footer mt-5">
+         <div class="row">
+            <div class="col-lg-3 footer-imgBox">
+               <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+            </div>
+            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+               <ul class="list-inline mb-2">
+                  <li class="list-inline-item"><a href="#!">공지사항</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <c:choose>
+                     <c:when test="${not empty loginSession}">
+                        <li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+                     </c:when>
+                     <c:otherwise>
+                        <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+                     </c:otherwise>
+                  </c:choose>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item">
+                     <c:choose>
+                        <c:when test="${not empty loginSession}">
+                           <a href="/group/toCreateGroup">모임 만들기</a>
+                        </c:when>
+                        <c:otherwise>
+                           <a href="/login/toLogin">모임 만들기</a>
+                        </c:otherwise>
+                     </c:choose>
+                  </li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item">
+                     <a href="privacy" style="color: red; font-weight: bold;">개인정보처리방침</a>
+                  </li>
+               </ul>
+               <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+                  개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+               <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+                  57 이레빌딩</p>
+               <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+                  2022. All Rights Reserved.</p>
+            </div>
+            <div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+               <ul class="list-inline mb-0">
+                  <li class="list-inline-item me-4"><a
+                     href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+                  <li class="list-inline-item me-4"><a
+                     href="https://twitter.com/?lang=ko"><i
+                        class="bi-twitter fs-3"></i></a></li>
+                  <li class="list-inline-item"><a
+                     href="https://www.instagram.com/"><i
+                        class="bi-instagram fs-3"></i></a></li>
+               </ul>
+            </div>
+         </div>
+      </footer>
+   </div>
     
     <script>
-    	// 공지사항 배경
-    	$(document).ready(function(){
-    		$(".fa-bullhorn").parents("tr").css("background-color", "#e9f2f7");
-    	});
-    	
-    	// 페이징
-    	$(".move").on("click", function(e){
-    		e.preventDefault();
-    		
-    		$("#moveForm").append("<input type='hidden' name='seq_group_board' value='" + $(this).attr("href")+"'>");
-    		$("#moveForm").attr("action", "/Gboard/toDetailView");
-    		$("#moveForm").submit();
-    	});
-    	
-    	// 페이지 이동 번호
-    	$(".pageInfo a").on("click", function(e){
-    		e.preventDefault();
-    		$("#moveForm").find("input[name='pageNum']").val($(this).attr("href"));
-    		$("#moveForm").attr("action", "/Gboard/toBoard");
-    		$("#moveForm").submit();
-    	});
-    	
- 		// 글쓰기 요청
-	    $("#writeBtn").on("click", function(){ 
-	    	let seq_group = $(this).val();
-			location.href = "/Gboard/toWrite?seq_group=" + seq_group;
-		})
-		
-		// 정렬
-		//let category;
-		$(".sortBox a").on("click", function(e){
-			let category = $(this).text();
-			if(category != '전체'){
-				e.preventDefault();
-				
-				$("#moveForm").find("input[name='category']").val(category);
-				$("#moveForm").find("input[name='pageNum']").val(1);
-				$("#moveForm").submit();
-			}
-		});
-		
-		// 검색
-		$("#searchBtn").on("click", function(e){
-			e.preventDefault();
-			
-			let type = $(".search_area select").val();
-			let keyword = $(".search_area input[name='keyword']").val();
-			
-			/* if(!type){
-				alert("검색 종류를 선택하세요.");
-				return false;
-			} */
-			
-			if(!keyword){
-				alert("검색어를 입력하세요.");
-				return false;
-			}
-			
-			$("#moveForm").find("input[name='type']").val(type);
-			$("#moveForm").find("input[name='keyword']").val(keyword);
-			$("#moveForm").find("input[name='pageNum']").val(1);
-			$("#moveForm").submit();
-		})
-		
-		// 게시글 목록 ajax
-		/* function makeDynamicEl(data){
-			$("tbody").empty();
-			if(data.length == 0){ // 검색 결과 없음
-				let tr = $("<tr>");
-				let td = $("<td colspan=5>").append("검색 결과가 없습니다.");
-				tr.append(td);
-				tr.appendTo("tbody");
-			}else{ // 검색 결과 있음
-				for(let dto of data){
-					let tr = $("<tr>");
-					let td1 = $("<td>").addClass("col-2");
-					if(dto.board_category == '공지'){
-						td1.append('<i class="fa-solid fa-bullhorn"></i>');
-					}else{
-						td1.append(dto.board_category);
-					}
-					let td2 = $("<td>").addClass("col-5 text-start");
-					let a = $("<a>").attr("href", "/board/toDetailView?seq_board="+dto.seq_board).append(dto.board_title);
-					td2.append(a);
-					let td3 = $("<td>").addClass("col-2").append(dto.user_nickname);
-					let td4 = $("<td>").addClass("col-2").append(dto.board_date);
-					let td5 = $("<td>").addClass("col-1").append(dto.board_count);
-					
-					tr.append(td1, td2, td3, td4, td5);
-					tr.appendTo("tbody");
-					
-					$(".fa-bullhorn").parents("tr").css("backgroundColor", "pink");
-				}	
-			}
-		} */
- 		
+       // 공지사항 배경
+       $(document).ready(function(){
+          $(".fa-bullhorn").parents("tr").css("background-color", "#e9f2f7");
+       });
+       
+       // 페이징
+       $(".move").on("click", function(e){
+          e.preventDefault();
+          
+          $("#moveForm").append("<input type='hidden' name='seq_group_board' value='" + $(this).attr("href")+"'>");
+          $("#moveForm").attr("action", "/Gboard/toDetailView");
+          $("#moveForm").submit();
+       });
+       
+       // 페이지 이동 번호
+       $(".pageInfo a").on("click", function(e){
+          e.preventDefault();
+          $("#moveForm").find("input[name='pageNum']").val($(this).attr("href"));
+          $("#moveForm").attr("action", "/Gboard/toBoard");
+          $("#moveForm").submit();
+       });
+       
+       // 글쓰기 요청
+       $("#writeBtn").on("click", function(){ 
+          let seq_group = $(this).val();
+         location.href = "/Gboard/toWrite?seq_group=" + seq_group;
+      })
+      
+      // 정렬
+      //let category;
+      $(".sortBox a").on("click", function(e){
+         let category = $(this).text();
+         if(category != '전체'){
+            e.preventDefault();
+            
+            $("#moveForm").find("input[name='category']").val(category);
+            $("#moveForm").find("input[name='pageNum']").val(1);
+            $("#moveForm").submit();
+         }
+      });
+      
+      // 검색
+      $("#searchBtn").on("click", function(e){
+         e.preventDefault();
+         
+         let type = $(".search_area select").val();
+         let keyword = $(".search_area input[name='keyword']").val();
+         
+         /* if(!type){
+            alert("검색 종류를 선택하세요.");
+            return false;
+         } */
+         
+         if(!keyword){
+            alert("검색어를 입력하세요.");
+            return false;
+         }
+         
+         $("#moveForm").find("input[name='type']").val(type);
+         $("#moveForm").find("input[name='keyword']").val(keyword);
+         $("#moveForm").find("input[name='pageNum']").val(1);
+         $("#moveForm").submit();
+      })
+      
+      // 게시글 목록 ajax
+      /* function makeDynamicEl(data){
+         $("tbody").empty();
+         if(data.length == 0){ // 검색 결과 없음
+            let tr = $("<tr>");
+            let td = $("<td colspan=5>").append("검색 결과가 없습니다.");
+            tr.append(td);
+            tr.appendTo("tbody");
+         }else{ // 검색 결과 있음
+            for(let dto of data){
+               let tr = $("<tr>");
+               let td1 = $("<td>").addClass("col-2");
+               if(dto.board_category == '공지'){
+                  td1.append('<i class="fa-solid fa-bullhorn"></i>');
+               }else{
+                  td1.append(dto.board_category);
+               }
+               let td2 = $("<td>").addClass("col-5 text-start");
+               let a = $("<a>").attr("href", "/board/toDetailView?seq_board="+dto.seq_board).append(dto.board_title);
+               td2.append(a);
+               let td3 = $("<td>").addClass("col-2").append(dto.user_nickname);
+               let td4 = $("<td>").addClass("col-2").append(dto.board_date);
+               let td5 = $("<td>").addClass("col-1").append(dto.board_count);
+               
+               tr.append(td1, td2, td3, td4, td5);
+               tr.appendTo("tbody");
+               
+               $(".fa-bullhorn").parents("tr").css("backgroundColor", "pink");
+            }   
+         }
+      } */
+       
     </script>
 </body>
 </html>

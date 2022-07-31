@@ -27,8 +27,8 @@
   <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-	<!-- Bootstrap icons-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+   <!-- Bootstrap icons-->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
   <!-- 아이콘 -->
   <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
@@ -51,46 +51,46 @@
 }
 /* 네비바  */
 * {
-	box-sizing: border-box;
-	font-family: "MICEGothic Bold"; 
+   box-sizing: border-box;
+   font-family: "MICEGothic Bold"; 
 }
 
 /* header 반응형 */
 @media ( max-width : 768px) {
-	#navLogo {
-		display: none;
-	}
-	#myPageIcon {
-		display: none;
-	}
-	#cartIcon {
-		display: none;
-	}
-	#menu {
-		display: none;
-	}
+   #navLogo {
+      display: none;
+   }
+   #myPageIcon {
+      display: none;
+   }
+   #cartIcon {
+      display: none;
+   }
+   #menu {
+      display: none;
+   }
 }
 
 /* header */
 #navLogo {
-	width: 150px;
-	height: 100px;
+   width: 150px;
+   height: 100px;
 }
 
 #logoImgs {
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 
 @media ( min-width : 768px) {
-	#navibar {
-		display: none;
-	}
+   #navibar {
+      display: none;
+   }
 }
 
 /* header 반응형 끝 */
 #logoImg {
-	width: 50%;
+   width: 50%;
 }
 
 /* 네비바 드롭다운 */
@@ -106,8 +106,8 @@
 }
 
 ul {
-	list-style: none;
-	padding: 0;
+   list-style: none;
+   padding: 0;
 }
 
 /* 슬라이드 */
@@ -121,19 +121,19 @@ ul {
       height: 100%;
   } 
 .locationText, .categoryText{
-	font-family : katuri;
+   font-family : katuri;
 }  
   
 
 /* body content */
 .content {
-	width: 100%;
-	margin-top: 40px;
+   width: 100%;
+   margin-top: 40px;
     margin-bottom: 0px;
-	background-color: #fbfbdf;
-	border-top: 5px solid #ffd766;
-	border-bottom: 5px solid #ffd766;
-	padding-right: 100px;
+   background-color: #fbfbdf;
+   border-top: 5px solid #ffd766;
+   border-bottom: 5px solid #ffd766;
+   padding-right: 100px;
     padding-left: 100px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -141,100 +141,100 @@ ul {
 }
 
 .card {
-	width:350px;
+   width:350px;
     border: 3px solid #d5f1d5;
     cursor: pointer;
 }
 .card-body{
-	background-color : #f4fdef;
+   background-color : #f4fdef;
 }
 .card>img {
-	width: 100%;
+   width: 100%;
 }
 
 .card-img-top {
-	width: 18rem;
-	height: 13rem;
+   width: 18rem;
+   height: 13rem;
 }
 
 .card-text-category {
-	width: fit-content;
-	padding: 4px;
-	background-color: #e26b8b;
-	height: 22px;
-	border-radius: 5px;
-	font-size: 14px;
+   width: fit-content;
+   padding: 4px;
+   background-color: #e26b8b;
+   height: 22px;
+   border-radius: 5px;
+   font-size: 14px;
 }
 
 /* footer */
 /*풋터 영역*/
 .footerWrapper{
-	background-color: #f9fafe;
+   background-color: #f9fafe;
 }
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	height: 100%;
-	text-align:center;
+   height: 100%;
+   text-align:center;
 }
 .footer-imgBox {
-	height: 100%;
-	text-align:center;
+   height: 100%;
+   text-align:center;
 }
 
 /*슬라이드*/
 img {
-	max-width: 100%;
-	height: auto;
+   max-width: 100%;
+   height: auto;
 }
 
 .slider {
-	width: 80%;
-	margin: 0px auto;
+   width: 80%;
+   margin: 0px auto;
 }
 
 .slider .slick-slide {
-	margin: 10px;
+   margin: 10px;
 }
 
 .slick-prev:before, .slick-next:before {
-	color: #444444;
+   color: #444444;
 }
 
 /* 사이즈 */
 .categoryMapper, .locationMapper {
-	width: 120px;
-	color: #62656e;
+   width: 120px;
+   color: #62656e;
 }
 
 .categoryMapper:hover {
-	width: 120px;
-	color: cornflowerblue;
-	cursor: pointer;
+   width: 120px;
+   color: cornflowerblue;
+   cursor: pointer;
 }
 
 .locationMapper:hover {
-	width: 120px;
-	color: cornflowerblue;
-	cursor: pointer;
+   width: 120px;
+   color: cornflowerblue;
+   cursor: pointer;
 }
 
 #categoryList {
-	display: none
+   display: none
 }
 
 
@@ -242,7 +242,7 @@ img {
 
 /* 지역,카테고리 버튼*/
 #locationBtn, #categoryBtn{
-	cursor:pointer;
+   cursor:pointer;
 }
 .b05_3d_roll {
     perspective: 500px;
@@ -369,7 +369,7 @@ body {
 
 <body>
   <!--네비바-->
-      <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
+      <header class="mb-3 border-bottom">
       <div style="background-color : #fff;">
       <div class="container">
          <!-- 접혔을 때 nav -->
@@ -485,23 +485,23 @@ body {
    </header>
 
 <div class="container">
-	<div class = "row">
-		<div class = "col-md-12 d-flex justify-content-start">
-			<div class = "mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
-		</div>
-	</div>
-	<div class="back row">
-	    <div class="col-md-4 button_base b05_3d_roll locationBtn" id="locationBtn">
-	        <div style = "font-family:katuri;">지역</div>
-	        <div style = "font-family:katuri;">지역</div>
-	    </div>
-	    <div class="col-md-4 button_base b05_3d_roll categoryBtn" id="categoryBtn">
-	        <div style = "font-family:katuri;">카테고리</div>
-	        <div style = "font-family:katuri;">카테고리</div>
-	    </div>
-	    <div class="col-md-4">
-	    </div>
-	</div>
+   <div class = "row">
+      <div class = "col-md-12 d-flex justify-content-start">
+         <div class = "mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
+      </div>
+   </div>
+   <div class="back row">
+       <div class="col-md-4 button_base b05_3d_roll locationBtn" id="locationBtn">
+           <div style = "font-family:katuri;">지역</div>
+           <div style = "font-family:katuri;">지역</div>
+       </div>
+       <div class="col-md-4 button_base b05_3d_roll categoryBtn" id="categoryBtn">
+           <div style = "font-family:katuri;">카테고리</div>
+           <div style = "font-family:katuri;">카테고리</div>
+       </div>
+       <div class="col-md-4">
+       </div>
+   </div>
   <!--지역 설정 슬라이더-->
       <div id="locationList" class="responsive mt-5">
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
@@ -581,7 +581,7 @@ body {
         <img src = "/resources/images/slide/지역14.png">
       </div>
       <span class="locationText mt-1">
-       	충청북도
+          충청북도
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
@@ -733,43 +733,43 @@ body {
     </div>
 </div>
 </div>
-	<!-- 모임 card 캐러셀 -->
+   <!-- 모임 card 캐러셀 -->
       <div class="row content mt-4">
          <div class="col p-0">
             <div class="content2">
                <div class="imgContainer">
                   <div class="row">
-                  	<c:if test = "${selectAllList.size() == 0}">
-                  		<div>아직 개설된 모임이 없습니다.</div>
-                  	</c:if>
-                  	<c:if test = "${selectAllList.size() > 0}">
-						<c:forEach items="${selectAllList}" var="dto">
-	                        <div class="col-md-3 d-flex justify-content-center p-4">
-	                           <div class="card">
-	                           		<c:choose>
-										<c:when test="${dto.sys_name ne null}">
-											<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
-										</c:when>
-										<c:otherwise>
-											<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
-										</c:otherwise>
-									</c:choose>
-									<span class="d-none">${dto.seq_group}</span>
-	                              <div class="card-body">
-	                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
-	                                    ${dto.group_category}
-	                                 </div>
-	                                 <div class="card-text mt-3 mb-3">
-	                                    <span style = "font-size:25px; font-family:Katuri;">${dto.group_title}</span>
-	                                 </div>
-	                                 <div class="card-text d-flex justify-content-end">
-	                                    <span><i class="fa-solid fa-location-dot" style="color:#00145a"></i><span class="ms-2" style = "color:#00145a; font-family:Katuri;">${dto.group_site}</span></span>
-	                                 </div>
-	                              </div>
-	                           </div>
-	                        </div>
-                     	</c:forEach>
-                  	</c:if>
+                     <c:if test = "${selectAllList.size() == 0}">
+                        <div>아직 개설된 모임이 없습니다.</div>
+                     </c:if>
+                     <c:if test = "${selectAllList.size() > 0}">
+                  <c:forEach items="${selectAllList}" var="dto">
+                           <div class="col-md-3 d-flex justify-content-center p-4">
+                              <div class="card">
+                                    <c:choose>
+                              <c:when test="${dto.sys_name ne null}">
+                                 <img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+                              </c:when>
+                              <c:otherwise>
+                                 <img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+                              </c:otherwise>
+                           </c:choose>
+                           <span class="d-none">${dto.seq_group}</span>
+                                 <div class="card-body">
+                                    <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+                                       ${dto.group_category}
+                                    </div>
+                                    <div class="card-text mt-3 mb-3">
+                                       <span style = "font-size:25px; font-family:Katuri;">${dto.group_title}</span>
+                                    </div>
+                                    <div class="card-text d-flex justify-content-end">
+                                       <span><i class="fa-solid fa-location-dot" style="color:#00145a"></i><span class="ms-2" style = "color:#00145a; font-family:Katuri;">${dto.group_site}</span></span>
+                                    </div>
+                                 </div>
+                              </div>
+                           </div>
+                        </c:forEach>
+                     </c:if>
                   </div>
                </div>
             </div>
@@ -898,7 +898,7 @@ $(".card").on("click",function() {
 
   // 지역으로 모임 조회
   $(".locationMapper").on("click",function() {
-	console.log("hi");
+   console.log("hi");
     let locationText = $(this).find('span').html(); // 공백이 포함되서 나옴
     let group_site = locationText.trim(); // 공백을 없앰
     console.log(group_site);

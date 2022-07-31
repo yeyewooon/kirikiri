@@ -72,7 +72,10 @@ $(document).ready(function() {
                  for (var i = files.length - 1; i >= 0; i--) {
                     uploadSummernoteImageFile(files[i], this);
                  }
-              }
+              },
+			      onKeyup: function(e) {
+				     	fn_checkByte(this); // 글자수 바이트 체크 
+				    }
            }
       });
 
@@ -258,12 +261,8 @@ body {
 .note-editable{
 	background-color:white;
 }
+
 /*지역선택 버튼*/
-.btn-primary:hover {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
-}
 .btn-primary:hover {
     color: #fff;
     background-color: #b5a8a8;
@@ -342,12 +341,6 @@ ul {
    margin-left: 30%;
 }
 
-.footer {
-   height: 200px;
-   background-color: black;
-   color: #fff;
-}
-
 .memberCntBox {
 	background-color: #c4d4eb;
 	width: 140px;
@@ -380,6 +373,9 @@ ul {
    font-weight: bold;
 }
 /*풋터 영역*/
+.footerWrapper{
+   background-color: #fff;
+}
 .footerBox {
    height: 0px;
 }
@@ -387,7 +383,6 @@ ul {
 footer.footer {
    padding-top: 2rem;
    padding-bottom: 2rem;
-   background-color: #f6f7f9;
 }
 
 .footer a {
@@ -398,8 +393,12 @@ footer.footer {
 }
 
 .footer-imgBox>img {
-	width: 100%;
-	height: 100%;
+   height: 100%;
+   text-align:center;
+}
+.footer-imgBox {
+   height: 100%;
+   text-align:center;
 }
 </style>
 </head>
@@ -627,17 +626,20 @@ footer.footer {
 						class="mt-2">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. 떠오르는 기발한
 						이름이 있나요? <br> 마음이 바뀌면 나중에 다시 변경할 수 있습니다.
 					</span>
-					<div class="form-floating mb-3 mt-1">
+					<div class="mb-3 mt-2">
 						<input type="text" class="form-control" id="group_title"
-							placeholder="모임 이름" name="group_title">
+							placeholder="최대 24자까지 작성 가능합니다." name="group_title" maxlength='24'>
 					</div>
 					<strong style = "font-family:InfinitySans-RegularA1;"class="mt-2">모집 내용</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
 						class="mt-2">모집내용은 회원들에게 그룹을 홍보할 때 표시됩니다. <br>변경사항이
-						있다면 나중에 언제든지 업데이트가 가능합니다.
+						있다면 나중에 언제든지 업데이트가 가능합니다. 내용은 최대 1750자까지 입력 가능합니다.
 					</span>
 					<div class="form-floating mb-3 mt-2">
 						<textarea id="summernote" name="group_info" class="group_info"></textarea>
+						<sup class="d-none">(<span id="nowByte">0</span>/4000bytes)</sup>
+						<sup>(<span id="nowText">0</span>/1750자)</sup>
 					</div>
+					
 				</div>
 			</div>
 			<!--위치 -->
@@ -686,7 +688,7 @@ footer.footer {
 					</span>
 					<div class = "row">
 						<div class=" col-md-9 imgBox mt-4">
-							<img style = "width:100%"src="/resources/images/메인사진2(배경).png" id="groupDefaultImg">
+							<img style = "width:100%; height:400px;" src="/resources/images/메인사진2(배경).png" id="groupDefaultImg">
 						</div>
 						<input type="file" class="form-control mt-3 w-75" name="groupFile"
 							id="groupFile" accept='image/jpeg,image/gif,image/png' />
@@ -764,27 +766,44 @@ footer.footer {
 		</span>
 	</div>
 	<!-- Footer-->
-	<div class="footerWrapper" style="background-color: #fff;">
+	<div class="footerWrapper" style="margin-top:50px; border-top : 1px solid #e0e3e8;">
 		<div class="container">
-			<footer class="footer" style="background-color: #fff;">
+			<footer class="footer">
 				<div class="row">
 					<div class="col-lg-3 footer-imgBox">
 						<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
 					</div>
 					<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
 						<ul class="list-inline mb-2">
-							<li class="list-inline-item"><a href="#!">공지사항</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">회원가입</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">로그인</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a>
-							</li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!"
-								style="color: red; font-weight: bold">개인정보처리방침</a></li>
-						</ul>
+                  <li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <c:choose>
+                     <c:when test="${not empty loginSession}">
+                        <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+                     </c:when>
+                     <c:otherwise>
+                        <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+                     </c:otherwise>
+                  </c:choose>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item">
+                     <c:choose>
+                        <c:when test="${not empty loginSession}">
+                           <a href="/group/toCreateGroup">모임 만들기</a>
+                        </c:when>
+                        <c:otherwise>
+                           <a href="/login/toLogin">모임 만들기</a>
+                        </c:otherwise>
+                     </c:choose>
+                  </li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item"><a href="/privacy"
+                     style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+               </ul>
 						<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
 							개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
 						<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
@@ -792,7 +811,7 @@ footer.footer {
 						<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
 							2022. All Rights Reserved.</p>
 					</div>
-					<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+					<div class="col-lg-3 h-100 text-center text-lg-start my-auto">
 						<ul class="list-inline mb-0">
 							<li class="list-inline-item me-4"><a href="#!"><i
 									class="bi-facebook fs-3"></i></a></li>
@@ -931,12 +950,44 @@ footer.footer {
     }
   })
 
+ 	
+  //textarea 바이트 수 체크하는 함수
+	function fn_checkByte(obj){
+	    const maxByte = 3000; //최대 100바이트
+	    const text_val = obj.value; //입력한 문자
+	    const text_len = text_val.length; //입력한 문자수
+	    let totalByte=0;
+	    
+	    for(let i=0; i<text_len; i++){
+	    	const each_char = text_val.charAt(i);
+	        const uni_char = escape(each_char); //유니코드 형식으로 변환
+	        if(uni_char.length>4){
+	        	// 한글 : 2Byte
+	            totalByte += 2;
+	        }else{
+	        	// 영문,숫자,특수문자 : 1Byte
+	            totalByte += 1;
+	        }
+	    }
+	    if(totalByte>maxByte){
+	    		alert('사진포함 최대 1750자까지만 입력가능합니다.');
+	        	document.getElementById("nowByte").innerText = totalByte;
+	            document.getElementById("nowByte").style.color = "red";
+	            document.getElementById("nowText").innerText = text_len;            
+	        }else{
+	        	document.getElementById("nowByte").innerText = totalByte;
+	            document.getElementById("nowByte").style.color = "green";
+	            document.getElementById("nowText").innerText = text_len;
+	        }
+	    }
 
   // Form으로 전송
   $("#registerGroupBtn").on("click",function() {
      let totalGroupCntById = "${totalGroupCntById}" //현재 세션의 가입한 모임 갯수
      // 구/군 변경시 비교
      let group_site_com = $("#sido1Input").val() + " " +$("#gugun1Input").val();
+     
+     let groupInfoByteCnt = $("#nowByte").html();
      if(totalGroupCntById >= 3) { // 모임 가입 갯수 판별
         Swal.fire({
               icon: 'error',
@@ -948,13 +999,13 @@ footer.footer {
         Swal.fire("모임 주제를 선택해주세요");
         return;
      }else if($("#group_title").val() == "") {
-        Swal.fire("모임 이름을 선택해주세요");
+        Swal.fire("모임 이름을 입력해주세요");
         return;
      }else if($(".group_info").val() == "") {
-        Swal.fire("모임 내용을 적어주세요");
+        Swal.fire("모임 내용을 입력해주세요");
         return;
-     }else if($(".group_info").val() > 1000) {
-        Swal.fire("내용은 1000자 이내로만 가능합니다");
+     }else if(groupInfoByteCnt >= 3000) {
+        Swal.fire("내용은 사진 포함1750자 이내로만 가능합니다");
         return;
      }else if($("#group_site").val() == "" || $("#sido1Input").val() == "") {
         Swal.fire('지역 선택을 완료를 눌러주세요');
@@ -969,9 +1020,10 @@ footer.footer {
             '이제 회원들을 모집해보세요!',
             'success'
       );
-     setTimeout(function() {
+
+      setTimeout(function() {
         $("#groupForm").submit();
-     },1000);
+     },1000); 
 
   })
 

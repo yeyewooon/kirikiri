@@ -36,18 +36,6 @@ body, html {
 	height: 1100px;
 }
 
-@media ( max-width : 991px ) {
-	body {
-		height: 1700px;
-	}
-}
-
-@media ( max-width : 760px ) {
-	body {
-		height: 2060px;
-	}
-}
-
 .container {
 	max-width: -webkit-fill-available;
 	height: 100%;
@@ -77,7 +65,7 @@ body, html {
 .sidebar {
 	float: left;
 	width: 15%;
-	height: 100%;
+	height: 1100px;
 	background-color: #4e78f5;
 }
 
@@ -115,6 +103,25 @@ a {
    font-size: larger;
    color: rgba(255, 255, 255, 0.683);
 }
+
+@media ( max-width : 991px ) {
+	.sidebar {
+		height: 2100px;
+	}
+	body {
+		height: 2100px;
+	}
+}
+
+@media ( max-width : 760px ) {
+	.sidebar {
+		height: 2400px;
+	}
+	body {
+		height: 2400px;
+	}
+}
+
 
 /*네비바*/
 .navbar {
@@ -345,27 +352,27 @@ a {
 			<!-- 차트 -->
 			<div class="row">
 				<div class="col-lg-7">
-					<div class="card shadow mb-4" style="height: 340px;">
+					<div class="card shadow mb-4" style="height: 380px;">
 						<div class="card-header py-2 d-flex align-items-center">
 							<h6 class="m-0 font-weight-bold text-primary">지역별 선호도 수</h6>
 						</div>
-						<div class="chart-container" style="padding: 10px;">
-							<canvas id="bar-chartcanvas" width="500" height="180"></canvas>
+						<div class="chart-container" style="padding: 10px; height:380px;">
+							<canvas id="bar-chartcanvas" width="500" height="190"></canvas>
 						</div>
 					</div>
 					<div class="card shadow mb-4">
 						<div class="card-header py-2">
 							<h6 class="m-0 font-weight-bold text-primary">모임 장소</h6>
 						</div>
-						<div id="map" style="width: 100%; height: 360px;"></div>
+						<div id="map" style="width: 100%; height: 380px;"></div>
 					</div>
 				</div>
 				<div class="col-lg-5">
-					<div class="card shadow mb-4" style="height: 340px;">
+					<div class="card shadow mb-4" style="height: 380px;">
 						<div class="card-header py-2">
 							<h6 class="m-0 font-weight-bold text-primary">일주일 동안 로그 기록</h6>
 						</div>
-						<div class="chart-container" style="padding: 10px;">
+						<div class="chart-container" style="padding: 10px; height:100%;">
 							<canvas id="line-chartcanvas" width="500" height="260"></canvas>
 						</div>
 					</div>
@@ -373,7 +380,7 @@ a {
 						<div class="card-header py-2">
 							<h6 class="m-0 font-weight-bold text-primary">모임별 일정수</h6>
 						</div>
-						<div style="height: 344px;"
+						<div style="height: 360px;"
 							class="d-flex justify-content-center align-items-center mt-3">
 							<canvas id="donutChart1"
 								style="height: 200; width: 500"></canvas>
