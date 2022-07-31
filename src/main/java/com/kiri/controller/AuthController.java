@@ -76,6 +76,7 @@ public class AuthController {
         	 if(type.getType().equals("naver") && type.getUnique_id().equals(ecpNaverId)) {
         		 MemberDTO dto = service.socialLogin(naverEmail);
         		 if("N".equals(dto.getUser_blacklist()) && "N".equals(dto.getUser_delete())){
+        			 service.loginLogSuccess(dto.getUser_email());
         			 session.setAttribute("loginType", type.getType());
         			 session.setAttribute("loginSession", dto);
         			 return "redirect:/";
@@ -152,6 +153,7 @@ public class AuthController {
 	       	if(type.getType().equals("kakao") && type.getUnique_id().equals("kakao")) {
 	       		MemberDTO dto = service.socialLogin(kakaoEmail);
 	       		if("N".equals(dto.getUser_blacklist()) && "N".equals(dto.getUser_delete())){
+	       			service.loginLogSuccess(dto.getUser_email());
 	       			session.setAttribute("loginType", type.getType());
 		       		session.setAttribute("loginSession", dto);
 		       		return "redirect:/";
@@ -217,6 +219,7 @@ public class AuthController {
     	
     	if(type.equals("naver") || type.equals("kakao")) {
     		signupService.updateLoginType(user_email, type , null);
+    		service.loginLogSuccess(user_email);
         	service.updatePw(user_email, "social");
         	session.setAttribute("loginSession", service.socialLogin(user_email));
         	session.setAttribute("loginType", type);

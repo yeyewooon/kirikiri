@@ -5,7 +5,7 @@ public class SiteDTO {
    private String user_email;
    private String area;
    private int preCnt;
-   
+
    public SiteDTO() {
    }
 
@@ -54,6 +54,6 @@ public class SiteDTO {
       return "SiteDTO [seq_site=" + seq_site + ", user_email=" + user_email + ", area=" + area + ", count=" + preCnt
             + "]";
    }
-   
-   
+
+
 }

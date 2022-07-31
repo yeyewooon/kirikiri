@@ -176,6 +176,10 @@
       }
 
       /*content안에*/
+      .title{
+		width:75%;
+		margin: auto;
+      }
       .reportBox {
         margin: auto;
         width: 75%;
@@ -253,7 +257,7 @@
             </a>
           </li>
           <li class="sidemenu">
-            <a href="#">
+            <a href="/admin/toGroupAdmin?curPage=1">
               <i class="fa-solid fa-house-user"></i><br />
               <span>모임 관리</span>
             </a>
@@ -271,7 +275,7 @@
       </div>
       <div class="contents">
         <div class="row title mt-2">
-          <div class="col mt-4 ms-4">
+          <div class="col mt-4">
             <h4 style="color: darkblue; text-shadow: 1px 1px 1px dodgerblue">
               게시물 관리
             </h4>

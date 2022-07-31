@@ -634,10 +634,10 @@ footer.footer {
       	 	   $("#email-domain").focus();
  	       	   return;   
  	       	auth = comfirm;
-           }else if(auth !== "comfirm"){
+           /* }else if(auth !== "comfirm"){
       	 	   sweetAlertFail("이메일 인증을 완료해주세요.");
       	 	   $("#email_id").focus();
- 	       	   return;   
+ 	       	   return;   */ 
  	       	
            }else if($("#user_pw").val() === "" || $("#pwCheck").val() === ""){
         	   sweetAlertFail("비밀번호를 입력해주세요.");
@@ -856,511 +856,526 @@ function sweetAlertSuccess(content){
 };
 </script>
 <body>
-<!--네비바-->
-  <header class="mb-3 border-bottom">
-      <div class="container">
-          <!-- 접혔을 때 nav -->
-          <nav id="navibar" class="navbar navbar-expand-md navbar-light" aria-label="Main navigation">
-              <div class="container-fluid">
-                  <div class="row">
-                      <div class="col-10">
-                          <a class="navbar-brand mb-2 mb-lg-0" href="#">
-                              <div class="title-box">
-                                  <img id="logoImg" src="/resources/images/kiri.jpg">
-                              </div>
-                          </a>
+ <!--네비바-->
+<header class="mb-3 border-bottom">
+    <div class="container">
+       <!-- 접혔을 때 nav -->
+       <nav id="navibar" class="navbar navbar-expand-md navbar-light"
+          aria-label="Main navigation">
+          <div class="container-fluid">
+             <div class="row">
+                <div class="col-10">
+                   <a class="navbar-brand mb-2 mb-lg-0" href="/">
+                      <div class="title-box">
+                         <img id="logoImg" src="/resources/images/kiri.jpg">
                       </div>
-                      <!-- toggle button -->
-                      <div class="col-2 d-flex align-items-center">
-                          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-                              aria-expanded="false" aria-label="Toggle navigation">
-                              <span class="navbar-toggler-icon"></span>
-                          </button>
-                      </div>
-                      <!-- 메뉴 -->
-                      <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                          <ul class="navbar-nav mb-2 mb-lg-0">
-                              <li class="nav-item"><a class="nav-link" href=" ">자유게시판</a></li>
-                              <c:choose>
-                                  <c:when test="${empty loginSession}">
-                                      <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                                      <li class="nav-item"><a class="nav-link" href=" ">회원가입</a></li>
-                                  </c:when>
-                                  <c:otherwise>
-                                      <li class="nav-item"><a class="nav-link" href=" ">마이페이지</a></li>
-                                      <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                                  </c:otherwise>
-                              </c:choose>
+                   </a>
+                </div>
+                <!-- toggle button -->
+                <div class="col-2 d-flex align-items-center">
+                   <button class="navbar-toggler" type="button"
+                      data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                      aria-controls="navbarNavDropdown" aria-expanded="false"
+                      aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                   </button>
+                </div>
+                <!-- 메뉴 -->
+                <div class="collapse navbar-collapse justify-content-end"
+                   id="navbarNavDropdown">
+                   <ul class="navbar-nav mb-2 mb-lg-0">
+                      <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                         <c:if test="${empty loginSession}">
+                            <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
+                         </c:if>
+                         <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                            <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                         </c:if>
+                         <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
+                            <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                            <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                         </c:if>
+                   </ul>
+                </div>
+             </div>
 
+          </div>
+       </nav>
+       <!-- 펼쳐졌을 때 nav -->
+       <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
+          aria-label="Main navigation">
+          <div class="row w-100 align-items-center">
+             <div class="col-5 d-flex justify-content-center">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                   <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
+                         게시판</a></li>
+                </ul>
+             </div>
 
-                          </ul>
+             <!-- logo -->
+             <div class="col-2">
+                <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
+                   id="logoImgs" src="/resources/images/kiri.jpg">
 
-                      </div>
-                  </div>
+                </a>
+             </div>
 
-              </div>
-          </nav>
-
-          <!-- 펼쳐졌을 때 nav -->
-          <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light" aria-label="Main navigation">
-              <div class="row w-100 align-items-center">
-                  <div class="col-5 d-flex justify-content-center">
-                      <ul class="navbar-nav mb-2 mb-lg-0">
-                          <li class="nav-item"><a class="nav-link mx-2" href="">자유 게시판</a></li>
+             <div class="col-5">
+                <div class="row align-items-center justify-content-center">
+                   <div class="col-auto">
+                      <ul class="navbar-nav mb-2 mb-lg-0 me-2">
+                         <c:if test="${empty loginSession}">
+                            <li class="nav-item"><a class="nav-link"
+                               href="/login/toLogin">로그인</a></li>
+                            <li class="nav-item"><a class="nav-link"
+                               href="/signup/toSignupAgree">회원가입</a></li>
+                         </c:if>
                       </ul>
-                  </div>
-                  <!-- logo -->
-                  <div class="col-2">
-                      <a href="/toHome.home" id="navLogo" class="mb-2 mb-lg-0">
-                          <img id="logoImgs" src="/resources/images/kiri.jpg">
-
+                   </div>
+                   <div class="col-auto user">
+                <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                   <div class="dropdown text-end">
+                      <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                      <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
                       </a>
-                  </div>
-                  <div class="col-5">
-                      <div class="row align-items-center justify-content-center">
-                          <div class="col-auto">
-                              <ul class="navbar-nav mb-2 mb-lg-0 me-2">
-                                  <c:if test="${empty loginSession}">
-                                      <li class="nav-item"><a class="nav-link" href="/toLogin.mem">로그인</a></li>
-                                      <li class="nav-item"><a class="nav-link" href="/toSignUp.mem">회원가입</a></li>
-                                  </c:if>
-                              </ul>
-                          </div>
-
-                          <div class="col-auto user">
-                              <c:if test="${not empty loginSession}">
-                                  <div class="dropdown text-end">
-                                      <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle"
-                                          id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                          <img src="/final/images/profile.jpg" alt="mdo" width="32" height="32"
-                                              class="rounded-circle">
-                                      </a>
-                                      <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                                          <li><a class="dropdown-item" href="#">마이페이지</a></li>
-                                          <li><a class="dropdown-item" href="#">로그아웃</a></li>
-                                      </ul>
-                                  </div>
-                              </c:if>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </nav>
-      </div>
-  </header>
-<!--바디-->
-
+                      <ul class="dropdown-menu text-small"
+                         aria-labelledby="dropdownUser1">
+                         <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                         <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                         <li><hr class="dropdown-divider"></li>
+                         <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+                         <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                      </ul>
+                   </div>
+                </c:if> 
+                <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
+                   <div class="dropdown text-end">
+                      <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                      <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                      </a>
+                      <ul class="dropdown-menu text-small"
+                         aria-labelledby="dropdownUser1">
+                         <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                         <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                         <li><hr class="dropdown-divider"></li>
+                         <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                      </ul>
+                   </div>
+                </c:if> 
+                   </div>
+                </div>
+             </div>
+          </div>
+       </nav>
+    </div>
+ </header>
 <form id="signupForm" action="/signup/signup" method="post" enctype="multipart/form-data">
-<div class="container signupBox">
-    <div class="row">
-        <div class="col"><h1>회원 가입</h1></div>
-    </div>
-    <div class="row circleLine justify-content-center">
-        <div class="col-1 circle">
-          <span id="signup-1">1</span>
-        </div>
-        <div class="col-3">
-          <div class="circleLine-line"></div>   
-        </div>
-        <div class="col-1 circle" >
-          <span id="signup-2">2</span>
-        </div>
-        <div class="col-3">
-            <div class="circleLine-line"></div>   
-        </div>
-        <div class="col-1 circle" >
-          <span>3</span>
-        </div>
-    </div>
-    <div class="row circleLine-text justify-content-center">
-        <div class="col-2">
-            <span class="circelLine-text-left">회원 정보 입력</span>
-        </div>
-        <div class="col-5">
-            <span id="circelLine-text-middle">회원 프로필 입력</span>
-        </div>
-        <div class="col-2">
-            <span class="circelLine-text-right">회원가입 완료</span>
-        </div>
-    </div>
-<!-- info 영역-->
-    <div id="userInfoBox">
-        <div class="row mt-5">
-            <div class="col-md-3">
-                <p>이름</p>
-            </div>
-            <div class="col-md-7">
-                <input type="text" id="user_name" name="user_name" class="form-control">
-            </div>
-            <div class="col-2"></div>
-        </div>
-         <div class="row">
-        	<div class="col-md-3">
-        	</div>
-        	<div class="col-md-7 text-align-left-col" id="name-col" >
-        	
-        	</div>
-        	<div class="col-2 text-align-left-col"></div>
-        </div>
-        <div class="row emailRow" >
-            <div class="col-md-3">
-                <p>이메일</p>
-            </div>
-            <div class="col-md-3 pr-0">
-                <input type="text" id="email-id" name="email" class="form-control">
-               	<span style="color: black; font-size: 15px;">@</span>
-            </div>
-            <div class="col-md-2" style="text-align: left">
-            	<div class="row">
-	                <select name="email-domain-select" id="email-domain-select" class="form-control">
-	                    <option value="1" selected>선택해주세요</option>
-	                    <option value='naver.com'>naver.com</option>
-	                    <option value='gmail.com'>gmail.com</option>
-	                    <option value='nate.com'>nate.com</option>
-	                    <option value='hanmail.net'>hanmail.net</option>
-	                    <option value='yahoo.co.kr'>yahoo.co.kr</option>
-	                    <option value='hotmail.com'>hotmail.com</option>
-	                    <option value='empal.com'>empal.com</option>
-	                    <option value='paran.com'>paran.com</option>
-	                    <option value='lycos.co.kr'>lycos.co.kr</option>
-	                    <option value='99'>직접입력</option>
-	                </select>
-                </div>
-                <div class="email-domain-row mt-1">
-                	<div class="col-md-10 p-0">
-                		<input type="text" id="email-domain" name="email-domain" class="form-control m-0 p-1" value="1">
-                		<input type="hidden" id="user_email" name="user_email" />
-                	</div>
-                	<div class="col-md-2 d-flex justify-items-center text-center">
-                		<i id="email-btn" class="fa-solid fa-angle-up m-auto" style="font-size:20px;"></i>
-                	</div>
-                </div>
-            </div>
-            <div class="col-md-2">
-            	<div class="row">
-            		<div class="col">
-            			<button type="button" class="btn btn-secondary" id="emailCheck">중복확인</button>
-            		</div>
-            	</div>
-            </div>
-            <div class="col-2"></div>
-            <div id="emailCheckBox">
-                <div class="row">
-                    <div class="col-md-3">
-                        <p>이메일 인증</p>
-                    </div>
-                    <div class="col-md-5">
-                        <input type="text" id="authNum" name="authNum" class="form-control">
-                    </div>
-                    <div class="col-md-2">
-                        <button type="button" class="btn btn-secondary" id="certificationBtn">인증번호 확인</button>
-                    </div>
-                    <div class="col-2"></div>
-                </div>
-            </div>
-        </div>
-        <div class="row"  >
-            <div class="col-md-3">
-                <p>비밀번호</p>
-            </div>
-            <div class="col-md-7">
-                <input type="password" id="user_pw" name="user_pw" class="form-control">
-            </div>
-            <div class="col-md-2 p-0 text-align-left-col">
-            </div>
-        </div>
-        <div class="row">
-        	<div class="col-md-3">
-        	</div>
-        	<div class="col-md-7 text-align-left-col" >
-        		<span class="condition">
-            		*한글, 영어, 숫자, !, @, #, $을 사용하여 최소 8, 최대 20자리까지 설정해주세요.
-            	</span>
-        	</div>
-        	<div class="col-2 text-align-left-col"></div>
-        </div>
-         <div class="row">
-        	<div class="col-md-3">
-        	</div>
-        	<div class="col-md-7 text-align-left-col" id="regex-col">
-        	
-        	</div>
-        	<div class="col-2 text-align-left-col"></div>
-        </div>
-        <div class="row" >
-            <div class="col-md-3">
-                <p>비밀번호 확인</p>
-            </div>
-            <div class="col-md-7" style="text-align: left;" >
-                <input type="password" id="pwCheck" name="pwCheck" class="form-control">
-            </div>
-            <div class="col-2"></div>
-        </div>
-        <div class="row">
-        	<div class="col-md-3">
-        	</div>
-        	<div class="col-md-7 text-align-left-col" id="check-col" >
-        	
-        	</div>
-        	<div class="col-2 text-align-left-col"></div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <p>닉네임</p>
-            </div>
-            <div class="col-md-5">
-                <input type="text" id="user_nickname" name="user_nickname" class="form-control">
-            </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-secondary" id="nicknameCheck">중복확인</button>
-            </div>
-            <div class="col-2"></div>
-        </div>
-        <div class="row">
-        	<div class="col-md-3">
-        	</div>
-        	<div class="col-md-7 text-align-left-col" >
-        		<span class="condition">
-            		*한글, 영어, 숫자을 사용하여 최소 2, 최대 12자리까지 설정해주세요.
-            	</span>
-        	</div>
-        	<div class="col-2 text-align-left-col"></div>
-        </div>
-        <div class="row">
-        	<div class="col-md-3">
-        	</div>
-        	<div class="col-md-7 text-align-left-col" id="nickname-col" >
-        	
-        	</div>
-        	<div class="col-2 text-align-left-col"></div>
-        </div>
-        <div class="row" >
-            <div class="col-md-3">
-                <p>생년월일</p>
-            </div>
-            <div class="col-md-9 d-flex justify-content start align-items-center">
-                <input type="text" id="year" name="year" class="form-control bthday" maxlength="4" required><label for="year">년</label>
-                <input type="text" id="month" name="month" class="form-control bthday" maxlength="2" placeholder="ex) 01" required><label for="month">월</label>
-                <input type="text" id="day" name="day" class="form-control bthday" maxlength="2" placeholder="ex) 01" required><label for="day">일</label>
-                <input type="hidden" id="user_bd" name="user_bd" class="form-control"></intput>
-            </div>
-        </div> 
-        <div class="row" >
-            <div class="col-md-3">
-                <p>휴대전화</p>
-            </div>
-            <div class="col-md-5" style="text-align: left;">
-                <select name="phone1" id="phone1" class="form-control" required>
-                    <option value="010" selected>010</option>
-                    <option value="011">011</option>
-                    <option value="016">016</option>
-                    <option value="017">017</option>
-                    <option value="018">018</option>
-                    <option value="019">019</option>
-                </select>
-                <input type="text" id="phone2" name="phone2" class="form-control" maxlength="4" required>
-                <input type="text" id="phone3" name="phone3" class="form-control" maxlength="4" required>
-                <input type="hidden" id="user_phone" name="user_phone">
-            </div>
-            <div class="col-md-2">
-            	<button type="button" id="checkPhone" class="btn btn-secondary" >중복확인</button>
-            </div>
-            <div class="col-2"></div>
-        </div>
-        <div class="row d-flex justify-items-center" >
-            <div class="col-md-3">
-                <p>성별</p>
-            </div>
-            <div class="col-md-7 pt-1">
-                <input class="user_gender" type="radio" id="men" name="user_gender" value="남자" required>
-                <label for="men">남자</label>
-                <input class="user_gender" type="radio" id="women" name="user_gender" value="여자" required>
-                <label for="women">여자</label>
-            </div>
-            <div class="col-2"></div>
-        </div>
-        <div class="row">
-        	<div class="col">
-        		<span class="condition" style="font-size: 20px;">*모든 정보를 입력해주세요.</span>
-        	</div>
-        </div>
-    </div>
-
-    <div id="userInfoBox-profile">
-        <div class="row" style="text-align: center;">
-            <div class="col">
-                <div class="profile_imgContainer">
-					<img id="p_img" name="p_img" src="/resources/images/profile.jpg"alt="오류가 발생했습니다.">
+	<div class="container signupBox">
+		<div class="row">
+			<div class="col"><h1>회원 가입</h1></div>
+		</div>
+		<div class="row circleLine justify-content-center">
+			<div class="col-1 circle">
+			  <span id="signup-1">1</span>
+			</div>
+			<div class="col-3">
+			  <div class="circleLine-line"></div>   
+			</div>
+			<div class="col-1 circle" >
+			  <span id="signup-2">2</span>
+			</div>
+			<div class="col-3">
+				<div class="circleLine-line"></div>   
+			</div>
+			<div class="col-1 circle" >
+			  <span>3</span>
+			</div>
+		</div>
+		<div class="row circleLine-text justify-content-center">
+			<div class="col-2">
+				<span class="circelLine-text-left">회원 정보 입력</span>
+			</div>
+			<div class="col-5">
+				<span id="circelLine-text-middle">회원 프로필 입력</span>
+			</div>
+			<div class="col-2">
+				<span class="circelLine-text-right">회원가입 완료</span>
+			</div>
+		</div>
+	<!-- info 영역-->
+		<div id="userInfoBox">
+			<div class="row mt-5">
+				<div class="col-md-3">
+					<p>이름</p>
 				</div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <p id="profileSetting">프로필 설정</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col">
-                <input type="file" class="form-control" id="user_image" name="file" accept="image/jpeg, image/png">
-                <button type="button" id="defaultImgBtn" class="btn btn-secondary">기본 이미지설정</button>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <p style="margin-top: 50px;">자기소개</p>
-            </div>
-            <div class="col-7" style="height: 120px;">
-                <textarea class="form-control" name="user_intro" id="user_intro" maxlength="500" placeholder="500자 이내로 작성해주세요. 작성하지 않아도 가입은 가능합니다."></textarea>
-            </div>
-            <div class="col-2"></div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-            </div>
-            <div class="col-7" id="user_intro_cnt">
-            	0/500
-            </div>
-            <div class="col-2"></div>
-        </div>
-        <div class="row">
-            <div class="col-3">
-                <p  style="margin-top: 10px;">직업</p>
-            </div>
-            <div class="col-8" style="text-align: left;">
-                <input type="radio" class="user_job" id="student" name="user_job" value="학생"><label for="student">학생</label>
-                <input type="radio" class="user_job" id="employee" name="user_job" value="회사원"><label for="employee">회사원</label>
-                <input type="radio" class="user_job" id="unemployed" name="user_job" value="무직"><label for="unemployed">무직</label>
-                <input type="radio" class="user_job" id="other" name="user_job" value="기타"><label for="other">기타</label>
-            </div>
-            <div class="col-1"></div>
-        </div>
-        <div class="row checkBox" >
-            <div class="col-3">
-                <p >좋아하는 취미<br>(최대 3개 선택)</p>
-            </div>
-            <div class="col-9">
-                    <div class="row" >
-                        <div class="col">
-                            <input type="checkbox"  id="travel" name="hobby" class="checkbox" value="아웃도어/여행"><label for="travel">아웃도어/여행</label>
-                            <input type="checkbox"  id="sports" name="hobby" class="checkbox" value="운동/스포츠"><label for="sports">운동/스포츠</label>
-                            <input type="checkbox"  id="fgn-language" name="hobby" class="checkbox" value="외국어/언어"><label for="sports">외국어/언어</label>
-                            <input type="checkbox"  id="pets" name="hobby" class="checkbox" value="반려동물"><label for="pets">반려동물</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="checkbox"  id="music" name="hobby" class="checkbox" value="음악/악기"><label for="music">음악/악기</label>
-                            <input type="checkbox"  id="making" name="hobby" class="checkbox" value="공예/만들기"><label for="making">공예/만들기</label>
-                            <input type="checkbox"  id="dance" name="hobby" class="checkbox" value="댄스/무용"><label for="dance">댄스/무용</label>
-                            <input type="checkbox"  id="reading" name="hobby" class="checkbox" value="인문학/책/글"><label for="reading">인문학/책/글</label>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            <input type="checkbox"  id="photographic" name="hobby" class="checkbox" value="사진/영상"><label for="photographic">사진/영상</label>
-                            <input type="checkbox"  id="game" name="hobby" class="checkbox" value="게임/오락"><label for="game">게임/오락</label>
-                            <input type="checkbox"  id="cooking" name="hobby" class="checkbox" value="요리/제조"><label for="cooking">요리/제조</label>
-                            <input type="checkbox"  id="culture" name="hobby" class="checkbox" value="문화/공연/축제"><label for="culture">문화/공연/축제</label>
-                        </div>
-                    </div>
-            </div>
-        </div>
-        <div class="row checkBox" >
-            <div class="col-3">
-                <p style="margin-top: 10px">선호지역<br>(최대 3개 선택)</p>
-            </div>
-            <div class="col-9">
-                <div class="row" >
-                    <div class="col">
-                        <input type="checkbox" id="seoul" name="area" class="checkbox" value="서울"><label for="seoul">서울</label>
-                        <input type="checkbox" id="incheon" name="area" class="checkbox" value="인천"><label for="incheon">인천</label>
-                        <input type="checkbox" id="gyeonggi-do" name="area" class="checkbox" value="경기도"><label for="gyeonggi-do">경기도</label>
-                        <input type="checkbox" id="gangwon-do" name="area" class="checkbox" value="강원도"><label for="gyeonggi-do">강원도</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <input type="checkbox" id="chungcheong-do" name="area" class="checkbox" value="충청도"><label for="chungcheong-do">충청도</label>
-                        <input type="checkbox" id="gyeongsang-do" name="area" class="checkbox" value="경상도"><label for="gyeongsang-do">경상도</label>
-                        <input type="checkbox" id="jeolla-do" name="area" class="checkbox" value="전라도"><label for="jeolla-do">전라도</label>
-                        <input type="checkbox" id="jeju-do" name="area" class="checkbox" value="제주도"><label for="jeju-do">제주도</label>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row btnRow">
-        <div class="col">
-            <button type="button" id="backPageBtn" class="btn btn-secondary">취소</button>
-            <button type="button" id="nextBtn" class="btn btn-primary">확인</button>
-        </div>
-    </div>
-    <div class="row btnRow">
-        <div class="col">
-            <button type="button" id="singupBackBtn" class="btn btn-secondary">뒤로가기</button>
-            <button type="button" id="completeBtn" class="btn btn-primary">가입하기</button>
-        </div>
-    </div>
-</div>
-</form>
-
-<footer class="footer mt-5">
-	<div class="row">
-		<div class="col-lg-3 footer-imgBox">
-			<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+				<div class="col-md-7">
+					<input type="text" id="user_name" name="user_name" class="form-control">
+				</div>
+				<div class="col-2"></div>
+			</div>
+			 <div class="row">
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-7 text-align-left-col" id="name-col" >
+				
+				</div>
+				<div class="col-2 text-align-left-col"></div>
+			</div>
+			<div class="row emailRow" >
+				<div class="col-md-3">
+					<p>이메일</p>
+				</div>
+				<div class="col-md-3 pr-0">
+					<input type="text" id="email-id" name="email" class="form-control">
+					   <span style="color: black; font-size: 15px;">@</span>
+				</div>
+				<div class="col-md-2" style="text-align: left">
+					<div class="row">
+						<select name="email-domain-select" id="email-domain-select" class="form-control">
+							<option value="1" selected>선택해주세요</option>
+							<option value='naver.com'>naver.com</option>
+							<option value='gmail.com'>gmail.com</option>
+							<option value='nate.com'>nate.com</option>
+							<option value='hanmail.net'>hanmail.net</option>
+							<option value='yahoo.co.kr'>yahoo.co.kr</option>
+							<option value='hotmail.com'>hotmail.com</option>
+							<option value='empal.com'>empal.com</option>
+							<option value='paran.com'>paran.com</option>
+							<option value='lycos.co.kr'>lycos.co.kr</option>
+							<option value='99'>직접입력</option>
+						</select>
+					</div>
+					<div class="email-domain-row mt-1">
+						<div class="col-md-10 p-0">
+							<input type="text" id="email-domain" name="email-domain" class="form-control m-0 p-1" value="1">
+							<input type="hidden" id="user_email" name="user_email" />
+						</div>
+						<div class="col-md-2 d-flex justify-items-center text-center">
+							<i id="email-btn" class="fa-solid fa-angle-up m-auto" style="font-size:20px;"></i>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="row">
+						<div class="col">
+							<button type="button" class="btn btn-secondary" id="emailCheck">중복확인</button>
+						</div>
+					</div>
+				</div>
+				<div class="col-2"></div>
+				<div id="emailCheckBox">
+					<div class="row">
+						<div class="col-md-3">
+							<p>이메일 인증</p>
+						</div>
+						<div class="col-md-5">
+							<input type="text" id="authNum" name="authNum" class="form-control">
+						</div>
+						<div class="col-md-2">
+							<button type="button" class="btn btn-secondary" id="certificationBtn">인증번호 확인</button>
+						</div>
+						<div class="col-2"></div>
+					</div>
+				</div>
+			</div>
+			<div class="row"  >
+				<div class="col-md-3">
+					<p>비밀번호</p>
+				</div>
+				<div class="col-md-7">
+					<input type="password" id="user_pw" name="user_pw" class="form-control">
+				</div>
+				<div class="col-md-2 p-0 text-align-left-col">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-7 text-align-left-col" >
+					<span class="condition">
+						*한글, 영어, 숫자, !, @, #, $을 사용하여 최소 8, 최대 20자리까지 설정해주세요.
+					</span>
+				</div>
+				<div class="col-2 text-align-left-col"></div>
+			</div>
+			 <div class="row">
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-7 text-align-left-col" id="regex-col">
+				
+				</div>
+				<div class="col-2 text-align-left-col"></div>
+			</div>
+			<div class="row" >
+				<div class="col-md-3">
+					<p>비밀번호 확인</p>
+				</div>
+				<div class="col-md-7" style="text-align: left;" >
+					<input type="password" id="pwCheck" name="pwCheck" class="form-control">
+				</div>
+				<div class="col-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-7 text-align-left-col" id="check-col" >
+				
+				</div>
+				<div class="col-2 text-align-left-col"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+					<p>닉네임</p>
+				</div>
+				<div class="col-md-5">
+					<input type="text" id="user_nickname" name="user_nickname" class="form-control">
+				</div>
+				<div class="col-md-2">
+					<button type="button" class="btn btn-secondary" id="nicknameCheck">중복확인</button>
+				</div>
+				<div class="col-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-7 text-align-left-col" >
+					<span class="condition">
+						*한글, 영어, 숫자을 사용하여 최소 2, 최대 12자리까지 설정해주세요.
+					</span>
+				</div>
+				<div class="col-2 text-align-left-col"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-3">
+				</div>
+				<div class="col-md-7 text-align-left-col" id="nickname-col" >
+				
+				</div>
+				<div class="col-2 text-align-left-col"></div>
+			</div>
+			<div class="row" >
+				<div class="col-md-3">
+					<p>생년월일</p>
+				</div>
+				<div class="col-md-9 d-flex justify-content start align-items-center">
+					<input type="text" id="year" name="year" class="form-control bthday" maxlength="4" required><label for="year">년</label>
+					<input type="text" id="month" name="month" class="form-control bthday" maxlength="2" placeholder="ex) 01" required><label for="month">월</label>
+					<input type="text" id="day" name="day" class="form-control bthday" maxlength="2" placeholder="ex) 01" required><label for="day">일</label>
+					<input type="hidden" id="user_bd" name="user_bd" class="form-control"></intput>
+				</div>
+			</div> 
+			<div class="row" >
+				<div class="col-md-3">
+					<p>휴대전화</p>
+				</div>
+				<div class="col-md-5" style="text-align: left;">
+					<select name="phone1" id="phone1" class="form-control" required>
+						<option value="010" selected>010</option>
+						<option value="011">011</option>
+						<option value="016">016</option>
+						<option value="017">017</option>
+						<option value="018">018</option>
+						<option value="019">019</option>
+					</select>
+					<input type="text" id="phone2" name="phone2" class="form-control" maxlength="4" required>
+					<input type="text" id="phone3" name="phone3" class="form-control" maxlength="4" required>
+					<input type="hidden" id="user_phone" name="user_phone">
+				</div>
+				<div class="col-md-2">
+					<button type="button" id="checkPhone" class="btn btn-secondary" >중복확인</button>
+				</div>
+				<div class="col-2"></div>
+			</div>
+			<div class="row d-flex justify-items-center" >
+				<div class="col-md-3">
+					<p>성별</p>
+				</div>
+				<div class="col-md-7 pt-1">
+					<input class="user_gender" type="radio" id="men" name="user_gender" value="남자" required>
+					<label for="men">남자</label>
+					<input class="user_gender" type="radio" id="women" name="user_gender" value="여자" required>
+					<label for="women">여자</label>
+				</div>
+				<div class="col-2"></div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<span class="condition" style="font-size: 20px;">*모든 정보를 입력해주세요.</span>
+				</div>
+			</div>
 		</div>
-		<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-			<ul class="list-inline mb-2">
-				<li class="list-inline-item"><a href="#!">공지사항</a></li>
-				<li class="list-inline-item">⋅</li>
-				<c:choose>
-					<c:when test="${not empty loginSession}">
-						<li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-					</c:otherwise>
-				</c:choose>
-				<li class="list-inline-item">⋅</li>
-				<li class="list-inline-item">
-					<c:choose>
-						<c:when test="${not empty loginSession}">
-							<a href="/group/toCreateGroup">모임 만들기</a>
-						</c:when>
-						<c:otherwise>
-							<a href="/login/toLogin">모임 만들기</a>
-						</c:otherwise>
-					</c:choose>
-				</li>
-				<li class="list-inline-item">⋅</li>
-				<li class="list-inline-item"><a href="privacy"
-					style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-			</ul>
-			<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-				개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-			<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-				57 이레빌딩</p>
-			<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-				2022. All Rights Reserved.</p>
+	
+		<div id="userInfoBox-profile">
+			<div class="row" style="text-align: center;">
+				<div class="col">
+					<div class="profile_imgContainer">
+						<img id="p_img" name="p_img" src="/resources/images/profile.jpg"alt="오류가 발생했습니다.">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<p id="profileSetting">프로필 설정</p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<input type="file" class="form-control" id="user_image" name="file" accept="image/jpeg, image/png">
+					<button type="button" id="defaultImgBtn" class="btn btn-secondary">기본 이미지설정</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<p style="margin-top: 50px;">자기소개</p>
+				</div>
+				<div class="col-7" style="height: 120px;">
+					<textarea class="form-control" name="user_intro" id="user_intro" maxlength="500" placeholder="500자 이내로 작성해주세요. 작성하지 않아도 가입은 가능합니다."></textarea>
+				</div>
+				<div class="col-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-3">
+				</div>
+				<div class="col-7" id="user_intro_cnt">
+					0/500
+				</div>
+				<div class="col-2"></div>
+			</div>
+			<div class="row">
+				<div class="col-3">
+					<p  style="margin-top: 10px;">직업</p>
+				</div>
+				<div class="col-8" style="text-align: left;">
+					<input type="radio" class="user_job" id="student" name="user_job" value="학생"><label for="student">학생</label>
+					<input type="radio" class="user_job" id="employee" name="user_job" value="회사원"><label for="employee">회사원</label>
+					<input type="radio" class="user_job" id="unemployed" name="user_job" value="무직"><label for="unemployed">무직</label>
+					<input type="radio" class="user_job" id="other" name="user_job" value="기타"><label for="other">기타</label>
+				</div>
+				<div class="col-1"></div>
+			</div>
+			<div class="row checkBox" >
+				<div class="col-3">
+					<p >좋아하는 취미<br>(최대 3개 선택)</p>
+				</div>
+				<div class="col-9">
+						<div class="row" >
+							<div class="col">
+								<input type="checkbox"  id="travel" name="hobby" class="checkbox" value="아웃도어/여행"><label for="travel">아웃도어/여행</label>
+								<input type="checkbox"  id="sports" name="hobby" class="checkbox" value="운동/스포츠"><label for="sports">운동/스포츠</label>
+								<input type="checkbox"  id="fgn-language" name="hobby" class="checkbox" value="외국어/언어"><label for="sports">외국어/언어</label>
+								<input type="checkbox"  id="pets" name="hobby" class="checkbox" value="반려동물"><label for="pets">반려동물</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<input type="checkbox"  id="music" name="hobby" class="checkbox" value="음악/악기"><label for="music">음악/악기</label>
+								<input type="checkbox"  id="making" name="hobby" class="checkbox" value="공예/만들기"><label for="making">공예/만들기</label>
+								<input type="checkbox"  id="dance" name="hobby" class="checkbox" value="댄스/무용"><label for="dance">댄스/무용</label>
+								<input type="checkbox"  id="reading" name="hobby" class="checkbox" value="인문학/책/글"><label for="reading">인문학/책/글</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col">
+								<input type="checkbox"  id="photographic" name="hobby" class="checkbox" value="사진/영상"><label for="photographic">사진/영상</label>
+								<input type="checkbox"  id="game" name="hobby" class="checkbox" value="게임/오락"><label for="game">게임/오락</label>
+								<input type="checkbox"  id="cooking" name="hobby" class="checkbox" value="요리/제조"><label for="cooking">요리/제조</label>
+								<input type="checkbox"  id="culture" name="hobby" class="checkbox" value="문화/공연/축제"><label for="culture">문화/공연/축제</label>
+							</div>
+						</div>
+				</div>
+			</div>
+			<div class="row checkBox" >
+				<div class="col-3">
+					<p style="margin-top: 10px">선호지역<br>(최대 3개 선택)</p>
+				</div>
+				<div class="col-9">
+					<div class="row" >
+						<div class="col">
+							<input type="checkbox" id="seoul" name="area" class="checkbox" value="서울"><label for="seoul">서울</label>
+							<input type="checkbox" id="incheon" name="area" class="checkbox" value="인천"><label for="incheon">인천</label>
+							<input type="checkbox" id="gyeonggi-do" name="area" class="checkbox" value="경기도"><label for="gyeonggi-do">경기도</label>
+							<input type="checkbox" id="gangwon-do" name="area" class="checkbox" value="강원도"><label for="gangwon-do">강원도</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<input type="checkbox" id="chungcheong-do" name="area" class="checkbox" value="충청도"><label for="chungcheong-do">충청도</label>
+							<input type="checkbox" id="gyeongsang-do" name="area" class="checkbox" value="경상도"><label for="gyeongsang-do">경상도</label>
+							<input type="checkbox" id="jeolla-do" name="area" class="checkbox" value="전라도"><label for="jeolla-do">전라도</label>
+							<input type="checkbox" id="jeju-do" name="area" class="checkbox" value="제주도"><label for="jeju-do">제주도</label>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
-		<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-			<ul class="list-inline mb-0">
-				<li class="list-inline-item me-4"><a
-					href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-				<li class="list-inline-item me-4"><a
-					href="https://twitter.com/?lang=ko"><i
-						class="bi-twitter fs-3"></i></a></li>
-				<li class="list-inline-item"><a
-					href="https://www.instagram.com/"><i
-						class="bi-instagram fs-3"></i></a></li>
-			</ul>
+		<div class="row btnRow">
+			<div class="col">
+				<button type="button" id="backPageBtn" class="btn btn-secondary">취소</button>
+				<button type="button" id="nextBtn" class="btn btn-primary">확인</button>
+			</div>
+		</div>
+		<div class="row btnRow">
+			<div class="col">
+				<button type="button" id="singupBackBtn" class="btn btn-secondary">뒤로가기</button>
+				<button type="button" id="completeBtn" class="btn btn-primary">가입하기</button>
+			</div>
 		</div>
 	</div>
-</footer>
+	</form>
+
+ <!-- Footer-->
+ <footer class="footer">
+	 <div class="container">
+		 <div class="row">
+			 <div class="col-lg-3 footer-imgBox">
+				 <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+			 </div>
+			 <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+				 <ul class="list-inline mb-2">
+					 <li class="list-inline-item"><a href="#!">공지사항</a></li>
+					 <li class="list-inline-item">⋅</li>
+					 <c:choose>
+						 <c:when test="${not empty loginSession}">
+							 <li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
+							 <li class="list-inline-item">⋅</li>
+							 <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+						 </c:when>
+						 <c:otherwise>
+							 <li class="list-inline-item"><a href="/signup/toSignup">회원가입</a></li>
+							 <li class="list-inline-item">⋅</li>
+							 <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+						 </c:otherwise>
+					 </c:choose>
+					 <li class="list-inline-item">⋅</li>
+					 <li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a></li>
+					 <li class="list-inline-item">⋅</li>
+					 <li class="list-inline-item"><a href="#!"
+						 style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+				 </ul>
+				 <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+					 개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+				 <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+					 57 이레빌딩</p>
+				 <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+					 2022. All Rights Reserved.</p>
+			 </div>
+			 <div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+				 <ul class="list-inline mb-0">
+					 <li class="list-inline-item me-4"><a
+						 href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+					 <li class="list-inline-item me-4"><a
+						 href="https://twitter.com/?lang=ko"><i
+							 class="bi-twitter fs-3"></i></a></li>
+					 <li class="list-inline-item"><a
+						 href="https://www.instagram.com/"><i
+							 class="bi-instagram fs-3"></i></a></li>
+				 </ul>
+			 </div>
+		 </div>
+	 </div>
+ </footer>
 </body>
 </html>

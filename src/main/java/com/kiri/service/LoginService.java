@@ -3,6 +3,8 @@ package com.kiri.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,6 +24,29 @@ public class LoginService {
 		map.put("user_pw", pw);
 		return dao.login(map);
 	}
+	
+	public String loginResult(MemberDTO dto, String type, HttpSession session) throws Exception{  //로그인결과 feat.조용진
+		System.out.println("type"+type);
+		if("N".equals(dto.getUser_blacklist()) && "N".equals(dto.getUser_delete())) {
+			dto.setUser_pw(null);
+			session.setAttribute("loginType", type);
+			session.setAttribute("loginSession", dto);
+			
+			loginLogSuccess(dto.getUser_email());
+			return "general";
+			
+		}else if("Y".equals(dto.getUser_blacklist())){
+			return "blackList";
+			
+		}else if("Y".equals(dto.getUser_delete())){
+			return "withdrawal";
+			
+		}else {
+			return "error";
+		}
+	}
+	
+	
 	public MemberDTO socialLogin(String id) throws Exception{  //소셜 로그인 feat.조용진
 		return dao.socialLogin(id);
 	}

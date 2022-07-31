@@ -21,181 +21,228 @@
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Black+Han+Sans&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style>
-* {
-	box-sizing: border-box;
-}
-
-#mainText {
-	font-family: "양진체";
-}
-/* benu */
-/* header 반응형 */
-@media ( max-width : 768px) {
-	#navLogo {
-		display: none;
+ 	* {
+     box-sizing: border-box;
+     font-family: 'InfinitySans-RegularA1';
+	 }
+	
+	 /* navi bar */
+	 /* header 반응형 */
+	 @media (max-width : 768px) {
+	     #navLogo {
+	         display: none;
+	     }
+	
+	     #myPageIcon {
+	         display: none;
+	     }
+	
+	     #cartIcon {
+	         display: none;
+	     }
+	
+	     #menu {
+	         display: none;
+	     }
+	 }
+	
+	 /* header */
+	 #navLogo {
+	     width: 150px;
+	     height: 100px;
+	 }
+	
+	 #logoImgs {
+	     width: 100%;
+	     height: 100%;
+	 }
+	
+	 @media (min-width : 768px) {
+	     #navibar {
+	         display: none;
+	     }
+	 }
+	
+	
+	 /* header 반응형 끝 */
+	 #logoImg {
+	     width: 50%;
+	 }
+	
+	 /* 맨 위 프로필+게시글 수 부분 */
+	 .topHeader {
+	     background-color: #e7f3fad0;
+	     width: 100%;
+	     padding : 30px;
+	 }
+	 
+	 .profiles{
+	     background-color: #ffffff8e;
+	     padding : 35px;
+	     height: max-content;
+	     border-radius:20px;
+	 }
+	.profileTitle {
+		position: relative;
 	}
-	#myPageIcon {
-		display: none;
+	
+	.line {
+		border: none;
+		background-color: rgb(102, 154, 209, 0.5);
+		margin-top: 10px;
+		width: 180px;
+		position: absolute;
+		top: 16px;
+		height: 20px;
+		box-shadow: 3px 2px 2px rgb(25, 104, 184);
 	}
-	#cartIcon {
-		display: none;
+	
+	
+	h1 {
+		margin: 0;
+		font-weight: 600;
+		z-index: 9999;
 	}
-	#menu {
-		display: none;
-	}
-}
-
-/* header */
-#navLogo {
-	width: 150px;
-	height: 100px;
-}
-
-#logoImgs {
-	width: 100%;
-	height: 100%;
-}
-
-@media ( min-width : 768px) {
-	#navibar {
-		display: none;
-	}
-}
-
-/* header 반응형 끝 */
-#logoImg {
-	width: 50%;
-}
-
-.header {
-	background-color: #d2e3ec;
-	justify-content: end;
-	width: 100%;
-}
-
-h2 {
-	margin-top: 100px;
-}
-
-.line {
-	border: 2px solid rgb(57, 88, 122);
-	margin-top: 10px;
-	width: 180px;
-	box-shadow: 3px 2px 2px rgb(25, 104, 184);
-}
-/* header 부분 */
-.header {
-	background-color: #d2e3ec;
-	justify-content: start;
-	width: 100%;
-}
-
-.profile {
-	margin: auto;
-}
-
-#profile_image {
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
-}
-
-#profilePic {
-	border: 0.1rem solid black;
-	margin: auto;
-	width: 200px;
-	height: 200px;
-	border-radius: 50%;
-	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
-}
-
-#profilePic:hover {
-	transition: 0.8s ease-in;
-	transform: scale(1.1);
-}
-
-#profilePic:not(:hover) {
-	transition: 0.8s ease-out;
-}
-
-#profileName {
-	font-size: 1.5em;
-}
-
-hr {
-	margin-top: 80px;
-}
-/* body */
-.pagination {
-	justify-content: center;
-}
-
-#memberDelete {
-	cursor: pointer;
-}
-
-.table { 
-	--bs-table-striped-bg: rgba(23, 109, 167, 0.05);
-}
-
-.Board {
-	cursor: pointer;
-}
-.genal, .meeting{
-	margin-top: 20px;
-	align-items: center;
-}
-.genal span,.meeting span{
-	cursor:pointer;
-}
-/*풋터 영역*/
-.footerBox {
-   height: 0px;
-}
-
-footer.footer {
-   padding-top: 2rem;
-   padding-bottom: 2rem;
-   background-color: #ffffff;
-}
-
-.footer a {
-   text-decoration: none;
-   color: black;
-   font-weight: 40px;
-   font-weight: bold;
-}
-
-.footer-imgBox>img {
-   width: 100%;
-   height: 100%;
-}
-
-/* 눈누 폰트 */
+	 .profile {
+	     margin: auto;
+	 }
+	 
+	 #profile_image {
+	     width: 100%;
+	     height: 100%;
+	     border-radius: 50%;
+	 }
+	
+	 #profilePic {
+	     border: 0.1rem solid black;
+	     margin: auto;
+	     width: 230px;
+	     height: 230px;
+	     border-radius: 50%;
+	     box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
+	 }
+	
+	 #profilePic:hover {
+	     transition: 0.8s ease-in;
+	     transform: scale(1.1);
+	 }
+	
+	 #profilePic:not(:hover) {
+	     transition: 0.8s ease-out;
+	 }
+	
+	 #profileName {
+	     font-size: 1.5em;
+	     border-bottom: 3px solid navy;
+	     padding-bottom: 9px;
+	     margin-bottom: 12px;
+	     min-width: 350px;
+	     max-width: 460px;
+	     text-align: center;
+	 }
+	
+	 hr {
+	     margin-top: 20px;
+	     margin-bottom : 0;
+	 }
+	
+	 /* body */
+	 .contentBox{
+	 	padding : 50px;
+	 	margin-left : 20px;
+	 	margin-right : 20px;
+	 }
+	 .pagination {
+	     justify-content: center;
+	 }
+	
+	 #memberDelete {
+	     cursor: pointer;
+	 }
+	
+	 .table {
+	     --bs-table-striped-bg: rgba(23, 109, 167, 0.05);
+	 }
+	
+	 .Board {
+	     cursor: pointer;
+	 }
+	
+	 .genal,
+	 .meeting {
+	     margin-top: 20px;
+	     align-items: center;
+	 }
+	
+	 .genal span,
+	 .meeting span {
+	     cursor: pointer;
+	 }
+	 .contentBox{
+         padding : 50px;
+         margin-left : 20px;
+         margin-right : 20px;
+     }
+	
+	 /*풋터 영역*/
+	 .footerBox {
+	     height: 0px;
+	 }
+	
+	 footer.footer {
+	     padding-top: 2rem;
+	     padding-bottom: 2rem;
+	     background-color: #ffffff;
+	 }
+	
+	 .footer a {
+	     text-decoration: none;
+	     color: black;
+	     font-weight: 40px;
+	     font-weight: bold;
+	 }
+	
+	 .footer-imgBox>img {
+	     width: 100%;
+	     height: 100%;
+	 }
+	
+	 /* 눈누 폰트 */
 @font-face {
-	font-family: "OTWelcomeRA";
-	src:
-		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2")
-		format("woff2");
-	font-weight: normal;
-	font-style: normal;
+   font-family: 'MICEGothic Bold';
+   src:
+       url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+   font-weight: 700;
+   font-style: normal;
+}
+@font-face {
+   font-family: 'InfinitySans-RegularA1';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
 }
 
 @font-face {
-	font-family: "양진체";
-	src:
-		url("https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff")
-		format("woff");
-	font-weight: normal;
-	font-style: normal;
+   font-family: 'BMJUA';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
 }
 </style>
 </head>
 <body>
 	<!-- page menu -->
 	<!--네비바-->
-        <header class="mb-3 border-bottom">
+        <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -310,56 +357,64 @@ footer.footer {
          </nav>
       </div>
    </header>
-	<div class="container py-5">
 		<!-- header 부분 -->
-		<div class="row header">
-			<div class="col-md-6 mt-3 mb-4">
-				<div id="profilePic">
-					<c:choose>
-						<c:when test="${empty memberdto.user_image}">
-							<img src="/resources/images/default_profile.jpg"
-								id="profile_image">
-						</c:when>
-						<c:otherwise>
-							<img src="/profile/${memberdto.user_image}" id="profile_image">
-						</c:otherwise>
-					</c:choose>
+		<div class="row m-0 topHeader">
+            	<div class="row profileTitle mb-5 text-center justify-content-center" style="font-family: 'Mochiy Pop One', sans-serif;">
+					<h1 style="font-family: 'Do Hyeon', sans-serif;">내가 쓴 글</h1>
+					<div class="line"></div>
 				</div>
-			</div>
-			<div class="col-md-5 mt-4">
-				<div class="col-12 mt-3" id="profileName">
-					<strong>${memberdto.user_name}</strong> <span style="font-size: 15px">님</span>
-				</div>
-				<div class="col-12 mt-3" id="totalCount">
-					<i class="fa-solid fa-file-pen"></i> <span> 전체 게시글 : </span> <span>
-						${totalBoardCount}</span>
-				</div>
-				<div class="col-12 mt-3" id="boardCount">
-					<i class="fa-solid fa-file-pen"></i> <span> 일반 게시글 : </span> <span>${selectBoardCount}</span>
-				</div>
-				<div class="col-12 mt-3" id="roomCount">
-					<i class="fa-solid fa-file-pen"></i> <span> 모임 게시글 : </span> <span>
-						${selectGroupBoardCount}</span>
-				</div>
-			</div>
-		</div>
-		<hr />
-		<form id="searchForm">
+                <div class="col-md-6 mt-3 mb-4 d-flex justify-content-center">
+                    <div id="profilePic">
+                        <c:choose>
+                            <c:when test="${empty memberdto.user_image}">
+                                <img src="/resources/images/default_profile.jpg" id="profile_image">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="/profile/${memberdto.user_image}" id="profile_image">
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
+                <div class="col-md-5 profiles">
+                    <div class="col-12" id="profileName">
+                        <strong>${memberdto.user_nickname}</strong> 
+                        <span style="font-size: 15px">님</span>
+                    </div>
+                    <div class="col-12 p-2" id="totalCount">
+                        <i class="fa-solid fa-file-pen"></i> 
+                        <span> 전체 게시글 : </span> 
+                        <span>${totalBoardCount} 건</span>
+                    </div>
+                    <div class="col-12 p-2" id="boardCount">
+                        <i class="fa-solid fa-file-pen"></i> 
+                        <span> 일반 게시글 : </span> 
+                        <span>${selectBoardCount} 건</span>
+                    </div>
+                    <div class="col-12 p-2" id="roomCount">
+                        <i class="fa-solid fa-file-pen"></i> 
+                        <span> 모임 게시글 : </span> 
+                        <span>${selectGroupBoardCount} 건</span>
+                    </div>
+                </div>
+            </div>
+		<hr/>
+		<div class="contentBox">
+			<form id="searchForm">
 			<div class="row">	
-				<div class="col-12" style="display:flex; justify-content:end;">
+				<div class="col-12 mt-2" style="display:flex; justify-content:end;">
 					<input class="d-none" type="text" id="user_email" value="${memberdto.user_email}">
-					<select class="form-select title" aria-label="Default select example"
+					<select class="form-select title me-3" aria-label="Default select example"
 						name="boardNameCategory" style="width: 100px;">
 						<option value="normal">일반</option>
 						<option value="meeting">모임</option>
 					</select>
-					<select class="form-select" aria-label="Default select example"
+					<select class="form-select me-3" aria-label="Default select example"
 						name="category" id="category" style="width: 100px;">
 						<option value="board_all">전체</option>
 						<option value="board_title">제목</option>
 						<option value="board_content">내용</option>
 					</select>		
-					<input type="text" name="keyword" class="form-control keyword" placeholder="검색" style="width: 250px;">		
+					<input type="text" name="keyword" class="form-control keyword me-3" placeholder="검색" style="width: 250px;">		
 					<button type="button" class="btn btn-outline-secondary" id="searchBtn" style="width: 70px;">검색</button>
 				</div>
 			</div>	
@@ -499,6 +554,7 @@ footer.footer {
 				
 				 for (let i=startIdx; i < endIdx; i++) {
 			        	const dto = data[i];
+						console.log(dto.seq_board);
 			            let tr = $("<tr>");
 			            let td1 = $("<td>").append(type);
 			            let td2;
@@ -507,11 +563,15 @@ footer.footer {
 			            let td5;
 			            let td6;
 			            let a;
-			            let span = $("<span>");
+			            let span= $("<span>");
 			            if (type === "일반") {
 			                td2 = $("<td>");
 			                a = $("<a>");
-			                a.attr('href','/board/toMyDetailWrite?seq_board=' + dto.seq_board)
+			                a.attr('href','/board/toDetailView?seq_board=' + dto.seq_board);
+			                a.css({
+			                	"color":"black",
+			                	"text-decoration":"none",
+			                });
 			                a.append(dto.board_title);
 			                a.appendTo(td2);
 			                
@@ -532,13 +592,17 @@ footer.footer {
 			                span.addClass("text-center boardDelete");
 			                span.css("cursor", "pointer");
 			                span.on("click", function () {
-			                  boardDelete(this, "/admin/boardDelete", "seq_board");
+			                  boardDelete(this, "/mem/boardDelete", "seq_board");
 			                });
 			              } else if (type === "모임") {
 			            	  
 			             	td2 = $("<td>");
 			                a = $("<a>");
-			                a.attr('href','/group_board/toMyDetailWrite?seq_board=' + dto.seq_board)
+			                a.attr('href','/group_board/toDetailView?seq_group_board=' + dto.seq_group_board);
+			                a.css({
+			                	"color":"black",
+			                	"text-decoration":"none",
+			                });
 			                a.append(dto.title);
 			                a.appendTo(td2);
 			                
@@ -559,12 +623,12 @@ footer.footer {
 			                span.addClass("text-center boardGroupDelete");
 			                span.css("cursor", "pointer");
 			                span.on("click", function () {
-			                  boardDelete(this, "/admin/groupBoardDelete", "seq_groud_board");
+			                  boardDelete(this, "/mem/groupBoardDelete", "seq_groud_board");
 			                });
 			              }
 
 					
-					tr.append(td1, td2, td3, td4, td5, td6, td7);
+					tr.append(td1, td2, td3, td4, td5, td6);
 					tr.appendTo("tbody");
 				}
 			}
@@ -619,7 +683,7 @@ footer.footer {
 		}
 
 		</script>
-		<div class="row body py-3" style="border-top-width: 0px">
+		<div class="row body py-3" style="border-top-width: 0px;">
 			<table class="table table-striped memberTable text-center mt-3"
 				id="tableBox">
 				<thead>
@@ -635,7 +699,7 @@ footer.footer {
 					 <c:forEach items="${list}" var="selectBoardList">
 					 	<tr>
 					 		<td>일반</td>
-							<td><a href="/board/toWriteDetail?seq_board=${selectBoardList.seq_board}" style="color:black; text-decoration:none;"  onclick="window.open(this.href, '_blank', 'width=1000, height=800'); return false;">${selectBoardList.board_title}</a></td>
+							<td><a href="/board/toDetailView?seq_board=${selectBoardList.seq_board}" style="color:black; text-decoration:none;">${selectBoardList.board_title}</a></td>
 							<td>${selectBoardList.board_date}</td>
 							<td>${selectBoardList.board_count}</td>
 							<td id="icon"><span class="text-center boardDelete" style="cursor:pointer;"
@@ -681,7 +745,6 @@ footer.footer {
 			let seq_board = +$(target).parent().next().text();
 			let user_email = $("#user_email").val();
 			console.log("seq_board: ", seq_board)
-			console.log(typeof dataType)
 			Swal.fire({
 			  title: '정말 삭제하시겠습니까?',
 			  text: "다시 복구 할수 없습니다.!",
@@ -724,6 +787,7 @@ footer.footer {
 		});
 		
 		</script>
+	</div>
 		<!-- Footer-->
 		<footer class="footer mt-5">
 			<div class="row">
@@ -782,6 +846,5 @@ footer.footer {
 				</div>
 			</div>
 		</footer>
-	</div>
 </body>
 </html>

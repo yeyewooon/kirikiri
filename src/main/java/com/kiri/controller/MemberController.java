@@ -58,13 +58,11 @@ public class MemberController {
 		String user_nickname = ((MemberDTO)session.getAttribute("loginSession")).getUser_nickname();
 		
 		MemberDTO selectMember = service.selectMember(user_email);
-		Login_TypeDTO loginType = service.selectLoginType(user_email); 
 		List<HobbyDTO> selectHobbyList = service.selectHobbyList(user_email);
 		List<SiteDTO> selectSiteList = service.selectSiteList(user_email);
 		List<Map<String, Object>> selectGroupList = service.selectGroupList(user_email);
 		List<Map<String, Object>> selectWishList = service.selectWishList(user_email);
 		List<BoardDTO> selectBoardList = service.selectBoardList(user_email);
-		System.out.println("loginType : "+loginType);
 
 		// 생년월일 자르기
 		String date = selectMember.getUser_bd().substring(0, 10);
@@ -95,7 +93,6 @@ public class MemberController {
 		model.addAttribute("memberdto", selectMember);
 		model.addAttribute("hobbyList", selectHobbyList);
 		model.addAttribute("siteList", selectSiteList);
-		model.addAttribute("loginType",loginType);
 		model.addAttribute("selectGroupList", selectGroupList);
 		model.addAttribute("selectWishList", selectWishList);
 		model.addAttribute("selectBoardList", selectBoardList);
@@ -209,13 +206,22 @@ public class MemberController {
 
 	@RequestMapping(value = "/profileModify") // 개인정보 수정
 	public String profileModify(MemberDTO dto, String data_password) throws Exception {
+		System.out.println("data_password" + data_password);
+		System.out.println(dto.getUser_pw());
 		
-		if(dto.getUser_pw() == "") {
+		if(dto.getUser_pw()== null) {
 			dto.setUser_pw(data_password);
 		}else {
-			String Encryption_pw = ecp.getSHA512(dto.getUser_pw());
-			dto.setUser_pw(Encryption_pw);
+			if(dto.getUser_pw() == "") {
+				dto.setUser_pw(data_password);
+			}else {
+				String Encryption_pw = ecp.getSHA512(dto.getUser_pw());
+				dto.setUser_pw(Encryption_pw);				
+			}
 		}
+		
+		System.out.println("update Dto : " +dto);
+		
 		service.profileModify(dto);
 		session.setAttribute("loginSession", dto);
 		return "redirect:myPage";
