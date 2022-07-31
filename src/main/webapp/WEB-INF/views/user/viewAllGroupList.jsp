@@ -60,12 +60,6 @@
 	#navLogo {
 		display: none;
 	}
-	#myPageIcon {
-		display: none;
-	}
-	#cartIcon {
-		display: none;
-	}
 	#menu {
 		display: none;
 	}
@@ -147,6 +141,7 @@ ul {
 }
 .card-body{
 	background-color : #f4fdef;
+	padding-bottom:0px;	
 }
 .card>img {
 	width: 100%;
@@ -156,7 +151,9 @@ ul {
 	width: 18rem;
 	height: 13rem;
 }
-
+.card-text{
+	height:48px;
+}
 .card-text-category {
 	width: fit-content;
 	padding: 4px;
@@ -164,6 +161,11 @@ ul {
 	height: 22px;
 	border-radius: 5px;
 	font-size: 14px;
+}
+.card-text-site{
+	height:30px;
+	margin: 0px;
+    margin-top: 30px;
 }
 
 /* footer */
@@ -756,13 +758,13 @@ body {
 									</c:choose>
 									<span class="d-none">${dto.seq_group}</span>
 	                              <div class="card-body">
-	                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+	                                 <div class="card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
 	                                    ${dto.group_category}
 	                                 </div>
-	                                 <div class="card-text mt-3 mb-3">
+	                                 <div class="card-text mb-9">
 	                                    <span style = "font-size:25px; font-family:Katuri;">${dto.group_title}</span>
 	                                 </div>
-	                                 <div class="card-text d-flex justify-content-end">
+	                                 <div class="card-text-site d-flex justify-content-end">
 	                                    <span><i class="fa-solid fa-location-dot" style="color:#00145a"></i><span class="ms-2" style = "color:#00145a; font-family:Katuri;">${dto.group_site}</span></span>
 	                                 </div>
 	                              </div>
@@ -784,21 +786,36 @@ body {
             <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
           </div>
           <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item"><a href="#!">공지사항</a></li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item"><a href="#!">회원가입</a></li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item"><a href="#!">로그인</a></li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item">
-                <a href="#!">책임의 한계 및 법적고지</a>
-              </li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item">
-                <a href="#!" style="color: red; font-weight: bold">개인정보처리방침</a>
-              </li>
-            </ul>
+          	<ul class="list-inline mb-2">
+				<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+				<li class="list-inline-item">⋅</li>
+				<c:choose>
+					<c:when test="${not empty loginSession}">
+						<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+					</c:otherwise>
+				</c:choose>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item">
+					<c:choose>
+						<c:when test="${not empty loginSession}">
+							<a href="/group/toCreateGroup">모임 만들기</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/login/toLogin">모임 만들기</a>
+						</c:otherwise>
+					</c:choose>
+				</li>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item"><a href="/privacy"
+					style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+			</ul>
             <p class="text-muted small mb-4 mb-lg-0">
               끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
               사업자등록번호 : 22-02-22
@@ -812,15 +829,14 @@ body {
           </div>
           <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
             <ul class="list-inline mb-0">
-              <li class="list-inline-item me-4">
-                <a href="#!"><i class="bi-facebook fs-3"></i></a>
-              </li>
-              <li class="list-inline-item me-4">
-                <a href="#!"><i class="bi-twitter fs-3"></i></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#!"><i class="bi-instagram fs-3"></i></a>
-              </li>
+				<li class="list-inline-item me-4"><a
+					href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+				<li class="list-inline-item me-4"><a
+					href="https://twitter.com/?lang=ko"><i
+						class="bi-twitter fs-3"></i></a></li>
+				<li class="list-inline-item"><a
+					href="https://www.instagram.com/"><i
+						class="bi-instagram fs-3"></i></a></li>
             </ul>
           </div>
         </div>

@@ -45,10 +45,6 @@ public class MemberController {
 		return "member/welcome";
 	}
 
-	@RequestMapping(value = "/signUp")
-	public String signup() {
-		return "member/signUp";
-	}
 
 	@RequestMapping(value = "/myPage")
 	public String myPage(MessageDTO MessageDTO, Model model) throws Exception { // myPage 로 이동
