@@ -72,9 +72,9 @@
       update group_member set "access" =
       <choose>
          <when test = "access.equals('주최자')">
-            '맴버' where user_email = #{user_email}
+            '멤버' where user_email = #{user_email}
          </when>
-         <when test = "access.equals('맴버')">
+         <when test = "access.equals('멤버')">
             '주최자' where user_email = #{user_email}
          </when>
       </choose>

@@ -222,7 +222,7 @@
 											<img src="/resources/images/profile.jpg" id="profile_img">
 										</c:if>
 										<c:if test="${profileList[status.index] ne null}" >
-											<img src="${profileList[status.index]}" id="profile_img">
+											<img src="/profile/${profileList[status.index]}" id="profile_img">
 										</c:if>
 									</div>
 								</td>

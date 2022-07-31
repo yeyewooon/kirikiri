@@ -264,11 +264,6 @@ body {
     background-color: #b5a8a8;
     border-color: #b5a8a8;
 }
-.btn-primary:hover {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
-}
 .btn-primary {
     color: #fff;
     background-color: #b5a8a8;
