@@ -103,15 +103,26 @@
         /* header 반응형 끝 */
         
     	/* contents 영역 */
+    	#modifyWrapper:not(textarea){
+    		font-family: 'InfinitySans-RegularA1';
+    	}
+    	
         #head{
-            background-color: #d2e3ec;
+            background-color: #EEEEEE;
             height: 100px;
-        }
-        #head>h1{
-            margin-top: 20px;
+            border-top-left-radius: 80px;
+            border-top-right-radius: 80px;
+            border: 3px solid black;
         }
         label {
             margin-top: 5px;
+        }
+        #bottom{
+        	background-color: #EEEEEE;
+            height: 100px;
+            border-bottom-left-radius: 80px;
+            border-bottom-right-radius: 80px;
+            border: 3px solid black;
         }
         
         /*풋터 영역*/
@@ -139,12 +150,16 @@
         
         /* 눈누 폰트 */
 		@font-face {
-			font-family: 'OTWelcomeRA';
-			src:
-				url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-				format('woff2');
-			font-weight: normal;
-			font-style: normal;
+            font-family: 'MICEGothic Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+		    font-family: 'InfinitySans-RegularA1';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
 		}
 		
 		@font-face {
@@ -286,8 +301,8 @@
       </div>
    </header>
 
-	<div class="container">
-        <div id="head" class="row text-center align-items-center mb-5">
+	<div class="container" id="modifyWrapper" style="width: 70%;">
+        <div id="head" class="row text-center align-items-center my-5">
             <h1>글 수정</h1>
         </div>
         
@@ -308,13 +323,18 @@
 	            			<select name="board_category" class="form-select selectBox" aria-label="유형" disabled>
 			                    <option value="default">선택</option>
 			                    <option value="공지" <c:out value="${modMap.boardDTO.gboard_category eq '공지' ? 'selected' : ''}"/>>공지</option>
-			                    <option value="일반" <c:out value="${modMap.boardDTO.gboard_category eq '일반' ? 'selected' : ''}"/>>일반</option>
+			                    <option value="가입인사" <c:out value="${modMap.boardDTO.gboard_category eq '가입인사' ? 'selected' : ''}"/>>일반</option>
+			                    <option value="수다" <c:out value="${modMap.boardDTO.gboard_category eq '수다' ? 'selected' : ''}"/>>수다</option>
+			                    <option value="정모" <c:out value="${modMap.boardDTO.gboard_category eq '정모' ? 'selected' : ''}"/>>정모</option>
+			                    <option value="후기" <c:out value="${modMap.boardDTO.gboard_category eq '후기' ? 'selected' : ''}"/>>후기</option>
 			                </select>
 	            		</c:when>
 	            		<c:otherwise>
 	            			<select name="board_category" class="form-select selectBox" aria-label="유형" disabled>
 			                    <option value="default">선택</option>
-			                    <option value="일반" <c:out value="${modMap.boardDTO.gboard_category eq '일반' ? 'selected' : ''}"/>>일반</option>
+			                    <option value="가입인사" <c:out value="${modMap.boardDTO.gboard_category eq '가입인사' ? 'selected' : ''}"/>>가입인사</option>
+			                    <option value="수다" <c:out value="${modMap.boardDTO.gboard_category eq '수다' ? 'selected' : ''}"/>>수다</option>
+			                    <option value="정모" <c:out value="${modMap.boardDTO.gboard_category eq '정모' ? 'selected' : ''}"/>>정모</option>
 			                    <option value="후기" <c:out value="${modMap.boardDTO.gboard_category eq '후기' ? 'selected' : ''}"/>>후기</option>
 			                </select>
 	            		</c:otherwise>
@@ -332,12 +352,12 @@
 				<textarea id="summernote" name="gboard_content">${modMap.boardDTO.gboard_content}</textarea>
 	        </div>
 	        
-	        <div class="row my-4 justify-content-center">
+	        <div class="row my-4 justify-content-center align-items-center" id="bottom">
 	            <div class="col-auto">
-	                <button type="button" id="cancelBtn" class="btn btn-secondary">취소</button>
+	                <button type="button" id="cancelBtn" class="btn btn-light">취소</button>
 	            </div>
 	            <div class="col-auto">
-	                <button type="button" id="submitBtn" class="btn btn-primary">수정 완료</button>
+	                <button type="button" id="submitBtn" class="btn" style="background-color: #c5d4db;">수정 완료</button>
 	            </div>
 	        </div>
         </form>
