@@ -22,13 +22,16 @@
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
 	crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Black+Han+Sans&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
 </head>
 
 <style>
 * {
 	box-sizing: border-box;
-	font-family: "InfinitySans-RegularA1";
-}
+	font-family: 'MICEGothic Bold';
+	}
 
 #mainText {
 	font-family: "BMJUA";
@@ -126,15 +129,8 @@ h1 {
 }
 
 .profileBox {
-	width: 40%;
 	padding: 35px;
 }
-
-.modifyPro {
-	margin-top: 30px;
-	color: gray;
-}
-
 .profileName {
 	text-align: center;
 	border-bottom: 3px solid navy;
@@ -334,21 +330,28 @@ footer.footer {
 
 /* 눈누 폰트 */
 @font-face {
-	font-family: 'InfinitySans-RegularA1';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+     font-family: 'MICEGothic Bold';
+     src:
+         url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+     font-weight: 700;
+     font-style: normal;
+}
+@font-face {
+   font-family: 'InfinitySans-RegularA1';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
 }
 
 @font-face {
-	font-family: 'BMJUA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+   font-family: 'BMJUA';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
 }
 
 /*쪽지함*/
@@ -375,7 +378,7 @@ footer.footer {
 <body>
 	<!-- page Benu -->
 	<!--네비바-->
-	<header class="mb-3 border-bottom">
+	<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
 		<div class="container">
 			<!-- 접혔을 때 nav -->
 			<nav id="navibar" class="navbar navbar-expand-md navbar-light"

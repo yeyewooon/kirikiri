@@ -14,8 +14,7 @@ public class MemberDAO {
 
 	@Autowired
 	private SqlSession session;
-	@Autowired
-	private HttpSession Hsession;
+	
 	
 	// member select
 	public MemberDTO selectMember(String user_email) throws Exception{ 

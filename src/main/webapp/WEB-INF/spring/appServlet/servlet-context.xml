@@ -16,6 +16,7 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/boardFile/*" location="/boardFile/" />
+	<resources mapping="/groupBoardFile/*" location="/groupBoardFile/" />
 	<resources mapping="/profile/*" location="/profile/"/>
 	<resources mapping="/group_profile/*" location="/group_profile/"/>
 	
@@ -38,14 +39,14 @@
 			<exclude-mapping path="/"/>
 			<exclude-mapping path="/resources/**"/>
 			<exclude-mapping path="/privacy"/>
-			<exclude-mapping path="/admin/*"/>
-			<exclude-mapping path="/toAdmin"/>
+			
 			<exclude-mapping path="/login/toLogin"/>
 			<exclude-mapping path="/login/general"/>
 			<exclude-mapping path="/login/findId"/>
 			<exclude-mapping path="/login/findPw"/>
 			<exclude-mapping path="/login/emailAuthFindPw"/>
 			<exclude-mapping path="/login/tempPw"/>
+			
 			<exclude-mapping path="/signup/toSignupAgree"/>
 			<exclude-mapping path="/signup/toSignup"/>
 			<exclude-mapping path="/signup/signup"/>
@@ -53,6 +54,7 @@
 			<exclude-mapping path="/signup/nicknameCheck"/>
 			<exclude-mapping path="/signup/phoneCheck"/>
 			<exclude-mapping path="/signup/emailAuth"/>
+			
 			<exclude-mapping path="/auth/naverCallback"/>
 			<exclude-mapping path="/auth/kakaoCallback"/>
 			<exclude-mapping path="/auth/toConnetion"/>

@@ -460,15 +460,10 @@ footer.footer {
 </header>
     <div class="container privacyBox">
         <div id="privacyForm">
-	        <div class="row" style="text-align: center;">
-				<div class="col">
-					<img src="/resources/images/kirilogo.png" alt="오류발생">
-					<input id="check" type="hidden" value="${connection.type}" />
-				</div>
-			</div>
 			<div class="row">
 				<div class="col">
-					<h2>계정 연동</h2>	
+					<h1 style="margin: 40px;">계정 연동</h1>	
+					<input id="check" type="hidden" value="${connection.type}" />
 				</div>
 			</div> 
 			<div class="row">

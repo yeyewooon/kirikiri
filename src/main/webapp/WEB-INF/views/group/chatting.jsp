@@ -357,27 +357,52 @@ hr{
 								<img class="emojiImg" src="/resources/images/emoticon/루피14.png">
 							</div>
 						</div>
+						<div class="col-10"></div>
 					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피9.png">
+					<div class="ogu">
+						<div class="row">
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/오구.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/오구1.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/오구2.png">
+							</div>
 						</div>
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피10.png">
+						<div class="row">
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/오구3.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/오구4.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/오구5.png">
+							</div>
 						</div>
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피11.png">
+						<div class="row">
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/오구6.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/오구7.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/오구8.png">
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피12.png">
-						</div>
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피13.png">
-						</div>
-						<div class="col-sm-4">
-							<img class="emojiImg" src="/resources/images/emoticon/루피14.png">
+						<div class="row">
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/오구9.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/오구10.png">
+							</div>
+							<div class="col-sm-4">
+								<img class="emojiImg" src="/resources/images/emoticon/오구11.png">
+							</div>
 						</div>
 					</div>
 				</div>
@@ -396,12 +421,32 @@ hr{
 		// 웹소켓 객체 생성할때 반드시 서버의 ip 주소값은 실제 ip 주소를 이용
 		// 포트번호 다르면 :포트번호/chat 39.120.220.2:11111
 		var seq_group = $("#seq_group").val();
-		let ws = new WebSocket("ws://39.120.220.2:11111/chat/"+seq_group);
+		let ws = new WebSocket("ws://192.168.0.4/chat/"+seq_group);
 		let nickname = $("#nickname").val();
 		
 		//이모티콘 나오게 하기
 		$(".emoticon").click(function(){
 			$(".emojiBox").fadeToggle();
+			$(".ogu").css("display","none");
+			$("#rupi").css("box-shadow","2px 2px 2px 2px skyblue");
+			$("#ogu").css("box-shadow", "none");
+			$("#ogu").click(function(){
+				$("#rupi").css("box-shadow", "none");
+				$(".ogu").css("display","block");
+				$(".rupi").css("display","none");
+				$("#ogu").css("box-shadow","2px 2px 2px 2px skyblue");
+			})
+			$("#rupi").click(function(){
+				$("#ogu").css("box-shadow", "none");
+				$("#rupi").css("box-shadow", "2px 2px 2px 2px skyblue");
+				$(".rupi").css("display","block");
+				$(".ogu").css("display","none");
+			})
+			if($("#message").click(function(){
+				$(".messages").css("zIndex", "1");
+				$(".emojiBox").css("display", "none");
+			}))
+			$(".rupi").css("display","block");
 		})
 		
 		$(".emojiImg").on("click", function () {
@@ -413,6 +458,7 @@ hr{
 		$(".messages").on("click", function(){
 			$(".messages").css("zIndex", "1");
 			$(".emojiBox").css("display", "none");
+			$(".rupi").css("display","block");
 		})
 
 		//nickList 배열로 만들기
@@ -430,7 +476,9 @@ hr{
 				sendChat();
 			})
 			$("#message").keypress(function(e){
-				if(e.keyCode == 13) sendChat();
+				if(e.keyCode == 13) {
+					sendChat();
+				}
 			})
 			
 			let openNick = new Array();
@@ -470,14 +518,62 @@ hr{
 				}else{ //그외 메세지 주고 받을때
 					let strArr = msg.message.split("/");
 					if(strArr[1]=="resources" && strArr[2]=="images" && strArr[3]=="emoticon"){
-						otherEmoji(msg); //이모티콘 보내기
+						otherEmoji(msg); //이모티콘받기
 					}else{
-						otherChat(msg); //일반 채팅 보내기
+					 	findWord(msg);
 					}
 					$(".messages").scrollTop($(".messages")[0].scrollHeight);
 				} 
 			}
 			$(".messages").scrollTop($(".messages")[0].scrollHeight);
+		}
+		
+		//배경 바꿨다 돌아오기
+		function changeBack(url){
+			$(".messages").css({"background-image":"url("+url+")", "background-size": "100% 120%"});
+			setTimeout(function() {
+				$(".messages").css("background-image","none");
+			}, 1500);
+			
+		}
+		//예약어찾기 - 보낼때
+		function sendWord(msg){
+			var exp_wow = /우와/;
+			var exp_hi = /안녕/;
+			var exp_hot = /더워/;
+			
+			var word1 = msg.search(exp_wow);
+			var word2 = msg.search(exp_hi);
+			var word3 = msg.search(exp_hot);
+			if(word1!=-1){
+				changeBack("/resources/images/background/우와.gif");
+			}else if(word2!=-1){
+				changeBack("/resources/images/background/안녕.gif");
+			}else if(word3!=-1){
+				changeBack("/resources/images/background/더워.gif");
+			}
+		}
+		//예약어찾기 -받을때
+		function findWord(msg){
+			var exp_wow = /우와/;
+			var exp_hi = /안녕/;
+			var exp_hot = /더워/;
+			
+			var word1 = msg.message.search(exp_wow);
+			var word2 = msg.message.search(exp_hi);
+			var word3 = msg.message.search(exp_hot);
+			if(word1==-1&&word2==-1&&word3==-1){
+				otherChat(msg);
+			}else if(word1!=-1){
+				changeBack("/resources/images/background/우와.gif");
+				otherChat(msg);
+			}else if(word2!=-1){
+				changeBack("/resources/images/background/안녕.gif");
+				otherChat(msg);
+			}else if(word3!=-1){
+				changeBack("/resources/images/background/더워.gif");
+				otherChat(msg);
+			}
 		}
 		
 		//server 시간
@@ -510,7 +606,7 @@ hr{
 		
 		//이모티콘 보내는 함수
 		function sendEmoji(imgCls){
-			let url = 'http://39.120.220.2:11111/';
+			let url = 'http://192.168.0.4/';
 			let emojiSrc = $(imgCls).prop("src").indexOf(url)+url.length-1; // /resources 시작하는 index번호
 			let realSrc = $(imgCls).prop("src").slice(emojiSrc);
 			console.log(realSrc);
@@ -539,6 +635,7 @@ hr{
 		//채팅 보내는 함수
 		function sendChat(){
 			let message = $("#message").val();
+			sendWord(message);
 			if(message != ""){ // message가 빈값이 아닐때만 전송
 				$("#message").val(""); //입력창 비우기
 				ws.send(message); // 서버의 endpoint에 메세지를 보내는 함수

@@ -737,12 +737,12 @@ footer.footer {
 						</div>
 						<div class="row find-box btns mt-4">
 							<div class="col-md-12 d-flex justify-content-center">
-								<button type="button" class="btn btn-primary" id="btnFindId">아이디
+								<button type="button" class="btn btn-outline-primary" id="btnFindId">아이디
 									찾기</button>
 							</div>
 						</div>
 						<div class="row findId-box m-2 mt-4">
-							<div class="col-md-3">
+							<div class="col-md-3 p-0">
 								<p>가입된 아이디</p>
 							</div>
 							<div class="col-md-5 " id="findId-col">
@@ -808,7 +808,7 @@ footer.footer {
 						</div>
 						<div class="row find-box mt-4">
 							<div class="col-12 d-flex justify-content-center">
-								<button type="button" class="btn btn-primary" id="btnFindPW">
+								<button type="button" class="btn btn-outline-primary" id="btnFindPW">
 									비밀번호찾기
 								</button>
 							</div>
@@ -823,7 +823,7 @@ footer.footer {
 								name="authNum" class="form-control">
 						</div>
 						<div class="col-md-4">
-							<button type="button" class="btn btn-primary"
+							<button type="button" class="btn btn-outline-primary"
 								id="findPw-emailCheck-btn">인증번호 입력</button>
 						</div>
 					</div>

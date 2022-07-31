@@ -19,7 +19,7 @@ import com.kiri.dao.Board_FileDAO;
 import com.kiri.dao.LikeDAO;
 import com.kiri.dto.BoardDTO;
 import com.kiri.dto.Board_FileDTO;
-import com.kiri.vo.Criteria;
+import com.kiri.utills.Criteria;
 
 @Service
 public class BoardService {
@@ -61,7 +61,9 @@ public class BoardService {
 	public Map<String, Object> like(int seq_board, String user_email) throws Exception{
 		// 좋아요 여부
 		Map<String, Object> map = new HashMap<>();
-		map.put("likeCheck", likeDAO.likeCheck(seq_board, user_email));
+		if(user_email != null) {
+			map.put("likeCheck", likeDAO.likeCheck(seq_board, user_email));
+		}
 		map.put("likeHit", boardDAO.selectLike(seq_board));
 		return map; 
 	}
@@ -161,5 +163,10 @@ public class BoardService {
 	// 게시글 총 개수
 	public int getTotal(Criteria cri) throws Exception{
 		return boardDAO.getTotal(cri);
+	}
+	
+	// 공지사항 상단 3개 정렬
+	public List<BoardDTO> getNotice() throws Exception{
+		return boardDAO.getNotice();
 	}
 }
