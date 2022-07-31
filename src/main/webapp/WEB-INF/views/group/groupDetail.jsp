@@ -16,6 +16,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>
+<!-- Bootstrap icons-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
 <!--구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -37,6 +39,22 @@
 
 body {
   background-color: #ffffff;
+}
+
+@font-face {
+    font-family: 'Katuri';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+   font-family: 'InfinitySans-RegularA1';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
 }
 
 /* header 반응형 */
@@ -125,8 +143,25 @@ body {
 }
 
 .groupActiveBtnBox {
-	width: 700px;
-	height: 40px;
+	width: 740px;
+	height: 60px;
+}
+
+a:link {
+  color : grey;
+  text-decoration: none;
+}
+a:visited {
+  color : grey;
+  text-decoration: none;
+}
+a:hover {
+  color : black;
+  text-decoration: none;
+}
+a:active {
+  color : grey;
+  text-decoration: none;
 }
 
 .groupInfoSumTitle {
@@ -207,20 +242,6 @@ body {
 	cursor: pointer
 }
 
-a:link {
-	color: black;
-	text-decoration: none;
-}
-
-a:visited {
-	color: black;
-	text-decoration: none;
-}
-
-a:hover {
-	color: black;
-	text-decoration: none;
-}
 #siren_icon{
 	cursor:pointer;
 }
@@ -235,28 +256,36 @@ a:hover {
 	margin-top: 0;
 	font-weight: bold;
 }
+
 /*풋터 영역*/
+.footerWrapper{
+   background-color: #fff;
+}
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	background-color: #f6f7f9;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	width: 100%;
-	height: 100%;
+   height: 100%;
+   text-align:center;
 }
+.footer-imgBox {
+   height: 100%;
+   text-align:center;
+}
+
 
 .uselessBox {
 	height: 40px;
@@ -274,7 +303,8 @@ footer.footer {
   word-break:break-all;
   border: 1px solid #e0e3e8;;
   position:fixed;
-  width: 400px;
+  width: 480px;
+  background-color : #fafafa;
 }
 
 #hiddenGroupInfo {
@@ -290,10 +320,12 @@ footer.footer {
    #hiddenGroupInfo {
     display: block;
   }
+  
+  .groupControllBtn {
+  	width : 100%;
+  }
 
 }
-
-
 
 #groupTitleBottom {
   border-radius: 10px;
@@ -305,7 +337,6 @@ footer.footer {
   height: 100px;
   border-radius: 50%;
   background-color: #fff;
-  cursor: pointer;
 }
 
 .groupTitleHeaderImgBox img{
@@ -330,15 +361,60 @@ footer.footer {
 }
 
 .categoryText:hover {
-  color: red;
-
+	color:black;
+	border-bottom : 5px solid; black;
 }
+
+/*모임신청, 모임탈퇴 버튼*/
+.btn-primary {
+    color: #fff;
+    background-color: #fc3049;
+    border-color: #fff;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+}
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+.btn-check:focus+.btn, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+.btn-check:focus+.btn, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+
+/* 카트 우측 코끼리 */
+.defaultKokiri {
+	position: relative;
+    left: 0%;
+    bottom: 80px;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+}
+
+
 </style>
 
 </head>
 <body>
 	<!--네비바-->
-	<header class="mb-3 border-bottom">
+	<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
 		<div class="container">
 			<!-- 접혔을 때 nav -->
 			<nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -475,7 +551,7 @@ footer.footer {
 	<div class="container">
 		<!--body-headline-->
 		<div class="row">
-			<div class="groupHeaderInfo col-sm-12 col-md-7 mt-2">
+			<div class="groupHeaderInfo col-sm-12 col-md-7 mt-4">
 				<div class="groupImgBox d-flex justify-content-center">
           			<c:choose>
 						<c:when test="${tbl_group_dto.sys_name ne null}">
@@ -497,16 +573,16 @@ footer.footer {
 			        </div>
 			      </div>
 			      <div class="col-2 d-flex">
-			        <button type=" button" class="" id="wishListBtn" style="border:0; outline:0; background-color : #fff; font-size :24px;">♡</button>
-			        <button type=" button" class="ms-2 d-none" id="wishCancelBtn" style="border:0; outline:0; color:red; background-color : #fff; font-size :24px;">♥</button>
+			        <button type=" button" class="" id="wishListBtn" style="border:0; outline:0; background-color : #fff; font-size :24px;"><i class="fa-regular fa-heart"></i></button>
+			        <button type=" button" class="d-none" id="wishCancelBtn" style="border:0; outline:0; color:red; background-color : #fff; font-size :24px;"><i class="fa-solid fa-heart"></i></button>
 			      </div>
 			    </div>
 			 </div>
   		</div>
 			</div>
       <!-- 우측 카드-->
-			<div class="col-sm-12 col-md-5 mt-2">
-          <div class="row" style="padding:34px; padding-top: 0px;">
+			<div class="col-sm-12 col-md-5 mt-4">
+          <div class="row" style="padding:34px; padding-top: 0px;" stlye="position : relative;">
             <!--호스트 프로필-->
             <div class="col-md-12 col-sm-12" id="groupTitleHeader">
               <div class="d-flex align-items-center mt-" style="height: 32%; border-bottom: 1px solid #ebeff0;; padding: 4px;">
@@ -517,17 +593,20 @@ footer.footer {
 								id="profile_image">
 						</c:when>
 						<c:otherwise>
-							<img src="/resources/images/메인사진2(배경).png" id="profile_image">
+							<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="kokiriImg">
 						</c:otherwise>
 					</c:choose>
                 </div>
-                <div class="hostInfo d-flex flex-column ms-3">
+                <div class="hostInfo d-flex flex-column ms-4" style="font-family:InfinitySans-RegularA1;">
                   <div>${memberList[0].user_nickname}</div>
                   <div style="font-size: 16px;">안녕하세요? 모임 주최자 ${memberList[0].user_nickname}입니다! </div>
                 </div>
+                <div class="defaultKokiri">
+                	<img src="/resources/images/kokiri.png" style="width:60px; height:60px;">
+                </div>
               </div>
               <!--위치 카테고리 회원 찜 -->
-              <div class="d-flex flex-column justify-content-center" style="padding: 4px;">
+              <div class="d-flex flex-column justify-content-center" style="padding: 4px; font-family:InfinitySans-RegularA1;" >
                 <div class="groupInfoSum mt-3" style="font-size: 16px;">
                   <div class="row">
                     <div class="col-12 d-flex">
@@ -579,12 +658,13 @@ footer.footer {
                 <!--버튼 디브-->
                 <div class="mt-3" style="border-top: 1px solid #e0e3e8;;">
                   <div class="d-flex align-items-center justify-content-center mt-3 joinContainer">
-                    <button type=" button" class="btn btn-primary ms-2 d-none mt-2" style="width:90%;"
+                    <button type=" button" class="btn btn-primary ms-2 d-none mt-2 groupControllBtn" style="width:90%;"
                       id="quitGroupBtn">모임 탈퇴하기</button>
-                    <button type=" button" class="btn btn-primary ms-2 mt-2" style="width:90%;"
+                    <button type=" button" class="btn btn-primary ms-2 mt-2 groupControllBtn" style="width:90%;"
                       id="joinGroupBtn">모임 가입하기</button>
                   </div>
                 </div>
+                
               </div>
             </div>
 
@@ -608,13 +688,9 @@ footer.footer {
               <!--버튼 디브-->
               <div class="mt-3" style="border-top: 1px solid #e0e3e8;;">
                 <div class="d-flex align-items-center justify-content-center mt-3 joinContainer">
-                  <button type=" button" class="btn btn-outline-info"
-                    id="wishListBtn">찜 하기</button>
-                  <button type=" button" class="btn btn-outline-info ms-2 d-none"
-                    id="wishCancelBtn">찜 취소</button>
-                  <button type=" button" class="btn btn-primary ms-2 d-none"
+                  <button type=" button" class="btn btn-primary ms-2 d-none" style="width:90%;"
                     id="quitGroupBtn">모임 탈퇴하기</button>
-                  <button type=" button" class="btn btn-primary ms-2"
+                  <button type=" button" class="btn btn-primary ms-2" style="width:90%;"
                     id="joinGroupBtn">모임 가입하기</button>
                 </div>
               </div>
@@ -624,15 +700,15 @@ footer.footer {
 		</div>
 	</div>
 	<!--버튼 클릭-->
-	<div class="mt-4 categoryContainer">
+	<div class="mt-4 categoryContainer" style="font-family:InfinitySans-RegularA1;">
 		<div class="container">
 			<!-- 이용 -->
 			<div class="row mt-2">
-				<div class="col-sm-12 col-md-7 d-flex justify-content-center mt-1" style="border-bottom: 1px solid #e0e3e8;">
-					<div class="groupActiveBtnBox d-flex justify-content-evenly align-items-center " style="color:grey;">
+				<div class="col-sm-12 col-md-7 d-flex justify-content-center mt-1">
+					<div class="groupActiveBtnBox d-flex justify-content-evenly align-items-center " style="color:grey; font-size:18px; border-bottom: 2px solid #e0e3e8;">
 						<div class="groupInfoBtn categoryText groupDetailInfo">상세정보</div>
             			<div class="groupInfoBtn categoryText groupCautionInfo">주의사항</div>
-            			<div class="groupInfoBtn categoryText groupMemInfo">멤버정보</div>
+            			<div class="groupInfoBtn categoryText groupMemInfo">멤버소개</div>
 						<div class="groupActiveBtn categoryText">게시판</div>
 						<div class="groupActiveBtn categoryText">일정</div>
 						<div class="groupActiveBtn categoryText">채팅</div>
@@ -646,14 +722,14 @@ footer.footer {
 		</div>
 	</div>
 
-	<!--세부 정보-->
+	<!--상세 정보-->
 	<div>
-		<div class="container">
+		<div class="container" style="font-family:InfinitySans-RegularA1;">
 			<div class="row">
 				<div class="col-md-7 d-flex justify-content-center">
 					<!--상세 정보 내용-->
-					<div class="groupInfo mt-3" style="width:100%;">
-            			<span style=" font-size: 20px; background: linear-gradient(to top, #FFE400 20%, transparent 30%)">상세정보</span>
+					<div class="groupInfo mt-4" style="width:100%;">
+            			<span style=" font-size: 30px; background: linear-gradient(to top, #FFE400 20%, transparent 30%)">상세정보</span>
 						<div class="groupContent mt-4">${tbl_group_dto.group_info}</div>
 					</div>
 				</div>
@@ -661,7 +737,7 @@ footer.footer {
         <div class="row mt-2">
           <div class="col-md-7 mt-3 cautionContainer" style="border-top: 1px solid #e0e3e8;">
             <div class="mt-3">
-              <span style=" font-size: 20px; background: linear-gradient(to top, #FFE400 20%, transparent 30%)">주의사항</span>
+              <span style=" font-size: 30px; background: linear-gradient(to top, #FFE400 20%, transparent 30%)">주의사항</span>
                 <div class="mt-3">
                   <h7> <i class="fa-solid fa-message"></i> <span class="ms-2">주최자
                     전달 메세지</span> </i></h7>
@@ -683,13 +759,13 @@ footer.footer {
           </div>
         </div>
 
-        <!--멤버정보-->
+        <!--멤버소개-->
         <div class="row mt-2">
           <div class="col-md-7" style="border-top: 1px solid #e0e3e8;">
             <div class="mt-3">
-              <span style=" font-size: 20px; background: linear-gradient(to top, #FFE400 20%, transparent 30%)">멤버정보</span>
+              <span style=" font-size: 30px; background: linear-gradient(to top, #FFE400 20%, transparent 30%)">멤버소개</span>
               <div class="groupMemberrInfo">
-                <!-- 맴버 -->
+                <!-- 멤버 -->
                 <div class="mt-4 d-flex">
                   <div class="d-flex align-items-end" style="font-size: 16px;">
                     멤버(<span class="memberCntSpan"></span>)명
@@ -832,27 +908,44 @@ footer.footer {
 		</div>
 
 	<!-- Footer-->
-	<div class="footerWrapper" style="background-color: #fff;">
+	<div class="footerWrapper" style="margin-top:50px; border-top : 1px solid #e0e3e8;">
 		<div class="container">
-			<footer class="footer" style="background-color: #fff;">
+			<footer class="footer">
 				<div class="row">
 					<div class="col-lg-3 footer-imgBox">
 						<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
 					</div>
 					<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
 						<ul class="list-inline mb-2">
-							<li class="list-inline-item"><a href="#!">공지사항</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">회원가입</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">로그인</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a>
-							</li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!"
-								style="color: red; font-weight: bold">개인정보처리방침</a></li>
-						</ul>
+                  <li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <c:choose>
+                     <c:when test="${not empty loginSession}">
+                        <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+                     </c:when>
+                     <c:otherwise>
+                        <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+                     </c:otherwise>
+                  </c:choose>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item">
+                     <c:choose>
+                        <c:when test="${not empty loginSession}">
+                           <a href="/group/toCreateGroup">모임 만들기</a>
+                        </c:when>
+                        <c:otherwise>
+                           <a href="/login/toLogin">모임 만들기</a>
+                        </c:otherwise>
+                     </c:choose>
+                  </li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item"><a href="/privacy"
+                     style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+               </ul>
 						<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
 							개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
 						<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
@@ -860,7 +953,7 @@ footer.footer {
 						<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
 							2022. All Rights Reserved.</p>
 					</div>
-					<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+					<div class="col-lg-3 h-100 text-center text-lg-start my-auto">
 						<ul class="list-inline mb-0">
 							<li class="list-inline-item me-4"><a href="#!"><i
 									class="bi-facebook fs-3"></i></a></li>
@@ -874,7 +967,6 @@ footer.footer {
 			</footer>
 		</div>
 	</div>
-
 	<script>
 
 
@@ -895,7 +987,7 @@ footer.footer {
 	      }
 	  }
 
-	// 특정위치로 이동
+	// 특정위치로 이동, 색상 변경
 	$(".categoryText").on("click",function(e) {
 		let selectedWord = $(this).html();
 		console.log(selectedWord);
@@ -905,15 +997,15 @@ footer.footer {
 		}else if(selectedWord == "주의사항") {
 			var offset = $(".cautionContainer").offset(); //해당 위치 반환
 			$("html, body").animate({scrollTop: offset.top},400);
-		}else if(selectedWord == "멤버정보") {
+		}else if(selectedWord == "멤버소개") {
 			var offset = $(".groupMemberrInfo").offset(); //해당 위치 반환
 			$("html, body").animate({scrollTop: offset.top},400);
 		}
 
 	})
 
-    let realMemberCnt = ${fn:length(memberList)}; // 주최자를 제외한 맴버수
-    $(".memberCntSpan").text(realMemberCnt); // 주최자를 제외한 맴버수
+    let realMemberCnt = ${fn:length(memberList)}; // 주최자를 제외한 멤버수
+    $(".memberCntSpan").text(realMemberCnt); // 주최자를 제외한 멤버수
 
     let seq_group = "${tbl_group_dto.seq_group}"; // 현재 모임 번호
     let loginSession_id = "${loginSession_id}"; // 현재 로그인 세션 아이디
@@ -921,7 +1013,7 @@ footer.footer {
     let hostEmail = "${memberList[0].user_email}"; // 주최자 아이디
    	let totalGroupCntById = "${totalGroupCntById}"; // 현재 로그인된 아이디의 모임 가입수
 
-     //해당 모임 맴버 프로필 보기
+     //해당 모임 멤버 프로필 보기
     $(".memberProfileContainer").on("click",function() {
         let findUserEmail = $(this).find('span').html(); // 공백이 포함되서 나옴
         let user_email = findUserEmail.trim(); // 공백을 없앰
@@ -1026,7 +1118,7 @@ footer.footer {
           $(".groupManageBtn").removeClass("d-none");
        }
 
-       // 현재 세션 id가 그룹맴버에 있으면 게시판,일정, 채팅 활동가능
+       // 현재 세션 id가 그룹멤버에 있으면 게시판,일정, 채팅 활동가능
        $(".groupActiveBtn").on("click",function() {
           let memberList = new Array(); // 빈 배열 생성
             <c:forEach items="${memberList}" var="dto">
@@ -1050,7 +1142,7 @@ footer.footer {
        })
 
         // 세션이 모임에 가입되어 있으면 모임 탈퇴하기, 가입 안되어있으면 모입 가입하기
-       // 맴버 리스트 체크 -> 모임 가입하기인지 모임 탈퇴인지 판별
+       // 멤버 리스트 체크 -> 모임 가입하기인지 모임 탈퇴인지 판별
        let memberList = new Array(); // 빈 배열 생성
         <c:forEach items="${memberList}" var="dto">
              memberList.push("${dto.user_email}");
@@ -1139,9 +1231,9 @@ footer.footer {
             Swal.fire('모임은 최대 3개만 가입가능합니다');
              return;
          }
-         let curMemberCnt = ${fn:length(memberList)}; // 현재 맴버수 jstl memberList 길이
-         let totalMemberCnt = ${tbl_group_dto.group_people}; // 수용가능 맴버수
-         if(curMemberCnt < totalMemberCnt) { // 현재 맴버수 < 수용 맴버수
+         let curMemberCnt = ${fn:length(memberList)}; // 현재 멤버수 jstl memberList 길이
+         let totalMemberCnt = ${tbl_group_dto.group_people}; // 수용가능 멤버수
+         if(curMemberCnt < totalMemberCnt) { // 현재 멤버수 < 수용 멤버수
 
             // 가입 신청한 명단에 현재 id 세션이 있는지 판별
             let applyList = new Array();
@@ -1311,11 +1403,6 @@ footer.footer {
              $("#reportBtn").addClass("d-none"); // 신고하기 버튼 안보이게
          })
          })
-
-
-
-
-
 
     </script>
 </body>

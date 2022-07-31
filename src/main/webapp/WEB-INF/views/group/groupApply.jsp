@@ -218,7 +218,7 @@ footer.footer {
 </style>
 </head>
 <body>
-   <header class="mb-3 border-bottom">
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -299,7 +299,7 @@ footer.footer {
                      <div class="col-auto user">
 						<c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
 							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
 								</a>
 								<ul class="dropdown-menu text-small"
@@ -311,10 +311,10 @@ footer.footer {
 								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 								</ul>
 							</div>
-						</c:if> 
+						</c:if>
 						<c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
 							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
 								</a>
 								<ul class="dropdown-menu text-small"
@@ -325,7 +325,7 @@ footer.footer {
 								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 								</ul>
 							</div>
-						</c:if> 
+						</c:if>
                      </div>
                   </div>
                </div>
@@ -476,46 +476,46 @@ footer.footer {
         </div>
       </footer>
     </div>
-  </div> 
+  </div>
 </body>
 <script>
 
 // 멤버관리 이동
 $("#groupMember").on("click", function(){
    location.href = "/group/toGroupMember?seq_group="+$("#seq_group").val();
-})   
+})
 // 모임가입 이동
 $("#groupApply").on("click", function(){
    location.href = "/group/toGroupApply?seq_group="+$("#seq_group").val();
-})   
+})
    // 모임수정 이동
    $("#groupModify").on("click", function(){
       location.href = "/group/toModifyGroup?seq_group="+$("#seq_group").val();
-   })   
+   })
 // 모임해산 이동
 $("#groupDelete").on("click", function(){
    location.href = "/group/toGroupDelete?seq_group="+$("#seq_group").val();
-})   
-   
+})
+
    // 그룹 승인하기
    $("#applyBtn").on("click", function(){
       let count = $("#group_people").val();
       let groupCount = $("#groupCount").val();
       let checkBoxArr = [];
-      $("input[name=checkUser_email]:checked").each(function(){         
+      $("input[name=checkUser_email]:checked").each(function(){
          checkBoxArr.push($(this).val());
       })
       if(checkBoxArr.length < 1){
           Swal.fire({
               icon: 'warning',
               text: '선택된 항목이 없습니다..',
-            })  
+            })
       }else{
 	      var jsonData = {
 	         "userEmails" : JSON.stringify(checkBoxArr)
 	      };
 	      var jsonString = JSON.stringify(jsonData);
-	      
+
 	       $.ajax({
 	         url:"/group/completeApply?&group_people="+count+"&groupCount="+groupCount,
 	         headers: {'Content-Type': 'application/json'},
@@ -526,7 +526,7 @@ $("#groupDelete").on("click", function(){
 	                  Swal.fire({
 	                       icon: 'success',
 	                       text: '승인이 완료되었습니다.',
-	                     })            
+	                     })
 	            }else if(data == "error"){
 	               Swal.fire({
 	                    icon: 'error',
@@ -538,29 +538,29 @@ $("#groupDelete").on("click", function(){
 	                    window.location.href = "";
 	                },1500);
 	         },error : function(e){
-	            console.log(e);      
+	            console.log(e);
 	         }
-	      })  	  
+	      })
       }
    })
-   
+
    // 그룹 승인 거절하기
    $("#denyBtn").on("click", function(){
       let checkBoxArr = [];
-      $("input[name=checkUser_email]:checked").each(function(){         
+      $("input[name=checkUser_email]:checked").each(function(){
          checkBoxArr.push($(this).val());
       })
       if(checkBoxArr.length < 1){
           Swal.fire({
               icon: 'warning',
               text: '선택된 항목이 없습니다.',
-            })  
+            })
       }else{
 	      var jsonData = {
 	         "userEmails" : JSON.stringify(checkBoxArr)
 	      };
 	      var jsonString = JSON.stringify(jsonData);
-	      
+
 	       $.ajax({
 	         url:"/group/denyApply",
 	         headers: {'Content-Type': 'application/json'},
@@ -570,17 +570,17 @@ $("#groupDelete").on("click", function(){
 	            Swal.fire({
 	                 icon: 'success',
 	                 text: '거절이 완료되었습니다.',
-	               })   
+	               })
 	               setTimeout(function() {
 	                       window.location.href = "";
 	                   },1500);
 	         },error : function(e){
-	            console.log(e);         
+	            console.log(e);
 	         }
 	      })
-    	  
+
       }
    })
-   
+
 </script>
 </html>

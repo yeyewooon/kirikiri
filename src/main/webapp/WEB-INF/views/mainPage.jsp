@@ -360,7 +360,7 @@ footer.footer {
   text-align: center;
   font-size: 1.3em;
   line-height: 2em;
-  cursor: pointer;  
+  cursor: pointer;
 }
 .btn:hover {
     color: #b6cdef;
@@ -404,7 +404,7 @@ footer.footer {
 </style>
 </head>
 <body>
-   <header class="mb-3 border-bottom">
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -485,7 +485,7 @@ footer.footer {
                      <div class="col-auto user">
                   <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
                      <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small"
@@ -497,10 +497,10 @@ footer.footer {
                            <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
                         </ul>
                      </div>
-                  </c:if> 
+                  </c:if>
                   <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
                      <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small"
@@ -511,7 +511,7 @@ footer.footer {
                            <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
                         </ul>
                      </div>
-                  </c:if> 
+                  </c:if>
                      </div>
                   </div>
                </div>
@@ -744,7 +744,7 @@ footer.footer {
             </div>
          </div>
       </div>
-      
+
       <!-- 모임 card 캐러셀 New -->
       <div class="row contentNew d-none">
          <div class="col p-0">
@@ -787,7 +787,7 @@ footer.footer {
             </div>
          </div>
       </div>
-      
+
       <!-- 모임 card 캐러셀 Best -->
       <div class="row contentBest d-none">
          <div class="col p-0">
@@ -901,16 +901,16 @@ footer.footer {
     	  Swal.fire({
                  icon: 'warning',
                  text: '로그인 후 사용하실수 있습니다..',
-               })  		   
-	   } 
-   }) 
+               })
+	   }
+   })
    <!-- 가입하기 버튼 -->
    $(".btn").on("click", function(){
 	   location.href = "/user/toViewAllGroupList";
    })
    <!-- AOS 스크립트 시작 -->
       AOS.init(); // 자바스크립트로 init()을 해야 동작한다.
-      
+
       const countDownTimer = function(id, date) {
          var _vDate = new Date(date); // 전달 받은 일자
          var _second = 1000;
@@ -948,9 +948,9 @@ footer.footer {
 
       countDownTimer("sample01", dateObj); // 내일까지
 
-      
-      
-      
+
+
+
       // 그룹영역 all, new, best d-none 주고, 풀기
       $(".allGroup").on("click", function(){
     	  $(".contentAll").removeClass("d-none");
@@ -967,14 +967,14 @@ footer.footer {
     	  $(".contentNew").addClass("d-none");
     	  $(".contentBest").removeClass("d-none");
       })
-      
+
       // 모임 card 눌러서 모임상세페이지 가기
       $(".card").on("click", function(){
     	  let seq_group = $(this).children('span').text();
     	  console.log(seq_group);
     	  location.href = "/group/toGroupDetail?seq_group="+seq_group;
       })
-      
+
       // 그룹영역 더보기 눌러서 페이지 이동
       $(".more").on("click", function(){
     	  location.href = "/user/toViewAllGroupList";
