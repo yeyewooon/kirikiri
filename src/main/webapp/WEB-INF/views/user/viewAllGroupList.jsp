@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,23 +52,17 @@
 /* 네비바  */
 * {
    box-sizing: border-box;
-   font-family: "MICEGothic Bold"; 
+   font-family: "MICEGothic Bold";
 }
 
 /* header 반응형 */
 @media ( max-width : 768px) {
-   #navLogo {
-      display: none;
-   }
-   #myPageIcon {
-      display: none;
-   }
-   #cartIcon {
-      display: none;
-   }
-   #menu {
-      display: none;
-   }
+	#navLogo {
+		display: none;
+	}
+	#menu {
+		display: none;
+	}
 }
 
 /* header */
@@ -119,11 +113,11 @@ ul {
     .locationPic img {
       width: 100%;
       height: 100%;
-  } 
+  }
 .locationText, .categoryText{
    font-family : katuri;
-}  
-  
+}
+
 
 /* body content */
 .content {
@@ -146,7 +140,8 @@ ul {
     cursor: pointer;
 }
 .card-body{
-   background-color : #f4fdef;
+	background-color : #f4fdef;
+	padding-bottom:0px;
 }
 .card>img {
    width: 100%;
@@ -156,7 +151,9 @@ ul {
    width: 18rem;
    height: 13rem;
 }
-
+.card-text{
+	height:48px;
+}
 .card-text-category {
    width: fit-content;
    padding: 4px;
@@ -164,6 +161,11 @@ ul {
    height: 22px;
    border-radius: 5px;
    font-size: 14px;
+}
+.card-text-site{
+	height:30px;
+	margin: 0px;
+    margin-top: 30px;
 }
 
 /* footer */
@@ -448,7 +450,7 @@ body {
                      <div class="col-auto user">
                   <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
                      <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small"
@@ -460,10 +462,10 @@ body {
                            <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
                         </ul>
                      </div>
-                  </c:if> 
+                  </c:if>
                   <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
                      <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small"
@@ -474,7 +476,7 @@ body {
                            <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
                         </ul>
                      </div>
-                  </c:if> 
+                  </c:if>
                      </div>
                   </div>
                </div>
@@ -739,37 +741,37 @@ body {
             <div class="content2">
                <div class="imgContainer">
                   <div class="row">
-                     <c:if test = "${selectAllList.size() == 0}">
-                        <div>아직 개설된 모임이 없습니다.</div>
-                     </c:if>
-                     <c:if test = "${selectAllList.size() > 0}">
-                  <c:forEach items="${selectAllList}" var="dto">
-                           <div class="col-md-3 d-flex justify-content-center p-4">
-                              <div class="card">
-                                    <c:choose>
-                              <c:when test="${dto.sys_name ne null}">
-                                 <img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
-                              </c:when>
-                              <c:otherwise>
-                                 <img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
-                              </c:otherwise>
-                           </c:choose>
-                           <span class="d-none">${dto.seq_group}</span>
-                                 <div class="card-body">
-                                    <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
-                                       ${dto.group_category}
-                                    </div>
-                                    <div class="card-text mt-3 mb-3">
-                                       <span style = "font-size:25px; font-family:Katuri;">${dto.group_title}</span>
-                                    </div>
-                                    <div class="card-text d-flex justify-content-end">
-                                       <span><i class="fa-solid fa-location-dot" style="color:#00145a"></i><span class="ms-2" style = "color:#00145a; font-family:Katuri;">${dto.group_site}</span></span>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </c:forEach>
-                     </c:if>
+                  	<c:if test = "${selectAllList.size() == 0}">
+                  		<div>아직 개설된 모임이 없습니다.</div>
+                  	</c:if>
+                  	<c:if test = "${selectAllList.size() > 0}">
+						<c:forEach items="${selectAllList}" var="dto">
+	                        <div class="col-md-3 d-flex justify-content-center p-4">
+	                           <div class="card">
+	                           		<c:choose>
+										<c:when test="${dto.sys_name ne null}">
+											<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+										</c:when>
+										<c:otherwise>
+											<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+										</c:otherwise>
+									</c:choose>
+									<span class="d-none">${dto.seq_group}</span>
+	                              <div class="card-body">
+	                                 <div class="card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+	                                    ${dto.group_category}
+	                                 </div>
+	                                 <div class="card-text mb-9">
+	                                    <span style = "font-size:25px; font-family:Katuri;">${dto.group_title}</span>
+	                                 </div>
+	                                 <div class="card-text-site d-flex justify-content-end">
+	                                    <span><i class="fa-solid fa-location-dot" style="color:#00145a"></i><span class="ms-2" style = "color:#00145a; font-family:Katuri;">${dto.group_site}</span></span>
+	                                 </div>
+	                              </div>
+	                           </div>
+	                        </div>
+                     	</c:forEach>
+                  	</c:if>
                   </div>
                </div>
             </div>
@@ -784,21 +786,36 @@ body {
             <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
           </div>
           <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-            <ul class="list-inline mb-2">
-              <li class="list-inline-item"><a href="#!">공지사항</a></li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item"><a href="#!">회원가입</a></li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item"><a href="#!">로그인</a></li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item">
-                <a href="#!">책임의 한계 및 법적고지</a>
-              </li>
-              <li class="list-inline-item">⋅</li>
-              <li class="list-inline-item">
-                <a href="#!" style="color: red; font-weight: bold">개인정보처리방침</a>
-              </li>
-            </ul>
+          	<ul class="list-inline mb-2">
+				<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+				<li class="list-inline-item">⋅</li>
+				<c:choose>
+					<c:when test="${not empty loginSession}">
+						<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+					</c:otherwise>
+				</c:choose>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item">
+					<c:choose>
+						<c:when test="${not empty loginSession}">
+							<a href="/group/toCreateGroup">모임 만들기</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/login/toLogin">모임 만들기</a>
+						</c:otherwise>
+					</c:choose>
+				</li>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item"><a href="/privacy"
+					style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+			</ul>
             <p class="text-muted small mb-4 mb-lg-0">
               끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
               사업자등록번호 : 22-02-22
@@ -812,26 +829,25 @@ body {
           </div>
           <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
             <ul class="list-inline mb-0">
-              <li class="list-inline-item me-4">
-                <a href="#!"><i class="bi-facebook fs-3"></i></a>
-              </li>
-              <li class="list-inline-item me-4">
-                <a href="#!"><i class="bi-twitter fs-3"></i></a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#!"><i class="bi-instagram fs-3"></i></a>
-              </li>
+				<li class="list-inline-item me-4"><a
+					href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+				<li class="list-inline-item me-4"><a
+					href="https://twitter.com/?lang=ko"><i
+						class="bi-twitter fs-3"></i></a></li>
+				<li class="list-inline-item"><a
+					href="https://www.instagram.com/"><i
+						class="bi-instagram fs-3"></i></a></li>
             </ul>
           </div>
         </div>
       </footer>
     </div>
-  </div> 
+  </div>
 
 
 
   <script>
-  
+
 //카테고리 설정 스크립트
 //지역 클릭시
 $('#locationBtn').on("click", function() {
@@ -892,7 +908,7 @@ $(".card").on("click",function() {
     let findSeq_group = $(this).find('span').html(); // 공백이 포함되서 나옴
     let seq_group = findSeq_group.trim(); // 공백을 없앰
     console.log(seq_group);
-    location.href = "/group/toGroupDetail?seq_group="+seq_group; 
+    location.href = "/group/toGroupDetail?seq_group="+seq_group;
   })
 
 
@@ -902,9 +918,9 @@ $(".card").on("click",function() {
     let locationText = $(this).find('span').html(); // 공백이 포함되서 나옴
     let group_site = locationText.trim(); // 공백을 없앰
     console.log(group_site);
-    location.href = "/user/toUserSelectedGroupList?group_site="+group_site; 
+    location.href = "/user/toUserSelectedGroupList?group_site="+group_site;
   })
-  
+
   // 카테고리로로 모임 조회
   $(".categoryMapper").on("click",function(e) {
     let categoryText = $(this).find('span').html(); // 공백이 포함되서 나옴

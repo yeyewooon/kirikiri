@@ -179,17 +179,22 @@ tr {
 	font-weight: bold;
 }
 
+ul {
+	list-style: none;
+	padding: 0;
+}
+
 /*풋터 영역*/
 .footerWrapper{
-   background-color: #fff;
+	margin-top:200px;
 }
 .footerBox {
    height: 0px;
 }
 
 footer.footer {
-   padding-top: 2rem;
-   padding-bottom: 2rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 
 .footer a {
@@ -200,12 +205,12 @@ footer.footer {
 }
 
 .footer-imgBox>img {
-   height: 100%;
-   text-align:center;
+	height: 100%;
+	text-align:center;
 }
 .footer-imgBox {
-   height: 100%;
-   text-align:center;
+	height: 100%;
+	text-align:center;
 }
 </style>
 </head>
@@ -291,7 +296,7 @@ footer.footer {
                      <div class="col-auto user">
 						<c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
 							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
 								</a>
 								<ul class="dropdown-menu text-small"
@@ -303,10 +308,10 @@ footer.footer {
 								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 								</ul>
 							</div>
-						</c:if> 
+						</c:if>
 						<c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
 							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
 								</a>
 								<ul class="dropdown-menu text-small"
@@ -317,7 +322,7 @@ footer.footer {
 								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 								</ul>
 							</div>
-						</c:if> 
+						</c:if>
                      </div>
                   </div>
                </div>
@@ -393,86 +398,94 @@ footer.footer {
 					id="deleteBtn">강퇴하기</button>
 			</div>
 		</div>
-	<!-- Footer-->
-		<footer class="footer mt-5">
-			<div class="row">
-				<div class="col-lg-3 footer-imgBox">
-					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-				</div>
-				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
-						<li class="list-inline-item">⋅</li>
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-							</c:otherwise>
-						</c:choose>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item">
-							<c:choose>
-								<c:when test="${not empty loginSession}">
-									<a href="/group/toCreateGroup">모임 만들기</a>
-								</c:when>
-								<c:otherwise>
-									<a href="/login/toLogin">모임 만들기</a>
-								</c:otherwise>
-							</c:choose>
-						</li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="/privacy"
-							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-					</ul>
-					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-						57 이레빌딩</p>
-					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-						2022. All Rights Reserved.</p>
-				</div>
-				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-					<ul class="list-inline mb-0">
-						<li class="list-inline-item me-4"><a
-							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-						<li class="list-inline-item me-4"><a
-							href="https://twitter.com/?lang=ko"><i
-								class="bi-twitter fs-3"></i></a></li>
-						<li class="list-inline-item"><a
-							href="https://www.instagram.com/"><i
-								class="bi-instagram fs-3"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</footer>
 	</div>
+<!-- Footer-->
+  <div class="footerWrapper">
+    <div class="container">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-lg-3 footer-imgBox">
+            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+          	<ul class="list-inline mb-2">
+				<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+				<li class="list-inline-item">⋅</li>
+				<c:choose>
+					<c:when test="${not empty loginSession}">
+						<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+					</c:otherwise>
+				</c:choose>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item">
+					<c:choose>
+						<c:when test="${not empty loginSession}">
+							<a href="/group/toCreateGroup">모임 만들기</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/login/toLogin">모임 만들기</a>
+						</c:otherwise>
+					</c:choose>
+				</li>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item"><a href="/privacy"
+					style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+			</ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
+              사업자등록번호 : 22-02-22
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2022. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-0">
+				<li class="list-inline-item me-4"><a
+					href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+				<li class="list-inline-item me-4"><a
+					href="https://twitter.com/?lang=ko"><i
+						class="bi-twitter fs-3"></i></a></li>
+				<li class="list-inline-item"><a
+					href="https://www.instagram.com/"><i
+						class="bi-instagram fs-3"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
 
 </body>
 <script>
    // 멤버관리 이동
    $("#groupMember").on("click", function(){
       location.href = "/group/toGroupMember?seq_group="+$("#seq_group").val();
-   })   
+   })
    // 모임가입 이동
    $("#groupApply").on("click", function(){
       location.href = "/group/toGroupApply?seq_group="+$("#seq_group").val();
-   })   
+   })
    // 모임수정 이동
    $("#groupModify").on("click", function(){
       location.href = "/group/toModifyGroup?seq_group="+$("#seq_group").val();
-   })   
+   })
    // 모임해산 이동
    $("#groupDelete").on("click", function(){
       location.href = "/group/toGroupDelete?seq_group="+$("#seq_group").val();
-   })   
-   
-   
+   })
+
+
 	$("input[type=checkbox]").on("change", function(){ //뭔가 체크박스가 눌렷을때
 		var tr = $(this).parent().parent();
 		let trAccess = tr.children('td').eq(4).children('input'); //직책
@@ -489,24 +502,24 @@ footer.footer {
 	if($(trAccess).prop("checked")){ //직책이 체크됐을때
 		for(let i=0; i<3; i++){
 			tr.parent().children().eq(i).children('td').eq(5).children('input[type=checkbox]').prop("checked", false);
-		}				
+		}
 	}else if($(trEmail).prop("checked")){ // 이메일이 체크됐을때
 		for(let i=0; i<3; i++){
 			tr.parent().children().eq(i).children('td').eq(4).children('input[type=checkbox]').prop("checked", false);
 		}
 	}
  		})
-   		
+
        // 그룹 권한 수정
       $("#modifyBtn").on("click", function(){
          let checkAccess = $('input[name=checkAccess]:checked').val();
          let checkEmail = $('input[name=checkAccess]:checked').parent().next().children('input').val();
-		 
+
          if(checkEmail != ""){
 	    	  Swal.fire({
 	                 icon: 'warning',
 	                 text: '버튼을 잘 선택해주세요.',
-	               })  
+	               })
          }else{
  	         $.ajax({
 	            url : "/group/groupAccess",
@@ -552,10 +565,10 @@ footer.footer {
 	            },error:function(e){
 	               console.log(e);
 	            }
-	         })    	 
+	         })
          }
       })
-   
+
    // 그룹 멤버 강퇴
    $("#deleteBtn").on("click", function(){
 	  let checkAccess = $('input[name=checkUser_email]:checked').parent().prev().children('.checkAccess').val();
@@ -564,17 +577,17 @@ footer.footer {
     	  Swal.fire({
               icon: 'warning',
               text: '버튼을 잘 선택해주세요.',
-            })  
+            })
 	  }else{
 	      let checkBoxArr = [];
-		      $("input[name=checkUser_email]:checked").each(function(){ 
+		      $("input[name=checkUser_email]:checked").each(function(){
 		    	 if(checkAccess != '주최자'){
-		         checkBoxArr.push($(this).val());    	  
+		         checkBoxArr.push($(this).val());
 			      var jsonData = {
 			         "userEmails" : JSON.stringify(checkBoxArr)
 			      };
 			      var jsonString = JSON.stringify(jsonData);
-			      
+
 			       $.ajax({
 			         url:"/group/deleteMember",
 			         headers: {'Content-Type': 'application/json'},
@@ -584,23 +597,23 @@ footer.footer {
 			            Swal.fire({
 			                 icon: 'success',
 			                 text: '멤버강퇴가 완료되었습니다.',
-			               })   
+			               })
 			               setTimeout(function() {
 			                       window.location.href = "";
 			                   },3000);
 			         },error : function(e){
-			            console.log(e);         
+			            console.log(e);
 			         }
 			      })
 		      }else{
 		    	  Swal.fire({
 		                 icon: 'warning',
 		                 text: '주최자는 강퇴할 수 없습니다.',
-		               })   
+		               })
 		      }
-	      })  
-	  }    
+	      })
+	  }
    })
-   
+
 </script>
 </html>

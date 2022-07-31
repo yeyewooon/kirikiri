@@ -33,34 +33,34 @@
             display: none;
          }
       }
-      
+
       /* header */
       #navLogo {
          width: 150px;
          height: 100px;
       }
-      
+
       #logoImgs {
          width: 100%;
          height: 100%;
       }
-      
+
       @media ( min-width : 768px) {
          #navibar {
             display: none;
          }
       }
-      
+
       #logoImg {
          width: 50%;
       }
       /* header 반응형 끝 */
-      
+
        * {
             box-sizing: border-box;
             /*font-family: 'OTWelcomeRA';*/
         }
-        
+
         /* header 반응형 */
         @media (max-width : 768px) {
             #navLogo {
@@ -100,77 +100,91 @@
         #logoImg {
             width: 50%;
         }
-        
+
         /* header 반응형 끝 */
-        
-       /* contents 영역 */
+
+    	/* contents 영역 */
+    	#writeWrapper:not(textarea){
+    		font-family: 'InfinitySans-RegularA1';
+    	}
+
         #head{
-            background-color: #d2e3ec;
+            background-color: #EEEEEE;
             height: 100px;
-        }
-        /* #head>h1{
-           font-family: 'OTWelcomeRA';
-            margin-top: 20px;
+            border-top-left-radius: 80px;
+            border-top-right-radius: 80px;
+            border: 3px solid black;
         }
         label {
-           font-family: 'OTWelcomeRA';
             margin-top: 5px;
-        } */
-        
+        }
+
+        #bottom{
+        	background-color: #EEEEEE;
+            height: 100px;
+            border-bottom-left-radius: 80px;
+            border-bottom-right-radius: 80px;
+            border: 3px solid black;
+        }
+
         /*풋터 영역*/
       .footerBox {
          height: 0px;
       }
-      
+
       footer.footer {
          padding-top: 2rem;
          padding-bottom: 2rem;
          background-color: #ffffff;
       }
-      
+
       .footer a {
          text-decoration: none;
          color: black;
          font-weight: 40px;
          font-weight: bold;
       }
-      
+
       .footer-imgBox>img {
          width: 100%;
          height: 100%;
       }
-      
-      
+
+
         /* 눈누 폰트 */
-      @font-face {
-         font-family: 'OTWelcomeRA';
-         src:
-            url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-            format('woff2');
-         font-weight: normal;
-         font-style: normal;
-      }
-      
-      @font-face {
-         font-family: '양진체';
-         src:
-            url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-            format('woff');
-         font-weight: normal;
-         font-style: normal;
-      }
-      /* summernote에 추가할 눈누 */
-      @font-face {
-          font-family: 'EarlyFontDiary';
-          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2') format('woff2');
-          font-weight: normal;
-          font-style: normal;
-      }
-      
-      .dropdown-toggle::after {
+		@font-face {
+            font-family: 'MICEGothic Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+		    font-family: 'InfinitySans-RegularA1';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+
+		@font-face {
+			font-family: '양진체';
+			src:
+				url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
+				format('woff');
+			font-weight: normal;
+			font-style: normal;
+		}
+		/* summernote에 추가할 눈누 */
+		@font-face {
+		    font-family: 'EarlyFontDiary';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2') format('woff2');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+
+		.dropdown-toggle::after {
             display: none;
         }
-      
+
    </style>
 </head>
 <body>
@@ -255,7 +269,7 @@
                      <div class="col-auto user">
                   <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
                      <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small"
@@ -267,10 +281,10 @@
                            <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
                         </ul>
                      </div>
-                  </c:if> 
+                  </c:if>
                   <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
                      <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
                         </a>
                         <ul class="dropdown-menu text-small"
@@ -281,7 +295,7 @@
                            <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
                         </ul>
                      </div>
-                  </c:if> 
+                  </c:if>
                      </div>
                   </div>
                </div>
@@ -290,63 +304,69 @@
       </div>
    </header>
 
-   <div class="container">
-        <div id="head" class="row text-center align-items-center mb-5">
+	<div class="container" id="writeWrapper" style="width: 70%;">
+        <div id="head" class="row text-center align-items-center my-5">
             <h1>글쓰기</h1>
         </div>
-        
+
         <form id="writeForm" action="/Gboard/write" method="post">
-           <input type="hidden" id="seq_group" name="seq_group" value="${seq_group}">
-           <div class="row mt-4 text-center">
-               <div class="col-1">
-                   <label class="form-label fs-5">분류</label>
-               </div>
-               <div class="col-2">
-                  <c:choose>
-                     <%-- 관리자 계정이라면 공지 쓰기 --%>
-                     <c:when test="${loginSession.user_email eq 'admin'}">
-                        <select name="gboard_category" class="form-select selectBox" aria-label="유형">
-                             <option selected value="default">선택</option>
-                             <option value="공지">공지</option>
-                             <option value="잡담">잡담</option>
-                             <option value="모집">모집</option>
-                             <option value="후기">후기</option>
-                         </select>
-                     </c:when>
-                     <c:otherwise>
-                        <select name="gboard_category" class="form-select selectBox" aria-label="유형">
-                             <option selected value="default">선택</option>
-                             <option value="잡담">잡담</option>
-                             <option value="모집">모집</option>
-                             <option value="후기">후기</option>
-                         </select>
-                     </c:otherwise>
-                  </c:choose>
-                   
-               </div>
-               <div class="col-1">
-                   <label class="form-label fs-5">제목</label>
-               </div>
-               <div class="col-8">
-                   <input type="text" id="title" name="gboard_title" class="form-control" placeholder="제목을 입력하세요.">
-               </div>
-           </div>
-         
-           <div class="row mt-4">
-            <textarea id="summernote" name="gboard_content"></textarea>
-           </div>
-           
-           <div class="row my-4 justify-content-center">
-               <div class="col-auto">
-                   <button type="button" id="cancelBtn" class="btn btn-secondary">취소</button>
-               </div>
-               <div class="col-auto">
-                   <button type="button" id="submitBtn" class="btn btn-primary">작성 완료</button>
-               </div>
-           </div>
+        	<div id="writeDiv">
+
+	        	<input type="hidden" id="seq_group" name="seq_group" value="${seq_group}">
+		        <div class="row mt-4 text-center">
+		            <div class="col-1">
+		                <label class="form-label fs-5">분류</label>
+		            </div>
+		            <div class="col-2">
+		            	<c:choose>
+		            		<%-- 관리자 계정이라면 공지 쓰기 --%>
+		            		<c:when test="${loginSession.user_email eq 'admin'}">
+		            			<select name="gboard_category" class="form-select selectBox" aria-label="유형">
+				                    <option selected value="default">선택</option>
+				                    <option value="공지">공지</option>
+				                    <option value="가입인사">가입인사</option>
+				                    <option value="수다">수다</option>
+				                    <option value="정모">정모</option>
+				                    <option value="후기">후기</option>
+				                </select>
+		            		</c:when>
+		            		<c:otherwise>
+		            			<select name="gboard_category" class="form-select selectBox" aria-label="유형">
+				                    <option selected value="default">선택</option>
+				                    <option value="가입인사">가입인사</option>
+				                    <option value="수다">수다</option>
+				                    <option value="정모">정모</option>
+				                    <option value="후기">후기</option>
+				                </select>
+		            		</c:otherwise>
+		            	</c:choose>
+
+		            </div>
+		            <div class="col-1">
+		                <label class="form-label fs-5">제목</label>
+		            </div>
+		            <div class="col-8">
+		                <input type="text" id="title" name="gboard_title" class="form-control" placeholder="제목을 입력하세요.">
+		            </div>
+		        </div>
+
+		        <div class="row mt-4">
+					<textarea id="summernote" name="gboard_content"></textarea>
+		        </div>
+
+	        </div>
+
+	        <div class="row my-4 justify-content-center align-items-center" id="bottom">
+	            <div class="col-auto">
+	                <button type="button" id="cancelBtn" class="btn btn-light">취소</button>
+	            </div>
+	            <div class="col-auto">
+	                <button type="button" id="submitBtn" class="btn" style="background-color: #EDEDED;">작성 완료</button>
+	            </div>
+	        </div>
         </form>
    </div>
-   
+
    <!-- Footer-->
     <div class="container">
       <footer class="footer mt-5">
@@ -408,7 +428,7 @@
          </div>
       </footer>
    </div>
-   
+
    <script>
       /* summernote */
       $(document).ready(function() {
@@ -453,16 +473,16 @@
                  }
               }
          });
-         
+
          // 주기적으로 감지할 대상 요소 선정
          let target = document.querySelector(".note-editable");
-         
+
          // DOM의 어떤 부분을 감시할지를 옵션 설정
-         let config = { 
+         let config = {
             childList: true, // 자식노드 추가/제거 감지
             subtree : true, // 대상 노드의 자식 뿐만 아니라 손자 이후로 모두 감시
          };
-         
+
          // 옵저버 인스턴스 생성, 콜백함수 설정
          let observer = new MutationObserver(function(mutationList){ // 타겟에 변화가 일어나면 콜백함수를 실행하게 된다.
             //console.log(mutationList);
@@ -487,11 +507,11 @@
                   }
                }
             }
-         }); 
+         });
          // 감지 시작
          observer.observe(target, config);
       });
-      
+
       // summernote 이미지 업로드 function
       function uploadSummernoteImageFile(file, editor){
          data = new FormData();
@@ -510,11 +530,11 @@
             }
          });
       }
-      
+
       let imgArr = new Array();
       // 작성 완료 버튼
       $("#submitBtn").on("click", function(){
-         
+
          if($("#title").val() === ""){
             Swal.fire({
                icon: 'warning'
@@ -540,7 +560,7 @@
             })
             return;
          }
-         
+
          let content = $("#summernote").summernote("code");
          let regImg = /(<img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>)/g;
          let src;
@@ -550,7 +570,7 @@
          }
          console.log(imgArr);
          console.log(imgArr.length);
-         
+
          if(imgArr.length !== 0){
             for(let i = 0; i < imgArr.length; i++){
                let inputImg = $("<input>").attr({
@@ -562,7 +582,7 @@
                $("#writeForm").append(inputImg);
             };
          }
-         
+
          Swal.fire({
             icon: 'success'
             , title: '게시글이 등록되었어요!'
@@ -573,12 +593,12 @@
             }
          });
       });
-      
+
       // 취소 버튼
       $("#cancelBtn").on("click", function(){
          location.href = "/Gboard/toBoard?seq_group" + ${seq_group};
       })
-      
+
    </script>
 </body>
 </html>

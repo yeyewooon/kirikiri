@@ -11,7 +11,7 @@
    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
    crossorigin="anonymous"></script>
-   
+
 <!--구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -139,28 +139,81 @@
    background-color: #fff;
 }
 .footerBox {
-   height: 0px;
+	height: 0px;
 }
 
 footer.footer {
-   padding-top: 2rem;
-   padding-bottom: 2rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 
 .footer a {
-   text-decoration: none;
-   color: black;
-   font-weight: 40px;
-   font-weight: bold;
+	text-decoration: none;
+	color: black;
+	font-weight: 40px;
+	font-weight: bold;
 }
 
 .footer-imgBox>img {
-   height: 100%;
-   text-align:center;
+	height: 100%;
+	text-align:center;
 }
 .footer-imgBox {
-   height: 100%;
-   text-align:center;
+	height: 100%;
+	text-align:center;
+}
+/*모임 해산 버튼*/
+.deleteBtn{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 160px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  text-align: center;
+  font-family: sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: #ccc;
+  cursor:pointer;
+}
+.deleteBtn:before{
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: #ff005e;
+  color: #fff;
+  transition: 0.5s;
+  transform-origin: bottom;
+  transform: translatey(-100%) rotatex(90deg);
+}
+.deleteBtn:hover:before
+{
+  transform: translatey(0) rotatex(0deg);
+}
+
+.deleteBtn:after{
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: #ea004f;
+  color: #fff;
+  transition: 0.5s;
+  transform-origin: top;
+  transform: translatey(0) rotatex(0deg);
+}
+.deleteBtn:hover:after{
+  transform: translatey(100%) rotatex(90deg);
 }
 </style>
 </head>
@@ -247,7 +300,7 @@ footer.footer {
                      <div class="col-auto user">
 						<c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
 							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
 								</a>
 								<ul class="dropdown-menu text-small"
@@ -259,10 +312,10 @@ footer.footer {
 								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 								</ul>
 							</div>
-						</c:if> 
+						</c:if>
 						<c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
 							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
 								</a>
 								<ul class="dropdown-menu text-small"
@@ -273,7 +326,7 @@ footer.footer {
 								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 								</ul>
 							</div>
-						</c:if> 
+						</c:if>
                      </div>
                   </div>
                </div>
@@ -323,21 +376,21 @@ footer.footer {
 						<img src="/resources/images/group/group_ban.png">
 					</div>
 				</div>
-			</div>
-
-			<div class="row">
-				<div class="col d-flex justify-content-center">
-					<button type="button" class="btn btn-danger btn-lg m-3"
-						id="deleteBtn">모임 해산하기</button>
+				<div class="row">
+					<div class="col-md-12 d-flex justify-content-center">
+						<div data-text="모임 해산하기" id = "deleteBtn" class = "deleteBtn">모임 해산하기</div>
+					</div>
 				</div>
 			</div>
+
 		</div>
 		<!-- 그룹번호 숨겨서 받기 -->
 		<div class="d-none">
 			<input type="text" value="${seq_group}" name="seq_group" id="seq_group">
 		</div>
-	  <!-- Footer-->
-  <div class="footerWrapper" style="border-top : 1px solid #e0e3e8;">
+	</div>
+<!-- Footer-->
+  <div class="footerWrapper">
     <div class="container">
       <footer class="footer">
         <div class="row">
@@ -345,36 +398,36 @@ footer.footer {
             <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
           </div>
           <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-             <ul class="list-inline mb-2">
-            <li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
-            <li class="list-inline-item">⋅</li>
-            <c:choose>
-               <c:when test="${not empty loginSession}">
-                  <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-                  <li class="list-inline-item">⋅</li>
-                  <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-               </c:when>
-               <c:otherwise>
-                  <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-                  <li class="list-inline-item">⋅</li>
-                  <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-               </c:otherwise>
-            </c:choose>
-            <li class="list-inline-item">⋅</li>
-            <li class="list-inline-item">
-               <c:choose>
-                  <c:when test="${not empty loginSession}">
-                     <a href="/group/toCreateGroup">모임 만들기</a>
-                  </c:when>
-                  <c:otherwise>
-                     <a href="/login/toLogin">모임 만들기</a>
-                  </c:otherwise>
-               </c:choose>
-            </li>
-            <li class="list-inline-item">⋅</li>
-            <li class="list-inline-item"><a href="/privacy"
-               style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-         </ul>
+          	<ul class="list-inline mb-2">
+				<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+				<li class="list-inline-item">⋅</li>
+				<c:choose>
+					<c:when test="${not empty loginSession}">
+						<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+					</c:otherwise>
+				</c:choose>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item">
+					<c:choose>
+						<c:when test="${not empty loginSession}">
+							<a href="/group/toCreateGroup">모임 만들기</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/login/toLogin">모임 만들기</a>
+						</c:otherwise>
+					</c:choose>
+				</li>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item"><a href="/privacy"
+					style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+			</ul>
             <p class="text-muted small mb-4 mb-lg-0">
               끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
               사업자등록번호 : 22-02-22
@@ -388,39 +441,39 @@ footer.footer {
           </div>
           <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
             <ul class="list-inline mb-0">
-            <li class="list-inline-item me-4"><a
-               href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-            <li class="list-inline-item me-4"><a
-               href="https://twitter.com/?lang=ko"><i
-                  class="bi-twitter fs-3"></i></a></li>
-            <li class="list-inline-item"><a
-               href="https://www.instagram.com/"><i
-                  class="bi-instagram fs-3"></i></a></li>
+				<li class="list-inline-item me-4"><a
+					href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+				<li class="list-inline-item me-4"><a
+					href="https://twitter.com/?lang=ko"><i
+						class="bi-twitter fs-3"></i></a></li>
+				<li class="list-inline-item"><a
+					href="https://www.instagram.com/"><i
+						class="bi-instagram fs-3"></i></a></li>
             </ul>
           </div>
         </div>
       </footer>
     </div>
-  </div> 
+  </div>
 </body>
 <script>
 	// 멤버관리 페이지 이동
 	$("#groupMember").on("click", function(){
 		location.href = "/group/toGroupMember?seq_group="+$("#seq_group").val();
-	})	
+	})
 	// 모임가입 페이지 이동
 	$("#groupApply").on("click", function(){
 		location.href = "/group/toGroupApply?seq_group="+$("#seq_group").val();
-	})	
+	})
 	// 모임수정 이동
 	$("#groupModify").on("click", function(){
 		location.href = "/group/toModifyGroup?seq_group="+$("#seq_group").val();
-	})	
+	})
 	// 모임해산 페이지 이동
 	$("#groupDelete").on("click", function(){
 		location.href = "/group/toGroupDelete?seq_group="+$("#seq_group").val();
-	})	
-	
+	})
+
 	// 모임 해산시키기
 	$("#deleteBtn").on("click", function(){
 			Swal.fire({
@@ -440,7 +493,7 @@ footer.footer {
 					}).css("display", "none");
 					deleteForm.append($("#seq_group"));
 					deleteForm.appendTo("body");
-					deleteForm.submit(); 
+					deleteForm.submit();
 			  }
 			})
 		})

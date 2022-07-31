@@ -416,7 +416,7 @@ canvas {
 		</div>
 		<div class="row">
 			<div class="col">
-				<button type="button" id="toLoginBtn" class="btn btn-primary">로그인
+				<button type="button" id="toLoginBtn" class="btn btn-outline-primary">로그인
 					후 즐기기</button>
 			</div>
 		</div>
