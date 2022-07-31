@@ -221,7 +221,7 @@ td>a {
 						class="fa-solid fa-users-rectangle"></i><br> <span>회원
 							관리</span>
 				</a></li>
-				<li class="sidemenu"><a href="#"> <i
+				<li class="sidemenu"><a href="/admin/toBoard?curPage=1"> <i
 						class="fa-solid fa-table"></i><br> <span>게시물 관리</span>
 				</a></li>
 				<li class="sidemenu groupMenu"><a href="/admin/toGroupAdmin?curPage=1"> <i

@@ -21,181 +21,204 @@
 	integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
 	crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Black+Han+Sans&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
 <style>
-* {
-	box-sizing: border-box;
-}
-
-#mainText {
-	font-family: "양진체";
-}
-/* benu */
-/* header 반응형 */
-@media ( max-width : 768px) {
-	#navLogo {
-		display: none;
+ 	* {
+     box-sizing: border-box;
+     font-family: 'MICEGothic Bold';
+	 }
+	
+	 /* navi bar */
+	 /* header 반응형 */
+	 @media (max-width : 768px) {
+	     #navLogo {
+	         display: none;
+	     }
+	
+	     #myPageIcon {
+	         display: none;
+	     }
+	
+	     #cartIcon {
+	         display: none;
+	     }
+	
+	     #menu {
+	         display: none;
+	     }
+	 }
+	
+	 /* header */
+	 #navLogo {
+	     width: 150px;
+	     height: 100px;
+	 }
+	
+	 #logoImgs {
+	     width: 100%;
+	     height: 100%;
+	 }
+	
+	 @media (min-width : 768px) {
+	     #navibar {
+	         display: none;
+	     }
+	 }
+	
+	
+	 /* header 반응형 끝 */
+	 #logoImg {
+	     width: 50%;
+	 }
+	
+	 /* 맨 위 프로필+게시글 수 부분 */
+	 .topHeader {
+	     background-color: #e7f3fad0;
+	     width: 100%;
+	     padding : 30px;
+	 }
+	 
+	 .profiles{
+	     background-color: #ffffff8e;
+	     padding : 35px;
+	     height: max-content;
+	     border-radius:20px;
+	 }
+	.profileTitle {
+		position: relative;
 	}
-	#myPageIcon {
-		display: none;
+	
+	.line {
+		border: none;
+		background-color: rgb(102, 154, 209, 0.5);
+		margin-top: 10px;
+		width: 180px;
+		position: absolute;
+		top: 16px;
+		height: 20px;
+		box-shadow: 3px 2px 2px rgb(25, 104, 184);
 	}
-	#cartIcon {
-		display: none;
+	
+	h1 {
+		margin: 0;
+		font-weight: 600;
+		z-index: 9999;
 	}
-	#menu {
-		display: none;
-	}
-}
-
-/* header */
-#navLogo {
-	width: 150px;
-	height: 100px;
-}
-
-#logoImgs {
-	width: 100%;
-	height: 100%;
-}
-
-@media ( min-width : 768px) {
-	#navibar {
-		display: none;
-	}
-}
-
-/* header 반응형 끝 */
-#logoImg {
-	width: 50%;
-}
-
-.header {
-	background-color: #d2e3ec;
-	justify-content: end;
-	width: 100%;
-}
-
-h2 {
-	margin-top: 100px;
-}
-
-.line {
-	border: 2px solid rgb(57, 88, 122);
-	margin-top: 10px;
-	width: 180px;
-	box-shadow: 3px 2px 2px rgb(25, 104, 184);
-}
-/* header 부분 */
-.header {
-	background-color: #d2e3ec;
-	justify-content: start;
-	width: 100%;
-}
-
-.profile {
-	margin: auto;
-}
-
-#profile_image {
-	width: 100%;
-	height: 100%;
-	border-radius: 50%;
-}
-
-#profilePic {
-	border: 0.1rem solid black;
-	margin: auto;
-	width: 200px;
-	height: 200px;
-	border-radius: 50%;
-	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
-}
-
-#profilePic:hover {
-	transition: 0.8s ease-in;
-	transform: scale(1.1);
-}
-
-#profilePic:not(:hover) {
-	transition: 0.8s ease-out;
-}
-
-#profileName {
-	font-size: 1.5em;
-}
-
-hr {
-	margin-top: 80px;
-}
-/* body */
-.pagination {
-	justify-content: center;
-}
-
-#memberDelete {
-	cursor: pointer;
-}
-
-.table { 
-	--bs-table-striped-bg: rgba(23, 109, 167, 0.05);
-}
-
-.Board {
-	cursor: pointer;
-}
-.genal, .meeting{
-	margin-top: 20px;
-	align-items: center;
-}
-.genal span,.meeting span{
-	cursor:pointer;
-}
-/*풋터 영역*/
-.footerBox {
-   height: 0px;
-}
-
-footer.footer {
-   padding-top: 2rem;
-   padding-bottom: 2rem;
-   background-color: #ffffff;
-}
-
-.footer a {
-   text-decoration: none;
-   color: black;
-   font-weight: 40px;
-   font-weight: bold;
-}
-
-.footer-imgBox>img {
-   width: 100%;
-   height: 100%;
-}
-
-/* 눈누 폰트 */
-@font-face {
-	font-family: "OTWelcomeRA";
-	src:
-		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2")
-		format("woff2");
-	font-weight: normal;
-	font-style: normal;
-}
-
-@font-face {
-	font-family: "양진체";
-	src:
-		url("https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff")
-		format("woff");
-	font-weight: normal;
-	font-style: normal;
-}
+	 .profile {
+	     margin: auto;
+	 }
+	
+	 #profile_image {
+	     width: 100%;
+	     height: 100%;
+	     border-radius: 50%;
+	 }
+	
+	 #profilePic {
+	     border: 0.1rem solid black;
+	     margin: auto;
+	     width: 230px;
+	     height: 230px;
+	     border-radius: 50%;
+	     box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
+	 }
+	
+	 #profilePic:hover {
+	     transition: 0.8s ease-in;
+	     transform: scale(1.1);
+	 }
+	
+	 #profilePic:not(:hover) {
+	     transition: 0.8s ease-out;
+	 }
+	
+	 #profileName {
+	     font-size: 1.5em;
+	     border-bottom: 3px solid navy;
+	     padding-bottom: 9px;
+	     margin-bottom: 12px;
+	     min-width: 350px;
+	     max-width: 460px;
+	     text-align: center;
+	 }
+	
+	 hr {
+	     margin-top: 20px;
+	     margin-bottom : 0;
+	 }
+	
+	 /* body */
+	 .contentBox{
+	 	padding : 50px;
+	 	margin-left : 20px;
+	 	margin-right : 20px;
+	 }
+	 .pagination {
+	     justify-content: center;
+	 }
+	
+	 #memberDelete {
+	     cursor: pointer;
+	 }
+	
+	 .table {
+	     --bs-table-striped-bg: rgba(23, 109, 167, 0.05);
+	 }
+	
+	 .Board {
+	     cursor: pointer;
+	 }
+	
+	 .genal,
+	 .meeting {
+	     margin-top: 20px;
+	     align-items: center;
+	 }
+	
+	 .genal span,
+	 .meeting span {
+	     cursor: pointer;
+	 }
+	
+	 /*풋터 영역*/
+	 .footerBox {
+	     height: 0px;
+	 }
+	
+	 footer.footer {
+	     padding-top: 2rem;
+	     padding-bottom: 2rem;
+	     background-color: #ffffff;
+	 }
+	
+	 .footer a {
+	     text-decoration: none;
+	     color: black;
+	     font-weight: 40px;
+	     font-weight: bold;
+	 }
+	
+	 .footer-imgBox>img {
+	     width: 100%;
+	     height: 100%;
+	 }
+	
+	 /* 눈누 폰트 */
+	 @font-face {
+	     font-family: 'MICEGothic Bold';
+	     src:
+	         url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+	     font-weight: 700;
+	     font-style: normal;
+	 }
 </style>
 </head>
 <body>
-	<!-- page Benu -->
+	<!-- page menu -->
 	<!--네비바-->
-        <header class="mb-3 border-bottom">
+        <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -312,37 +335,45 @@ footer.footer {
    </header>
 	<div class="container py-5">
 		<!-- header 부분 -->
-		<div class="row header">
-			<div class="col-md-6 mt-3 mb-4">
-				<div id="profilePic">
-					<c:choose>
-						<c:when test="${empty memberdto.user_image}">
-							<img src="/resources/images/default_profile.jpg"
-								id="profile_image">
-						</c:when>
-						<c:otherwise>
-							<img src="/profile/${memberdto.user_image}" id="profile_image">
-						</c:otherwise>
-					</c:choose>
+		<div class="row m-0 topHeader">
+            	<div class="row profileTitle mb-5 text-center justify-content-center" style="font-family: 'Mochiy Pop One', sans-serif;">
+					<h1 style="font-family: 'Mochiy Pop One', sans-serif;">내가 쓴 글</h1>
+					<div class="line"></div>
 				</div>
-			</div>
-			<div class="col-md-5 mt-4">
-				<div class="col-12 mt-3" id="profileName">
-					<strong>${memberdto.user_name}</strong> <span style="font-size: 15px">님</span>
-				</div>
-				<div class="col-12 mt-3" id="totalCount">
-					<i class="fa-solid fa-file-pen"></i> <span> 전체 게시글 : </span> <span>
-						${totalBoardCount}</span>
-				</div>
-				<div class="col-12 mt-3" id="boardCount">
-					<i class="fa-solid fa-file-pen"></i> <span> 일반 게시글 : </span> <span>${selectBoardCount}</span>
-				</div>
-				<div class="col-12 mt-3" id="roomCount">
-					<i class="fa-solid fa-file-pen"></i> <span> 모임 게시글 : </span> <span>
-						${selectGroupBoardCount}</span>
-				</div>
-			</div>
-		</div>
+                <div class="col-md-6 mt-3 mb-4 d-flex justify-content-center">
+                    <div id="profilePic">
+                        <c:choose>
+                            <c:when test="${empty memberdto.user_image}">
+                                <img src="/resources/images/default_profile.jpg" id="profile_image">
+                            </c:when>
+                            <c:otherwise>
+                                <img src="/profile/${memberdto.user_image}" id="profile_image">
+                            </c:otherwise>
+                        </c:choose>
+                    </div>
+                </div>
+                <div class="col-md-5 profiles">
+                    <div class="col-12" id="profileName">
+                        <strong>${memberdto.user_nickname}</strong> 
+                        <span style="font-size: 15px">님</span>
+                    </div>
+                    <div class="col-12 p-2" id="totalCount">
+                        <i class="fa-solid fa-file-pen"></i> 
+                        <span> 전체 게시글 : </span> 
+                        <span>${totalBoardCount} 건</span>
+                    </div>
+                    <div class="col-12 p-2" id="boardCount">
+                        <i class="fa-solid fa-file-pen"></i> 
+                        <span> 일반 게시글 : </span> 
+                        <span>${selectBoardCount} 건</span>
+                    </div>
+                    <div class="col-12 p-2" id="roomCount">
+                        <i class="fa-solid fa-file-pen"></i> 
+                        <span> 모임 게시글 : </span> 
+                        <span>${selectGroupBoardCount} 건</span>
+                    </div>
+                </div>
+            </div>
 		<hr />
 		<form id="searchForm">
 			<div class="row">	
@@ -497,78 +528,72 @@ footer.footer {
 					endIdx = data.length;
 				}
 				
-				for (let i=startIdx; i < endIdx; i++) {
-                    const dto = data[i];
-                     let tr = $("<tr>");
-                     let td1 = $("<td>").append(type);
-                     let td2;
-                     let td3;
-                     let td4;
-                     let td5;
-                     let td6;
-                     let a;
-                     let span = $("<span>");
-                     if (type === "일반") {
-                       td2 = $("<td>");
-                       a = $("<a>");
-                       a.attr('href','/board/toDetailView?seq_board=' + dto.seq_board)
-                       a.css({
-                          'color':'black',
-                          'text-decoration':'none',
-                       })
-                       a.append(dto.board_title);
-                       a.appendTo(td2);
-                       
-                       td3 = $("<td>").append(dto.board_date);
-                       td4 = $("<td>").append(dto.board_count);
-                       td5 = $("<td>");
-                       td5.attr("id", "icon");
+				 for (let i=startIdx; i < endIdx; i++) {
+			        	const dto = data[i];
+			            let tr = $("<tr>");
+			            let td1 = $("<td>").append(type);
+			            let td2;
+			            let td3;
+			            let td4;
+			            let td5;
+			            let td6;
+			            let a;
+			            let span = $("<span>");
+			            if (type === "일반") {
+			                td2 = $("<td>");
+			                a = $("<a>");
+			                a.attr('href','/board/toMyDetailWrite?seq_board=' + dto.seq_board)
+			                a.append(dto.board_title);
+			                a.appendTo(td2);
+			                
+			                td3 = $("<td>").append(dto.board_date);
+			                td4 = $("<td>").append(dto.board_count);
+			                td5 = $("<td>");
+			                td5.attr("id", "icon");
 
-                       let i = $("<i>");
-                       i.addClass("fa-solid fa-trash");
-                       span.append(i);
-                       td5.append(span);
+			                let i = $("<i>");
+			                i.addClass("fa-solid fa-trash");
+			                span.append(i);
+			                td5.append(span);
 
-                       td6 = $("<td>").append(dto.seq_board);
-                       td6.addClass("d-none");
-                       td6.attr("id", "seq_board");
+			                td6 = $("<td>").append(dto.seq_board);
+			                td6.addClass("d-none");
+			                td6.attr("id", "seq_board");
 
-                       span.addClass("text-center boardDelete");
-                       span.css("cursor", "pointer");
-                       span.on("click", function () {
-                         boardDelete(this, "/admin/boardDelete", "seq_board");
-                       });
-                     } else if (type === "모임") {
-                         td2 = $("<td>");
-                       a = $("<a>");
-                       a.attr('href','/board/toDetailView?seq_board=' + dto.seq_board)
-                       a.css({
-                          'color':'black',
-                          'text-decoration':'none',
-                       })
-                       a.append(dto.title);
-                       a.appendTo(td2);
-                       
-                       td3 = $("<td>").append(dto.written_date);
-                       td4 = $("<td>").append(dto.view_count);
-                       td5 = $("<td>");
-                       td5.attr('id', 'icon');
+			                span.addClass("text-center boardDelete");
+			                span.css("cursor", "pointer");
+			                span.on("click", function () {
+			                  boardDelete(this, "/admin/boardDelete", "seq_board");
+			                });
+			              } else if (type === "모임") {
+			            	  
+			             	td2 = $("<td>");
+			                a = $("<a>");
+			                a.attr('href','/group_board/toMyDetailWrite?seq_board=' + dto.seq_board)
+			                a.append(dto.title);
+			                a.appendTo(td2);
+			                
+			                td3 = $("<td>").append(dto.written_date);
+			                td4 = $("<td>").append(dto.view_count);
+			                td5 = $("<td>");
+			                td5.attr('id', 'icon');
 
-                       let i = $("<i>");
-                       i.addClass("fa-solid fa-trash");
-                       span.append(i);
-                       td5.append(span);
+			                let i = $("<i>");
+			                i.addClass("fa-solid fa-trash");
+			                span.append(i);
+			                td5.append(span);
 
-                       td6 = $("<td>").append(dto.seq_group_board);
-                       td6.addClass("d-none");
-                       td6.attr('id', 'seq_group_board');
+			                td6 = $("<td>").append(dto.seq_group_board);
+			                td6.addClass("d-none");
+			                td6.attr('id', 'seq_group_board');
 
-                       span.addClass("text-center boardGroupDelete");
-                       span.css("cursor", "pointer");
-                       span.on("click", function () {
-                         boardDelete(this, "/admin/groupBoardDelete", "seq_groud_board");
-                       });
-                     }
+			                span.addClass("text-center boardGroupDelete");
+			                span.css("cursor", "pointer");
+			                span.on("click", function () {
+			                  boardDelete(this, "/admin/groupBoardDelete", "seq_groud_board");
+			                });
+			              }
+
 					
 					tr.append(td1, td2, td3, td4, td5, td6, td7);
 					tr.appendTo("tbody");
@@ -625,29 +650,29 @@ footer.footer {
 		}
 
 		</script>
-		<div class="row body py-3" style="border-top-width: 0px">
+		<div class="row body py-3" style="border-top-width: 0px;">
 			<table class="table table-striped memberTable text-center mt-3"
 				id="tableBox">
 				<thead>
 					<tr>
-                      <th scope="col">유형</th>
-	                  <th scope="col">제목</th>
-	                  <th scope="col">작성일</th>
-	                  <th scope="col">조회수</th>
-	                  <th scope="col">삭제</th>
-                   </tr>
+		                <th scope="col">유형</th>
+						<th scope="col">제목</th>
+						<th scope="col">작성일</th>
+						<th scope="col">조회수</th>
+						<th scope="col">삭제</th>
+             		</tr>
 				</thead>
 				<tbody>
 					 <c:forEach items="${list}" var="selectBoardList">
-					 	   <tr>
-		                       <td>일반</td>
-		                       <td><a href="/board/toDetailView?seq_board=${selectBoardList.seq_board}" style="color:black; text-decoration:none;">${selectBoardList.board_title}</a></td>
-		                       <td>${selectBoardList.board_date}</td>
-		                       <td>${selectBoardList.board_count}</td>
-		                       <td id="icon"><span class="text-center boardDelete" style="cursor:pointer;"
-		                          id="boardDelete"><i class="fa-solid fa-trash"></i></span></td>
-		                       <td class="d-none" id="seq_board">${selectBoardList.seq_board}</td>
-               			   </tr>
+					 	<tr>
+					 		<td>일반</td>
+							<td><a href="/board/toDetailView?seq_board=${selectBoardList.seq_board}" style="color:black; text-decoration:none;">${selectBoardList.board_title}</a></td>
+							<td>${selectBoardList.board_date}</td>
+							<td>${selectBoardList.board_count}</td>
+							<td id="icon"><span class="text-center boardDelete" style="cursor:pointer;"
+								id="boardDelete"><i class="fa-solid fa-trash"></i></span></td>
+							<td class="d-none" id="seq_board">${selectBoardList.seq_board}</td>
+						</tr>
 					</c:forEach>
 				</tbody>
 			</table>

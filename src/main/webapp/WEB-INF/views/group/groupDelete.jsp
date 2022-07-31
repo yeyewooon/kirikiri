@@ -101,9 +101,14 @@
     margin-bottom: 10px;
 }
 /*버튼 색 지정*/
-.btn-primary{
-background-color:cornflowerblue;
-border-color:cornflowerblue;
+.btn-primary {/*버튼 4개*/
+   background-color: cornflowerblue;
+   border-color: cornflowerblue;
+}
+.btn-primary:hover{ /*버튼 4개*/
+	color: #fff;
+    background-color: #5680CC;
+    border-color: #5680CC;
 }
 
 /*모임 해산 문구 및 사진*/
@@ -131,27 +136,81 @@ border-color:cornflowerblue;
 
 /*풋터 영역*/
 .footerBox {
-   height: 0px;
+	height: 0px;
 }
 
 footer.footer {
-   padding-top: 2rem;
-   padding-bottom: 2rem;
-   background-color: #ffffff;
-   width: fit-content;
-    margin: auto;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 
 .footer a {
-   text-decoration: none;
-   color: black;
-   font-weight: 40px;
-   font-weight: bold;
+	text-decoration: none;
+	color: black;
+	font-weight: 40px;
+	font-weight: bold;
 }
 
 .footer-imgBox>img {
-   width: 100%;
-   height: 100%;
+	height: 100%;
+	text-align:center;
+}
+.footer-imgBox {
+	height: 100%;
+	text-align:center;
+}
+/*모임 해산 버튼*/
+.deleteBtn{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 160px;
+  height: 50px;
+  line-height: 50px;
+  font-size: 20px;
+  text-align: center;
+  font-family: sans-serif;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background: #ccc;
+  cursor:pointer;
+}
+.deleteBtn:before{
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: #ff005e;
+  color: #fff;
+  transition: 0.5s;
+  transform-origin: bottom;
+  transform: translatey(-100%) rotatex(90deg);
+}
+.deleteBtn:hover:before
+{
+  transform: translatey(0) rotatex(0deg);
+}
+
+.deleteBtn:after{
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  background: #ea004f;
+  color: #fff;
+  transition: 0.5s;
+  transform-origin: top;
+  transform: translatey(0) rotatex(0deg);
+}
+.deleteBtn:hover:after{
+  transform: translatey(100%) rotatex(90deg);
 }
 </style>
 </head>
@@ -279,19 +338,19 @@ footer.footer {
 			<div class="row rowBtn">
 					<div class="col-md-3 btnBox">
 						<button type="button" class="btn btn-primary btn-lg"
-							id="groupApply">가입 신청</button>
+							id="groupApply" style="font-weight: bold;">가입 신청</button>
 					</div>
 					<div class="col-md-3 btnBox">
 						<button type="button" class="btn btn-primary btn-lg"
-							id="groupMember">멤버 관리</button>
+							id="groupMember" style="font-weight: bold;">멤버 관리</button>
 					</div>
 					<div class="col-md-3 btnBox">
 						<button type="button" class="btn btn-primary btn-lg"
-							id="groupModify">모임 수정</button>
+							id="groupModify" style="font-weight: bold;">모임 수정</button>
 					</div>
 					<div class="col-md-3 btnBox">
 						<button type="button" class="btn btn-primary btn-lg"
-							id="groupDelete">모임 해산</button>
+							id="groupDelete" style="font-weight: bold;">모임 해산</button>
 					</div>
 			</div>
 			<!-- 해산 문구 및 사진 -->
@@ -314,78 +373,85 @@ footer.footer {
 						<img src="/resources/images/group/group_ban.png">
 					</div>
 				</div>
-			</div>
-
-			<div class="row">
-				<div class="col d-flex justify-content-center">
-					<button type="button" class="btn btn-danger btn-lg m-3"
-						id="deleteBtn">모임 해산하기</button>
+				<div class="row">
+					<div class="col-md-12 d-flex justify-content-center">
+						<div data-text="모임 해산하기" id = "deleteBtn" class = "deleteBtn">모임 해산하기</div>
+					</div>
 				</div>
 			</div>
+
 		</div>
 		<!-- 그룹번호 숨겨서 받기 -->
 		<div class="d-none">
 			<input type="text" value="${seq_group}" name="seq_group" id="seq_group">
 		</div>
-		<!-- Footer-->
-		<footer class="footer mt-5">
-			<div class="row">
-				<div class="col-lg-3 footer-imgBox">
-					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-				</div>
-				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
-						<li class="list-inline-item">⋅</li>
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-							</c:otherwise>
-						</c:choose>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item">
-							<c:choose>
-								<c:when test="${not empty loginSession}">
-									<a href="/group/toCreateGroup">모임 만들기</a>
-								</c:when>
-								<c:otherwise>
-									<a href="/login/toLogin">모임 만들기</a>
-								</c:otherwise>
-							</c:choose>
-						</li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="/privacy"
-							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-					</ul>
-					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-						57 이레빌딩</p>
-					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-						2022. All Rights Reserved.</p>
-				</div>
-				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-					<ul class="list-inline mb-0">
-						<li class="list-inline-item me-4"><a
-							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-						<li class="list-inline-item me-4"><a
-							href="https://twitter.com/?lang=ko"><i
-								class="bi-twitter fs-3"></i></a></li>
-						<li class="list-inline-item"><a
-							href="https://www.instagram.com/"><i
-								class="bi-instagram fs-3"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</footer>
 	</div>
+<!-- Footer-->
+  <div class="footerWrapper">
+    <div class="container">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-lg-3 footer-imgBox">
+            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+          	<ul class="list-inline mb-2">
+				<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+				<li class="list-inline-item">⋅</li>
+				<c:choose>
+					<c:when test="${not empty loginSession}">
+						<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+					</c:otherwise>
+				</c:choose>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item">
+					<c:choose>
+						<c:when test="${not empty loginSession}">
+							<a href="/group/toCreateGroup">모임 만들기</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/login/toLogin">모임 만들기</a>
+						</c:otherwise>
+					</c:choose>
+				</li>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item"><a href="/privacy"
+					style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+			</ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
+              사업자등록번호 : 22-02-22
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2022. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-0">
+				<li class="list-inline-item me-4"><a
+					href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+				<li class="list-inline-item me-4"><a
+					href="https://twitter.com/?lang=ko"><i
+						class="bi-twitter fs-3"></i></a></li>
+				<li class="list-inline-item"><a
+					href="https://www.instagram.com/"><i
+						class="bi-instagram fs-3"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div> 	
 </body>
 <script>
 	// 멤버관리 페이지 이동
@@ -407,19 +473,27 @@ footer.footer {
 	
 	// 모임 해산시키기
 	$("#deleteBtn").on("click", function(){
-		let answer = confirm("정말 해산하시겠습니까?");
-		console.log($("#seq_group").val());
-		
-		if(answer){ 
-			let deleteForm = $("<form>").attr({
-				"method" : "post"
-				, "action" : "/group/groupDelete"
-			}).css("display", "none");
-			deleteForm.append($("#seq_group"));
-			deleteForm.appendTo("body");
-			deleteForm.submit();
-		}
-	})
+			Swal.fire({
+			  title: '모임을 해산하시겠습니까???',
+			  text: "해산하시면 다시 복구시킬 수 없습니다.",
+			  icon: 'warning',
+			  showCancelButton: true,
+			  confirmButtonColor: '#3085d6',
+			  cancelButtonColor: '#d33',
+			  confirmButtonText: '해산하기',
+			  cancelButtonText: '다시생각하기'
+			}).then((result) => {
+			  if (result.value) {
+				  let deleteForm = $("<form>").attr({
+						"method" : "post"
+						, "action" : "/group/groupDelete"
+					}).css("display", "none");
+					deleteForm.append($("#seq_group"));
+					deleteForm.appendTo("body");
+					deleteForm.submit(); 
+			  }
+			})
+		})
 
 </script>
 </html>

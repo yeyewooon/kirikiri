@@ -55,24 +55,24 @@ public class AdminController {
 
    }
 
-   @RequestMapping(value="/toReport") //신고하기->블랙리스트테이블로 등록
-   @ResponseBody
-   public String toReport(@RequestParam(value="seqArray[]") List<Integer> seqArray) throws Exception{
-      ReportDTO rdto = new ReportDTO();
-      BlackListDTO bdto = new BlackListDTO();
-      if(seqArray.size()==0) {
-         return "fail";
-      }else {
-         for(int seq_report : seqArray) {
-               rdto = service.selectReportBySeq(seq_report);
-               bdto = new BlackListDTO(0, rdto.getUser_email(), null, rdto.getReport_reason());
-               service.insertBl(bdto);
-               service.deleteReport(seq_report);
-               service.updateBl(rdto.getUser_email());
-           }
-         return "success";
-      }
-   }
+	   @RequestMapping(value="/toReport") //신고하기->블랙리스트테이블로 등록
+	   @ResponseBody
+	   public String toReport(@RequestParam(value="seqArray[]") List<Integer> seqArray) throws Exception{
+	      ReportDTO rdto = new ReportDTO();
+	      BlackListDTO bdto = new BlackListDTO();
+	      if(seqArray.size()==0) {
+	         return "fail";
+	      }else {
+	         for(int seq_report : seqArray) {
+	               rdto = service.selectReportBySeq(seq_report);
+	               bdto = new BlackListDTO(0, rdto.getReport_receive(), null, rdto.getReport_reason());
+	               service.insertBl(bdto);
+	               service.deleteReport(seq_report);
+	               service.updateBl(rdto.getReport_receive());
+	           }
+	         return "success";
+	      }
+	   }
 
    @RequestMapping(value="/toReportDelete") //신고 삭제-> 블랙리스트등록XX
    @ResponseBody
@@ -123,16 +123,16 @@ public class AdminController {
    // 모임 관리 가기(모임 전체 조회)
    @RequestMapping(value = "/toGroupAdmin")
    public String toGroupAdmin(int curPage, Model model) throws Exception{
-   
+
    List<Tbl_GroupDTO> groupList = service.selectAllGroup(curPage*7-6, curPage*7);
    model.addAttribute("groupList", groupList);
-   
+
    HashMap<String, Object> map = service.getPageNaviGroup(curPage);
    model.addAttribute("naviMap", map);
-   
+
    int totalCnt = service.selectGroupCnt();
    model.addAttribute("groupCnt", totalCnt);
-   
+
    return"admin/adminGroup";
    }
    // 모임 검색
@@ -143,14 +143,14 @@ public class AdminController {
    for ( String key : searchMap.keySet() ) {
    searchList.add(String.valueOf(searchMap.get(key)));
    }
-   
+
    List<Tbl_GroupDTO> slist = service.searchGroup(searchList.get(0), searchList.get(1));
-   
+
    String json = new Gson().toJson(slist);
    response.setCharacterEncoding("utf-8");
    response.getWriter().write(json);
    }
-   
+
    // 모임 삭제
    @RequestMapping(value = "/toDeleteGroup")
    public String deleteGroup(int seq_group) throws Exception{
@@ -162,21 +162,21 @@ public class AdminController {
       public String toBoard(int curPage, Model model) throws Exception{
          System.out.println("curPage : "+curPage);
          System.out.println("게시물 관리 페이지");
-   
+
          // board curPage로 자라서 list 가져오기
          List<BoardDTO> list = service.selectBoard(curPage*10-9, curPage*10);
          model.addAttribute("list",list);
-   
+
          // board 총 count 가져오기
          int boardCnt = service.selectBoardCount();
-   
+
          // group_board 총 count 가져오기
          int group_boardCnt = service.selectGroupBoardCount();
-   
+
          int totalCnt = boardCnt + group_boardCnt;
          System.out.println(totalCnt);
          model.addAttribute("totalCnt",totalCnt);
-   
+
          // 페이지 네이션
          HashMap<String, Object> map = service.getBoardPageNavi(curPage);
          model.addAttribute("naviMap", map);
@@ -234,33 +234,32 @@ public class AdminController {
       return "success";
    }
 
+	// 김영완 07_22
+	@RequestMapping(value = "/toAdmin")
+	public String toAdminMain(Model model) throws Exception {
+		// 카카오맵
+		List<AdminMainDTO> locationList = service.selectAllGroupLocation();
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonLocationList = mapper.writeValueAsString(locationList);
 
+		List<AdminMainDTO> cntGroupCalList = service.cntGroupCalendar(); // 그룹 수
+		int cntMember = service.cntMember() - 1; // 멤버 수(관리자 제외)
+		int cntGroupCnt = service.cntGroupCnt(); // 모임 수
+		int cntBoard =  service.cntBoard(); // 게시글 수(자유게시판)
+		int cntGroupBoard =  service.cntGroupBoard(); // 게시글 수(모임게시판)
+		int totalBoardCnt = cntBoard + cntGroupBoard; // 전체 게시글 수
+		int cntGroupCal = service.cntGroupCal(); // 일정수
+		List<SiteDTO> cntPreLocationList = service.cntPreLocation(); // 선호지역 수
+		List<Login_LogDTO> cntLoginLogList = service.cntLoginLog(); // 로그인 로그 수
 
-
-   // 김영완 07_22
-   @RequestMapping(value = "/toAdmin")
-   public String toAdminMain(Model model) throws Exception {
-      // 카카오맵
-      List<AdminMainDTO> locationList = service.selectAllGroupLocation();
-      ObjectMapper mapper = new ObjectMapper();
-      String jsonLocationList = mapper.writeValueAsString(locationList);
-
-      List<AdminMainDTO> cntGroupCalList = service.cntGroupCalendar(); // 그룹 수
-      //int cntMember = service.cntMember(); // 멤버 수
-      int cntGroupCnt = service.cntGroupCnt(); // 모임 수
-      // int cntBoard = service.cntBoard(); // 게시글 수(자유게시판)
-      //int cntGroupBoard = service.cntGroupBoard(); // 게시글 수(모임게시판)
-      int cntGroupCal = service.cntGroupCal(); // 일정수
-      List<SiteDTO> cntPreLocationList = service.cntPreLocation(); // 선호지역 수
-      List<Login_LogDTO> cntLoginLogList = service.cntLoginLog(); // 로그인 로그 수
-
-      model.addAttribute("jsonLocationList",jsonLocationList);
-      model.addAttribute("cntGroupCalList",cntGroupCalList);
-      //model.addAttribute("cntMember",cntMember);
-      model.addAttribute("cntGroupCnt",cntGroupCnt);
-      model.addAttribute("cntGroupCal",cntGroupCal);
-      model.addAttribute("cntPreLocationList",cntPreLocationList);
-      model.addAttribute("cntLoginLogList",cntLoginLogList);
-      return "/admin/adminMain";
-   }
+		model.addAttribute("jsonLocationList",jsonLocationList);
+		model.addAttribute("cntGroupCalList",cntGroupCalList);
+		model.addAttribute("cntMember",cntMember);
+		model.addAttribute("cntGroupCnt",cntGroupCnt);
+		model.addAttribute("totalBoardCnt",totalBoardCnt);
+		model.addAttribute("cntGroupCal",cntGroupCal);
+		model.addAttribute("cntPreLocationList",cntPreLocationList);
+		model.addAttribute("cntLoginLogList",cntLoginLogList);
+		return "/admin/adminMain";
+	}
 }

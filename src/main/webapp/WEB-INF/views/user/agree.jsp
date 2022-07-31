@@ -193,7 +193,7 @@ footer.footer {
 <script>
 $(document).ready(function(){
 	$("#backBtn").click(function(){
-		location.href = "/";
+		location.href = "/login/toLogin";
 	})
 	
 	$("input:checkbox[name='checkboxAll']").click(function(){ 
@@ -402,8 +402,8 @@ $(document).ready(function(){
 			</div>
 			<div class="row" style="text-align: center; margin-bottom: 70px;" >
 				<div class="col">
-					<button class="btn btn-secondary" type="button" id="backBtn">취소</button>
-					<button class="btn btn-primary" type="button" id="cpBtn">확인</button>
+					<button class="btn btn-outline-secondary" type="button" id="backBtn">취소</button>
+					<button class="btn btn-outline-primary" type="button" id="cpBtn">확인</button>
 				</div>
 			</div>
         </div>

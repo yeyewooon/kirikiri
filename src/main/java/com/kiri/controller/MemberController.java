@@ -45,10 +45,6 @@ public class MemberController {
 		return "member/welcome";
 	}
 
-	@RequestMapping(value = "/signUp")
-	public String signup() {
-		return "member/signUp";
-	}
 
 	@RequestMapping(value = "/myPage")
 	public String myPage(MessageDTO MessageDTO, Model model) throws Exception { // myPage 로 이동
@@ -218,15 +214,14 @@ public class MemberController {
 		return result;
 	}
 	
-	@RequestMapping(value="/pwCheck") // pw 중복확인
-	@ResponseBody
-	public int pwCheck(String user_pw) throws Exception{
-		System.out.println("password : " + user_pw);
-		String Encryption_pw = ecp.getSHA512(user_pw); 
-		
-		 int result = service.pwCheck(Encryption_pw);
-		 return result;
-	}
+   @RequestMapping(value="/pwCheck") // pw 중복확인
+   @ResponseBody
+   public int pwCheck(String user_pw, String user_email) throws Exception{
+      String Encryption_pw = ecp.getSHA512(user_pw); 
+      
+       int result = service.pwCheck(Encryption_pw, user_email);
+       return result;
+   }
 	
 	
 

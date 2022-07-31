@@ -36,11 +36,11 @@
    font-family: 'MICEGothic Bold';
 }
 @font-face {
-            font-family: 'MICEGothic Bold';
-            src:
-                url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
+   font-family: 'MICEGothic Bold';
+   src:
+       url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+   font-weight: 700;
+   font-style: normal;
 }
 
 /* header 반응형 */
@@ -175,30 +175,30 @@ a {
 }
 
 .text:hover {
-   transition: 0.8s ease-in;
+   transition: 0.5s ease-in;
    transform: scale(1.1);
    transform: translate(0, -5px);
 }
 
 /* all, new, best 부분 css */
 .contentAll, .contentNew, .contentBest {
-   width: 100%;
-   margin: 0px;
-   background-color: rgb(245, 245, 245);
-}
-
-.content {
 	width: 100%;
-	margin: 0px;
-	background-color: rgb(245, 245, 245);
+    margin-bottom: 0px;
+	background-color: #fbfbdf;
+    margin-left: 0px;
 }
-
+.imgContainer{
+	padding-bottom:10px;
+}
 .card {
-	width: 18rem;
-	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
-	cursor:pointer;
+	width:350px;
+    border: 3px solid #d5f1d5;
+    cursor: pointer;
 }
-
+.card-body{
+	background-color : #f4fdef;
+	padding-bottom:0px;
+}
 .card>img {
 	width: 100%;
 }
@@ -207,7 +207,9 @@ a {
 	width: 18rem;
 	height: 13rem;
 }
-
+.card-text{
+	height:48px;
+}
 .card-text-category {
 	width: fit-content;
 	padding: 4px;
@@ -216,13 +218,16 @@ a {
 	border-radius: 5px;
 	font-size: 14px;
 }
+.card-text-site{
+	height:30px;
+}
 
 .more {
    width: 100%;
    height: 50px;
    text-align: center;
    margin-top: 20px;
-   background-color: lightgray;
+   background-color: #e0ecf3;
    cursor:pointer;
 }
 
@@ -293,8 +298,109 @@ footer.footer {
    width: 100%;
    height: 100%;
 }
-
-
+/*모임생성 버튼*/
+@import url(https://fonts.googleapis.com/css?family=Roboto:700);
+.button {
+  background: #3D4C53;
+  width : 200px;
+  height : 50px;
+  overflow: hidden;
+  text-align : center;
+  transition : .2s;
+  cursor : pointer;
+  border-radius: 3px;
+  box-shadow: 0px 1px 2px rgba(0,0,0,.2);
+}
+.btnTwo {
+  position : relative;
+  width : 200px;
+  height : 100px;
+  margin-top: -100px;
+  padding-top: 2px;
+  background : #26A69A;
+  left : -250px;
+  transition : .3s;
+}
+.btnText {
+  color : white;
+  padding-top: 13px;
+  transition : .3s;
+}
+.btnText2 {
+  margin-top : 60px;
+  margin-right : -130px;
+  color : #FFF;
+}
+.button:hover .btnTwo{ /*When hovering over .button change .btnTwo*/
+  left: -130px;
+}
+.button:hover .btnText{ /*When hovering over .button change .btnText*/
+  margin-left : 65px;
+}
+.button:active { /*Clicked and held*/
+  box-shadow: 0px 5px 6px rgba(0,0,0,0.3);
+}
+/**/
+:root {
+  --bg: #3C465C;
+  --primary: #6782e5;
+  --solid: #fff;
+  --btn-w: 300px;
+  --dot-w: calc(var(--btn-w)*.2);
+  --tr-X: calc(var(--btn-w) - var(--dot-w));
+}
+.btn {
+  position: relative;
+  margin: 0 auto;
+  width: 300px;
+  color: #8791b5;
+  border: 0.15em solid #6782e5;
+  border-radius: 5em;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.3em;
+  line-height: 2em;
+  cursor: pointer;  
+}
+.btn:hover {
+    color: #b6cdef;
+}
+.dot {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: var(--dot-w);
+  height: 100%;
+  border-radius: 100%;
+  transition: all 300ms ease;
+  display: none;
+}
+.dot:after {
+  content: '';
+  position: absolute;
+  left: calc(50% - .4em);
+  top: -.4em;
+  height: .8em;
+  width: .8em;
+  background: var(--primary);
+  border-radius: 1em;
+  border: .25em solid var(--solid);
+  box-shadow: 0 0 .7em var(--solid),
+        0 0 2em var(--primary);
+}
+.btn:hover .dot,
+.btn:focus .dot {
+  animation: atom 2s infinite linear;
+  display: block;
+}
+@keyframes atom {
+  0% {transform: translateX(0) rotate(0);}
+  30%{transform: translateX(var(--tr-X)) rotate(0);}
+  50% {transform: translateX(var(--tr-X)) rotate(180deg);}
+  80% {transform: translateX(0) rotate(180deg);}
+  100% {transform: translateX(0) rotate(360deg);}
+}
+*:before, *:after {box-sizing: border-box;}
 </style>
 </head>
 <body>
@@ -427,8 +533,15 @@ footer.footer {
                즐거운 시간을 보내세요.</div>
             <div class="mt-4 w-75">취미가 없고 지루한 일상이 싫다면 모임을 가입하세요. 즐거운 모임으로
                새로운 세상을 찾아요.</div>
+			<div class = "mt-4">
+				<div class="button">
+				    <p class="btnText">모임만들기</p>
+				    <div class="btnTwo">
+				    <p class="btnText2">Go!</p>
+				    </div>
+				 </div>
+			</div>
          </div>
-
       </div>
 
       <!--동그라미세개-->
@@ -472,7 +585,7 @@ footer.footer {
             class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
             <div class="circleImg" data-aos="flip-left" data-aos-duration="1000"
                data-aos-delay="200">
-               <img src="/resources/images/chatting.png" id="circle_img">
+               <img src="/resources/images/update_chatting.png" id="circle_img">
             </div>
             <div class="w-100">
                <p class="text-center mt-4 circleTitle">모임간 소통</p>
@@ -484,9 +597,10 @@ footer.footer {
       <!--가입 하기 버튼-->
       <div class="row mt-2">
          <div class="signUpBox col text-center">
-         	<a href = "/user/toViewAllGroupList">
-            <button type="button" class="btn btn-outline-primary groupSignUp">가입하기</button>
-         	</a>
+			<div class="btn">
+		    	<a href="/signup/toSignupAgree" style = "color:#0a58ca;"><span>가입하기</span></a>
+		    <div class="dot"></div>
+		  	</div>
          </div>
       </div>
 
@@ -589,11 +703,11 @@ footer.footer {
          <div class="col-4 d-flex justify-content-start text bestGroup">BEST</div>
       </div>
 	<!-- 모임 card 캐러셀 All -->
-      <div class="row contentAll mt-4">
+      <div class="row contentAll">
          <div class="col p-0">
             <div class="content2">
                <div class="imgContainer">
-                  <div class="row">
+                  <div class="row" style="padding : 18px;">
                      <c:forEach items="${selectAllList}" var="dto" begin="0" end = "5">
                         <div class="col-md-4 d-flex justify-content-center p-4">
                            <div class="card" data-aos="flip-up" data-aos-duration="1000">
@@ -607,13 +721,13 @@ footer.footer {
 								</c:choose>
 								<span class="d-none seq_group">${dto.seq_group}</span>
                               <div class="card-body">
-                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+                                 <div class="card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
                                     ${dto.group_category}
                                  </div>
                                  <div class="card-text mt-1">
                                     <strong>${dto.group_title}</strong>
                                  </div>
-                                 <div class="card-text d-flex justify-content-end">
+                                 <div class="card-text-site d-flex justify-content-end">
                                     <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
                                  </div>
                               </div>
@@ -623,7 +737,7 @@ footer.footer {
                   </div>
                </div>
             </div>
-             <div class="col-12" style="width: 100%">
+             <div class="col-md-12" style="width: 100%">
                <div class="d-flex justify-content-center align-items-center more">
                   <span>더보기</span><span class = "ms-2"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
               </div>
@@ -632,7 +746,7 @@ footer.footer {
       </div>
       
       <!-- 모임 card 캐러셀 New -->
-      <div class="row contentNew d-none mt-4">
+      <div class="row contentNew d-none">
          <div class="col p-0">
             <div class="content2">
                <div class="imgContainer">
@@ -675,7 +789,7 @@ footer.footer {
       </div>
       
       <!-- 모임 card 캐러셀 Best -->
-      <div class="row contentBest d-none mt-4">
+      <div class="row contentBest d-none">
          <div class="col p-0">
             <div class="content2">
                <div class="imgContainer">
@@ -711,7 +825,7 @@ footer.footer {
             </div>
              <div class="col-12" style="width: 100%">
                <div class="d-flex justify-content-center align-items-center more">
-                  <span>더보기</span><span class = "ms-2"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
+                  <span style = "font-color:grey;">더보기</span><span class = "ms-2"><i style = "font-color:grey;" class="fa-solid fa-arrow-right-to-bracket"></i></span>
               </div>
             </div>
          </div>
@@ -777,8 +891,24 @@ footer.footer {
 	</div>
 
 
-   <!-- AOS 스크립트 시작 -->
    <script>
+   <!-- 모임생성 고! 버튼 -->
+   let check = "${loginSession.user_email}";
+    $(".button").on("click", function(){
+    if(check != ""){
+		   location.href = "/group/toCreateGroup";
+	   }else{
+    	  Swal.fire({
+                 icon: 'warning',
+                 text: '로그인 후 사용하실수 있습니다..',
+               })  		   
+	   } 
+   }) 
+   <!-- 가입하기 버튼 -->
+   $(".btn").on("click", function(){
+	   location.href = "/user/toViewAllGroupList";
+   })
+   <!-- AOS 스크립트 시작 -->
       AOS.init(); // 자바스크립트로 init()을 해야 동작한다.
       
       const countDownTimer = function(id, date) {

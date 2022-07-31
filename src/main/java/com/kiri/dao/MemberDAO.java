@@ -1,5 +1,6 @@
 package com.kiri.dao;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
@@ -13,6 +14,7 @@ public class MemberDAO {
 
 	@Autowired
 	private SqlSession session;
+	
 	
 	// member select
 	public MemberDTO selectMember(String user_email) throws Exception{ 
@@ -40,9 +42,12 @@ public class MemberDAO {
 	}
 	
 	// pw 중복확인
-	public int pwCheck(String user_pw)throws Exception{
-		return session.selectOne("myPageMapper.pwCheck",user_pw);
-	}
+   public int pwCheck(String user_pw, String user_email)throws Exception{
+      Map<String, String> map = new HashMap<String, String>();
+      map.put("user_pw",user_pw);
+      map.put("user_email", user_email);
+      return session.selectOne("myPageMapper.pwCheck",map);
+   }
 	
 	// 회원탈퇴
 	public void profileDelete(Map<String,String> memberdto) throws Exception{

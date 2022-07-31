@@ -144,7 +144,7 @@ h2{
 .btn{
     width: 30%;
     margin: 15px;
-    height: 100%;
+    height: 70%;
     border: 1px solid #d2e3ec;
     margin-bottom: 70px;
 }
@@ -193,7 +193,7 @@ p{
     margin-right: 10px;
     border-radius: 10px;
     width: 20%;
-    height: 40%;
+    height: 60%;
 }
 
 
@@ -243,7 +243,7 @@ footer.footer {
 		$("#generalBtn").click(function(){
 			
 			Swal.fire({
-				  title: '일반 회원',
+				  title: '뒤로가기',
 				  text: "로그인 페이지로 돌아가서 다시 로그인 하시겠습니까?",
 				  icon: 'question',
 				  showCancelButton: true,
@@ -460,15 +460,10 @@ footer.footer {
 </header>
     <div class="container privacyBox">
         <div id="privacyForm">
-	        <div class="row" style="text-align: center;">
-				<div class="col">
-					<img src="/resources/images/kirilogo.png" alt="오류발생">
-					<input id="check" type="hidden" value="${connection.type}" />
-				</div>
-			</div>
 			<div class="row">
 				<div class="col">
-					<h2>계정 연동</h2>	
+					<h1 style="margin: 40px;">계정 연동</h1>	
+					<input id="check" type="hidden" value="${connection.type}" />
 				</div>
 			</div> 
 			<div class="row">

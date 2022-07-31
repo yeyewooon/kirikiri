@@ -19,7 +19,7 @@ import com.kiri.utills.SecurityInfo;
 public class KakaoLogin {
 	private final static String kakaoClientId = SecurityInfo.kakaoId;
 	private final static String kakaoClientSecret = SecurityInfo.kakaoSecret;
-	private final static String kakaoRedirectUri = "http://localhost:80/auth/kakaoCallback"; 
+	private final static String kakaoRedirectUri = "http://localhost:8090/auth/kakaoCallback"; 
 	private final static String sessionState = "kakao_oauth_state";
 	private final static String kakaoProfileApiUri = "https://kapi.kakao.com/v2/user/me";
 
@@ -47,7 +47,7 @@ public class KakaoLogin {
 		}
 		return null;
 	}
-	
+
 	private String generateRandomString() {
 		return UUID.randomUUID().toString();
 	}
@@ -59,7 +59,7 @@ public class KakaoLogin {
 	private String getSession(HttpSession session) {
 		return (String) session.getAttribute(sessionState);
 	}
-	
+
 	public String getUserProfile(OAuth2AccessToken oauthToken) throws Exception {
 		OAuth20Service oauthService = new ServiceBuilder()
 				.apiKey(kakaoClientId)
@@ -70,5 +70,5 @@ public class KakaoLogin {
 		Response response = request.send();
 		return response.getBody();
 	}
-	
+
 }
