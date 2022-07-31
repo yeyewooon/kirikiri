@@ -15,6 +15,7 @@ public class MemberDAO {
 	@Autowired
 	private SqlSession session;
 	
+	
 	// member select
 	public MemberDTO selectMember(String user_email) throws Exception{ 
 		return session.selectOne("myPageMapper.selectMember",user_email);
