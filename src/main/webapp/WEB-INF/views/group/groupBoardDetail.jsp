@@ -58,7 +58,7 @@
 		
         body {
             /*font-family: 'OTWelcomeRA';*/
-            background-color: #d2e3ec;
+            background-color: #EEEEEE;
             /* height: 100px; */
         }
 
@@ -73,6 +73,13 @@
         } */
 	
 		/* 컨텐츠 영역 */
+		#detail{
+			border-radius: 30px;
+		}
+		#detail:not(#content){
+        	font-family: 'InfinitySans-RegularA1';
+        }
+		
         #category {
             background-color: #fce2e1;
             border-radius: 60px;
@@ -96,22 +103,27 @@
        		background-color: transparent;
        	}
        	.likeBtn img{
-       		width: 40px;
+       		width: 100px;
        	}
 		
 		/* 좋아요 영역 */
-		#body-like .col-auto{
+		/* #body-like .col-auto{
 			background-color: #fce2e1;
 			border-radius: 50px;
-		}
+		} */
 		
 		/* 댓글 영역 */
-		#Commenttab .col-auto{
+		/* #Commenttab .col-auto{
 			background-color: #d2e3ec;
 			border-top-left-radius: 5px;
 			border-top-right-radius: 5px;
-		}
+		} */
 		
+		#commentWrapper{
+			background-color: #EEEEEE;
+			border-radius: 10px;
+		}
+				
         .profileBox{
             /* background-color: gray; */
             width: 100px;
@@ -162,11 +174,11 @@
         }
         
         @font-face {
-            font-family: 'OTWelcomeRA';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
+		    font-family: 'InfinitySans-RegularA1';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
 
         @font-face {
             font-family: '양진체';
@@ -293,7 +305,8 @@
       </div>
    </header>
    
-    <div class="container my-5 py-5" style="width: 70%;">
+   <!-- 디테일 뷰 -->
+    <div id="detail" class="container my-5 py-5">
         <div class="row text-center">
             <div class="col-auto my-3 fs-5 py-1" id="category">${detail.boardDTO.gboard_category}</div>
         </div>
@@ -304,9 +317,14 @@
 
         <div class="row mt-4 justify-content-between align-items-center">
             <div class="col-auto" id="board-head-col">
-                <i class="fa-regular fa-clock me-3"> ${detail.boardDTO.written_date}</i>
-                <i class="fa-regular fa-font-awesome me-3"> ${detail.boardDTO.view_count}</i>
-                <i class="fa-regular fa-comment-dots"> ${detail.commentCnt}</i>
+                <i class="fa-regular fa-clock me-3"></i>
+                <span class="me-3">${detail.boardDTO.written_date}</span>
+                <i class="fa-regular fa-font-awesome me-3"></i>
+                <span class="me-3">${detail.boardDTO.view_count}</span>
+                <i class="fa-regular fa-comment-dots"></i>
+                <span class="me-3">${detail.commentCnt}</span>
+                <i class="fa-regular fa-heart"></i>
+                <span>${like.likeHit}</span>
             </div>
             <div class="col-auto d-flex justify-content-end">
                 <div class="fw-bold fs-4 me-2">작성자</div>
@@ -333,19 +351,21 @@
 	        			<c:when test="${like.likeCheck == 0}">
 	        				<div class="col-auto">
 			        			<button class="likeBtn" id="likeBefore" value="${detail.boardDTO.seq_group_board}">
-			        				<img src="/resources/images/emptyheart.png" alt="좋아요">
+			        				<img src="/resources/images/board/likeText.png" alt="좋아요"><br>
+			        				<img src="/resources/images/board/like.png" alt="좋아요">
 			        			</button>
-			        			<span>버튼을 눌러서 게시글에 공감해 보세요!</span>
 			        		</div>
+			        		<span class="text-center">게시글에 좋아요를 눌러보세요!</span>
 	        			</c:when>
 	        			<%-- 추천 누름 --%>
 	        			<c:otherwise>
 	        				<div class="col-auto">
 			        			<button class="likeBtn" id="likeAfter" value="${detail.boardDTO.seq_group_board}">
-			        				<img src="/resources/images/fullheart.png" alt="좋아요">
+			        				<img src="/resources/images/board/notLikeText.png" alt="좋아요"><br>
+			        				<img src="/resources/images/board/notLike.png" alt="좋아요취소">
 			        			</button>
-			        			<span>이미 좋아요 한 게시물이에요</span>
 			        		</div>
+			        		<span class="text-center">좋아요를 취소할 수 있어요.</span>
 	        			</c:otherwise>
 	        		</c:choose>
 	        	</c:when>
@@ -354,22 +374,23 @@
 	        	<c:otherwise>
 		        	<div class="col-auto">
 				        <button id="like-notLoginBtn" value="${detail.boardDTO.seq_group_board}">
-				        	<img src="/resources/images/emptyheart.png" alt="좋아요">
+				        	<img src="/resources/images/board/likeText.png" alt="좋아요"><br>
+			        		<img src="/resources/images/board/like.png" alt="좋아요">
 				        </button>
-				        <span>${like.likeHit}</span>
+				        <span class="text-center">로그인 후 좋아요를 눌러보세요!</span>
 					</div>
 	        	</c:otherwise>
 	        </c:choose>
         </div>
 	
 		<!-- 댓글 탭 -->
-		<div class="row" id="Commenttab">
+		<%-- <div class="row" id="Commenttab">
 			<div class="col-auto" style="margin-right: 1px;"><i class="fa-solid fa-comment"></i> [${detail.commentCnt}개]</div>
 			<div class="col-auto"><i class="fa-solid fa-heart"></i> [${like.likeHit}개]</div>
-		</div>
+		</div> --%>
 		
 		<!-- 댓글 영역 -->
-        <div class="row" style="border: 1px solid #e8e8e8;">
+        <div class="row" id="commentWrapper">
             <div class="col-12" id="body-comment">
                 <!-- 댓글 출력 -->
                 <c:choose>
@@ -381,7 +402,7 @@
 	                </c:when>
 	                <c:otherwise>
 	                	<c:forEach items="${detail.commentList}" var="comment">
-	                		<div class="row align-items-center py-3" style="border-bottom: 1px solid #e8e8e8;">
+	                		<div class="row align-items-center py-3" style="border-bottom: 3px solid white;">
 	                			<!-- 프로필 이미지 -->
 			                    <div class="col-2 d-flex justify-content-center">		                        
 			                        <div class="profileBox">
@@ -434,7 +455,7 @@
 
         <!-- 댓글 등록 -->
         <form id="commentForm" action="/comment/writeG" method="post">
-	        <div class="row mt-4 p-0 py-3" style="background-color: #f5fafc; border-radius: 10px">
+	        <div class="row mt-4 p-0 py-3" style="background-color: #ECECEC; border-radius: 10px">
 	       		<input class="d-none" id="seq_group" name="seq_group" value="${detail.boardDTO.seq_group}">
 	        	<input class="d-none" id="seq_board" name="seq_group_board" value="${detail.boardDTO.seq_group_board}">
 				<div class="col-10">
@@ -537,7 +558,7 @@
     	// 목록으로 돌아가기
     	$("#toListBtn").on("click", function(){
     		$("#infoForm").find("#seq_group_board").remove();
-    		$("#infoForm").attr("action", "/Gboard/toBoard");
+    		$("#infoForm").attr("action", "/Gboard/toBoard?seq_group="+${detail.boardDTO.seq_group});
     		$("#infoForm").submit();
     	})
     	
@@ -601,7 +622,7 @@
 	    					timer: 1500
     					});
     					$("#body-like").load(location.href + " #body-like");
-    					$("#Commenttab").load(location.href + " #Commenttab");
+    					$("#board-head-col").load(location.href + " #board-head-col");
     				}
     				else if(likeCheck == 1){
     					Swal.fire({
@@ -611,7 +632,7 @@
 	    					timer: 1500
     					});
     					$("#body-like").load(location.href + " #body-like");
-    					$("#Commenttab").load(location.href + " #Commenttab");
+    					$("#board-head-col").load(location.href + " #board-head-col");
     				}
     			}, error : function(e){
     				console.log(e);
@@ -667,7 +688,7 @@
     	$("#body-comment").on("click", ".mod-commentBtn", function(e){
     		$(e.target).parents(".defaultComment").addClass("d-none");
     		$(e.target).parents().next(".afterComment").removeClass("d-none");
-    		$(e.target).parents(".commentHead").next().find(".comment").attr("readonly", false).css("border", "3px solid #fce2e1").focus();
+    		$(e.target).parents(".commentHead").next().find(".comment").attr("readonly", false).css("background-color", "white").focus();
     	})
     	
     	// 댓글 수정 취소
@@ -739,7 +760,7 @@
     	    					Swal.fire('삭제 완료!', '', 'success');
     	        				$("#body-comment").load(location.href + " #body-comment"); 
     	        				$("#board-head-col").load(location.href + " #board-head-col");
-    	        				$("#Commenttab").load(location.href + " #Commenttab");
+    	        				//$("#Commenttab").load(location.href + " #Commenttab");
     	    				}else{
     	    					Swal.fire('삭제 실패', '', 'error');
     	    				}			
