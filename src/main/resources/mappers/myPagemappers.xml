@@ -48,10 +48,10 @@
 	</select>
 	
 	<!-- pw 중복검사 -->
-	<select id="pwCheck" resultType="int" parameterType="String">
-		select count(*) from member
-			where user_pw = #{user_pw}
-	</select>
+   <select id="pwCheck" resultType="int" parameterType="map">
+      select count(*) from member
+         where user_pw = #{user_pw} and user_email = #{user_email}
+   </select>
 	
 	<!-- 관심사 정보 -->
 	<select id="selectHobbyList" resultType="com.kiri.dto.HobbyDTO">

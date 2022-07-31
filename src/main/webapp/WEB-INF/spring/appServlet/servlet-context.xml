@@ -16,6 +16,7 @@
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	<resources mapping="/boardFile/*" location="/boardFile/" />
+	<resources mapping="/groupBoardFile/*" location="/groupBoardFile/" />
 	<resources mapping="/profile/*" location="/profile/"/>
 	<resources mapping="/group_profile/*" location="/group_profile/"/>
 	
@@ -31,5 +32,67 @@
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<beans:property name="maxUploadSize" value="100000000"></beans:property> <!-- 최대 파일크기 10MB -->
 	</beans:bean>
-
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/**"/>
+			<exclude-mapping path="/"/>
+			<exclude-mapping path="/resources/**"/>
+			<exclude-mapping path="/privacy"/>
+			
+			<exclude-mapping path="/login/toLogin"/>
+			<exclude-mapping path="/login/general"/>
+			<exclude-mapping path="/login/findId"/>
+			<exclude-mapping path="/login/findPw"/>
+			<exclude-mapping path="/login/emailAuthFindPw"/>
+			<exclude-mapping path="/login/tempPw"/>
+			
+			<exclude-mapping path="/signup/toSignupAgree"/>
+			<exclude-mapping path="/signup/toSignup"/>
+			<exclude-mapping path="/signup/signup"/>
+			<exclude-mapping path="/signup/emailCheck"/>
+			<exclude-mapping path="/signup/nicknameCheck"/>
+			<exclude-mapping path="/signup/phoneCheck"/>
+			<exclude-mapping path="/signup/emailAuth"/>
+			
+			<exclude-mapping path="/auth/naverCallback"/>
+			<exclude-mapping path="/auth/kakaoCallback"/>
+			<exclude-mapping path="/auth/toConnetion"/>
+			<exclude-mapping path="/auth/connetion"/>
+			<exclude-mapping path="/auth/socialSignup"/>
+			
+			<exclude-mapping path="/group/selectMemberProfile"/>
+			<exclude-mapping path="/group/toGroupDetail"/>
+			<exclude-mapping path="/board/toBoard"/>
+			<exclude-mapping path="/board/toDetailView"/>
+			<exclude-mapping path="/mem/welcome"/>
+			<exclude-mapping path="/user/toViewAllGroupList"/>
+			<exclude-mapping path="/user/toUserSelectedGroupList"/>
+			<exclude-mapping path="/toError"/>
+			<beans:bean class="com.kiri.utills.LoginInterceptor"/>
+		</interceptor>
+		<interceptor>
+			<mapping path="/login/toLogin"/>
+			<mapping path="/login/general"/>
+			<mapping path="/login/findId"/>
+			<mapping path="/login/findPw"/>
+			<mapping path="/login/emailAuthFindPw"/>
+			<mapping path="/login/tempPw"/>
+			<mapping path="/signup/toSignupAgree"/>
+			<mapping path="/signup/toSignup"/>
+			<mapping path="/signup/signup"/>
+			<mapping path="/signup/emailCheck"/>
+			<mapping path="/signup/nicknameCheck"/>
+			<mapping path="/signup/phoneCheck"/>
+			<mapping path="/signup/emailAuth"/>
+			<mapping path="/auth/naverCallback"/>
+			<mapping path="/auth/kakaoCallback"/>
+			<mapping path="/auth/toConnetion"/>
+			<mapping path="/auth/connetion"/>
+			<mapping path="/auth/socialSignup"/>
+			<mapping path="/mem/welcome"/>
+			<beans:bean class="com.kiri.utills.Interceptor"/>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>

@@ -4,17 +4,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-<!-- summernote -->
+	<!-- summernote -->
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- include summernote css/js-->
     <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+    <!-- swal -->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	<script src="sweetalert2.min.js"></script>
 <meta charset="UTF-8">
 <title>글 작성</title>
     <style>
+    	/* header 반응형 */
+		@media ( max-width : 768px) {
+		   #navLogo {
+		      display: none;
+		   }
+		   #myPageIcon {
+		      display: none;
+		   }
+		   #cartIcon {
+		      display: none;
+		   }
+		   #menu {
+		      display: none;
+		   }
+		}
+		
+		/* header */
+		#navLogo {
+		   width: 150px;
+		   height: 100px;
+		}
+		
+		#logoImgs {
+		   width: 100%;
+		   height: 100%;
+		}
+		
+		@media ( min-width : 768px) {
+		   #navibar {
+		      display: none;
+		   }
+		}
+		
+		#logoImg {
+		   width: 50%;
+		}
+		/* header 반응형 끝 */
+		
     	* {
             box-sizing: border-box;
             /*font-family: 'OTWelcomeRA';*/
@@ -67,15 +108,39 @@
             background-color: #d2e3ec;
             height: 100px;
         }
-        #head>h1{
+        /* #head>h1{
         	font-family: 'OTWelcomeRA';
             margin-top: 20px;
         }
         label {
         	font-family: 'OTWelcomeRA';
             margin-top: 5px;
-        }
+        } */
         
+        /*풋터 영역*/
+		.footerBox {
+		   height: 0px;
+		}
+		
+		footer.footer {
+		   padding-top: 2rem;
+		   padding-bottom: 2rem;
+		   background-color: #ffffff;
+		}
+		
+		.footer a {
+		   text-decoration: none;
+		   color: black;
+		   font-weight: 40px;
+		   font-weight: bold;
+		}
+		
+		.footer-imgBox>img {
+		   width: 100%;
+		   height: 100%;
+		}
+		
+		
         /* 눈누 폰트 */
 		@font-face {
 			font-family: 'OTWelcomeRA';
@@ -109,6 +174,122 @@
 	</style>
 </head>
 <body>
+	<header class="border-bottom">
+      <div class="container">
+         <!-- 접혔을 때 nav -->
+         <nav id="navibar" class="navbar navbar-expand-md navbar-light"
+            aria-label="Main navigation">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-10">
+                     <a class="navbar-brand mb-2 mb-lg-0" href="/">
+                        <div class="title-box">
+                           <img id="logoImg" src="/resources/images/kiri.jpg">
+                        </div>
+                     </a>
+                  </div>
+                  <!-- toggle button -->
+                  <div class="col-2 d-flex align-items-center">
+                     <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                     </button>
+                  </div>
+                  <!-- 메뉴 -->
+                  <div class="collapse navbar-collapse justify-content-end"
+                     id="navbarNavDropdown">
+                     <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                           <c:if test="${empty loginSession}">
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
+                           </c:if>
+                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
+                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                     </ul>
+                  </div>
+               </div>
+
+            </div>
+         </nav>
+         <!-- 펼쳐졌을 때 nav -->
+         <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
+            aria-label="Main navigation">
+            <div class="row w-100 align-items-center">
+               <div class="col-5 d-flex justify-content-center">
+                  <ul class="navbar-nav mb-2 mb-lg-0">
+                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
+                           게시판</a></li>
+                  </ul>
+               </div>
+
+               <!-- logo -->
+               <div class="col-2">
+                  <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
+                     id="logoImgs" src="/resources/images/kiri.jpg">
+
+                  </a>
+               </div>
+
+               <div class="col-5">
+                  <div class="row align-items-center justify-content-center">
+                     <div class="col-auto">
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-2">
+                           <c:if test="${empty loginSession}">
+                              <li class="nav-item"><a class="nav-link"
+                                 href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link"
+                                 href="/signup/toSignupAgree">회원가입</a></li>
+                           </c:if>
+                        </ul>
+                     </div>
+                     <div class="col-auto user">
+                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                     <div class="dropdown text-end">
+                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small"
+                           aria-labelledby="dropdownUser1">
+                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                           <li><hr class="dropdown-divider"></li>
+                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                        </ul>
+                     </div>
+                  </c:if> 
+                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
+                     <div class="dropdown text-end">
+                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                        </a>
+                        <ul class="dropdown-menu text-small"
+                           aria-labelledby="dropdownUser1">
+                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                           <li><hr class="dropdown-divider"></li>
+                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                        </ul>
+                     </div>
+                  </c:if> 
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </nav>
+      </div>
+   </header>
+
 	<div class="container">
         <div id="head" class="row text-center align-items-center mb-5">
             <h1>글쓰기</h1>
@@ -160,9 +341,69 @@
 	            </div>
 	        </div>
         </form>
-        
 	</div>
 	
+	<!-- Footer-->
+    <div class="container">
+		<footer class="footer mt-5">
+			<div class="row">
+				<div class="col-lg-3 footer-imgBox">
+					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+				</div>
+				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+					<ul class="list-inline mb-2">
+						<li class="list-inline-item"><a href="#!">공지사항</a></li>
+						<li class="list-inline-item">⋅</li>
+						<c:choose>
+							<c:when test="${not empty loginSession}">
+								<li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+							</c:otherwise>
+						</c:choose>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item">
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<a href="/group/toCreateGroup">모임 만들기</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/login/toLogin">모임 만들기</a>
+								</c:otherwise>
+							</c:choose>
+						</li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item">
+							<a href="privacy" style="color: red; font-weight: bold;">개인정보처리방침</a>
+						</li>
+					</ul>
+					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+						57 이레빌딩</p>
+					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+						2022. All Rights Reserved.</p>
+				</div>
+				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item me-4"><a
+							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+						<li class="list-inline-item me-4"><a
+							href="https://twitter.com/?lang=ko"><i
+								class="bi-twitter fs-3"></i></a></li>
+						<li class="list-inline-item"><a
+							href="https://www.instagram.com/"><i
+								class="bi-instagram fs-3"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+	</div>
 	
 	<script>
 		/* summernote */
@@ -271,16 +512,28 @@
 		$("#submitBtn").on("click", function(){
 			
 			if($("#title").val() === ""){
-				alert("제목을 입력해 주세요.");
+				Swal.fire({
+					icon: 'warning'
+					, title: '웁쓰...'
+					, text: '게시글 제목이 없어요. 제목을 작성해 주세요!'
+				})
 				$("#title").focus();
 				return;
 			}
 			if($("#summernote").summernote("isEmpty")){
-				alert("내용을 입력해 주세요.");
+				Swal.fire({
+					icon: 'warning'
+					, title: '웁쓰...'
+					, text: '게시글에 내용이 없어요. 내용을 작성해 보세요!'
+				})
 				return;
 			}
 			if($(".selectBox").val() === "default"){
-				alert("게시글 분류를 선택해 주세요.");
+				Swal.fire({
+					icon: 'warning'
+					, title: '웁쓰...'
+					, text: '게시글 분류를 선택하셔야 합니다!'
+				})
 				return;
 			}
 			
@@ -306,7 +559,15 @@
 				};
 			}
 			
-			$("#writeForm").submit();
+			Swal.fire({
+				icon: 'success'
+				, title: '게시글이 등록되었어요!'
+				, showConfirmButton: true
+			}).then((result) =>{
+				if(result.isConfirmed){
+					$("#writeForm").submit();
+				}
+			});
 		});
 		
 		// 취소 버튼

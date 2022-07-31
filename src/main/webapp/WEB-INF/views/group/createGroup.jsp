@@ -139,12 +139,26 @@ function uploadSummernoteImageFile(file, editor){
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+@font-face {
+    font-family: 'Katuri';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+   font-family: 'InfinitySans-RegularA1';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
 .dropdown-toggle::after {
 	display: none;
 }
 
 body {
-	background-color: #f6f7f9;
+	background-color: white;
 }
 
 * {
@@ -189,6 +203,101 @@ body {
 	width: 50%;
 }
 
+/*타이틀*/
+.create-title{
+    font-family: katuri;
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+    background: linear-gradient(to top, #FFE400 20%, transparent 30%)
+    }
+.title-image{
+    margin-bottom: 35px;
+    width: 70px;
+    height: 70px;
+	}
+/*row 영역*/
+.style{
+	border: 2px solid #f3fffc;
+    border-radius: 50px;
+    padding: 50px;
+    background-color: #f3fffc;
+    box-shadow: 3px 3px 5px 5px rgb(182 182 181);
+}
+/*Interest 버튼 영역*/
+.categoryBtn{
+	font-family:InfinitySans-RegularA1;
+}
+.btn-outline-primary{
+	color:black;
+	border: 2px solid #b5a8a8;
+}
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+    }
+.btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+}
+.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
+    box-shadow: 0 0 0 0.25rem rgb(130 133 137 / 50%);
+}
+.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+}
+
+/*Basic Info*/
+.note-editable{
+	background-color:white;
+}
+/*지역선택 버튼*/
+.btn-primary:hover {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #fff;
+}
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+.btn-check:focus+.btn, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+.btn-check:focus+.btn, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+/*아이콘 크기*/
+.fa-solid, .fas {
+    font-size: 30px;
+}
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
 	color: #83bf7b;
@@ -214,17 +323,7 @@ a {
 	color: #316f8c;
 }
 
-.imgBox {
-	width: 500px;
-	height: 340px;
-	background-color: yellowgreen;
-	border-radius: 4px;
-}
 
-.imgBox img {
-	width: 500px;
-	height: 340px;
-}
 
 .mainFooter {
 	height: 70px;
@@ -250,7 +349,7 @@ ul {
 }
 
 .memberCntBox {
-	background-color: black;
+	background-color: #c4d4eb;
 	width: 140px;
 	border-radius: 10px;
 	height: 30px;
@@ -302,16 +401,10 @@ footer.footer {
 	width: 100%;
 	height: 100%;
 }
-
-.btn-primary {
-	color: #fff;
-	background-color: cornflowerblue;
-	border-color: #fff;
-}
 </style>
 </head>
 <body>
-	<header class="mb-3 border-bottom">
+	<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
 		<div style="background-color: #fff;">
 			<div class="container">
 				<!-- 접혔을 때 nav -->
@@ -446,11 +539,14 @@ footer.footer {
 			</div>
 		</div>
 	</header>
+		<div style = "text-align:center;">
+			<span class = "create-title">Create Group</span><span><img class = "title-image" src = "/resources/images/Create_Group.png"></span>
+		</div>
 	<div class="container w-75 mainContainer">
 		<form action="/group/createGroup" method="post"
 			enctype="multipart/form-data" id="groupForm">
 			<!--관심사 -->
-			<div class="row mt-4">
+			<div class="row style mt-4">
 				<!--관심사 아이콘-->
 				<div class="col-3 mainIcon text-center">
 					<h4>
@@ -458,13 +554,13 @@ footer.footer {
 					</h4>
 				</div>
 				<!--관심사 버튼  -->
-				<div class="col-9 mainTextInterest d-flex flex-column justify-content-start">
-					<h4>Interests</h4>
-					<span style="font-size: 14px;">주제가 구체적일수록 비슷한 관심사를 가진 사람들에게
+				<div class="col-md-9 mainTextInterest d-flex flex-column justify-content-start">
+					<h4 style = "font-family:katuri;">Interests</h4>
+					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">주제가 구체적일수록 비슷한 관심사를 가진 사람들에게
 						그룹을 <br>홍보하기가 더 쉬워집니다. 주제는 1개만 선택 가능합니다.
 					</span>
 					<div class="row mt-4">
-						<div class="col">
+						<div class="col-md">
 							<button type="button"
 								class="btn btn-outline-primary rounded-pill categoryBtn"
 								value="아웃도어/여행">아웃도어/여행</button>
@@ -480,7 +576,7 @@ footer.footer {
 						</div>
 					</div>
 					<div class="row mt-2">
-						<div class="col">
+						<div class="col-md">
 							<button type="button"
 								class="btn btn-outline-primary rounded-pill categoryBtn"
 								value="음악/악기">음악/악기</button>
@@ -496,7 +592,7 @@ footer.footer {
 						</div>
 					</div>
 					<div class="row mt-2">
-						<div class="col">
+						<div class="col-md">
 							<button type="button"
 								class="btn btn-outline-primary rounded-pill categoryBtn"
 								value="사진/영상">사진/영상</button>
@@ -516,7 +612,7 @@ footer.footer {
 				</div>
 			</div>
 			<!--Basic Info-->
-			<div class="row mt-5">
+			<div class="row style  mt-5">
 				<!--아이콘-->
 				<div class="col-3 mainIcon text-center">
 					<h4>
@@ -525,9 +621,9 @@ footer.footer {
 				</div>
 				<!--기본 글쓰기 -->
 				<div
-					class="col-9 mainTextBasicInfo d-flex flex-column justify-content-start">
-					<h4>Basic Info</h4>
-					<strong class="mt-2">모임 이름</strong> <span style="font-size: 14px;"
+					class="col-md-9 mainTextBasicInfo d-flex flex-column justify-content-start">
+					<h4 style = "font-family:katuri;">Basic Info</h4>
+					<strong class="mt-2" style = "font-family:InfinitySans-RegularA1;">모임 이름</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
 						class="mt-2">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. 떠오르는 기발한
 						이름이 있나요? <br> 마음이 바뀌면 나중에 다시 변경할 수 있습니다.
 					</span>
@@ -535,7 +631,7 @@ footer.footer {
 						<input type="text" class="form-control" id="group_title"
 							placeholder="모임 이름" name="group_title">
 					</div>
-					<strong class="mt-2">모집 내용</strong> <span style="font-size: 14px;"
+					<strong style = "font-family:InfinitySans-RegularA1;"class="mt-2">모집 내용</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
 						class="mt-2">모집내용은 회원들에게 그룹을 홍보할 때 표시됩니다. <br>변경사항이
 						있다면 나중에 언제든지 업데이트가 가능합니다.
 					</span>
@@ -545,7 +641,7 @@ footer.footer {
 				</div>
 			</div>
 			<!--위치 -->
-			<div class="row mt-5">
+			<div class="row style  mt-5">
 				<!--위치 아이콘-->
 				<div class="col-3 mainIcon text-center">
 					<h4>
@@ -554,13 +650,13 @@ footer.footer {
 				</div>
 				<!--위치 설정  -->
 				<div
-					class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
-					<h4>Location</h4>
-					<span style="font-size: 14px;">해당 지역의 사람들이 귀하의 이벤트를 발견하도록 돕고
+					class="col-md-9 mainText mainTextMap d-flex flex-column justify-content-start">
+					<h4 style = "font-family:katuri;">Location</h4>
+					<span style="font-size: 14px; font-family:InfinitySans-RegularA1;">해당 지역의 사람들이 귀하의 이벤트를 발견하도록 돕고
 						<br> 참석자들에게 위치를 제공해주세요.
-					</span> <span class="mt-2"><strong>지역 설정</strong></span>
+					</span> <span class="mt-2" style = "font-family:InfinitySans-RegularA1;"><strong>지역 설정</strong></span>
 					<div class="selectBox d-flex">
-						<select class="form-select mt-2 w-25" name="sido1" id="sido1"
+						<select class="form-select mt-2 w-25 me-2" name="sido1" id="sido1"
 							onchange="selectBoxChange1(this.value);"></select> <select
 							class="form-select mt-2 w-25" name="gugun1" id="gugun1"
 							onchange="selectBoxChange2(this.value);"></select>
@@ -574,7 +670,7 @@ footer.footer {
 				</div>
 			</div>
 			<!--메인 이미지-->
-			<div class="row mt-5">
+			<div class="row style  mt-5">
 				<!--메인 이미지 아이콘-->
 				<div class="col-3 mainIcon text-center">
 					<h4>
@@ -583,20 +679,22 @@ footer.footer {
 				</div>
 				<!--이미지 올리기 -->
 				<div
-					class="col-9 mainTextFile d-flex flex-column justify-content-start">
-					<h4>Main Image</h4>
-					<span style="font-size: 14px;">썸네일로 보여질 이미지입니다. <br>본인이
+					class="col-md-9 mainTextFile d-flex flex-column justify-content-start">
+					<h4 style ="font-family:katuri;">Main Image</h4>
+					<span style="font-size: 14px;font-family:InfinitySans-RegularA1;">썸네일로 보여질 이미지입니다. <br>본인이
 						생각하는 최고의 사진을 넣어주세요!
 					</span>
-					<div class="imgBox mt-4">
-						<img src="/resources/images/메인사진2(배경).png" id="groupDefaultImg">
+					<div class = "row">
+						<div class=" col-md-9 imgBox mt-4">
+							<img style = "width:100%"src="/resources/images/메인사진2(배경).png" id="groupDefaultImg">
+						</div>
+						<input type="file" class="form-control mt-3 w-75" name="groupFile"
+							id="groupFile" accept='image/jpeg,image/gif,image/png' />
 					</div>
-					<input type="file" class="form-control mt-3 w-75" name="groupFile"
-						id="groupFile" accept='image/jpeg,image/gif,image/png' />
 				</div>
 			</div>
 			<!--인원수-->
-			<div class="row mt-5">
+			<div class="row style  mt-5">
 				<!--위치 아이콘-->
 				<div class="col-3 mainIcon text-center">
 					<h4>
@@ -605,9 +703,9 @@ footer.footer {
 				</div>
 				<!--위치설정-->
 				<div
-					class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
-					<h4>Member</h4>
-					<span style="font-size: 14px;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
+					class="col-md-9 mainText mainTextMap d-flex flex-column justify-content-start">
+					<h4 style = "font-family:katuri;">Member</h4>
+					<span style="font-size: 14px;font-family:InfinitySans-RegularA1;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
 						인원은 최소 2명부터 최대 10명까지 가능합니다.
 					</span> <strong class="mt-2">인원 설정</strong>
 					<div class="memberCntBox d-flex mt-2 ">
@@ -629,7 +727,7 @@ footer.footer {
 				</div>
 			</div>
 			<!--이미지-->
-			<div class="row mt-5">
+			<div class="row style  mt-5">
 				<!--이미지 아이콘-->
 				<div class="col-3 mainIcon text-center">
 					<h4>
@@ -638,20 +736,20 @@ footer.footer {
 				</div>
 				<!--이미지 올리기 -->
 				<div
-					class="col-9 mainTextFile d-flex flex-column justify-content-start">
-					<h4>Guideline</h4>
+					class="col-md-9 mainTextFile d-flex flex-column justify-content-start">
+					<h4 style = "font-family:katuri;">Guideline</h4>
 					<span>
-						<h5>거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
-					</span> <span style="font-size: 14px;" class="mt-2">끼리끼리는 끈끈한 커뮤니티를
+						<h5 style = "font-family:InfinitySans-RegularA1;">거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
+					</span> <span style="font-size: 14px;font-family:InfinitySans-RegularA1;" class="mt-2">끼리끼리는 끈끈한 커뮤니티를
 						통해 사람들이 더욱 풍요롭고 행복한 삶을 <br>살 수 있도록 합니다. 따라서 모든 그룹은 다음 사항을
 						충족해야 합니다.
 					</span>
 					<ul class="mt-2" style="font-size: 14px;">
-						<li><i class="fa-solid fa-check"></i><span class="ms-3">회원에게
+						<li><i class="fa-solid fa-check"></i><span class="ms-3" style = "font-family:InfinitySans-RegularA1;">회원에게
 								성장의 기회 제공</span></li>
-						<li><i class="fa-solid fa-check"></i><span class="ms-3">모든
+						<li><i class="fa-solid fa-check"></i><span class="ms-3" style = "font-family:InfinitySans-RegularA1;">모든
 								이벤트에 주최자 참석</span></li>
-						<li><i class="fa-solid fa-check"></i><span class="ms-3">그룹의
+						<li><i class="fa-solid fa-check"></i><span class="ms-3" style = "font-family:InfinitySans-RegularA1;">그룹의
 								목적은 투명하게 공개</span></li>
 					</ul>
 				</div>
@@ -836,21 +934,27 @@ footer.footer {
 
   // Form으로 전송
   $("#registerGroupBtn").on("click",function() {
-	  
 	  let totalGroupCntById = "${totalGroupCntById}" //현재 세션의 가입한 모임 갯수
 	  // 구/군 변경시 비교 
 	  let group_site_com = $("#sido1Input").val() + " " +$("#gugun1Input").val();
 	  if(totalGroupCntById >= 3) { // 모임 가입 갯수 판별
-		  Swal.fire("모임은 최대 3개까지 가입 혹은 생성이 가능합니다");
+		  Swal.fire({
+		        icon: 'error',
+		        title: '모임 생성 불가!',
+		        text: '모임은 최대 3개까지 가입 혹은 생성이 가능합니다!',
+		      });
 		  return;
 	  }else if($("#group_category").val() == "") {
-		  Swal.fire("모임주제를 선택해주세요");
+		  Swal.fire("모임 주제를 선택해주세요");
 		  return;
 	  }else if($("#group_title").val() == "") {
-		  Swal.fire("모임 제목을 선택해주세요");
+		  Swal.fire("모임 이름을 선택해주세요");
 		  return;
 	  }else if($(".group_info").val() == "") {
 		  Swal.fire("모임 내용을 적어주세요");
+		  return;
+	  }else if($(".group_info").val() > 1000) {
+		  Swal.fire("내용은 1000자 이내로만 가능합니다");
 		  return;
 	  }else if($("#group_site").val() == "" || $("#sido1Input").val() == "") {
 		  Swal.fire('지역 선택을 완료를 눌러주세요');
@@ -859,8 +963,16 @@ footer.footer {
 	      Swal.fire('지역 선택을 완료를 눌러주세요');
 	      return;
 	  }
-	  
-	 $("#groupForm").submit();
+	 
+	  Swal.fire(
+		      '그룹 생성 성공',
+		      '이제 회원들을 모집해보세요!',
+		      'success'
+		);
+	  setTimeout(function() {
+		  $("#groupForm").submit();
+     },1000);
+	 
   })
   
   // 이미지 선택

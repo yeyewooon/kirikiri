@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kiri.dto.BoardDTO;
-import com.kiri.vo.Criteria;
+import com.kiri.utills.Criteria;
 
 @Repository
 public class BoardDAO {
@@ -179,5 +179,10 @@ public class BoardDAO {
 	// 전체 게시글 개수
 	public int getTotal(Criteria cri) throws Exception{
 		return session.selectOne("boardMapper.getTotal", cri);
+	}
+	
+	// 공지사항 상단 3개 정렬
+	public List<BoardDTO> getNotice() throws Exception{
+		return session.selectList("boardMapper.getNotice");
 	}
 }

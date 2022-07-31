@@ -35,6 +35,8 @@
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 <link rel="stylesheet"
 	href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+	<!-- Bootstrap icons-->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">	
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
 	crossorigin="anonymous"></script>
@@ -49,12 +51,13 @@
             font-weight: 700;
             font-style: normal;
 }
-
-/* 네비바  */
-body {
-	background-color: #f6f7f9;
+@font-face {
+    font-family: 'Katuri';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 }
-
+/* 네비바  */
 * {
 	box-sizing: border-box;
 	font-family: "MICEGothic Bold"; 
@@ -98,30 +101,6 @@ body {
 	width: 50%;
 }
 
-.mainIcon i {
-	color: #316f8c;
-}
-
-.imgBox {
-	width: 240px;
-	height: 240px;
-	background-color: yellowgreen;
-	border-radius: 4px;
-}
-
-.imgBox img {
-	width: 240px;
-	height: 240px;
-}
-
-.mainFooter {
-	height: 70px;
-}
-
-#search-addon {
-	cursor: pointer;
-}
-
 ul {
 	list-style: none;
 	padding: 0;
@@ -145,7 +124,6 @@ ul {
 
 /* 슬라이드 */
 .locationPic {
-      width: 100px;
       height: 100px;
       overflow: hidden;
     }
@@ -154,20 +132,34 @@ ul {
       width: 100%;
       height: 100%;
   } 
+  .locationText, .categoryText{
+	font-family : katuri;
+}  
 
 /* body content */
 .content {
 	width: 100%;
-	margin: 0px;
-	background-color: rgb(245, 245, 245);
+	margin-top: 40px;
+    margin-bottom: 0px;
+	background-color: #fbfbdf;
+	border-top: 5px solid #ffd766;
+	border-bottom: 5px solid #ffd766;
+	padding-right: 100px;
+    padding-left: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-left: 0px;
 }
 
 .card {
-	width: 18rem;
-	box-shadow: 3px 3px 5px 5px rgb(182, 181, 181);
-	cursor:pointer;
+	width:350px;
+    border: 3px solid #d5f1d5;
+    cursor: pointer;
 }
-
+.card-body{
+	background-color : #f4fdef;
+	padding-bottom:0px;	
+}
 .card>img {
 	width: 100%;
 }
@@ -176,7 +168,9 @@ ul {
 	width: 18rem;
 	height: 13rem;
 }
-
+.card-text{
+	height:48px;
+}
 .card-text-category {
 	width: fit-content;
 	padding: 4px;
@@ -185,9 +179,18 @@ ul {
 	border-radius: 5px;
 	font-size: 14px;
 }
+.card-text-site{
+	height:30px;
+	margin: 0px;
+    margin-top: 30px;
+}
 
 /* footer */
 /*풋터 영역*/
+/*풋터 영역*/
+.footerWrapper{
+	background-color: #f9fafe;
+}
 .footerBox {
 	height: 0px;
 }
@@ -195,7 +198,6 @@ ul {
 footer.footer {
 	padding-top: 2rem;
 	padding-bottom: 2rem;
-	background-color: #f6f7f9;
 }
 
 .footer a {
@@ -206,10 +208,15 @@ footer.footer {
 }
 
 .footer-imgBox>img {
-	width: 100%;
 	height: 100%;
+	text-align:center;
+}
+.footer-imgBox {
+	height: 100%;
+	text-align:center;
 }
 
+/*슬라이드*/
 img {
 	max-width: 100%;
 	height: auto;
@@ -249,7 +256,128 @@ img {
 #locationList {
 	display :none;
 }
+#locationBtn, #categoryBtn{
+	cursor:pointer;
+}
+.b05_3d_roll {
+    perspective: 500px;
+    -webkit-perspective: 500px;
+    -moz-perspective: 500px;
+}
 
+.b05_3d_roll div {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 50px;
+    padding: 10px;
+    border: #8D9EE0 solid 2px;
+    pointer-events: none;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.b05_3d_roll div:nth-child(1) {
+    color: #ffffff;
+    background-color: #8D9EE0;
+    transform: rotateX(90deg);
+    -webkit-transform: rotateX(90deg);
+    -moz-transform: rotateX(90deg);
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transform-origin: 50% 50% -25px;
+    -webkit-transform-origin: 50% 50% -25px;
+    -moz-transform-origin: 50% 50% -25px;
+}
+
+.b05_3d_roll div:nth-child(2) {
+    color: #8D9EE0;
+    background-color: #ffffff;
+    transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transform-origin: 50% 50% -25px;
+    -webkit-transform-origin: 50% 50% -25px;
+    -moz-transform-origin: 50% 50% -25px;
+}
+
+.b05_3d_roll:hover div:nth-child(1) {
+    color: #ffffff;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transform: rotateX(0deg);
+    -webkit-transform: rotateX(0deg);
+    -moz-transform: rotateX(0deg);
+}
+
+.b05_3d_roll:hover div:nth-child(2) {
+    background-color: #8D9EE0;
+    transition: all 0.2s ease;
+    -webkit-transition: all 0.2s ease;
+    -moz-transition: all 0.2s ease;
+    transform: rotateX(-90deg);
+    -webkit-transform: rotateX(-90deg);
+    -moz-transform: rotateX(-90deg);
+}
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed');
+
+.preserve-3d {
+    transform-style: preserve-3d;
+    -webkit-transform-style: preserve-3d;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    overflow-x: none;
+    font-family: Roboto Condensed, sans-serif;
+    font-size: 15px;
+    font-smooth: always;
+    -webkit-font-smoothing: antialiased;
+}
+
+
+@media screen and (max-width: 1260px) {
+    .back {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 840px) {
+    .back {
+        width: 100%;
+    }
+}
+
+.button_base {
+    margin: 0;
+    border: 0;
+    font-size: 18px;
+    top: 50%;
+    left: 50%;
+    width: 100px;
+    height: 50px;
+    text-align: center;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-user-select: none;
+    cursor: default;
+}
+
+.button_base:hover {
+    cursor: pointer;
+}
+.slick-prev:before, .slick-next:before {
+    color: coral;
+}
 </style>
 
 </head>
@@ -374,37 +502,45 @@ img {
       </div>
    </header>
 	<div class="container">
-		<button type="button" class="btn btn-primary" id="locationBtn"
-			value="locationList">지역</button>
-		<button type="button" class="btn btn-primary" id="categoryBtn"
-			value="categoryList">카테고리</button>
+	<div class="back row">
+	    <div class="col-md-4 button_base b05_3d_roll locationBtn" id="locationBtn">
+	        <div style = "font-family:katuri;">지역</div>
+	        <div style = "font-family:katuri;">지역</div>
+	    </div>
+	    <div class="col-md-4 button_base b05_3d_roll categoryBtn" id="categoryBtn">
+	        <div style = "font-family:katuri;">카테고리</div>
+	        <div style = "font-family:katuri;">카테고리</div>
+	    </div>
+	    <div class="col-md-4">
+	    </div>
+	</div>
 		<!--지역 설정 슬라이더-->
 		<div id="locationList" class="responsive mt-5">
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic">
-					<img src="/resources/images/slide/지역9.png">
+					<img src="/resources/images/slide/지역2.png">
 				</div>
 				<span class="locationText mt-1"> 서울특별시 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역2.png">
+					<img src="/resources/images/slide/지역7.png">
 				</div>
 				<span class="locationText mt-1"> 인천광역시 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역3.png">
+					<img src="/resources/images/slide/지역13.png">
 				</div>
 				<span class="locationText mt-1"> 대전광역시 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역4.png">
+					<img src="/resources/images/slide/지역8.png">
 				</div>
 				<span class="locationText mt-1"> 광주광역시 </span>
 			</div>
@@ -425,63 +561,63 @@ img {
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역22.png">
+					<img src="/resources/images/slide/지역9.png">
 				</div>
 				<span class="locationText mt-1"> 부산광역시 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역8.png">
+					<img src="/resources/images/slide/지역15.png">
 				</div>
 				<span class="locationText mt-1"> 경기도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역9.png">
+					<img src="/resources/images/slide/지역10.png">
 				</div>
 				<span class="locationText mt-1"> 강원도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역10.png">
+					<img src="/resources/images/slide/지역14.png">
 				</div>
 				<span class="locationText mt-1"> 충청북도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역11.png">
+					<img src="/resources/images/slide/지역20.png">
 				</div>
 				<span class="locationText mt-1"> 충청남도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역12.png">
+					<img src="/resources/images/slide/지역6.png">
 				</div>
 				<span class="locationText mt-1"> 전라북도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역14.png">
+					<img src="/resources/images/slide/지역21.png">
 				</div>
 				<span class="locationText mt-1"> 전라남도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역13.png">
+					<img src="/resources/images/slide/지역16.png">
 				</div>
 				<span class="locationText mt-1"> 경상북도 </span>
 			</div>
 			<div
 				class="locationMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="locationPic" style="font-size: 40px;">
-					<img src="/resources/images/slide/지역15.png">
+					<img src="/resources/images/slide/지역12.png">
 				</div>
 				<span class="locationText mt-1"> 경상남도 </span>
 			</div>
@@ -576,55 +712,109 @@ img {
 			<div
 				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
 				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-microphone-stand"></i>
+					<i class="fa-solid fa-hands-clapping"></i>
 				</div>
 				<span class="categoryText mt-1"> 문화/공연/축제 </span>
 			</div>
 		</div>
 	</div>
 
-	<div class="container">
 	<!-- 모임 card 캐러셀 -->
 	<div class="row content mt-4">
 		<div class="col p-0">
 			<div class="content2">
 				<div class="imgContainer">
-					<div class="row" style="background-color: #f6f7f9;">
-						<c:forEach items="${groupList}" var="dto">
-							<div class="col-md-4 d-flex justify-content-center p-4">
-								<div class="card">
-									<c:choose>
-										<c:when test="${dto.sys_name ne null}">
-											<img src="/group_profile/${dto.sys_name}" id="profile_image"
-												class="card-img-top">
-										</c:when>
-										<c:otherwise>
-											<img src="/resources/images/메인사진2(배경).png" id="profile_image"
-												class="card-img-top">
-										</c:otherwise>
-									</c:choose>
-									<span class="d-none">${dto.seq_group}</span>
-									<div class="card-body">
-										<div
-											class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
-											${dto.group_category}</div>
-										<div class="card-text mt-1">
-											<strong>${dto.group_title}</strong>
-										</div>
-										<div class="card-text d-flex justify-content-end">
-											<i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
+					<div class="row">
+						<c:if test = "${groupList.size() == 0}">
+							<div>해당 지역의 모임이 없습니다.</div>
+						</c:if>
+						<c:if test = "${groupList.size() > 0}">
+							<c:forEach items="${groupList}" var="dto">
+								<div class="col-md-3 d-flex justify-content-center p-4">
+									<div class="card">
+										<c:choose>
+											<c:when test="${dto.sys_name ne null}">
+												<img src="/group_profile/${dto.sys_name}" id="profile_image"
+													class="card-img-top">
+											</c:when>
+											<c:otherwise>
+												<img src="/resources/images/메인사진2(배경).png" id="profile_image"
+													class="card-img-top">
+											</c:otherwise>
+										</c:choose>
+										<span class="d-none">${dto.seq_group}</span>
+										<div class="card-body">
+											<div
+												class="card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+												${dto.group_category}</div>
+											<div class="card-text mb-9">
+												<span style = "font-size:25px; font-family:Katuri;">${dto.group_title}</span>
+											</div>
+											<div class="card-text-site d-flex justify-content-end">
+												<span><i class="fa-solid fa-location-dot" style="color:#00145a"></i><span class="ms-2" style = "color:#00145a; font-family:Katuri;">${dto.group_site}</span></span>
+											</div>
 										</div>
 									</div>
-								</div>
-							</div>
-						</c:forEach>
+								</div>									
+							</c:forEach>
+						</c:if>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
+ <!-- Footer-->
+  <div class="footerWrapper">
+    <div class="container">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-lg-3 footer-imgBox">
+            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-2">
+              <li class="list-inline-item"><a href="#!">공지사항</a></li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item"><a href="#!">회원가입</a></li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item"><a href="#!">로그인</a></li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item">
+                <a href="#!">책임의 한계 및 법적고지</a>
+              </li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item">
+                <a href="#!" style="color: red; font-weight: bold">개인정보처리방침</a>
+              </li>
+            </ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
+              사업자등록번호 : 22-02-22
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2022. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-4">
+                <a href="#!"><i class="bi-facebook fs-3"></i></a>
+              </li>
+              <li class="list-inline-item me-4">
+                <a href="#!"><i class="bi-twitter fs-3"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#!"><i class="bi-instagram fs-3"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div> 
 
 
 	<script>
@@ -634,6 +824,8 @@ $('#locationBtn').on("click", function() {
     $('#categoryList').css('display', 'none'); // 카테고리 안보이게
     $('#locationList').css('display', 'block'); // 지역 보이게
     $('#locationList').get(0).slick.setPosition(); 
+    $('.locationBtn').children().eq(1).css({'background-color':'#8D9EE0', 'color':'white'});
+    $('.categoryBtn').children().eq(1).css({'background-color':'white', 'color':'#8D9EE0'});
 });
 
 // 카테고리 클릭시
@@ -641,6 +833,8 @@ $('#categoryBtn').on("click", function() {
     $('#categoryList').css('display', 'block'); // 카테고리 보이게
     $('#locationList').css('display', 'none'); // 지역 안보이게
     $('#categoryList').get(0).slick.setPosition();
+    $('.categoryBtn').children().eq(1).css({'background-color':'#8D9EE0', 'color':'white'});
+    $('.locationBtn').children().eq(1).css({'background-color':'white', 'color':'#8D9EE0'});
 });
 
 // 슬라이더 함수

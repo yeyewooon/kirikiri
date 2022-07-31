@@ -30,7 +30,7 @@ public class Board_FileDAO {
 //	}
 	
 	// 게시글에 있는 파일 이름 가져오기
-	public List<String> selectFile(int seq_board) throws Exception{
-		return session.selectList("fileMapper.selectFile", seq_board);
-	}
+//	public List<String> selectFile(int seq_board) throws Exception{
+//		return session.selectList("fileMapper.selectFile", seq_board);
+//	}
 }
