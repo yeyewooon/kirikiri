@@ -374,13 +374,13 @@ footer.footer {
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
+    background-color: #f75266;
+    border-color: #f75266;
 }
 .btn-check:focus+.btn-primary, .btn-primary:focus {
     color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
+    background-color: #f75266;
+    border-color: #f75266;
     box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
 }
 .btn-check:focus+.btn, .btn:focus {
@@ -389,7 +389,7 @@ footer.footer {
 }
 .btn-check:focus+.btn-primary, .btn-primary:focus {
     color: #fff;
-    background-color: #b5a8a8;
+    background-color: #f75266;
     border-color: #b5a8a8;
     box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
 }
@@ -397,6 +397,15 @@ footer.footer {
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
 }
+
+/* 신고하기 */
+.btn-danger , .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    background-color: #2551a8 !important;
+    color:#fff;
+    border-color: #2551a8;
+}
+
+
 
 /* 카트 우측 코끼리 */
 .defaultKokiri {
@@ -408,6 +417,17 @@ footer.footer {
     background-color: white;
 }
 
+.btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:visited {
+    background-color: #a4a4a4 !important;
+    color:#fff;
+    border-color: #a4a4a4;
+}
+
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:visited {
+    background-color: #f36f31 !important;
+    color:#fff;
+    border-color:#f36f31;
+}
 
 </style>
 

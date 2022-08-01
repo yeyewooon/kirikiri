@@ -373,6 +373,22 @@ footer.footer {
 .msgModal-footer {
 	border-top: 0px;
 }
+
+
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:visited {
+    background-color: #a4a4a4 !important;
+    color:#fff;
+    border-color: #a4a4a4;
+}
+
+.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    background-color: #435770 !important;
+    color:#fff;
+    border-color: #435770;
+}
+
+
+
 </style>
 
 <body>
@@ -1280,9 +1296,9 @@ footer.footer {
 							</table>
 						</div>
 						<div class="modal-footer msgModal-footer">
-							<button type="button" class="btn btn-danger ms-2" id="deleteBtn">삭제</button>
-							<button type="button" class="btn btn-primary ms-2" id="closeBtn"
+							<button type="button" class="btn btn-success ms-2" id="closeBtn"
 								data-bs-dismiss="modal">닫기</button>
+							<button type="button" class="btn btn-danger ms-2" id="deleteBtn">삭제</button>
 							<input type="text" value="${memberdto.user_nickname}" id="myId"
 								hidden>
 						</div>

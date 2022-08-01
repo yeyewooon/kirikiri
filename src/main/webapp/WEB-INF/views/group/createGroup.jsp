@@ -73,9 +73,9 @@ $(document).ready(function() {
                     uploadSummernoteImageFile(files[i], this);
                  }
               },
-			      onKeyup: function(e) {
-				     	fn_checkByte(this); // 글자수 바이트 체크 
-				    }
+		      onKeyup: function(e) {
+			     	fn_checkByte(this); // 글자수 바이트 체크 
+			    }
            }
       });
 
@@ -321,7 +321,6 @@ a {
 .mainIcon i {
    color: #316f8c;
 }
-
 
 
 .mainFooter {
@@ -714,14 +713,14 @@ footer.footer {
 						<div
 							class="calBtn minusBtn d-flex justify-content-center align-items-center"
 							id="minusBtn">
-							<i class="fa-solid fa-minus"></i>
+							<i class="fa-solid fa-minus" style="font-size:14px;"></i>
 						</div>
 						<div
 							class="memberCnt d-flex justify-content-center align-items-center">2</div>
 						<div
 							class="calBtn plusBtn d-flex justify-content-center align-items-center"
 							id="plusBtn">
-							<i class="fa-solid fa-plus"></i>
+							<i class="fa-solid fa-plus" style="font-size:14px;"></i>
 						</div>
 					</div>
 					<input type="text" name="group_people" id="group_people" value="2"
@@ -950,7 +949,6 @@ footer.footer {
     }
   })
 
- 	
   //textarea 바이트 수 체크하는 함수
 	function fn_checkByte(obj){
 	    const maxByte = 3000; //최대 100바이트
@@ -1030,16 +1028,41 @@ footer.footer {
   // 이미지 선택
   let groupFile = document.getElementById("groupFile");
   let groupDefaultImg = document.getElementById("groupDefaultImg");
+  
+	//사진 타입 
+  function checkFile(obj) {
+    let fileKind = obj.value.lastIndexOf('.');
+    let fileName = obj.value.substring(fileKind+1,obj.length);
+    let fileType = fileName.toLowerCase();
+    
+    if(fileType == "jpg" || fileType == "gif" || fileType == "png" || fileType == "jpeg" || fileType == "bmp"){
+    	return true;
+    }else{
+       alert("이미지 파일만 선택할 수 있습니다.");
+       $("#groupFile").val("");
+   		return false;
+    }
+    
+    if(fileType == "bmp"){
+       answer = confirm("BMP 파일은 웹상에서 사용하기엔 적절한 이미지 형식이 아닙니다. /n 사용하시겠습니까?");
+       if(!answer) return false;
+    	
+    }
+}
 
   // 이미지 즉각 변환
-  groupFile.onchange = function () {
-    let reader = new FileReader();
-    reader.readAsDataURL(this.files[0]);
-
-    reader.onload = function (e) {
-       groupDefaultImg.src = e.target.result;
-    }
-  }
+   groupFile.onchange = function () {
+	  let result = checkFile(this);
+	  if(result) { // 사진 파일 일 떄만 
+		  let reader = new FileReader();
+		    reader.readAsDataURL(this.files[0]);
+		    reader.onload = function (e) {
+		    	groupDefaultImg.src = e.target.result;
+		    }
+	  }else { // 사진 파일이 아닐 때
+		  groupDefaultImg.src = "/resources/images/메인사진2(배경).png";
+	  }
+  } 
 
   // 카테고리 선택
     $(".categoryBtn").on("click", function (e) {
