@@ -212,7 +212,7 @@ public class MemberController {
 				dto.setUser_pw(data_password);
 			}else {
 				String Encryption_pw = ecp.getSHA512(dto.getUser_pw());
-				dto.setUser_pw(Encryption_pw);				
+				 dto.setUser_pw(Encryption_pw);		
 			}
 		}
 		

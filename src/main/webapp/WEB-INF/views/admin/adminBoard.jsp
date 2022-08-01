@@ -699,6 +699,7 @@
         /* Read more about isConfirmed, isDenied below */
         if (result.isDenied) {
           Swal.fire("로그아웃 성공", "", "info");
+          location.href="/login/toLogout";
         }
       });
     });

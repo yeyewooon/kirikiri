@@ -37,6 +37,9 @@
 		<interceptor>
 			<mapping path="/**"/>
 			<exclude-mapping path="/"/>
+			<exclude-mapping path="/group_profile/*"/>
+			<exclude-mapping path="/profile/*"/>
+			
 			<exclude-mapping path="/resources/**"/>
 			<exclude-mapping path="/privacy"/>
 			

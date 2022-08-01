@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -42,6 +44,8 @@ public class MemberService {
 	private BoardDAO boarddao;
 	@Autowired
 	private Group_BoardDAO group_boarddao;
+	@Autowired
+	private HttpSession session;
 
 	/* member */
 
@@ -80,7 +84,9 @@ public class MemberService {
 
 	// 개인정보 수정
 	public void profileModify(MemberDTO dto){
-		
+		((MemberDTO)session.getAttribute("loginSession")).setUser_nickname(dto.getUser_nickname());
+		((MemberDTO)session.getAttribute("loginSession")).setUser_phone(dto.getUser_phone());
+		((MemberDTO)session.getAttribute("loginSession")).setUser_intro(dto.getUser_intro());
 		memberdao.profileModify(dto);
 	}
 	
