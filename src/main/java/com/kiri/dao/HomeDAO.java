@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kiri.dto.BestGroupDTO;
+import com.kiri.dto.BoardDTO;
 import com.kiri.dto.Tbl_GroupDTO;
 
 @Repository
@@ -33,4 +34,13 @@ public class HomeDAO {
 	   public List<BestGroupDTO> selectBestGroup(){
 		   return session.selectList("userMapper.selectBestGroup");
 	   }
+	   
+	   //게시판 두개 뽑기
+	   public List<BoardDTO> getBestBoard(){
+		   return session.selectList("boardMapper.getBestBoard");
+	   }
+	   public String getSysname(int seq_board) {
+		   return session.selectOne("boardMapper.getSysname", seq_board);
+	   }
+	   
 }

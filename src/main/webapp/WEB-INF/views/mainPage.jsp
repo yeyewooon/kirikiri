@@ -1,7 +1,53 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-   <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-      <!DOCTYPE html>
-      <html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+   pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
+<html>
+<head>
+<link
+   href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+   rel="stylesheet">
+<script
+   src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+   integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+   crossorigin="anonymous"></script>
+<!--구글 폰트-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+   integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+   crossorigin="anonymous"></script>
+<!-- AOS 라이브러리 불러오기-->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<!-- 아이콘 -->
+<script src="https://kit.fontawesome.com/f9358a6ceb.js"
+   crossorigin="anonymous"></script>
+<!-- Bootstrap icons-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+<title>끼리끼리</title>
+<style>
+* {
+   box-sizing: border-box;
+   font-family: 'MICEGothic Bold';
+}
+@font-face {
+   font-family: 'MICEGothic Bold';
+   src:
+       url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+   font-weight: 700;
+   font-style: normal;
+}
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
       <head>
          <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -604,341 +650,375 @@
                </div>
             </div>
 
-            <!--원그림-->
-            <div class="row">
-               <div class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
-                  <div class="circleImg" data-aos="flip-left" data-aos-duration="1000">
-                     <img src="/resources/images/aksu.png" id="circle_img">
+
+      <!--원그림-->
+      <div class="row">
+         <div
+            class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
+            <div class="circleImg" data-aos="flip-left" data-aos-duration="1000">
+               <img src="/resources/images/aksu.png" id="circle_img">
+            </div>
+            <div class="w-100">
+               <p class="text-center mt-4 circleTitle">그룹 가입하기</p>
+               <p>공통된 관심사인 사람을 만나고, 자신의 커뮤니티를 찾아보세요.</p>
+            </div>
+         </div>
+         <div
+            class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
+            <div class="circleImg" data-aos="flip-left" data-aos-duration="1000"
+               data-aos-delay="100">
+               <img src="/resources/images/dodbogi.png" id="circle_img">
+            </div>
+            <div class="w-100">
+               <p class="text-center mt-4 circleTitle">이벤트 찾기</p>
+               <p>자신이 생각하시는 모든 주제에 대한 이벤트가 이루어집니다!</p>
+            </div>
+         </div>
+         <div
+            class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
+            <div class="circleImg" data-aos="flip-left" data-aos-duration="1000"
+               data-aos-delay="200">
+               <img src="/resources/images/update_chatting.png" id="circle_img">
+            </div>
+            <div class="w-100">
+               <p class="text-center mt-4 circleTitle">모임간 소통</p>
+               <p>사람들을 모으고 공통의 관심사를 찾기 위해 전문가가 될 필요는 없죠!</p>
+            </div>
+         </div>
+      </div>
+
+      <!--가입 하기 버튼-->
+      <div class="row mt-2">
+         <div class="signUpBox col text-center">
+			<div class="btn">
+		    	<a href="/signup/toSignupAgree" style = "color:#0a58ca;"><span>가입하기</span></a>
+		    <div class="dot"></div>
+		  	</div>
+         </div>
+      </div>
+
+      <!-- 네모네모 -->
+      <div id="bestParty" class="p-4 mt-5">
+      	<div class="bestTitle row justify-content-center">
+			<img src="/resources/images/BestBoard.png" style="width:50%">
+      	</div>
+      	<div class="row text-center mb-4">
+      		<h5 style="color:darkgreen;">끼리끼리 회원들에게 가장 많은 좋아요를 받은 게시물을 살펴보세요!</h5>
+      	</div>
+         <div class="content-1" data-aos="fade-left" data-aos-duration="1000">
+            <div class="row g-0 align-items-center">
+               <div class="col-xl-6 text-end px-5">
+                  <div class="text-start">
+                  	<img src="/resources/images/gold.png" style="width:80px;">
+                  	<span style="font-size:45px; font-family:'SDSamliphopangche_Outline';"> BEST LIKES </span>
                   </div>
-                  <div class="w-100">
-                     <p class="text-center mt-4 circleTitle">그룹 가입하기</p>
-                     <p>공통된 관심사인 사람을 만나고, 자신의 커뮤니티를 찾아보세요.</p>
+                  <div class="fs-4">
+               			<i class="fa-regular fa-heart" style="color:red"></i>
+               			<span class="me-3">${boardList.get(0).likehit }</span>
+               			<i class="fa-regular fa-eye" style="color:gray"></i>
+               			<span>${boardList.get(0).board_count }</span>
+               		</div>
+                  <div class="fs-2 mt-4">${boardList.get(0).board_title }</div>
+                  <div class="my-2 fs-5">by ${boardList.get(0).user_nickname } </div>
+                  <div>
+                     <a href="/board/toDetailView?seq_board=${boardList.get(0).seq_board }" style="color:#6f6f6f;">자세히 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                   </div>
                </div>
-               <div class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
-                  <div class="circleImg" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="100">
-                     <img src="/resources/images/dodbogi.png" id="circle_img">
-                  </div>
-                  <div class="w-100">
-                     <p class="text-center mt-4 circleTitle">이벤트 찾기</p>
-                     <p>자신이 생각하시는 모든 주제에 대한 이벤트가 이루어집니다!</p>
-                  </div>
+               <div class="mainImg col-xl-6 ms-auto d-flex align-items-center">
+               		<c:if test="${sysList.get(0) eq null }">
+               			<img src="/resources/images/찜2.jpg" class="img-fluid">
+               		</c:if>
+               		<c:if test="${sysList.get(0) ne null }">
+               			<img src="/boardFile/${sysList.get(0)}" class="img-fluid">
+               		</c:if>
                </div>
-               <div class="circleBox col-md-4 d-flex flex-column justify-content-center align-items-center">
-                  <div class="circleImg" data-aos="flip-left" data-aos-duration="1000" data-aos-delay="200">
-                     <img src="/resources/images/update_chatting.png" id="circle_img">
+            </div>
+         </div>
+<!-- 게시물 뽑아오기 하기 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
+         <div class="content-2 mt-3" data-aos="fade-right"
+            data-aos-duration="1000">
+            <div class="row g-0 mt-5 align-items-center">
+               <div class="mainImg col-xl-6 mb-4 mb-lg-0">
+                  <c:if test="${sysList.get(1) eq null }">
+               			<img src="/resources/images/찜2.jpg" class="img-fluid">
+               		</c:if>
+               		<c:if test="${sysList.get(1) ne null }">
+               			<img src="/boardFile/${sysList.get(1)}" class="img-fluid">
+               		</c:if>
+               </div>
+               <div class="col-xl-6 ms-auto pe-5 px-5">
+                  <div>
+                  	<img src="/resources/images/silver.png" style="width:80px;">
+                  	<span style="font-size:45px; font-family:'SDSamliphopangche_Outline';"> BEST LIKES </span>
                   </div>
-                  <div class="w-100">
-                     <p class="text-center mt-4 circleTitle">모임간 소통</p>
-                     <p>사람들을 모으고 공통의 관심사를 찾기 위해 전문가가 될 필요는 없죠!</p>
+                  <div class="fs-4 mt-2 text-end">
+               			<i class="fa-regular fa-heart" style="color:red"></i>
+               			<span class="me-3">${boardList.get(1).likehit }</span>
+               			<i class="fa-regular fa-eye" style="color:gray"></i>
+               			<span>${boardList.get(1).board_count }</span>
+               		</div>
+                  <div class="fs-2 mt-4 ps-2 ">${boardList.get(1).board_title }</div>
+                  <div class="my-2 fs-5 ps-2 ">by ${boardList.get(1).user_nickname } </div>
+                  <div class="ps-2">
+                     <a href="/board/toDetailView?seq_board=${boardList.get(1).seq_board }" style="color:#6f6f6f;">자세히 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                   </div>
                </div>
             </div>
+         </div>
+      </div>
 
-            <!--가입 하기 버튼-->
-            <div class="row mt-2">
-               <div class="signUpBox col text-center">
-                  <div class="btn">
-                     <a href="/signup/toSignupAgree" style="color:#0a58ca;"><span>가입하기</span></a>
-                     <div class="dot"></div>
+      <!-- 애플리케이션 -->
+      <div class="acontainer mt-5">
+         <div class="row mt-3">
+            <div
+               class="col-md-5 phoneImgBox d-flex align-items-center justify-content-center">
+               <img src="/resources/images/smartphone.png">
+            </div>
+            <div
+               class="col-md-7 d-flex align-items-center justify-content-center">
+               <div
+                  class="phoneTextBox d-flex flex-column justify-content-center align-items-center mt-2">
+                  <div class="downloadHead">
+                     <h1>
+                        <span style="font-size: 50px; color: #4285f4;">끼</span><span
+                           style="font-size: 50px; color: #9e9e9e;">리</span><span
+                           style="font-size: 50px; color: #4285f4;">끼</span><span
+                           style="font-size: 50px; color: #9e9e9e;">리</span> 모바일 앱 출시!
+                     </h1>
+                  </div>
+                  <div class="downloadTtitle mt-3">
+                     <strong>이제 끼리끼리를 앱에서도 사용할 수 있습니다.</strong>
+                  </div>
+                  <div class="downloadContent">
+                     <label><strong style="font-size: 30px;">남은 시간</strong><br></label>
+                     <strong id="sample01" style="color: red"></strong>
+                  </div>
+                  <div class="downloadBtn mt-3 d-flex">
+                     <div class="row appBox">
+                        <div class="col-4 text-center mt-1" style="color: #fff;">
+                           <i class="fa-brands fa-apple w-100 appleLogo"></i>
+                        </div>
+                        <div
+                           class="col-8 appBoxText d-flex flex-column justify-content-center"
+                           style="color: #fff;">
+                           <span><strong>AppStore</strong>에서</span> <span
+                              class="downLoadSmallText">다운로드 하기</span>
+                        </div>
+                     </div>
+                     <div class="row appBox ms-5">
+                        <div class="col-4 text-center mt-1" style="color: #fff;">
+                           <i class="fa-brands fa-google-play w-100 googleLogo"></i>
+                        </div>
+                        <div
+                           class="col-8 appBoxText d-flex flex-column justify-content-center"
+                           style="color: #fff;">
+                           <span><strong>Android</strong>에서</span> <span
+                              class="downLoadSmallText">다운로드 하기</span>
+                        </div>
+                     </div>
                   </div>
                </div>
             </div>
+         </div>
+      </div>
 
-            <!-- 네모네모 -->
-            <div id="bestParty" class="p-4 mt-5">
-               <div class="content-1" data-aos="fade-left" data-aos-duration="1000">
-                  <div class="row g-0 align-items-center">
-                     <div class="col-lg-5 text-end ps-5">
-                        <div class="fs-2">모임 이름 &bullet;</div>
-                        <div class="fs-3">글 제목</div>
-                        <div class="my-4">모임 후기 샬라샬라 적어요 샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라</div>
-                        <div>
-                           <a href="/board/toBoard">글 보러 가기</a>
-                        </div>
-                     </div>
-                     <div class="mainImg col-lg-6 ms-auto d-flex align-items-center">
-                        <img src="/resources/images/메인사진2(배경).png" class="img-fluid">
-                     </div>
-                  </div>
-               </div>
-               <!-- 게시물 뽑아오기 하기 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ -->
-               <div class="content-2 mt-3" data-aos="fade-right" data-aos-duration="1000">
-                  <div class="row g-0 mt-5 align-items-center">
-                     <div class="mainImg col-lg-6 mb-4 mb-lg-0">
-                        <img src="/resources/images/메인사진2(배경).png" class="img-fluid">
-                     </div>
-                     <div class="col-lg-5 ms-auto pe-5">
-                        <div class="fs-2">모임 이름 &bullet;</div>
-                        <div class="fs-3">글 제목</div>
-                        <div class="my-4">모임 후기 샬라샬라 적어요 샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라</div>
-                        <div>
-                           <a href="">글 보러 가기</a>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 애플리케이션 -->
-            <div class="acontainer mt-5">
-               <div class="row mt-3">
-                  <div class="col-md-5 phoneImgBox d-flex align-items-center justify-content-center">
-                     <img src="/resources/images/smartphone.png">
-                  </div>
-                  <div class="col-md-7 d-flex align-items-center justify-content-center">
-                     <div class="phoneTextBox d-flex flex-column justify-content-center align-items-center mt-2">
-                        <div class="downloadHead">
-                           <h1>
-                              <span style="font-size: 50px; color: #4285f4;">끼</span><span
-                                 style="font-size: 50px; color: #9e9e9e;">리</span><span
-                                 style="font-size: 50px; color: #4285f4;">끼</span><span
-                                 style="font-size: 50px; color: #9e9e9e;">리</span> 모바일 앱 출시!
-                           </h1>
-                        </div>
-                        <div class="downloadTtitle mt-3">
-                           <strong>이제 끼리끼리를 앱에서도 사용할 수 있습니다.</strong>
-                        </div>
-                        <div class="downloadContent">
-                           <label><strong style="font-size: 30px;">남은 시간</strong><br></label>
-                           <strong id="sample01" style="color: red"></strong>
-                        </div>
-                        <div class="downloadBtn mt-3 d-flex">
-                           <div class="row appBox">
-                              <div class="col-4 text-center mt-1" style="color: #fff;">
-                                 <i class="fa-brands fa-apple w-100 appleLogo"></i>
-                              </div>
-                              <div class="col-8 appBoxText d-flex flex-column justify-content-center"
-                                 style="color: #fff;">
-                                 <span><strong>AppStore</strong>에서</span> <span class="downLoadSmallText">다운로드 하기</span>
+      <!-- 모임 나타나기 -->
+      <!-- menubar -->
+      <div class="row menu ms-0">
+         <div class="col-4 d-flex justify-content-end text allGroup">ALL</div>
+         <div class="col-4 d-flex justify-content-center text newGroup">NEW</div>
+         <div class="col-4 d-flex justify-content-start text bestGroup">BEST</div>
+      </div>
+	<!-- 모임 card 캐러셀 All -->
+      <div class="row contentAll">
+         <div class="col p-0">
+            <div class="content2">
+               <div class="imgContainer">
+                  <div class="row" style="padding : 18px;">
+                     <c:forEach items="${selectAllList}" var="dto" begin="0" end = "5">
+                        <div class="col-md-4 d-flex justify-content-center p-4">
+                           <div class="card" data-aos="flip-up" data-aos-duration="1000">
+                           		<c:choose>
+									<c:when test="${dto.sys_name ne null}">
+										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+									</c:when>
+									<c:otherwise>
+										<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+									</c:otherwise>
+								</c:choose>
+								<span class="d-none seq_group">${dto.seq_group}</span>
+                              <div class="card-body">
+                                 <div class="card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+                                    ${dto.group_category}
+                                 </div>
+                                 <div class="card-text mt-1">
+                                    <strong>${dto.group_title}</strong>
+                                 </div>
+                                 <div class="card-text-site d-flex justify-content-end">
+                                    <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
+                                 </div>
                               </div>
                            </div>
-                           <div class="row appBox ms-5">
-                              <div class="col-4 text-center mt-1" style="color: #fff;">
-                                 <i class="fa-brands fa-google-play w-100 googleLogo"></i>
-                              </div>
-                              <div class="col-8 appBoxText d-flex flex-column justify-content-center"
-                                 style="color: #fff;">
-                                 <span><strong>Android</strong>에서</span> <span class="downLoadSmallText">다운로드 하기</span>
+                        </div>
+                     </c:forEach>
+                  </div>
+               </div>
+            </div>
+             <div class="col-md-12" style="width: 100%">
+               <div class="d-flex justify-content-center align-items-center more">
+                  <span>더보기</span><span class = "ms-2"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
+              </div>
+            </div>
+         </div>
+      </div>
+
+      <!-- 모임 card 캐러셀 New -->
+      <div class="row contentNew d-none">
+         <div class="col p-0">
+            <div class="content2">
+               <div class="imgContainer">
+                  <div class="row">
+                     <c:forEach items="${selectNewList}" var="dto" begin="0" end = "5">
+                        <div class="col-md-4 d-flex justify-content-center p-4">
+                           <div class="card" data-aos="flip-up" data-aos-duration="1000">
+                           		<c:choose>
+									<c:when test="${dto.sys_name ne null}">
+										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+									</c:when>
+									<c:otherwise>
+										<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+									</c:otherwise>
+								</c:choose>
+								<span class="d-none  seq_group">${dto.seq_group}</span>
+                              <div class="card-body">
+                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+                                    ${dto.group_category}
+                                 </div>
+                                 <div class="card-text mt-1">
+                                    <strong>${dto.group_title}</strong>
+                                 </div>
+                                 <div class="card-text d-flex justify-content-end">
+                                    <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
+                                 </div>
                               </div>
                            </div>
                         </div>
-                     </div>
+                     </c:forEach>
                   </div>
                </div>
             </div>
-
-            <!-- 모임 나타나기 -->
-            <!-- menubar -->
-            <div class="row menu ms-0">
-               <div class="col-4 d-flex justify-content-end text allGroup">ALL</div>
-               <div class="col-4 d-flex justify-content-center text newGroup">NEW</div>
-               <div class="col-4 d-flex justify-content-start text bestGroup">BEST</div>
+             <div class="col-12" style="width: 100%">
+               <div class="d-flex justify-content-center align-items-center more">
+                  <span>더보기</span><span class = "ms-2"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
+              </div>
             </div>
-            <!-- 모임 card 캐러셀 All -->
-            <div class="row contentAll">
-               <div class="col p-0">
-                  <div class="content2">
-                     <div class="imgContainer">
-                        <div class="row" style="padding : 18px;">
-                           <c:forEach items="${selectAllList}" var="dto" begin="0" end="5">
-                              <div class="col-md-4 d-flex justify-content-center p-4">
-                                 <div class="card" data-aos="flip-up" data-aos-duration="1000">
-                                    <c:choose>
-                                       <c:when test="${dto.sys_name ne null}">
-                                          <img src="/group_profile/${dto.sys_name}" id="profile_image"
-                                             class="card-img-top">
-                                       </c:when>
-                                       <c:otherwise>
-                                          <img src="/resources/images/메인사진2(배경).png" id="profile_image"
-                                             class="card-img-top">
-                                       </c:otherwise>
-                                    </c:choose>
-                                    <span class="d-none seq_group">${dto.seq_group}</span>
-                                    <div class="card-body">
-                                       <div class="card-text-category d-flex justify-content-center align-items-center"
-                                          style="color:#fff;">
-                                          ${dto.group_category}
-                                       </div>
-                                       <div class="card-text mt-1">
-                                          <strong>${dto.group_title}</strong>
-                                       </div>
-                                       <div class="card-text-site d-flex justify-content-end">
-                                          <i class="fa-solid fa-location-dot"></i><span
-                                             class="ms-2">${dto.group_site}</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </c:forEach>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-md-12" style="width: 100%">
-                     <div class="d-flex justify-content-center align-items-center more">
-                        <span>더보기</span><span class="ms-2"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 모임 card 캐러셀 New -->
-            <div class="row contentNew d-none">
-               <div class="col p-0">
-                  <div class="content2">
-                     <div class="imgContainer">
-                        <div class="row">
-                           <c:forEach items="${selectNewList}" var="dto" begin="0" end="5">
-                              <div class="col-md-4 d-flex justify-content-center p-4">
-                                 <div class="card" data-aos="flip-up" data-aos-duration="1000">
-                                    <c:choose>
-                                       <c:when test="${dto.sys_name ne null}">
-                                          <img src="/group_profile/${dto.sys_name}" id="profile_image"
-                                             class="card-img-top">
-                                       </c:when>
-                                       <c:otherwise>
-                                          <img src="/resources/images/메인사진2(배경).png" id="profile_image"
-                                             class="card-img-top">
-                                       </c:otherwise>
-                                    </c:choose>
-                                    <span class="d-none  seq_group">${dto.seq_group}</span>
-                                    <div class="card-body">
-                                       <div
-                                          class="card-text card-text-category d-flex justify-content-center align-items-center"
-                                          style="color:#fff;">
-                                          ${dto.group_category}
-                                       </div>
-                                       <div class="card-text mt-1">
-                                          <strong>${dto.group_title}</strong>
-                                       </div>
-                                       <div class="card-text d-flex justify-content-end">
-                                          <i class="fa-solid fa-location-dot"></i><span
-                                             class="ms-2">${dto.group_site}</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </c:forEach>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-12" style="width: 100%">
-                     <div class="d-flex justify-content-center align-items-center more">
-                        <span>더보기</span><span class="ms-2"><i class="fa-solid fa-arrow-right-to-bracket"></i></span>
-                     </div>
-                  </div>
-               </div>
-            </div>
-
-            <!-- 모임 card 캐러셀 Best -->
-            <div class="row contentBest d-none">
-               <div class="col p-0">
-                  <div class="content2">
-                     <div class="imgContainer">
-                        <div class="row">
-                           <c:forEach items="${selectBestList}" var="dto" begin="0" end="5">
-                              <div class="col-md-4 d-flex justify-content-center p-4">
-                                 <div class="card" data-aos="flip-up" data-aos-duration="1000">
-                                    <c:choose>
-                                       <c:when test="${dto.sys_name ne null}">
-                                          <img src="/group_profile/${dto.sys_name}" id="profile_image"
-                                             class="card-img-top">
-                                       </c:when>
-                                       <c:otherwise>
-                                          <img src="/resources/images/메인사진2(배경).png" id="profile_image"
-                                             class="card-img-top">
-                                       </c:otherwise>
-                                    </c:choose>
-                                    <span class="d-none  seq_group">${dto.seq_group}</span>
-                                    <div class="card-body">
-                                       <div
-                                          class="card-text card-text-category d-flex justify-content-center align-items-center"
-                                          style="color:#fff;">
-                                          ${dto.group_category}
-                                       </div>
-                                       <div class="card-text mt-1">
-                                          <strong>${dto.group_title}</strong>
-                                       </div>
-                                       <div class="card-text d-flex justify-content-end">
-                                          <i class="fa-solid fa-location-dot"></i><span
-                                             class="ms-2">${dto.group_site}</span>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-                           </c:forEach>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-12" style="width: 100%">
-                     <div class="d-flex justify-content-center align-items-center more">
-                        <span style="font-color:grey;">더보기</span><span class="ms-2"><i style="font-color:grey;"
-                              class="fa-solid fa-arrow-right-to-bracket"></i></span>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <!-- Footer-->
-            <footer class="footer mt-5">
-               <div class="row">
-                  <div class="col-lg-3 footer-imgBox">
-                     <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-                  </div>
-                  <div class="col-lg-6 h-100 my-auto">
-                     <ul class="list-inline mb-2">
-                        <li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <c:choose>
-                           <c:when test="${not empty loginSession}">
-                              <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-                              <li class="list-inline-item">⋅</li>
-                              <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-                           </c:when>
-                           <c:otherwise>
-                              <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-                              <li class="list-inline-item">⋅</li>
-                              <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-                           </c:otherwise>
-                        </c:choose>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item">
-                           <c:choose>
-                              <c:when test="${not empty loginSession}">
-                                 <a href="/group/toCreateGroup">모임 만들기</a>
-                              </c:when>
-                              <c:otherwise>
-                                 <a href="/login/toLogin">모임 만들기</a>
-                              </c:otherwise>
-                           </c:choose>
-                        </li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="/privacy"
-                              style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-                     </ul>
-                     <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-                        개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-                     <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-                        57 이레빌딩</p>
-                     <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-                        2022. All Rights Reserved.</p>
-                  </div>
-                  <div class="col-lg-3 h-100 my-auto">
-                     <ul class="list-inline mb-0">
-                        <li class="list-inline-item me-4"><a href="https://ko-kr.facebook.com"><i
-                                 class="bi-facebook fs-3"></i></a></li>
-                        <li class="list-inline-item me-4"><a href="https://twitter.com/?lang=ko"><i
-                                 class="bi-twitter fs-3"></i></a></li>
-                        <li class="list-inline-item"><a href="https://www.instagram.com/"><i
-                                 class="bi-instagram fs-3"></i></a></li>
-                     </ul>
-                  </div>
-               </div>
-            </footer>
          </div>
+      </div>
 
-         <div class="d-flex">
+      <!-- 모임 card 캐러셀 Best -->
+      <div class="row contentBest d-none">
+         <div class="col p-0">
+            <div class="content2">
+               <div class="imgContainer">
+                  <div class="row">
+                     <c:forEach items="${selectBestList}" var="dto" begin="0" end = "5">
+                        <div class="col-md-4 d-flex justify-content-center p-4">
+                           <div class="card" data-aos="flip-up" data-aos-duration="1000">
+                           		<c:choose>
+									<c:when test="${dto.sys_name ne null}">
+										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+									</c:when>
+									<c:otherwise>
+										<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+									</c:otherwise>
+								</c:choose>
+								<span class="d-none  seq_group">${dto.seq_group}</span>
+                              <div class="card-body">
+                                 <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+                                    ${dto.group_category}
+                                 </div>
+                                 <div class="card-text mt-1">
+                                    <strong>${dto.group_title}</strong>
+                                 </div>
+                                 <div class="card-text d-flex justify-content-end">
+                                    <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
+                                 </div>
+                              </div>
+                           </div>
+                        </div>
+                     </c:forEach>
+                  </div>
+               </div>
+            </div>
+             <div class="col-12" style="width: 100%">
+               <div class="d-flex justify-content-center align-items-center more">
+                  <span style = "font-color:grey;">더보기</span><span class = "ms-2"><i style = "font-color:grey;" class="fa-solid fa-arrow-right-to-bracket"></i></span>
+              </div>
+            </div>
          </div>
-         <script>
+      </div>
+		<!-- Footer-->
+		<footer class="footer mt-5">
+			<div class="row">
+				<div class="col-lg-3 footer-imgBox">
+					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+				</div>
+				<div class="col-lg-6 h-100 my-auto">
+					<ul class="list-inline mb-2">
+						<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+						<li class="list-inline-item">⋅</li>
+						<c:choose>
+							<c:when test="${not empty loginSession}">
+								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+							</c:otherwise>
+						</c:choose>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item">
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<a href="/group/toCreateGroup">모임 만들기</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/login/toLogin">모임 만들기</a>
+								</c:otherwise>
+							</c:choose>
+						</li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/privacy"
+							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+					</ul>
+					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+						57 이레빌딩</p>
+					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+						2022. All Rights Reserved.</p>
+				</div>
+				<div class="col-lg-3 h-100 my-auto">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item me-4"><a
+							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+						<li class="list-inline-item me-4"><a
+							href="https://twitter.com/?lang=ko"><i
+								class="bi-twitter fs-3"></i></a></li>
+						<li class="list-inline-item"><a
+							href="https://www.instagram.com/"><i
+								class="bi-instagram fs-3"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+
+   <script>
    <!-- 모임생성 고! 버튼 -->
    let check = "${loginSession.user_email}";
     $(".button").on("click", function(){
