@@ -16,7 +16,8 @@ public class WSConfig extends Configurator{
 		HttpSession session = (HttpSession)request.getHttpSession();
 		// nickname이라는 key값으로 사용자으 ㅣ닉네임을 셋팅해줌.
 		sec.getUserProperties().put("user_nickname", ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname());
-
+		sec.getUserProperties().put("user_email", ((MemberDTO) session.getAttribute("loginSession")).getUser_email());
+		
 		super.modifyHandshake(sec, request, response);
 	}
 }

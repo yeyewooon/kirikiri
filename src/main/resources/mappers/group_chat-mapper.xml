@@ -6,7 +6,7 @@
 <mapper namespace="chatMapper">
 	<insert id="insert" parameterType="com.kiri.dto.Group_ChatDTO">
 		insert into group_chat
-			values(seq_chat.nextval, #{seq_group}, #{user_nickname}, #{message}, sysdate)
+			values(seq_chat.nextval, #{seq_group}, #{user_email}, #{user_nickname}, #{message}, sysdate)
 	</insert>
 	<select id="selectChat" parameterType="int" resultType="com.kiri.dto.Group_ChatDTO">
 		select seq_chat, seq_group, user_nickname, message, to_char(sendDate, 'am hh:mi') as sendDate from group_chat where seq_group = #{seq_group} order by 1

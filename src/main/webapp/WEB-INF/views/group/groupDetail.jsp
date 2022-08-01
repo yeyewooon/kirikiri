@@ -1153,9 +1153,13 @@ footer.footer {
                    }else if(activeText == "일정") {
                       location.href = "/cal/toGroupCalendar?seq_group="+seq_group;
                    }else if(activeText == "채팅") {
-                	   window.open("/group/toChat?seq_group="+seq_group, "PopupWin", "width=500,height=600");
+                	   let url="/group/toChat?seq_group="+seq_group;
+                	   let name = "PopupWin";
+                	   let option = "width=600,height=600,left=600, top=200";
+                	   window.open(url, name, option);
                    }
                    return;
+                   
                 }
             }
              Swal.fire('모임 회원만 가능합니다');
