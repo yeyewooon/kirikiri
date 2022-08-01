@@ -188,7 +188,7 @@ body{
   background-color: white;
 }
 .circleLine-text{
-    margin: auto; 
+    margin: auto;
     text-align: center;
     margin-bottom: 70px;
     margin-top: 10px;
@@ -250,15 +250,15 @@ input{
     width: 83%;
     padding-left: 0px;
     margin: 5px;
-    margin-left: 12px; 
+    margin-left: 12px;
 }
 #email-domain{
 	width: 100%;
 	padding-left: 0px;
 	display: inline-block;
-	margin:5px; 
+	margin:5px;
 	margin-top : 0px;
-	margin-left: 12px; 
+	margin-left: 12px;
 }
 #email-btn {
 	display: block;
@@ -357,20 +357,20 @@ footer.footer {
 </head>
 <script>
    $(document).ready(function(){
-	   let code ; 
+	   let code ;
 	   let auth ;
 	   let nicknameConfirm;
 	   let phoneConfirm;
-	   
+
 	   $("#backPageBtn").click(function(){
 		   location.href = "/signup/toSignupAgree";
 	   })
-	   
-       $("#singupBackBtn").click(function(){ // 뒤로가기 
+
+       $("#singupBackBtn").click(function(){ // 뒤로가기
            back();
-      
+
        });
-       
+
        $('#email-domain-select').change(function () { //이메일 셀렉트
               let state = "";
               state = $('#email-domain-select option:selected').val();
@@ -383,25 +383,25 @@ footer.footer {
                 $('.email-domain-row').hide();
               }
         });
-       
+
 		$("#emailCheck").click(function(){ //이메일 중복체크
 			 let user_email = $("#email-id").val()+"@"+$("#email-domain").val();
    	  		 let emailRegex = /^[a-zA-Z0-9+-\_.]+@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-   	  		 
+
    	  		 if($("#email-id").val() == ""){
    	  			 sweetAlertFail("아이디를 입력해주세요.");
    	  			 return;
-   	  			 
+
    	  		 }else if($("#email-domain").val() === "1"){
       			 sweetAlertFail("도메인을 선택 혹은 입력해주세요.");
       			 return;
-      		
+
       		 }else if(!emailRegex.test(user_email)){
        	 		 sweetAlertFail("올바르지 않은 이메일 형식입니다.");
 	       	 	 return;
-	       	 	 
+
 	      	 }else{
-		      	  
+
 	       	  	  $.ajax({
 	        		url : "/signup/emailCheck"
 	        		, type : "post"
@@ -411,9 +411,9 @@ footer.footer {
 	        			if(result === "impossibility"){
 	        				sweetAlertFail("사용 중인 이메일입니다.");
 	        				$("#eamail-id").focus();
-	        				
+
 	        			}else if(result === "possibility"){
-	        				
+
 	        				Swal.fire({
 	        					  title: '사용 가능한 이메일입니다.',
 	        					  text: "해당 이메일로 인증하시겠습니까?",
@@ -439,28 +439,28 @@ footer.footer {
 	  	        						, success : function (data) {
 	  	        							code = data;
 	  	        							$("#authNum").focus();
-	  	        							
+
 	  	        						}, error : function(e){
 	  	        							console.log(e);
-	  	        						}			
+	  	        						}
 	  	        					});
-	        						  
+
 	        					  };
-	        					  
+
 	        					});
-	        					
+
 	        				}else{
 	        					return;
 	        			}
-	        	
+
 	        		}, error : function(e){
 	        			console.log(e);
 	        		}
 	        	})
       	   }
-   	   
+
    	   });
-		
+
 		$("#certificationBtn").click(function(){
 			if($("#authNum").val() === code){
 				Swal.fire({
@@ -475,44 +475,44 @@ footer.footer {
 				$('#email-domain-select').attr('disabled',true);
 				auth = "comfirm";
 				return;
-				
+
 			}else{
 				sweetAlertFail("인증 번호가 다릅니다. 다시 입력해주세요.");
 				$("#authNum").focus();
 				return;
 			}
-			
+
 		});
-		
+
 		$("#email_id").change(function(){
 			auth = "deny";
 		});
-		
+
 		$("#user_nickname").change(function(){
 			nicknameConfirm = "deny";
 		});
-		
+
 		$("#user_nickname").change(function(){
 			$("#nickname-col").empty();
-			let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;   
-			
+			let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;
+
 			if(!nicknameRegex.test($("#user_nickname").val())){
 				invalidNickname();
 	       	 	return;
 			}
 		});
-	   
+
 		$("#nicknameCheck").click(function(){ //휴대폰 중복체크
-  	  		 let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;    
-     
+  	  		 let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;
+
   	  		 if(!nicknameRegex.test($("#user_nickname").val())){
       	 		 sweetAlertFail("올바르지 않은 닉네임 형식입니다.");
       	 		 $("#nicknameCheck").focus();
 	       	 	 return;
-	       	 	 
+
 	      	 }else{
 		      	  let user_nickname = $("#user_nickname").val();
-		      	  
+
 	       	  	  $.ajax({
 	        		url : "/signup/nicknameCheck"
 	        		, type : "post"
@@ -524,23 +524,23 @@ footer.footer {
 	        				sweetAlertFail("사용 중인 닉네임입니다.");
 	        				$("#user_nickname").focus();
 	        				invalidNickname();
-	        				
+
 	        			}else if(result === "possibility"){
 	        				sweetAlertSuccess("사용 가능한 닉네임입니다.");
 	        				nicknameConfirm = "confirm";
 	        				validNickname();
 	        			}
-	        	
+
 	        		}, error : function(e){
 	        			console.log(e);
 	        		}
 	        	})
      	   }
   	   });
-		
+
 	   $("#user_name").change(function(){
 		   let nameRegex = /^[가-힣]+$/;
-		   
+
 		   if(!nameRegex.test($("#user_name").val())){
 			   invalidName();
 			   return;
@@ -548,15 +548,15 @@ footer.footer {
 			   $("#name-col").empty();
 		   }
 	   });
-		
+
        $("#email-btn").click(function(){ //이메일 직접입력 취소
     	   $(".email-domain-row").hide();
     	   $("#email-domain").val("");
        });
-       
+
        $("#user_pw").change(function(){ //비밀번호
     	   let passwordRegex = /^[a-z0-9!@#$]{8,20}$/
-    	   
+
     	   if(!passwordRegex.test($("#user_pw").val())){
     		   invalidPw();
     		   return;
@@ -567,27 +567,27 @@ footer.footer {
     		   validPw();
     	   }
        });
-       
+
        $("#pwCheck").change(function(){ //비밀번호확인
     	   if($("#user_pw").val() != $("#pwCheck").val()){
     		   checkPw();
     	   }else{
     		   $("#check-col").empty();
     	   }
-       
+
        });
-       
-       
+
+
        $("#checkPhone").click(function(){ //이메일 중복체크
     	   let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
     	   let phone = $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
-   
+
 	  		 if(!phoneRegex.test(phone)){
     	 		sweetAlertFail("올바르지 않은 전화번호 형식입니다.");
 	       	 	 return;
-	       	 	 
+
 	      	 }else{
-		      	  
+
 	       	  	  $.ajax({
 	        		url : "/signup/phoneCheck"
 	        		, type : "post"
@@ -597,7 +597,7 @@ footer.footer {
 	        			console.log(result);
 	        			if(result === "impossibility"){
 	        				sweetAlertFail("사용 중인 전화번호입니다.");
-	        				
+
 	        			}else if(result === "possibility"){
 	        				sweetAlertSuccess("사용 가능한 전화번호 입니다.");
 	        				$('#phone1').attr('disabled',true);
@@ -605,88 +605,88 @@ footer.footer {
 	        				$("#phone3").attr('readonly',true);
 	        				phoneConfirm = "confirm";
 	        			}
-	        	
+
 	        		}, error : function(e){
 	        			console.log(e);
 	        		}
 	        	})
    	   }
 	   });
-       
-       
+
+
        $("#nextBtn").click(function(){ //다음으로
     	   let nameRegex = /^[가-힣]+$/;
-       	   
+
       	   let bdRegex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 		   let bd = $("#year").val() + $("#month").val() + $("#day").val();
-		   
+
 		   let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
-		   let phone =  $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val(); 
-		   
-		   let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;   
-	       	 	 
+		   let phone =  $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
+
+		   let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
            if(!nameRegex.test($("#user_name").val())){
         	   sweetAlertFail("올바르지 않은 이름입니다.");
         	   $("#user_name").focus();
-        	   return;   
-           
+        	   return;
+
            } else if(!emailRegex.test($("#email-domain").val())){
       	 	   sweetAlertFail("올바르지 않은 이메일 형식입니다.");
       	 	   $("#email-domain").focus();
- 	       	   return;   
+ 	       	   return;
  	       	auth = comfirm;
            }else if(auth !== "comfirm"){
       	 	   sweetAlertFail("이메일 인증을 완료해주세요.");
       	 	   $("#email_id").focus();
- 	       	   return;  
- 	       	
+ 	       	   return;
+
            }else if($("#user_pw").val() === "" || $("#pwCheck").val() === ""){
         	   sweetAlertFail("비밀번호를 입력해주세요.");
            	   return;
-           	   
+
            }else if($("#email-id").val() === $("#user_pw").val()){
     		   sweetAlertFail("아이디와 비밀번호를 다르게 설정해주세요.");
     		   return;
-        	   
+
            }else if($("#user_pw").val() != $("#pwCheck").val()){
         	   sweetAlertFail("비밀번호가 다릅니다.");
         	   $("#pwCheck").focus();
         	   return;
-        	   
+
            }else if(nicknameConfirm !== "confirm"){
         	   sweetAlertFail("닉네임 중복확인을 해주세요.");
         	   $("#user_nickname").focus();
         	   return;
-        	   
+
            }else if($("#month").val() + $("#day").val() === "0230" || $("#month").val() + $("#day").val() === "0231"){
         	   sweetAlertFail("생일을 정확하게 입력해주세요.");
         	   $("#day").focus();
         	   return;
-        	   
+
            }else if(!bdRegex.test(bd)){
         	   sweetAlertFail("생일을 정확하게 입력해주세요.");
         	   return;
-        	   
+
            }else if(phoneConfirm !== "confirm"){
         	   sweetAlertFail("핸드폰 중복확인을 해주세요.");
         	   return;
-        	   
+
            }else if(!$('input:radio[name="user_gender"]').is(":checked")){
         	   sweetAlertFail("성별을 선택해주세요.");
         	   return;
-        	   
+
            }else{
         	   next();
            }
        });
-       
+
        // 뒷 페이지
-       
+
        $("#profileSetting").click(function(){ //프로필사진
     	   $("#user_image").show() ;
     	   $("#defaultImgBtn").show() ;
-       });	
-       
+       });
+
        $("#user_image").change(function(){
     	   let result = checkFile(this);
     	   console.log(result);
@@ -698,7 +698,7 @@ footer.footer {
         	   }
     	   }
        });
-       
+
        $('#user_intro').keyup(function (e){
  		  const top = $('#user_intro').prop('scrollHeight');
           $('#user_intro').scrollTop(top);
@@ -708,39 +708,39 @@ footer.footer {
           }
           $('#user_intro_cnt').html(content.length + '/30');
       });
-       
+
        $('input:checkbox[name="hobby"]').click(function(){
-    	   let hobbyCnt = $('input:checkbox[name="hobby"]:checked').length; 
-    	  
+    	   let hobbyCnt = $('input:checkbox[name="hobby"]:checked').length;
+
     	   if(hobbyCnt>3){
     	    sweetAlertFail('취미는 최대 3개까지 선택이 가능합니다.');
     	    $(this).prop('checked', false);
     	   }
     	});
-       
+
 	   $('input:checkbox[name="area"]').click(function(){
-    	   let areaCnt = $('input:checkbox[name="area"]:checked').length;  
-    	  
+    	   let areaCnt = $('input:checkbox[name="area"]:checked').length;
+
     	   if(areaCnt>3){
     		sweetAlertFail('관심지역은 최대 3개까지 선택이 가능합니다.');
     	    $(this).prop('checked', false);
     	   }
     	});
-       
+
 	   $("#defaultImgBtn").click(function(){
 		   $("#user_image").val("");
 		   $("#p_img").attr("src", "/resources/images/profile.jpg");
-	   }); 
-	   
+	   });
+
 	   $("#completeBtn").click(function(){
 		  if(!$('input:radio[name="user_job"]').is(':checked')){
 			  sweetAlertFail("직업을 선택해주세요.");
 		   	  return;
-			  
+
 	      }else if($('input:checkbox[name="hobby"]:checked').length == 0){
 	    	  sweetAlertFail("취미는 적어도 1개는 선택해주세요.");
-		      return;	
-				
+		      return;
+
 		  }else if($('input:checkbox[name="area"]:checked').length == 0){
 			  sweetAlertFail("관심 지역은 적어도 1개는 선택해주세요.");
 			  return;
@@ -749,10 +749,10 @@ footer.footer {
 		  $("#user_phone").val($("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val());
 		  $("#user_email").val($("#email-id").val()+"@"+$("#email-domain").val());
 		  $("#signupForm").submit();
-		  
+
 	   });
-		
-	   
+
+
    })
 function back(){ //뒤로가기
  	$("#signup-1").css("text-shadow","1px 2px 2px darkblue");
@@ -777,7 +777,7 @@ function next(){ //다음페이지
     $("#userInfoBox-profile").show();
     $("#singupBackBtn").show();
     $("#completeBtn").show();
-} 
+}
 function invalidName(){
 	$("#name-col").empty();
 	let span = $('<span>').attr('id', 'name-check-span').css("color","red").html("올바르지 않은 이름입니다.");
@@ -821,7 +821,7 @@ function checkFile(obj) {
 	 let fileKind = obj.value.lastIndexOf('.');
 	 let fileName = obj.value.substring(fileKind+1,obj.length);
 	 let fileType = fileName.toLowerCase();
-     
+
 	 if(fileType == "jpg" || fileType == "gif" || fileType == "png" || fileType == "jpeg" || fileType == "bmp"){
 		 return true;
 	 }else{
@@ -832,7 +832,7 @@ function checkFile(obj) {
 		 $("#p_img").attr("src", "/resources/images/profile.jpg");
 		 return false;
 	 }
-	 
+
 	 if(fileType == "bmp"){
 		 answer = confirm("BMP 파일은 웹상에서 사용하기엔 적절한 이미지 형식이 아닙니다. /n 사용하시겠습니까?");
 		 if(!answer)return false;
@@ -843,7 +843,7 @@ function sweetAlertFail(content){
 		 icon: 'error',
 		 title: 'Oops...',
 		 text: content,
-		});  	
+		});
 };
 function sweetAlertSuccess(content){
 	Swal.fire({
@@ -999,13 +999,13 @@ function sweetAlertSuccess(content){
 			  <span id="signup-1">1</span>
 			</div>
 			<div class="col-3">
-			  <div class="circleLine-line"></div>   
+			  <div class="circleLine-line"></div>
 			</div>
 			<div class="col-1 circle" >
 			  <span id="signup-2">2</span>
 			</div>
 			<div class="col-3">
-				<div class="circleLine-line"></div>   
+				<div class="circleLine-line"></div>
 			</div>
 			<div class="col-1 circle" >
 			  <span>3</span>
@@ -1037,7 +1037,7 @@ function sweetAlertSuccess(content){
 				<div class="col-md-3">
 				</div>
 				<div class="col-md-7 text-align-left-col" id="name-col" >
-				
+
 				</div>
 				<div class="col-2 text-align-left-col"></div>
 			</div>
@@ -1122,7 +1122,7 @@ function sweetAlertSuccess(content){
 				<div class="col-md-3">
 				</div>
 				<div class="col-md-7 text-align-left-col" id="regex-col">
-				
+
 				</div>
 				<div class="col-2 text-align-left-col"></div>
 			</div>
@@ -1139,7 +1139,7 @@ function sweetAlertSuccess(content){
 				<div class="col-md-3">
 				</div>
 				<div class="col-md-7 text-align-left-col" id="check-col" >
-				
+
 				</div>
 				<div class="col-2 text-align-left-col"></div>
 			</div>
@@ -1169,7 +1169,7 @@ function sweetAlertSuccess(content){
 				<div class="col-md-3">
 				</div>
 				<div class="col-md-7 text-align-left-col" id="nickname-col" >
-				
+
 				</div>
 				<div class="col-2 text-align-left-col"></div>
 			</div>
@@ -1183,7 +1183,7 @@ function sweetAlertSuccess(content){
 					<input type="text" id="day" name="day" class="form-control bthday" maxlength="2" placeholder="ex) 01" required><label for="day">일</label>
 					<input type="hidden" id="user_bd" name="user_bd" class="form-control"></intput>
 				</div>
-			</div> 
+			</div>
 			<div class="row" >
 				<div class="col-md-3">
 					<p>휴대전화</p>
@@ -1224,7 +1224,7 @@ function sweetAlertSuccess(content){
 				</div>
 			</div>
 		</div>
-	
+
 		<div id="userInfoBox-profile">
 			<div class="row" style="text-align: center;">
 				<div class="col">

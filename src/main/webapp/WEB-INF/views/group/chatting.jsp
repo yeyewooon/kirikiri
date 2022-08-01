@@ -421,11 +421,7 @@ hr{
 		// 웹소켓 객체 생성할때 반드시 서버의 ip 주소값은 실제 ip 주소를 이용
 		// 포트번호 다르면 :포트번호/chat 39.120.220.2:11111
 		var seq_group = $("#seq_group").val();
-		let ws = new WebSocket("ws://192.168.20.21/chat/"+seq_group);
 		let nickname = $("#nickname").val();
-		
-		//이모티콘 나오게 하기
-		$(".emoticon").click(function(){
 			$(".emojiBox").fadeToggle();
 			$(".ogu").css("display","none");
 			$("#rupi").css("box-shadow","2px 2px 2px 2px skyblue");

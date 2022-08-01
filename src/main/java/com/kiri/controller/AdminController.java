@@ -248,32 +248,32 @@ public class AdminController {
 	@RequestMapping(value = "/toAdmin")
 	public String toAdminMain(Model model) throws Exception {
 		// 카카오맵
-		/*
-		 * List<AdminMainDTO> locationList = service.selectAllGroupLocation();
-		 * ObjectMapper mapper = new ObjectMapper(); String jsonLocationList =
-		 * mapper.writeValueAsString(locationList);
-		 */
+		
+		 List<AdminMainDTO> locationList = service.selectAllGroupLocation();
+		 ObjectMapper mapper = new ObjectMapper(); String jsonLocationList =
+		 mapper.writeValueAsString(locationList);
+		 
 
-		/*
-		 * List<AdminMainDTO> cntGroupCalList = service.cntGroupCalendar(); // 그룹 수 //
-		 * int cntMember = service.cntMember() - 1; // 멤버 수(관리자 제외) int cntGroupCnt =
-		 * service.cntGroupCnt(); // 모임 수 // int cntBoard = service.cntBoard(); // 게시글
-		 * 수(자유게시판) int cntGroupBoard = service.cntGroupBoard(); // 게시글 수(모임게시판) // int
-		 * totalBoardCnt = cntBoard + cntGroupBoard; // 전체 게시글 수 int cntGroupCal =
-		 * service.cntGroupCal(); // 일정수 List<SiteDTO> cntPreLocationList =
-		 * service.cntPreLocation(); // 선호지역 수 List<Login_LogDTO> cntLoginLogList =
-		 * service.cntLoginLog(); // 로그인 로그 수
-		 */
-		/*
-		 * model.addAttribute("jsonLocationList",jsonLocationList);
-		 * model.addAttribute("cntGroupCalList",cntGroupCalList); //
-		 * model.addAttribute("cntMember",cntMember);
-		 * model.addAttribute("cntGroupCnt",cntGroupCnt); //
-		 * model.addAttribute("totalBoardCnt",totalBoardCnt);
-		 * model.addAttribute("cntGroupCal",cntGroupCal);
-		 * model.addAttribute("cntPreLocationList",cntPreLocationList);
-		 * model.addAttribute("cntLoginLogList",cntLoginLogList);
-		 */
+		
+		List<AdminMainDTO> cntGroupCalList = service.cntGroupCalendar(); // 그룹 수 //
+		 int cntMember = service.cntMember() - 1; // 멤버 수(관리자 제외) 
+		 int cntGroupCnt = service.cntGroupCnt(); // 모임 수 // 
+		 int cntBoard = service.cntBoard(); // 게시글 수(자유게시판) 
+		 int cntGroupBoard = service.cntGroupBoard(); // 게시글 수(모임게시판) // 
+		 int totalBoardCnt = cntBoard + cntGroupBoard; // 전체 게시글 수 
+		 int cntGroupCal = service.cntGroupCal(); // 일정수 
+		 List<SiteDTO> cntPreLocationList = service.cntPreLocation(); // 선호지역 수 
+		 List<Login_LogDTO> cntLoginLogList = service.cntLoginLog(); // 로그인 로그 수
+
+		model.addAttribute("jsonLocationList",jsonLocationList);
+		model.addAttribute("cntGroupCalList",cntGroupCalList); //
+		model.addAttribute("cntMember",cntMember);
+		model.addAttribute("cntGroupCnt",cntGroupCnt); //
+		model.addAttribute("totalBoardCnt",totalBoardCnt);
+		model.addAttribute("cntGroupCal",cntGroupCal);
+		model.addAttribute("cntPreLocationList",cntPreLocationList);
+		model.addAttribute("cntLoginLogList",cntLoginLogList);
+
 		return "/admin/adminMain";
 	}
 }
