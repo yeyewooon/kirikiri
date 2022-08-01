@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.kiri.dao.BoardDAO;
 import com.kiri.dao.Group_BoardDAO;
 import com.kiri.dao.HobbyDAO;
+import com.kiri.dao.LoginDAO;
 import com.kiri.dao.MemberDAO;
 import com.kiri.dao.SiteDAO;
 import com.kiri.dao.Tbl_GroupDAO;
@@ -20,6 +21,7 @@ import com.kiri.dao.WishListDAO;
 import com.kiri.dto.BoardDTO;
 import com.kiri.dto.Group_BoardDTO;
 import com.kiri.dto.HobbyDTO;
+import com.kiri.dto.Login_TypeDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.SiteDTO;
 
@@ -70,6 +72,11 @@ public class MemberService {
         }
         return sys_name;
     }
+	
+	// LoginType 가져오기
+	public Login_TypeDTO selectLoginType(String user_email) {
+		return  memberdao.selectLoginType(user_email);
+	}
 
 	// 개인정보 수정
 	public void profileModify(MemberDTO dto){
@@ -88,9 +95,9 @@ public class MemberService {
 	}
 	
 	// pw 중복확인
-   public int pwCheck(String user_pw, String user_email) throws Exception{
-      return memberdao.pwCheck(user_pw, user_email);
-   }
+	public int pwCheck(String user_pw, String user_email) throws Exception{
+		return memberdao.pwCheck(user_pw, user_email);
+	}
 	
 	// 회원 탈퇴
 	public void profileDelete(Map<String,String> memberdto) throws Exception{

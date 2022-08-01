@@ -36,16 +36,20 @@ public class HomeController {
 		model.addAttribute("selectBestList", selectBestList);
 		
 		//게시판 두개
-		List<BoardDTO> getBestBoard = home_service.getBestBoard();
-		int seq_board;
-		List<String> sys_name = new ArrayList<>();
-		for(int i=0; i<2; i++) {
-			seq_board = getBestBoard.get(i).getSeq_board();
-			sys_name.add(home_service.getSysname(seq_board));
-			
-		}
-		model.addAttribute("sysList", sys_name);
-		model.addAttribute("boardList", getBestBoard);
+	      List<BoardDTO> getBestBoard = home_service.getBestBoard();
+	      int seq_board;
+	      List<String> sys_name = new ArrayList<>();
+	      if(getBestBoard.size()==0) {
+	         System.out.println("없습니다~~");
+	      }else {
+	         for(int i=0; i<2; i++) {
+	            seq_board = getBestBoard.get(i).getSeq_board();
+	            sys_name.add(home_service.getSysname(seq_board));
+	            
+	         }
+	         model.addAttribute("sysList", sys_name);
+	         model.addAttribute("boardList", getBestBoard);
+	      }
 		
 		return "mainPage";
 	}
