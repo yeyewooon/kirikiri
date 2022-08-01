@@ -42,6 +42,12 @@
    font-weight: 700;
    font-style: normal;
 }
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /* header 반응형 */
 @media ( max-width : 768px) {
@@ -606,18 +612,38 @@ footer.footer {
 
       <!-- 네모네모 -->
       <div id="bestParty" class="p-4 mt-5">
+      	<div class="bestTitle row justify-content-center">
+			<img src="/resources/images/BestBoard.png" style="width:50%">
+      	</div>
+      	<div class="row text-center mb-4">
+      		<h5 style="color:darkgreen;">끼리끼리 회원들에게 가장 많은 좋아요를 받은 게시물을 살펴보세요!</h5>
+      	</div>
          <div class="content-1" data-aos="fade-left" data-aos-duration="1000">
             <div class="row g-0 align-items-center">
-               <div class="col-lg-5 text-end ps-5">
-                  <div class="fs-2">모임 이름 &bullet;</div>
-                  <div class="fs-3">글 제목</div>
-                  <div class="my-4">모임 후기 샬라샬라 적어요 샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라</div>
+               <div class="col-xl-6 text-end px-5">
+                  <div class="text-start">
+                  	<img src="/resources/images/gold.png" style="width:80px;">
+                  	<span style="font-size:45px; font-family:'SDSamliphopangche_Outline';"> BEST LIKES </span>
+                  </div>
+                  <div class="fs-4">
+               			<i class="fa-regular fa-heart" style="color:red"></i>
+               			<span class="me-3">${boardList.get(0).likehit }</span>
+               			<i class="fa-regular fa-eye" style="color:gray"></i>
+               			<span>${boardList.get(0).board_count }</span>
+               		</div>
+                  <div class="fs-2 mt-4">${boardList.get(0).board_title }</div>
+                  <div class="my-2 fs-5">by ${boardList.get(0).user_nickname } </div>
                   <div>
-                     <a href="/board/toBoard">글 보러 가기</a>
+                     <a href="/board/toDetailView?seq_board=${boardList.get(0).seq_board }" style="color:#6f6f6f;">자세히 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                   </div>
                </div>
-               <div class="mainImg col-lg-6 ms-auto d-flex align-items-center">
-                  <img src="/resources/images/메인사진2(배경).png" class="img-fluid">
+               <div class="mainImg col-xl-6 ms-auto d-flex align-items-center">
+               		<c:if test="${sysList.get(0) eq null }">
+               			<img src="/resources/images/찜2.jpg" class="img-fluid">
+               		</c:if>
+               		<c:if test="${sysList.get(0) ne null }">
+               			<img src="/boardFile/${sysList.get(0)}" class="img-fluid">
+               		</c:if>
                </div>
             </div>
          </div>
@@ -625,15 +651,29 @@ footer.footer {
          <div class="content-2 mt-3" data-aos="fade-right"
             data-aos-duration="1000">
             <div class="row g-0 mt-5 align-items-center">
-               <div class="mainImg col-lg-6 mb-4 mb-lg-0">
-                  <img src="/resources/images/메인사진2(배경).png" class="img-fluid">
+               <div class="mainImg col-xl-6 mb-4 mb-lg-0">
+                  <c:if test="${sysList.get(1) eq null }">
+               			<img src="/resources/images/찜2.jpg" class="img-fluid">
+               		</c:if>
+               		<c:if test="${sysList.get(1) ne null }">
+               			<img src="/boardFile/${sysList.get(1)}" class="img-fluid">
+               		</c:if>
                </div>
-               <div class="col-lg-5 ms-auto pe-5">
-                  <div class="fs-2">모임 이름 &bullet;</div>
-                  <div class="fs-3">글 제목</div>
-                  <div class="my-4">모임 후기 샬라샬라 적어요 샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라샬라</div>
-                  <div>
-                     <a href="">글 보러 가기</a>
+               <div class="col-xl-6 ms-auto pe-5 px-5">
+                  <div> 
+                  	<img src="/resources/images/silver.png" style="width:80px;">
+                  	<span style="font-size:45px; font-family:'SDSamliphopangche_Outline';"> BEST LIKES </span> 
+                  </div>
+                  <div class="fs-4 mt-2 text-end">
+               			<i class="fa-regular fa-heart" style="color:red"></i>
+               			<span class="me-3">${boardList.get(1).likehit }</span>
+               			<i class="fa-regular fa-eye" style="color:gray"></i>
+               			<span>${boardList.get(1).board_count }</span>
+               		</div>
+                  <div class="fs-2 mt-4 ps-2 ">${boardList.get(1).board_title }</div>
+                  <div class="my-2 fs-5 ps-2 ">by ${boardList.get(1).user_nickname } </div>
+                  <div class="ps-2">
+                     <a href="/board/toDetailView?seq_board=${boardList.get(1).seq_board }" style="color:#6f6f6f;">자세히 <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
                   </div>
                </div>
             </div>

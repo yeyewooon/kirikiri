@@ -218,6 +218,18 @@ h4 {
 	cursor: pointer;
 }
 
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #a4a4a4 !important;
+    color:#fff;
+    border-color: #a4a4a4;
+}
+
+.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    background-color: #435770 !important;
+    color:#fff;
+    border-color: #435770;
+}
+
 /* card */
 .serviceBox {
 	color: white;
@@ -350,9 +362,10 @@ footer.footer {
 
 .msgReceive, .msgSend {
 	cursor: pointer;
-	border: 1px solid black;
+	border: 3px solid #FFE19E;
 	border-radius: 5px;
 	padding: 4px;
+	color : #5B718E;
 }
 
 .table-content {
@@ -430,7 +443,7 @@ footer.footer {
 					<div class="col-5 d-flex justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link mx-2"
-								href="/board/toBoard">자유 게시판</a></li>
+								href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
 						</ul>
 					</div>
 
@@ -462,8 +475,8 @@ footer.footer {
 											class="d-block link-dark text-decoration-none dropdown-toggle"
 											id="dropdownUser1" data-bs-toggle="dropdown"
 											aria-expanded="false"> <img
-											src="/resources/images/profile.jpg" alt="mdo" width="32"
-											height="32" class="rounded-circle">
+											src="/resources/images/profile.jpg" alt="mdo" width="40"
+											height="40" class="rounded-circle">
 										</a>
 										<ul class="dropdown-menu text-small"
 											aria-labelledby="dropdownUser1">
@@ -486,8 +499,8 @@ footer.footer {
 											class="d-block link-dark text-decoration-none dropdown-toggle"
 											id="dropdownUser1" data-bs-toggle="dropdown"
 											aria-expanded="false"> <img
-											src="/resources/images/profile.jpg" alt="mdo" width="32"
-											height="32" class="rounded-circle">
+											src="/resources/images/profile.jpg" alt="mdo" width="40"
+											height="40" class="rounded-circle">
 										</a>
 										<ul class="dropdown-menu text-small"
 											aria-labelledby="dropdownUser1">
@@ -1070,7 +1083,7 @@ footer.footer {
 					</div>
 				</div>
 			</div>
-			<div class="row body">
+			<div class="row body m-0">
 				<div class="col-md-4 d-flex justify-content-center mt-5">
 					<div class="serviceBox color2 m-2">
 						<div class="service-icon" style="color: #27436d;">
@@ -1229,17 +1242,17 @@ footer.footer {
 				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
 					data-bs-keyboard="false" tabindex="-1"
 					aria-labelledby="staticBackdropLabel" aria-hidden="true" style="z-index: 9999;">
-					<div class="modal-dialog modal-dialog-centered">
+					<div class="justify-content-center modal-lg modal-dialog modal-dialog-centered modal-dialog-scrollable">
 						<div class="modal-content">
-							<div class="modal-header">
-								<span id="staticBackdropLabel" style="font-size: 16px;"><i
-									class="fa-solid fa-envelope-open"></i></span><span class="ms-2">쪽지함보기</span>
+							<div class="modal-header" style="background-color:#FFFEE9; border-bottom:2px solid #FFE19E;">
+								<span id="staticBackdropLabel" style="font-size: 16px; color:#435770;"><i
+									class="fa-solid fa-envelope-open"></i></span><span class="ms-2">내 쪽지함</span>
 								<button type="button" class="btn-close" data-bs-dismiss="modal"
 									aria-label="Close"></button>
 							</div>
 							<div class="row mt-2">
 								<div class="col-md-12 d-flex">
-									<div class="msgReceive d-flex justify-content-center ms-2">
+									<div class="msgReceive d-flex justify-content-center ms-2" style="background-color : #FFECC2;">
 										<span class="receiveBtn"><i class="fa-solid fa-check"></i></span><span
 											class="ms-1">받은 쪽지함</span>
 									</div>
@@ -1261,22 +1274,29 @@ footer.footer {
 										</tr>
 									</thead>
 									<tbody class="tbody-content">
-										<c:forEach items="${rmsgList}" var="dto">
+										<c:if test="${rmsgList.size() == 0 }">
 											<tr>
-												<td scope="row"><input type="checkbox"
-													value="${dto.seq_message}" name="seq_message"></td>
-												<td>${dto.user_send}</td>
-												<td>${dto.msgContent}</td>
-												<td>${dto.date}</td>
+												<td colspan="4">쪽지가 없습니다.</td>
 											</tr>
-										</c:forEach>
+										</c:if>
+										<c:if test="${rmsgList.size() != 0 }">
+											<c:forEach items="${rmsgList}" var="dto">
+												<tr>
+													<td scope="row"><input type="checkbox"
+														value="${dto.seq_message}" name="seq_message"></td>
+													<td>${dto.user_send}</td>
+													<td>${dto.msgContent}</td>
+													<td>${dto.date}</td>
+												</tr>
+											</c:forEach>
+										</c:if>
 									</tbody>
 								</table>
 							</div>
-							<div class="modal-footer msgModal-footer">
-								<button type="button" class="btn btn-danger ms-2" id="deleteBtn">삭제</button>
+							<div class="modal-footer msgModal-footer"  style="background-color:#FFFEE9; border-top:2px solid #FFE19E;">
 								<button type="button" class="btn btn-primary ms-2" id="closeBtn"
 									data-bs-dismiss="modal">닫기</button>
+								<button type="button" class="btn btn-danger ms-2" id="deleteBtn">삭제</button>
 								<input type="text" value="${memberdto.user_nickname}" id="myId"
 									hidden>
 							</div>
@@ -1386,6 +1406,8 @@ footer.footer {
     // 보낸 쪽지 클릭시 체크되면서 테이블 보여주기
     $('.msgSend').on("click", function () {
         $('.receiveBtn').addClass('d-none');
+        $('.msgReceive').css("background-color", "#FFF");
+        $('.msgSend').css("background-color", "#FFECC2");
         $('.sendBtn').removeClass('d-none');
         let myId = $("#myId").val();
         $.ajax({
@@ -1411,6 +1433,12 @@ footer.footer {
                         tr.append(td1, td2, td3, td4);
                         $(".tbody-content").append(tr);
                     }
+                }else{
+                	let tr = $("<tr>");
+                	let td = $('<td colspan=4>');
+                	td.append("쪽지가 없습니다.");
+                	tr.append(td);
+                	$(".tbody-content").append(tr);
                 }
             }, error: function (e) {
                 console.log(e);
@@ -1421,6 +1449,8 @@ footer.footer {
     $('.msgReceive').on("click", function () {
         $('.sendBtn').addClass('d-none');
         $('.receiveBtn').removeClass('d-none');
+        $('.msgSend').css("background-color", "#FFF");
+        $('.msgReceive').css("background-color", "#FFECC2");
         let myId = $("#myId").val();
         $.ajax({
             url: "/user/receiveMsg?user_receive=" + myId,
@@ -1445,6 +1475,12 @@ footer.footer {
                         tr.append(td1, td2, td3, td4);
                         $(".tbody-content").append(tr);
                     }
+                }else{
+                	let tr = $("<tr>");
+                	let td = $('<td colspan=4>');
+                	td.append("쪽지가 없습니다.");
+                	tr.append(td);
+                	$(".tbody-content").append(tr);
                 }
             }, error: function (e) {
                 console.log(e);
