@@ -509,9 +509,13 @@ footer.footer {
 										<a href="/"
 											class="d-block link-dark text-decoration-none dropdown-toggle"
 											id="dropdownUser1" data-bs-toggle="dropdown"
-											aria-expanded="false"> <img
-											src="/resources/images/profile.jpg" alt="mdo" width="40"
-											height="40" class="rounded-circle">
+											aria-expanded="false"> 
+											<c:if test="${loginSession.user_image eq null}">
+												<img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+											</c:if>
+											<c:if test="${loginSession.user_image ne null}">
+												<img src="/profile/${loginSession.user_image }" alt="mdo" width="40" height="40" class="rounded-circle">
+											</c:if>
 										</a>
 										<ul class="dropdown-menu text-small"
 											aria-labelledby="dropdownUser1">
