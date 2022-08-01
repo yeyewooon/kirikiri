@@ -221,7 +221,7 @@ footer.footer {
 </style>
 </head>
 <body>
-	<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -248,7 +248,7 @@ footer.footer {
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard" style="font-size:18px;">자유게시판</a></li>
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
                               <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
@@ -268,14 +268,14 @@ footer.footer {
 
             </div>
          </nav>
-         <!-- 펼쳐졌을 때 nav -->
+		<!-- 펼쳐졌을 때 nav -->
          <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
             aria-label="Main navigation">
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
 
@@ -290,7 +290,7 @@ footer.footer {
                <div class="col-5">
                   <div class="row align-items-center justify-content-center">
                      <div class="col-auto">
-                        <ul class="navbar-nav mb-2 mb-lg-0 me-2">
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-2" style = "font-size:18px;">
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link"
                                  href="/login/toLogin">로그인</a></li>
@@ -300,35 +300,52 @@ footer.footer {
                         </ul>
                      </div>
                      <div class="col-auto user">
-						<c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-								</a>
-								<ul class="dropdown-menu text-small"
-								   aria-labelledby="dropdownUser1">
-								   <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-								   <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-								   <li><hr class="dropdown-divider"></li>
-								   <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-								</ul>
-							</div>
-						</c:if>
-						<c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-								</a>
-								<ul class="dropdown-menu text-small"
-								   aria-labelledby="dropdownUser1">
-								   <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-								   <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-								   <li><hr class="dropdown-divider"></li>
-								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-								</ul>
-							</div>
-						</c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
@@ -514,18 +531,13 @@ footer.footer {
       $("#modifyBtn").on("click", function(){
          let checkAccess = $('input[name=checkAccess]:checked').val();
          let checkEmail = $('input[name=checkAccess]:checked').parent().next().children('input').val();
-
-         if(checkEmail != ""){
-	    	  Swal.fire({
-	                 icon: 'warning',
-	                 text: '버튼을 잘 선택해주세요.',
-	               })
-         }else{
+         let seq_group = $("#seq_group").val();
  	         $.ajax({
 	            url : "/group/groupAccess",
 	            type : "post",
 	            data : {user_email : checkEmail,
-	                  access : checkAccess},
+	                  access : checkAccess,
+	                  seq_group : seq_group},
 	            success: function(data){
 	               if(data == "success"){
 	            	    let timerInterval
@@ -533,7 +545,7 @@ footer.footer {
 	            	      icon:'success',
 	            	      title: '주최자 위임이 완료되었습니다!',
 	            	      html: ' <b></b>' + '초뒤에 페이지가 이동됩니다.',
-	            	      timer: 5000,
+	            	      timer: 3000,
 	            	      timerProgressBar: true,
 	            	      didOpen: () => {
 	            	        Swal.showLoading()
@@ -566,25 +578,21 @@ footer.footer {
 	               console.log(e);
 	            }
 	         })
-         }
+         
       })
 
    // 그룹 멤버 강퇴
    $("#deleteBtn").on("click", function(){
-	  let checkAccess = $('input[name=checkUser_email]:checked').parent().prev().children('.checkAccess').val();
-	  console.log(checkAccess);
-	  if(checkAccess != ""){
-    	  Swal.fire({
-              icon: 'warning',
-              text: '버튼을 잘 선택해주세요.',
-            })
-	  }else{
+      let checkEmail = $('input[name=checkAccess]').parent().next().children('input').val();
+      let seq_group = $("#seq_group").val();
+	  console.log(checkEmail);
 	      let checkBoxArr = [];
 		      $("input[name=checkUser_email]:checked").each(function(){
 		    	 if(checkAccess != '주최자'){
-		         checkBoxArr.push($(this).val());
+		         	checkBoxArr.push($(this).val());
 			      var jsonData = {
-			         "userEmails" : JSON.stringify(checkBoxArr)
+			         "userEmails" : JSON.stringify(checkBoxArr),
+			         "seq_group" : seq_group
 			      };
 			      var jsonString = JSON.stringify(jsonData);
 
@@ -611,8 +619,8 @@ footer.footer {
 		                 text: '주최자는 강퇴할 수 없습니다.',
 		               })
 		      }
+		    	 console.log(checkBoxArr);
 	      })
-	  }
    })
 
 </script>
