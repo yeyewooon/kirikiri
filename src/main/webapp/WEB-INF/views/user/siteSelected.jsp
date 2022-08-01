@@ -184,7 +184,7 @@ ul {
 }
 /* footer */
 .footerWrapper{
-	background-color: #f9fafe;
+	background-color: white;
 }
 .footerBox {
 	height: 0px;
@@ -376,6 +376,75 @@ body {
     color: coral;
 }
 
+/* a태그 없애기 */
+	a {	 
+		text-decoration:none; 
+		color : black; !important 
+	}
+	a:hover { 
+		text-decoration:none;
+		color : black; !important 
+	}
+
+/* 모임 생성 버튼*/
+            @import url(https://fonts.googleapis.com/css?family=Roboto:700);
+
+            .button {
+               background: #3D4C53;
+               width: 200px;
+               height: 50px;
+               overflow: hidden;
+               text-align: center;
+               transition: .2s;
+               cursor: pointer;
+               border-radius: 3px;
+               box-shadow: 0px 1px 2px rgba(0, 0, 0, .2);
+            }
+
+            .btnTwo {
+               position: relative;
+               width: 200px;
+               height: 100px;
+               margin-top: -100px;
+               padding-top: 2px;
+               background: #26A69A;
+               left: -250px;
+               transition: .3s;
+            }
+
+            .btnText {
+               color: white;
+               padding-top: 13px;
+               transition: .3s;
+            }
+
+            .btnText2 {
+               margin-top: 60px;
+               margin-right: -130px;
+               color: #FFF;
+            }
+
+            .button:hover .btnTwo {
+               /*When hovering over .button change .btnTwo*/
+               left: -130px;
+            }
+
+            .button:hover .btnText {
+               /*When hovering over .button change .btnText*/
+               margin-left: 65px;
+            }
+
+            .button:active {
+               /*Clicked and held*/
+               box-shadow: 0px 5px 6px rgba(0, 0, 0, 0.3);
+            }
+
+
+
+
+
+
+
 </style>
 
 </head>
@@ -515,6 +584,11 @@ body {
       </div>
    </header>
 	<div class="container">
+	<div class = "row">
+      <div class = "col-md-12 d-flex justify-content-start">
+         <div class = "mb-1" style = "font-size: 30px; font-family: katuri;"><a href="/user/toViewAllGroupList">모임 전체</a></div>
+      </div>
+   </div>
 	<div class="back row">
 	    <div class="col-md-4 button_base b05_3d_roll locationBtn" id="locationBtn">
 	        <div style = "font-family:katuri;">지역</div>
@@ -755,7 +829,25 @@ body {
 				<div class="imgContainer">
 					<div class="row">
 						<c:if test = "${groupList.size() == 0}">
-							<div>해당 지역의 모임이 없습니다.</div>
+							<div>
+								<div class="row" style="height:600px;">
+									<div class="col-sm-12 col-md-12 d-flex flex-column align-items-center justify-content-center" >
+										<div>
+											<div><h3>현재 해당 지역에는 그룹이 존재하지 않습니다.<h3></div>
+											<div style="font-size : 18px;">자신이 모임장이 되어서 취미를 공유하고
+												모임 일정을 통해 즐거운 만남과, 모임 게시판, 모임 채팅을 활용하여
+												다양한 이야기와 취미활동을 공유하세요.
+											</div>
+											<div class="button mt-3">
+						                        <p class="btnText">모임만들기</p>
+						                        <div class="btnTwo">
+						                           <p class="btnText2">Go!</p>
+						                        </div>
+                     						</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</c:if>
 						<c:if test = "${groupList.size() > 0}">
 							<c:forEach items="${groupList}" var="dto">
@@ -793,7 +885,7 @@ body {
 		</div>
 	</div>
 <!-- Footer-->
-	<div class="footerWrapper" style="margin-top:50px; border-top : 1px solid #e0e3e8;">
+	<div class="footerWrapper" style="border-top : 1px solid #e0e3e8;">
 		<div class="container">
 			<footer class="footer">
 				<div class="row">
@@ -855,6 +947,24 @@ body {
 
 
 	<script>
+	
+	// 모임생성 고! 버튼
+    let check = "${loginSession.user_email}";
+ $(".button").on("click", function () {
+    if (check != "") {
+       location.href = "/group/toCreateGroup";
+    } else {
+       Swal.fire({
+          icon: 'warning',
+          text: '로그인 후 사용하실수 있습니다..',
+       })
+    }
+ })
+	
+	
+	
+	
+	
 	
 
 // 지역 클릭시

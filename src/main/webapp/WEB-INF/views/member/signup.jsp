@@ -630,7 +630,7 @@ footer.footer {
         	   $("#user_name").focus();
         	   return;   
            
-           }else if(!emailRegex.test($("#email-domain").val())){
+           }/* else if(!emailRegex.test($("#email-domain").val())){
       	 	   sweetAlertFail("올바르지 않은 이메일 형식입니다.");
       	 	   $("#email-domain").focus();
  	       	   return;   

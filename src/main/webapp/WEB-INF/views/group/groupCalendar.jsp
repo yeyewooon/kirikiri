@@ -272,6 +272,37 @@ footer.footer {
 	display:none;
 }
 
+
+/* 버튼 색 */
+
+/* 취소 */
+.btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:visited {
+    background-color: #a4a4a4 !important;
+    color:#fff;
+    border-color: #a4a4a4;
+}
+
+/* 저장 */
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:visited {
+    background-color: #2551a8 !important;
+    color:#fff;
+    border-color: #2551a8;
+}
+
+/* 삭제 */
+.btn-danger , .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    background-color: #2551a8 !important;
+    color:#fff;
+    border-color: #2551a8;
+}
+
+/* 수정 */
+.btn-warning, .btn-warning:hover, .btn-warning:active, .btn-warning:visited {
+    background-color: #96c93d !important;
+    color:#fff;
+    border-color: #96c93d;
+}
+
 </style>
 
 
@@ -624,12 +655,11 @@ footer.footer {
 									</div>
 								</div>
 								<div class="modal-footer" id="buttonDiv">
-									<button type="button" class="btn btn-secondary "
-										onclick="moveSite()">취소</button>
-									<button type="button" class="btn btn-outline-success " id="calSubmit">저장</button>
+									<button type="button" class="btn btn-secondary"onclick="moveSite()">취소</button>
+									<button type="button" class="btn btn-success " id="calSubmit">저장</button>
 									<button type="button" class="btn btn-danger" id="calDelete">삭제</button>
-									<button type="button" class="btn btn-outline-warning" id="calModify">수정</button>
-									<button type="button" class="btn btn-outline-warning d-none" id="calModifySubmit">수정 완료</button>
+									<button type="button" class="btn btn-warning" id="calModify">수정</button>
+									<button type="button" class="btn btn-warning d-none" id="calModifySubmit">수정 완료</button>
 								</div>
 							</div>
 						</div>
