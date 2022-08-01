@@ -759,37 +759,37 @@ body {
             <div class="content2">
                <div class="imgContainer">
                   <div class="row" style="padding : 18px;">
-                     <c:if test = "${selectAllList.size() == 0}">
-                        <div>아직 개설된 모임이 없습니다.</div>
-                     </c:if>
-                     <c:if test = "${selectAllList.size() > 0}">
-                  <c:forEach items="${selectAllList}" var="dto">
-                           <div class="col-md-3 d-flex justify-content-center p-4">
-                              <div class="card">
-                                    <c:choose>
-                              <c:when test="${dto.sys_name ne null}">
-                                 <img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
-                              </c:when>
-                              <c:otherwise>
-                                 <img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
-                              </c:otherwise>
-                           </c:choose>
-                           <span class="d-none">${dto.seq_group}</span>
-                                 <div class="card-body">
-                                    <div class="card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
-                                       ${dto.group_category}
-                                    </div>
-                                    <div class="card-text mt-3">
-                                       <span style = "font-size:25px; font-family:Katuri;">${dto.group_title}</span>
-                                    </div>
-                                    <div class="card-text-site d-flex justify-content-end">
-                                       <span><i class="fa-solid fa-location-dot" style="color:#00145a"></i><span class="ms-2" style = "color:#00145a; font-family:Katuri;">${dto.group_site}</span></span>
-                                    </div>
-                                 </div>
-                              </div>
-                           </div>
-                        </c:forEach>
-                     </c:if>
+                  	<c:if test = "${selectAllList.size() == 0}">
+                  		<div>아직 개설된 모임이 없습니다.</div>
+                  	</c:if>
+                  	<c:if test = "${selectAllList.size() > 0}">
+						<c:forEach items="${selectAllList}" var="dto">
+	                        <div class="col-md-3 d-flex justify-content-center p-4">
+	                           <div class="card">
+	                           		<c:choose>
+										<c:when test="${dto.sys_name ne null}">
+											<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+										</c:when>
+										<c:otherwise>
+											<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+										</c:otherwise>
+									</c:choose>
+									<span class="d-none">${dto.seq_group}</span>
+	                              <div class="card-body">
+	                                 <div class="card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
+	                                    ${dto.group_category}
+	                                 </div>
+	                                 <div class="card-text mt-3">
+	                                    <span style = "font-size:25px; font-family:Katuri;">${dto.group_title}</span>
+	                                 </div>
+	                                 <div class="card-text-site d-flex justify-content-end">
+	                                    <span><i class="fa-solid fa-location-dot" style="color:#00145a"></i><span class="ms-2" style = "color:#00145a; font-family:Katuri;">${dto.group_site}</span></span>
+	                                 </div>
+	                              </div>
+	                           </div>
+	                        </div>
+                     	</c:forEach>
+                  	</c:if>
                   </div>
                </div>
             </div>

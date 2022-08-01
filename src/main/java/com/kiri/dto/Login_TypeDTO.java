@@ -16,7 +16,6 @@ public class Login_TypeDTO {
 		this.seq_type = seq_type;
 		this.user_email = user_email;
 		this.type = type;
-		this.unique_id = unique_id;
 		this.signup_date = signup_date;
 	}
 
@@ -40,6 +39,14 @@ public class Login_TypeDTO {
 		return type;
 	}
 
+	public String getUnique_id() {
+		return unique_id;
+	}
+
+	public void setUnique_id(String unique_id) {
+		this.unique_id = unique_id;
+	}
+
 	public void setType(String type) {
 		this.type = type;
 	}
@@ -52,18 +59,10 @@ public class Login_TypeDTO {
 		this.signup_date = signup_date;
 	}
 
-	public String getunique_id() {
-		return unique_id;
-	}
-
-	public void setunique_id(String unique_id) {
-		this.unique_id = unique_id;
-	}
-
 	@Override
 	public String toString() {
 		return seq_type + " : " + user_email + " : " + type
-				+ " : " + unique_id + " : " + signup_date;
+				+ " : "+" : "+ unique_id + signup_date;
 	}
 	
 	

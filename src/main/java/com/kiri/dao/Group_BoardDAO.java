@@ -58,6 +58,11 @@ public class Group_BoardDAO {
 		return session.selectList("groupBoardMapper.getListPaging", cri);
 	}
 	
+	// 모임장 아이디 얻어오기
+	public String getAccess(int seq_group) throws Exception{
+		return session.selectOne("groupBoardMapper.getAccess", seq_group);
+	}
+	
 	// 전체 게시글 개수
 	public int getTotal(Criteria cri) throws Exception{
 		return session.selectOne("groupBoardMapper.getTotal", cri);
@@ -99,7 +104,7 @@ public class Group_BoardDAO {
 	}
 	
 	// 공지 3개
-	public List<Group_BoardDTO> getNotice() throws Exception{
-		return session.selectList("groupBoardMapper.getNotice");
+	public List<Group_BoardDTO> getNotice(int seq_group) throws Exception{
+		return session.selectList("groupBoardMapper.getNotice", seq_group);
 	}
 }

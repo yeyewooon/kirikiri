@@ -188,7 +188,7 @@ body{
   background-color: white;
 }
 .circleLine-text{
-    margin: auto; 
+    margin: auto;
     text-align: center;
     margin-bottom: 70px;
     margin-top: 10px;
@@ -250,15 +250,15 @@ input{
     width: 83%;
     padding-left: 0px;
     margin: 5px;
-    margin-left: 12px; 
+    margin-left: 12px;
 }
 #email-domain{
 	width: 100%;
 	padding-left: 0px;
 	display: inline-block;
-	margin:5px; 
+	margin:5px;
 	margin-top : 0px;
-	margin-left: 12px; 
+	margin-left: 12px;
 }
 #email-btn {
 	display: block;
@@ -357,20 +357,20 @@ footer.footer {
 </head>
 <script>
    $(document).ready(function(){
-	   let code ; 
+	   let code ;
 	   let auth ;
 	   let nicknameConfirm;
 	   let phoneConfirm;
-	   
+
 	   $("#backPageBtn").click(function(){
 		   location.href = "/signup/toSignupAgree";
 	   })
-	   
-       $("#singupBackBtn").click(function(){ // 뒤로가기 
+
+       $("#singupBackBtn").click(function(){ // 뒤로가기
            back();
-      
+
        });
-       
+
        $('#email-domain-select').change(function () { //이메일 셀렉트
               let state = "";
               state = $('#email-domain-select option:selected').val();
@@ -383,25 +383,25 @@ footer.footer {
                 $('.email-domain-row').hide();
               }
         });
-       
+
 		$("#emailCheck").click(function(){ //이메일 중복체크
 			 let user_email = $("#email-id").val()+"@"+$("#email-domain").val();
    	  		 let emailRegex = /^[a-zA-Z0-9+-\_.]+@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-   	  		 
+
    	  		 if($("#email-id").val() == ""){
    	  			 sweetAlertFail("아이디를 입력해주세요.");
    	  			 return;
-   	  			 
+
    	  		 }else if($("#email-domain").val() === "1"){
       			 sweetAlertFail("도메인을 선택 혹은 입력해주세요.");
       			 return;
-      		
+
       		 }else if(!emailRegex.test(user_email)){
        	 		 sweetAlertFail("올바르지 않은 이메일 형식입니다.");
 	       	 	 return;
-	       	 	 
+
 	      	 }else{
-		      	  
+
 	       	  	  $.ajax({
 	        		url : "/signup/emailCheck"
 	        		, type : "post"
@@ -411,9 +411,9 @@ footer.footer {
 	        			if(result === "impossibility"){
 	        				sweetAlertFail("사용 중인 이메일입니다.");
 	        				$("#eamail-id").focus();
-	        				
+
 	        			}else if(result === "possibility"){
-	        				
+
 	        				Swal.fire({
 	        					  title: '사용 가능한 이메일입니다.',
 	        					  text: "해당 이메일로 인증하시겠습니까?",
@@ -439,28 +439,28 @@ footer.footer {
 	  	        						, success : function (data) {
 	  	        							code = data;
 	  	        							$("#authNum").focus();
-	  	        							
+
 	  	        						}, error : function(e){
 	  	        							console.log(e);
-	  	        						}			
+	  	        						}
 	  	        					});
-	        						  
+
 	        					  };
-	        					  
+
 	        					});
-	        					
+
 	        				}else{
 	        					return;
 	        			}
-	        	
+
 	        		}, error : function(e){
 	        			console.log(e);
 	        		}
 	        	})
       	   }
-   	   
+
    	   });
-		
+
 		$("#certificationBtn").click(function(){
 			if($("#authNum").val() === code){
 				Swal.fire({
@@ -475,44 +475,44 @@ footer.footer {
 				$('#email-domain-select').attr('disabled',true);
 				auth = "comfirm";
 				return;
-				
+
 			}else{
 				sweetAlertFail("인증 번호가 다릅니다. 다시 입력해주세요.");
 				$("#authNum").focus();
 				return;
 			}
-			
+
 		});
-		
+
 		$("#email_id").change(function(){
 			auth = "deny";
 		});
-		
+
 		$("#user_nickname").change(function(){
 			nicknameConfirm = "deny";
 		});
-		
+
 		$("#user_nickname").change(function(){
 			$("#nickname-col").empty();
-			let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;   
-			
+			let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;
+
 			if(!nicknameRegex.test($("#user_nickname").val())){
 				invalidNickname();
 	       	 	return;
 			}
 		});
-	   
+
 		$("#nicknameCheck").click(function(){ //휴대폰 중복체크
-  	  		 let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;    
-     
+  	  		 let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;
+
   	  		 if(!nicknameRegex.test($("#user_nickname").val())){
       	 		 sweetAlertFail("올바르지 않은 닉네임 형식입니다.");
       	 		 $("#nicknameCheck").focus();
 	       	 	 return;
-	       	 	 
+
 	      	 }else{
 		      	  let user_nickname = $("#user_nickname").val();
-		      	  
+
 	       	  	  $.ajax({
 	        		url : "/signup/nicknameCheck"
 	        		, type : "post"
@@ -524,23 +524,23 @@ footer.footer {
 	        				sweetAlertFail("사용 중인 닉네임입니다.");
 	        				$("#user_nickname").focus();
 	        				invalidNickname();
-	        				
+
 	        			}else if(result === "possibility"){
 	        				sweetAlertSuccess("사용 가능한 닉네임입니다.");
 	        				nicknameConfirm = "confirm";
 	        				validNickname();
 	        			}
-	        	
+
 	        		}, error : function(e){
 	        			console.log(e);
 	        		}
 	        	})
      	   }
   	   });
-		
+
 	   $("#user_name").change(function(){
 		   let nameRegex = /^[가-힣]+$/;
-		   
+
 		   if(!nameRegex.test($("#user_name").val())){
 			   invalidName();
 			   return;
@@ -548,15 +548,15 @@ footer.footer {
 			   $("#name-col").empty();
 		   }
 	   });
-		
+
        $("#email-btn").click(function(){ //이메일 직접입력 취소
     	   $(".email-domain-row").hide();
     	   $("#email-domain").val("");
        });
-       
+
        $("#user_pw").change(function(){ //비밀번호
     	   let passwordRegex = /^[a-z0-9!@#$]{8,20}$/
-    	   
+
     	   if(!passwordRegex.test($("#user_pw").val())){
     		   invalidPw();
     		   return;
@@ -567,27 +567,27 @@ footer.footer {
     		   validPw();
     	   }
        });
-       
+
        $("#pwCheck").change(function(){ //비밀번호확인
     	   if($("#user_pw").val() != $("#pwCheck").val()){
     		   checkPw();
     	   }else{
     		   $("#check-col").empty();
     	   }
-       
+
        });
-       
-       
+
+
        $("#checkPhone").click(function(){ //이메일 중복체크
     	   let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
     	   let phone = $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
-   
+
 	  		 if(!phoneRegex.test(phone)){
     	 		sweetAlertFail("올바르지 않은 전화번호 형식입니다.");
 	       	 	 return;
-	       	 	 
+
 	      	 }else{
-		      	  
+
 	       	  	  $.ajax({
 	        		url : "/signup/phoneCheck"
 	        		, type : "post"
@@ -597,7 +597,7 @@ footer.footer {
 	        			console.log(result);
 	        			if(result === "impossibility"){
 	        				sweetAlertFail("사용 중인 전화번호입니다.");
-	        				
+
 	        			}else if(result === "possibility"){
 	        				sweetAlertSuccess("사용 가능한 전화번호 입니다.");
 	        				$('#phone1').attr('disabled',true);
@@ -605,88 +605,88 @@ footer.footer {
 	        				$("#phone3").attr('readonly',true);
 	        				phoneConfirm = "confirm";
 	        			}
-	        	
+
 	        		}, error : function(e){
 	        			console.log(e);
 	        		}
 	        	})
    	   }
 	   });
-       
-       
+
+
        $("#nextBtn").click(function(){ //다음으로
     	   let nameRegex = /^[가-힣]+$/;
-       	   
+
       	   let bdRegex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 		   let bd = $("#year").val() + $("#month").val() + $("#day").val();
-		   
+
 		   let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
-		   let phone =  $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val(); 
-		   
-		   let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;   
-	       	 	 
+		   let phone =  $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
+
+		   let emailRegex = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+
            if(!nameRegex.test($("#user_name").val())){
         	   sweetAlertFail("올바르지 않은 이름입니다.");
         	   $("#user_name").focus();
-        	   return;   
-           
-           }else if(!emailRegex.test($("#email-domain").val())){
+        	   return;
+
+           } else if(!emailRegex.test($("#email-domain").val())){
       	 	   sweetAlertFail("올바르지 않은 이메일 형식입니다.");
       	 	   $("#email-domain").focus();
- 	       	   return;   
+ 	       	   return;
  	       	auth = comfirm;
            }else if(auth !== "comfirm"){
       	 	   sweetAlertFail("이메일 인증을 완료해주세요.");
       	 	   $("#email_id").focus();
- 	       	   return;   
- 	       	
+ 	       	   return;
+
            }else if($("#user_pw").val() === "" || $("#pwCheck").val() === ""){
         	   sweetAlertFail("비밀번호를 입력해주세요.");
            	   return;
-           	   
+
            }else if($("#email-id").val() === $("#user_pw").val()){
     		   sweetAlertFail("아이디와 비밀번호를 다르게 설정해주세요.");
     		   return;
-        	   
+
            }else if($("#user_pw").val() != $("#pwCheck").val()){
         	   sweetAlertFail("비밀번호가 다릅니다.");
         	   $("#pwCheck").focus();
         	   return;
-        	   
+
            }else if(nicknameConfirm !== "confirm"){
         	   sweetAlertFail("닉네임 중복확인을 해주세요.");
         	   $("#user_nickname").focus();
         	   return;
-        	   
+
            }else if($("#month").val() + $("#day").val() === "0230" || $("#month").val() + $("#day").val() === "0231"){
         	   sweetAlertFail("생일을 정확하게 입력해주세요.");
         	   $("#day").focus();
         	   return;
-        	   
+
            }else if(!bdRegex.test(bd)){
         	   sweetAlertFail("생일을 정확하게 입력해주세요.");
         	   return;
-        	   
+
            }else if(phoneConfirm !== "confirm"){
         	   sweetAlertFail("핸드폰 중복확인을 해주세요.");
         	   return;
-        	   
+
            }else if(!$('input:radio[name="user_gender"]').is(":checked")){
         	   sweetAlertFail("성별을 선택해주세요.");
         	   return;
-        	   
+
            }else{
         	   next();
            }
        });
-       
+
        // 뒷 페이지
-       
+
        $("#profileSetting").click(function(){ //프로필사진
     	   $("#user_image").show() ;
     	   $("#defaultImgBtn").show() ;
-       });	
-       
+       });
+
        $("#user_image").change(function(){
     	   let result = checkFile(this);
     	   console.log(result);
@@ -698,7 +698,7 @@ footer.footer {
         	   }
     	   }
        });
-       
+
        $('#user_intro').keyup(function (e){
  		  const top = $('#user_intro').prop('scrollHeight');
           $('#user_intro').scrollTop(top);
@@ -708,39 +708,39 @@ footer.footer {
           }
           $('#user_intro_cnt').html(content.length + '/30');
       });
-       
+
        $('input:checkbox[name="hobby"]').click(function(){
-    	   let hobbyCnt = $('input:checkbox[name="hobby"]:checked').length; 
-    	  
+    	   let hobbyCnt = $('input:checkbox[name="hobby"]:checked').length;
+
     	   if(hobbyCnt>3){
     	    sweetAlertFail('취미는 최대 3개까지 선택이 가능합니다.');
     	    $(this).prop('checked', false);
     	   }
     	});
-       
+
 	   $('input:checkbox[name="area"]').click(function(){
-    	   let areaCnt = $('input:checkbox[name="area"]:checked').length;  
-    	  
+    	   let areaCnt = $('input:checkbox[name="area"]:checked').length;
+
     	   if(areaCnt>3){
     		sweetAlertFail('관심지역은 최대 3개까지 선택이 가능합니다.');
     	    $(this).prop('checked', false);
     	   }
     	});
-       
+
 	   $("#defaultImgBtn").click(function(){
 		   $("#user_image").val("");
 		   $("#p_img").attr("src", "/resources/images/profile.jpg");
-	   }); 
-	   
+	   });
+
 	   $("#completeBtn").click(function(){
 		  if(!$('input:radio[name="user_job"]').is(':checked')){
 			  sweetAlertFail("직업을 선택해주세요.");
 		   	  return;
-			  
+
 	      }else if($('input:checkbox[name="hobby"]:checked').length == 0){
 	    	  sweetAlertFail("취미는 적어도 1개는 선택해주세요.");
-		      return;	
-				
+		      return;
+
 		  }else if($('input:checkbox[name="area"]:checked').length == 0){
 			  sweetAlertFail("관심 지역은 적어도 1개는 선택해주세요.");
 			  return;
@@ -749,10 +749,10 @@ footer.footer {
 		  $("#user_phone").val($("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val());
 		  $("#user_email").val($("#email-id").val()+"@"+$("#email-domain").val());
 		  $("#signupForm").submit();
-		  
+
 	   });
-		
-	   
+
+
    })
 function back(){ //뒤로가기
  	$("#signup-1").css("text-shadow","1px 2px 2px darkblue");
@@ -777,7 +777,7 @@ function next(){ //다음페이지
     $("#userInfoBox-profile").show();
     $("#singupBackBtn").show();
     $("#completeBtn").show();
-} 
+}
 function invalidName(){
 	$("#name-col").empty();
 	let span = $('<span>').attr('id', 'name-check-span').css("color","red").html("올바르지 않은 이름입니다.");
@@ -821,7 +821,7 @@ function checkFile(obj) {
 	 let fileKind = obj.value.lastIndexOf('.');
 	 let fileName = obj.value.substring(fileKind+1,obj.length);
 	 let fileType = fileName.toLowerCase();
-     
+
 	 if(fileType == "jpg" || fileType == "gif" || fileType == "png" || fileType == "jpeg" || fileType == "bmp"){
 		 return true;
 	 }else{
@@ -832,7 +832,7 @@ function checkFile(obj) {
 		 $("#p_img").attr("src", "/resources/images/profile.jpg");
 		 return false;
 	 }
-	 
+
 	 if(fileType == "bmp"){
 		 answer = confirm("BMP 파일은 웹상에서 사용하기엔 적절한 이미지 형식이 아닙니다. /n 사용하시겠습니까?");
 		 if(!answer)return false;
@@ -843,7 +843,7 @@ function sweetAlertFail(content){
 		 icon: 'error',
 		 title: 'Oops...',
 		 text: content,
-		});  	
+		});
 };
 function sweetAlertSuccess(content){
 	Swal.fire({
@@ -857,121 +857,138 @@ function sweetAlertSuccess(content){
 </script>
 <body>
  <!--네비바-->
-<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
-    <div class="container">
-       <!-- 접혔을 때 nav -->
-       <nav id="navibar" class="navbar navbar-expand-md navbar-light"
-          aria-label="Main navigation">
-          <div class="container-fluid">
-             <div class="row">
-                <div class="col-10">
-                   <a class="navbar-brand mb-2 mb-lg-0" href="/">
-                      <div class="title-box">
-                         <img id="logoImg" src="/resources/images/kiri.jpg">
-                      </div>
-                   </a>
-                </div>
-                <!-- toggle button -->
-                <div class="col-2 d-flex align-items-center">
-                   <button class="navbar-toggler" type="button"
-                      data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                      aria-controls="navbarNavDropdown" aria-expanded="false"
-                      aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                   </button>
-                </div>
-                <!-- 메뉴 -->
-                <div class="collapse navbar-collapse justify-content-end"
-                   id="navbarNavDropdown">
-                   <ul class="navbar-nav mb-2 mb-lg-0">
-                      <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
-                         <c:if test="${empty loginSession}">
-                            <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
-                         </c:if>
-                         <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                            <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                         </c:if>
-                         <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                            <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                            <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                         </c:if>
-                   </ul>
-                </div>
-             </div>
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
+      <div class="container">
+         <!-- 접혔을 때 nav -->
+         <nav id="navibar" class="navbar navbar-expand-md navbar-light"
+            aria-label="Main navigation">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-10">
+                     <a class="navbar-brand mb-2 mb-lg-0" href="/">
+                        <div class="title-box">
+                           <img id="logoImg" src="/resources/images/kiri.jpg">
+                        </div>
+                     </a>
+                  </div>
+                  <!-- toggle button -->
+                  <div class="col-2 d-flex align-items-center">
+                     <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                     </button>
+                  </div>
+                  <!-- 메뉴 -->
+                  <div class="collapse navbar-collapse justify-content-end"
+                     id="navbarNavDropdown">
+                     <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard" style="font-size:18px;">자유게시판</a></li>
+                           <c:if test="${empty loginSession}">
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
+                           </c:if>
+                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
+                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                     </ul>
+                  </div>
+               </div>
 
-          </div>
-       </nav>
-       <!-- 펼쳐졌을 때 nav -->
-       <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
-          aria-label="Main navigation">
-          <div class="row w-100 align-items-center">
-             <div class="col-5 d-flex justify-content-center">
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                   <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                         게시판</a></li>
-                </ul>
-             </div>
+            </div>
+         </nav>
+      <!-- 펼쳐졌을 때 nav -->
+         <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
+            aria-label="Main navigation">
+            <div class="row w-100 align-items-center">
+               <div class="col-5 d-flex justify-content-center">
+                  <ul class="navbar-nav mb-2 mb-lg-0">
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
+                  </ul>
+               </div>
 
-             <!-- logo -->
-             <div class="col-2">
-                <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
-                   id="logoImgs" src="/resources/images/kiri.jpg">
+               <!-- logo -->
+               <div class="col-2">
+                  <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
+                     id="logoImgs" src="/resources/images/kiri.jpg">
 
-                </a>
-             </div>
+                  </a>
+               </div>
 
-             <div class="col-5">
-                <div class="row align-items-center justify-content-center">
-                   <div class="col-auto">
-                      <ul class="navbar-nav mb-2 mb-lg-0 me-2">
-                         <c:if test="${empty loginSession}">
-                            <li class="nav-item"><a class="nav-link"
-                               href="/login/toLogin">로그인</a></li>
-                            <li class="nav-item"><a class="nav-link"
-                               href="/signup/toSignupAgree">회원가입</a></li>
-                         </c:if>
-                      </ul>
-                   </div>
-                   <div class="col-auto user">
-                <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                   <div class="dropdown text-end">
-                      <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                      <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                      </a>
-                      <ul class="dropdown-menu text-small"
-                         aria-labelledby="dropdownUser1">
-                         <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                         <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                         <li><hr class="dropdown-divider"></li>
-                         <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                         <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                      </ul>
-                   </div>
-                </c:if> 
-                <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                   <div class="dropdown text-end">
-                      <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                      <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                      </a>
-                      <ul class="dropdown-menu text-small"
-                         aria-labelledby="dropdownUser1">
-                         <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                         <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                         <li><hr class="dropdown-divider"></li>
-                         <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                      </ul>
-                   </div>
-                </c:if> 
-                   </div>
-                </div>
-             </div>
-          </div>
-       </nav>
-    </div>
- </header>
+               <div class="col-5">
+                  <div class="row align-items-center justify-content-center">
+                     <div class="col-auto">
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-2" style = "font-size:18px;">
+                           <c:if test="${empty loginSession}">
+                              <li class="nav-item"><a class="nav-link"
+                                 href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link"
+                                 href="/signup/toSignupAgree">회원가입</a></li>
+                           </c:if>
+                        </ul>
+                     </div>
+                     <div class="col-auto user">
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </nav>
+      </div>
+   </header>
 <form id="signupForm" action="/signup/signup" method="post" enctype="multipart/form-data">
 	<div class="container signupBox">
 		<div class="row">
@@ -982,13 +999,13 @@ function sweetAlertSuccess(content){
 			  <span id="signup-1">1</span>
 			</div>
 			<div class="col-3">
-			  <div class="circleLine-line"></div>   
+			  <div class="circleLine-line"></div>
 			</div>
 			<div class="col-1 circle" >
 			  <span id="signup-2">2</span>
 			</div>
 			<div class="col-3">
-				<div class="circleLine-line"></div>   
+				<div class="circleLine-line"></div>
 			</div>
 			<div class="col-1 circle" >
 			  <span>3</span>
@@ -1020,7 +1037,7 @@ function sweetAlertSuccess(content){
 				<div class="col-md-3">
 				</div>
 				<div class="col-md-7 text-align-left-col" id="name-col" >
-				
+
 				</div>
 				<div class="col-2 text-align-left-col"></div>
 			</div>
@@ -1105,7 +1122,7 @@ function sweetAlertSuccess(content){
 				<div class="col-md-3">
 				</div>
 				<div class="col-md-7 text-align-left-col" id="regex-col">
-				
+
 				</div>
 				<div class="col-2 text-align-left-col"></div>
 			</div>
@@ -1122,7 +1139,7 @@ function sweetAlertSuccess(content){
 				<div class="col-md-3">
 				</div>
 				<div class="col-md-7 text-align-left-col" id="check-col" >
-				
+
 				</div>
 				<div class="col-2 text-align-left-col"></div>
 			</div>
@@ -1152,7 +1169,7 @@ function sweetAlertSuccess(content){
 				<div class="col-md-3">
 				</div>
 				<div class="col-md-7 text-align-left-col" id="nickname-col" >
-				
+
 				</div>
 				<div class="col-2 text-align-left-col"></div>
 			</div>
@@ -1166,7 +1183,7 @@ function sweetAlertSuccess(content){
 					<input type="text" id="day" name="day" class="form-control bthday" maxlength="2" placeholder="ex) 01" required><label for="day">일</label>
 					<input type="hidden" id="user_bd" name="user_bd" class="form-control"></intput>
 				</div>
-			</div> 
+			</div>
 			<div class="row" >
 				<div class="col-md-3">
 					<p>휴대전화</p>
@@ -1207,7 +1224,7 @@ function sweetAlertSuccess(content){
 				</div>
 			</div>
 		</div>
-	
+
 		<div id="userInfoBox-profile">
 			<div class="row" style="text-align: center;">
 				<div class="col">
@@ -1232,7 +1249,7 @@ function sweetAlertSuccess(content){
 					<p style="margin-top: 50px;">자기소개</p>
 				</div>
 				<div class="col-7" style="height: 120px;">
-					<textarea class="form-control" name="user_intro" id="user_intro" maxlength="30" placeholder="30자 이내로 작성해주세요. 작성하지 않아도 가입은 가능합니다."></textarea>
+					<textarea class="form-control" name="user_intro" id="user_intro" maxlength="29" placeholder="30자 이내로 작성해주세요. 작성하지 않아도 가입은 가능합니다."></textarea>
 				</div>
 				<div class="col-2"></div>
 			</div>
@@ -1360,7 +1377,7 @@ function sweetAlertSuccess(content){
 							</c:choose>
 						</li>
 						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="privacy"
+						<li class="list-inline-item"><a href="/privacy"
 							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
 					</ul>
 					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |

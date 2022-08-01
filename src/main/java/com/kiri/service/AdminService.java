@@ -98,7 +98,7 @@ public class AdminService {
 	}
 
 	
-	// 게시물 관리
+	///// 호준 게시물 관리
 
 	// 전체 게시글 curPage로 자르기
 	public List<BoardDTO> selectBoard(int start, int end) throws Exception{
@@ -119,6 +119,11 @@ public class AdminService {
 	public List<BoardDTO> selectAllBoard() throws Exception{
 		return boarddao.selectAllBoard();
 	}
+	
+	// 일반게시판 공지 조회
+	public List<BoardDTO> selectNoticeBoardList() throws Exception{
+		return boarddao.selectNoticeBoardList();
+	}
 
 	// 모임게시판 조회
 	public List<Group_BoardDTO> selectAllGroupBoard() throws Exception{
@@ -128,6 +133,11 @@ public class AdminService {
 	// 일반게시판 검색으로 조회
 	public List<BoardDTO> generalSearchList(String category, String keyword) throws Exception{
 		return boarddao.generalSearchList(category, keyword);
+	}
+
+	// 일반게시판 검색으로 조회
+	public List<BoardDTO> noticeSearchList(String category, String keyword) throws Exception{
+		return boarddao.noticeSearchList(category, keyword);
 	}
 
 	// 모임게시판 검색으로 조회
