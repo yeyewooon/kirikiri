@@ -2,6 +2,7 @@ package com.kiri.service;
 
 import java.io.File;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,6 +51,15 @@ public class BoardService {
 		map.put("commentList", commentDAO.selectAll(seq_board)); // 댓글 데이터 가져오기
 		map.put("commentCnt", commentDAO.commentCnt(seq_board)); // 댓글 개수
 		return map;
+	}
+	
+	// 댓글 프로필 조회
+	public String getProfileImg(String user_email) throws Exception{
+		if(user_email != null) {
+			return commentDAO.getProfileImg(user_email);
+		}else {
+			return null;
+		}
 	}
 	
 	// 조회수 + 1

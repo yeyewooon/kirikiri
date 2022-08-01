@@ -57,7 +57,6 @@ public class HomeController {
 	         model.addAttribute("sysList", sys_name);
 	         model.addAttribute("boardList", getBestBoard);
 	      }
-	      
 		
 		return "mainPage";
 	}

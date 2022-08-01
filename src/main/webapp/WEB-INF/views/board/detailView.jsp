@@ -35,6 +35,9 @@
 		}
 		
 		/* header */
+		header{
+			background-color: white;
+		}
 		#navLogo {
 		   width: 150px;
 		   height: 100px;
@@ -251,8 +254,8 @@
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
 
@@ -277,35 +280,52 @@
                         </ul>
                      </div>
                      <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
@@ -415,7 +435,13 @@
 	                			<!-- 프로필 이미지 -->
 			                    <div class="col-2 d-flex justify-content-center">		                        
 			                        <div class="profileBox">
-			                            <img src="/resources/images/profile.jpg">
+			                        	<c:if test="${profile eq null}">
+			                        		<!-- 기본이미지 -->
+			                        		<img src="/resources/images/profile.jpg">
+			                        	</c:if>
+			                            <c:if test="${profile ne null}">
+			                        		<img src="/profile/${profile}">
+			                        	</c:if>
 			                        </div>
 			                    </div>
 								<!-- 내용 -->
@@ -451,7 +477,26 @@
 			                            <div class="col-12">
 			                                <textarea class="form-control comment" style="resize: none; background-color: transparent;" readonly>${comment.comment_content}</textarea>
 			                            </div>
-			                            
+			                            <c:if test="${loginSession.user_email eq 'admin'}">
+			                           		<div class="col-3 defaultComment">
+						                		<button type="button" class="del-commentBtn btn btn-danger" value="${comment.seq_comment}">삭제</button>
+						                	</div>
+			                            	<div class="col-3 afterComment d-none">
+						                		<button type="button" class="btn btn-secondary mod-cancelBtn me-2">취소</button>
+						                		<button type="button" class="btn btn-primary mod-completeBtn" value="${comment.seq_comment}">완료</button>
+						                	</div>
+			                            </c:if>
+			                            <!-- 댓글 수정/삭제 버튼 -->
+					                	<c:if test="${comment.user_email eq loginSession.user_email && loginSession.user_email ne 'admin'}">
+						                	<div class="col-3 defaultComment">
+						                		<button type="button" class="mod-commentBtn btn btn-warning me-2" value="${comment.seq_comment}">수정</button>
+						                		<button type="button" class="del-commentBtn btn btn-danger" value="${comment.seq_comment}">삭제</button>
+						                	</div>
+						                	<div class="col-3 afterComment d-none">
+						                		<button type="button" class="btn btn-secondary mod-cancelBtn me-2">취소</button>
+						                		<button type="button" class="btn btn-primary mod-completeBtn" value="${comment.seq_comment}">완료</button>
+						                	</div>
+					                	</c:if>
 			                        </div>
 			                    </div>
 			                </div>

@@ -36,7 +36,6 @@
 	</select> -->
 	
 	<!-- 게시글에 있는 파일 이름 가져오기 -->
-	<!-- 게시글 수정할 때 지워줄 파일 검사하기 위해 가져옴  -->
 	<!-- <select id="selectFile" parameterType="int" resultType="String">
 		select sys_name from board_file
 			where seq_board = #{seq_board}
