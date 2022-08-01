@@ -11,7 +11,7 @@
    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
    crossorigin="anonymous"></script>
-   
+
 <!--구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -135,6 +135,9 @@
 }
 
 /*풋터 영역*/
+.footerWrapper{
+   background-color: #fff;
+}
 .footerBox {
 	height: 0px;
 }
@@ -216,7 +219,7 @@ footer.footer {
 </head>
 <body>
 
-   <header class="mb-3 border-bottom">
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -297,7 +300,7 @@ footer.footer {
                      <div class="col-auto user">
 						<c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
 							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
 								</a>
 								<ul class="dropdown-menu text-small"
@@ -309,10 +312,10 @@ footer.footer {
 								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 								</ul>
 							</div>
-						</c:if> 
+						</c:if>
 						<c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
 							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
 								</a>
 								<ul class="dropdown-menu text-small"
@@ -323,7 +326,7 @@ footer.footer {
 								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 								</ul>
 							</div>
-						</c:if> 
+						</c:if>
                      </div>
                   </div>
                </div>
@@ -451,26 +454,26 @@ footer.footer {
         </div>
       </footer>
     </div>
-  </div> 	
+  </div>
 </body>
 <script>
 	// 멤버관리 페이지 이동
 	$("#groupMember").on("click", function(){
 		location.href = "/group/toGroupMember?seq_group="+$("#seq_group").val();
-	})	
+	})
 	// 모임가입 페이지 이동
 	$("#groupApply").on("click", function(){
 		location.href = "/group/toGroupApply?seq_group="+$("#seq_group").val();
-	})	
+	})
 	// 모임수정 이동
 	$("#groupModify").on("click", function(){
 		location.href = "/group/toModifyGroup?seq_group="+$("#seq_group").val();
-	})	
+	})
 	// 모임해산 페이지 이동
 	$("#groupDelete").on("click", function(){
 		location.href = "/group/toGroupDelete?seq_group="+$("#seq_group").val();
-	})	
-	
+	})
+
 	// 모임 해산시키기
 	$("#deleteBtn").on("click", function(){
 			Swal.fire({
@@ -490,7 +493,7 @@ footer.footer {
 					}).css("display", "none");
 					deleteForm.append($("#seq_group"));
 					deleteForm.appendTo("body");
-					deleteForm.submit(); 
+					deleteForm.submit();
 			  }
 			})
 		})

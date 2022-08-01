@@ -287,12 +287,11 @@ input {
 	height: 90%;
 }
 
-#emailCheck {
+#emailCheck{
 	width: 80%;
-	margin: 0px;
-	padding: 0px;
-	height: 100%;
-	margin-top: 5px;
+	margin: auto;
+    height: 100%;
+    margin-top: 2px;
 }
 
 .user_gender {
@@ -632,15 +631,15 @@ footer.footer {
 		   $("#p_img").attr("src", "/resources/images/profile.jpg");
 	   }); 
        
-       $('#user_intro').on('change', function() {  // 자기소개
-           $('#user_intro_cnt').html("("+$(this).val().length+" / 500)");
-           const top = $('#user_intro').prop('scrollHeight');
+       $('#user_intro').keyup(function (e){
+  		  const top = $('#user_intro').prop('scrollHeight');
            $('#user_intro').scrollTop(top);
-           
-           if($(this).val().length > 500) {
-               $(this).val($(this).val().substring(0, 500));
-               $('#user_intro_cnt').html("(500 / 500)");
+           var content = $(this).val();
+           if($(this).val().length > 29) {
+            $(this).val($(this).val().substring(0, 30));
            }
+           $('#user_intro_cnt').html(content.length + '/30');
+           
        });
        
        $('input:checkbox[name="hobby"]').click(function(){
@@ -771,7 +770,7 @@ function sweetAlertSuccess(content){
 </script>
 <body>
  <!--네비바-->
-<header class="mb-3 border-bottom">
+<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
    <div class="container">
       <!-- 접혔을 때 nav -->
       <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -964,7 +963,7 @@ function sweetAlertSuccess(content){
 						class="form-control">
 				</div>
 				<div class="col-md-2">
-					<button type="button" class="btn btn-secondary" id="nicknameCheck">중복확인</button>
+					<button type="button" class="btn btn-outline-secondary" id="nicknameCheck">중복확인</button>
 				</div>
 				<div class="col-2"></div>
 			</div>
@@ -1012,7 +1011,7 @@ function sweetAlertSuccess(content){
                <input type="hidden" id="user_phone" name="user_phone">
            </div>
            <div class="col-md-2">
-           	<button type="button" id="checkPhone" class="btn btn-secondary" >중복확인</button>
+           	<button type="button" id="checkPhone" class="btn btn-outline-secondary" >중복확인</button>
            </div>
            <div class="col-2"></div>
        </div>
@@ -1062,7 +1061,7 @@ function sweetAlertSuccess(content){
         <div class="row">
             <div class="col">
                 <input type="file" class="form-control" id="user_image" name="file" accept="image/jpeg, image/png">
-                <button type="button" id="defaultImgBtn" class="btn btn-secondary">기본 이미지설정</button>
+                <button type="button" id="defaultImgBtn" class="btn btn-outline-secondary">기본 이미지설정</button>
             </div>
         </div>
         <div class="row">
@@ -1070,7 +1069,7 @@ function sweetAlertSuccess(content){
                 <p style="margin-top: 50px;">자기소개</p>
             </div>
             <div class="col-7" style="height: 120px;">
-                <textarea class="form-control" name="user_intro" id="user_intro" maxlength="500" placeholder="500자 이내로 작성해주세요. 작성하지 않아도 가입은 가능합니다."></textarea>
+                <textarea class="form-control" name="user_intro" id="user_intro" maxlength="30" placeholder="30자 이내로 작성해주세요. 작성하지 않아도 가입은 가능합니다."></textarea>
             </div>
             <div class="col-2"></div>
         </div>
@@ -1078,7 +1077,7 @@ function sweetAlertSuccess(content){
             <div class="col-3">
             </div>
             <div class="col-7" id="user_intro_cnt">
-            	0/500
+            	0/30
             </div>
             <div class="col-2"></div>
         </div>
@@ -1151,69 +1150,77 @@ function sweetAlertSuccess(content){
     </div>
     <div class="row btnRow">
         <div class="col">
-            <button type="button" id="backPageBtn" class="btn btn-secondary">취소</button>
-            <button type="button" id="nextBtn" class="btn btn-primary">확인</button>
+            <button type="button" id="backPageBtn" class="btn" style="background-color: white; border: 1px solid navy;">취소</button>
+            <button type="button" id="nextBtn" class="btn" style="background-color: #e6f6ff; border: 1px solid navy;">확인</button>
         </div>
     </div>
     <div class="row btnRow">
         <div class="col">
-            <button type="button" id="singupBackBtn" class="btn btn-secondary">뒤로가기</button>
-            <button type="button" id="completeBtn" class="btn btn-primary">가입하기</button>
+            <button type="button" id="singupBackBtn" class="btn" style="background-color: white; border: 1px solid navy;">뒤로가기</button>
+            <button type="button" id="completeBtn" class="btn" style="background-color: #e6f6ff; border: 1px solid navy;">가입하기</button>
         </div>
     </div>
 </div>
 </form>	
-
- <!-- Footer-->
- <footer class="footer">
-	 <div class="container">
-		 <div class="row">
-			 <div class="col-lg-3 footer-imgBox">
-				 <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-			 </div>
-			 <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-				 <ul class="list-inline mb-2">
-					 <li class="list-inline-item"><a href="#!">공지사항</a></li>
-					 <li class="list-inline-item">⋅</li>
-					 <c:choose>
-						 <c:when test="${not empty loginSession}">
-							 <li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
-							 <li class="list-inline-item">⋅</li>
-							 <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-						 </c:when>
-						 <c:otherwise>
-							 <li class="list-inline-item"><a href="/signup/toSignup">회원가입</a></li>
-							 <li class="list-inline-item">⋅</li>
-							 <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-						 </c:otherwise>
-					 </c:choose>
-					 <li class="list-inline-item">⋅</li>
-					 <li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a></li>
-					 <li class="list-inline-item">⋅</li>
-					 <li class="list-inline-item"><a href="#!"
-						 style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-				 </ul>
-				 <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-					 개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-				 <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-					 57 이레빌딩</p>
-				 <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-					 2022. All Rights Reserved.</p>
-			 </div>
-			 <div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-				 <ul class="list-inline mb-0">
-					 <li class="list-inline-item me-4"><a
-						 href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-					 <li class="list-inline-item me-4"><a
-						 href="https://twitter.com/?lang=ko"><i
-							 class="bi-twitter fs-3"></i></a></li>
-					 <li class="list-inline-item"><a
-						 href="https://www.instagram.com/"><i
-							 class="bi-instagram fs-3"></i></a></li>
-				 </ul>
-			 </div>
-		 </div>
-	 </div>
- </footer>
+    <!-- Footer-->
+	<footer class="footer">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3 footer-imgBox">
+					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+				</div>
+				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+					<ul class="list-inline mb-2">
+						<li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
+						<li class="list-inline-item">⋅</li>
+						<c:choose>
+							<c:when test="${not empty loginSession}">
+								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="list-inline-item"><a href="/signup/toSignup">회원가입</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+							</c:otherwise>
+						</c:choose>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item">
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<a href="/group/toCreateGroup">모임 만들기</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/login/toLogin">모임 만들기</a>
+								</c:otherwise>
+							</c:choose>
+						</li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="privacy"
+							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+					</ul>
+					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+						57 이레빌딩</p>
+					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+						2022. All Rights Reserved.</p>
+				</div>
+				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item me-4"><a
+							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+						<li class="list-inline-item me-4"><a
+							href="https://twitter.com/?lang=ko"><i
+								class="bi-twitter fs-3"></i></a></li>
+						<li class="list-inline-item"><a
+							href="https://www.instagram.com/"><i
+								class="bi-instagram fs-3"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
 </body>
 </html>

@@ -104,18 +104,28 @@
         /* header 반응형 끝 */
         
     	/* contents 영역 */
+    	#writeWrapper:not(textarea){
+    		font-family: 'InfinitySans-RegularA1';
+    	}
+    	
         #head{
             background-color: #d2e3ec;
             height: 100px;
-        }
-        /* #head>h1{
-        	font-family: 'OTWelcomeRA';
-            margin-top: 20px;
+            border-top-left-radius: 80px;
+            border-top-right-radius: 80px;
+            border: 3px solid black;
         }
         label {
-        	font-family: 'OTWelcomeRA';
             margin-top: 5px;
-        } */
+        }
+        
+        #bottom{
+        	background-color: #d2e3ec;
+            height: 100px;
+            border-bottom-left-radius: 80px;
+            border-bottom-right-radius: 80px;
+            border: 3px solid black;
+        }
         
         /*풋터 영역*/
 		.footerBox {
@@ -143,12 +153,16 @@
 		
         /* 눈누 폰트 */
 		@font-face {
-			font-family: 'OTWelcomeRA';
-			src:
-				url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-				format('woff2');
-			font-weight: normal;
-			font-style: normal;
+            font-family: 'MICEGothic Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+		    font-family: 'InfinitySans-RegularA1';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
 		}
 		
 		@font-face {
@@ -174,7 +188,7 @@
 	</style>
 </head>
 <body>
-	<header class="border-bottom">
+	<header class="border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -290,54 +304,63 @@
       </div>
    </header>
 
-	<div class="container">
-        <div id="head" class="row text-center align-items-center mb-5">
-            <h1>글쓰기</h1>
-        </div>
-        
+	
+	<div class="container" id="writeWrapper" style="width: 70%;">
+        <div id="head" class="row text-center align-items-center my-5">
+			<h1>글쓰기</h1>
+		</div>
+		
         <form id="writeForm" action="/board/write" method="post">
-	        <div class="row mt-4 text-center">
-	            <div class="col-1">
-	                <label class="form-label fs-5">분류</label>
-	            </div>
-	            <div class="col-2">
-	            	<c:choose>
-	            		<%-- 관리자 계정이라면 공지 쓰기 --%>
-	            		<c:when test="${loginSession.user_email eq 'admin'}">
-	            			<select name="board_category" class="form-select selectBox" aria-label="유형">
-			                    <option selected value="default">선택</option>
-			                    <option value="공지">공지</option>
-			                    <option value="일반">일반</option>
-			                </select>
-	            		</c:when>
-	            		<c:otherwise>
-	            			<select name="board_category" class="form-select selectBox" aria-label="유형">
-			                    <option selected value="default">선택</option>
-			                    <option value="일반">일반</option>
-			                    <option value="후기">후기</option>
-			                </select>
-	            		</c:otherwise>
-	            	</c:choose>
-	                
-	            </div>
-	            <div class="col-1">
-	                <label class="form-label fs-5">제목</label>
-	            </div>
-	            <div class="col-8">
-	                <input type="text" id="title" name="board_title" class="form-control" placeholder="제목을 입력하세요.">
-	            </div>
-	        </div>
-			
-	        <div class="row mt-4">
-				<textarea id="summernote" name="board_content"></textarea>
+	        <div id="writeDiv">
+	        
+		        <div class="row mt-4 text-center">
+		            <div class="col-1">
+		                <label class="form-label fs-5">분류</label>
+		            </div>
+		            <div class="col-2">
+		            	<c:choose>
+		            		<%-- 관리자 계정이라면 공지 쓰기 --%>
+		            		<c:when test="${loginType eq 'admin'}">
+		            			<select name="board_category" class="form-select selectBox" aria-label="유형">
+				                    <option selected value="default">선택</option>
+				                    <option value="공지">공지</option>
+				                    <option value="수다">수다</option>
+				                    <option value="일상">일상</option>
+				                    <option value="기타">기타</option>
+				                </select>
+		            		</c:when>
+		            		<c:otherwise>
+		            			<select name="board_category" class="form-select selectBox" aria-label="유형">
+				                    <option selected value="default">선택</option>
+				                    <option value="수다">수다</option>
+				                    <option value="일상">일상</option>
+				                    <option value="후기">후기</option>
+				                    <option value="기타">기타</option>
+				                </select>
+		            		</c:otherwise>
+		            	</c:choose>
+		                
+		            </div>
+		            <div class="col-1">
+		                <label class="form-label fs-5">제목</label>
+		            </div>
+		            <div class="col-8">
+		                <input type="text" id="title" name="board_title" class="form-control" placeholder="제목을 입력하세요.">
+		            </div>
+		        </div>
+				
+		        <div class="row mt-4">
+					<textarea id="summernote" name="board_content"></textarea>
+		        </div>
+	        
 	        </div>
 	        
-	        <div class="row my-4 justify-content-center">
+	        <div class="row my-4 justify-content-center align-items-center" id="bottom">
 	            <div class="col-auto">
-	                <button type="button" id="cancelBtn" class="btn btn-secondary">취소</button>
+	                <button type="button" id="cancelBtn" class="btn btn-light">취소</button>
 	            </div>
 	            <div class="col-auto">
-	                <button type="button" id="submitBtn" class="btn btn-primary">작성 완료</button>
+	                <button type="button" id="submitBtn" class="btn" style="background-color: #e6f6ff;">작성 완료</button>
 	            </div>
 	        </div>
         </form>
@@ -561,7 +584,7 @@
 			
 			Swal.fire({
 				icon: 'success'
-				, title: '게시글이 등록되었어요!'
+				, title: '게시글을 등록하겠습니다!'
 				, showConfirmButton: true
 			}).then((result) =>{
 				if(result.isConfirmed){
