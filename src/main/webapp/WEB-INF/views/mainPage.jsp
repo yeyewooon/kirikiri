@@ -26,8 +26,8 @@
    crossorigin="anonymous"></script>
 <!-- Bootstrap icons-->
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-	rel="stylesheet">
+   href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+   rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <title>끼리끼리</title>
 <style>
@@ -497,121 +497,138 @@
       </head>
 
       <body>
-         <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
-            <div class="container">
-               <!-- 접혔을 때 nav -->
-               <nav id="navibar" class="navbar navbar-expand-md navbar-light" aria-label="Main navigation">
-                  <div class="container-fluid">
-                     <div class="row">
-                        <div class="col-10">
-                           <a class="navbar-brand mb-2 mb-lg-0" href="/">
-                              <div class="title-box">
-                                 <img id="logoImg" src="/resources/images/kiri.jpg">
-                              </div>
-                           </a>
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
+      <div class="container">
+         <!-- 접혔을 때 nav -->
+         <nav id="navibar" class="navbar navbar-expand-md navbar-light"
+            aria-label="Main navigation">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-10">
+                     <a class="navbar-brand mb-2 mb-lg-0" href="/">
+                        <div class="title-box">
+                           <img id="logoImg" src="/resources/images/kiri.jpg">
                         </div>
-                        <!-- toggle button -->
-                        <div class="col-2 d-flex align-items-center">
-                           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                              data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown"
-                              aria-expanded="false" aria-label="Toggle navigation">
-                              <span class="navbar-toggler-icon"></span>
-                           </button>
-                        </div>
-                        <!-- 메뉴 -->
-                        <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                           <ul class="navbar-nav mb-2 mb-lg-0">
-                              <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
-                              <c:if test="${empty loginSession}">
-                                 <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                                 <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
-                              </c:if>
-                              <c:if test="${not empty loginSession && loginSession.user_email eq 'admin'}">
-                                 <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                                 <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
-                                 <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                              </c:if>
-                              <c:if test="${not empty loginSession && loginSession.user_email ne 'admin'}">
-                                 <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                                 <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                              </c:if>
-                           </ul>
-                        </div>
-                     </div>
-
+                     </a>
                   </div>
-               </nav>
-               <!-- 펼쳐졌을 때 nav -->
-               <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light" aria-label="Main navigation">
-                  <div class="row w-100 align-items-center">
-                     <div class="col-5 d-flex justify-content-center">
-                        <ul class="navbar-nav mb-2 mb-lg-0">
-                           <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                                 게시판</a></li>
+                  <!-- toggle button -->
+                  <div class="col-2 d-flex align-items-center">
+                     <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                     </button>
+                  </div>
+                  <!-- 메뉴 -->
+                  <div class="collapse navbar-collapse justify-content-end"
+                     id="navbarNavDropdown">
+                     <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard" style="font-size:18px;">자유게시판</a></li>
+                           <c:if test="${empty loginSession}">
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
+                           </c:if>
+                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
+                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                     </ul>
+                  </div>
+               </div>
+
+            </div>
+         </nav>
+      <!-- 펼쳐졌을 때 nav -->
+         <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
+            aria-label="Main navigation">
+            <div class="row w-100 align-items-center">
+               <div class="col-5 d-flex justify-content-center">
+                  <ul class="navbar-nav mb-2 mb-lg-0">
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
+                  </ul>
+               </div>
+
+               <!-- logo -->
+               <div class="col-2">
+                  <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
+                     id="logoImgs" src="/resources/images/kiri.jpg">
+
+                  </a>
+               </div>
+
+               <div class="col-5">
+                  <div class="row align-items-center justify-content-center">
+                     <div class="col-auto">
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-2" style = "font-size:18px;">
+                           <c:if test="${empty loginSession}">
+                              <li class="nav-item"><a class="nav-link"
+                                 href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link"
+                                 href="/signup/toSignupAgree">회원가입</a></li>
+                           </c:if>
                         </ul>
                      </div>
-
-                     <!-- logo -->
-                     <div class="col-2">
-                        <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img id="logoImgs"
-                              src="/resources/images/kiri.jpg">
-
-                        </a>
-                     </div>
-
-                     <div class="col-5">
-                        <div class="row align-items-center justify-content-center">
-                           <div class="col-auto">
-                              <ul class="navbar-nav mb-2 mb-lg-0 me-2">
-                                 <c:if test="${empty loginSession}">
-                                    <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
-                                 </c:if>
+                     <div class="col-auto user">
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
                               </ul>
                            </div>
-                           <div class="col-auto user">
-                              <c:if test="${not empty loginSession && loginSession.user_email eq 'admin'}">
-                                 <div class="dropdown text-end">
-                                    <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle"
-                                       id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                       <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32"
-                                          class="rounded-circle">
-                                    </a>
-                                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                                       <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                                       <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                                       <li>
-                                          <hr class="dropdown-divider">
-                                       </li>
-                                       <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                                       <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                                    </ul>
-                                 </div>
-                              </c:if>
-                              <c:if test="${not empty loginSession && loginSession.user_email ne 'admin'}">
-                                 <div class="dropdown text-end">
-                                    <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle"
-                                       id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                                       <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32"
-                                          class="rounded-circle">
-                                    </a>
-                                    <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
-                                       <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                                       <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                                       <li>
-                                          <hr class="dropdown-divider">
-                                       </li>
-                                       <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                                    </ul>
-                                 </div>
-                              </c:if>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
                            </div>
-                        </div>
+                        </c:if>
                      </div>
                   </div>
-               </nav>
+               </div>
             </div>
-         </header>
+         </nav>
+      </div>
+   </header>
          <div class="container">
             <!-- 그림 -->
             <div class="topimg row">
@@ -690,34 +707,34 @@
       <!--가입 하기 버튼-->
       <div class="row mt-2">
          <div class="signUpBox col text-center">
-			<div class="btn">
-		    	<a href="/signup/toSignupAgree" style = "color:#0a58ca;"><span>가입하기</span></a>
-		    <div class="dot"></div>
-		  	</div>
+         <div class="btn">
+             <a href="/signup/toSignupAgree" style = "color:#0a58ca;"><span>가입하기</span></a>
+          <div class="dot"></div>
+           </div>
          </div>
       </div>
 
       <!-- 네모네모 -->
       <div id="bestParty" class="p-4 mt-5">
-      	<div class="bestTitle row justify-content-center">
-			<img src="/resources/images/BestBoard.png" style="width:50%">
-      	</div>
-      	<div class="row text-center mb-4">
-      		<h5 style="color:darkgreen;">끼리끼리 회원들에게 가장 많은 좋아요를 받은 게시물을 살펴보세요!</h5>
-      	</div>
+         <div class="bestTitle row justify-content-center">
+         <img src="/resources/images/BestBoard.png" style="width:50%">
+         </div>
+         <div class="row text-center mb-4">
+            <h5 style="color:darkgreen;">끼리끼리 회원들에게 가장 많은 좋아요를 받은 게시물을 살펴보세요!</h5>
+         </div>
          <div class="content-1" data-aos="fade-left" data-aos-duration="1000">
             <div class="row g-0 align-items-center">
                <div class="col-xl-6 text-end px-5">
                   <div class="text-start">
-                  	<img src="/resources/images/gold.png" style="width:80px;">
-                  	<span style="font-size:45px; font-family:'SDSamliphopangche_Outline';"> BEST LIKES </span>
+                     <img src="/resources/images/gold.png" style="width:80px;">
+                     <span style="font-size:45px; font-family:'SDSamliphopangche_Outline';"> BEST LIKES </span>
                   </div>
                   <div class="fs-4">
-               			<i class="fa-regular fa-heart" style="color:red"></i>
-               			<span class="me-3">${boardList.get(0).likehit }</span>
-               			<i class="fa-regular fa-eye" style="color:gray"></i>
-               			<span>${boardList.get(0).board_count }</span>
-               		</div>
+                        <i class="fa-regular fa-heart" style="color:red"></i>
+                        <span class="me-3">${boardList.get(0).likehit }</span>
+                        <i class="fa-regular fa-eye" style="color:gray"></i>
+                        <span>${boardList.get(0).board_count }</span>
+                     </div>
                   <div class="fs-2 mt-4">${boardList.get(0).board_title }</div>
                   <div class="my-2 fs-5">by ${boardList.get(0).user_nickname } </div>
                   <div>
@@ -725,12 +742,12 @@
                   </div>
                </div>
                <div class="mainImg col-xl-6 ms-auto d-flex align-items-center">
-               		<c:if test="${sysList.get(0) eq null }">
-               			<img src="/resources/images/찜2.jpg" class="img-fluid">
-               		</c:if>
-               		<c:if test="${sysList.get(0) ne null }">
-               			<img src="/boardFile/${sysList.get(0)}" class="img-fluid">
-               		</c:if>
+                     <c:if test="${sysList.get(0) eq null }">
+                        <img src="/resources/images/찜2.jpg" class="img-fluid">
+                     </c:if>
+                     <c:if test="${sysList.get(0) ne null }">
+                        <img src="/boardFile/${sysList.get(0)}" class="img-fluid">
+                     </c:if>
                </div>
             </div>
          </div>
@@ -740,23 +757,23 @@
             <div class="row g-0 mt-5 align-items-center">
                <div class="mainImg col-xl-6 mb-4 mb-lg-0">
                   <c:if test="${sysList.get(1) eq null }">
-               			<img src="/resources/images/찜2.jpg" class="img-fluid">
-               		</c:if>
-               		<c:if test="${sysList.get(1) ne null }">
-               			<img src="/boardFile/${sysList.get(1)}" class="img-fluid">
-               		</c:if>
+                        <img src="/resources/images/찜2.jpg" class="img-fluid">
+                     </c:if>
+                     <c:if test="${sysList.get(1) ne null }">
+                        <img src="/boardFile/${sysList.get(1)}" class="img-fluid">
+                     </c:if>
                </div>
                <div class="col-xl-6 ms-auto pe-5 px-5">
                   <div>
-                  	<img src="/resources/images/silver.png" style="width:80px;">
-                  	<span style="font-size:45px; font-family:'SDSamliphopangche_Outline';"> BEST LIKES </span>
+                     <img src="/resources/images/silver.png" style="width:80px;">
+                     <span style="font-size:45px; font-family:'SDSamliphopangche_Outline';"> BEST LIKES </span>
                   </div>
                   <div class="fs-4 mt-2 text-end">
-               			<i class="fa-regular fa-heart" style="color:red"></i>
-               			<span class="me-3">${boardList.get(1).likehit }</span>
-               			<i class="fa-regular fa-eye" style="color:gray"></i>
-               			<span>${boardList.get(1).board_count }</span>
-               		</div>
+                        <i class="fa-regular fa-heart" style="color:red"></i>
+                        <span class="me-3">${boardList.get(1).likehit }</span>
+                        <i class="fa-regular fa-eye" style="color:gray"></i>
+                        <span>${boardList.get(1).board_count }</span>
+                     </div>
                   <div class="fs-2 mt-4 ps-2 ">${boardList.get(1).board_title }</div>
                   <div class="my-2 fs-5 ps-2 ">by ${boardList.get(1).user_nickname } </div>
                   <div class="ps-2">
@@ -829,7 +846,7 @@
          <div class="col-4 d-flex justify-content-center text newGroup">NEW</div>
          <div class="col-4 d-flex justify-content-start text bestGroup">BEST</div>
       </div>
-	<!-- 모임 card 캐러셀 All -->
+   <!-- 모임 card 캐러셀 All -->
       <div class="row contentAll">
          <div class="col p-0">
             <div class="content2">
@@ -838,15 +855,15 @@
                      <c:forEach items="${selectAllList}" var="dto" begin="0" end = "5">
                         <div class="col-md-4 d-flex justify-content-center p-4">
                            <div class="card" data-aos="flip-up" data-aos-duration="1000">
-                           		<c:choose>
-									<c:when test="${dto.sys_name ne null}">
-										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
-									</c:when>
-									<c:otherwise>
-										<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
-									</c:otherwise>
-								</c:choose>
-								<span class="d-none seq_group">${dto.seq_group}</span>
+                                 <c:choose>
+                           <c:when test="${dto.sys_name ne null}">
+                              <img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+                           </c:when>
+                           <c:otherwise>
+                              <img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+                           </c:otherwise>
+                        </c:choose>
+                        <span class="d-none seq_group">${dto.seq_group}</span>
                               <div class="card-body">
                                  <div class="card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
                                     ${dto.group_category}
@@ -881,15 +898,15 @@
                      <c:forEach items="${selectNewList}" var="dto" begin="0" end = "5">
                         <div class="col-md-4 d-flex justify-content-center p-4">
                            <div class="card" data-aos="flip-up" data-aos-duration="1000">
-                           		<c:choose>
-									<c:when test="${dto.sys_name ne null}">
-										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
-									</c:when>
-									<c:otherwise>
-										<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
-									</c:otherwise>
-								</c:choose>
-								<span class="d-none  seq_group">${dto.seq_group}</span>
+                                 <c:choose>
+                           <c:when test="${dto.sys_name ne null}">
+                              <img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+                           </c:when>
+                           <c:otherwise>
+                              <img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+                           </c:otherwise>
+                        </c:choose>
+                        <span class="d-none  seq_group">${dto.seq_group}</span>
                               <div class="card-body">
                                  <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
                                     ${dto.group_category}
@@ -924,15 +941,15 @@
                      <c:forEach items="${selectBestList}" var="dto" begin="0" end = "5">
                         <div class="col-md-4 d-flex justify-content-center p-4">
                            <div class="card" data-aos="flip-up" data-aos-duration="1000">
-                           		<c:choose>
-									<c:when test="${dto.sys_name ne null}">
-										<img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
-									</c:when>
-									<c:otherwise>
-										<img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
-									</c:otherwise>
-								</c:choose>
-								<span class="d-none  seq_group">${dto.seq_group}</span>
+                                 <c:choose>
+                           <c:when test="${dto.sys_name ne null}">
+                              <img src="/group_profile/${dto.sys_name}" id="profile_image" class="card-img-top">
+                           </c:when>
+                           <c:otherwise>
+                              <img src="/resources/images/메인사진2(배경).png" id="profile_image" class="card-img-top">
+                           </c:otherwise>
+                        </c:choose>
+                        <span class="d-none  seq_group">${dto.seq_group}</span>
                               <div class="card-body">
                                  <div class="card-text card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
                                     ${dto.group_category}
@@ -957,65 +974,65 @@
             </div>
          </div>
       </div>
-		<!-- Footer-->
-		<footer class="footer mt-5">
-			<div class="row">
-				<div class="col-lg-3 footer-imgBox">
-					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-				</div>
-				<div class="col-lg-6 h-100 my-auto">
-					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
-						<li class="list-inline-item">⋅</li>
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-							</c:otherwise>
-						</c:choose>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item">
-							<c:choose>
-								<c:when test="${not empty loginSession}">
-									<a href="/group/toCreateGroup">모임 만들기</a>
-								</c:when>
-								<c:otherwise>
-									<a href="/login/toLogin">모임 만들기</a>
-								</c:otherwise>
-							</c:choose>
-						</li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="/privacy"
-							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-					</ul>
-					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-						57 이레빌딩</p>
-					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-						2022. All Rights Reserved.</p>
-				</div>
-				<div class="col-lg-3 h-100 my-auto">
-					<ul class="list-inline mb-0">
-						<li class="list-inline-item me-4"><a
-							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-						<li class="list-inline-item me-4"><a
-							href="https://twitter.com/?lang=ko"><i
-								class="bi-twitter fs-3"></i></a></li>
-						<li class="list-inline-item"><a
-							href="https://www.instagram.com/"><i
-								class="bi-instagram fs-3"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</footer>
-	</div>
+      <!-- Footer-->
+      <footer class="footer mt-5">
+         <div class="row">
+            <div class="col-lg-3 footer-imgBox">
+               <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+            </div>
+            <div class="col-lg-6 h-100 my-auto">
+               <ul class="list-inline mb-2">
+                  <li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <c:choose>
+                     <c:when test="${not empty loginSession}">
+                        <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+                     </c:when>
+                     <c:otherwise>
+                        <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+                     </c:otherwise>
+                  </c:choose>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item">
+                     <c:choose>
+                        <c:when test="${not empty loginSession}">
+                           <a href="/group/toCreateGroup">모임 만들기</a>
+                        </c:when>
+                        <c:otherwise>
+                           <a href="/login/toLogin">모임 만들기</a>
+                        </c:otherwise>
+                     </c:choose>
+                  </li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item"><a href="/privacy"
+                     style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+               </ul>
+               <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+                  개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+               <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+                  57 이레빌딩</p>
+               <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+                  2022. All Rights Reserved.</p>
+            </div>
+            <div class="col-lg-3 h-100 my-auto">
+               <ul class="list-inline mb-0">
+                  <li class="list-inline-item me-4"><a
+                     href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+                  <li class="list-inline-item me-4"><a
+                     href="https://twitter.com/?lang=ko"><i
+                        class="bi-twitter fs-3"></i></a></li>
+                  <li class="list-inline-item"><a
+                     href="https://www.instagram.com/"><i
+                        class="bi-instagram fs-3"></i></a></li>
+               </ul>
+            </div>
+         </div>
+      </footer>
+   </div>
 
 
    <script>
