@@ -238,8 +238,8 @@
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
 
@@ -264,35 +264,52 @@
                         </ul>
                      </div>
                      <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if>
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
@@ -344,7 +361,7 @@
 	                <label class="form-label fs-5">제목</label>
 	            </div>
 	            <div class="col-8">
-	                <input type="text" id="title" name="gboard_title" class="form-control" value="${modMap.boardDTO.gboard_title}">
+	                <input type="text" id="title" name="gboard_title" class="form-control" placeholder="제목을 입력하세요. (최대 18자)" value="${modMap.boardDTO.gboard_title}" maxlength="18">
 	            </div>
 	        </div>
 
@@ -369,6 +386,100 @@
          <input type="hidden" name="keyword" value="${cri.keyword}">
       </form>
 
+<<<<<<< HEAD
+			// 감지 시작
+			observer.observe(target, config);
+		});
+		
+		let newImg = new Array();
+		// summernote 이미지 업로드 function
+		function uploadSummernoteImageFile(file, editor){
+			data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				data : data
+				, type : "POST"
+				, enctype: "multipart/form-data"
+				, url : "/Gboard/summernoteImg"
+				, contentType : false
+				, processData : false
+				, success : function(data){
+					$(editor).summernote("editor.insertImage", data.url);
+					newImg.push(data.url.replace("/groupBoardFile/", ""));
+				}, error : function(e){
+					console.log(e);
+				}
+			});
+		}
+		
+		// 작성 완료 버튼
+		$("#submitBtn").on("click", function(){
+			if($("#title").val() === ""){
+				Swal.fire({
+					icon: 'warning'
+					, title: '웁쓰...'
+					, text: '게시글 제목이 없어요. 제목을 작성해 주세요!'
+				})
+				$("#title").focus();
+				return;
+			}
+			if($("#summernote").summernote("isEmpty")){
+				Swal.fire({
+					icon: 'warning'
+					, title: '웁쓰...'
+					, text: '게시글에 내용이 없어요. 내용을 작성해 보세요!'
+				})
+				return;
+			}
+			if($(".selectBox").val() === "default"){
+				Swal.fire({
+					icon: 'warning'
+					, title: '웁쓰...'
+					, text: '게시글 분류를 선택하셔야 합니다!'
+				})
+				return;
+			}
+			
+			/* let content = $("#summernote").summernote("code");
+			let regImg = /(<img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>)/g;
+			let src;
+			while(regImg.test(content)){
+				src = RegExp.$2.replace("/groupBoardFile/", "");
+				newImg.push(src);
+			}
+			console.log(newImg);
+			console.log(newImg.length); */
+			
+			if(newImg.length !== 0){
+				for(let i = 0; i < newImg.length; i++){
+					let inputImg = $("<input>").attr({
+						"type" : "hidden"
+						, "class" : "imgs"
+						, "name" : "imgs[]"
+						, "value" : newImg[i]
+					});
+					$("#modifyForm").append(inputImg);
+				};
+			}
+			
+			Swal.fire({
+				icon: 'success'
+				, title: '게시글 수정 완료!'
+				, showConfirmButton: true
+			}).then((result) =>{
+				if(result.isConfirmed){
+					$("#modifyForm").submit();
+				}
+			});
+		});
+		
+		// 취소 버튼
+		$("#cancelBtn").on("click", function(){
+			location.href = "/Gboard/toDetailView?seq_group_board="+${modMap.boardDTO.seq_group_board};
+		})
+		
+	</script>
+=======
    </div>
 
    <!-- Footer-->
@@ -603,5 +714,6 @@
       })
 
    </script>
+>>>>>>> ec0ec86f032a705f3539907ef116ad52c22ca67f
 </body>
 </html>
