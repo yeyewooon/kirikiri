@@ -70,8 +70,8 @@
  	<!-- 게시물 list 잘라서 가져오기 -->
 	<select id="selectBoard" parameterType="map" resultType="com.kiri.dto.BoardDTO">
 		select *
-            from (select board.*, row_number() over(order by board_date desc) as num from board where board_category not like '%공지%')
-            where num between #{start} and #{end}
+			from (select board.*, row_number() over(order by board_date desc) as num from board)
+			where num between #{start} and #{end}
  	</select>
 
 	<!-- 내가 쓴 일반게시판 글 갯수 가져오기 -->
@@ -84,52 +84,30 @@
 		select count(*) from group_board
 	</select>
 
-	<!-- ajax 일반 조회 -->
+	<!-- 일반 조회 -->
  	<select id="selectAllBoard" resultType="com.kiri.dto.BoardDTO">
-		select * from board where board_category not like '%공지%' order by board_date desc
- 	</select>
- 	
- 	<!-- ajax 일반 게시글의 공지 조회 -->
-	<select id="selectNoticeBoardList" resultType="com.kiri.dto.BoardDTO">
-		select * from board where board_category like '%공지%' order by board_date desc
+		select * from board order by board_date desc
  	</select>
 
 	<!-- ajax 모임 게시글 -->
 	<select id="selectAllGroupBoard" resultType="com.kiri.dto.Group_BoardDTO">
 		select * from group_board order by written_date desc
- 	</select> 	
+ 	</select>
 
  	<!-- 검색으로 일반게시판 글 정보 가져오기 -->
 	<select id="generalSearchList" parameterType="map" resultType="com.kiri.dto.BoardDTO">
 		<if test="category == 'board_all'">
-			select * from board where board_category not like '%공지%' and
+			select * from board where
 					(board_title like '%' || #{keyword} ||'%' or
-					board_category like '%' || #{keyword} ||'%')
+					board_content like '%' || #{keyword} ||'%')
 		</if>
 		<if test="category == 'board_title'">
-			select * from board where board_category not like '%공지%' and
+			select * from board where
 					board_title like '%' || #{keyword} ||'%'
 		</if>
-		<if test="category == 'board_category'">
-			select * from board where board_category not like '%공지%' and
-					board_category like '%' || #{keyword} ||'%'
-		</if>
-	</select>
-	
-	<!-- 검색으로 일반게시판 공지 글 정보 가져오기 -->
-	<select id="noticeSearchList" parameterType="map" resultType="com.kiri.dto.BoardDTO">
-		<if test="category == 'board_all'">
-			select * from board where board_category like '%공지%' and
-					(board_title like '%' || #{keyword} ||'%' or
-					board_category like '%' || #{keyword} ||'%')
-		</if>
-		<if test="category == 'board_title'">
-			select * from board where board_category like '%공지%' and
-					board_title like '%' || #{keyword} ||'%'
-		</if>
-		<if test="category == 'board_category'">
-			select * from board where board_category like '%공지%' and
-					board_category like '%' || #{keyword} ||'%'
+		<if test="category == 'board_content'">
+			select * from board where
+					board_content like '%' || #{keyword} ||'%'
 		</if>
 	</select>
 
@@ -138,16 +116,16 @@
 
 		<if test="category == 'board_all'">
 			select * from group_board where
-					(gboard_title like '%' || #{keyword} ||'%' or
-					gboard_category like '%' || #{keyword} ||'%')
+					(title like '%' || #{keyword} ||'%' or
+					content like '%' || #{keyword} ||'%')
 		</if>
-		<if test="category == 'gboard_title'">
+		<if test="category == 'title'">
 			select * from group_board where
-					gboard_title like '%' || #{keyword} ||'%'
+					title like '%' || #{keyword} ||'%'
 		</if>
-		<if test="category == 'gboard_category'">
+		<if test="category == 'content'">
 			select * from group_board where
-					gboard_category like '%' || #{keyword} ||'%'
+					content like '%' || #{keyword} ||'%'
 		</if>
 	</select>
 
@@ -180,28 +158,28 @@
  	</select>
 
  	<!-- 멤버 수 -->
- 	<select id="cntGroupMember" resultType="int">
- 		select sum(count(*)) cntMem from group_member group by seq_group
- 	</select>
+ 	<select id="cntMember" resultType="int">
+       select sum(count(*)) cntMem from member group by user_email
+    </select>
 
 	<!-- 모임 수 -->
 	<select id="cntGroupCnt" resultType="int">
-		select sum(count(*)) cntGroup from tbl_group group by seq_group
+		select nvl(sum(count(*)),0) cntGroup from tbl_group group by seq_group
 	</select>
 
 	<!-- 게시글 수(자유게시판) -->
-	<!-- <select id="cntBoard" resultType="int">
-		select sum(count(*)) cntBoard from board group by seq_board
-	</select> -->
+	<select id="cntBoard" resultType="int">
+		select nvl(sum(count(*)),0) cntBoard from board group by seq_board
+	</select> 
 
 	<!-- 게시글 수(모임게시판) -->
-	<!-- <select id="cntGroupBoard" resultType="int">
-		select sum(count(*)) cntGroupBoard from group_board group by seq_group_board
-	</select> -->
+	<select id="cntGroupBoard" resultType="int">
+		select nvl(sum(count(*)),0) cntGroupBoard from group_board group by seq_group_board
+	</select>
 
 	<!-- 일정수 -->
 	<select id="cntGroupCal" resultType="int">
-		select sum(count(*)) cntCal from group_calendar group by seq_group
+		select nvl(sum(count(*)),0) cntCal from group_calendar group by seq_group
 	</select>
 
 	<!-- 선호 지역수 -->

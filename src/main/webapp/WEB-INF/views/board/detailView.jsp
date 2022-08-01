@@ -472,32 +472,11 @@
 						                	</div>
 					                	</c:if>
 			                        </div>
-			
 			                        <div class="row">
-			                            <div class="col-12">
-			                                <textarea class="form-control comment" style="resize: none; background-color: transparent;" readonly>${comment.comment_content}</textarea>
-			                            </div>
-			                            <c:if test="${loginSession.user_email eq 'admin'}">
-			                           		<div class="col-3 defaultComment">
-						                		<button type="button" class="del-commentBtn btn btn-danger" value="${comment.seq_comment}">삭제</button>
-						                	</div>
-			                            	<div class="col-3 afterComment d-none">
-						                		<button type="button" class="btn btn-secondary mod-cancelBtn me-2">취소</button>
-						                		<button type="button" class="btn btn-primary mod-completeBtn" value="${comment.seq_comment}">완료</button>
-						                	</div>
-			                            </c:if>
-			                            <!-- 댓글 수정/삭제 버튼 -->
-					                	<c:if test="${comment.user_email eq loginSession.user_email && loginSession.user_email ne 'admin'}">
-						                	<div class="col-3 defaultComment">
-						                		<button type="button" class="mod-commentBtn btn btn-warning me-2" value="${comment.seq_comment}">수정</button>
-						                		<button type="button" class="del-commentBtn btn btn-danger" value="${comment.seq_comment}">삭제</button>
-						                	</div>
-						                	<div class="col-3 afterComment d-none">
-						                		<button type="button" class="btn btn-secondary mod-cancelBtn me-2">취소</button>
-						                		<button type="button" class="btn btn-primary mod-completeBtn" value="${comment.seq_comment}">완료</button>
-						                	</div>
-					                	</c:if>
-			                        </div>
+										<div class="col-12">
+											<textarea class="form-control comment" style="resize: none; background-color: transparent;" readonly>${comment.comment_content}</textarea>
+										</div>
+									</div>
 			                    </div>
 			                </div>
 			                

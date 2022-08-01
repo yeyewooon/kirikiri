@@ -714,7 +714,7 @@
          </div>
       </div>
 
-      <!-- 네모네모 -->
+<!-- 네모네모 -->
       <div id="bestParty" class="p-4 mt-5">
          <div class="bestTitle row justify-content-center">
             <img src="/resources/images/BestBoard.png" style="width: 50%">

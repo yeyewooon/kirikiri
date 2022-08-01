@@ -1157,14 +1157,13 @@ footer.footer {
                    }else if(activeText == "일정") {
                       location.href = "/cal/toGroupCalendar?seq_group="+seq_group;
                    }else if(activeText == "채팅") {
-                	   var popupX = (document.body.offsetWidth / 2) - (200 / 2);
-                		// 만들 팝업창 좌우 크기의 1/2 만큼 보정값으로 빼주었음
-
-                		var popupY= (window.screen.height / 2) - (300 / 2);
-                		// 만들 팝업창 상하 크기의 1/2 만큼 보정값으로 빼주었음
-                	   window.open("/group/toChat?seq_group="+seq_group, "PopupWin", "width=500,height=600,left='+ popupX + ', top='+ popupY");
+                	   let url="/group/toChat?seq_group="+seq_group;
+                	   let name = "PopupWin";
+                	   let option = "width=600,height=600,left=600, top=200";
+                	   window.open(url, name, option);
                    }
                    return;
+                   
                 }
             }
              Swal.fire('모임 회원만 가능합니다');

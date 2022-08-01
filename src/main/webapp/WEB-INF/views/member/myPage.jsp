@@ -1105,7 +1105,7 @@ footer.footer {
 										<div class="col-3 d-flex justify-content-end">
 											<i class="fa-solid fa-people-group"></i>
 										</div>
-										<div class="col-7 d-flex justify-content-start">
+										<div class="col-7 d-flex justify-content-start text-start">
 											<span><a
 												href="/group/toGroupDetail?seq_group=${Groupdto.SEQ_GROUP}" style="padding:0px;">${Groupdto.TITLE}</a></span>
 										</div>
