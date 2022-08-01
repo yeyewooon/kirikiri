@@ -386,6 +386,22 @@ footer.footer {
 .msgModal-footer {
 	border-top: 0px;
 }
+
+
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:visited {
+    background-color: #a4a4a4 !important;
+    color:#fff;
+    border-color: #a4a4a4;
+}
+
+.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    background-color: #435770 !important;
+    color:#fff;
+    border-color: #435770;
+}
+
+
+
 </style>
 
 <body>
@@ -594,7 +610,7 @@ footer.footer {
 			<div class="row">
 				<div class="col-md-1"></div>
 				<div class="col-md-5 modifyPro text-center" style="display: none;">
-					<i class="fa-solid fa-folder-plus me-3"></i> 
+					<i class="fa-solid fa-folder-plus me-3"></i>
 					<span id="modifyProfilePic" style="cursor: pointer; user-select: none">프로필 사진 변경</span>
 				</div>
 				<div class="col-md-6"></div>
@@ -626,14 +642,14 @@ footer.footer {
 			</div>
 		</form>
 	</div>
-	
+
 	<script>
     	//버튼 나오게하기
     	$(".topBtn").on("click",function(){
          $(".profileBtns").toggle();
          $(".modifyPro").toggle();
         })
-        
+
         // 사용자가 새로운 프로필을 선택했을때 이미지 띄워주기
         document.getElementById("file").onchange = function () {
             let reader = new FileReader();
