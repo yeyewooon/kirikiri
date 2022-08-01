@@ -18,6 +18,11 @@ public class Board_CommentDAO {
 		return session.selectList("commentMapper.selectAll", seq_board);
 	}
 	
+	// 댓글 프로필
+	public String getProfileImg(String user_email) throws Exception{
+		return session.selectOne("commentMapper.getProfileImg", user_email);
+	}
+	
 	// 댓글 등록
 	public int write(Board_CommentDTO dto) throws Exception{
 		return session.insert("commentMapper.write", dto);

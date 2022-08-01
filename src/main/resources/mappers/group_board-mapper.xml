@@ -30,12 +30,12 @@
 	<select id="getListPaging" parameterType="com.kiri.utills.Criteria" resultType="com.kiri.dto.Group_BoardDTO">
 			select * from
 				(select /*+ index_desc(group_board gboard_index) */ rownum as rn, group_board.*
-					from group_board where
+					from group_board where seq_group = #{seq_group}
 						<if test="category != '공지'">
-							gboard_category not like '%'|| '공지' ||'%' and
+							and gboard_category not like '%'|| '공지' ||'%'
 						</if>
 			<![CDATA[
-						rownum <= #{pageNum} * #{amount}
+						and rownum <= #{pageNum} * #{amount}
 			]]>
 			<if test="keyword != null">
 				<include refid="criteria"></include>
@@ -49,11 +49,17 @@
 		]]>
 	</select>
 	
+	<!-- 모임장인지? -->
+	<select id="getAccess" parameterType="int" resultType="String">
+		select user_email from group_member where seq_group = #{seq_group} and "access" like  '%'|| '주최자' ||'%'
+	</select>
+	
 	<!-- 공지사항 상단 3개 정렬 -->
-	<select id="getNotice" resultType="com.kiri.dto.Group_BoardDTO">
+	<select id="getNotice" parameterType="int" resultType="com.kiri.dto.Group_BoardDTO">
 		select * from
 			(select * from group_board
-				where gboard_category='공지'
+				where seq_group = #{seq_group}
+				and gboard_category='공지'
 				order by seq_group_board desc)
 			<![CDATA[
 			where ROWNUM <=3 order by seq_group_board desc

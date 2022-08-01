@@ -114,12 +114,15 @@ public class BoardController {
 		// 게시글 정보 얻기
 		Map<String, Object> map = service.getDetail(seq_board);
 		model.addAttribute("detail", map);
-		// 좋아요 여부, 개수
+		
 		String user_email = null;
 		if(session.getAttribute("loginSession") != null) {
 			user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();	
 		}
+		// 좋아요 여부, 개수
 		model.addAttribute("like", service.like(seq_board, user_email));
+		// 댓글 프로필
+		model.addAttribute("profile", service.getProfileImg(user_email));
 		
 		// criteria 인스턴스 전달
 		model.addAttribute("cri", cri);

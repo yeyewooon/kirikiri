@@ -43,6 +43,16 @@ public class Group_BoardService {
 		map.put("commentCnt", commentDAO.commentCnt(seq_group_board)); // 댓글 개수
 		return map;
 	}
+	
+	// 모임장 아이디 얻어오기
+	public String getAccess(int seq_group) throws Exception{
+		return boardDAO.getAccess(seq_group);
+	}
+	
+	// 댓글 프로필 조회
+	public String getProfileImg(String user_email) throws Exception{
+		return commentDAO.getProfileImgG(user_email);
+	}
 
 	// 조회수 + 1
 	public void viewCntUp(int seq_group_board) throws Exception {
@@ -146,7 +156,7 @@ public class Group_BoardService {
 	}
 	
 	// 공지 3개 얻어오기
-	public List<Group_BoardDTO> getNotice() throws Exception{
-		return boardDAO.getNotice();
+	public List<Group_BoardDTO> getNotice(int seq_group) throws Exception{
+		return boardDAO.getNotice(seq_group);
 	}
 }
