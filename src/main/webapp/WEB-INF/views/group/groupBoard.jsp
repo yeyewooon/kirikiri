@@ -30,34 +30,34 @@
 		      display: none;
 		   }
 		}
-		
+
 		/* header */
 		#navLogo {
 		   width: 150px;
 		   height: 100px;
 		}
-		
+
 		#logoImgs {
 		   width: 100%;
 		   height: 100%;
 		}
-		
+
 		@media ( min-width : 768px) {
 		   #navibar {
 		      display: none;
 		   }
 		}
-		
+
 		#logoImg {
 		   width: 50%;
 		}
 		/* header 반응형 끝 */
-	
+
 		/* 게시글 영역 */
 		.contentWrapper{
 			font-family: 'InfinitySans-RegularA1';
 		}
-		
+
 		/* 코끼리 머리*/
 		#headWrapper{
 			position: relative;
@@ -95,7 +95,7 @@
             border-bottom-left-radius: 80px;
             border-bottom-right-radius: 80px;
         }
-        
+
         .form-control{
             display: inline-block;
 
@@ -104,17 +104,17 @@
         	width: 23px;
         	height: 24px;
         } */
-        
+
         #boardList a{
-        	text-decoration: none;
-        	color: black;
+           text-decoration: none;
+           color: black;
         }
         /* 컨텐츠 container */
 		#contentRow{
 			border-left: 5px solid black;
 			border-right: 5px solid black;
 		}
-		
+
 		/* 사이드바 */
         #aside{
         	margin-top: 150px;
@@ -135,27 +135,27 @@
         	text-align: center;
         }
         .sortBox li:hover{
-        	background-color: #d2e3ec9e;
+           background-color: #d2e3ec9e;
         }
         .sortBox a{
-        	color: black;
-        	text-decoration: none;
+           color: black;
+           text-decoration: none;
         }
-        
+
         /* 컨텐츠 속 */
         #content-body{
         	padding: 30px;
         }
-        
+
         /* breadcrumb */
         .breadcrumb a{
-        	text-decoration: none;
-        	color: #a6a6a6;
+           text-decoration: none;
+           color: #a6a6a6;
         }
         .breadcrumb a:hover{
-        	text-decoration: underline;
+           text-decoration: underline;
         }
-        
+
         /* 페이징 */
 		.page-item.active .page-link{
 			background-color: #EEEEEE;
@@ -166,30 +166,30 @@
 			color: black;
 			border: 0px;
 		}
-		
+
 		/*풋터 영역*/
 		.footerBox {
 		   height: 0px;
 		}
-		
+
 		footer.footer {
 		   padding-top: 2rem;
 		   padding-bottom: 2rem;
 		   background-color: #ffffff;
 		}
-		
+
 		.footer a {
 		   text-decoration: none;
 		   color: black;
 		   font-weight: 40px;
 		   font-weight: bold;
 		}
-		
+
 		.footer-imgBox>img {
 		   width: 100%;
 		   height: 100%;
 		}
-		
+
 		/* 폰트 */
 		@font-face {
             font-family: 'MICEGothic Bold';
@@ -206,7 +206,7 @@
 	</style>
 </head>
 <body>
-	<header class="border-bottom">
+   <header class="border-bottom">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -346,7 +346,7 @@
 	            <h1>모임 게시판</h1>
 	        </div>
     	</div>
-        
+
 		<div class="container contentWrapper" style="background-color: white;">
 			<!-- 컨텐츠 영역 -->
 			<div class="row" id="contentRow">
@@ -363,9 +363,9 @@
 						</ul>
 					</div>
 				</aside>
-			
+
 				<div id="content-body" class="col-10">
-				
+
 					<div class="row mt-4 justify-content-end">
 						<div class="col-auto">
 				            <c:choose>
@@ -378,7 +378,7 @@
 				            </c:choose>
 						</div>
 					</div>
-			
+
 					<!-- breadcrumb -->
 					<div class="row">
 						<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
@@ -389,7 +389,7 @@
 							</ol>
 						</nav>
 					</div>
-			
+
 					<!-- 게시글 -->
 			        <div class="row mt-3" id="boardList">
 			            <div class="col">
@@ -445,7 +445,7 @@
 							</table>
 			            </div>
 			        </div>
-	        
+
 			        <!-- 페이징 -->
 			        <div class="row mt-4 pageInfo_wrap">
 			        	<div class="pageInfo_area">
@@ -458,14 +458,14 @@
 										</a>
 									</li>
 								</c:if>
-								
+
 								<!-- 각 번호 페이지 버튼 -->
 								<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
 									<li class="pageInfo_btn page-item ${pageMaker.cri.pageNum == num ? 'active':''}">
 										<a class="page-link" href="${num}">${num}</a>
 									</li>
 								</c:forEach>
-								
+
 								<!-- 다음 페이지 버튼 -->
 								<c:if test="${pageMaker.next}">
 				                    <li class="pageInfo_btn next page-item">
@@ -473,7 +473,7 @@
 				                    		<i class="fa-solid fa-angle-right"></i>
 				                    	</a>
 				                    </li>
-				                </c:if> 
+				                </c:if>
 							</ul>
 			        	</div>
 			        </div>
@@ -485,7 +485,7 @@
 						<input type="hidden" name="type" value="${pageMaker.cri.type}">
 						<input type="hidden" name="category" value="${pageMaker.cri.category}">
 			        </form>
-	        
+
 			        <!-- 검색 -->
 					<div class="search_wrap">
 						<div class="search_area row mt-4 justify-content-center">
@@ -517,168 +517,168 @@
 			<div id="foot" class="row">
 			</div>
 		</div>
-    	
+
     </div>
-    
+
     <!-- Footer-->
     <div class="container">
-		<footer class="footer mt-5">
-			<div class="row">
-				<div class="col-lg-3 footer-imgBox">
-					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-				</div>
-				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="#!">공지사항</a></li>
-						<li class="list-inline-item">⋅</li>
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-							</c:otherwise>
-						</c:choose>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item">
-							<c:choose>
-								<c:when test="${not empty loginSession}">
-									<a href="/group/toCreateGroup">모임 만들기</a>
-								</c:when>
-								<c:otherwise>
-									<a href="/login/toLogin">모임 만들기</a>
-								</c:otherwise>
-							</c:choose>
-						</li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item">
-							<a href="privacy" style="color: red; font-weight: bold;">개인정보처리방침</a>
-						</li>
-					</ul>
-					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-						57 이레빌딩</p>
-					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-						2022. All Rights Reserved.</p>
-				</div>
-				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-					<ul class="list-inline mb-0">
-						<li class="list-inline-item me-4"><a
-							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-						<li class="list-inline-item me-4"><a
-							href="https://twitter.com/?lang=ko"><i
-								class="bi-twitter fs-3"></i></a></li>
-						<li class="list-inline-item"><a
-							href="https://www.instagram.com/"><i
-								class="bi-instagram fs-3"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</footer>
-	</div>
-    
+      <footer class="footer mt-5">
+         <div class="row">
+            <div class="col-lg-3 footer-imgBox">
+               <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+            </div>
+            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+               <ul class="list-inline mb-2">
+                  <li class="list-inline-item"><a href="#!">공지사항</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <c:choose>
+                     <c:when test="${not empty loginSession}">
+                        <li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+                     </c:when>
+                     <c:otherwise>
+                        <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+                        <li class="list-inline-item">⋅</li>
+                        <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+                     </c:otherwise>
+                  </c:choose>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item">
+                     <c:choose>
+                        <c:when test="${not empty loginSession}">
+                           <a href="/group/toCreateGroup">모임 만들기</a>
+                        </c:when>
+                        <c:otherwise>
+                           <a href="/login/toLogin">모임 만들기</a>
+                        </c:otherwise>
+                     </c:choose>
+                  </li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item">
+                     <a href="privacy" style="color: red; font-weight: bold;">개인정보처리방침</a>
+                  </li>
+               </ul>
+               <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+                  개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+               <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+                  57 이레빌딩</p>
+               <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+                  2022. All Rights Reserved.</p>
+            </div>
+            <div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+               <ul class="list-inline mb-0">
+                  <li class="list-inline-item me-4"><a
+                     href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+                  <li class="list-inline-item me-4"><a
+                     href="https://twitter.com/?lang=ko"><i
+                        class="bi-twitter fs-3"></i></a></li>
+                  <li class="list-inline-item"><a
+                     href="https://www.instagram.com/"><i
+                        class="bi-instagram fs-3"></i></a></li>
+               </ul>
+            </div>
+         </div>
+      </footer>
+   </div>
+
     <script>
-    	// 공지사항 배경
-    	$(document).ready(function(){
-    		$(".fa-bullhorn").parents("tr").css("background-color", "#e9f2f7");
-    	});
-    	
-    	// 페이징
-    	$(".move").on("click", function(e){
-    		e.preventDefault();
-    		
-    		$("#moveForm").append("<input type='hidden' name='seq_group_board' value='" + $(this).attr("href")+"'>");
-    		$("#moveForm").attr("action", "/Gboard/toDetailView");
-    		$("#moveForm").submit();
-    	});
-    	
-    	// 페이지 이동 번호
-    	$(".pageInfo a").on("click", function(e){
-    		e.preventDefault();
-    		$("#moveForm").find("input[name='pageNum']").val($(this).attr("href"));
-    		$("#moveForm").attr("action", "/Gboard/toBoard");
-    		$("#moveForm").submit();
-    	});
-    	
- 		// 글쓰기 요청
-	    $("#writeBtn").on("click", function(){ 
-	    	let seq_group = $(this).val();
-			location.href = "/Gboard/toWrite?seq_group=" + seq_group;
-		})
-		
-		// 정렬
-		//let category;
-		$(".sortBox a").on("click", function(e){
-			let category = $(this).text();
-			if(category != '전체'){
-				e.preventDefault();
-				
-				$("#moveForm").find("input[name='category']").val(category);
-				$("#moveForm").find("input[name='pageNum']").val(1);
-				$("#moveForm").submit();
-			}
-		});
-		
-		// 검색
-		$("#searchBtn").on("click", function(e){
-			e.preventDefault();
-			
-			let type = $(".search_area select").val();
-			let keyword = $(".search_area input[name='keyword']").val();
-			
-			/* if(!type){
-				alert("검색 종류를 선택하세요.");
-				return false;
-			} */
-			
-			if(!keyword){
-				alert("검색어를 입력하세요.");
-				return false;
-			}
-			
-			$("#moveForm").find("input[name='type']").val(type);
-			$("#moveForm").find("input[name='keyword']").val(keyword);
-			$("#moveForm").find("input[name='pageNum']").val(1);
-			$("#moveForm").submit();
-		})
-		
-		// 게시글 목록 ajax
-		/* function makeDynamicEl(data){
-			$("tbody").empty();
-			if(data.length == 0){ // 검색 결과 없음
-				let tr = $("<tr>");
-				let td = $("<td colspan=5>").append("검색 결과가 없습니다.");
-				tr.append(td);
-				tr.appendTo("tbody");
-			}else{ // 검색 결과 있음
-				for(let dto of data){
-					let tr = $("<tr>");
-					let td1 = $("<td>").addClass("col-2");
-					if(dto.board_category == '공지'){
-						td1.append('<i class="fa-solid fa-bullhorn"></i>');
-					}else{
-						td1.append(dto.board_category);
-					}
-					let td2 = $("<td>").addClass("col-5 text-start");
-					let a = $("<a>").attr("href", "/board/toDetailView?seq_board="+dto.seq_board).append(dto.board_title);
-					td2.append(a);
-					let td3 = $("<td>").addClass("col-2").append(dto.user_nickname);
-					let td4 = $("<td>").addClass("col-2").append(dto.board_date);
-					let td5 = $("<td>").addClass("col-1").append(dto.board_count);
-					
-					tr.append(td1, td2, td3, td4, td5);
-					tr.appendTo("tbody");
-					
-					$(".fa-bullhorn").parents("tr").css("backgroundColor", "pink");
-				}	
-			}
-		} */
- 		
+       // 공지사항 배경
+       $(document).ready(function(){
+          $(".fa-bullhorn").parents("tr").css("background-color", "#e9f2f7");
+       });
+
+       // 페이징
+       $(".move").on("click", function(e){
+          e.preventDefault();
+
+          $("#moveForm").append("<input type='hidden' name='seq_group_board' value='" + $(this).attr("href")+"'>");
+          $("#moveForm").attr("action", "/Gboard/toDetailView");
+          $("#moveForm").submit();
+       });
+
+       // 페이지 이동 번호
+       $(".pageInfo a").on("click", function(e){
+          e.preventDefault();
+          $("#moveForm").find("input[name='pageNum']").val($(this).attr("href"));
+          $("#moveForm").attr("action", "/Gboard/toBoard");
+          $("#moveForm").submit();
+       });
+
+       // 글쓰기 요청
+       $("#writeBtn").on("click", function(){
+          let seq_group = $(this).val();
+         location.href = "/Gboard/toWrite?seq_group=" + seq_group;
+      })
+
+      // 정렬
+      //let category;
+      $(".sortBox a").on("click", function(e){
+         let category = $(this).text();
+         if(category != '전체'){
+            e.preventDefault();
+
+            $("#moveForm").find("input[name='category']").val(category);
+            $("#moveForm").find("input[name='pageNum']").val(1);
+            $("#moveForm").submit();
+         }
+      });
+
+      // 검색
+      $("#searchBtn").on("click", function(e){
+         e.preventDefault();
+
+         let type = $(".search_area select").val();
+         let keyword = $(".search_area input[name='keyword']").val();
+
+         /* if(!type){
+            alert("검색 종류를 선택하세요.");
+            return false;
+         } */
+
+         if(!keyword){
+            alert("검색어를 입력하세요.");
+            return false;
+         }
+
+         $("#moveForm").find("input[name='type']").val(type);
+         $("#moveForm").find("input[name='keyword']").val(keyword);
+         $("#moveForm").find("input[name='pageNum']").val(1);
+         $("#moveForm").submit();
+      })
+
+      // 게시글 목록 ajax
+      /* function makeDynamicEl(data){
+         $("tbody").empty();
+         if(data.length == 0){ // 검색 결과 없음
+            let tr = $("<tr>");
+            let td = $("<td colspan=5>").append("검색 결과가 없습니다.");
+            tr.append(td);
+            tr.appendTo("tbody");
+         }else{ // 검색 결과 있음
+            for(let dto of data){
+               let tr = $("<tr>");
+               let td1 = $("<td>").addClass("col-2");
+               if(dto.board_category == '공지'){
+                  td1.append('<i class="fa-solid fa-bullhorn"></i>');
+               }else{
+                  td1.append(dto.board_category);
+               }
+               let td2 = $("<td>").addClass("col-5 text-start");
+               let a = $("<a>").attr("href", "/board/toDetailView?seq_board="+dto.seq_board).append(dto.board_title);
+               td2.append(a);
+               let td3 = $("<td>").addClass("col-2").append(dto.user_nickname);
+               let td4 = $("<td>").addClass("col-2").append(dto.board_date);
+               let td5 = $("<td>").addClass("col-1").append(dto.board_count);
+
+               tr.append(td1, td2, td3, td4, td5);
+               tr.appendTo("tbody");
+
+               $(".fa-bullhorn").parents("tr").css("backgroundColor", "pink");
+            }
+         }
+      } */
+
     </script>
 </body>
 </html>

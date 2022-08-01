@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kiri.dto.Login_TypeDTO;
 import com.kiri.dto.MemberDTO;
 
 @Repository
@@ -19,6 +20,11 @@ public class MemberDAO {
 	// member select
 	public MemberDTO selectMember(String user_email) throws Exception{ 
 		return session.selectOne("myPageMapper.selectMember",user_email);
+	}
+	
+	// LoginType 가져오기
+	public Login_TypeDTO selectLoginType(String user_email) {
+		return  session.selectOne("myPageMapper.selectLoginType",user_email);
 	}
 	
 	// 사진 수정
@@ -42,12 +48,12 @@ public class MemberDAO {
 	}
 	
 	// pw 중복확인
-   public int pwCheck(String user_pw, String user_email)throws Exception{
-      Map<String, String> map = new HashMap<String, String>();
-      map.put("user_pw",user_pw);
-      map.put("user_email", user_email);
-      return session.selectOne("myPageMapper.pwCheck",map);
-   }
+	public int pwCheck(String user_pw, String user_email)throws Exception{
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("user_pw",user_pw);
+		map.put("user_email", user_email);
+		return session.selectOne("myPageMapper.pwCheck",map);
+	}
 	
 	// 회원탈퇴
 	public void profileDelete(Map<String,String> memberdto) throws Exception{

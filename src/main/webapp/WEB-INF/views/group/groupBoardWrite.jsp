@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- summernote -->
+   <!-- summernote -->
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -14,53 +14,53 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <!-- swal -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="sweetalert2.min.js"></script>
+   <script src="sweetalert2.min.js"></script>
 <meta charset="UTF-8">
 <title>그룹 글 작성</title>
     <style>
-    	/* header 반응형 */
-		@media ( max-width : 768px) {
-		   #navLogo {
-		      display: none;
-		   }
-		   #myPageIcon {
-		      display: none;
-		   }
-		   #cartIcon {
-		      display: none;
-		   }
-		   #menu {
-		      display: none;
-		   }
-		}
-		
-		/* header */
-		#navLogo {
-		   width: 150px;
-		   height: 100px;
-		}
-		
-		#logoImgs {
-		   width: 100%;
-		   height: 100%;
-		}
-		
-		@media ( min-width : 768px) {
-		   #navibar {
-		      display: none;
-		   }
-		}
-		
-		#logoImg {
-		   width: 50%;
-		}
-		/* header 반응형 끝 */
-		
-    	* {
+       /* header 반응형 */
+      @media ( max-width : 768px) {
+         #navLogo {
+            display: none;
+         }
+         #myPageIcon {
+            display: none;
+         }
+         #cartIcon {
+            display: none;
+         }
+         #menu {
+            display: none;
+         }
+      }
+
+      /* header */
+      #navLogo {
+         width: 150px;
+         height: 100px;
+      }
+
+      #logoImgs {
+         width: 100%;
+         height: 100%;
+      }
+
+      @media ( min-width : 768px) {
+         #navibar {
+            display: none;
+         }
+      }
+
+      #logoImg {
+         width: 50%;
+      }
+      /* header 반응형 끝 */
+
+       * {
             box-sizing: border-box;
             /*font-family: 'OTWelcomeRA';*/
         }
-        
+
         /* header 반응형 */
         @media (max-width : 768px) {
             #navLogo {
@@ -100,14 +100,14 @@
         #logoImg {
             width: 50%;
         }
-        
+
         /* header 반응형 끝 */
-        
+
     	/* contents 영역 */
     	#writeWrapper:not(textarea){
     		font-family: 'InfinitySans-RegularA1';
     	}
-    	
+
         #head{
             background-color: #EEEEEE;
             height: 100px;
@@ -118,7 +118,7 @@
         label {
             margin-top: 5px;
         }
-        
+
         #bottom{
         	background-color: #EEEEEE;
             height: 100px;
@@ -126,31 +126,31 @@
             border-bottom-right-radius: 80px;
             border: 3px solid black;
         }
-        
+
         /*풋터 영역*/
-		.footerBox {
-		   height: 0px;
-		}
-		
-		footer.footer {
-		   padding-top: 2rem;
-		   padding-bottom: 2rem;
-		   background-color: #ffffff;
-		}
-		
-		.footer a {
-		   text-decoration: none;
-		   color: black;
-		   font-weight: 40px;
-		   font-weight: bold;
-		}
-		
-		.footer-imgBox>img {
-		   width: 100%;
-		   height: 100%;
-		}
-		
-		
+      .footerBox {
+         height: 0px;
+      }
+
+      footer.footer {
+         padding-top: 2rem;
+         padding-bottom: 2rem;
+         background-color: #ffffff;
+      }
+
+      .footer a {
+         text-decoration: none;
+         color: black;
+         font-weight: 40px;
+         font-weight: bold;
+      }
+
+      .footer-imgBox>img {
+         width: 100%;
+         height: 100%;
+      }
+
+
         /* 눈누 폰트 */
 		@font-face {
             font-family: 'MICEGothic Bold';
@@ -164,7 +164,7 @@
 		    font-weight: normal;
 		    font-style: normal;
 		}
-		
+
 		@font-face {
 			font-family: '양진체';
 			src:
@@ -180,15 +180,15 @@
 		    font-weight: normal;
 		    font-style: normal;
 		}
-		
+
 		.dropdown-toggle::after {
             display: none;
         }
-		
-	</style>
+
+   </style>
 </head>
 <body>
-	<header class="border-bottom">
+   <header class="border-bottom">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -325,10 +325,10 @@
         <div id="head" class="row text-center align-items-center my-5">
             <h1>글쓰기</h1>
         </div>
-        
+
         <form id="writeForm" action="/Gboard/write" method="post">
         	<div id="writeDiv">
-        	
+
 	        	<input type="hidden" id="seq_group" name="seq_group" value="${seq_group}">
 		        <div class="row mt-4 text-center">
 		            <div class="col-1">
@@ -357,7 +357,7 @@
 				                </select>
 		            		</c:otherwise>
 		            	</c:choose>
-		                
+
 		            </div>
 		            <div class="col-1">
 		                <label class="form-label fs-5">제목</label>
@@ -366,13 +366,13 @@
 		                <input type="text" id="title" name="gboard_title" class="form-control" placeholder="제목을 입력하세요. (최대 18자)" maxlength="18">
 		            </div>
 		        </div>
-				
+
 		        <div class="row mt-4">
 					<textarea id="summernote" name="gboard_content"></textarea>
 		        </div>
-	        
+
 	        </div>
-	        
+
 	        <div class="row my-4 justify-content-center align-items-center" id="bottom">
 	            <div class="col-auto">
 	                <button type="button" id="cancelBtn" class="btn btn-light">취소</button>
@@ -382,9 +382,9 @@
 	            </div>
 	        </div>
         </form>
-	</div>
-	
-	<!-- Footer-->
+   </div>
+
+   <!-- Footer-->
     <div class="container">
 		<footer class="footer mt-5">
 			<div class="row">

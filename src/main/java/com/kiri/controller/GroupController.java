@@ -55,22 +55,31 @@ public class GroupController {
    @RequestMapping(value = "/groupAccess")
    @ResponseBody
    public String groupAccess(Group_MemberDTO Group_MemberDTO) throws Exception {
-      tbl_group_service.groupAccess(Group_MemberDTO);
+	  System.out.println(Group_MemberDTO);
+
+	  tbl_group_service.groupAccess(Group_MemberDTO);
+
       String email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
       Group_MemberDTO.setUser_email(email);
       Group_MemberDTO.setAccess("주최자");
-      tbl_group_service.groupAccess(Group_MemberDTO);
+
+      tbl_group_service.groupAccess(Group_MemberDTO); 
 
       return "success";
    }
 
    // 멤버관리에서 멤버 강퇴(o)
-	
 	 @RequestMapping(value = "/deleteMember")
 	 @ResponseBody 
 	 public String groupMemberDelete(@RequestBody Map<String, Object> param) throws Exception { 
 		 List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
-		 tbl_group_service.groupMemberDelete(userEmails);
+		 int seq_group = Integer.parseInt(param.get("seq_group").toString());
+
+		 System.out.println("================================");
+		 System.out.println(seq_group);
+		 System.out.println(userEmails);
+		 System.out.println("================================");
+		 tbl_group_service.groupMemberDelete(userEmails, seq_group); 
 	  
 	  return String.valueOf(userEmails); 
 	 }
@@ -147,6 +156,7 @@ public class GroupController {
    public String makeGroup(Tbl_GroupDTO tbl_group_dto, MultipartFile groupFile, HttpSession session) throws Exception {
       Group_MemberDTO group_member_dto = new Group_MemberDTO();
 
+      System.out.println(tbl_group_dto.toString());
       // 세션 아이디, 닉네임 session에서 뽑아올 값
       String user_email = ((MemberDTO) session.getAttribute("loginSession")).getUser_email();
       String user_nickname = ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname();

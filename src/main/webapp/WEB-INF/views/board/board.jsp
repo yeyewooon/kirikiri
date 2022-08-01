@@ -206,7 +206,7 @@
     </style>
 </head>
 <body>
-	<header class="border-bottom">
+	<header class="border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -679,7 +679,8 @@
 				}	
 			}
 		}
- 		
+ 		window.close();
+		window.opener.location.reload();
     </script>
 </body>
 </html>

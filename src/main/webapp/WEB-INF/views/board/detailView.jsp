@@ -201,7 +201,7 @@
     </style>
 </head>
 <body>
-	<header class="mb-3 border-bottom">
+	<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -477,7 +477,26 @@
 			                            <div class="col-12">
 			                                <textarea class="form-control comment" style="resize: none; background-color: transparent;" readonly>${comment.comment_content}</textarea>
 			                            </div>
-			                            
+			                            <c:if test="${loginSession.user_email eq 'admin'}">
+			                           		<div class="col-3 defaultComment">
+						                		<button type="button" class="del-commentBtn btn btn-danger" value="${comment.seq_comment}">삭제</button>
+						                	</div>
+			                            	<div class="col-3 afterComment d-none">
+						                		<button type="button" class="btn btn-secondary mod-cancelBtn me-2">취소</button>
+						                		<button type="button" class="btn btn-primary mod-completeBtn" value="${comment.seq_comment}">완료</button>
+						                	</div>
+			                            </c:if>
+			                            <!-- 댓글 수정/삭제 버튼 -->
+					                	<c:if test="${comment.user_email eq loginSession.user_email && loginSession.user_email ne 'admin'}">
+						                	<div class="col-3 defaultComment">
+						                		<button type="button" class="mod-commentBtn btn btn-warning me-2" value="${comment.seq_comment}">수정</button>
+						                		<button type="button" class="del-commentBtn btn btn-danger" value="${comment.seq_comment}">삭제</button>
+						                	</div>
+						                	<div class="col-3 afterComment d-none">
+						                		<button type="button" class="btn btn-secondary mod-cancelBtn me-2">취소</button>
+						                		<button type="button" class="btn btn-primary mod-completeBtn" value="${comment.seq_comment}">완료</button>
+						                	</div>
+					                	</c:if>
 			                        </div>
 			                    </div>
 			                </div>
