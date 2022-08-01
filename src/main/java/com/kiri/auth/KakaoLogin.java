@@ -47,7 +47,7 @@ public class KakaoLogin {
 		}
 		return null;
 	}
-	
+
 	private String generateRandomString() {
 		return UUID.randomUUID().toString();
 	}
@@ -59,7 +59,7 @@ public class KakaoLogin {
 	private String getSession(HttpSession session) {
 		return (String) session.getAttribute(sessionState);
 	}
-	
+
 	public String getUserProfile(OAuth2AccessToken oauthToken) throws Exception {
 		OAuth20Service oauthService = new ServiceBuilder()
 				.apiKey(kakaoClientId)
@@ -70,5 +70,5 @@ public class KakaoLogin {
 		Response response = request.send();
 		return response.getBody();
 	}
-	
+
 }

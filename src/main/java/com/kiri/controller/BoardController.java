@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,8 +23,8 @@ import com.google.gson.JsonObject;
 import com.kiri.dto.BoardDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.service.BoardService;
-import com.kiri.vo.Criteria;
-import com.kiri.vo.PageMakerDTO;
+import com.kiri.utills.Criteria;
+import com.kiri.utills.PageMakerDTO;
 
 @RequestMapping("/board")
 @Controller
@@ -35,46 +36,16 @@ public class BoardController {
 	
 	/* 자유 게시판 */
 	@RequestMapping(value = "/toBoard") // board 페이지 요청
-	public String toBoard(HttpServletRequest request, HttpServletResponse response, Model model, Criteria cri) throws Exception {
-		System.out.println(cri);
+	public String toBoard(Model model, Criteria cri) throws Exception {
+		
 		model.addAttribute("list", service.getListPaging(cri));
+		model.addAttribute("noticeList", service.getNotice());
 		int total = service.getTotal(cri);
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
 		model.addAttribute("pageMaker", pageMake);
 		
-//		List<BoardDTO> list = service.selectAll();
-//		model.addAttribute("list", list);
-		
-//		Cookie[] cookies = request.getCookies();
-//		boolean cookieFlag = false;
-//		for(Cookie cookie : cookies) {
-//			if(cookie.getName().equals("visit_cookie") == false) { // 쿠키가 존재하지 않으면
-//				cookieFlag = cookieFlag;
-//			}else { // 쿠키가 존재하면
-//				cookieFlag = !cookieFlag;
-//			}
-//		}
-//		System.out.println("cookie 존재여부 : " + cookieFlag);
-//		
-//		if(cookieFlag == false) { // 쿠키가 존재하지 않으면
-//			// 쿠키 생성
-//			Cookie newCookie = new Cookie("visit_cookie", null);
-//			newCookie.setComment("게시글조회 확인");
-//			newCookie.setMaxAge(3 * 60);
-//			newCookie.setPath("/");
-//			response.addCookie(newCookie);
-//		}
-		
 		return "board/board";
 	}
-	
-//	@RequestMapping(value = "/sort")  // 카테고리별 게시글
-//	@ResponseBody
-//	public List<BoardDTO> sortByCategory(String category) throws Exception {
-//		System.out.println("카테고리 : " + category);
-//		List<BoardDTO> list = service.selectCategory(category);
-//		return list;
-//	}
 	
 	@RequestMapping(value = "/toWrite") // write 페이지 요청
 	public String toWrite() {
@@ -110,27 +81,46 @@ public class BoardController {
 		return result;
 	}
 	
-	//@CookieValue(name="visit_cookie") String cookie
 	@RequestMapping(value = "/toDetailView") // 게시글 상세페이지 요청
-	public String toDetailView(int seq_board, 
-			 HttpServletResponse response,  Model model, Criteria cri) throws Exception{
-		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
-		// 조회수 로직
-		// 쿠키 가져옴
-//		System.out.println("cookie : " + cookie);
-//		if(!(cookie.contains(String.valueOf(seq_board)))) {
-//			cookie += seq_board + "/";
-//			service.viewCntUp(seq_board);
-//		}
-//		Cookie newCookie = new Cookie("visit_cookie", cookie); 
-//		newCookie.setPath("/");
-//		response.addCookie(newCookie);
+	public String toDetailView(int seq_board, HttpServletRequest request
+			 , HttpServletResponse response,  Model model, Criteria cri) throws Exception{
+		// 조회수
+		Cookie oldCookie = null;
+		Cookie[] cookies = request.getCookies();
+		if (cookies != null) {
+			for (Cookie cookie : cookies) {
+				if (cookie.getName().equals("postView")) {
+					oldCookie = cookie;
+				}
+			}
+		}
+		
+		if (oldCookie != null) {
+			if (!oldCookie.getValue().contains("[" + seq_board + "]")) {
+				service.viewCntUp(seq_board);
+				oldCookie.setValue(oldCookie.getValue() + "_[" + seq_board + "]");
+				oldCookie.setPath("/");
+				oldCookie.setMaxAge(60 * 60 * 24);
+				response.addCookie(oldCookie);
+			}
+		}else {
+			service.viewCntUp(seq_board);
+			Cookie newCookie = new Cookie("postView","[" + seq_board + "]");
+			newCookie.setPath("/");
+			newCookie.setMaxAge(60 * 60 * 24);
+			response.addCookie(newCookie);
+		}
 		
 		// 게시글 정보 얻기
 		Map<String, Object> map = service.getDetail(seq_board);
 		model.addAttribute("detail", map);
 		// 좋아요 여부, 개수
+		String user_email = null;
+		if(session.getAttribute("loginSession") != null) {
+			user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();	
+		}
 		model.addAttribute("like", service.like(seq_board, user_email));
+		
 		// criteria 인스턴스 전달
 		model.addAttribute("cri", cri);
 		
@@ -176,17 +166,15 @@ public class BoardController {
 		return "redirect:/board/toBoard";
 	}
 	
-//	@RequestMapping(value = "/search") // 게시글 검색
-//	@ResponseBody
-//	public List<BoardDTO> search(String category, String keyword, String option) throws Exception{
-//		System.out.println("category : " + category + ", keyword : " + keyword + ", option : " + option);
-//		List<BoardDTO> list = service.search(category, keyword, option);
-//		return list;
-//	}
-	
 	@RequestMapping(value = "/")
 	public String home() {
 		return "mainPage";
+	}
+	
+	@ExceptionHandler // 에러 처리
+	public String toError(Exception e) {
+		e.printStackTrace();
+		return "redirect:/toError";
 	}
 }
 

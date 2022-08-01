@@ -37,9 +37,22 @@ public class GroupCalendarService {
 		
 	}
 
-	// 일정 수정 
+	// 일정 옮기기 
+	public int calMove(Group_CalendarDTO dto) {
+		return dao.calMove(dto);
+	}
+	
+	// // 이벤트 옮길 때 해당 일정의 끝 날짜 구하기 
+	public List<Group_CalendarDTO> findEndByGroupSeq(int seq_group_cal) {
+		return dao.findEndByGroupSeq(seq_group_cal);
+	}
+
+	// 일정 수정
 	public int calModify(Group_CalendarDTO dto) {
 		return dao.calModify(dto);
+		
 	}
+	
+	
 	
 }

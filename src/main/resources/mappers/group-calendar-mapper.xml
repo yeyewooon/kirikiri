@@ -6,7 +6,7 @@
  <mapper namespace="calMapper">
  	<!-- 일정 글쓰기 -->
  	<insert id="calInsert" parameterType="com.kiri.dto.Group_CalendarDTO">
- 		insert into group_calendar values(seq_group_cal.nextval,#{seq_group}, #{user_email, jdbcType = VARCHAR},#{title}, to_date(#{start},'YYYY-MM-DD'),#{gcal_name},#{gcal_content},#{gcal_place},#{gcal_latitude},#{gcal_longitude})
+ 		insert into group_calendar values(seq_group_cal.nextval,#{seq_group}, #{user_email, jdbcType = VARCHAR},#{title}, to_date(#{start},'YYYY-MM-DD'),to_date(#{end},'YYYY-MM-DD'),#{gcal_content},#{gcal_place},#{gcal_latitude},#{gcal_longitude},#{group_time})
  	</insert>
 
 	<!-- 일정 모든 데이터 가져오기 -->
@@ -25,10 +25,19 @@
 		delete from group_calendar where seq_group_cal = #{seq_group_cal}
 	</delete>
 
-	<!-- 일정 수정 -->
-	<update id="calModify" parameterType="com.kiri.dto.Group_CalendarDTO">
-		update group_calendar set "start" = #{start} where seq_group_cal = #{seq_group_cal}
+	<!-- 일정 옮기기 -->
+	<update id="calMove" parameterType="com.kiri.dto.Group_CalendarDTO">
+		update group_calendar set "start" = #{start}, "end" = #{end} where seq_group_cal = #{seq_group_cal}
 	</update>
 	
+	<!-- 이벤트 옮길 때 해당 일정의 끝 날짜 구하기 -->
+	<select id="findEndByGroupSeq" parameterType="int" resultType="com.kiri.dto.Group_CalendarDTO">
+		select * from group_calendar where seq_group_cal = #{seq_group_cal}
+	</select>
+	
+	<!-- 일정 수정 -->
+	<update id="calModify" parameterType="com.kiri.dto.Group_CalendarDTO">
+		update group_calendar set title = #{title}, gcal_content = #{gcal_content}, gcal_place = #{gcal_place}, gcal_latitude = #{gcal_latitude},gcal_longitude = #{gcal_longitude}, group_time = #{group_time} where seq_group_cal = #{seq_group_cal}
+	</update>
 	
  </mapper>

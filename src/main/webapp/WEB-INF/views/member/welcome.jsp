@@ -244,7 +244,7 @@ canvas {
 </script>
 <body>
 <!--네비바-->
- <header class="mb-3 border-bottom">
+ <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
      <div class="container">
         <!-- 접혔을 때 nav -->
         <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -416,7 +416,7 @@ canvas {
 		</div>
 		<div class="row">
 			<div class="col">
-				<button type="button" id="toLoginBtn" class="btn btn-primary">로그인
+				<button type="button" id="toLoginBtn" class="btn btn-outline-primary">로그인
 					후 즐기기</button>
 			</div>
 		</div>

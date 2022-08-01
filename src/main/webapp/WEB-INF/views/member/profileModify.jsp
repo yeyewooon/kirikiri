@@ -338,7 +338,7 @@ footer.footer {
 </script>
 <body>
 	<!--네비바-->
-	<header class="mb-3 border-bottom">
+	<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
 		<div class="container">
 			<!-- 접혔을 때 nav -->
 			<nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -756,10 +756,17 @@ footer.footer {
 						<p style="margin-top: 50px;">자기소개</p>
 					</div>
 					<div class="col-md-7" style="height: 120px;">
-						<textarea class="form-control" name="user_intro" id="introMessage">${memberdto.user_intro}</textarea>
+						<textarea class="form-control" name="user_intro" id="introMessage" maxlength="29">${memberdto.user_intro}</textarea>
 					</div>
 					<div class="col-2"></div>
 				</div>
+				<div class="row">
+					<div class="col-3"></div>
+					<div class="col-7" id="user_intro_cnt">
+						0/30
+					</div>
+				<div class="col-2"></div>
+			</div>
 			</div>
 			<div class="row">
 				<div class="col">
@@ -769,6 +776,21 @@ footer.footer {
 			</div>
 		</form>
 		<script>
+		if($("#introMessage").val()!=""){
+			$('#user_intro_cnt').html($("#introMessage").val().length + '/30');
+			
+		}
+		
+		$('#introMessage').keyup(function (e){
+	 		  const top = $('#user_intro').prop('scrollHeight');
+	          $('#introMessage').scrollTop(top);
+	          var content = $(this).val();
+	          if($(this).val().length > 29) {
+	           $(this).val($(this).val().substring(0, 30));
+	          }
+	          $('#user_intro_cnt').html(content.length + '/30');
+	      });
+		
 		/* 취소버튼 */
 		$("#backPageBtn").on("click",function(){
 			location.href="/mem/myPage";

@@ -105,28 +105,49 @@
    margin-top: 10px;
     margin-bottom: 10px;
 }
-.btn-success {
-   color: #fff;
-   background-color: #51c9db;
-   border-color: #51c9db;
+.btn-primary {/*버튼 4개*/
+   background-color: cornflowerblue;
+   border-color: cornflowerblue;
+}
+.btn-primary:hover{ /*버튼 4개*/
+	color: #fff;
+    background-color: #5680CC;
+    border-color: #5680CC;
 }
 
-.btn-success:hover {
-   color: #fff;
-   background-color: #46ADBD;
-   border-color: #46ADBD;
+.btn-success{ /*가입 승인*/
+	color: #fff;
+    background-color: #50C7D9;
+    border-color: #50C7D9;
+}
+.btn-success:hover{ /*가입 승인*/
+	color: #fff;
+    background-color: #3A919E;
+    border-color: #3A919E;
+}
+.btn-check:focus+.btn-success, .btn-success:focus{ /*가입 승인*/
+	color: #fff;
+    background-color: #3A919E;
+    border-color: #3A919E;
+    box-shadow: 0 0 0 0.25rem rgb(48 145 158 / 50%);
 }
 
-.btn-secondary {
+.btn-secondary {/*가입 거절*/
    color: #fff;
    background-color: #f06345;
    border-color: #f06345;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover {/*가입 거절*/
    color: #fff;
    background-color: #D4583D;
    border-color: #D4583D;
+}
+.btn-check:focus+.btn-secondary, .btn-secondary:focus{ /*가입 거절*/
+	color: #fff;
+    background-color: #D4583D;
+    border-color: #D4583D;
+    box-shadow: 0 0 0 0.25rem rgb(212 88 61 / 50%);
 }
 
 /*테이블*/
@@ -150,12 +171,6 @@ th, td {
    margin-top: 50px;
 }
 
-/*버튼 색 지정*/
-.btn-primary {
-   background-color: cornflowerblue;
-   border-color: cornflowerblue;
-}
-
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
    color: #83bf7b;
@@ -167,35 +182,43 @@ th, td {
    margin-top: 0;
    font-weight: bold;
 }
-
+ul {
+	list-style: none;
+	padding: 0;
+}
+/* footer */
 /*풋터 영역*/
+.footerWrapper{
+	margin-top:200px;
+}
 .footerBox {
-   height: 0px;
+	height: 0px;
 }
 
 footer.footer {
-   padding-top: 9rem;
-   padding-bottom: 2rem;
-   background-color: #ffffff;
-   width: fit-content;
-   margin: auto;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 
 .footer a {
-   text-decoration: none;
-   color: black;
-   font-weight: 40px;
-   font-weight: bold;
+	text-decoration: none;
+	color: black;
+	font-weight: 40px;
+	font-weight: bold;
 }
 
 .footer-imgBox>img {
-   width: 100%;
-   height: 100%;
+	height: 100%;
+	text-align:center;
+}
+.footer-imgBox {
+	height: 100%;
+	text-align:center;
 }
 </style>
 </head>
 <body>
-   <header class="mb-3 border-bottom">
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -276,7 +299,7 @@ footer.footer {
                      <div class="col-auto user">
 						<c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
 							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
 								</a>
 								<ul class="dropdown-menu text-small"
@@ -288,10 +311,10 @@ footer.footer {
 								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 								</ul>
 							</div>
-						</c:if> 
+						</c:if>
 						<c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
 							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
+								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
 								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
 								</a>
 								<ul class="dropdown-menu text-small"
@@ -302,7 +325,7 @@ footer.footer {
 								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
 								</ul>
 							</div>
-						</c:if> 
+						</c:if>
                      </div>
                   </div>
                </div>
@@ -317,19 +340,19 @@ footer.footer {
          <div class="row rowBtn">
             <div class="col-md-3 btnBox">
                <button type="button" class="btn btn-primary btn-lg"
-                  id="groupApply">가입 신청</button>
+                  id="groupApply" style = "font-weight: bold;">가입 신청</button>
             </div>
             <div class="col-md-3 btnBox">
                <button type="button" class="btn btn-primary btn-lg"
-                  id="groupMember">멤버 관리</button>
+                  id="groupMember" style = "font-weight: bold;">멤버 관리</button>
             </div>
             <div class="col-md-3 btnBox">
                <button type="button" class="btn btn-primary btn-lg"
-                  id="groupModify">모임 수정</button>
+                  id="groupModify" style = "font-weight: bold;">모임 수정</button>
             </div>
             <div class="col-md-3 btnBox">
                <button type="button" class="btn btn-primary btn-lg"
-                  id="groupDelete">모임 해산</button>
+                  id="groupDelete" style = "font-weight: bold;">모임 해산</button>
             </div>
          </div>
 
@@ -387,158 +410,177 @@ footer.footer {
             </div>
          </div>
       </div>
-   <!-- Footer-->
-		<footer class="footer mt-5">
-			<div class="row">
-				<div class="col-lg-3 footer-imgBox">
-					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-				</div>
-				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
-						<li class="list-inline-item">⋅</li>
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-							</c:otherwise>
-						</c:choose>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item">
-							<c:choose>
-								<c:when test="${not empty loginSession}">
-									<a href="/group/toCreateGroup">모임 만들기</a>
-								</c:when>
-								<c:otherwise>
-									<a href="/login/toLogin">모임 만들기</a>
-								</c:otherwise>
-							</c:choose>
-						</li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="/privacy"
-							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-					</ul>
-					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-						57 이레빌딩</p>
-					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-						2022. All Rights Reserved.</p>
-				</div>
-				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-					<ul class="list-inline mb-0">
-						<li class="list-inline-item me-4"><a
-							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-						<li class="list-inline-item me-4"><a
-							href="https://twitter.com/?lang=ko"><i
-								class="bi-twitter fs-3"></i></a></li>
-						<li class="list-inline-item"><a
-							href="https://www.instagram.com/"><i
-								class="bi-instagram fs-3"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</footer>
    </div>
-
-
+  <!-- Footer-->
+  <div class="footerWrapper">
+    <div class="container">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-lg-3 footer-imgBox">
+            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+          	<ul class="list-inline mb-2">
+				<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+				<li class="list-inline-item">⋅</li>
+				<c:choose>
+					<c:when test="${not empty loginSession}">
+						<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+					</c:when>
+					<c:otherwise>
+						<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+					</c:otherwise>
+				</c:choose>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item">
+					<c:choose>
+						<c:when test="${not empty loginSession}">
+							<a href="/group/toCreateGroup">모임 만들기</a>
+						</c:when>
+						<c:otherwise>
+							<a href="/login/toLogin">모임 만들기</a>
+						</c:otherwise>
+					</c:choose>
+				</li>
+				<li class="list-inline-item">⋅</li>
+				<li class="list-inline-item"><a href="/privacy"
+					style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+			</ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
+              사업자등록번호 : 22-02-22
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2022. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-0">
+				<li class="list-inline-item me-4"><a
+					href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+				<li class="list-inline-item me-4"><a
+					href="https://twitter.com/?lang=ko"><i
+						class="bi-twitter fs-3"></i></a></li>
+				<li class="list-inline-item"><a
+					href="https://www.instagram.com/"><i
+						class="bi-instagram fs-3"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
 </body>
 <script>
 
 // 멤버관리 이동
 $("#groupMember").on("click", function(){
    location.href = "/group/toGroupMember?seq_group="+$("#seq_group").val();
-})   
+})
 // 모임가입 이동
 $("#groupApply").on("click", function(){
    location.href = "/group/toGroupApply?seq_group="+$("#seq_group").val();
-})   
+})
    // 모임수정 이동
    $("#groupModify").on("click", function(){
       location.href = "/group/toModifyGroup?seq_group="+$("#seq_group").val();
-   })   
+   })
 // 모임해산 이동
 $("#groupDelete").on("click", function(){
    location.href = "/group/toGroupDelete?seq_group="+$("#seq_group").val();
-})   
-   
+})
+
    // 그룹 승인하기
    $("#applyBtn").on("click", function(){
       let count = $("#group_people").val();
       let groupCount = $("#groupCount").val();
       let checkBoxArr = [];
-      $("input[name=checkUser_email]:checked").each(function(){         
+      $("input[name=checkUser_email]:checked").each(function(){
          checkBoxArr.push($(this).val());
       })
-      
-      var jsonData = {
-         "userEmails" : JSON.stringify(checkBoxArr)
-      };
-      var jsonString = JSON.stringify(jsonData);
-      
-       $.ajax({
-         url:"/group/completeApply?&group_people="+count+"&groupCount="+groupCount,
-         headers: {'Content-Type': 'application/json'},
-         type : "post",
-         data: jsonString,
-         success:function(data){
-            if(data == "success"){
-                  Swal.fire({
-                       icon: 'success',
-                       text: '승인이 완료되었습니다.',
-                     })            
-            }else if(data == "error"){
-               Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: '인원수를 확인해주세요!',
-                  })
-            }
-            setTimeout(function() {
-                    window.location.href = "";
-                },3000);
-         },error : function(e){
-            console.log(e);      
-         }
-      })
+      if(checkBoxArr.length < 1){
+          Swal.fire({
+              icon: 'warning',
+              text: '선택된 항목이 없습니다..',
+            })
+      }else{
+	      var jsonData = {
+	         "userEmails" : JSON.stringify(checkBoxArr)
+	      };
+	      var jsonString = JSON.stringify(jsonData);
+
+	       $.ajax({
+	         url:"/group/completeApply?&group_people="+count+"&groupCount="+groupCount,
+	         headers: {'Content-Type': 'application/json'},
+	         type : "post",
+	         data: jsonString,
+	         success:function(data){
+	            if(data == "success"){
+	                  Swal.fire({
+	                       icon: 'success',
+	                       text: '승인이 완료되었습니다.',
+	                     })
+	            }else if(data == "error"){
+	               Swal.fire({
+	                    icon: 'error',
+	                    title: 'Oops...',
+	                    text: '인원수를 확인해주세요!',
+	                  })
+	            }
+	            setTimeout(function() {
+	                    window.location.href = "";
+	                },1500);
+	         },error : function(e){
+	            console.log(e);
+	         }
+	      })
+      }
    })
-   
+
    // 그룹 승인 거절하기
    $("#denyBtn").on("click", function(){
       let checkBoxArr = [];
-      $("input[name=checkUser_email]:checked").each(function(){         
+      $("input[name=checkUser_email]:checked").each(function(){
          checkBoxArr.push($(this).val());
       })
-      
-      var jsonData = {
-         "userEmails" : JSON.stringify(checkBoxArr)
-      };
-      var jsonString = JSON.stringify(jsonData);
-      
-       $.ajax({
-         url:"/group/denyApply",
-         headers: {'Content-Type': 'application/json'},
-         type : "post",
-         data: jsonString,
-         success:function(data){
-            Swal.fire({
-                 icon: 'success',
-                 text: '거절이 완료되었습니다.',
-               })   
-               setTimeout(function() {
-                       window.location.href = "";
-                   },3000);
-         },error : function(e){
-            console.log(e);         
-         }
-      })
+      if(checkBoxArr.length < 1){
+          Swal.fire({
+              icon: 'warning',
+              text: '선택된 항목이 없습니다.',
+            })
+      }else{
+	      var jsonData = {
+	         "userEmails" : JSON.stringify(checkBoxArr)
+	      };
+	      var jsonString = JSON.stringify(jsonData);
+
+	       $.ajax({
+	         url:"/group/denyApply",
+	         headers: {'Content-Type': 'application/json'},
+	         type : "post",
+	         data: jsonString,
+	         success:function(data){
+	            Swal.fire({
+	                 icon: 'success',
+	                 text: '거절이 완료되었습니다.',
+	               })
+	               setTimeout(function() {
+	                       window.location.href = "";
+	                   },1500);
+	         },error : function(e){
+	            console.log(e);
+	         }
+	      })
+
+      }
    })
-   
+
 </script>
 </html>

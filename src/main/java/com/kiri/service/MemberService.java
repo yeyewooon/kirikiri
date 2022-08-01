@@ -80,6 +80,7 @@ public class MemberService {
 
 	// 개인정보 수정
 	public void profileModify(MemberDTO dto){
+		
 		memberdao.profileModify(dto);
 	}
 	

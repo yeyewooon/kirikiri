@@ -83,6 +83,8 @@
 	 
 	 .profiles{
 	     background-color: #ffffff8e;
+	     width:auto;
+	     min-width:500px;
 	     padding : 35px;
 	     height: max-content;
 	     border-radius:20px;
@@ -94,10 +96,10 @@
 	.line {
 		border: none;
 		background-color: rgb(102, 154, 209, 0.5);
-		margin-top: 10px;
-		width: 180px;
-		position: absolute;
-		top: 16px;
+		margin : auto;
+		position:relative;
+		bottom:20px;
+		width: 100%;
 		height: 20px;
 		box-shadow: 3px 2px 2px rgb(25, 104, 184);
 	}
@@ -359,15 +361,18 @@
    </header>
 		<!-- header 부분 -->
 		<div class="row m-0 topHeader">
-            	<div class="row profileTitle mb-5 text-center justify-content-center" style="font-family: 'Mochiy Pop One', sans-serif;">
+            <div class="row profileTitle mb-5 justify-content-center" style="font-family: 'Mochiy Pop One', sans-serif;">
+				<div class="col-auto">
 					<h1 style="font-family: 'Do Hyeon', sans-serif;">내가 쓴 글</h1>
 					<div class="line"></div>
 				</div>
-                <div class="col-md-6 mt-3 mb-4 d-flex justify-content-center">
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-6 mt-3 mb-4">
                     <div id="profilePic">
                         <c:choose>
                             <c:when test="${empty memberdto.user_image}">
-                                <img src="/resources/images/default_profile.jpg" id="profile_image">
+                                <img src="/resources/images/메인사진2(배경).png" id="profile_image">
                             </c:when>
                             <c:otherwise>
                                 <img src="/profile/${memberdto.user_image}" id="profile_image">
@@ -375,7 +380,7 @@
                         </c:choose>
                     </div>
                 </div>
-                <div class="col-md-5 profiles">
+                <div class="col-6 profiles">
                     <div class="col-12" id="profileName">
                         <strong>${memberdto.user_nickname}</strong> 
                         <span style="font-size: 15px">님</span>
@@ -396,6 +401,7 @@
                         <span>${selectGroupBoardCount} 건</span>
                     </div>
                 </div>
+			</div>
             </div>
 		<hr/>
 		<div class="contentBox">
@@ -598,12 +604,12 @@
 			            	  
 			             	td2 = $("<td>");
 			                a = $("<a>");
-			                a.attr('href','/group_board/toDetailView?seq_group_board=' + dto.seq_group_board);
+			                a.attr('href','/Gboard/toDetailView?seq_group_board=' + dto.seq_group_board);
 			                a.css({
 			                	"color":"black",
 			                	"text-decoration":"none",
 			                });
-			                a.append(dto.title);
+			                a.append(dto.gboard_title);
 			                a.appendTo(td2);
 			                
 			                td3 = $("<td>").append(dto.written_date);

@@ -77,39 +77,33 @@
 	justify-content: end;
 	width: 100%;
 	padding: 50px;
-	position:relative;
 }
-.headImg{
+#headImg{
 	position:absolute;
-	top: 70px;
-	left: 1430px;
+	bottom:210px;
+	left:370px;
 }
-.headImg > img{
+
+.headWrapper > img{
 	width:180px;
 	height:180px;	
 }
 
-.profileTitle {
-	position: relative;
-}
 .topBtn{
    border:none;
    background-color : transparent;
    color : grey;
    font-size:25px;
+   z-index:9999;
 }
 
-.btn-light:hover{
-	background-color:#e7f3fad0;
-}
 .line {
 	border: none;
 	background-color: rgb(102, 154, 209, 0.5);
-	margin-top: 10px;
-	width: 240px;
-	position: absolute;
-	left:800px;
-	top: 25px;
+	margin : auto;
+	width: 100%;
+	position:relative;
+	bottom:18px;
 	height: 20px;
 	box-shadow: 3px 2px 2px rgb(25, 104, 184);
 }
@@ -127,6 +121,9 @@ h1 {
 	height: 280px;
 	border-radius: 50%;
 	padding: 0;
+}
+#profilePic > img{
+	width: 100%;
 }
 
 #profile_image {
@@ -149,13 +146,13 @@ h1 {
 	padding: 35px;
 	min-width:550px;
 	border-radius : 20px;
+	position:relative;
 }
 
 .modifyPro {
 	margin-top: 30px;
 	color: gray;
 }
-
 .profileName {
 	text-align: center;
 	border-bottom: 3px solid navy;
@@ -190,6 +187,19 @@ h4 {
 }
 
 /* modal 창 영역 */
+.modal-dialog{
+	position:relative;
+}
+.kokiriImg{
+	position:absolute;
+	top: 200px;
+	right: 440px;
+	z-index:1;
+}
+.kokiriImg > img{
+	width:150px;
+	height:150px;	
+}
 .modal-content {
 	width: 580px;
 }
@@ -270,6 +280,7 @@ h4 {
 	font-size: 18px;
 	line-height: 22px;
 	padding: 8px;
+	padding-left:0px;
 }
 .serviceBox a:hover{
 	color:#67e98e;
@@ -364,10 +375,11 @@ footer.footer {
 }
 
 .msgReceive, .msgSend {
-	cursor: pointer;
-	border: 1px solid black;
-	border-radius: 5px;
-	padding: 4px;
+   cursor: pointer;
+   border: 3px solid #FFE19E;
+   border-radius: 5px;
+   padding: 4px;
+   color : #5B718E;
 }
 
 .table-content {
@@ -376,6 +388,17 @@ footer.footer {
 
 .msgModal-footer {
 	border-top: 0px;
+}
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #a4a4a4 !important;
+    color:#fff;
+    border-color: #a4a4a4;
+}
+
+.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    background-color: #435770 !important;
+    color:#fff;
+    border-color: #435770;
 }
 </style>
 
@@ -470,30 +493,21 @@ footer.footer {
 								</ul>
 							</div>
 							<div class="col-auto user">
-								<c:if
-									test="${not empty loginSession && loginSession.user_email eq 'admin'}">
-									<div class="dropdown text-end">
-										<a href="/"
-											class="d-block link-dark text-decoration-none dropdown-toggle"
-											id="dropdownUser1" data-bs-toggle="dropdown"
-											aria-expanded="false"> <img
-											src="/resources/images/profile.jpg" alt="mdo" width="32"
-											height="32" class="rounded-circle">
-										</a>
-										<ul class="dropdown-menu text-small"
-											aria-labelledby="dropdownUser1">
-											<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-											<li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
-											</li>
-											<li>
-												<hr class="dropdown-divider">
-											</li>
-											<li><a class="dropdown-item" href="/admin/toAdmin">관리자
-													페이지이동</a></li>
-											<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-										</ul>
-									</div>
-								</c:if>
+					<c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                   		<div class="dropdown text-end">
+	                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+	                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+	                        </a>
+	                        <ul class="dropdown-menu text-small"
+	                           aria-labelledby="dropdownUser1">
+	                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+	                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+	                           <li><hr class="dropdown-divider"></li>
+	                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+	                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+	                        </ul>
+                     	</div>
+                  	</c:if>
 								<c:if
 									test="${not empty loginSession && loginSession.user_email ne 'admin'}">
 									<div class="dropdown text-end">
@@ -510,9 +524,9 @@ footer.footer {
 											<li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
 											</li>
 											<li>
-												<hr class="dropdown-divider">
+												<hr class="dropdown-divider" style="margin:0px;">
 											</li>
-											<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+											<li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
 										</ul>
 									</div>
 								</c:if>
@@ -526,31 +540,35 @@ footer.footer {
 
 	<!-- header jsp -->
 	<div class="header">
-		<div class="headImg">
-			<img src="/resources/images/kokiri.png">
-		</div>
-		<div class="row profileTitle mb-4 text-center justify-content-center">
-			<h1 style="font-family: 'Mochiy Pop One', sans-serif;">My Profile</h1>
-			<div class="line"></div>
-			<div class="d-flex justify-content-end">
-				<button type="button" class="btn btn-light topBtn"><i class="fa-solid fa-pen-to-square me-5"></i></button>
+		<div class="row mb-4 text-center justify-content-center">
+			<div class="col-auto">
+				<h1 style="font-family: 'Mochiy Pop One', sans-serif;">My Profile</h1>
+				<div class="line"></div>	
+			</div>
+			<div class="col-auto d-flex align-items-center">
+				<button type="button" class="btn topBtn"><i class="fa-solid fa-pen-to-square"></i></button>
 			</div>
 		</div>
 		<form action="/mem/modifyProfilePic" method="post" id="modifyPicForm"
 			enctype="multipart/form-data">
-			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-4 justify-content-center m-auto" id="profilePic">
-					<c:choose>
-						<c:when test="${empty memberdto.user_image}">
-							<img src="/resources/images/메인사진2(배경).png" id="profile_image">
-						</c:when>
-						<c:otherwise>
-							<img src="/profile/${memberdto.user_image}" id="profile_image">
-						</c:otherwise>
-					</c:choose>
+			<div class="row justify-content-center">
+				<!-- <div class="col-md-2 d-none d-md-block"></div> -->
+				<div class="col-4 d-flex justify-content-center">
+					<div id="profilePic">
+						<c:choose>
+							<c:when test="${empty memberdto.user_image}">
+								<img src="/resources/images/메인사진2(배경).png" id="profile_image">
+							</c:when>
+							<c:otherwise>
+								<img src="/profile/${memberdto.user_image}" id="profile_image">
+							</c:otherwise>
+						</c:choose>
+					</div>
 				</div>
-				<div class="col-md-5 profileBox m-auto justify-content-center" style="background-color: white;">
+				<div class="col-8 profileBox" style="background-color: white;">
+					<div class="headWrapper">
+						<img src="/resources/images/kokiri.png" id="headImg">
+					</div>		
 					<div class="profileName">
 						<span style="font-size: 20px"> <strong
 							style="font-size: 25px; font-family: 'Mochiy Pop One', sans-serif;">${memberdto.user_nickname}</strong>님
@@ -576,27 +594,26 @@ footer.footer {
 							</tr>
 						</tbody>
 					</table>
+						
 				</div>
-				<div class="col-md-1">
-					<input type="text" class="d-none" name="${memberdto}"
-						value="${memberdto}">
-				</div>
+				
+				<input type="text" class="d-none" name="${memberdto}" value="${memberdto}">
+				
 			</div>
 			<div class="row">
-				<div class="col-md-1"></div>
-				<div class="col-md-5 modifyPro text-center" style="display: none;">
-					<i class="fa-solid fa-folder-plus me-3"></i> 
+				<div class="col-md-8 modifyPro text-center" style="display: none;">
+					<i class="fa-solid fa-folder-plus ms-5 me-3"></i> 
 					<span id="modifyProfilePic" style="cursor: pointer; user-select: none">프로필 사진 변경</span>
 				</div>
-				<div class="col-md-6"></div>
+				<div class="col-md-4"></div>
 			</div>
 			<div class="row">
 				<div class="col-md-8 d-flex justify-content-center">
 					<input type="file" class="form-control w-50 mt-2 d-none" id="file"
 						name="user_image" accept='image/jpeg,image/gif,image/png'>
 				</div>
-				<div class="col-md-4 profileBtns justify-content-end"
-					style="text-align: end; display: none">
+				<div class="col-md-4 profileBtns justify-content-start"
+					style="text-align: start; display: none">
 					<c:choose>
 						<c:when test="${loginType eq 'general'}">
 							<button type="button" class="btn btn-outline-primary profileBtn me-3"
@@ -608,7 +625,7 @@ footer.footer {
 								id="profileModify">개인정보 수정</button>
 						</c:otherwise>
 					</c:choose>
-					<button type="button" class="btn btn-outline-danger profileBtn"
+					<button type="button" class="btn btn-outline-danger profileBtn ms-3"
 						id="profileDelete">회원탈퇴</button>
 					<input type="text" class="d-none" id="user_delete"
 						value="${memberdto.user_delete}"> <input type="text"
@@ -1063,7 +1080,7 @@ footer.footer {
 											style="padding: none;">
 											<i class="fa-solid fa-crown " style="color: gold;"></i>
 										</div>
-										<div class="col-7 d-flex justify-content-start" >
+										<div class="col-7 d-flex justify-content-start text-start" >
 											<span>
 											<a href="/group/toGroupDetail?seq_group=${Groupdto.SEQ_GROUP}" style="padding:0px;">${Groupdto.TITLE}</a>
 											</span>
@@ -1088,7 +1105,7 @@ footer.footer {
 					</div>
 				</div>
 			</div>
-			<div class="row body">
+			<div class="row body" style="margin:0px;">
 				<div class="col-md-4 d-flex justify-content-center mt-5">
 					<div class="serviceBox color2 m-2">
 						<div class="service-icon" style="color: #27436d;">
@@ -1106,12 +1123,12 @@ footer.footer {
 						</c:if>
 						<c:if test="${selectBoardList.size() > 0}">
 							<c:forEach items="${selectBoardList}" var="boarddto"
-								varStatus="status" begin="0" end="2">
+								varStatus="status" begin="0" end="3">
 								<div class="row description" style="color: #27436d;">
 									<div class="col-3 d-flex justify-content-end">
 										<i class="fa-solid fa-pen-nib ms-3"></i>
 									</div>
-									<div class="col-7 d-felx justify-content-start">
+									<div class="col-7 d-felx justify-content-start text-start">
 										<span>${boarddto.board_title}</span>
 									</div>
 									<div class="col-2 d-felx justify-content-start"></div>
@@ -1147,8 +1164,8 @@ footer.footer {
 									<div class="col-3 d-flex justify-content-end">
 										<i class="fa-solid fa-heart"></i>
 									</div>
-									<div class="col-6 d-flex justify-content-start">
-										<span>${wishlistdto.TITLE}</span>
+									<div class="col-6 d-flex justify-content-start text-start">
+										<span><a href="/group/toGroupDetail?seq_group=${wishlistdto.SEQ_GROUP}">${wishlistdto.TITLE}</a></span>
 									</div>
 									<div class="col-3 d-flex justify-content-start">
 										<i class="fa-solid fa-trash-can wishDelete"></i> <input
@@ -1244,64 +1261,72 @@ footer.footer {
 					</div>
 				</div>
 				<!-- Modal -->
-				<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
-					data-bs-keyboard="false" tabindex="-1"
-					aria-labelledby="staticBackdropLabel" aria-hidden="true" style="z-index: 9999;">
-					<div class="modal-dialog modal-dialog-centered">
-						<div class="modal-content">
-							<div class="modal-header">
-								<span id="staticBackdropLabel" style="font-size: 16px;"><i
-									class="fa-solid fa-envelope-open"></i></span><span class="ms-2">쪽지함보기</span>
-								<button type="button" class="btn-close" data-bs-dismiss="modal"
-									aria-label="Close"></button>
-							</div>
-							<div class="row mt-2">
-								<div class="col-md-12 d-flex">
-									<div class="msgReceive d-flex justify-content-center ms-2">
-										<span class="receiveBtn"><i class="fa-solid fa-check"></i></span><span
-											class="ms-1">받은 쪽지함</span>
-									</div>
-									<div class="msgSend d-flex justify-content-center"
-										style="margin-left: 10px;">
-										<span class="sendBtn d-none"><i
-											class="fa-solid fa-check"></i></span><span class="ms-1">보낸 쪽지함</span>
-									</div>
-								</div>
-							</div>
-							<div class="modal-body">
-								<table class="table table-content">
-									<thead>
-										<tr>
-											<th class="col-2">삭제</th>
-											<th class="col-2 table-head">보낸사람</th>
-											<th scope="col">내용</th>
-											<th scope="col">날짜</th>
-										</tr>
-									</thead>
-									<tbody class="tbody-content">
-										<c:forEach items="${rmsgList}" var="dto">
-											<tr>
-												<td scope="row"><input type="checkbox"
-													value="${dto.seq_message}" name="seq_message"></td>
-												<td>${dto.user_send}</td>
-												<td>${dto.msgContent}</td>
-												<td>${dto.date}</td>
-											</tr>
-										</c:forEach>
-									</tbody>
-								</table>
-							</div>
-							<div class="modal-footer msgModal-footer">
-								<button type="button" class="btn btn-danger ms-2" id="deleteBtn">삭제</button>
-								<button type="button" class="btn btn-primary ms-2" id="closeBtn"
-									data-bs-dismiss="modal">닫기</button>
-								<input type="text" value="${memberdto.user_nickname}" id="myId"
-									hidden>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+         <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+            data-bs-keyboard="false" tabindex="-1"
+            aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-lg justify-content-center modal-dialog modal-dialog-scrollable modal-dialog-centered">
+               <div class="modal-content">
+                  <div class="modal-header"  style="background-color:#FFFEE9; border-bottom:2px solid #FFE19E;">
+                     <span id="staticBackdropLabel" style="font-size: 16px;"><i
+                        class="fa-solid fa-envelope-open"></i></span><span class="ms-2">쪽지함보기</span>
+                     <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                  </div>
+                  <div class="row mt-2">
+                     <div class="col-md-12 d-flex">
+                        <div class="msgReceive d-flex justify-content-center ms-2" style="background-color:#FFECC2">
+                           <span class="receiveBtn"><i class="fa-solid fa-check"></i></span><span
+                              class="ms-1">받은 쪽지함</span>
+                        </div>
+                        <div class="msgSend d-flex justify-content-center"
+                           style="margin-left: 10px;">
+                           <span class="sendBtn d-none"><i
+                              class="fa-solid fa-check"></i></span><span class="ms-1">보낸 쪽지함</span>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="modal-body">
+                     <table class="table table-content">
+                        <thead>
+                           <tr>
+                              <th class="col-2">삭제</th>
+                              <th class="col-2 table-head">보낸사람</th>
+                              <th scope="col">내용</th>
+                              <th scope="col">날짜</th>
+                           </tr>
+                        </thead>
+                           <tbody class="tbody-content">
+                              <c:if test="${rmsgList.size() == 0 }">
+                                 <tr>
+                                    <td colspan="4">쪽지가 없습니다.</td>
+                                 </tr>
+                              </c:if>
+                              <c:if test="${rmsgList.size() != 0 }">
+                                 <c:forEach items="${rmsgList}" var="dto">
+                                    <tr>
+                                       <td scope="row"><input type="checkbox"
+                                          value="${dto.seq_message}" name="seq_message"></td>
+                                       <td>${dto.user_send}</td>
+                                       <td>${dto.msgContent}</td>
+                                       <td>${dto.date}</td>
+                                    </tr>
+                                 </c:forEach>
+                              </c:if>
+                           </tbody>
+                        </table>
+                     </div>
+                     <div class="modal-footer msgModal-footer"  style="background-color:#FFFEE9; border-top:2px solid #FFE19E;">
+                        <button type="button" class="btn btn-primary ms-2" id="closeBtn"
+                           data-bs-dismiss="modal">닫기</button>
+                        <button type="button" class="btn btn-danger ms-2" id="deleteBtn">삭제</button>
+                        <input type="text" value="${memberdto.user_nickname}" id="myId"
+                           hidden>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
 		</div>
 	</div>
 	<!-- Footer-->
@@ -1404,6 +1429,8 @@ footer.footer {
     // 보낸 쪽지 클릭시 체크되면서 테이블 보여주기
     $('.msgSend').on("click", function () {
         $('.receiveBtn').addClass('d-none');
+        $('.msgReceive').css("background-color", "#FFF");
+        $('.msgSend').css("background-color", "#FFECC2");
         $('.sendBtn').removeClass('d-none');
         let myId = $("#myId").val();
         $.ajax({
@@ -1429,6 +1456,12 @@ footer.footer {
                         tr.append(td1, td2, td3, td4);
                         $(".tbody-content").append(tr);
                     }
+                }else{
+                   let tr = $("<tr>");
+                   let td = $('<td colspan=4>');
+                   td.append("쪽지가 없습니다.");
+                   tr.append(td);
+                   $(".tbody-content").append(tr);
                 }
             }, error: function (e) {
                 console.log(e);
@@ -1439,6 +1472,8 @@ footer.footer {
     $('.msgReceive').on("click", function () {
         $('.sendBtn').addClass('d-none');
         $('.receiveBtn').removeClass('d-none');
+        $('.msgSend').css("background-color", "#FFF");
+        $('.msgReceive').css("background-color", "#FFECC2");
         let myId = $("#myId").val();
         $.ajax({
             url: "/user/receiveMsg?user_receive=" + myId,
@@ -1463,6 +1498,12 @@ footer.footer {
                         tr.append(td1, td2, td3, td4);
                         $(".tbody-content").append(tr);
                     }
+                }else{
+                   let tr = $("<tr>");
+                   let td = $('<td colspan=4>');
+                   td.append("쪽지가 없습니다.");
+                   tr.append(td);
+                   $(".tbody-content").append(tr);
                 }
             }, error: function (e) {
                 console.log(e);

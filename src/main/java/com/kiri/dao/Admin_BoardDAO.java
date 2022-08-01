@@ -41,6 +41,11 @@ public class Admin_BoardDAO {
 			return session.selectList("adminMapper.selectAllBoard");
 		}
 		
+		// 일반게시판 공지 조회
+		public List<BoardDTO> selectNoticeBoardList() throws Exception {
+			return session.selectList("adminMapper.selectNoticeBoardList");
+		}
+		
 		// 모임게시판 조회
 		public List<Group_BoardDTO> selectAllGroupBoard() throws Exception {
 			return session.selectList("adminMapper.selectAllGroupBoard");
@@ -56,12 +61,22 @@ public class Admin_BoardDAO {
 			return session.selectList("adminMapper.generalSearchList",map);
 		}
 		
+		// 일판게시판 공지 검색으로 조회
+		public List<BoardDTO> noticeSearchList(String category, String keyword) throws Exception{
+			
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("category", category);
+			map.put("keyword", keyword);
+			
+			return session.selectList("adminMapper.noticeSearchList",map);
+		}
+		
 		// 모임게시판 검색으로 조회
 		public List<Group_BoardDTO> meetingSearchList(String category, String keyword) throws Exception{
 			Map<String, String> map = new HashMap<String, String>();
 			map.put("category", category);
 			map.put("keyword", keyword);
-			
+			System.out.println(category + " : " + keyword);
 			return session.selectList("adminMapper.meetingSearchList",map);
 		}
 		

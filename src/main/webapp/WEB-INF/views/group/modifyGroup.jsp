@@ -13,6 +13,8 @@
 <!-- bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<!-- Bootstrap icons-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
 <!--구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -141,182 +143,276 @@ function uploadSummernoteImageFile(file, editor){
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+@font-face {
+    font-family: 'Katuri';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+   font-family: 'InfinitySans-RegularA1';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+.dropdown-toggle::after {
+   display: none;
+}
+
 body {
-	background-color: #f6f7f9;
+	background-color: white;
 }
 
 * {
-	box-sizing: border-box;
-	font-family: "OTWelcomeRA";
-}
-
-#mainText {
-	font-family: "양진체";
+   box-sizing: border-box;
 }
 
 /* header 반응형 */
 @media ( max-width : 768px) {
-	#navLogo {
-		display: none;
-	}
-	#myPageIcon {
-		display: none;
-	}
-	#cartIcon {
-		display: none;
-	}
-	#menu {
-		display: none;
-	}
+   #navLogo {
+      display: none;
+   }
+   #myPageIcon {
+      display: none;
+   }
+   #cartIcon {
+      display: none;
+   }
+   #menu {
+      display: none;
+   }
 }
 
 /* header */
 #navLogo {
-	width: 150px;
-	height: 100px;
+   width: 150px;
+   height: 100px;
 }
 
 #logoImgs {
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 
 @media ( min-width : 768px) {
-	#navibar {
-		display: none;
-	}
+   #navibar {
+      display: none;
+   }
 }
 
 /* header 반응형 끝 */
 #logoImg {
-	width: 50%;
+   width: 50%;
 }
 
-#bestParty {
-	background-color: #e8f5ed;
-	font-family: "Do Hyeon", sans-serif;
+/*타이틀*/
+.create-title{
+    font-family: katuri;
+    font-size: 60px;
+    font-weight: bold;
+    text-align: center;
+    background: linear-gradient(to top, #FFE400 20%, transparent 30%)
+    }
+.title-image{
+    margin-bottom: 35px;
+    width: 70px;
+    height: 70px;
+	}
+/*row 영역*/
+.style{
+	border: 2px solid #f3fffc;
+    border-radius: 50px;
+    padding: 50px;
+    background-color: #f3fffc;
+    box-shadow: 3px 3px 5px 5px rgb(182 182 181);
+}
+/*Interest 버튼 영역*/
+.categoryBtn{
+	font-family:InfinitySans-RegularA1;
+}
+.btn-outline-primary{
+	color:black;
+	border: 2px solid #b5a8a8;
+}
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+    }
+.btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+}
+.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
+    box-shadow: 0 0 0 0.25rem rgb(130 133 137 / 50%);
+}
+.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+.btn-outline-primary:hover {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+}
+
+/*Basic Info*/
+.note-editable{
+	background-color:white;
+}
+/*지역선택 버튼*/
+.btn-primary:hover {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+}
+.btn-primary {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #fff;
+}
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+.btn-check:focus+.btn, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+    color: #fff;
+    background-color: #b5a8a8;
+    border-color: #b5a8a8;
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+.btn-check:focus+.btn, .btn:focus {
+    outline: 0;
+    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+}
+/*아이콘 크기*/
+.fa-solid, .fas {
+    font-size: 30px;
+}
+/* 네비바 드롭다운 */
+.dropdown-toggle:hover {
+   color: #83bf7b;
+   border-color: aliceblue;
+}
+
+.dropdown:hover .dropdown-menu {
+   display: block;
+   margin-top: 0;
+   font-weight: bold;
 }
 
 a {
-	text-decoration: none;
-	color: black;
+   text-decoration: none;
+   color: black;
 }
 
 .mainContainer {
-	margin-top: 40px;
+   margin-top: 40px;
 }
 
 .mainIcon i {
-	color: #316f8c;
+   color: #316f8c;
 }
 
-.imgBox {
-	width: 500px;
-	height: 340px;
-	background-color: yellowgreen;
-	border-radius: 4px;
-}
 
-.imgBox img {
-	width: 500px;
-	height: 340px;
-}
 
 .mainFooter {
-	height: 70px;
+   height: 70px;
 }
 
 #search-addon {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 ul {
-	list-style: none;
-	padding: 0;
+   list-style: none;
+   padding: 0;
 }
 
 .mainFooterBtnBox {
-	margin-left: 30%;
-}
-
-.footer {
-	height: 200px;
-	background-color: black;
-	color: #fff;
+   margin-left: 30%;
 }
 
 .memberCntBox {
-	background-color: black;
+	background-color: #c4d4eb;
 	width: 140px;
 	border-radius: 10px;
 	height: 30px;
 }
 
 .plusBtn, .minusBtn {
-	width: 35px;
-	color: #fff;
+   width: 35px;
+   color: #fff;
 }
 
 .plusBtn, .minusBtn:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .memberCnt {
-	width: 70px;
-	color: #fff;
+   width: 70px;
+   color: #fff;
+}
+/* 네비바 드롭다운 */
+.dropdown-toggle:hover {
+   color: #83bf7b;
+   border-color: aliceblue;
+}
+
+.dropdown:hover .dropdown-menu {
+   display: block;
+   margin-top: 0;
+   font-weight: bold;
 }
 
 /*풋터 영역*/
+.footerWrapper{
+   background-color: #fff;
+}
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	background-color: #f6f7f9;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	width: 100%;
-	height: 100%;
+   height: 100%;
+   text-align:center;
 }
-
-/* 눈누 폰트 */
-@font-face {
-	font-family: "OTWelcomeRA";
-	src:
-		url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2")
-		format("woff2");
-	font-weight: normal;
-	font-style: normal;
+.footer-imgBox {
+   height: 100%;
+   text-align:center;
 }
-
-.btn-primary {
-    color: #fff;
-    border-color: #fff;
-	background-color: #4dabf7;
-}
-
-.btn-primary:hover {
-	background-color: #4263eb;
-    border-color: #fff;
-}
-
 
 
 </style>
 </head>
 <body>
 	<!--네비바-->
-      <header class="mb-3 border-bottom">
+      <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div style= "background-color : #fff;">
       <div class="container">
          <!-- 접혔을 때 nav -->
@@ -374,7 +470,6 @@ footer.footer {
                            게시판</a></li>
                   </ul>
                </div>
-
                <!-- logo -->
                <div class="col-2">
                   <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
@@ -382,7 +477,6 @@ footer.footer {
 
                   </a>
                </div>
-
                <div class="col-5">
                   <div class="row align-items-center justify-content-center">
                      <div class="col-auto">
@@ -433,31 +527,34 @@ footer.footer {
       </div>
      </div>
    </header>
+   	
+   	<div style = "text-align:center;">
+		<span class = "create-title">Modify Group</span><span><img class = "title-image" src = "/resources/images/Create_Group.png"></span>
+	</div>
 	<div class="container w-75 mainContainer">
 		<form action="/group/modifyGroup" method="post"
 			enctype="multipart/form-data" id="groupForm">
 			<!--관심사 -->
-			<div class="row mt-4">
+			<div class="row style mt-4">
 				<!--관심사 아이콘-->
 				<div class="col-3 mainIcon text-center">
-					<h2>
+					<h4>
 						<i class="fa-solid fa-tags"></i>
-					</h2>
+					</h4>
 				</div>
 				<!-- seq_group 몰래 넣기 -->
 				<input type="text" name="seq_group" id="seq_group"
 					value="${tbl_group_dto.seq_group}" hidden>
 				<!--관심사 버튼  -->
-				<div
-					class="col-9 mainTextInterest d-flex flex-column justify-content-start">
-					<h2>Interests</h2>
-					<span style="font-size: 14px;">주제가 구체적일수록 비슷한 관심사를 가진 사람들에게
+				<div class="col-9 mainTextInterest d-flex flex-column justify-content-start">
+					<h4 style = "font-family:katuri;">Interests</h4>
+					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">주제가 구체적일수록 비슷한 관심사를 가진 사람들에게
 						그룹을 <br>홍보하기가 더 쉬워집니다. 주제는 1개만 선택 가능합니다.<br>
 					<br> 기존에 선택하셨던 주제는 <strong>${tbl_group_dto.group_category}</strong>
 						입니다.
 					</span>
 					<div class="row mt-4">
-						<div class="col">
+						<div class="col-md">
 							<button type="button"
 								class="btn btn-outline-primary rounded-pill categoryBtn"
 								value="아웃도어/여행">아웃도어/여행</button>
@@ -473,7 +570,7 @@ footer.footer {
 						</div>
 					</div>
 					<div class="row mt-2">
-						<div class="col">
+						<div class="col-md">
 							<button type="button"
 								class="btn btn-outline-primary rounded-pill categoryBtn"
 								value="음악/악기">음악/악기</button>
@@ -510,27 +607,28 @@ footer.footer {
 			</div>
 
 			<!--Basic Info-->
-			<div class="row mt-5">
+			<div class="row style mt-5">
 				<!--아이콘-->
 				<div class="col-3 mainIcon text-center">
-					<h2>
+					<h4>
 						<i class="fa-solid fa-pen-to-square"></i>
-					</h2>
+					</h4>
 				</div>
 				<!--기본 글쓰기 -->
 				<div
-					class="col-9 mainTextBasicInfo d-flex flex-column justify-content-start">
-					<h2>Basic Info</h2>
-					<strong class="mt-2">모임 이름</strong> <span style="font-size: 14px;"
+					class="col-md-9 mainTextBasicInfo d-flex flex-column justify-content-start">
+					<h4 style = "font-family:katuri;">Basic Info</h4>
+					<strong class="mt-2">모임 이름</strong> <span style="font-family:InfinitySans-RegularA1; font-size: 14px;"
 						class="mt-2">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. 떠오르는 기발한
 						이름이 있나요? <br> 마음이 바뀌면 나중에 다시 변경할 수 있습니다.
 					</span>
-					<div class="form-floating mb-3 mt-1">
+					<div class="mb-3 mt-1">
 						<input type="text" class="form-control" id="group_title"
-							placeholder="모임 이름" name="group_title"
+							placeholder="최대 24자까지 작성 가능합니다." name="group_title" maxlength='24'
 							value="${tbl_group_dto.group_title}">
+							
 					</div>
-					<strong class="mt-3">모집 내용</strong> <span style="font-size: 14px;"
+					<strong style = "font-family:InfinitySans-RegularA1;"class="mt-2">모집 내용</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
 						class="mt-2">모집내용은 회원들에게 그룹을 홍보할 때 표시됩니다. <br>변경사항이
 						있다면 나중에 언제든지 업데이트가 가능합니다.
 					</span>
@@ -543,63 +641,65 @@ footer.footer {
 			</div>
 
 			<!--위치 -->
-			<div class="row mt-5">
+			<div class="row style mt-5">
 				<!--위치 아이콘-->
 				<div class="col-3 mainIcon text-center">
-					<h2>
+					<h4>
 						<i class="fa-solid fa-location-dot"></i>
-					</h2>
+					</h4>
 				</div>
-				<!--위치 설정  -->
+				<!--위치 설정-->
 				<div
 					class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
-					<h3>Location</h3>
-					<span style="font-size: 14px;">해당 지역의 사람들이 귀하의 이벤트를 발견하도록 돕고
+					<h4 style = "font-family:katuri;">Location</h4>
+					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">해당 지역의 사람들이 귀하의 이벤트를 발견하도록 돕고
 						<br> 참석자들에게 위치를 제공해주세요.<br>
 					<br> 기존에 선택하셨던 위치는 <strong>${tbl_group_dto.group_site}</strong>
 						입니다.
-					</span> <span class="mt-2"><strong>새로운 지역 설정</strong></span>
+					</span> <span class="mt-2" style = "font-family:InfinitySans-RegularA1;"><strong>새로운 지역 설정</strong></span>
 					<div class="selectBox d-flex">
-						<select class="form-select mt-2 w-25" name="sido1" id="sido1"
+						<select class="form-select mt-2 w-25 me-2" name="sido1" id="sido1"
 							onchange="selectBoxChange1(this.value);"></select> <select
-							class="form-select mt-2 w-25 ms-3" name="gugun1" id="gugun1"
+							class="form-select mt-2 w-25" name="gugun1" id="gugun1"
 							onchange="selectBoxChange2(this.value);"></select>
 						<button type="button"
 							class="btn btn-primary mt-2 group_siteBtn ms-3">지역 선택 완료</button>
 					</div>
 					<!--모임 지역-->
 					<input type="text" id="group_site" name="group_site"
-						value="${tbl_group_dto.group_site}" hidden> <input
-						type="text" id="sido1Input" name="sido1Input" hidden> <input
-						type="text" id="gugun1Input" name="gugun1Input" hidden>
+						value="${tbl_group_dto.group_site}" hidden> 
+					<input type="text" id="sido1Input" name="sido1Input" hidden> 
+					<input type="text" id="gugun1Input" name="gugun1Input" hidden>
 				</div>
 			</div>
 
 			<!--메인 이미지-->
-			<div class="row mt-5">
+			<div class="row style mt-5">
 				<!--메인 이미지 아이콘-->
 				<div class="col-3 mainIcon text-center">
-					<h2>
+					<h4>
 						<i class="fa-solid fa-images"></i>
-					</h2>
+					</h4>
 				</div>
 				<!--이미지 올리기 -->
 				<div
 					class="col-9 mainTextFile d-flex flex-column justify-content-start">
-					<h2>Main Image</h2>
-					<span style="font-size: 14px;">썸네일로 보여질 이미지입니다. <br>본인이
+					<h4 style ="font-family:katuri;">Main Image</h4>
+					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">썸네일로 보여질 이미지입니다. <br>본인이
 						생각하는 최고의 사진을 넣어주세요!
 					</span>
-					<div class="imgBox mt-4">
-						<c:choose>
-							<c:when test="${tbl_group_dto.sys_name ne null}">
-								<img src="/group_profile/${tbl_group_dto.sys_name}"
-									id="profile_image">
-							</c:when>
-							<c:otherwise>
-								<img src="/resources/images/메인사진2(배경).png" id="profile_image">
-							</c:otherwise>
-						</c:choose>
+					<div class="row">
+						<div class="col-md-9 imgBox mt-4">
+							<c:choose>
+								<c:when test="${tbl_group_dto.sys_name ne null}">
+									<img src="/group_profile/${tbl_group_dto.sys_name}"
+										id="profile_image" style = "width:100%">
+								</c:when>
+								<c:otherwise>
+									<img src="/resources/images/메인사진2(배경).png" id="profile_image" style = "width:100%">
+								</c:otherwise>
+							</c:choose>
+						</div>
 					</div>
 					<input type="file" class="form-control mt-3 w-75" name="groupFile"
 						id="groupFile" accept='image/jpeg,image/gif,image/png'
@@ -608,18 +708,18 @@ footer.footer {
 			</div>
 
 			<!--인원수-->
-			<div class="row mt-5">
+			<div class="row style mt-5">
 				<!--위치 아이콘-->
 				<div class="col-3 mainIcon text-center">
-					<h2>
+					<h4>
 						<i class="fa-solid fa-user-group"></i>
-					</h2>
+					</h4>
 				</div>
-				<!--위치 설정  -->
+				<!--위치 설정-->
 				<div
-					class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
-					<h2>Member</h2>
-					<span style="font-size: 14px;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
+					class="col-md-9 mainText mainTextMap d-flex flex-column justify-content-start">
+					<h4 style = "font-family:katuri;">Member</h4>
+					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
 						인원은 최소 2명부터 최대 10명까지 가능합니다.<br>
 					<br> 현재 모임의 맴버수는 <strong>${fn:length(memberList)}명</strong>
 						입니다.
@@ -643,85 +743,108 @@ footer.footer {
 				</div>
 			</div>
 			<!--이미지-->
-			<div class="row mt-5">
+			<div class="row style mt-5">
 				<!--이미지 아이콘-->
 				<div class="col-3 mainIcon text-center">
-					<h2>
+					<h4>
 						<i class="fa-solid fa-circle-info"></i>
-					</h2>
+					</h4>
 				</div>
 				<!--이미지 올리기 -->
-				<div
-					class="col-9 mainTextFile d-flex flex-column justify-content-start">
-					<h2>Guideline</h2>
+				<div class="col-md-9 mainTextFile d-flex flex-column justify-content-start">
+					<h4 style = "font-family:katuri;">Guideline</h4>
 					<span>
 						<h5>거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
-					</span> <span style="font-size: 14px;" class="mt-2">끼리끼리는 끈끈한 커뮤니티를
+					</span> <span style="font-size: 14px;font-family:InfinitySans-RegularA1;" class="mt-2">끼리끼리는 끈끈한 커뮤니티를
 						통해 사람들이 더욱 풍요롭고 행복한 삶을 <br>살 수 있도록 합니다. 따라서 모든 그룹은 다음 사항을
 						충족해야 합니다.
 					</span>
 					<ul class="mt-2" style="font-size: 14px;">
-						<li><i class="fa-solid fa-check"></i><span class="ms-3">회원에게
+						<li><i class="fa-solid fa-check"></i><span class="ms-3" style = "font-family:InfinitySans-RegularA1;">회원에게
 								성장의 기회 제공</span></li>
-						<li><i class="fa-solid fa-check"></i><span class="ms-3">모든
+						<li><i class="fa-solid fa-check"></i><span class="ms-3" style = "font-family:InfinitySans-RegularA1;">모든
 								이벤트에 주최자 참석</span></li>
-						<li><i class="fa-solid fa-check"></i><span class="ms-3">그룹의
+						<li><i class="fa-solid fa-check"></i><span class="ms-3" style = "font-family:InfinitySans-RegularA1;">그룹의
 								목적은 투명하게 공개</span></li>
 					</ul>
 				</div>
-		</form>
-	</div>
-	</div>
+			</div>
+			</form>
+		</div>
 	<!--뒤로가기 , 동의 후 등록-->
 	<div class="mainFooter d-flex justify-content-center align-items-center mt-3">
 		<span class="mainFooterBtnBox">
-			<button class="btn btn-outline-warning">뒤로 가기</button>
+			<button class="btn btn-outline-warning" id="backBtn">뒤로 가기</button>
 			<button class="btn btn-primary ms-4" id="modifyGroupBtn">동의 후 수정</button>
 		</span>
 	</div>
-	<!-- Footer-->
-	<div class="footerWrapper" style="background-color: #fff;">
-		<div class="container">
-			<footer class="footer" style="background-color: #fff;">
-				<div class="row">
-					<div class="col-lg-3 footer-imgBox">
-						<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
-					</div>
-					<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-						<ul class="list-inline mb-2">
-							<li class="list-inline-item"><a href="#!">공지사항</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">회원가입</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">로그인</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a>
-							</li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!"
-								style="color: red; font-weight: bold">개인정보처리방침</a></li>
-						</ul>
-						<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-							개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-						<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-							57 이레빌딩</p>
-						<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-							2022. All Rights Reserved.</p>
-					</div>
-					<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-						<ul class="list-inline mb-0">
-							<li class="list-inline-item me-4"><a href="#!"><i
-									class="bi-facebook fs-3"></i></a></li>
-							<li class="list-inline-item me-4"><a href="#!"><i
-									class="bi-twitter fs-3"></i></a></li>
-							<li class="list-inline-item"><a href="#!"><i
-									class="bi-instagram fs-3"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
+	
+	  <!-- Footer-->
+  <div class="footerWrapper" style="border-top : 1px solid #e0e3e8;">
+    <div class="container">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-lg-3 footer-imgBox">
+            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+             <ul class="list-inline mb-2">
+            <li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+            <li class="list-inline-item">⋅</li>
+            <c:choose>
+               <c:when test="${not empty loginSession}">
+                  <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+               </c:when>
+               <c:otherwise>
+                  <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+               </c:otherwise>
+            </c:choose>
+            <li class="list-inline-item">⋅</li>
+            <li class="list-inline-item">
+               <c:choose>
+                  <c:when test="${not empty loginSession}">
+                     <a href="/group/toCreateGroup">모임 만들기</a>
+                  </c:when>
+                  <c:otherwise>
+                     <a href="/login/toLogin">모임 만들기</a>
+                  </c:otherwise>
+               </c:choose>
+            </li>
+            <li class="list-inline-item">⋅</li>
+            <li class="list-inline-item"><a href="/privacy"
+               style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+         </ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
+              사업자등록번호 : 22-02-22
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2022. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-0">
+            <li class="list-inline-item me-4"><a
+               href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+            <li class="list-inline-item me-4"><a
+               href="https://twitter.com/?lang=ko"><i
+                  class="bi-twitter fs-3"></i></a></li>
+            <li class="list-inline-item"><a
+               href="https://www.instagram.com/"><i
+                  class="bi-instagram fs-3"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div> 
 	<script>
   // 지역 설정
   $('document').ready(function() {
