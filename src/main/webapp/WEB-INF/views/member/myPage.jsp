@@ -243,6 +243,18 @@ h4 {
 	cursor: pointer;
 }
 
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: #a4a4a4 !important;
+    color:#fff;
+    border-color: #a4a4a4;
+}
+
+.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    background-color: #435770 !important;
+    color:#fff;
+    border-color: #435770;
+}
+
 /* card */
 .serviceBox {
 	color: white;
@@ -468,7 +480,7 @@ footer.footer {
 					<div class="col-5 d-flex justify-content-center">
 						<ul class="navbar-nav mb-2 mb-lg-0">
 							<li class="nav-item"><a class="nav-link mx-2"
-								href="/board/toBoard">자유 게시판</a></li>
+								href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
 						</ul>
 					</div>
 
@@ -515,8 +527,8 @@ footer.footer {
 											class="d-block link-dark text-decoration-none dropdown-toggle"
 											id="dropdownUser1" data-bs-toggle="dropdown"
 											aria-expanded="false"> <img
-											src="/resources/images/profile.jpg" alt="mdo" width="32"
-											height="32" class="rounded-circle">
+											src="/resources/images/profile.jpg" alt="mdo" width="40"
+											height="40" class="rounded-circle">
 										</a>
 										<ul class="dropdown-menu text-small"
 											aria-labelledby="dropdownUser1">
@@ -634,14 +646,14 @@ footer.footer {
 			</div>
 		</form>
 	</div>
-	
+
 	<script>
     	//버튼 나오게하기
     	$(".topBtn").on("click",function(){
          $(".profileBtns").toggle();
          $(".modifyPro").toggle();
         })
-        
+
         // 사용자가 새로운 프로필을 선택했을때 이미지 띄워주기
         document.getElementById("file").onchange = function () {
             let reader = new FileReader();
@@ -689,7 +701,7 @@ footer.footer {
 	<div class="modal fade" id="exampleModal2" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true"
 		style="z-index: 9999;">
-		<div class="modal-dialog">
+		<div class="modal-dialog modal-dialog-centered">
 			<div class="modal-content" style="width: 350px; height: 400px;">
 				<div class="modal-header">
 					<h5 class="modal-title" id="exampleModalLabel">비밀번호 확인</h5>
@@ -780,7 +792,7 @@ footer.footer {
 	
 				<div class="modal fade" id="exampleModal1" tabindex="-1"
 					aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
-					<div class="modal-dialog">
+					<div class="modal-dialog modal-dialog-centered">
 						<div class="modal-content" style="width: 350px;">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">선호지역(최대 3개선택)</h5>
@@ -918,7 +930,7 @@ footer.footer {
 	
 					<div class="modal fade" id="exampleModal" tabindex="-1"
 						aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
-						<div class="modal-dialog">
+						<div class="modal-dialog modal-dialog-centered">
 							<div class="modal-content">
 								<div class="modal-header">
 									<h5 class="modal-title" id="exampleModalLabel">관심사(최대 3개

@@ -374,13 +374,13 @@ footer.footer {
 
 .btn-primary:hover {
     color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
+    background-color: #f75266;
+    border-color: #f75266;
 }
 .btn-check:focus+.btn-primary, .btn-primary:focus {
     color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
+    background-color: #f75266;
+    border-color: #f75266;
     box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
 }
 .btn-check:focus+.btn, .btn:focus {
@@ -389,7 +389,7 @@ footer.footer {
 }
 .btn-check:focus+.btn-primary, .btn-primary:focus {
     color: #fff;
-    background-color: #b5a8a8;
+    background-color: #f75266;
     border-color: #b5a8a8;
     box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
 }
@@ -397,6 +397,15 @@ footer.footer {
     outline: 0;
     box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
 }
+
+/* 신고하기 */
+.btn-danger , .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    background-color: #2551a8 !important;
+    color:#fff;
+    border-color: #2551a8;
+}
+
+
 
 /* 카트 우측 코끼리 */
 .defaultKokiri {
@@ -408,144 +417,155 @@ footer.footer {
     background-color: white;
 }
 
+.btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:visited {
+    background-color: #a4a4a4 !important;
+    color:#fff;
+    border-color: #a4a4a4;
+}
+
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:visited {
+    background-color: #f36f31 !important;
+    color:#fff;
+    border-color:#f36f31;
+}
 
 </style>
 
 </head>
 <body>
 	<!--네비바-->
-	<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
-		<div class="container">
-			<!-- 접혔을 때 nav -->
-			<nav id="navibar" class="navbar navbar-expand-md navbar-light"
-				aria-label="Main navigation">
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-10">
-							<a class="navbar-brand mb-2 mb-lg-0" href="/">
-								<div class="title-box">
-									<img id="logoImg" src="/resources/images/kiri.jpg">
-								</div>
-							</a>
-						</div>
-						<!-- toggle button -->
-						<div class="col-2 d-flex align-items-center">
-							<button class="navbar-toggler" type="button"
-								data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-								aria-controls="navbarNavDropdown" aria-expanded="false"
-								aria-label="Toggle navigation">
-								<span class="navbar-toggler-icon"></span>
-							</button>
-						</div>
-						<!-- 메뉴 -->
-						<div class="collapse navbar-collapse justify-content-end"
-							id="navbarNavDropdown">
-							<ul class="navbar-nav mb-2 mb-lg-0">
-								<li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
-								<c:if test="${empty loginSession}">
-									<li class="nav-item"><a class="nav-link"
-										href="/login/toLogin">로그인</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="/login/signup">회원가입</a></li>
-								</c:if>
-								<c:if
-									test="${not empty loginSession && loginSession.user_email eq 'admin'}">
-									<li class="nav-item"><a class="nav-link"
-										href="/mem/myPage">마이페이지</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="/admin/toAdmin">관리자페이지 이동</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="/login/toLogout">로그아웃</a></li>
-								</c:if>
-								<c:if
-									test="${not empty loginSession && loginSession.user_email ne 'admin'}">
-									<li class="nav-item"><a class="nav-link"
-										href="/mem/myPage">마이페이지</a></li>
-									<li class="nav-item"><a class="nav-link"
-										href="/login/toLogout">로그아웃</a></li>
-								</c:if>
-							</ul>
-						</div>
-					</div>
-				</div>
-			</nav>
-			<!-- 펼쳐졌을 때 nav -->
-			<nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
-				aria-label="Main navigation">
-				<div class="row w-100 align-items-center">
-					<div class="col-5 d-flex justify-content-center">
-						<ul class="navbar-nav mb-2 mb-lg-0">
-							<li class="nav-item"><a class="nav-link mx-2"
-								href="/board/toBoard">자유 게시판</a></li>
-						</ul>
-					</div>
-					<!-- logo -->
-					<div class="col-2">
-						<a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
-							id="logoImgs" src="/resources/images/kiri.jpg">
-						</a>
-					</div>
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
+      <div class="container">
+         <!-- 접혔을 때 nav -->
+         <nav id="navibar" class="navbar navbar-expand-md navbar-light"
+            aria-label="Main navigation">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-10">
+                     <a class="navbar-brand mb-2 mb-lg-0" href="/">
+                        <div class="title-box">
+                           <img id="logoImg" src="/resources/images/kiri.jpg">
+                        </div>
+                     </a>
+                  </div>
+                  <!-- toggle button -->
+                  <div class="col-2 d-flex align-items-center">
+                     <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                     </button>
+                  </div>
+                  <!-- 메뉴 -->
+                  <div class="collapse navbar-collapse justify-content-end"
+                     id="navbarNavDropdown">
+                     <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard" style="font-size:18px;">자유게시판</a></li>
+                           <c:if test="${empty loginSession}">
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
+                           </c:if>
+                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
+                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                     </ul>
+                  </div>
+               </div>
 
-					<div class="col-5">
-						<div class="row align-items-center justify-content-center">
-							<div class="col-auto">
-								<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-									<c:if test="${empty loginSession}">
-										<li class="nav-item"><a class="nav-link"
-											href="/login/toLogin">로그인</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/signup/toSignupAgree">회원가입</a></li>
-									</c:if>
-								</ul>
-							</div>
-							<div class="col-auto user">
-								<c:if
-									test="${not empty loginSession && loginSession.user_email eq 'admin'}">
-									<div class="dropdown text-end">
-										<a href="/"
-											class="d-block link-dark text-decoration-none dropdown-toggle"
-											id="dropdownUser1" data-bs-toggle="dropdown"
-											aria-expanded="false"> <img
-											src="/resources/images/profile.jpg" alt="mdo" width="32"
-											height="32" class="rounded-circle">
-										</a>
-										<ul class="dropdown-menu text-small"
-											aria-labelledby="dropdownUser1">
-											<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-											<li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-											<li><hr class="dropdown-divider"></li>
-											<li><a class="dropdown-item" href="/admin/toAdmin">관리자
-													페이지이동</a></li>
-											<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-										</ul>
-									</div>
-								</c:if>
-								<c:if
-									test="${not empty loginSession && loginSession.user_email ne 'admin'}">
-									<div class="dropdown text-end">
-										<a href="/"
-											class="d-block link-dark text-decoration-none dropdown-toggle"
-											id="dropdownUser1" data-bs-toggle="dropdown"
-											aria-expanded="false"> <img
-											src="/resources/images/profile.jpg" alt="mdo" width="32"
-											height="32" class="rounded-circle">
-										</a>
-										<ul class="dropdown-menu text-small"
-											aria-labelledby="dropdownUser1">
-											<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-											<li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-											<li><hr class="dropdown-divider"></li>
-											<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-										</ul>
-									</div>
-								</c:if>
-							</div>
-						</div>
-					</div>
-				</div>
-			</nav>
-		</div>
-	</header>
+            </div>
+         </nav>
+		<!-- 펼쳐졌을 때 nav -->
+         <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
+            aria-label="Main navigation">
+            <div class="row w-100 align-items-center">
+               <div class="col-5 d-flex justify-content-center">
+                  <ul class="navbar-nav mb-2 mb-lg-0">
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
+                  </ul>
+               </div>
+
+               <!-- logo -->
+               <div class="col-2">
+                  <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
+                     id="logoImgs" src="/resources/images/kiri.jpg">
+
+                  </a>
+               </div>
+
+               <div class="col-5">
+                  <div class="row align-items-center justify-content-center">
+                     <div class="col-auto">
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-2" style = "font-size:18px;">
+                           <c:if test="${empty loginSession}">
+                              <li class="nav-item"><a class="nav-link"
+                                 href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link"
+                                 href="/signup/toSignupAgree">회원가입</a></li>
+                           </c:if>
+                        </ul>
+                     </div>
+                     <div class="col-auto user">
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </nav>
+      </div>
+   </header>
 
 	<!--body-->
 	<div class="container">
@@ -800,7 +820,7 @@ footer.footer {
 				<div class="modal fade profileModal" id="staticBackdrop"
 					data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
 					aria-labelledby="staticBackdropLabel" aria-hidden="true">
-					<div class="modal-dialog">
+					<div class="justify-content-center modal-dialog modal-dialog-centered">
 						<div class="modal-content">
 							<div class="modal-header">
 								<h5 class="modal-title" id="exampleModalLabel">회원 프로필</h5>

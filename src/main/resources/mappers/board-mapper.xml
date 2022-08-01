@@ -160,5 +160,13 @@
 			and board_category like '%'||#{category}||'%'
 		</if>
 	</select>
-	
+	<!-- 메인페이지 보드 좋아요 많은거 두개 뽑기 -->
+	<select id="getBestBoard" resultType="com.kiri.dto.BoardDTO">
+		<![CDATA[select * from board 
+			where seq_board in(select seq_board from (select row_number() over(order by likehit desc, board_date desc) as ranking, seq_board from board where board_category not like '%공지%') where ranking<3) order by 9 desc
+		]]>
+	</select>
+	<select id="getSysname" parameterType="int" resultType="String">
+		<![CDATA[select sys_name from (select rownum, sys_name from board_file where rownum=1 and seq_board=#{seq_board})]]>
+	</select>
 </mapper>
