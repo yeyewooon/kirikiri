@@ -421,7 +421,7 @@ hr{
 		// 웹소켓 객체 생성할때 반드시 서버의 ip 주소값은 실제 ip 주소를 이용
 		// 포트번호 다르면 :포트번호/chat 39.120.220.2:11111
 		var seq_group = $("#seq_group").val();
-		let ws = new WebSocket("ws://192.168.0.4/chat/"+seq_group);
+		let ws = new WebSocket("ws://1.220.236.76/chat/"+seq_group);
 		let nickname = $("#nickname").val();
 		
 		//이모티콘 나오게 하기
@@ -606,7 +606,7 @@ hr{
 		
 		//이모티콘 보내는 함수
 		function sendEmoji(imgCls){
-			let url = 'http://192.168.0.4/';
+			let url = 'http://1.220.236.76/';
 			let emojiSrc = $(imgCls).prop("src").indexOf(url)+url.length-1; // /resources 시작하는 index번호
 			let realSrc = $(imgCls).prop("src").slice(emojiSrc);
 			console.log(realSrc);
