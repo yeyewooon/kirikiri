@@ -770,7 +770,7 @@
                <c:if test="${boardList eq null}">
                         "없습니다~";
                      </c:if>
-               <c:if test="${boardList ne null}">
+               <c:if test="${boardList.size()>=2}">
                   <div class="mainImg col-xl-6 mb-4 mb-lg-0">
                      <c:if test="${sysList.get(1) eq null }">
                         <img src="/resources/images/찜2.jpg" class="img-fluid">
