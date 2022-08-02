@@ -73,9 +73,9 @@ $(document).ready(function() {
                     uploadSummernoteImageFile(files[i], this);
                  }
               },
-		      onKeyup: function(e) {
-			     	fn_checkByte(this); // 글자수 바이트 체크 
-			    }
+            onKeyup: function(e) {
+                 fn_checkByte(this); // 글자수 바이트 체크 
+             }
            }
       });
 
@@ -143,21 +143,21 @@ function uploadSummernoteImageFile(file, editor){
 <title>Insert title here</title>
 <style>
 @font-face {
-	font-family: 'Katuri';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+   font-family: 'Katuri';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
 }
 
 @font-face {
-	font-family: 'InfinitySans-RegularA1';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
+   font-family: 'InfinitySans-RegularA1';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
 }
 
 @font-face {
@@ -175,16 +175,16 @@ function uploadSummernoteImageFile(file, editor){
 }
 
 body {
-	background-color: white;
+   background-color: white;
 }
 
 * {
-	box-sizing: border-box;
+   box-sizing: border-box;
 }
 
 /* header */
 header {
-	font-family : 'MICEGothic Bold';
+   font-family : 'MICEGothic Bold';
  }
 
 @media ( max-width : 768px) {
@@ -243,211 +243,221 @@ header {
 
 /*타이틀*/
 .create-title {
-	font-family: katuri;
-	font-size: 60px;
-	font-weight: bold;
-	text-align: center;
-	background: linear-gradient(to top, #FFE400 20%, transparent 30%)
+   font-family: katuri;
+   font-size: 60px;
+   font-weight: bold;
+   text-align: center;
+   background: linear-gradient(to top, #FFE400 20%, transparent 30%)
 }
 
 .title-image {
-	margin-bottom: 35px;
-	width: 70px;
-	height: 70px;
+   margin-bottom: 35px;
+   width: 70px;
+   height: 70px;
 }
 /*row 영역*/
 .style {
-	border: 2px solid #f3fffc;
-	border-radius: 50px;
-	padding: 50px;
-	background-color: #f3fffc;
-	box-shadow: 3px 3px 5px 5px rgb(182, 182, 181);
+    border: 2px solid #ff8f00;
+    border-radius: 50px;
+    padding: 50px;
+    background-color: #fffeea8a;
+    box-shadow: 3px 3px 5px 5px rgb(195 145 27);
 }
 /*Interest 버튼 영역*/
 .categoryBtn {
-	font-family: InfinitySans-RegularA1;
+   font-family: InfinitySans-RegularA1;
 }
 
-.btn-outline-primary {
-	color: black;
-	border: 2px solid #b5a8a8;
-}
-
-.btn-outline-primary:hover {
-	color: #fff;
-	background-color: #b5a8a8;
-	border-color: #b5a8a8;
-}
-
-.btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary,
-	.btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show,
-	.btn-outline-primary:active {
-	color: #fff;
-	background-color: #b5a8a8;
-	border-color: #b5a8a8;
-}
-
-.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus,
-	.btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus,
-	.btn-outline-primary:active:focus {
-	box-shadow: 0 0 0 0.25rem rgb(130 133 137/ 50%);
-}
-
-.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus,
-	.btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus,
-	.btn-outline-primary:active:focus {
-	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
+.btn-outline-primary{
+   color: #ffb526;
+    border: 3px solid #ffcd70;
 }
 
 .btn-outline-primary:hover {
-	color: #fff;
-	background-color: #b5a8a8;
-	border-color: #b5a8a8;
+    color: #fff;
+    background-color: #fcab4e;
+    border-color: #e27500;
+    }
+    
+.btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
+   color: #fff;
+    background-color: #fcab4e;
+    border-color: #e27500;
+}
+
+.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus,
+   .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus,
+   .btn-outline-primary:active:focus {
+   box-shadow: 0 0 0 0.25rem rgb(130 133 137/ 50%);
+}
+
+.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus,
+   .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus,
+   .btn-outline-primary:active:focus {
+   box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
+}
+
+.btn-outline-warning{
+   color: #ffb526;
+    border: 3px solid #ffcd70;
+}
+
+.btn-outline-warning:hover {
+    color: #fff;
+    background-color: #fcab4e;
+    border-color: #e27500;
+    }
+    
+.btn-check:active+.btn-outline-warning, .btn-check:checked+.btn-outline-warning, .btn-outline-warning.active, .btn-outline-warning.dropdown-toggle.show, .btn-outline-warning, .btn-outline-warning:active {
+   color: #fff;
+    background-color: #fcab4e;
+    border-color: #e27500;
 }
 
 /*Basic Info*/
 .note-editable {
-	background-color: white;
+   background-color: white;
 }
 
 /*지역선택 버튼*/
 .btn-primary:hover {
-	color: #fff;
-	background-color: #b5a8a8;
-	border-color: #b5a8a8;
+   color: #fff;
+   background-color: #b5a8a8;
+   border-color: #b5a8a8;
 }
 
 .btn-primary {
-	color: #fff;
-	background-color: #b5a8a8;
-	border-color: #fff;
+   color: #fff;
+   background-color: #b5a8a8;
+   border-color: #fff;
 }
 
 .btn-check:focus+.btn-primary, .btn-primary:focus {
-	color: #fff;
-	background-color: #b5a8a8;
-	border-color: #b5a8a8;
-	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
+   color: #fff;
+   background-color: #b5a8a8;
+   border-color: #b5a8a8;
+   box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
 }
 
 .btn-check:focus+.btn, .btn:focus {
-	outline: 0;
-	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
+   outline: 0;
+   box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
 }
 
 .btn-check:focus+.btn-primary, .btn-primary:focus {
-	color: #fff;
-	background-color: #b5a8a8;
-	border-color: #b5a8a8;
-	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
+   color: #fff;
+   background-color: #b5a8a8;
+   border-color: #b5a8a8;
+   box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
 }
 
 .btn-check:focus+.btn, .btn:focus {
-	outline: 0;
-	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
+   outline: 0;
+   box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
 }
 /*아이콘 크기*/
 .fa-solid, .fas {
-	font-size: 30px;
+   font-size: 30px;
 }
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
-	color: #83bf7b;
-	border-color: aliceblue;
+   color: #83bf7b;
+   border-color: aliceblue;
 }
 
 .dropdown:hover .dropdown-menu {
-	display: block;
-	margin-top: 0;
-	font-weight: bold;
+   display: block;
+   margin-top: 0;
+   font-weight: bold;
 }
 
 a {
-	text-decoration: none;
-	color: black;
+   text-decoration: none;
+   color: black;
 }
 
 .mainContainer {
-	margin-top: 40px;
+   margin-top: 40px;
 }
 
 .mainIcon i {
-	color: #316f8c;
+   color: #aa6565;
 }
 
 .mainFooter {
-	height: 70px;
+   height: 70px;
 }
 
 #search-addon {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 ul {
-	list-style: none;
-	padding: 0;
+   list-style: none;
+   padding: 0;
 }
 
 .mainFooterBtnBox {
-	margin-left: 30%;
+   margin-left: 30%;
 }
 
 .memberCntBox {
-	background-color: #c4d4eb;
-	width: 140px;
-	border-radius: 10px;
-	height: 30px;
+   background-color: #fcab4e;
+    border-color: #e27500;
+   width: 140px;
+   border-radius: 10px;
+   height: 30px;
 }
 
 .plusBtn, .minusBtn {
-	width: 35px;
-	color: #fff;
+   width: 35px;
+   color: #fff;
 }
 
 .plusBtn, .minusBtn:hover {
-	cursor: pointer;
+   cursor: pointer;
 }
 
 .memberCnt {
-	width: 70px;
-	color: #fff;
+   width: 70px;
+   color: #fff;
 }
 
 /* footer */
 .footer-imgBox img {
-	max-width: 100%;
+   max-width: 100%;
 }
 
 .footerWrapper {
-	background-color: white;
-	font-family: "MICEGothic Bold";
-	font-size: 15px;
+   background-color: white;
+   font-family: "MICEGothic Bold";
+   font-size: 15px;
 }
 
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	height: 100%;
-	text-align: center;
+   height: 100%;
+   text-align: center;
 }
 
 .footer-imgBox {
-	height: 100%;
-	text-align: center;
+   height: 100%;
+   text-align: center;
 }
 
 </style>
@@ -596,234 +606,234 @@ footer.footer {
       </div>
    </header>
    
-		<div style = "text-align:center;">
-			<span class = "create-title">Create Group</span><span><img class = "title-image" src = "/resources/images/Create_Group.png"></span>
-		</div>
-	<div class="container w-75 mainContainer">
-		<form action="/group/createGroup" method="post"
-			enctype="multipart/form-data" id="groupForm">
-			<!--관심사 -->
-			<div class="row style mt-4">
-				<!--관심사 아이콘-->
-				<div class="col-3 mainIcon text-center">
-					<h4>
-						<i class="fa-solid fa-tags"></i>
-					</h4>
-				</div>
-				<!--관심사 버튼  -->
-				<div class="col-md-9 mainTextInterest d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Interests</h4>
-					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">주제가 구체적일수록 비슷한 관심사를 가진 사람들에게
-						그룹을 <br>홍보하기가 더 쉬워집니다. 주제는 1개만 선택 가능합니다.
-					</span>
-					<div class="row mt-4">
-						<div class="col-md">
-							<button type="button"
-								class="btn btn-outline-primary rounded-pill categoryBtn"
-								value="아웃도어/여행">아웃도어/여행</button>
-							<button type="button"
-								class="btn btn-outline-primary rounded-pill categoryBtn"
-								value="운동/스포츠">운동/스포츠</button>
-							<button type="button"
-								class="btn btn-outline-primary rounded-pill categoryBtn"
-								value="외국어/언어">외국어/언어</button>
-							<button type="button"
-								class="btn btn-outline-primary rounded-pill categoryBtn"
-								value="반려동물">반려동물</button>
-						</div>
-					</div>
-					<div class="row mt-2">
-						<div class="col-md">
-							<button type="button"
-								class="btn btn-outline-primary rounded-pill categoryBtn"
-								value="음악/악기">음악/악기</button>
-							<button type="button"
-								class="btn btn-outline-primary rounded-pill categoryBtn"
-								value="공예/만들기">공예/만들기</button>
-							<button type="button"
-								class="btn btn-outline-primary rounded-pill categoryBtn"
-								value="댄스/무용">댄스/무용</button>
-							<button type="button"
-								class="btn btn-outline-primary rounded-pill categoryBtn"
-								value="인문학/책/글">인문학/책/글</button>
-						</div>
-					</div>
-					<div class="row mt-2">
-						<div class="col-md">
-							<button type="button"
-								class="btn btn-outline-primary rounded-pill categoryBtn"
-								value="사진/영상">사진/영상</button>
-							<button type="button"
-								class="btn btn-outline-primary rounded-pill categoryBtn"
-								value="게임/오락">게임/오락</button>
-							<button type="button"
-								class="btn btn-outline-primary rounded-pill categoryBtn"
-								value="요리/제조">요리/제조</button>
-							<button type="button"
-								class="btn btn-outline-primary rounded-pill categoryBtn"
-								value="문화/공연/축제">문화/공연/축제</button>
-							<input type="text" name="group_category" id="group_category"
-								hidden>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!--Basic Info-->
-			<div class="row style  mt-5">
-				<!--아이콘-->
-				<div class="col-3 mainIcon text-center">
-					<h4>
-						<i class="fa-solid fa-pen-to-square"></i>
-					</h4>
-				</div>
-				<!--기본 글쓰기 -->
-				<div
-					class="col-md-9 mainTextBasicInfo d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Basic Info</h4>
-					<strong class="mt-2" style = "font-family:InfinitySans-RegularA1;">모임 이름</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
-						class="mt-2">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. 떠오르는 기발한
-						이름이 있나요? <br> 마음이 바뀌면 나중에 다시 변경할 수 있습니다.
-					</span>
-					<div class="mb-3 mt-2">
-						<input type="text" class="form-control" id="group_title"
-							placeholder="최대 24자까지 작성 가능합니다." name="group_title" maxlength='24'>
-					</div>
-					<strong style = "font-family:InfinitySans-RegularA1;"class="mt-2">모집 내용</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
-						class="mt-2">모집내용은 회원들에게 그룹을 홍보할 때 표시됩니다. <br>변경사항이
-						있다면 나중에 언제든지 업데이트가 가능합니다. 내용은 최대 1750자까지 입력 가능합니다.
-					</span>
-					<div class="form-floating mb-3 mt-2">
-						<textarea id="summernote" name="group_info" class="group_info"></textarea>
-						<sup class="d-none">(<span id="nowByte">0</span>/4000bytes)</sup>
-						<sup>(<span id="nowText">0</span>/1750자)</sup>
-					</div>
-					
-				</div>
-			</div>
-			<!--위치 -->
-			<div class="row style  mt-5">
-				<!--위치 아이콘-->
-				<div class="col-3 mainIcon text-center">
-					<h4>
-						<i class="fa-solid fa-location-dot"></i>
-					</h4>
-				</div>
-				<!--위치 설정  -->
-				<div
-					class="col-md-9 mainText mainTextMap d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Location</h4>
-					<span style="font-size: 14px; font-family:InfinitySans-RegularA1;">해당 지역의 사람들이 귀하의 이벤트를 발견하도록 돕고
-						<br> 참석자들에게 위치를 제공해주세요.
-					</span> <span class="mt-2" style = "font-family:InfinitySans-RegularA1;"><strong>지역 설정</strong></span>
-					<div class="selectBox d-flex">
-						<select class="form-select mt-2 w-25 me-2" name="sido1" id="sido1"
-							onchange="selectBoxChange1(this.value);"></select> <select
-							class="form-select mt-2 w-25" name="gugun1" id="gugun1"
-							onchange="selectBoxChange2(this.value);"></select>
-						<button type="button"
-							class="btn btn-primary mt-2 group_siteBtn ms-3">지역 선택 완료</button>
-					</div>
-					<!--모임 지역-->
-					<input type="text" id="group_site" name="group_site" hidden>
-					<input type="text" id="sido1Input" name="sido1Input" hidden>
-					<input type="text" id="gugun1Input" name="gugun1Input" hidden>
-				</div>
-			</div>
-			<!--메인 이미지-->
-			<div class="row style  mt-5">
-				<!--메인 이미지 아이콘-->
-				<div class="col-3 mainIcon text-center">
-					<h4>
-						<i class="fa-solid fa-images"></i>
-					</h4>
-				</div>
-				<!--이미지 올리기 -->
-				<div
-					class="col-md-9 mainTextFile d-flex flex-column justify-content-start">
-					<h4 style ="font-family:katuri;">Main Image</h4>
-					<span style="font-size: 14px;font-family:InfinitySans-RegularA1;">썸네일로 보여질 이미지입니다. <br>본인이
-						생각하는 최고의 사진을 넣어주세요!
-					</span>
-					<div class = "row">
-						<div class=" col-md-9 imgBox mt-4">
-							<img style = "width:100%; height:400px;" src="/resources/images/메인사진2(배경).png" id="groupDefaultImg">
-						</div>
-						<input type="file" class="form-control mt-3 w-75" name="groupFile"
-							id="groupFile" accept='image/jpeg,image/gif,image/png' />
-					</div>
-				</div>
-			</div>
-			<!--인원수-->
-			<div class="row style  mt-5">
-				<!--위치 아이콘-->
-				<div class="col-3 mainIcon text-center">
-					<h4>
-						<i class="fa-solid fa-user-group"></i>
-					</h4>
-				</div>
-				<!--위치설정-->
-				<div
-					class="col-md-9 mainText mainTextMap d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Member</h4>
-					<span style="font-size: 14px;font-family:InfinitySans-RegularA1;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
-						인원은 최소 2명부터 최대 10명까지 가능합니다.
-					</span> <strong class="mt-2">인원 설정</strong>
-					<div class="memberCntBox d-flex mt-2 ">
-						<div
-							class="calBtn minusBtn d-flex justify-content-center align-items-center"
-							id="minusBtn">
-							<i class="fa-solid fa-minus" style="font-size:14px;"></i>
-						</div>
-						<div
-							class="memberCnt d-flex justify-content-center align-items-center">2</div>
-						<div
-							class="calBtn plusBtn d-flex justify-content-center align-items-center"
-							id="plusBtn">
-							<i class="fa-solid fa-plus" style="font-size:14px;"></i>
-						</div>
-					</div>
-					<input type="text" name="group_people" id="group_people" value="2"
-						hidden>
-				</div>
-			</div>
-			<!--이미지-->
-			<div class="row style  mt-5">
-				<!--이미지 아이콘-->
-				<div class="col-3 mainIcon text-center">
-					<h4>
-						<i class="fa-solid fa-circle-info"></i>
-					</h4>
-				</div>
-				<!--이미지 올리기 -->
-				<div
-					class="col-md-9 mainTextFile d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Guideline</h4>
-					<span>
-						<h5 style = "font-family:InfinitySans-RegularA1;">거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
-					</span> <span style="font-size: 14px;font-family:InfinitySans-RegularA1;" class="mt-2">끼리끼리는 끈끈한 커뮤니티를
-						통해 사람들이 더욱 풍요롭고 행복한 삶을 <br>살 수 있도록 합니다. 따라서 모든 그룹은 다음 사항을
-						충족해야 합니다.
-					</span>
-					<ul class="mt-2" style="font-size: 14px;">
-						<li><i class="fa-solid fa-check"></i><span class="ms-3" style = "font-family:InfinitySans-RegularA1;">회원에게
-								성장의 기회 제공</span></li>
-						<li><i class="fa-solid fa-check"></i><span class="ms-3" style = "font-family:InfinitySans-RegularA1;">모든
-								이벤트에 주최자 참석</span></li>
-						<li><i class="fa-solid fa-check"></i><span class="ms-3" style = "font-family:InfinitySans-RegularA1;">그룹의
-								목적은 투명하게 공개</span></li>
-					</ul>
-				</div>
-		</form>
-	</div>
-	</div>
-	<!--뒤로가기 , 동의 후 등록-->
-	<div class="mainFooter d-flex justify-content-center align-items-center mt-3">
-		<span class="mainFooterBtnBox">
-			<button class="btn btn-outline-warning" id="backBtn">뒤로 가기</button>
-			<button class="btn btn-primary ms-4" id="registerGroupBtn">동의후 등록</button>
-		</span>
-	</div>
-	<!-- Footer-->
+      <div style = "text-align:center;">
+         <span class = "create-title">Create Group</span><span><img class = "title-image" src = "/resources/images/Create_Group.png"></span>
+      </div>
+   <div class="container w-75 mainContainer">
+      <form action="/group/createGroup" method="post"
+         enctype="multipart/form-data" id="groupForm">
+         <!--관심사 -->
+         <div class="row style mt-4">
+            <!--관심사 아이콘-->
+            <div class="col-3 mainIcon text-center">
+               <h4>
+                  <i class="fa-solid fa-tags"></i>
+               </h4>
+            </div>
+            <!--관심사 버튼  -->
+            <div class="col-md-9 mainTextInterest d-flex flex-column justify-content-start">
+               <h4 style = "font-family:katuri;">Interests</h4>
+               <span style="font-family:InfinitySans-RegularA1; font-size: 14px;">주제가 구체적일수록 비슷한 관심사를 가진 사람들에게
+                  그룹을 <br>홍보하기가 더 쉬워집니다. 주제는 1개만 선택 가능합니다.
+               </span>
+               <div class="row mt-4">
+                  <div class="col-md">
+                     <button type="button"
+                        class="btn btn-outline-primary rounded-pill categoryBtn"
+                        value="아웃도어/여행">아웃도어/여행</button>
+                     <button type="button"
+                        class="btn btn-outline-primary rounded-pill categoryBtn"
+                        value="운동/스포츠">운동/스포츠</button>
+                     <button type="button"
+                        class="btn btn-outline-primary rounded-pill categoryBtn"
+                        value="외국어/언어">외국어/언어</button>
+                     <button type="button"
+                        class="btn btn-outline-primary rounded-pill categoryBtn"
+                        value="반려동물">반려동물</button>
+                  </div>
+               </div>
+               <div class="row mt-2">
+                  <div class="col-md">
+                     <button type="button"
+                        class="btn btn-outline-primary rounded-pill categoryBtn"
+                        value="음악/악기">음악/악기</button>
+                     <button type="button"
+                        class="btn btn-outline-primary rounded-pill categoryBtn"
+                        value="공예/만들기">공예/만들기</button>
+                     <button type="button"
+                        class="btn btn-outline-primary rounded-pill categoryBtn"
+                        value="댄스/무용">댄스/무용</button>
+                     <button type="button"
+                        class="btn btn-outline-primary rounded-pill categoryBtn"
+                        value="인문학/책/글">인문학/책/글</button>
+                  </div>
+               </div>
+               <div class="row mt-2">
+                  <div class="col-md">
+                     <button type="button"
+                        class="btn btn-outline-primary rounded-pill categoryBtn"
+                        value="사진/영상">사진/영상</button>
+                     <button type="button"
+                        class="btn btn-outline-primary rounded-pill categoryBtn"
+                        value="게임/오락">게임/오락</button>
+                     <button type="button"
+                        class="btn btn-outline-primary rounded-pill categoryBtn"
+                        value="요리/제조">요리/제조</button>
+                     <button type="button"
+                        class="btn btn-outline-primary rounded-pill categoryBtn"
+                        value="문화/공연/축제">문화/공연/축제</button>
+                     <input type="text" name="group_category" id="group_category"
+                        hidden>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <!--Basic Info-->
+         <div class="row style  mt-5">
+            <!--아이콘-->
+            <div class="col-3 mainIcon text-center">
+               <h4>
+                  <i class="fa-solid fa-pen-to-square"></i>
+               </h4>
+            </div>
+            <!--기본 글쓰기 -->
+            <div
+               class="col-md-9 mainTextBasicInfo d-flex flex-column justify-content-start">
+               <h4 style = "font-family:katuri;">Basic Info</h4>
+               <strong class="mt-2" style = "font-family:InfinitySans-RegularA1;">모임 이름</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
+                  class="mt-2">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. 떠오르는 기발한
+                  이름이 있나요? <br> 마음이 바뀌면 나중에 다시 변경할 수 있습니다.
+               </span>
+               <div class="mb-3 mt-2">
+                  <input type="text" class="form-control" id="group_title"
+                     placeholder="최대 24자까지 작성 가능합니다." name="group_title" maxlength='24'>
+               </div>
+               <strong style = "font-family:InfinitySans-RegularA1;"class="mt-2">모집 내용</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
+                  class="mt-2">모집내용은 회원들에게 그룹을 홍보할 때 표시됩니다. <br>변경사항이
+                  있다면 나중에 언제든지 업데이트가 가능합니다. 내용은 최대 1750자까지 입력 가능합니다.
+               </span>
+               <div class="form-floating mb-3 mt-2">
+                  <textarea id="summernote" name="group_info" class="group_info"></textarea>
+                  <sup class="d-none">(<span id="nowByte">0</span>/4000bytes)</sup>
+                  <sup>(<span id="nowText">0</span>/1750자)</sup>
+               </div>
+               
+            </div>
+         </div>
+         <!--위치 -->
+         <div class="row style  mt-5">
+            <!--위치 아이콘-->
+            <div class="col-3 mainIcon text-center">
+               <h4>
+                  <i class="fa-solid fa-location-dot"></i>
+               </h4>
+            </div>
+            <!--위치 설정  -->
+            <div
+               class="col-md-9 mainText mainTextMap d-flex flex-column justify-content-start">
+               <h4 style = "font-family:katuri;">Location</h4>
+               <span style="font-size: 14px; font-family:InfinitySans-RegularA1;">해당 지역의 사람들이 귀하의 이벤트를 발견하도록 돕고
+                  <br> 참석자들에게 위치를 제공해주세요.
+               </span> <span class="mt-2" style = "font-family:InfinitySans-RegularA1;"><strong>지역 설정</strong></span>
+               <div class="selectBox d-flex">
+                  <select class="form-select mt-2 w-25 me-2" name="sido1" id="sido1"
+                     onchange="selectBoxChange1(this.value);"></select> <select
+                     class="form-select mt-2 w-25" name="gugun1" id="gugun1"
+                     onchange="selectBoxChange2(this.value);"></select>
+                  <button type="button"
+                     class="btn btn-primary mt-2 group_siteBtn ms-3">지역 선택 완료</button>
+               </div>
+               <!--모임 지역-->
+               <input type="text" id="group_site" name="group_site" hidden>
+               <input type="text" id="sido1Input" name="sido1Input" hidden>
+               <input type="text" id="gugun1Input" name="gugun1Input" hidden>
+            </div>
+         </div>
+         <!--메인 이미지-->
+         <div class="row style  mt-5">
+            <!--메인 이미지 아이콘-->
+            <div class="col-3 mainIcon text-center">
+               <h4>
+                  <i class="fa-solid fa-images"></i>
+               </h4>
+            </div>
+            <!--이미지 올리기 -->
+            <div
+               class="col-md-9 mainTextFile d-flex flex-column justify-content-start">
+               <h4 style ="font-family:katuri;">Main Image</h4>
+               <span style="font-size: 14px;font-family:InfinitySans-RegularA1;">썸네일로 보여질 이미지입니다. <br>본인이
+                  생각하는 최고의 사진을 넣어주세요!
+               </span>
+               <div class = "row">
+                  <div class=" col-md-9 imgBox mt-4">
+                     <img style = "width:100%; height:400px;" src="/resources/images/메인사진2(배경).png" id="groupDefaultImg">
+                  </div>
+                  <input type="file" class="form-control mt-3 w-75" name="groupFile"
+                     id="groupFile" accept='image/jpeg,image/gif,image/png' />
+               </div>
+            </div>
+         </div>
+         <!--인원수-->
+         <div class="row style  mt-5">
+            <!--위치 아이콘-->
+            <div class="col-3 mainIcon text-center">
+               <h4>
+                  <i class="fa-solid fa-user-group"></i>
+               </h4>
+            </div>
+            <!--위치설정-->
+            <div
+               class="col-md-9 mainText mainTextMap d-flex flex-column justify-content-start">
+               <h4 style = "font-family:katuri;">Member</h4>
+               <span style="font-size: 14px;font-family:InfinitySans-RegularA1;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
+                  인원은 최소 2명부터 최대 10명까지 가능합니다.
+               </span> <strong class="mt-2">인원 설정</strong>
+               <div class="memberCntBox d-flex mt-2 ">
+                  <div
+                     class="calBtn minusBtn d-flex justify-content-center align-items-center"
+                     id="minusBtn">
+                     <i class="fa-solid fa-minus" style="font-size:14px;"></i>
+                  </div>
+                  <div
+                     class="memberCnt d-flex justify-content-center align-items-center">2</div>
+                  <div
+                     class="calBtn plusBtn d-flex justify-content-center align-items-center"
+                     id="plusBtn">
+                     <i class="fa-solid fa-plus" style="font-size:14px;"></i>
+                  </div>
+               </div>
+               <input type="text" name="group_people" id="group_people" value="2"
+                  hidden>
+            </div>
+         </div>
+         <!--이미지-->
+         <div class="row style  mt-5">
+            <!--이미지 아이콘-->
+            <div class="col-3 mainIcon text-center">
+               <h4>
+                  <i class="fa-solid fa-circle-info"></i>
+               </h4>
+            </div>
+            <!--이미지 올리기 -->
+            <div
+               class="col-md-9 mainTextFile d-flex flex-column justify-content-start">
+               <h4 style = "font-family:katuri;">Guideline</h4>
+               <span>
+                  <h5 style = "font-family:InfinitySans-RegularA1;">거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
+               </span> <span style="font-size: 14px;font-family:InfinitySans-RegularA1;" class="mt-2">끼리끼리는 끈끈한 커뮤니티를
+                  통해 사람들이 더욱 풍요롭고 행복한 삶을 <br>살 수 있도록 합니다. 따라서 모든 그룹은 다음 사항을
+                  충족해야 합니다.
+               </span>
+               <ul class="mt-2" style="font-size: 14px;">
+                  <li><i class="fa-solid fa-check"></i><span class="ms-3" style = "font-family:InfinitySans-RegularA1;">회원에게
+                        성장의 기회 제공</span></li>
+                  <li><i class="fa-solid fa-check"></i><span class="ms-3" style = "font-family:InfinitySans-RegularA1;">모든
+                        이벤트에 주최자 참석</span></li>
+                  <li><i class="fa-solid fa-check"></i><span class="ms-3" style = "font-family:InfinitySans-RegularA1;">그룹의
+                        목적은 투명하게 공개</span></li>
+               </ul>
+            </div>
+      </form>
+   </div>
+   </div>
+   <!--뒤로가기 , 동의 후 등록-->
+   <div class="mainFooter d-flex justify-content-center align-items-center mt-3">
+      <span class="mainFooterBtnBox">
+         <button class="btn btn-outline-secondary" id="backBtn">뒤로 가기</button>
+         <button class="btn btn-warning ms-4" id="registerGroupBtn">동의후 등록</button>
+      </span>
+   </div>
+   <!-- Footer-->
    <div class="footerWrapper mt-5" style="border-top:1px solid #e0e3e8;">
       <div class="container">
          <footer class="footer">
@@ -1018,34 +1028,34 @@ footer.footer {
   })
 
   //textarea 바이트 수 체크하는 함수
-	function fn_checkByte(obj){
-	    const maxByte = 3000; //최대 100바이트
-	    const text_val = obj.value; //입력한 문자
-	    const text_len = text_val.length; //입력한 문자수
-	    let totalByte=0;
-	    
-	    for(let i=0; i<text_len; i++){
-	    	const each_char = text_val.charAt(i);
-	        const uni_char = escape(each_char); //유니코드 형식으로 변환
-	        if(uni_char.length>4){
-	        	// 한글 : 2Byte
-	            totalByte += 2;
-	        }else{
-	        	// 영문,숫자,특수문자 : 1Byte
-	            totalByte += 1;
-	        }
-	    }
-	    if(totalByte>maxByte){
-	    		alert('사진포함 최대 1750자까지만 입력가능합니다.');
-	        	document.getElementById("nowByte").innerText = totalByte;
-	            document.getElementById("nowByte").style.color = "red";
-	            document.getElementById("nowText").innerText = text_len;            
-	        }else{
-	        	document.getElementById("nowByte").innerText = totalByte;
-	            document.getElementById("nowByte").style.color = "green";
-	            document.getElementById("nowText").innerText = text_len;
-	        }
-	    }
+   function fn_checkByte(obj){
+       const maxByte = 3000; //최대 100바이트
+       const text_val = obj.value; //입력한 문자
+       const text_len = text_val.length; //입력한 문자수
+       let totalByte=0;
+       
+       for(let i=0; i<text_len; i++){
+          const each_char = text_val.charAt(i);
+           const uni_char = escape(each_char); //유니코드 형식으로 변환
+           if(uni_char.length>4){
+              // 한글 : 2Byte
+               totalByte += 2;
+           }else{
+              // 영문,숫자,특수문자 : 1Byte
+               totalByte += 1;
+           }
+       }
+       if(totalByte>maxByte){
+             alert('사진포함 최대 1750자까지만 입력가능합니다.');
+              document.getElementById("nowByte").innerText = totalByte;
+               document.getElementById("nowByte").style.color = "red";
+               document.getElementById("nowText").innerText = text_len;            
+           }else{
+              document.getElementById("nowByte").innerText = totalByte;
+               document.getElementById("nowByte").style.color = "green";
+               document.getElementById("nowText").innerText = text_len;
+           }
+       }
 
   // Form으로 전송
   $("#registerGroupBtn").on("click",function() {
@@ -1097,43 +1107,43 @@ footer.footer {
   let groupFile = document.getElementById("groupFile");
   let groupDefaultImg = document.getElementById("groupDefaultImg");
   
-	//사진 타입 
+   //사진 타입 
   function checkFile(obj) {
     let fileKind = obj.value.lastIndexOf('.');
     let fileName = obj.value.substring(fileKind+1,obj.length);
     let fileType = fileName.toLowerCase();
     
     if(fileType == "jpg" || fileType == "gif" || fileType == "png" || fileType == "jpeg" || fileType == "bmp"){
-    	return true;
+       return true;
     }else{
-    	Swal.fire({
-    		  icon: 'error',
-    		  title: '에러',
-    		  text: '이미지타입의 파일만 가능합니다!',
-    	})
+       Swal.fire({
+            icon: 'error',
+            title: '에러',
+            text: '이미지타입의 파일만 가능합니다!',
+       })
        $("#groupFile").val("");
-   		return false;
+         return false;
     }
     
     if(fileType == "bmp"){
        answer = confirm("BMP 파일은 웹상에서 사용하기엔 적절한 이미지 형식이 아닙니다. /n 사용하시겠습니까?");
        if(!answer) return false;
-    	
+       
     }
 }
 
   // 이미지 즉각 변환
    groupFile.onchange = function () {
-	  let result = checkFile(this);
-	  if(result) { // 사진 파일 일 떄만 
-		  let reader = new FileReader();
-		    reader.readAsDataURL(this.files[0]);
-		    reader.onload = function (e) {
-		    	groupDefaultImg.src = e.target.result;
-		    }
-	  }else { // 사진 파일이 아닐 때
-		  groupDefaultImg.src = "/resources/images/메인사진2(배경).png";
-	  }
+     let result = checkFile(this);
+     if(result) { // 사진 파일 일 떄만 
+        let reader = new FileReader();
+          reader.readAsDataURL(this.files[0]);
+          reader.onload = function (e) {
+             groupDefaultImg.src = e.target.result;
+          }
+     }else { // 사진 파일이 아닐 때
+        groupDefaultImg.src = "/resources/images/메인사진2(배경).png";
+     }
   } 
 
   // 카테고리 선택
