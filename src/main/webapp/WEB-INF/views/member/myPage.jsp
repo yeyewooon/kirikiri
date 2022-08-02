@@ -29,9 +29,9 @@
 
 <style>
 * {
-   box-sizing: border-box;
-   font-family: 'InfinitySans-RegularA1';
-   }
+	box-sizing: border-box;
+	font-family: 'MICEGothic Bold';
+	}
 
 /* benu */
 /* header 반응형 */
@@ -332,7 +332,11 @@ h4 {
    height: 200px;
 }
 
-/*풋터 영역*/
+.footerWrapper{
+   background-color: white;
+   font-family: "MICEGothic Bold";
+   font-size: 15px;
+}
 .footerBox {
    height: 0px;
 }
@@ -533,9 +537,13 @@ footer.footer {
                               <a href="/"
                                  class="d-block link-dark text-decoration-none dropdown-toggle"
                                  id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> <img
-                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
-                                 height="40" class="rounded-circle">
+                                 aria-expanded="false"> 
+                                 <c:if test="${loginSession.user_image eq null}">
+                                    <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                                 <c:if test="${loginSession.user_image ne null}">
+                                    <img src="/profile/${loginSession.user_image }" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
                               </a>
                               <ul class="dropdown-menu text-small"
                                  aria-labelledby="dropdownUser1">
@@ -557,118 +565,160 @@ footer.footer {
       </div>
    </header>
 
-   <!-- header jsp -->
-   <div class="header">
-      <div class="row mb-4 text-center justify-content-center">
-         <div class="col-auto">
-            <h1 style="font-family: 'Mochiy Pop One', sans-serif;">My Profile</h1>
-            <div class="line"></div>
-         </div>
-         <div class="col-auto d-flex align-items-center">
-            <button type="button" class="btn topBtn"><i class="fa-solid fa-pen-to-square"></i></button>
-         </div>
-      </div>
-      <form action="/mem/modifyProfilePic" method="post" id="modifyPicForm"
-         enctype="multipart/form-data">
-         <div class="row justify-content-center">
-            <!-- <div class="col-md-2 d-none d-md-block"></div> -->
-            <div class="col-4 d-flex justify-content-center">
-               <div id="profilePic">
-                  <c:choose>
-                     <c:when test="${empty memberdto.user_image}">
-                        <img src="/resources/images/메인사진2(배경).png" id="profile_image">
-                     </c:when>
-                     <c:otherwise>
-                        <img src="/profile/${memberdto.user_image}" id="profile_image">
-                     </c:otherwise>
-                  </c:choose>
-               </div>
-            </div>
-            <div class="col-8 profileBox" style="background-color: white;">
-               <div class="headWrapper">
-                  <img src="/resources/images/kokiri.png" id="headImg">
-               </div>
-               <div class="profileName">
-                  <span style="font-size: 20px"> <strong
-                     style="font-size: 25px; font-family: 'Mochiy Pop One', sans-serif;">${memberdto.user_nickname}</strong>님
-                  </span>
-                  <div class="statusMessage mt-2" id="statusMessage">
-                     <i class="fa-solid fa-quote-left"></i> <span>${memberdto.user_intro}</span>
-                     <i class="fa-solid fa-quote-right"></i>
-                  </div>
-               </div>
-               <table>
-                  <tbody>
-                     <tr>
-                        <td><i class="fa-solid fa-user icon m-2"></i></td>
-                        <td><span>${memberdto.user_name}</span></td>
-                     </tr>
-                     <tr>
-                        <td><i class="fa-solid fa-cake-candles icon m-2"></i></td>
-                        <td><span>${date}</span></td>
-                     </tr>
-                     <tr>
-                        <td><i class="fa-solid fa-envelope icon m-2"></i></td>
-                        <td><span>${memberdto.user_email}</span></td>
-                     </tr>
-                  </tbody>
-               </table>
+	<!-- header jsp -->
+	<div class="header">
+		<div class="row mb-4 text-center justify-content-center">
+			<div class="col-auto">
+				<h1 style="font-family: 'Mochiy Pop One', sans-serif;">My Profile</h1>
+				<div class="line"></div>	
+			</div>
+			<div class="col-auto d-flex align-items-center">
+				<button type="button" class="btn topBtn"><i class="fa-solid fa-pen-to-square"></i></button>
+			</div>
+		</div>
+		<form action="/mem/modifyProfilePic" method="post" id="modifyPicForm"
+			enctype="multipart/form-data">
+			<div class="row justify-content-center">
+				<!-- <div class="col-md-2 d-none d-md-block"></div> -->
+				<div class="col-4 d-flex justify-content-center">
+					<div id="profilePic">
+						<c:choose>
+							<c:when test="${empty memberdto.user_image}">
+								<img src="/resources/images/profile.jpg" id="profile_image">
+							</c:when>
+							<c:otherwise>
+								<img src="/profile/${memberdto.user_image}" id="profile_image">
+							</c:otherwise>
+						</c:choose>
+					</div>
+				</div>
+				<div class="col-8 profileBox" style="background-color: white;">
+					<div class="headWrapper">
+						<img src="/resources/images/kokiri.png" id="headImg">
+					</div>		
+					<div class="profileName">
+						<span style="font-size: 20px"> <strong
+							style="font-size: 25px; font-family: 'Mochiy Pop One', sans-serif;">${memberdto.user_nickname}</strong>님
+						</span>
+						<div class="statusMessage mt-2" id="statusMessage">
+							<i class="fa-solid fa-quote-left"></i> <span>${memberdto.user_intro}</span>
+							<i class="fa-solid fa-quote-right"></i>
+						</div>
+					</div>
+					<table>
+						<tbody>
+							<tr>
+								<td><i class="fa-solid fa-user icon m-2"></i></td>
+								<td><span>${memberdto.user_name}</span></td>
+							</tr>
+							<tr>
+								<td><i class="fa-solid fa-cake-candles icon m-2"></i></td>
+								<td><span>${date}</span></td>
+							</tr>
+							<tr>
+								<td><i class="fa-solid fa-envelope icon m-2"></i></td>
+								<td><span>${memberdto.user_email}</span></td>
+							</tr>
+						</tbody>
+					</table>
+						
+				</div>
+				
+				<input type="text" class="d-none" name="${memberdto}" value="${memberdto}">
+				
+			</div>
+			<div class="row">
+				<div class="col-md-8 modifyPro text-center" style="display: none;">
+					<i class="fa-solid fa-folder-plus ms-5 me-3"></i> 
+					<span id="modifyProfilePic" style="cursor: pointer; user-select: none">프로필 사진 변경</span>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-8 d-flex justify-content-center">
+					<input type="file" class="form-control w-50 mt-2 d-none" id="file"
+						name="user_image" accept='image/jpeg,image/gif,image/png'>
+				</div>
+				<div class="col-md-4 profileBtns justify-content-start"
+					style="text-align: start; display: none">
+					<c:choose>
+						<c:when test="${loginType eq 'general'}">
+							<button type="button" class="btn btn-outline-primary profileBtn me-3"
+								data-bs-toggle="modal" data-bs-target="#exampleModal2">개인정보
+								수정</button>
+						</c:when>
+						<c:otherwise>
+							<button type="button" class="btn btn-outline-primary profileBtn"
+								id="profileModify">개인정보 수정</button>
+						</c:otherwise>
+					</c:choose>
+					<button type="button" class="btn btn-outline-danger profileBtn ms-3"
+						id="profileDelete">회원탈퇴</button>
+					<input type="text" class="d-none" id="user_delete"
+						value="${memberdto.user_delete}"> <input type="text"
+						class="d-none" id="user_email" value="${memberdto.user_email}">
+				</div>
+			</div>
+		</form>
+	</div>
 
-            </div>
-
-            <input type="text" class="d-none" name="${memberdto}" value="${memberdto}">
-
-         </div>
-         <div class="row">
-            <div class="col-md-8 modifyPro text-center" style="display: none;">
-               <i class="fa-solid fa-folder-plus ms-5 me-3"></i>
-               <span id="modifyProfilePic" style="cursor: pointer; user-select: none">프로필 사진 변경</span>
-            </div>
-            <div class="col-md-4"></div>
-         </div>
-         <div class="row">
-            <div class="col-md-8 d-flex justify-content-center">
-               <input type="file" class="form-control w-50 mt-2 d-none" id="file"
-                  name="user_image" accept='image/jpeg,image/gif,image/png'>
-            </div>
-            <div class="col-md-4 profileBtns justify-content-start"
-               style="text-align: start; display: none">
-               <c:choose>
-                  <c:when test="${loginType eq 'general'}">
-                     <button type="button" class="btn btn-outline-primary profileBtn me-3"
-                        data-bs-toggle="modal" data-bs-target="#exampleModal2">개인정보
-                        수정</button>
-                  </c:when>
-                  <c:otherwise>
-                     <button type="button" class="btn btn-outline-primary profileBtn"
-                        id="profileModify">개인정보 수정</button>
-                  </c:otherwise>
-               </c:choose>
-               <button type="button" class="btn btn-outline-danger profileBtn ms-3"
-                  id="profileDelete">회원탈퇴</button>
-               <input type="text" class="d-none" id="user_delete"
-                  value="${memberdto.user_delete}"> <input type="text"
-                  class="d-none" id="user_email" value="${memberdto.user_email}">
-            </div>
-         </div>
-      </form>
-   </div>
-
-   <script>
-       //버튼 나오게하기
-       $(".topBtn").on("click",function(){
+	<script>
+		// 이미지 선택
+		  let groupFile = document.getElementById("file");
+		  let groupDefaultImg = document.getElementById("profile_image");
+		  
+		   //사진 타입 
+		  function checkFile(obj) {
+		    let fileKind = obj.value.lastIndexOf('.');
+		    let fileName = obj.value.substring(fileKind+1,obj.length);
+		    let fileType = fileName.toLowerCase();
+		    
+		    if(fileType == "jpg" || fileType == "gif" || fileType == "png" || fileType == "jpeg" || fileType == "bmp"){
+		       return true;
+		    }else{
+		       Swal.fire({
+		            icon: 'error',
+		            title: '에러',
+		            text: '이미지타입의 파일만 가능합니다!',
+		       })
+		       $("#file").val("");
+		         return false;
+		    }
+		    
+		    if(fileType == "bmp"){
+		       answer = confirm("BMP 파일은 웹상에서 사용하기엔 적절한 이미지 형식이 아닙니다. /n 사용하시겠습니까?");
+		       if(!answer) return false;
+		       
+		    }
+		}
+	
+		  // 이미지 즉각 변환
+		   groupFile.onchange = function () {
+		     let result = checkFile(this);
+		     if(result) { // 사진 파일 일 떄만 
+		        let reader = new FileReader();
+		          reader.readAsDataURL(this.files[0]);
+		          reader.onload = function (e) {
+		             groupDefaultImg.src = e.target.result;
+		          }
+		     }else { // 사진 파일이 아닐 때
+		        groupDefaultImg.src = "/resources/images/profile.jpg";
+		     }
+		  } 
+    	//버튼 나오게하기
+    	$(".topBtn").on("click",function(){
          $(".profileBtns").toggle();
          $(".modifyPro").toggle();
         })
 
         // 사용자가 새로운 프로필을 선택했을때 이미지 띄워주기
-        document.getElementById("file").onchange = function () {
+        /* document.getElementById("file").onchange = function () {
             let reader = new FileReader();
             reader.readAsDataURL(this.files[0])
             reader.onload = function (e) {
                 document.getElementById("profile_image").src = e.target.result;
             }
-        }
+        } */
         $("#modifyProfilePic").on("click", function () {
             if ($("#modifyProfilePic").text() === '프로필 사진 변경') {
                 this.textContent = '저장';
@@ -1370,66 +1420,76 @@ footer.footer {
                   </div>
                </div>
             </div>
-         </div>
+			</div>
       </div>
-      </div>
-   </div>
-   <!-- Footer-->
-   <footer class="footer mt-5">
-      <div class="row">
-         <div class="col-lg-3 footer-imgBox">
-            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-         </div>
-         <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-            <ul class="list-inline mb-2">
-               <li class="list-inline-item"><a
-                  href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
-               <li class="list-inline-item">⋅</li>
+	</div>
+	<!-- Footer-->
+  <div class="footerWrapper mt-5" style="border-top:1px solid #e0e3e8;">
+    <div class="container">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-lg-3 footer-imgBox">
+            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+             <ul class="list-inline mb-2">
+            <li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+            <li class="list-inline-item">⋅</li>
+            <c:choose>
+               <c:when test="${not empty loginSession}">
+                  <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+               </c:when>
+               <c:otherwise>
+                  <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+               </c:otherwise>
+            </c:choose>
+            <li class="list-inline-item">⋅</li>
+            <li class="list-inline-item">
                <c:choose>
                   <c:when test="${not empty loginSession}">
-                     <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-                     <li class="list-inline-item">⋅</li>
-                     <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+                     <a href="/group/toCreateGroup">모임 만들기</a>
                   </c:when>
                   <c:otherwise>
-                     <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-                     <li class="list-inline-item">⋅</li>
-                     <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+                     <a href="/login/toLogin">모임 만들기</a>
                   </c:otherwise>
                </c:choose>
-               <li class="list-inline-item">⋅</li>
-               <li class="list-inline-item"><c:choose>
-                     <c:when test="${not empty loginSession}">
-                        <a href="/group/toCreateGroup">모임 만들기</a>
-                     </c:when>
-                     <c:otherwise>
-                        <a href="/login/toLogin">모임 만들기</a>
-                     </c:otherwise>
-                  </c:choose></li>
-               <li class="list-inline-item">⋅</li>
-               <li class="list-inline-item"><a href="privacy"
-                  style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-            </ul>
-            <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-               개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-            <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-               57 이레빌딩</p>
-            <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-               2022. All Rights Reserved.</p>
-         </div>
-         <div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+            </li>
+            <li class="list-inline-item">⋅</li>
+            <li class="list-inline-item"><a href="/privacy"
+               style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+         </ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
+              사업자등록번호 : 22-02-22
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2022. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
             <ul class="list-inline mb-0">
-               <li class="list-inline-item me-4"><a
-                  href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-               <li class="list-inline-item me-4"><a
-                  href="https://twitter.com/?lang=ko"><i class="bi-twitter fs-3"></i></a></li>
-               <li class="list-inline-item"><a
-                  href="https://www.instagram.com/"><i class="bi-instagram fs-3"></i></a></li>
+            <li class="list-inline-item me-4"><a
+               href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+            <li class="list-inline-item me-4"><a
+               href="https://twitter.com/?lang=ko"><i
+                  class="bi-twitter fs-3"></i></a></li>
+            <li class="list-inline-item"><a
+               href="https://www.instagram.com/"><i
+                  class="bi-instagram fs-3"></i></a></li>
             </ul>
-         </div>
-      </div>
-   </footer>
-   <script>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+	<script>
     /* 내가쓴글로 이동 */
     $("#towritePage").on("click", function () {
         let user_email = $("#user_email").val();

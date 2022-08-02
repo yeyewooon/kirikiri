@@ -120,23 +120,23 @@
 	<!-- 내가 쓴 일반게시판 글 정보 -->
 	<select id="selectBoardList" resultType="com.kiri.dto.BoardDTO">
 		select * from board
-			where user_email = #{user_email}
+			where user_email = #{user_email} and board_category not like '%공지%'
 	</select>
 	
 	<!-- 검색으로 일반게시판 글 정보 가져오기 -->
 	<select id="genalSearchList" parameterType="map" resultType="com.kiri.dto.BoardDTO">
 		
 		<if test="category == 'board_all'">
-			select * from board where
+			select * from board where board_category not like '%공지%' and
 					(board_title like '%' || #{keyword} ||'%' or
 					board_content like '%' || #{keyword} ||'%') and user_email=#{user_email}
 		</if>
 		<if test="category == 'board_title'">
-			select * from board where
+			select * from board where board_category not like '%공지%' and
 					board_title like '%' || #{keyword} ||'%' and user_email=#{user_email}		
 		</if>
 		<if test="category == 'board_content'">
-			select * from board where
+			select * from board where board_category not like '%공지%' and
 					board_content like '%' || #{keyword} ||'%' and user_email= #{user_email}		
 		</if>
 	</select>
