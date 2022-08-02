@@ -41,7 +41,7 @@ public class AdminController {
    public String toMember(int curPage, Model model) throws Exception{
       List<ReportDTO> reportList = service.selectReport();
       model.addAttribute("reportList", reportList);
-
+      
       List<MemberDTO> list = service.selectAllMember(curPage*10-9, curPage*10);
       model.addAttribute("list", list);
 
@@ -65,10 +65,10 @@ public class AdminController {
 	      }else {
 	         for(int seq_report : seqArray) {
 	               rdto = service.selectReportBySeq(seq_report);
-	               bdto = new BlackListDTO(0, rdto.getReport_receive(), null, rdto.getReport_reason());
+	               bdto = new BlackListDTO(0, rdto.getReceive_email(), null, rdto.getReport_reason());
 	               service.insertBl(bdto);
 	               service.deleteReport(seq_report);
-	               service.updateBl(rdto.getReport_receive());
+	               service.updateBl(rdto.getReceive_email());
 	           }
 	         return "success";
 	      }
