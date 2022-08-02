@@ -135,7 +135,10 @@ ul {
   .locationText, .categoryText{
 	font-family : katuri;
 }  
-
+/*모임전체 클릭*/
+.allGroup{
+	cursor:pointer;
+}
 /* body content */
 .content {
 	width: 100%;
@@ -596,7 +599,7 @@ body {
 	<div class="container">
 	<div class = "row">
       <div class = "col-md-12 d-flex justify-content-start">
-         <div class = "mb-1" style = "font-size: 30px; font-family: katuri;"><a href="/user/toViewAllGroupList">모임 전체</a></div>
+         <div class = "allGroup mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
       </div>
    </div>
 	<div class="back row">
@@ -955,7 +958,10 @@ body {
     }
  })
 	
-	
+// 모임전체 클릭시 vuewAllGroupList 이동
+$(".allGroup").on("click", function(){
+	location.href = "/user/toViewAllGroupList";
+})
 	
 	
 	

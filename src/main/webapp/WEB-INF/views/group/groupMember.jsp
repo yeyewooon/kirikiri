@@ -379,7 +379,7 @@ footer.footer {
 			<!-- 테이블 -->
 			<div class="row tableinfo">
 				<div class="table-responsive-md">
-					<table class="table table-bordered">
+					<table class="table table-hover table-bordered">
 						<thead>
 							<tr class="table-primary">
 								<td>직책</td>

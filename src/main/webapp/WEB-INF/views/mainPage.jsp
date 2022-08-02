@@ -873,7 +873,7 @@
          <div class="col p-0">
             <div class="content2">
                <div class="imgContainer">
-                  <div class="row" style="padding : 18px;">
+                  <div class="row">
                      <c:forEach items="${selectAllList}" var="dto" begin="0" end = "5">
                         <div class="col-md-4 d-flex justify-content-center p-4">
                            <div class="card" data-aos="flip-up" data-aos-duration="1000">
@@ -893,7 +893,7 @@
                                  <div class="card-text mt-1">
                                     <strong>${dto.group_title}</strong>
                                  </div>
-                                 <div class="card-text-site d-flex justify-content-end">
+                                 <div class="card-text-site d-flex justify-content-end align-items-center">
                                     <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
                                  </div>
                               </div>
@@ -936,7 +936,7 @@
                                  <div class="card-text mt-1">
                                     <strong>${dto.group_title}</strong>
                                  </div>
-                                 <div class="card-text d-flex justify-content-end">
+                                 <div class=" d-flex card-text-site justify-content-end align-items-center">
                                     <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
                                  </div>
                               </div>
@@ -979,7 +979,7 @@
                                  <div class="card-text mt-1">
                                     <strong>${dto.group_title}</strong>
                                  </div>
-                                 <div class="card-text d-flex justify-content-end">
+                                 <div class="card-text-site d-flex justify-content-end align-items-center">
                                     <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
                                  </div>
                               </div>

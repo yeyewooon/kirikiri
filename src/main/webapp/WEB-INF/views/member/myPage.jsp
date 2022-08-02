@@ -103,8 +103,8 @@
 	margin : auto;
 	width: 100%;
 	position:relative;
-	bottom:18px;
-	height: 20px;
+	bottom:9px;
+	height: 12px;
 	box-shadow: 3px 2px 2px rgb(25, 104, 184);
 }
 
@@ -287,7 +287,7 @@ h4 {
 }
 
 .serviceBox .description, a {
-	color:#008A65;
+	color:#245e4f;
 	text-decoration: none;
 	font-size: 18px;
 	line-height: 22px;
@@ -295,7 +295,7 @@ h4 {
 	padding-left:0px;
 }
 .serviceBox a:hover{
-	color:#67e98e;
+	color:#008A65;
 }
 
 .serviceBox.color1 {
@@ -776,7 +776,7 @@ footer.footer {
 								id="siteModify" style="cursor: pointer;"></i>
 						</h3>
 						<c:forEach items="${siteList}" var="sitedto">
-							<div class="row description" style="color:#008A65;">
+							<div class="row description" style="color:#245e4f;">
 								<div class="col-3 d-flex justify-content-end">
 									<i class="fa-solid fa-location-dot me-3"></i>
 								</div>
@@ -1272,15 +1272,17 @@ footer.footer {
 						</div>
 					</div>
 				</div>
-				<!-- Modal -->
+		<!-- Modal -->
          <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
             data-bs-keyboard="false" tabindex="-1"
             aria-labelledby="staticBackdropLabel" aria-hidden="true">
             <div class="modal-lg justify-content-center modal-dialog modal-dialog-scrollable modal-dialog-centered">
                <div class="modal-content">
                   <div class="modal-header"  style="background-color:#FFFEE9; border-bottom:2px solid #FFE19E;">
-                     <span id="staticBackdropLabel" style="font-size: 16px;"><i
-                        class="fa-solid fa-envelope-open"></i></span><span class="ms-2">쪽지함보기</span>
+                     <span id="staticBackdropLabel" style="font-size: 16px;">
+                     <img style = "width:35px;" src = "/resources/images/mail.png">
+                     </span>
+                     <span class="ms-2">쪽지함보기</span>
                      <button type="button" class="btn-close" data-bs-dismiss="modal"
                         aria-label="Close"></button>
                   </div>

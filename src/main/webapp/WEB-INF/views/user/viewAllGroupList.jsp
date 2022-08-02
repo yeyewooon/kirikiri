@@ -511,7 +511,7 @@ body {
 <div class="container">
    <div class = "row">
       <div class = "col-md-12 d-flex justify-content-start">
-         <div class = "mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
+         <div class = "allGroup mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
       </div>
    </div>
    <div class="back row">

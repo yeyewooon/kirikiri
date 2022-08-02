@@ -228,7 +228,10 @@ img {
 .slick-prev:before, .slick-next:before {
 	color: #444444;
 }
-
+/*모임전체 클릭*/
+.allGroup{
+	cursor:pointer;
+}
 /* 사이즈 */
 .categoryMapper, .locationMapper {
 	width: 120px;
@@ -328,18 +331,6 @@ img {
     transform-style: preserve-3d;
     -webkit-transform-style: preserve-3d;
 }
-
-body {
-    padding: 0;
-    margin: 0;
-    border: 0;
-    overflow-x: none;
-    font-family: Roboto Condensed, sans-serif;
-    font-size: 15px;
-    font-smooth: always;
-    -webkit-font-smoothing: antialiased;
-}
-
 
 @media screen and (max-width: 1260px) {
     .back {
@@ -590,7 +581,7 @@ body {
 	<div class="container">
 	<div class = "row">
       <div class = "col-md-12 d-flex justify-content-start">
-         <div class = "mb-1" style = "font-size: 30px; font-family: katuri;"><a href="/user/toViewAllGroupList">모임 전체</a></div>
+         <div class = "allGroup mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
       </div>
    </div>
 	<div class="back row">
@@ -965,6 +956,10 @@ body {
     }
  })
 	
+// 모임전체 클릭시 vuewAllGroupList 이동
+$(".allGroup").on("click", function(){
+	location.href = "/user/toViewAllGroupList";
+})
 	
 	
 	
