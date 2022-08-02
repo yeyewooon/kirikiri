@@ -76,7 +76,7 @@
 
 	<!-- 내가 쓴 일반게시판 글 갯수 가져오기 -->
 	<select id="selectBoardCount" resultType="int">
-		select count(*) from board
+		select count(*) from board where board_category not like '%공지%'
 	</select>
 
 	<!-- 내가 쓴 모임게시판 글 갯수 가져오기 -->

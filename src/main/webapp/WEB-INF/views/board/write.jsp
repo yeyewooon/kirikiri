@@ -1,183 +1,201 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- summernote -->
-    <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
-    <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- include summernote css/js-->
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-    <!-- swal -->
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="sweetalert2.min.js"></script>
-	<!-- Bootstrap icons-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+<!-- summernote -->
+<script type="text/javascript"
+	src="//code.jquery.com/jquery-3.6.0.min.js"></script>
+<link rel="stylesheet"
+	href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
+<script type="text/javascript"
+	src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- include summernote css/js-->
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
+<!-- swal -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.min.js"></script>
+<!-- Bootstrap icons-->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+	rel="stylesheet">
 <meta charset="UTF-8">
 <title>글 작성</title>
-    <style>
-    	/* header */
-		header {
-		   font-family: 'MICEGothic Bold';
-		}
-		
-		@media ( max-width : 768px) {
-		   #navLogo {
-		      display: none;
-		   }
-		   #myPageIcon {
-		      display: none;
-		   }
-		   #cartIcon {
-		      display: none;
-		   }
-		   #menu {
-		      display: none;
-		   }
-		}
-		
-		/* header */
-		#navLogo {
-		   width: 150px;
-		   height: 100px;
-		}
-		
-		#logoImgs {
-		   width: 100%;
-		   height: 100%;
-		}
-		
-		@media ( min-width : 768px) {
-		   #navibar {
-		      display: none;
-		   }
-		}
-		
-		#logoImg {
-		   width: 50%;
-		}
-		/* header 반응형 끝 */
-		
-		
-		/* 네비바 드롭다운 */
-		.dropdown-toggle:hover {
-		   color: #83bf7b;
-		   border-color: aliceblue;
-		}
-		
-		.dropdown:hover .dropdown-menu {
-		   display: block;
-		   margin-top: 0;
-		   font-weight: bold;
-		}
-		
-		.groupHeaderInfo {
-		   height: 480px;
-		}
-        
-    	/* contents 영역 */
-    	.note-group-image-url{
-    		display: none;
-    	}
-    	#writeWrapper:not(textarea){
-    		font-family: 'InfinitySans-RegularA1';
-    	}
-    	
-        #head{
-            background-color: #d2e3ec;
-            height: 100px;
-            border-top-left-radius: 80px;
-            border-top-right-radius: 80px;
-            border: 3px solid black;
-        }
-        label {
-            margin-top: 5px;
-        }
-        
-        #bottom{
-        	background-color: #d2e3ec;
-            height: 100px;
-            border-bottom-left-radius: 80px;
-            border-bottom-right-radius: 80px;
-            border: 3px solid black;
-        }
-        
-		/* footer */
-		/*풋터 영역*/
-		.footer-imgBox img{
-		   max-width: 100%;
-		}
-		
-		.footerWrapper{
-		   background-color: white;
-		   font-family: "MICEGothic Bold";
-		   font-size: 15px;
-		}
-		.footerBox {
-		   height: 0px;
-		}
-		
-		footer.footer {
-		   padding-top: 2rem;
-		   padding-bottom: 2rem;
-		}
-		
-		.footer a {
-		   text-decoration: none;
-		   color: black;
-		   font-weight: 40px;
-		   font-weight: bold;
-		}
-		
-		.footer-imgBox>img {
-		   height: 100%;
-		   text-align:center;
-		}
-		.footer-imgBox {
-		   height: 100%;
-		   text-align:center;
-		}
-		
-		
-        /* 눈누 폰트 */
-		@font-face {
-            font-family: 'MICEGothic Bold';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
-            font-weight: 700;
-            font-style: normal;
-        }
-        @font-face {
-		    font-family: 'InfinitySans-RegularA1';
-		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
-		    font-weight: normal;
-		    font-style: normal;
-		}
-		
-		@font-face {
-			font-family: '양진체';
-			src:
-				url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-				format('woff');
-			font-weight: normal;
-			font-style: normal;
-		}
-		/* summernote에 추가할 눈누 */
-		@font-face {
-		    font-family: 'EarlyFontDiary';
-		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2') format('woff2');
-		    font-weight: normal;
-		    font-style: normal;
-		}
-		
-		.note-editor .dropdown-toggle::after {
-            display: none;
-        }
-		
-	</style>
+<style>
+/* header */
+header {
+	font-family: 'MICEGothic Bold';
+}
+
+@media ( max-width : 768px) {
+	#navLogo {
+		display: none;
+	}
+	#myPageIcon {
+		display: none;
+	}
+	#cartIcon {
+		display: none;
+	}
+	#menu {
+		display: none;
+	}
+}
+
+/* header */
+#navLogo {
+	width: 150px;
+	height: 100px;
+}
+
+#logoImgs {
+	width: 100%;
+	height: 100%;
+}
+
+@media ( min-width : 768px) {
+	#navibar {
+		display: none;
+	}
+}
+
+#logoImg {
+	width: 50%;
+}
+/* header 반응형 끝 */
+
+/* 네비바 드롭다운 */
+.dropdown-toggle:hover {
+	color: #83bf7b;
+	border-color: aliceblue;
+}
+
+.dropdown:hover .dropdown-menu {
+	display: block;
+	margin-top: 0;
+	font-weight: bold;
+}
+
+.groupHeaderInfo {
+	height: 480px;
+}
+
+/* contents 영역 */
+.note-group-image-url {
+	display: none;
+}
+
+#writeWrapper:not(textarea) {
+	font-family: 'InfinitySans-RegularA1';
+}
+
+#head {
+	background-color: #d2e3ec;
+	height: 100px;
+	border-top-left-radius: 80px;
+	border-top-right-radius: 80px;
+	border: 3px solid black;
+}
+
+label {
+	margin-top: 5px;
+}
+
+#bottom {
+	background-color: #d2e3ec;
+	height: 100px;
+	border-bottom-left-radius: 80px;
+	border-bottom-right-radius: 80px;
+	border: 3px solid black;
+}
+
+/* footer */
+/*풋터 영역*/
+.footer-imgBox img {
+	max-width: 100%;
+}
+
+.footerWrapper {
+	background-color: white;
+	font-family: "MICEGothic Bold";
+	font-size: 15px;
+}
+
+.footerBox {
+	height: 0px;
+}
+
+footer.footer {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+.footer a {
+	text-decoration: none;
+	color: black;
+	font-weight: 40px;
+	font-weight: bold;
+}
+
+.footer-imgBox>img {
+	height: 100%;
+	text-align: center;
+}
+
+.footer-imgBox {
+	height: 100%;
+	text-align: center;
+}
+
+/* 눈누 폰트 */
+@font-face {
+	font-family: 'MICEGothic Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'InfinitySans-RegularA1';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: '양진체';
+	src:
+		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+/* summernote에 추가할 눈누 */
+@font-face {
+	font-family: 'EarlyFontDiary';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2')
+		format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.note-editor .dropdown-toggle::after {
+	display: none;
+}
+</style>
 </head>
 <body>
 	<!--네비바-->
@@ -209,7 +227,8 @@
 						<div class="collapse navbar-collapse justify-content-end"
 							id="navbarNavDropdown">
 							<ul class="navbar-nav mb-2 mb-lg-0">
-								<li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
+								<li class="nav-item"><a class="nav-link"
+									href="/board/toBoard">자유게시판</a></li>
 								<c:if test="${empty loginSession}">
 									<li class="nav-item"><a class="nav-link"
 										href="/login/toLogin">로그인</a></li>
@@ -331,70 +350,76 @@
 			</nav>
 		</div>
 	</header>
-	
+
 	<div class="container" id="writeWrapper" style="width: 70%;">
-        <div id="head" class="row text-center align-items-center my-5">
+		<div id="head" class="row text-center align-items-center my-5">
 			<h1>글쓰기</h1>
 		</div>
-		
-        <form id="writeForm" action="/board/write" method="post">
-	        <div id="writeDiv">
-	        
-		        <div class="row mt-4 text-center">
-		            <div class="col-1">
-		                <label class="form-label fs-5">분류</label>
-		            </div>
-		            <div class="col-2">
-		            	<c:choose>
-		            		<%-- 관리자 계정이라면 공지 쓰기 --%>
-		            		<c:when test="${loginType eq 'admin'}">
-		            			<select name="board_category" class="form-select selectBox" aria-label="유형">
-				                    <option selected value="default">선택</option>
-				                    <option value="공지">공지</option>
-				                    <option value="수다">수다</option>
-				                    <option value="일상">일상</option>
-				                    <option value="기타">기타</option>
-				                </select>
-		            		</c:when>
-		            		<c:otherwise>
-		            			<select name="board_category" class="form-select selectBox" aria-label="유형">
-				                    <option selected value="default">선택</option>
-				                    <option value="수다">수다</option>
-				                    <option value="일상">일상</option>
-				                    <option value="후기">후기</option>
-				                    <option value="기타">기타</option>
-				                </select>
-		            		</c:otherwise>
-		            	</c:choose>
-		                
-		            </div>
-		            <div class="col-1">
-		                <label class="form-label fs-5">제목</label>
-		            </div>
-		            <div class="col-8">
-		                <input type="text" id="title" name="board_title" class="form-control" placeholder="제목을 입력하세요. (최대 18자)" maxlength="18">
-		            </div>
-		        </div>
-				
-		        <div class="row mt-4">
+
+		<form id="writeForm" action="/board/write" method="post">
+			<div id="writeDiv">
+
+				<div class="row mt-4 text-center">
+					<div class="col-1">
+						<label class="form-label fs-5">분류</label>
+					</div>
+					<div class="col-2">
+						<c:choose>
+							<%-- 관리자 계정이라면 공지 쓰기 --%>
+							<c:when test="${loginType eq 'admin'}">
+								<select name="board_category" class="form-select selectBox"
+									aria-label="유형">
+									<option selected value="default">선택</option>
+									<option value="공지">공지</option>
+									<option value="수다">수다</option>
+									<option value="일상">일상</option>
+									<option value="기타">기타</option>
+								</select>
+							</c:when>
+							<c:otherwise>
+								<select name="board_category" class="form-select selectBox"
+									aria-label="유형">
+									<option selected value="default">선택</option>
+									<option value="수다">수다</option>
+									<option value="일상">일상</option>
+									<option value="후기">후기</option>
+									<option value="기타">기타</option>
+								</select>
+							</c:otherwise>
+						</c:choose>
+
+					</div>
+					<div class="col-1">
+						<label class="form-label fs-5">제목</label>
+					</div>
+					<div class="col-8">
+						<input type="text" id="title" name="board_title"
+							class="form-control" placeholder="제목을 입력하세요. (최대 18자)"
+							maxlength="18">
+					</div>
+				</div>
+
+				<div class="row mt-4">
 					<textarea id="summernote" name="board_content"></textarea>
-		        </div>
-	        
-	        </div>
-	        
-	        <div class="row my-4 justify-content-center align-items-center" id="bottom">
-	            <div class="col-auto">
-	                <button type="button" id="cancelBtn" class="btn btn-light">취소</button>
-	            </div>
-	            <div class="col-auto">
-	                <button type="button" id="submitBtn" class="btn" style="background-color: #e6f6ff;">작성 완료</button>
-	            </div>
-	        </div>
-        </form>
+				</div>
+
+			</div>
+
+			<div class="row my-4 justify-content-center align-items-center"
+				id="bottom">
+				<div class="col-auto">
+					<button type="button" id="cancelBtn" class="btn btn-light">취소</button>
+				</div>
+				<div class="col-auto">
+					<button type="button" id="submitBtn" class="btn"
+						style="background-color: #e6f6ff;">작성 완료</button>
+				</div>
+			</div>
+		</form>
 	</div>
-	
+
 	<!-- Footer-->
-	<div class="footerWrapper mt-5" style="border-top:1px solid #e0e3e8;">
+	<div class="footerWrapper mt-5" style="border-top: 1px solid #e0e3e8;">
 		<div class="container">
 			<footer class="footer">
 				<div class="row">
@@ -403,7 +428,8 @@
 					</div>
 					<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
 						<ul class="list-inline mb-2">
-							<li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
+							<li class="list-inline-item"><a
+								href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
 							<li class="list-inline-item">⋅</li>
 							<c:choose>
 								<c:when test="${not empty loginSession}">
@@ -424,16 +450,14 @@
 								</c:otherwise>
 							</c:choose>
 							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item">
-								<c:choose>
+							<li class="list-inline-item"><c:choose>
 									<c:when test="${not empty loginSession}">
 										<a href="/group/toCreateGroup">모임 만들기</a>
 									</c:when>
 									<c:otherwise>
 										<a href="/login/toLogin">모임 만들기</a>
 									</c:otherwise>
-								</c:choose>
-							</li>
+								</c:choose></li>
 							<li class="list-inline-item">⋅</li>
 							<li class="list-inline-item"><a href="/privacy"
 								style="color: red; font-weight: bold;">개인정보처리방침</a></li>
@@ -462,7 +486,7 @@
 			</footer>
 		</div>
 	</div>
-	
+
 	<script>
 		/* summernote */
 		
@@ -627,14 +651,13 @@
 				if(result.isConfirmed){
 					$("#writeForm").submit();
 				}
-			});
+			})
 		});
 		
 		// 취소 버튼
 		$("#cancelBtn").on("click", function(){
 			location.href = "/board/toBoard";
 		})
-		
 	</script>
 </body>
 </html>
