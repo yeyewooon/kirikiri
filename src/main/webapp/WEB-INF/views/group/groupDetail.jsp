@@ -31,30 +31,55 @@
 <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 <!--차트 js-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
-<title>모임 상세 페이지</title>
+<title>모임 상세</title>
 <style>
+@font-face {
+	font-family: 'MICEGothic Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'MICEGothic';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic.woff2')
+		format('woff2');
+	font-weight: 400;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Katuri';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'InfinitySans-RegularA1';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 * {
 	box-sizing: border-box;
 }
 
 body {
-  background-color: #ffffff;
+	background-color: #ffffff;
 }
 
-@font-face {
-    font-family: 'Katuri';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-   font-family: 'InfinitySans-RegularA1';
-   src:
-      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
-      format('woff');
-   font-weight: normal;
-   font-style: normal;
+/* header */
+header {
+	font-family: 'MICEGothic Bold';
 }
 
 /* header 반응형 */
@@ -107,20 +132,19 @@ body {
 	font-weight: bold;
 }
 
-
 .groupHeaderInfo {
-  height: 480px;
+	height: 480px;
 }
 
 /* body menu */
 .groupImgBox {
 	background-color: #fafafa;
 	width: 100%;
-  height: 80%;
+	height: 80%;
 	border-radius: 10px;
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px ;
-  border: 1px solid #e0e3e8;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+	border: 1px solid #e0e3e8;
 }
 
 .groupImgBox img {
@@ -128,18 +152,18 @@ body {
 	width: 100%;
 	border-radius: 10px;
 	border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px ;
+	border-bottom-left-radius: 0px;
 }
 
 .groupTitleTextBox {
-  width: 100%;
-  height: 20%;
-  background-color: #fff;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px ;
-  border: 1px solid #e0e3e8;
-  border-top: 0px;
-  word-break:break-all;
+	width: 100%;
+	height: 20%;
+	background-color: #fff;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	border: 1px solid #e0e3e8;
+	border-top: 0px;
+	word-break: break-all;
 }
 
 .groupActiveBtnBox {
@@ -148,20 +172,23 @@ body {
 }
 
 a:link {
-  color : grey;
-  text-decoration: none;
+	color: grey;
+	text-decoration: none;
 }
+
 a:visited {
-  color : grey;
-  text-decoration: none;
+	color: grey;
+	text-decoration: none;
 }
+
 a:hover {
-  color : black;
-  text-decoration: none;
+	color: black;
+	text-decoration: none;
 }
+
 a:active {
-  color : grey;
-  text-decoration: none;
+	color: grey;
+	text-decoration: none;
 }
 
 .groupInfoSumTitle {
@@ -181,7 +208,7 @@ a:active {
 	width: 100px;
 	height: 100px;
 	border-radius: 50%;
-	background-color : #fafafa;
+	background-color: #fafafa;
 }
 
 .hostImg img {
@@ -206,13 +233,13 @@ a:active {
 }
 
 .groupContent {
-   box-sizing: content-box;
-   word-wrap:break-word;
+	box-sizing: content-box;
+	word-wrap: break-word;
 }
 
 .groupInfo img {
-   width:100%;
-   height: 400px;
+	width: 100%;
+	height: 400px;
 }
 
 /* 모달 프로필  */
@@ -242,8 +269,8 @@ a:active {
 	cursor: pointer
 }
 
-#siren_icon{
-	cursor:pointer;
+#siren_icon {
+	cursor: pointer;
 }
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
@@ -257,35 +284,42 @@ a:active {
 	font-weight: bold;
 }
 
-/*풋터 영역*/
-.footerWrapper{
-   background-color: #fff;
+/* footer */
+.footer-imgBox img {
+	max-width: 100%;
 }
+
+.footerWrapper {
+	background-color: white;
+	font-family: "MICEGothic Bold";
+	font-size: 15px;
+}
+
 .footerBox {
-   height: 0px;
+	height: 0px;
 }
 
 footer.footer {
-   padding-top: 2rem;
-   padding-bottom: 2rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 
 .footer a {
-   text-decoration: none;
-   color: black;
-   font-weight: 40px;
-   font-weight: bold;
+	text-decoration: none;
+	color: black;
+	font-weight: 40px;
+	font-weight: bold;
 }
 
 .footer-imgBox>img {
-   height: 100%;
-   text-align:center;
-}
-.footer-imgBox {
-   height: 100%;
-   text-align:center;
+	height: 100%;
+	text-align: center;
 }
 
+.footer-imgBox {
+	height: 100%;
+	text-align: center;
+}
 
 .uselessBox {
 	height: 40px;
@@ -293,142 +327,144 @@ footer.footer {
 
 /* 새로 시작 */
 .infoSumLogo i {
-  color: #6f767c;
+	color: #6f767c;
 }
 
 #groupTitleHeader {
-  height: 400px;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  word-break:break-all;
-  border: 1px solid #e0e3e8;;
-  position:fixed;
-  width: 480px;
-  background-color : #fafafa;
+	height: 400px;
+	border-radius: 10px;
+	margin-bottom: 10px;
+	word-break: break-all;
+	border: 1px solid #e0e3e8;
+	position: fixed;
+	width: 480px;
+	background-color: #fafafa;
 }
 
 #hiddenGroupInfo {
-  display: none;
+	display: none;
 }
 
-@media ( max-width: 768px ) {
-  #groupTitleHeader {
-    height: 390px;
-    width: 458px;
-    display: none;
-   }
-   #hiddenGroupInfo {
-    display: block;
-  }
-  
-  .groupControllBtn {
-  	width : 100%;
-  }
-
+@media ( max-width : 768px ) {
+	#groupTitleHeader {
+		height: 390px;
+		width: 458px;
+		display: none;
+	}
+	#hiddenGroupInfo {
+		display: block;
+	}
+	.groupControllBtn {
+		width: 100%;
+	}
 }
 
 #groupTitleBottom {
-  border-radius: 10px;
-  word-break:break-all;
+	border-radius: 10px;
+	word-break: break-all;
 }
 
 .groupTitleHeaderImgBox {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background-color: #fff;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background-color: #fff;
 }
 
-.groupTitleHeaderImgBox img{
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
+.groupTitleHeaderImgBox img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
 }
 
 .categoryContainer {
-  height: 66px;
+	height: 66px;
 }
 
-@media ( max-width: 768px ) {
-  .categoryContainer {
-    height: 110px;
-  }
-
-  .joinContainer {
-    display: flex;
-    justify-content: center;
-  }
+@media ( max-width : 768px ) {
+	.categoryContainer {
+		height: 110px;
+	}
+	.joinContainer {
+		display: flex;
+		justify-content: center;
+	}
 }
 
 .categoryText:hover {
-	color:black;
-	border-bottom : 5px solid; black;
+	color: black;
+	border-bottom: 5px solid;
+	black;
 }
 
 /*모임신청, 모임탈퇴 버튼*/
 .btn-primary {
-    color: #fff;
-    background-color: #fc3049;
-    border-color: #fff;
+	color: #fff;
+	background-color: #fc3049;
+	border-color: #fff;
 }
 
 .btn-primary:hover {
-    color: #fff;
-    background-color: #f75266;
-    border-color: #f75266;
+	color: #fff;
+	background-color: #f75266;
+	border-color: #f75266;
 }
+
 .btn-check:focus+.btn-primary, .btn-primary:focus {
-    color: #fff;
-    background-color: #f75266;
-    border-color: #f75266;
-    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+	color: #fff;
+	background-color: #f75266;
+	border-color: #f75266;
+	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
 }
+
 .btn-check:focus+.btn, .btn:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
 }
+
 .btn-check:focus+.btn-primary, .btn-primary:focus {
-    color: #fff;
-    background-color: #f75266;
-    border-color: #b5a8a8;
-    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+	color: #fff;
+	background-color: #f75266;
+	border-color: #b5a8a8;
+	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
 }
+
 .btn-check:focus+.btn, .btn:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
 }
 
 /* 신고하기 */
-.btn-danger , .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
-    background-color: #2551a8 !important;
-    color:#fff;
-    border-color: #2551a8;
+.btn-danger, .btn-danger:hover, .btn-danger:active, .btn-danger:visited
+	{
+	background-color: #2551a8 !important;
+	color: #fff;
+	border-color: #2551a8;
 }
-
-
 
 /* 카트 우측 코끼리 */
 .defaultKokiri {
 	position: relative;
-    left: 0%;
-    bottom: 80px;
-    width: 40px;
-    height: 40px;
-    background-color: white;
+	left: 0%;
+	bottom: 80px;
+	width: 40px;
+	height: 40px;
+	background-color: white;
 }
 
-.btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:visited {
-    background-color: #a4a4a4 !important;
-    color:#fff;
-    border-color: #a4a4a4;
+.btn-secondary, .btn-secondary:hover, .btn-secondary:active,
+	.btn-secondary:visited {
+	background-color: #a4a4a4 !important;
+	color: #fff;
+	border-color: #a4a4a4;
 }
 
-.btn-success, .btn-success:hover, .btn-success:active, .btn-success:visited {
-    background-color: #f36f31 !important;
-    color:#fff;
-    border-color:#f36f31;
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:visited
+	{
+	background-color: #f36f31 !important;
+	color: #fff;
+	border-color: #f36f31;
 }
-
 </style>
 
 </head>
@@ -461,7 +497,7 @@ footer.footer {
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
                         <c:if test="${empty loginSession}">
                            <li class="nav-item"><a class="nav-link"
                               href="/login/toLogin">로그인</a></li>
@@ -559,7 +595,12 @@ footer.footer {
                                  <li>
                                     <hr class="dropdown-divider" style="margin:0px;">
                                  </li>
-                                 <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  <c:if test="${loginType ne 'kakao'}">
+                                      <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  </c:if>
+                                 <c:if test="${loginType eq 'kakao'}">
+                                    <li><a class="dropdown-item mt-2" href="${kakaoLogout}">로그아웃</a></li>
+                                 </c:if>
                               </ul>
                            </div>
                         </c:if>
@@ -931,70 +972,73 @@ footer.footer {
 			</div>
 		</div>
 
-	<!-- Footer-->
-	<div class="footerWrapper" style="margin-top:50px; border-top : 1px solid #e0e3e8;">
-		<div class="container">
-			<footer class="footer">
-				<div class="row">
-					<div class="col-lg-3 footer-imgBox">
-						<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
-					</div>
-					<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-						<ul class="list-inline mb-2">
-                  <li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+	    <!-- Footer-->
+  <div class="footerWrapper mt-5" style="border-top:1px solid #e0e3e8;">
+    <div class="container">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-lg-3 footer-imgBox">
+            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+             <ul class="list-inline mb-2">
+            <li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+            <li class="list-inline-item">⋅</li>
+            <c:choose>
+               <c:when test="${not empty loginSession}">
+                  <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
                   <li class="list-inline-item">⋅</li>
-                  <c:choose>
-                     <c:when test="${not empty loginSession}">
-                        <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-                     </c:when>
-                     <c:otherwise>
-                        <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-                     </c:otherwise>
-                  </c:choose>
+                  <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+               </c:when>
+               <c:otherwise>
+                  <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
                   <li class="list-inline-item">⋅</li>
-                  <li class="list-inline-item">
-                     <c:choose>
-                        <c:when test="${not empty loginSession}">
-                           <a href="/group/toCreateGroup">모임 만들기</a>
-                        </c:when>
-                        <c:otherwise>
-                           <a href="/login/toLogin">모임 만들기</a>
-                        </c:otherwise>
-                     </c:choose>
-                  </li>
-                  <li class="list-inline-item">⋅</li>
-                  <li class="list-inline-item"><a href="/privacy"
-                     style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-               </ul>
-						<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-							개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-						<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-							57 이레빌딩</p>
-						<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-							2022. All Rights Reserved.</p>
-					</div>
-					<div class="col-lg-3 h-100 text-center text-lg-start my-auto">
-						<ul class="list-inline mb-0">
-							<li class="list-inline-item me-4"><a href="#!"><i
-									class="bi-facebook fs-3"></i></a></li>
-							<li class="list-inline-item me-4"><a href="#!"><i
-									class="bi-twitter fs-3"></i></a></li>
-							<li class="list-inline-item"><a href="#!"><i
-									class="bi-instagram fs-3"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
+                  <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+               </c:otherwise>
+            </c:choose>
+            <li class="list-inline-item">⋅</li>
+            <li class="list-inline-item">
+               <c:choose>
+                  <c:when test="${not empty loginSession}">
+                     <a href="/group/toCreateGroup">모임 만들기</a>
+                  </c:when>
+                  <c:otherwise>
+                     <a href="/login/toLogin">모임 만들기</a>
+                  </c:otherwise>
+               </c:choose>
+            </li>
+            <li class="list-inline-item">⋅</li>
+            <li class="list-inline-item"><a href="/privacy"
+               style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+         </ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
+              사업자등록번호 : 22-02-22
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2022. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-0">
+            <li class="list-inline-item me-4"><a
+               href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+            <li class="list-inline-item me-4"><a
+               href="https://twitter.com/?lang=ko"><i
+                  class="bi-twitter fs-3"></i></a></li>
+            <li class="list-inline-item"><a
+               href="https://www.instagram.com/"><i
+                  class="bi-instagram fs-3"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
 	<script>
-
-
-
 	// width 사이즈 감지
 	  window.onresize = function(){
 	    let widthSize = document.documentElement.clientWidth;
