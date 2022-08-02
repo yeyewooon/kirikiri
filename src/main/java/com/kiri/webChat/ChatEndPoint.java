@@ -24,6 +24,7 @@ public class ChatEndPoint {
 		// ws의 Session은 HttpSession과 다름.
 		private static List<Session> clients = Collections.synchronizedList(new ArrayList<>());
 		private String user_nickname;
+		private String user_email;
 		private static List<String> nickList = new ArrayList<String>();
 		private Group_ChatService service = SpringContext.getApplicationContext().getBean(Group_ChatService.class);
 		private static Map<String, Integer> seqMap = new HashMap<>();
@@ -34,6 +35,7 @@ public class ChatEndPoint {
 		public void onOpen(Session session, EndpointConfig config, @PathParam("seq_group") int seq_group) {
 			//원래 이거
 			String user_nickname = (String)config.getUserProperties().get("user_nickname");
+			user_email = (String)config.getUserProperties().get("user_email");
 			System.out.println("접속한 사용자 : "+ user_nickname);
 			 // 멤버필드로 셋팅해두기(onMessage메서드에서 사용가능하게끔)
 			this.user_nickname = user_nickname;
@@ -75,7 +77,7 @@ public class ChatEndPoint {
 			System.out.println(obj.toString());
 			
 			try{
-				service.insert(new Group_ChatDTO(0, seq_group, this.user_nickname, message, null));
+				service.insert(new Group_ChatDTO(0, seq_group, this.user_email, this.user_nickname, message, null));
 			}catch(Exception e) {
 				e.printStackTrace();
 				// 만약 db에 데이터 저장이 정상적으로 이뤄지지 않으면 다른 사용자들에게 메세지를 전송하는 작업 또한 하지 않도록 메서드의 흐름 종료 -> return

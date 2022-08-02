@@ -218,6 +218,10 @@ public class MemberController {
 		
 		System.out.println("update Dto : " +dto);
 		
+		service.groupChatmodify(dto.getUser_email(), dto.getUser_nickname());
+		service.groupMemmodify(dto.getUser_email(), dto.getUser_nickname());
+		service.groupApplymodify(dto.getUser_email(), dto.getUser_nickname());
+		
 		service.profileModify(dto);
 		session.setAttribute("loginSession", dto);
 		return "redirect:myPage";

@@ -86,7 +86,7 @@
 
 .headWrapper > img{
    width:180px;
-   height:180px;   
+   height:180px;
 }
 
 .topBtn{
@@ -198,7 +198,7 @@ h4 {
 }
 .kokiriImg > img{
    width:150px;
-   height:150px;   
+   height:150px;
 }
 .modal-content {
    width: 580px;
@@ -562,7 +562,7 @@ footer.footer {
       <div class="row mb-4 text-center justify-content-center">
          <div class="col-auto">
             <h1 style="font-family: 'Mochiy Pop One', sans-serif;">My Profile</h1>
-            <div class="line"></div>   
+            <div class="line"></div>
          </div>
          <div class="col-auto d-flex align-items-center">
             <button type="button" class="btn topBtn"><i class="fa-solid fa-pen-to-square"></i></button>
@@ -587,7 +587,7 @@ footer.footer {
             <div class="col-8 profileBox" style="background-color: white;">
                <div class="headWrapper">
                   <img src="/resources/images/kokiri.png" id="headImg">
-               </div>      
+               </div>
                <div class="profileName">
                   <span style="font-size: 20px"> <strong
                      style="font-size: 25px; font-family: 'Mochiy Pop One', sans-serif;">${memberdto.user_nickname}</strong>님
@@ -613,15 +613,15 @@ footer.footer {
                      </tr>
                   </tbody>
                </table>
-                  
+
             </div>
-            
+
             <input type="text" class="d-none" name="${memberdto}" value="${memberdto}">
-            
+
          </div>
          <div class="row">
             <div class="col-md-8 modifyPro text-center" style="display: none;">
-               <i class="fa-solid fa-folder-plus ms-5 me-3"></i> 
+               <i class="fa-solid fa-folder-plus ms-5 me-3"></i>
                <span id="modifyProfilePic" style="cursor: pointer; user-select: none">프로필 사진 변경</span>
             </div>
             <div class="col-md-4"></div>
@@ -796,7 +796,7 @@ footer.footer {
                </div>
             </div>
             <!-- modal -->
-   
+
             <div class="modal fade" id="exampleModal1" tabindex="-1"
                aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
                <div class="modal-dialog modal-dialog-centered">
@@ -903,7 +903,7 @@ footer.footer {
                                           error: function (e) {
                                               console.log(e);
                                           }
-                                      })                                           
+                                      })
                                      }
                                  });
                              </script>
@@ -920,7 +920,7 @@ footer.footer {
                         data-bs-toggle="modal" data-bs-target="#exampleModal"
                         id="hobbyModify" style="cursor: pointer;"></i>
                   </h3>
-   
+
                   <c:forEach items="${hobbyList}" var="hobbydto">
                      <div class="row description" style="color: #27436d;">
                         <div class="col-3 d-flex justify-content-end">
@@ -934,7 +934,7 @@ footer.footer {
                   </c:forEach>
                </div>
                <!-- Modal -->
-   
+
                <div class="modal fade" id="exampleModal" tabindex="-1"
                   aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
                   <div class="modal-dialog modal-dialog-centered">
@@ -1045,12 +1045,12 @@ footer.footer {
                                    $("#saveBtn").on("click", function () {
                                        let checkAccess = $('input[name=hobby]:checked').val();
                                        let user_email = $("#user_email").val();
-                                       
+
                                        let checkBoxArr = [];
                                        $("input[name=hobby]:checked").each(function () {
                                            checkBoxArr.push($(this).val());
                                        })
-                                       
+
                                        if(checkBoxArr == ""){
                                           Swal.fire('적어도 한개는 선택해주세요!!!')
                                        }else{
@@ -1066,9 +1066,9 @@ footer.footer {
                                             error: function (e) {
                                                 console.log(e);
                                             }
-                                        })                                               
+                                        })
                                        }
-                                     
+
                                    });
                                </script>
                      </div>
@@ -1228,7 +1228,7 @@ footer.footer {
                        let user_email = $("#user_email").val();
                        location.href = "/mem/profileModifyPage?user_email=" + user_email;
                    })
-   
+
                    /* 희망 모임 삭제 */
                    $(".wishDelete").on("click", function () {
                        let seq_group = $(this).next().val();
@@ -1519,7 +1519,7 @@ footer.footer {
         $('.receiveBtn').removeClass('d-none');
         $('.msgSend').css("background-color", "#FFF");
         $('.msgReceive').css("background-color", "#FFECC2");
-        	
+
         let myId = $("#myId").val();
         $.ajax({
             url: "/user/receiveMsg?user_receive=" + myId,
@@ -1591,22 +1591,22 @@ footer.footer {
         window.close();
     })
 
-    // 쪽지 답자 
+    // 쪽지 답자
     $(".table").on("click",".sendNickname",function() {
-    	let user_receive = $(this).text(); // 답장 받는 사람 닉네임 
-    	$("#user_receive").val(user_receive); // 답장 받는 사람 닉네임 넣어주기 
-    	$("#msgSelect").addClass("d-none"); // 받은 쪽지함, 보낸 쪽지함 안보이게 
-    	$(".table-content").addClass("d-none"); // 쪽지 테이블 안보이게 
+    	let user_receive = $(this).text(); // 답장 받는 사람 닉네임
+    	$("#user_receive").val(user_receive); // 답장 받는 사람 닉네임 넣어주기
+    	$("#msgSelect").addClass("d-none"); // 받은 쪽지함, 보낸 쪽지함 안보이게
+    	$(".table-content").addClass("d-none"); // 쪽지 테이블 안보이게
     	$("#msgForm").removeClass("d-none"); // 답장 form 보이게
-    	$("#msgTitle").html("답장 보내기") // 쪽지함보기 -> 답장 보내기 
-    	$("#deleteBtn").addClass("d-none"); // 삭제 버튼 안보이게 
-    	$("#replyBtn").removeClass("d-none"); // 답장 버튼 보이게 
+    	$("#msgTitle").html("답장 보내기") // 쪽지함보기 -> 답장 보내기
+    	$("#deleteBtn").addClass("d-none"); // 삭제 버튼 안보이게
+    	$("#replyBtn").removeClass("d-none"); // 답장 버튼 보이게
     })
 
-    // 답장 버튼 눌렀을 떄 
+    // 답장 버튼 눌렀을 떄
     $("#replyBtn").on("click",function() {
-    	
-    	// 내용 비었을 떄 
+
+    	// 내용 비었을 떄
     	if($("#msgContent").val() == "") {
             Swal.fire('내용을 입력해주세요');
             return;
@@ -1620,13 +1620,13 @@ footer.footer {
           data : {"user_receive" : user_receive, "msgContent" : msgContent},
           dataType : "text",
           success : function(data) {
-             if(data == "success") { // 성공시 
+             if(data == "success") { // 성공시
             	 Swal.fire('답장 완료');
             	// 1 초있다가 페이지 로드
 					setTimeout(function() {
 						window.location.href = "";
 					},700);
-					
+
              }else {
             	 Swal.fire({
 					  icon: 'error',
@@ -1644,12 +1644,12 @@ footer.footer {
           }
          })
     })
-  
+
     // 다시 홈으로 돌아오는 함수
 		let moveSite = function() {
 			window.location.href = "";
 		}
-    
+
 </script>
 </body>
 

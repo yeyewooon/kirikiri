@@ -158,7 +158,7 @@ public class AdminController {
    System.out.println("그룹 번호 : " + seq_group);
    return "redirect:/admin/toGroupAdmin?curPage=1";
    }
-   
+
    ////게시판 호준
    @RequestMapping(value = "/toBoard") // 게시물 관리
    public String toBoard(int curPage, Model model) throws Exception{
@@ -174,11 +174,11 @@ public class AdminController {
 
       // group_board 총 count 가져오기
 	 int group_boardCnt = service.selectGroupBoardCount();
-	
+
 	 int totalCnt = boardCnt + group_boardCnt;
 	 System.out.println(totalCnt);
 	 model.addAttribute("totalCnt",totalCnt);
-	
+
 	 // 페이지 네이션
 	 HashMap<String, Object> map = service.getBoardPageNavi(curPage);
 	 model.addAttribute("naviMap", map);
@@ -199,7 +199,7 @@ public class AdminController {
 	   List<BoardDTO> selectNoticeBoardList = service.selectNoticeBoardList();
 	   return selectNoticeBoardList;
    }
-   
+
    @RequestMapping(value = "/meetingBoard") // 모임 게시판 조회
    @ResponseBody
    public List<Group_BoardDTO> meetingBoard(int curPage) throws Exception {
@@ -214,7 +214,7 @@ public class AdminController {
       List<BoardDTO> boardlist = service.generalSearchList(category, keyword);
       return boardlist;
    }
-   
+
    @RequestMapping(value = "/noticeSearch") // 일반 게시판의 공지 검색
    @ResponseBody
    public List<BoardDTO> noticeSearch(String category, String keyword) throws Exception {
@@ -270,7 +270,7 @@ public class AdminController {
 				model.addAttribute("cntGroupCal",cntGroupCal);
 				model.addAttribute("cntPreLocationList",cntPreLocationList);
 				model.addAttribute("cntLoginLogList",cntLoginLogList);
-		 
+
 		return "/admin/adminMain";
 	}
 }
