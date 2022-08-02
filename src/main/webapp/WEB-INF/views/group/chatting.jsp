@@ -33,7 +33,7 @@
 * {
 	box-sizing: border-box;
 	font-family: 'Bazzi';
-	font-size : 11px;
+	font-size : 15px;
 }
 
 /* 눈누 폰트 */
@@ -75,7 +75,7 @@
 }
 
 .users>p {
-	font-size: 15px;
+	font-size: 16px;
 	text-align: center;
 	padding-top: 8px;
 	color: darkolivegreen;
@@ -121,7 +121,7 @@
 }
 
 .contentBox {
-	font-size: 11px;
+	font-size: 15px;
 }
 
 .chatBox {
@@ -132,7 +132,7 @@
 	height: 90%;
 	overflow-y: scroll;
 	-ms-overflow-style: none;
-	margin-bottom : 10px;
+	padding-bottom : 10px;
 }
 
 .messages::-webkit-scrollbar {
@@ -142,13 +142,20 @@
 
 #time {
 	color: darkgray;
-	font-size: 10px;
+	font-size: 13px;
 }
 
 .mymsg{
-	margin-top : 10px;
+	margin-top : 20px;
 	overflow : hidden;
 	margin-left : 35%;
+	word-break:break-all;
+}
+
+.othermsg{
+	margin-top : 20px;
+	margin-right : 35%;
+	word-break:break-all;
 }
 
 .mymsg .msgBox {
@@ -163,6 +170,8 @@
 .mymsg .timename{
 	float: right;
 	margin-left : 60%;
+	width: 100%;
+    text-align: end;
 }
 
 .othermsg .msgBox {
@@ -171,7 +180,6 @@
 	background-color: #d6ede0;
 	padding: 10px;
 	border-radius: 13px;
-	margin-right : 20%;
 }
 
 .inputmsg {
@@ -222,10 +230,10 @@ hr{
 	<div class="container chatting">
 		<input type="text" class="d-none" id="nickname" value="${user_nickname }">
 		<input type="text" class="d-none" id="seq_group" value="${seq_group }">
-		<div class="row title">
-			<div class="col-12 d-flex justify-content-center pt-3">
+		<div class="row title text-center pt-1">
+			<div class="col-12">
 				<span style="font-size: 32px; color: navy; font-family: 'KOTRAHOPE';">${tgList[0].group_title}</span> 
-				<span style="font-size: 30px; font-family: 'KOTRAHOPE';">&nbsp;채팅</span>
+			<span style="font-size: 30px; font-family: 'KOTRAHOPE';">&nbsp;채팅</span>
 			</div>
 		</div>
 		<div class="row contentBox">
@@ -265,26 +273,26 @@ hr{
 									<div style="clear: both;"></div>
 									<c:set var = "str" value = "${gcList.message }"/>
 									<c:if test="${fn:contains(str, '/resources/')}">
-										<div class="msgBox"><img style="pointer-events : none;" class="emojiImg" src="${gcList.message }"></div>
+										<div class="msgBox"><span><img style="pointer-events : none;" class="emojiImg" src="${gcList.message }"></span></div>
 									</c:if>
     								<c:if test="${not fn:contains(str, '/resources/')}">
-										<div class="msgBox">${gcList.message }</div>
+										<div class="msgBox"><span>${gcList.message }</span></div>
 									</c:if>
 								</div>
 								<div style="clear: both;"></div>
 							</c:when>
 							<c:otherwise>
-								<div class="othermsg mt-3">
+								<div class="othermsg">
 									<div class="timename">
 										<span>${gcList.user_nickname } &nbsp</span>
 										<span id="time">${gcList.sendDate }</span>
 									</div>
 									<c:set var = "str" value = "${gcList.message }"/>
 									<c:if test="${fn:contains(str, '/resources/')}">
-										<div class="msgBox"><img style="pointer-events : none;" class="emojiImg" src="${gcList.message }"></div>
+										<div class="msgBox"><span><img style="pointer-events : none;" class="emojiImg" src="${gcList.message }"></span></div>
 									</c:if>
     								<c:if test="${not fn:contains(str, '/resources/')}">
-										<div class="msgBox">${gcList.message }</div>
+										<div class="msgBox"><span>${gcList.message }</span></div>
 									</c:if>
 								</div>
 							</c:otherwise>
@@ -421,29 +429,32 @@ hr{
 		// 웹소켓 객체 생성할때 반드시 서버의 ip 주소값은 실제 ip 주소를 이용
 		// 포트번호 다르면 :포트번호/chat 39.120.220.2:11111
 		var seq_group = $("#seq_group").val();
+		let ws = new WebSocket("ws://192.168.20.21/chat/"+seq_group);
 		let nickname = $("#nickname").val();
-			$(".emojiBox").fadeToggle();
-			$(".ogu").css("display","none");
-			$("#rupi").css("box-shadow","2px 2px 2px 2px skyblue");
-			$("#ogu").css("box-shadow", "none");
-			$("#ogu").click(function(){
-				$("#rupi").css("box-shadow", "none");
-				$(".ogu").css("display","block");
-				$(".rupi").css("display","none");
-				$("#ogu").css("box-shadow","2px 2px 2px 2px skyblue");
-			})
-			$("#rupi").click(function(){
-				$("#ogu").css("box-shadow", "none");
-				$("#rupi").css("box-shadow", "2px 2px 2px 2px skyblue");
-				$(".rupi").css("display","block");
-				$(".ogu").css("display","none");
-			})
-			if($("#message").click(function(){
-				$(".messages").css("zIndex", "1");
-				$(".emojiBox").css("display", "none");
-			}))
-			$(".rupi").css("display","block");
-		})
+		//이모티콘 나오게 하기
+	      $(".emoticon").click(function(){
+	         $(".emojiBox").fadeToggle();
+	         $(".ogu").css("display","none");
+	         $("#rupi").css("box-shadow","2px 2px 2px 2px skyblue");
+	         $("#ogu").css("box-shadow", "none");
+	         $("#ogu").click(function(){
+	            $("#rupi").css("box-shadow", "none");
+	            $(".ogu").css("display","block");
+	            $(".rupi").css("display","none");
+	            $("#ogu").css("box-shadow","2px 2px 2px 2px skyblue");
+	         })
+	         $("#rupi").click(function(){
+	            $("#ogu").css("box-shadow", "none");
+	            $("#rupi").css("box-shadow", "2px 2px 2px 2px skyblue");
+	            $(".rupi").css("display","block");
+	            $(".ogu").css("display","none");
+	         })
+	         if($("#message").click(function(){
+	            $(".messages").css("zIndex", "1");
+	            $(".emojiBox").css("display", "none");
+	         }))
+	         $(".rupi").css("display","block");
+	      })
 		
 		$(".emojiImg").on("click", function () {
 			console.log($(".emojiImg"));
@@ -616,8 +627,9 @@ hr{
 			let div_tn = $("<div>").attr("class", "timename");
 			div_tn.append(span1, span2);
 			
-			let div_msgB = $("<div>").attr("class", "msgBox").html(emoji);
-			
+			let div_msgB = $("<div>").attr("class", "msgBox");
+			let span = $("<span>").html(emoji);
+			div_msgB.append(span);
 			let div_mymsg = $("<div>").attr("class", "mymsg");
 			div_mymsg.append(div_tn, div_msgB);
 			$(".messages").append(div_mymsg, div_clear);
@@ -639,13 +651,15 @@ hr{
 				
 				let span1 = $("<span>").attr("id", "time").html(serverTime());
 				let span2 = $("<span>").html(nickname); 
-				let div_tn = $("<div>").attr("class", "timename");
+				let div_tn = $("<div>").attr("class", "timename");		
 				div_tn.append(span1, span2);
-				
-				let div_msgB = $("<div>").attr("class", "msgBox").html(message);
 
+				let div_msgB = $("<div>").attr("class", "msgBox");
+				let span = $("<span>").html(message);
+				div_msgB.append(span);
 				let div_mymsg = $("<div>").attr("class", "mymsg");
 				div_mymsg.append(div_tn, div_msgB);
+				//
 				$(".messages").append(div_mymsg, div_clear);
 				
 				$(".messages").scrollTop($(".messages")[0].scrollHeight);
@@ -660,9 +674,10 @@ hr{
 			let div_tn = $("<div>").attr("class", "timename");
 			div_tn.append(span2, span1);
 			
-			let div_msgB = $("<div>").attr("class", "msgBox").html("<img style='pointer-events : none;' class='emojiImg' src = '" + msg.message + "'>");
-
-			let div_othermsg = $("<div>").attr("class", "othermsg mt-3");
+			let div_msgB = $("<div>").attr("class", "msgBox");
+			let span = $("<span>").html("<img style='pointer-events : none;' class='emojiImg' src = '" + msg.message + "'>");
+			div_msgB.append(span);
+			let div_othermsg = $("<div>").attr("class", "othermsg");
 			div_othermsg.append(div_tn, div_msgB);
 			$(".messages").append(div_othermsg);
 		}
@@ -674,9 +689,10 @@ hr{
 			let div_tn = $("<div>").attr("class", "timename");
 			div_tn.append(span2, span1);
 			
-			let div_msgB = $("<div>").attr("class", "msgBox").html(msg.message);
-
-			let div_othermsg = $("<div>").attr("class", "othermsg mt-3");
+			let div_msgB = $("<div>").attr("class", "msgBox");
+			let span = $("<span>").html(msg.message);
+			div_msgB.append(span);
+			let div_othermsg = $("<div>").attr("class", "othermsg");
 			div_othermsg.append(div_tn, div_msgB);
 			$(".messages").append(div_othermsg);
 		}

@@ -415,24 +415,24 @@ footer.footer {
       <div class="container-btn">
          <!-- 버튼 그룹 -->
          <div class="row rowBtn">
-			<div class="col-sm-3 btnBox">
-				<div id = "groupApply" class="btn-3d blue applyBtn" style="font-weight: bold;">가입 신청</div>
+			<div class="col-md-3 btnBox">
+				<div id = "groupApply" class="row btn-3d blue applyBtn" style="font-weight: bold;">가입 신청</div>
 			</div>
-			<div class="col-sm-3 btnBox">
-				<div id="groupMember" class="btn-3d blue" style="font-weight: bold;">멤버 관리</div>
+			<div class="col-md-3 btnBox">
+				<div id="groupMember" class="row btn-3d blue" style="font-weight: bold;">멤버 관리</div>
 			</div>
-			<div class="col-sm-3 btnBox">
-				<div id="groupModify" class="btn-3d blue" style="font-weight: bold;">모임 수정</div>
+			<div class="col-md-3 btnBox">
+				<div id="groupModify" class="row btn-3d blue" style="font-weight: bold;">모임 수정</div>
 			</div>
-			<div class="col-sm-3 btnBox">
-				<div id="groupDelete" class="btn-3d blue" style="font-weight: bold;">모임 해산</div>
+			<div class="col-md-3 btnBox">
+				<div id="groupDelete" class="row btn-3d blue" style="font-weight: bold;">모임 해산</div>
 			</div>
          </div>
 
          <!-- 테이블 -->
          <div class="row tableinfo">
             <div class="col-12 d-flex justify-content-center">
-               <table class="table table-bordered">
+               <table class="table table-hover table-bordered">
                   <thead>
                      <tr class="table-primary">
                         <td>닉네임</td>

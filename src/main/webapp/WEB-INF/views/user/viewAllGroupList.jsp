@@ -49,6 +49,11 @@
     font-weight: normal;
     font-style: normal;
 }
+/* 네비바  */
+* {
+   box-sizing: border-box;
+   font-family: "MICEGothic Bold"; 
+}
 /* header */
 header {
 	font-family : 'MICEGothic Bold';
@@ -538,7 +543,7 @@ body {
 <div class="container">
    <div class = "row">
       <div class = "col-md-12 d-flex justify-content-start">
-         <div class = "mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
+         <div class = "allGroup mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
       </div>
    </div>
    <div class="back row">
@@ -791,7 +796,21 @@ body {
                <div class="imgContainer">
                   <div class="row" style="padding : 18px;">
                   	<c:if test = "${selectAllList.size() == 0}">
-                  		<div>아직 개설된 모임이 없습니다.</div>
+                           <div class="col-sm-12 col-md-12 d-flex flex-column align-items-center justify-content-center" >
+                              <div>
+                                 <div><h3>현재 해당 카테고리는 그룹이 존재하지 않습니다.<h3></div>
+                                 <div style="font-size : 18px;">자신이 모임장이 되어서 취미를 공유하고
+                                    모임 일정을 통해 즐거운 만남과, 모임 게시판, 모임 채팅을 활용하여
+                                    다양한 이야기와 취미활동을 공유하세요.
+                                 </div>
+                                 <div class="button mt-3">
+                                          <p class="btnText">모임만들기</p>
+                                          <div class="btnTwo">
+                                             <p class="btnText2">Go!</p>
+                                          </div>
+                                       </div>
+                              </div>
+                           </div>
                   	</c:if>
                   	<c:if test = "${selectAllList.size() > 0}">
 						<c:forEach items="${selectAllList}" var="dto">
