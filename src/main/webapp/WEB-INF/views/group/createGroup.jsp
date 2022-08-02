@@ -143,21 +143,35 @@ function uploadSummernoteImageFile(file, editor){
 <title>Insert title here</title>
 <style>
 @font-face {
-    font-family: 'Katuri';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
-    font-weight: normal;
+	font-family: 'Katuri';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'InfinitySans-RegularA1';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+    font-family: 'MICEGothic Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+    font-weight: 700;
     font-style: normal;
 }
+
 @font-face {
-   font-family: 'InfinitySans-RegularA1';
-   src:
-      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
-      format('woff');
-   font-weight: normal;
-   font-style: normal;
-}
-.dropdown-toggle::after {
-   display: none;
+    font-family: 'MICEGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
 }
 
 body {
@@ -165,10 +179,14 @@ body {
 }
 
 * {
-   box-sizing: border-box;
+	box-sizing: border-box;
 }
 
-/* header 반응형 */
+/* header */
+header {
+	font-family : 'MICEGothic Bold';
+ }
+
 @media ( max-width : 768px) {
    #navLogo {
       display: none;
@@ -206,97 +224,6 @@ body {
    width: 50%;
 }
 
-/*타이틀*/
-.create-title{
-    font-family: katuri;
-    font-size: 60px;
-    font-weight: bold;
-    text-align: center;
-    background: linear-gradient(to top, #FFE400 20%, transparent 30%)
-    }
-.title-image{
-    margin-bottom: 35px;
-    width: 70px;
-    height: 70px;
-	}
-/*row 영역*/
-.style{
-	border: 2px solid #f3fffc;
-    border-radius: 50px;
-    padding: 50px;
-    background-color: #f3fffc;
-    box-shadow: 3px 3px 5px 5px rgb(182 182 181);
-}
-/*Interest 버튼 영역*/
-.categoryBtn{
-	font-family:InfinitySans-RegularA1;
-}
-.btn-outline-primary{
-	color:black;
-	border: 2px solid #b5a8a8;
-}
-.btn-outline-primary:hover {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
-    }
-.btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
-}
-.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
-    box-shadow: 0 0 0 0.25rem rgb(130 133 137 / 50%);
-}
-.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
-    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
-}
-.btn-outline-primary:hover {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
-}
-
-/*Basic Info*/
-.note-editable{
-	background-color:white;
-}
-
-/*지역선택 버튼*/
-.btn-primary:hover {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
-}
-.btn-primary {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #fff;
-}
-.btn-check:focus+.btn-primary, .btn-primary:focus {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
-    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
-}
-.btn-check:focus+.btn, .btn:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
-}
-.btn-check:focus+.btn-primary, .btn-primary:focus {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
-    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
-}
-.btn-check:focus+.btn, .btn:focus {
-    outline: 0;
-    box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
-}
-/*아이콘 크기*/
-.fa-solid, .fas {
-    font-size: 30px;
-}
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
    color: #83bf7b;
@@ -309,35 +236,160 @@ body {
    font-weight: bold;
 }
 
+/* 썸머노트 드롭다운 */
+.note-editor .dropdown-toggle::after {
+            display: none;
+        }
+
+/*타이틀*/
+.create-title {
+	font-family: katuri;
+	font-size: 60px;
+	font-weight: bold;
+	text-align: center;
+	background: linear-gradient(to top, #FFE400 20%, transparent 30%)
+}
+
+.title-image {
+	margin-bottom: 35px;
+	width: 70px;
+	height: 70px;
+}
+/*row 영역*/
+.style {
+	border: 2px solid #f3fffc;
+	border-radius: 50px;
+	padding: 50px;
+	background-color: #f3fffc;
+	box-shadow: 3px 3px 5px 5px rgb(182, 182, 181);
+}
+/*Interest 버튼 영역*/
+.categoryBtn {
+	font-family: InfinitySans-RegularA1;
+}
+
+.btn-outline-primary {
+	color: black;
+	border: 2px solid #b5a8a8;
+}
+
+.btn-outline-primary:hover {
+	color: #fff;
+	background-color: #b5a8a8;
+	border-color: #b5a8a8;
+}
+
+.btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary,
+	.btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show,
+	.btn-outline-primary:active {
+	color: #fff;
+	background-color: #b5a8a8;
+	border-color: #b5a8a8;
+}
+
+.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus,
+	.btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus,
+	.btn-outline-primary:active:focus {
+	box-shadow: 0 0 0 0.25rem rgb(130 133 137/ 50%);
+}
+
+.btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus,
+	.btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus,
+	.btn-outline-primary:active:focus {
+	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
+}
+
+.btn-outline-primary:hover {
+	color: #fff;
+	background-color: #b5a8a8;
+	border-color: #b5a8a8;
+}
+
+/*Basic Info*/
+.note-editable {
+	background-color: white;
+}
+
+/*지역선택 버튼*/
+.btn-primary:hover {
+	color: #fff;
+	background-color: #b5a8a8;
+	border-color: #b5a8a8;
+}
+
+.btn-primary {
+	color: #fff;
+	background-color: #b5a8a8;
+	border-color: #fff;
+}
+
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+	color: #fff;
+	background-color: #b5a8a8;
+	border-color: #b5a8a8;
+	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
+}
+
+.btn-check:focus+.btn, .btn:focus {
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
+}
+
+.btn-check:focus+.btn-primary, .btn-primary:focus {
+	color: #fff;
+	background-color: #b5a8a8;
+	border-color: #b5a8a8;
+	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
+}
+
+.btn-check:focus+.btn, .btn:focus {
+	outline: 0;
+	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
+}
+/*아이콘 크기*/
+.fa-solid, .fas {
+	font-size: 30px;
+}
+/* 네비바 드롭다운 */
+.dropdown-toggle:hover {
+	color: #83bf7b;
+	border-color: aliceblue;
+}
+
+.dropdown:hover .dropdown-menu {
+	display: block;
+	margin-top: 0;
+	font-weight: bold;
+}
+
 a {
-   text-decoration: none;
-   color: black;
+	text-decoration: none;
+	color: black;
 }
 
 .mainContainer {
-   margin-top: 40px;
+	margin-top: 40px;
 }
 
 .mainIcon i {
-   color: #316f8c;
+	color: #316f8c;
 }
 
-
 .mainFooter {
-   height: 70px;
+	height: 70px;
 }
 
 #search-addon {
-   cursor: pointer;
+	cursor: pointer;
 }
 
 ul {
-   list-style: none;
-   padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 .mainFooterBtnBox {
-   margin-left: 30%;
+	margin-left: 30%;
 }
 
 .memberCntBox {
@@ -348,57 +400,56 @@ ul {
 }
 
 .plusBtn, .minusBtn {
-   width: 35px;
-   color: #fff;
+	width: 35px;
+	color: #fff;
 }
 
 .plusBtn, .minusBtn:hover {
-   cursor: pointer;
+	cursor: pointer;
 }
 
 .memberCnt {
-   width: 70px;
-   color: #fff;
-}
-/* 네비바 드롭다운 */
-.dropdown-toggle:hover {
-   color: #83bf7b;
-   border-color: aliceblue;
+	width: 70px;
+	color: #fff;
 }
 
-.dropdown:hover .dropdown-menu {
-   display: block;
-   margin-top: 0;
-   font-weight: bold;
+/* footer */
+.footer-imgBox img {
+	max-width: 100%;
 }
-/*풋터 영역*/
-.footerWrapper{
-   background-color: #fff;
+
+.footerWrapper {
+	background-color: white;
+	font-family: "MICEGothic Bold";
+	font-size: 15px;
 }
+
 .footerBox {
-   height: 0px;
+	height: 0px;
 }
 
 footer.footer {
-   padding-top: 2rem;
-   padding-bottom: 2rem;
+	padding-top: 2rem;
+	padding-bottom: 2rem;
 }
 
 .footer a {
-   text-decoration: none;
-   color: black;
-   font-weight: 40px;
-   font-weight: bold;
+	text-decoration: none;
+	color: black;
+	font-weight: 40px;
+	font-weight: bold;
 }
 
 .footer-imgBox>img {
-   height: 100%;
-   text-align:center;
+	height: 100%;
+	text-align: center;
 }
+
 .footer-imgBox {
-   height: 100%;
-   text-align:center;
+	height: 100%;
+	text-align: center;
 }
+
 </style>
 </head>
 <body>
@@ -430,7 +481,7 @@ footer.footer {
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
                         <c:if test="${empty loginSession}">
                            <li class="nav-item"><a class="nav-link"
                               href="/login/toLogin">로그인</a></li>
@@ -528,7 +579,12 @@ footer.footer {
                                  <li>
                                     <hr class="dropdown-divider" style="margin:0px;">
                                  </li>
-                                 <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  <c:if test="${loginType ne 'kakao'}">
+                                      <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  </c:if>
+                                 <c:if test="${loginType eq 'kakao'}">
+                                    <li><a class="dropdown-item mt-2" href="${kakaoLogout}">로그아웃</a></li>
+                                 </c:if>
                               </ul>
                            </div>
                         </c:if>
@@ -768,65 +824,74 @@ footer.footer {
 		</span>
 	</div>
 	<!-- Footer-->
-	<div class="footerWrapper" style="margin-top:50px; border-top : 1px solid #e0e3e8;">
-		<div class="container">
-			<footer class="footer">
-				<div class="row">
-					<div class="col-lg-3 footer-imgBox">
-						<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
-					</div>
-					<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-						<ul class="list-inline mb-2">
-                  <li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
-                  <li class="list-inline-item">⋅</li>
-                  <c:choose>
-                     <c:when test="${not empty loginSession}">
-                        <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-                     </c:when>
-                     <c:otherwise>
-                        <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-                     </c:otherwise>
-                  </c:choose>
-                  <li class="list-inline-item">⋅</li>
-                  <li class="list-inline-item">
+   <div class="footerWrapper mt-5" style="border-top:1px solid #e0e3e8;">
+      <div class="container">
+         <footer class="footer">
+            <div class="row">
+               <div class="col-lg-3 footer-imgBox">
+                  <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+               </div>
+               <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                  <ul class="list-inline mb-2">
+                     <li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
+                     <li class="list-inline-item">⋅</li>
                      <c:choose>
                         <c:when test="${not empty loginSession}">
-                           <a href="/group/toCreateGroup">모임 만들기</a>
+                           <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                           <li class="list-inline-item">⋅</li>
+                           <c:if test="${loginType ne 'kakao'}">
+                              <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                           <c:if test="${loginType eq 'kakao'}">
+                              <li class="list-inline-item"><a href="${kakaoLogout}">로그아웃</a></li>
+                           </c:if>
                         </c:when>
                         <c:otherwise>
-                           <a href="/login/toLogin">모임 만들기</a>
+                           <li class="list-inline-item"><a
+                              href="/signup/toSignupAgree">회원가입</a></li>
+                           <li class="list-inline-item">⋅</li>
+                           <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
                         </c:otherwise>
                      </c:choose>
-                  </li>
-                  <li class="list-inline-item">⋅</li>
-                  <li class="list-inline-item"><a href="/privacy"
-                     style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-               </ul>
-						<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-							개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-						<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-							57 이레빌딩</p>
-						<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-							2022. All Rights Reserved.</p>
-					</div>
-					<div class="col-lg-3 h-100 text-center text-lg-start my-auto">
-						<ul class="list-inline mb-0">
-							<li class="list-inline-item me-4"><a href="#!"><i
-									class="bi-facebook fs-3"></i></a></li>
-							<li class="list-inline-item me-4"><a href="#!"><i
-									class="bi-twitter fs-3"></i></a></li>
-							<li class="list-inline-item"><a href="#!"><i
-									class="bi-instagram fs-3"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
+                     <li class="list-inline-item">⋅</li>
+                     <li class="list-inline-item">
+                        <c:choose>
+                           <c:when test="${not empty loginSession}">
+                              <a href="/group/toCreateGroup">모임 만들기</a>
+                           </c:when>
+                           <c:otherwise>
+                              <a href="/login/toLogin">모임 만들기</a>
+                           </c:otherwise>
+                        </c:choose>
+                     </li>
+                     <li class="list-inline-item">⋅</li>
+                     <li class="list-inline-item"><a href="/privacy"
+                        style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+                  </ul>
+                  <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+                     개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+                  <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+                     57 이레빌딩</p>
+                  <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+                     2022. All Rights Reserved.</p>
+               </div>
+               <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+                  <ul class="list-inline mb-0">
+                     <li class="list-inline-item me-4"><a
+                        href="https://ko-kr.facebook.com"><i
+                           class="bi-facebook fs-3"></i></a></li>
+                     <li class="list-inline-item me-4"><a
+                        href="https://twitter.com/?lang=ko"><i
+                           class="bi-twitter fs-3"></i></a></li>
+                     <li class="list-inline-item"><a
+                        href="https://www.instagram.com/"><i
+                           class="bi-instagram fs-3"></i></a></li>
+                  </ul>
+               </div>
+            </div>
+         </footer>
+      </div>
+   </div>
 
    <script>
   // 지역 설정

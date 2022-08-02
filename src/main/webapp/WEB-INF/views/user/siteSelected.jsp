@@ -58,45 +58,58 @@
     font-style: normal;
 }
 
-/* 네비바  */
-* {
-	box-sizing: border-box;
-	font-family: "MICEGothic Bold"; 
+/* header */
+header {
+	font-family : 'MICEGothic Bold';
 }
+
 
 /* header 반응형 */
-@media ( max-width : 768px) {
-	#navLogo {
-		display: none;
-	}
-	#myPageIcon {
-		display: none;
-	}
-	#cartIcon {
-		display: none;
-	}
-	#menu {
-		display: none;
-	}
-}
+            @media (max-width : 768px) {
+               #navLogo {
+                  display: none;
+               }
 
-/* header */
-#navLogo {
-	width: 150px;
-	height: 100px;
-}
+               #myPageIcon {
+                  display: none;
+               }
 
-#logoImgs {
-	width: 100%;
-	height: 100%;
-}
+               #cartIcon {
+                  display: none;
+               }
 
-@media ( min-width : 768px) {
-	#navibar {
-		display: none;
-	}
-}
+               #menu {
+                  display: none;
+               }
+            }
 
+            /* header */
+            #navLogo {
+               width: 150px;
+               height: 100px;
+            }
+
+            #logoImgs {
+               width: 100%;
+               height: 100%;
+            }
+
+            @media (min-width : 768px) {
+               #navibar {
+                  display: none;
+               }
+            }
+
+            /* header 반응형 끝 */
+            #logoImg {
+               width: 50%;
+            }
+
+
+ul {
+	list-style: none;
+	padding: 0;
+}
 
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
@@ -110,30 +123,37 @@
    font-weight: bold;
 }
 
-/* header 반응형 끝 */
-#logoImg {
-	width: 50%;
-}
 
-ul {
-	list-style: none;
-	padding: 0;
-}
 
 
 /* 슬라이드 */
 .locationPic {
-      height: 100px;
-      overflow: hidden;
-    }
+   width : 100px;
+   height : 100px;
+    overflow: hidden;
+    border :3px solid #BABDEB;
+    border-radius : 50%;
+}
 
     .locationPic img {
       width: 100%;
-      height: 100%;
-  } 
+      height : 100%;
+  }
 .locationText, .categoryText{
-	font-family : katuri;
-}  
+   font-family : katuri;
+}
+
+.categoryPic{
+    font-size: 55px;
+    width : 100px;
+    height : 100px;
+    border :3px solid #BABDEB;
+     border-radius : 50%;
+     background-color : #f4f5f9;
+     text-align : center;
+     padding-top : 9px;
+}
+
 /* body content */
 .content {
 	width: 100%;
@@ -478,7 +498,7 @@ body {
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
                         <c:if test="${empty loginSession}">
                            <li class="nav-item"><a class="nav-link"
                               href="/login/toLogin">로그인</a></li>
@@ -576,7 +596,12 @@ body {
                                  <li>
                                     <hr class="dropdown-divider" style="margin:0px;">
                                  </li>
-                                 <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  <c:if test="${loginType ne 'kakao'}">
+                                      <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  </c:if>
+                                 <c:if test="${loginType eq 'kakao'}">
+                                    <li><a class="dropdown-item mt-2" href="${kakaoLogout}">로그아웃</a></li>
+                                 </c:if>
                               </ul>
                            </div>
                         </c:if>
@@ -606,224 +631,235 @@ body {
 	    </div>
 	</div>
  <!--지역 설정 슬라이더-->
-   <div id="locationList" class="responsive mt-5">
+      <div id="locationList" class="responsive mt-5">
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
       <div class="locationPic">
-        <img src = "/resources/images/slide/지역2.png">
+        <img src = "/resources/images/slide/서울.png">
       </div>
       <span class="locationText mt-1">
         서울특별시
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역7.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/인천.png">
       </div>
       <span class="locationText mt-1">
         인천광역시
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역13.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/대전.jpeg">
       </div>
       <span class="locationText mt-1">
         대전광역시
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역8.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/광주.jpeg">
       </div>
       <span class="locationText mt-1">
         광주광역시
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역5.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/대구.jpeg">
       </div>
       <span class="locationText mt-1">
         대구광역시
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역6.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/울산.jpeg">
       </div>
       <span class="locationText mt-1">
         울산광역시
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역9.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/부산.png">
       </div>
       <span class="locationText mt-1">
         부산광역시
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역15.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/경기도.png">
       </div>
       <span class="locationText mt-1">
         경기도
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역10.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/강원도.png">
       </div>
       <span class="locationText mt-1">
         강원도
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역14.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/충북.png">
       </div>
       <span class="locationText mt-1">
-       	충청북도
+          충청북도
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역20.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/충남.jpeg">
       </div>
       <span class="locationText mt-1">
         충청남도
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역6.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/전북.png">
       </div>
       <span class="locationText mt-1">
         전라북도
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역21.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/전남.png">
       </div>
       <span class="locationText mt-1">
         전라남도
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역16.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/경북.png">
       </div>
       <span class="locationText mt-1">
         경상북도
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-       <img src = "/resources/images/slide/지역12.png">
+      <div class="locationPic" style="font-size: 66px;">
+       <img src = "/resources/images/slide/경남.png">
       </div>
       <span class="locationText mt-1">
         경상남도
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="locationPic" style="font-size: 40px;">
-        <img src = "/resources/images/slide/지역19.png">
+      <div class="locationPic" style="font-size: 66px;">
+        <img src = "/resources/images/slide/제주.png">
       </div>
       <span class="locationText mt-1">
         제주도
       </span>
     </div>
   </div>
-		<!--카테고리 설정 슬라이더-->
-		<div id="categoryList" class="responsive mt-5">
-			<div
-				class="categoryMapper d-flex flex-column align-items-center justify-content-center"
-				id="아웃도어/여행">
-				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-plane-departure"></i>
-				</div>
-				<span class="categoryText mt-1"> 아웃도어/여행 </span>
-			</div>
-			<div
-				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
-				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-baseball"></i>
-				</div>
-				<span class="categoryText mt-1"> 운동/스포츠 </span>
-			</div>
-			<div
-				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
-				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-language"></i>
-				</div>
-				<span class="categoryText mt-1"> 외국어/언어 </span>
-			</div>
-			<div
-				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
-				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-dog"></i>
-				</div>
-				<span class="categoryText mt-1"> 반려동물 </span>
-			</div>
-			<div
-				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
-				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-guitar"></i>
-				</div>
-				<span class="categoryText mt-1"> 음악/악기 </span>
-			</div>
-			<div
-				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
-				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-democrat"></i>
-				</div>
-				<span class="categoryText mt-1"> 공예/만들기 </span>
-			</div>
-			<div
-				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
-				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-people-group"></i>
-				</div>
-				<span class="categoryText mt-1"> 댄스/무용 </span>
-			</div>
-			<div
-				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
-				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-book"></i>
-				</div>
-				<span class="categoryText mt-1"> 인문학/책/글 </span>
-			</div>
-			<div
-				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
-				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-camera"></i>
-				</div>
-				<span class="categoryText mt-1"> 사진/영상 </span>
-			</div>
-			<div
-				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
-				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-gamepad"></i>
-				</div>
-				<span class="categoryText mt-1"> 게임/오락 </span>
-			</div>
-			<div
-				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
-				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-kitchen-set"></i>
-				</div>
-				<span class="categoryText mt-1"> 요리/제조 </span>
-			</div>
-			<div
-				class="categoryMapper d-flex flex-column align-items-center justify-content-center">
-				<div class="categoryPic" style="font-size: 66px;">
-					<i class="fa-solid fa-hands-clapping"></i>
-				</div>
-				<span class="categoryText mt-1"> 문화/공연/축제 </span>
-			</div>
-		</div>
+  <!--카테고리 설정 슬라이더-->
+  <div id="categoryList" class="responsive mt-5" >
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center" id="아웃도어/여행">
+      <div class="categoryPic">
+        <i class="fa-solid fa-plane-departure"></i>
+      </div>
+      <span class="categoryText mt-1">
+        아웃도어/여행
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic">
+        <i class="fa-solid fa-baseball"></i>
+      </div>
+      <span class="categoryText mt-1">
+        운동/스포츠
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic">
+        <i class="fa-solid fa-language"></i>
+      </div>
+      <span class="categoryText mt-1">
+        외국어/언어
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic">
+        <i class="fa-solid fa-dog"></i>
+      </div>
+      <span class="categoryText mt-1">
+        반려동물
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic">
+        <i class="fa-solid fa-guitar"></i>
+      </div>
+      <span class="categoryText mt-1">
+        음악/악기
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic">
+        <i class="fa-solid fa-democrat"></i>
+      </div>
+      <span class="categoryText mt-1">
+        공예/만들기
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic">
+        <i class="fa-solid fa-people-group"></i>
+      </div>
+      <span class="categoryText mt-1">
+        댄스/무용
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic">
+        <i class="fa-solid fa-book"></i>
+      </div>
+      <span class="categoryText mt-1">
+        인문학/책/글
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic">
+        <i class="fa-solid fa-camera"></i>
+      </div>
+      <span class="categoryText mt-1">
+        사진/영상
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic">
+        <i class="fa-solid fa-gamepad"></i>
+      </div>
+      <span class="categoryText mt-1">
+        게임/오락
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic">
+        <i class="fa-solid fa-kitchen-set"></i>
+      </div>
+      <span class="categoryText mt-1">
+        요리/제조
+      </span>
+    </div>
+    <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
+      <div class="categoryPic">
+        <i class="fa-solid fa-hands-clapping"></i>
+      </div>
+      <span class="categoryText mt-1">
+        문화/공연/축제
+      </span>
+    </div>
+</div>
 	</div>
 
 	<!-- 모임 card 캐러셀 -->
