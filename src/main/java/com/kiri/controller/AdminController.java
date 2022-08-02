@@ -41,7 +41,7 @@ public class AdminController {
    public String toMember(int curPage, Model model) throws Exception{
       List<ReportDTO> reportList = service.selectReport();
       model.addAttribute("reportList", reportList);
-      
+
       List<MemberDTO> list = service.selectAllMember(curPage*10-9, curPage*10);
       model.addAttribute("list", list);
 
@@ -65,10 +65,10 @@ public class AdminController {
 	      }else {
 	         for(int seq_report : seqArray) {
 	               rdto = service.selectReportBySeq(seq_report);
-	               bdto = new BlackListDTO(0, rdto.getReceive_email(), null, rdto.getReport_reason());
+	               bdto = new BlackListDTO(0, rdto.getReport_receive(), null, rdto.getReport_reason());
 	               service.insertBl(bdto);
 	               service.deleteReport(seq_report);
-	               service.updateBl(rdto.getReceive_email());
+	               service.updateBl(rdto.getReport_receive());
 	           }
 	         return "success";
 	      }
@@ -166,7 +166,8 @@ public class AdminController {
       System.out.println("게시물 관리 페이지");
 
       // board curPage로 자라서 list 가져오기
-      List<BoardDTO> list = service.selectBoard(curPage*10-9, curPage*10);
+  List<BoardDTO> list = service.selectBoard(curPage*10-9, curPage*10);
+      System.out.println("list : "+list);
       model.addAttribute("list",list);
 
       // board 총 count 가져오기
@@ -236,7 +237,7 @@ public class AdminController {
       List<Group_BoardDTO> meetinglist = service.meetingSearchList(category, keyword);
       return meetinglist;
    }
-
+   
    @RequestMapping(value="/boardDelete") // 게시글 삭제
    @ResponseBody
    public String boardDelete(int seq_board) throws Exception{

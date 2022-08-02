@@ -188,7 +188,7 @@ h4 {
 
 /* modal 창 영역 */
 .modal-dialog{
-   max-width:580px;
+	max-width:580px;
 }
 .kokiriImg{
    position:absolute;
@@ -782,12 +782,12 @@ footer.footer {
                         style="height: 100%; font-family: none;">
                   </div>
                   <script>
-                                    const test = document.querySelector('#password');
-                                    console.log(test)
-                                    test.addEventListener('change', () => {
-                                        console.log('change')
-                                    })
-                                </script>
+                      const test = document.querySelector('#password');
+                      console.log(test)
+                      test.addEventListener('change', () => {
+                          console.log('change')
+                      })
+                  </script>
                   <div>
                      <button type="button" class="btn btn-secondary mt-3" id="checkPw"
                         style="width: 100%;">확인</button>
@@ -914,49 +914,56 @@ footer.footer {
                         </div>
                      </div>
                      <script>
-                                 var maxCount = 3;
-                                 var count = 0;
-                                 function CountChecked1(field) {
-                                     if (field.checked) {
-                                         count += 1;
-                                     } else {
-                                         count -= 1;
-                                     }
-                                     if (count > maxCount) {
-                                         alert("최대 3개까지만 선택가능합니다!");
-                                         field.checked = false;
-                                         count -= 1;
-                                     }
-                                 }
-                                 // 저장 버튼 눌렀을 때
-                                 $("#saveSiteBtn").on("click", function () {
-                                     let checkAccess = $('input[name=site]:checked').val();
-                                     let user_email = $("#user_email").val();
-                                     console.log("asdasd : ", checkAccess);
-                                     let checkBoxArr = [];
-                                     $("input[name=site]:checked").each(function () {
-                                         checkBoxArr.push($(this).val());
-                                     })
-                                     console.log(checkBoxArr);
-                                     if(checkBoxArr == ""){
-                                        Swal.fire('적어도 하나는 선택해주세요!!!')
-                                     }else{
-                                      $.ajax({
-                                          url: "/mem/siteModal?&checkBoxArr=" + checkBoxArr + "&user_email=" + user_email,
-                                          type: "get",
-                                          data: { "checkBoxArr[]": checkBoxArr },
-                                          success: function (data) {
-                                              console.log(data);
-                                              $(".fade").hide();
-                                              location.href = "/mem/myPage";
-                                          },
-                                          error: function (e) {
-                                              console.log(e);
-                                          }
-                                      })
-                                     }
-                                 });
-                             </script>
+                     // 개인정보 수정 enterkey()
+                      //검색하는거 enter 키
+					  $("#password").on("keyup", function(key) {
+					    if (key.keyCode == 13) {
+					      $("#checkPw").click();
+					    }
+					  });
+                      var maxCount = 3;
+                      var count = 0;
+                      function CountChecked1(field) {
+                          if (field.checked) {
+                              count += 1;
+                          } else {
+                              count -= 1;
+                          }
+                          if (count > maxCount) {
+                              alert("최대 3개까지만 선택가능합니다!");
+                              field.checked = false;
+                              count -= 1;
+                          }
+                      }
+                      // 저장 버튼 눌렀을 때
+                      $("#saveSiteBtn").on("click", function () {
+                          let checkAccess = $('input[name=site]:checked').val();
+                          let user_email = $("#user_email").val();
+                          console.log("asdasd : ", checkAccess);
+                          let checkBoxArr = [];
+                          $("input[name=site]:checked").each(function () {
+                              checkBoxArr.push($(this).val());
+                          })
+                          console.log(checkBoxArr);
+                          if(checkBoxArr == ""){
+                             Swal.fire('적어도 하나는 선택해주세요!!!')
+                          }else{
+                           $.ajax({
+                               url: "/mem/siteModal?&checkBoxArr=" + checkBoxArr + "&user_email=" + user_email,
+                               type: "get",
+                               data: { "checkBoxArr[]": checkBoxArr },
+                               success: function (data) {
+                                   console.log(data);
+                                   $(".fade").hide();
+                                   location.href = "/mem/myPage";
+                               },
+                               error: function (e) {
+                                   console.log(e);
+                               }
+                           })
+                          }
+                      });
+                  </script>
                   </div>
                </div>
             </div>
@@ -1278,11 +1285,12 @@ footer.footer {
                        let user_email = $("#user_email").val();
                        location.href = "/mem/profileModifyPage?user_email=" + user_email;
                    })
-
+                   console.log(${selectWishList.size()});
                    /* 희망 모임 삭제 */
                    $(".wishDelete").on("click", function () {
                        let seq_group = $(this).next().val();
-                       let parent = $(this).parents("#wishBox");
+                       let parent = $(this).parent().parent();
+                       console.log(parent.length)
                        Swal.fire({
                            title: '정말 삭제하시겠습니까?',
                            text: "다시 복구 할수 없습니다.!",

@@ -347,27 +347,29 @@
           </table>
         </div>
 
-    <!-- 검색전 pagination -->    
-		<div class="pagination mt-4 justify-content-center" id="page">
-			<nav aria-label="Page navigation example">
-				<ul class="pagination">
-					<c:if test="${naviMap.needPrev eq true}">
-						<li class="page-item"><a class="page-link"
-							href="/admin/toBoard?curPage=${naviMap.startNavi-1}"><i
-								class="fa-solid fa-angle-left"></i></a></li>
-					</c:if>
-					<c:forEach var="pageNum" begin="${naviMap.startNavi}" end="${naviMap.endNavi}">
-						<li class="page-item"><a class="page-link" href="/admin/toBoard?curPage=${pageNum}">${pageNum}</a></li>
-					</c:forEach>
-					<c:if test="${naviMap.needNext eq true}">
-						<li class="page-item"><a class="page-link"
-							href="/admin/toBoard?curPage=${naviMap.endNavi+1}"><i
-								class="fa-solid fa-angle-right"></i></a></li>
-					</c:if>
-				</ul>
-			</nav>
-		</div>
-      </div>
+   	<!-- 검색전 pagination -->    
+			<div class="pagination mt-4 justify-content-center" id="page">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<c:if test="${naviMap.needPrev eq true}">
+							<li class="page-item"><a class="page-link"
+								href="/admin/toBoard?curPage=${naviMap.startNavi-1}"><i
+									class="fa-solid fa-angle-left"></i></a></li>
+						</c:if>
+						<c:forEach var="pageNum" begin="${naviMap.startNavi}"
+							end="${naviMap.endNavi}">
+							<li class="page-item"><a class="page-link"
+								href="/admin/toBoard?curPage=${pageNum}">${pageNum}</a></li>
+						</c:forEach>
+						<c:if test="${naviMap.needNext eq true}">
+							<li class="page-item"><a class="page-link"
+								href="/admin/toBoard?curPage=${naviMap.endNavi+1}"><i
+									class="fa-solid fa-angle-right"></i></a></li>
+						</c:if>
+					</ul>
+				</nav>
+			</div> 
+     	 </div>
     </div>
     <script>
 	//로그아웃 부분
@@ -412,9 +414,14 @@
         })
     })
     	$(".notice").on("click",function(){
-    		let url = "/board/toWrite"
+    		let url = "/board/toNoticeWrite";
     		window.open(url, '_blank', 'width=1200, height=800');
     	})
+    	window.call = function (data) {
+		    if(data=="msg"){
+		    	location.reload();
+		    }
+		}; 
 	   //검색하는거 enter 키
 	   $(".keyword").on("keyup", function(key) {
 	     if (key.keyCode == 13) {
@@ -510,6 +517,7 @@
             a.attr("href", "/admin/toBoard?curPage=" + Number(curPage - 1));
             ajaxPagination(data, curPage - 1, a, type, keyword);
             i.addClass("fa-solid fa-angle-left");
+            i.css({"margin":"0"});
 
             a.append(i);
             li.append(a);
@@ -540,6 +548,7 @@
             a.attr("href", "/admin/toBoard?curPage=" + Number(curPage + 1));
             ajaxPagination(data, curPage + 1, a, type, keyword);
             i.addClass("fa-solid fa-angle-right");
+            i.css({"margin":"0"});
 
             a.append(i);
             li.append(a);

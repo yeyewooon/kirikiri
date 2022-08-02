@@ -592,7 +592,7 @@
 					<ul class="pagination">
 						<c:if test="${naviMap.needPrev eq true}">
 							<li class="page-item"><a class="page-link"
-								href="/admin/toBoard?curPage=${naviMap.startNavi-1}"><i
+								href="/mem/myWrite?curPage=${naviMap.startNavi-1}"><i
 									class="fa-solid fa-angle-left"></i></a></li>
 						</c:if>
 						<c:forEach var="pageNum" begin="${naviMap.startNavi}"
@@ -602,7 +602,7 @@
 						</c:forEach>
 						<c:if test="${naviMap.needNext eq true}">
 							<li class="page-item"><a class="page-link"
-								href="/admin/toBoard?curPage=${naviMap.endNavi+1}"><i
+								href="/mem/myWrite?curPage=${naviMap.endNavi+1}"><i
 									class="fa-solid fa-angle-right"></i></a></li>
 						</c:if>
 					</ul>
