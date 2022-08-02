@@ -194,11 +194,12 @@ public class MemberController {
 				dto.setUser_pw(data_password);
 			}else {
 				String Encryption_pw = ecp.getSHA512(dto.getUser_pw());
-				dto.setUser_pw(Encryption_pw);				
+				 dto.setUser_pw(Encryption_pw);		
 			}
 		}
 		
 		System.out.println("update Dto : " +dto);
+		System.out.println("User_email : " + dto.getUser_email());
 		
 		service.groupChatmodify(dto.getUser_email(), dto.getUser_nickname());
 		service.groupMemmodify(dto.getUser_email(), dto.getUser_nickname());
