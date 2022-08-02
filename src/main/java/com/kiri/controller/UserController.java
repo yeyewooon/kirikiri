@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kiri.dto.MemberDTO;
 import com.kiri.dto.MessageDTO;
 import com.kiri.dto.ReportDTO;
 import com.kiri.dto.Tbl_GroupDTO;
@@ -63,7 +64,9 @@ public class UserController {
 	   @ResponseBody
 	   @RequestMapping(value = "/insertMessage")
 	   public String sendMessage(MessageDTO MessageDTO) throws Exception {
-	      String rs = message_service.sendMessage(MessageDTO);
+	      String user_send = ((MemberDTO)session.getAttribute("loginSession")).getUser_nickname(); // 세션에서 받아온 닉네임
+		  MessageDTO.setUser_send(user_send);
+		  String rs = message_service.sendMessage(MessageDTO);
 	      return rs;
 	   }
 

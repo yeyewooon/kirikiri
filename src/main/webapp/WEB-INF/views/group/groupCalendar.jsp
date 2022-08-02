@@ -1078,7 +1078,7 @@ footer.footer {
 						// 모달창 안보이게 
 						calendarModal.hide();
 						
-						// 0.8 초있다가 페이지 로드
+						// 1 초있다가 페이지 로드
 						setTimeout(function() {
 							window.location.href = "";
 						},1000);

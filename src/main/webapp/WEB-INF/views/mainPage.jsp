@@ -490,7 +490,7 @@ footer.footer {
 
       <body>
       
-      <!--네비바-->
+  <!--네비바-->
    <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
@@ -518,7 +518,7 @@ footer.footer {
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
                         <c:if test="${empty loginSession}">
                            <li class="nav-item"><a class="nav-link"
                               href="/login/toLogin">로그인</a></li>
