@@ -581,7 +581,7 @@ td>a {
 	})
 	
     
-        //로그아웃 부분
+       //로그아웃 부분
         $(".user").mouseenter(function () {
             $(".logOut").css({ "display": "block", "z-index": "99" });
         })
@@ -596,10 +596,30 @@ td>a {
                 showCancelButton: true,
                 denyButtonText: `로그아웃`,
             }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isDenied) {
-                    Swal.fire('로그아웃 성공', '', 'info')
+            	if (result.isDenied) {
+            		Swal.fire({
+                	      icon:'success',
+                	      title: '메인화면으로 이동합니다!',
+                	      html: ' <b></b>' + '초뒤에 페이지가 이동됩니다.',
+                	      timer: 1000,
+                	      timerProgressBar: true,
+                	      didOpen: () => {
+                	        Swal.showLoading()
+                	        const b = Swal.getHtmlContainer().querySelector('b')
+                	        timerInterval = setInterval(() => {
+                	          b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
+                	        }, 100)
+                	      },
+                	      willClose: () => {
+                	        clearInterval(timerInterval)
+                	      }
+                	    })
+                	     setTimeout(function() {
+                	    	 	location.href = "/login/toLogout";
+                             },1200);
+                	 
                 }
+            
             })
         })
     </script>

@@ -554,7 +554,6 @@ footer.footer {
 								}
 							})
 						}
-
 					})
 				</script>
 				<div class="row">					
@@ -584,6 +583,7 @@ footer.footer {
 						</div>
 						<div class="col-md-7" style="text-align: left;">
 							<input type="password" id="password" name="user_pw" class="form-control" style="font-family:none;">
+							<span class="d-none" id="wrong-password-regex" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호의 형식에 맞지 않습니다. **</span>
 							<ul class="desc" style="font-size: 0.8rem; padding: 10px">
 								<li>영문, 숫자, 특수문자를 혼합하여 최소 8자리 이상 20자리 이하로 설정해 주세요.</li>
 								<li>기타 일반 정보 등으로부터 추측이 용이한 비밀번호는 피해주세요.</li>
@@ -650,6 +650,21 @@ footer.footer {
 					<div class="col-md-2"></div>
 				</div>
 				<script>
+				
+				/* 비밀번호 regex 실행 후 span 뿌려주기 */
+				let passwordRegex = /^$|^[a-z0-9!@#$]{8,20}$/;
+				
+				const test = document.querySelector('#password');
+	            console.log(test)
+	            test.addEventListener('change', (e) => {
+	            	let password = e.target.value;
+	                console.log(e.target.value);
+	                if(!passwordRegex.test(password)){
+	                	$("#wrong-password-regex").removeClass("d-none");
+	                }else if(passwordRegex.test(password)){
+	                	$("#wrong-password-regex").addClass("d-none");
+	                }
+	            })
 				
 				/* phone 실시간으로 검색후 중복확인 버튼 disabled 속성 제거 */
 				let phone1 = $(".checkPhone1").val();

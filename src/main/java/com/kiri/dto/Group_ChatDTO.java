@@ -3,15 +3,18 @@ package com.kiri.dto;
 public class Group_ChatDTO {
 	private int seq_chat;
 	private int seq_group;
+	private String user_email;
 	private String user_nickname;
 	private String message;
 	private String sendDate;
 	
 	public Group_ChatDTO() {}
-	public Group_ChatDTO(int seq_chat, int seq_group, String user_nickname, String message, String sendDate) {
+	public Group_ChatDTO(int seq_chat, int seq_group, String user_email, String user_nickname, String message,
+			String sendDate) {
 		super();
 		this.seq_chat = seq_chat;
 		this.seq_group = seq_group;
+		this.user_email = user_email;
 		this.user_nickname = user_nickname;
 		this.message = message;
 		this.sendDate = sendDate;
@@ -28,6 +31,12 @@ public class Group_ChatDTO {
 	public void setSeq_group(int seq_group) {
 		this.seq_group = seq_group;
 	}
+	public String getUser_email() {
+		return user_email;
+	}
+	public void setUser_email(String user_email) {
+		this.user_email = user_email;
+	}
 	public String getUser_nickname() {
 		return user_nickname;
 	}
@@ -40,17 +49,18 @@ public class Group_ChatDTO {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getsendDate() {
+	public String getSendDate() {
 		return sendDate;
 	}
-	public void setsendDate(String sendDate) {
+	public void setSendDate(String sendDate) {
 		this.sendDate = sendDate;
 	}
 	@Override
 	public String toString() {
-		return seq_chat + " : " + seq_group + " : " + user_nickname
-				+ " : " + message + " : " + sendDate;
+		return "Group_ChatDTO [seq_chat=" + seq_chat + ", seq_group=" + seq_group + ", user_email=" + user_email
+				+ ", user_nickname=" + user_nickname + ", message=" + message + ", sendDate=" + sendDate + "]";
 	}
+	
 	
 	
 }
