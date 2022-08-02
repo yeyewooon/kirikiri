@@ -41,40 +41,67 @@
 <script src="sweetalert2.min.js"></script>
 <title>그룹 가입신청</title>
 <style>
-* {
-   font-family: 'OTWelcomeRA';
+
+@font-face {
+    font-family: 'MICEGothic Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
 }
-/* header 반응형 */
-@media ( max-width : 768px) {
-   #navLogo {
-      display: none;
-   }
-   #menu {
-      display: none;
-   }
+@font-face {
+    font-family: 'MICEGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
 }
+
 
 /* header */
-#navLogo {
-   width: 150px;
-   height: 100px;
+header {
+	font-family : 'MICEGothic Bold';
 }
 
-#logoImgs {
-   width: 100%;
-   height: 100%;
-}
 
-@media ( min-width : 768px) {
-   #navibar {
-      display: none;
-   }
-}
+/* header 반응형 */
+            @media (max-width : 768px) {
+               #navLogo {
+                  display: none;
+               }
 
-/* header 반응형 끝 */
-#logoImg {
-   width: 50%;
-}
+               #myPageIcon {
+                  display: none;
+               }
+
+               #cartIcon {
+                  display: none;
+               }
+
+               #menu {
+                  display: none;
+               }
+            }
+
+            /* header */
+            #navLogo {
+               width: 150px;
+               height: 100px;
+            }
+
+            #logoImgs {
+               width: 100%;
+               height: 100%;
+            }
+
+            @media (min-width : 768px) {
+               #navibar {
+                  display: none;
+               }
+            }
+
+            /* header 반응형 끝 */
+            #logoImg {
+               width: 50%;
+            }
 
 /*테이블 배경 및 범위*/
 .tableinfo {
@@ -130,11 +157,18 @@ ul {
 	list-style: none;
 	padding: 0;
 }
+
 /* footer */
-/*풋터 영역*/
-.footerWrapper{
-	margin-top:200px;
+.footer-imgBox img {
+	max-width: 100%;
 }
+
+.footerWrapper {
+	background-color: white;
+	font-family: "MICEGothic Bold";
+	font-size: 15px;
+}
+
 .footerBox {
 	height: 0px;
 }
@@ -153,12 +187,14 @@ footer.footer {
 
 .footer-imgBox>img {
 	height: 100%;
-	text-align:center;
+	text-align: center;
 }
+
 .footer-imgBox {
 	height: 100%;
-	text-align:center;
+	text-align: center;
 }
+
 /*버튼4개*/
 .btn-3d {
   position: relative;
@@ -260,7 +296,7 @@ footer.footer {
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
                         <c:if test="${empty loginSession}">
                            <li class="nav-item"><a class="nav-link"
                               href="/login/toLogin">로그인</a></li>
@@ -358,7 +394,12 @@ footer.footer {
                                  <li>
                                     <hr class="dropdown-divider" style="margin:0px;">
                                  </li>
-                                 <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  <c:if test="${loginType ne 'kakao'}">
+                                      <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  </c:if>
+                                 <c:if test="${loginType eq 'kakao'}">
+                                    <li><a class="dropdown-item mt-2" href="${kakaoLogout}">로그아웃</a></li>
+                                 </c:if>
                               </ul>
                            </div>
                         </c:if>
@@ -442,71 +483,74 @@ footer.footer {
       </div>
    </div>
   <!-- Footer-->
-  <div class="footerWrapper">
-    <div class="container">
-      <footer class="footer">
-        <div class="row">
-          <div class="col-lg-3 footer-imgBox">
-            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
-          </div>
-          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-          	<ul class="list-inline mb-2">
-				<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
-				<li class="list-inline-item">⋅</li>
-				<c:choose>
-					<c:when test="${not empty loginSession}">
-						<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-					</c:otherwise>
-				</c:choose>
-				<li class="list-inline-item">⋅</li>
-				<li class="list-inline-item">
-					<c:choose>
-						<c:when test="${not empty loginSession}">
-							<a href="/group/toCreateGroup">모임 만들기</a>
-						</c:when>
-						<c:otherwise>
-							<a href="/login/toLogin">모임 만들기</a>
-						</c:otherwise>
-					</c:choose>
-				</li>
-				<li class="list-inline-item">⋅</li>
-				<li class="list-inline-item"><a href="/privacy"
-					style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-			</ul>
-            <p class="text-muted small mb-4 mb-lg-0">
-              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
-              사업자등록번호 : 22-02-22
-            </p>
-            <p class="text-muted small mb-4 mb-lg-0">
-              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
-            </p>
-            <p class="text-muted small mb-4 mb-lg-0">
-              &copy; Your Website 2022. All Rights Reserved.
-            </p>
-          </div>
-          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
-            <ul class="list-inline mb-0">
-				<li class="list-inline-item me-4"><a
-					href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-				<li class="list-inline-item me-4"><a
-					href="https://twitter.com/?lang=ko"><i
-						class="bi-twitter fs-3"></i></a></li>
-				<li class="list-inline-item"><a
-					href="https://www.instagram.com/"><i
-						class="bi-instagram fs-3"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </div>
+   <div class="footerWrapper" style="border-top:1px solid #e0e3e8; margin-top:200px;">
+      <div class="container">
+         <footer class="footer">
+            <div class="row">
+               <div class="col-lg-3 footer-imgBox">
+                  <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+               </div>
+               <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                  <ul class="list-inline mb-2">
+                     <li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
+                     <li class="list-inline-item">⋅</li>
+                     <c:choose>
+                        <c:when test="${not empty loginSession}">
+                           <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                           <li class="list-inline-item">⋅</li>
+                           <c:if test="${loginType ne 'kakao'}">
+                              <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                           <c:if test="${loginType eq 'kakao'}">
+                              <li class="list-inline-item"><a href="${kakaoLogout}">로그아웃</a></li>
+                           </c:if>
+                        </c:when>
+                        <c:otherwise>
+                           <li class="list-inline-item"><a
+                              href="/signup/toSignupAgree">회원가입</a></li>
+                           <li class="list-inline-item">⋅</li>
+                           <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+                        </c:otherwise>
+                     </c:choose>
+                     <li class="list-inline-item">⋅</li>
+                     <li class="list-inline-item">
+                        <c:choose>
+                           <c:when test="${not empty loginSession}">
+                              <a href="/group/toCreateGroup">모임 만들기</a>
+                           </c:when>
+                           <c:otherwise>
+                              <a href="/login/toLogin">모임 만들기</a>
+                           </c:otherwise>
+                        </c:choose>
+                     </li>
+                     <li class="list-inline-item">⋅</li>
+                     <li class="list-inline-item"><a href="/privacy"
+                        style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+                  </ul>
+                  <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+                     개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+                  <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+                     57 이레빌딩</p>
+                  <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+                     2022. All Rights Reserved.</p>
+               </div>
+               <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+                  <ul class="list-inline mb-0">
+                     <li class="list-inline-item me-4"><a
+                        href="https://ko-kr.facebook.com"><i
+                           class="bi-facebook fs-3"></i></a></li>
+                     <li class="list-inline-item me-4"><a
+                        href="https://twitter.com/?lang=ko"><i
+                           class="bi-twitter fs-3"></i></a></li>
+                     <li class="list-inline-item"><a
+                        href="https://www.instagram.com/"><i
+                           class="bi-instagram fs-3"></i></a></li>
+                  </ul>
+               </div>
+            </div>
+         </footer>
+      </div>
+   </div>
 </body>
 <script>
 
