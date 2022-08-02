@@ -166,7 +166,7 @@ public class AdminController {
       System.out.println("게시물 관리 페이지");
 
       // board curPage로 자라서 list 가져오기
-      List<BoardDTO> list = service.selectBoard(curPage*10-9, curPage*10);
+  List<BoardDTO> list = service.selectBoard(curPage*10-9, curPage*10);
       System.out.println("list : "+list);
       model.addAttribute("list",list);
 

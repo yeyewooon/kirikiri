@@ -230,7 +230,7 @@ td>a {
 			</ul>
 		</div>
 		<div class="navbar">
-			<div class="userName">| &nbsp&nbsp admin</div>
+		<div class="userName">| &nbsp&nbsp admin</div>
 			<div class="user">
 				<img src="/resources/images/해삐루피.png" id="user_img">
 			</div>
@@ -323,6 +323,47 @@ td>a {
 	</div>
 </body>
 <script>
+//로그아웃 부분
+$(".user").mouseenter(function () {
+    $(".logOut").css({ "display": "block", "z-index": "99" });
+})
+$(".user").mouseleave(function () {
+    $(".logOut").css("display", "none");
+})
+$(".logOut").click(function () {
+    Swal.fire({
+        title: '정말 로그아웃 하시겠습니까?',
+        showConfirmButton: false,
+        showDenyButton: true,
+        showCancelButton: true,
+        denyButtonText: `로그아웃`,
+    }).then((result) => {
+    	if (result.isDenied) {
+    		Swal.fire({
+        	      icon:'success',
+        	      title: '메인화면으로 이동합니다!',
+        	      html: ' <b></b>' + '초뒤에 페이지가 이동됩니다.',
+        	      timer: 1000,
+        	      timerProgressBar: true,
+        	      didOpen: () => {
+        	        Swal.showLoading()
+        	        const b = Swal.getHtmlContainer().querySelector('b')
+        	        timerInterval = setInterval(() => {
+        	          b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
+        	        }, 100)
+        	      },
+        	      willClose: () => {
+        	        clearInterval(timerInterval)
+        	      }
+        	    })
+        	     setTimeout(function() {
+        	    	 	location.href = "/login/toLogout";
+                     },1200);
+        	 
+        }
+    
+    })
+})
 //부분 새로고침 -> 팝업 닫힌후
 window.call = function (data) {
     if(data=="msg"){
@@ -374,8 +415,8 @@ function makeSearchTable(){
 						let tr = $("<tr>");
 						let td1 = $("<td>").html(groupList.user_email);
 						let td2 = $("<td>").html(groupList.group_title);
-						let td3 = $("<td>").html(groupList.group_people);
-						let td4 = $("<td>").html(groupList.group_category);
+						let td3 = $("<td>").html(groupList.group_category);
+						let td4 = $("<td>").html(groupList.group_people);
 						let td5 = $("<td>").html(groupList.group_site);
 						let icon = $("<i>").addClass("fa-solid fa-trash");
 						let anchor = $("<a>").attr("href", "/admin/toDeleteGroup?seq_group="+groupList.seq_group).append(icon);
@@ -393,26 +434,6 @@ function makeSearchTable(){
 		
 	}
 }
-//로그아웃 부분
-$(".user").mouseenter(function () {
-    $(".logOut").css({ "display": "block", "z-index": "99" });
-})
-$(".user").mouseleave(function () {
-    $(".logOut").css("display", "none");
-})
-$(".logOut").click(function () {
-    Swal.fire({
-        title: '정말 로그아웃 하시겠습니까?',
-        showConfirmButton: false,
-        showDenyButton: true,
-        showCancelButton: true,
-        denyButtonText: `로그아웃`,
-    }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isDenied) {
-            Swal.fire('로그아웃 성공', '', 'info')
-        }
-    })
-})
+
 </script>
 </html>

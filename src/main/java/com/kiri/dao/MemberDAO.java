@@ -61,6 +61,21 @@ public class MemberDAO {
 		session.selectOne("myPageMapper.groupApplymodify",map);
 	}
 	
+	//report 닉네임 수정
+	public void groupreportmodify(String user_email, String user_nickname) throws Exception{
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("user_email",user_email);
+		map.put("user_nickname", user_nickname);
+		session.selectOne("myPageMapper.groupreportmodify",map);
+	}
+	//report2 닉네임 수정
+	public void groupreport2modify(String user_email, String user_nickname) throws Exception{
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("user_email",user_email);
+		map.put("user_nickname", user_nickname);
+		session.selectOne("myPageMapper.groupreport2modify",map);
+	}
+	
 	// 닉네임 중복확인
 	public int nicknameCheck(String user_nickname)throws Exception{
 		return session.selectOne("myPageMapper.nicknameCheck",user_nickname);

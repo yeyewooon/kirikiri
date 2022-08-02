@@ -870,7 +870,7 @@ footer.footer {
                                  <div>
                                     <input onclick="CountChecked1(this)" type="checkbox" id="인천"
                                        name="site" class="checkbox me-1" value="인천"> <label
-                                       for="강원도">인천</label>
+                                       for="인천">인천</label>
                                  </div>
                                  <div>
                                     <input onclick="CountChecked1(this)" type="checkbox" id="경기도"
@@ -1157,7 +1157,7 @@ footer.footer {
                                  <i class="fa-solid fa-crown " style="color: gold;"></i>
                               </div>
                               <div class="col-7 d-flex justify-content-start text-start" >
-                                 <span>
+                                 <span style = "word-break:break-all;">
                                  <a href="/group/toGroupDetail?seq_group=${Groupdto.SEQ_GROUP}" style="padding:0px;">${Groupdto.TITLE}</a>
                                  </span>
                               </div>
@@ -1306,7 +1306,7 @@ footer.footer {
                                    '희망 모임을 삭제하였습니다.',
                                    'success'
                                ).then(function () {
-                                    $.ajax({
+                                     $.ajax({
                                        url: "/mem/wishDelete",
                                        type: "post",
                                        data: {
@@ -1314,11 +1314,12 @@ footer.footer {
                                        },
                                        success: function (data) {
                                            parent.remove();
+                                           
                                        },
                                        error: function (e) {
                                            console.log(e);
                                        }
-                                   }) 
+                                   })  
                                });
                            }
                        })
