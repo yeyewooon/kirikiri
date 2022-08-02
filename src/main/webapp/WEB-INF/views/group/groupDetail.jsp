@@ -964,7 +964,8 @@ footer.footer {
 								<button type="button" class="btn btn-danger d-none closeXmark"
 									id="reportBtn">신고하기</button>
 							</div>
-							
+							<input type = "text" value="" id = "send_email" class = "d-none">
+							<input type = "text" value="" id = "receive_email" class = "d-none">
 							</div>
 						</div>
 					</div>
@@ -1107,6 +1108,9 @@ footer.footer {
               $("#reportName").text('${loginSession.user_name}'); // 해당 회원 이름 신고자에 넣어주기
               $("#user_receive").val(data.profileList[0].user_nickname); // 쪽지 보내기 -> 받는사람 닉네임 넣어주기
               $("#report_receive").val(data.profileList[0].user_nickname); // 신고하기 -> 신고자 닉네임 넣어주기
+              
+              
+              $("#receive_email").val(data.profileList[0].user_email); // 신고하기 -> 신고자 이메일 넣어주기
            },
            error : function(e) {
         	   Swal.fire({
@@ -1371,7 +1375,7 @@ footer.footer {
                      $("#wishCancelBtn").removeClass("d-none"); // 찜한 취소한 즉시 wishList 버튼 보이게
                      setTimeout(function() {
                      window.location.href = "";
-                  },800);
+                  },500);
                }
             },error : function(e) {
             	Swal.fire({
@@ -1396,7 +1400,7 @@ footer.footer {
                      $("#wishCancelBtn").addClass("d-none"); // 찜한 취소한 즉시 wishList 버튼 보이게
                      setTimeout(function() {
                      window.location.href = "";
-                  },800);
+                  },500);
                }
             },
             error : function(e) {
@@ -1432,11 +1436,14 @@ footer.footer {
                Swal.fire('내용을 입력해주세요');
                return;
             }
+            let receive_email = $("#receive_email").val(); // 받는 사람 이메일
             let report_receive = $("#report_receive").val(); // 받는 사람 닉네임
             let reportContent = $("#reportContent").val(); // 쪽지 내용
-            console.log("신고당하는 사람 : " + report_receive);
+            console.log("신고당하는 사람 닉네임 : " + report_receive);
+            console.log("신고당하는 사람 이메일 : " + receive_email);
             console.log("신고 내용 : " + reportContent);
-            console.log("신고 하는사람 : " + loginSession_nickName);
+            console.log("신고 하는사람 닉네임 : " + loginSession_nickName);
+            console.log("신고 하는사람 이메일 : " + loginSession_id);
           Swal.fire({
              title: '정말 신고하시겠습니까?',
              text: "유저 신고는 신중히 부탁드립니다.",
@@ -1450,7 +1457,7 @@ footer.footer {
              $.ajax ({
                   url : "/user/insertreport",
                    type : "post",
-                   data : {"report_send" : loginSession_nickName, "report_receive" : report_receive, "report_reason" : reportContent},
+                   data : {"send_email" : loginSession_id, "receive_email" : receive_email,"report_send" : loginSession_nickName, "report_receive" : report_receive, "report_reason" : reportContent},
                    dataType : "text",
                    success : function(data) {
                       if(data == "success") {

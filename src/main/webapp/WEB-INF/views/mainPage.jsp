@@ -1084,7 +1084,7 @@ footer.footer {
    })
    <!-- 가입하기 버튼 -->
    $(".btn").on("click", function(){
-      location.href = "/user/toViewAllGroupList";
+      location.href = "/signup/toSignupAgree";
    })
    <!-- AOS 스크립트 시작 -->
       AOS.init(); // 자바스크립트로 init()을 해야 동작한다.
