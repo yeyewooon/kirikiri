@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>채팅</title>
 <link
    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
    rel="stylesheet">
@@ -29,6 +29,9 @@
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
    crossorigin="anonymous"></script>
+<!-- swal -->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="sweetalert2.min.js"></script>
 <style>
 * {
    box-sizing: border-box;
@@ -499,10 +502,11 @@ hr{
             if(msg.status=="open"){       //누가 들어왔을때
                let intersection = nickList.filter(x => msg.openNickname.includes(x));
                let difference = nickList.filter(x => !msg.openNickname.includes(x));
-               console.log(intersection);
-               console.log("difference : " + difference);
+               console.log(nickList.length);
+               console.log(msg.openNickname.length);
+               console.log("difference : " + difference.length);
                
-               if(nickList.length-intersection.length != difference.length){
+               if(nickList.length-msg.openNickname.length != difference.length){
                   Swal.fire({
                      position: 'top-center',
                      icon: 'info',

@@ -1338,6 +1338,10 @@ footer.footer {
                         '호스트가 승인을 할 때까지 기다려주세요!',
                         'success'
                      )
+                     // 1 초있다가 페이지 로드
+                     setTimeout(function() {
+                        window.location.href = "";
+                     },1000);
                       }
                    },
                    error : function(e) {

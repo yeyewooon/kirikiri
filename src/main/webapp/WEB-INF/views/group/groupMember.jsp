@@ -574,6 +574,7 @@ footer.footer {
          let checkAccess = $('input[name=checkAccess]:checked').val();
          let checkEmail = $('input[name=checkAccess]:checked').parent().next().children('input').val();
          let seq_group = $("#seq_group").val();
+         if(checkAccess != '주최자'){
  	         $.ajax({
 	            url : "/group/groupAccess",
 	            type : "post",
@@ -620,13 +621,22 @@ footer.footer {
 	               console.log(e);
 	            }
 	         })
+         }else{
+             Swal.fire({
+                 icon: 'error',
+                 title: 'Oops...',
+                 text: '본인은 선택하지 못합니다!',
+               }) 
+         }
          
       })
 
    // 그룹 멤버 강퇴
    $("#deleteBtn").on("click", function(){
+	  let checkAccess = $('input[name=checkUser_email]:checked').parent().prev().children('.checkAccess').val();
       let checkEmail = $('input[name=checkAccess]').parent().next().children('input').val();
       let seq_group = $("#seq_group").val();
+      console.log(checkAccess);
 	  console.log(checkEmail);
 	      let checkBoxArr = [];
 		      $("input[name=checkUser_email]:checked").each(function(){
@@ -638,7 +648,7 @@ footer.footer {
 			      };
 			      var jsonString = JSON.stringify(jsonData);
 
-			       $.ajax({
+			      $.ajax({
 			         url:"/group/deleteMember",
 			         headers: {'Content-Type': 'application/json'},
 			         type : "post",
@@ -654,7 +664,7 @@ footer.footer {
 			         },error : function(e){
 			            console.log(e);
 			         }
-			      })
+			      }) 
 		      }else{
 		    	  Swal.fire({
 		                 icon: 'warning',
