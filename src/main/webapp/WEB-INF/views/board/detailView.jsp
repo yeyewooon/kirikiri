@@ -516,21 +516,11 @@
 						                	</div>
 					                	</c:if>
 			                        </div>
-			
 			                        <div class="row">
-			                            <div class="col-12">
-			                                <textarea class="form-control comment" style="resize: none; background-color: transparent;" readonly>${comment.comment_content}</textarea>
-			                            </div>
-			                            <c:if test="${loginSession.user_email eq 'admin'}">
-			                           		<div class="col-3 defaultComment">
-						                		<button type="button" class="del-commentBtn btn btn-danger" value="${comment.seq_comment}">삭제</button>
-						                	</div>
-			                            	<div class="col-3 afterComment d-none">
-						                		<button type="button" class="btn btn-secondary mod-cancelBtn me-2">취소</button>
-						                		<button type="button" class="btn btn-primary mod-completeBtn" value="${comment.seq_comment}">완료</button>
-						                	</div>
-			                            </c:if>
-			                        </div>
+										<div class="col-12">
+											<textarea class="form-control comment" style="resize: none; background-color: transparent;" readonly>${comment.comment_content}</textarea>
+										</div>
+									</div>
 			                    </div>
 			                </div>
 			                

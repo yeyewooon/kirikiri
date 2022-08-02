@@ -375,6 +375,8 @@ public class GroupController {
          user_nickname = dto.getUser_nickname();
          System.out.println(user_nickname);
          MemberDTO mdto = gcService.getProfileImg(user_nickname);
+         System.out.println(mdto.toString());
+         System.out.println("안녕하세요!!");
          System.out.println(mdto.getUser_image());
          profileList.add(mdto.getUser_image());
       }
