@@ -558,14 +558,18 @@ footer.footer {
                             <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
                             <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
                          </c:if>
-                         <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                         <c:if test = "${not empty loginSession && loginType eq 'admin'}">
                             <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
                             <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
                             <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
                          </c:if>
-                         <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
+                         <c:if test = "${not empty loginSession && (loginType eq 'general' || loginType eq 'naver')}">
                             <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
                             <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
+                         </c:if>
+                         <c:if test = "${not empty loginSession && loginType eq 'kakao'}">
+                            <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
+                            <li class="nav-item"><a class="nav-link" href="${kakaoLogout}">로그아웃</a></li>
                          </c:if>
                    </ul>
                 </div>
@@ -630,7 +634,12 @@ footer.footer {
                          <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
                          <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
                          <li><hr class="dropdown-divider"></li>
-                         <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                     	  <c:if test = "${not empty loginSession && loginType eq 'kakao'}">
+                     	  	<li><a class="dropdown-item" href="${kakaoLogout}">로그아웃</a></li>
+                     	  </c:if>
+                     	  <c:if test = "${not empty loginSession && loginType ne 'kakao'}">
+                     	  	<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                     	  </c:if>
                       </ul>
                    </div>
                 </c:if> 

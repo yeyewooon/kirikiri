@@ -617,7 +617,7 @@ footer.footer {
 				</div>
 				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
 					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="#!">공지사항</a></li>
+						<li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
 						<li class="list-inline-item">⋅</li>
 						<c:choose>
 							<c:when test="${not empty loginSession}">

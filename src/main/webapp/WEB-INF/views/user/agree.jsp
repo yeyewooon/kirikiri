@@ -418,16 +418,16 @@ $(document).ready(function(){
 				</div>
 				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
 					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="#!">공지사항</a></li>
+						<li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
 						<li class="list-inline-item">⋅</li>
 						<c:choose>
 							<c:when test="${not empty loginSession}">
-								<li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
+								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
 								<li class="list-inline-item">⋅</li>
 								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
 							</c:when>
 							<c:otherwise>
-								<li class="list-inline-item"><a href="/signup/toSignup">회원가입</a></li>
+								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
 								<li class="list-inline-item">⋅</li>
 								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
 							</c:otherwise>

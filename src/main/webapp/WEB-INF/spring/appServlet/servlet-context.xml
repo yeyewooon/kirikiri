@@ -60,6 +60,7 @@
 			<exclude-mapping path="/auth/toConnetion"/>
 			<exclude-mapping path="/auth/connetion"/>
 			<exclude-mapping path="/auth/socialSignup"/>
+			<exclude-mapping path="/auth/kakao"/>
 			
 			<exclude-mapping path="/group/selectMemberProfile"/>
 			<exclude-mapping path="/group/toGroupDetail"/>
@@ -90,6 +91,7 @@
 			<mapping path="/auth/toConnetion"/>
 			<mapping path="/auth/connetion"/>
 			<mapping path="/auth/socialSignup"/>
+			<mapping path="/auth/kakao"/>
 			<mapping path="/mem/welcome"/>
 			<beans:bean class="com.kiri.utills.Interceptor"/>
 		</interceptor>

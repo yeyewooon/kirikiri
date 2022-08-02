@@ -128,23 +128,31 @@ public class AuthController {
 	public String callbackKakao(Model model, @RequestParam String code, @RequestParam String state, HttpSession session) throws Exception {
 		OAuth2AccessToken oauthToken;
 		oauthToken = kakaoLogin.getAccessToken(session, code, state);	
+		String accessToken = oauthToken.getAccessToken();
 		apiResult = kakaoLogin.getUserProfile(oauthToken);
 		
 		JSONParser parser = new JSONParser();
 		JSONObject jsonObj = (JSONObject)parser.parse(apiResult);
-		
 		JSONObject responseObj = (JSONObject) jsonObj.get("kakao_account");	
 		JSONObject profile = (JSONObject) responseObj.get("profile");
 		
 		MemberDTO kakao = new MemberDTO();
 		String kakaoEmail = (String) responseObj.get("email");
 		
+		
 		String kakaoName = (String) profile.get("nickname");
 		kakao.setUser_email(kakaoEmail);
 		kakao.setUser_name(kakaoName);
 		kakao.setUser_pw("kakao");
+		session.setAttribute("accessToken", accessToken);
+		
+		if("".equals(kakaoEmail) || null == kakaoEmail ) {
+			session.setAttribute("kakaoUser", kakao);
+			return "redirect:/auth/socialSignup";
+		}
 		
 		boolean is_singup = signupService.emailCheck(kakaoEmail);
+		
 		
 		if(!is_singup) { //false 조회 된 것 true 조회 안된 것
 			
@@ -156,6 +164,7 @@ public class AuthController {
 	       			service.loginLogSuccess(dto.getUser_email());
 	       			session.setAttribute("loginType", type.getType());
 		       		session.setAttribute("loginSession", dto);
+		       		
 		       		return "redirect:/";
 		       		
 	       		}else if(!"N".equals(dto.getUser_blacklist())) {
@@ -245,6 +254,14 @@ public class AuthController {
 		
 		return "/member/socialSignup";
 	 }
+	
+	@RequestMapping("kakao") // 카카오 이메일동의 다시하기  feat.조용진
+	public String kakao(Model model) throws Exception {
+		String accessToken = (String)session.getAttribute("accessToken");
+		kakaoLogin.kakaoLogout(accessToken, "https://kapi.kakao.com/v1/user/unlink");
+		session.invalidate();
+		return "redirect:/login/toLogin";
+	}
 	
 	 @ExceptionHandler
 		public String toError(Exception e) {

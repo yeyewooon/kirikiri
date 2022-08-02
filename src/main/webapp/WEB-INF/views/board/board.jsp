@@ -54,44 +54,84 @@
 		/* header 반응형 끝 */
 	
 		/* 게시글 영역 */
+		.contentWrapper{
+			font-family: 'InfinitySans-RegularA1';
+		}
 		
+		/* 코끼리 머리*/
+		#headWrapper{
+			position: relative;
+			padding-top: 120px;
+		}
+		#boardHead-img{
+        	position: absolute;
+        	left: 50%;
+        	transform: translate(-40%, -60%);
+        	width: 400px;
+        }
         #head{
         	font-family: 'MICEGothic Bold';
             background-color: #d2e3ec;
-            height: 100px;
+            height: 150px;
+            border: 5px solid black;
+            border-top-left-radius: 80px;
+            border-top-right-radius: 80px;
         }
+        /* 코끼리 다리 */
+        #footWrapper{
+        	position: relative;
+        	padding-bottom: 120px;
+        }
+        #boardFoot-img{
+        	position: absolute;
+        	left: 50%;
+        	transform: translate(-40%, 100%);
+        	width: 400px;
+        }
+        #foot{
+            background-color: #d2e3ec;
+            height: 100px;
+            border: 5px solid black;
+            border-bottom-left-radius: 80px;
+            border-bottom-right-radius: 80px;
+        }
+        
         .form-control{
             display: inline-block;
-
         }
-        #searchBtn img{
+        /* #searchBtn img{
         	width: 23px;
         	height: 24px;
-        }
+        } */
         
         #boardList a{
         	text-decoration: none;
         	color: black;
         }
-        /* 버튼 색상 */
-        .btn-primary{
-        	
-        }
         
-        /* 게시글 구분 선택 */
+        /* 컨텐츠 container */
+		#contentRow{
+			border-left: 5px solid black;
+			border-right: 5px solid black;
+		}
+        
+        /* 사이드바 */
+        #aside{
+        	margin-top: 150px;
+        	padding: 20px;
+        	height: 650px;
+        }
         .sortBox{
-        	height: 50px;
         	line-height: 50px;
         	list-style: none;
         	margin: 0;
         	padding: 0;
         }
         .sortBox li{
-        	box-sizing: border-box;
-        	width: 25%;
-        	float: left;
-        	background-color: #fce2e1;
-        	border: 1px solid white;
+        	border: 2px solid black;
+        	border-radius: 10px;
+        	margin-bottom: 15px;
+        	background-color: #d2e3ec;
         	text-align: center;
         }
         .sortBox li:hover{
@@ -100,6 +140,11 @@
         .sortBox a{
         	color: black;
         	text-decoration: none;
+        }
+        
+        /* 컨텐츠 속 */
+        #content-body{
+        	padding: 30px;
         }
         
         /* breadcrumb */
@@ -115,9 +160,11 @@
 		.page-item.active .page-link{
 			background-color: #d2e3ec;
 			border-color: #bfced6;
+			color: black;
 		}
 		.page-link{
 			color: black;
+			border: 0px;
 		}
 		
 		/*풋터 영역*/
@@ -150,10 +197,16 @@
             font-weight: 700;
             font-style: normal;
         }
+        @font-face {
+		    font-family: 'InfinitySans-RegularA1';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
     </style>
 </head>
 <body>
-	<header class="border-bottom">
+	<header class="border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -206,8 +259,8 @@
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
 
@@ -232,35 +285,52 @@
                         </ul>
                      </div>
                      <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
@@ -269,167 +339,190 @@
       </div>
    </header>
 
-    <div class="container">
-        <div id="head" class="row text-center align-items-center">
-            <h1>자유 게시판</h1>
-        </div>
-		<div class="container" style="width: 90%">
-			<div class="row mt-4 justify-content-end">
-				<div class="col-auto">
-		            <c:choose>
-		            	<c:when test="${loginType eq 'admin'}">
-		            		<button type="button" id="writeBtn" class="btn" style="background-color: #fce2e1;">관리자 글쓰기</button>
-		            	</c:when>
-		            	<c:otherwise>
-		            		<button type="button" id="writeBtn" class="btn" style="background-color: #fce2e1;">글쓰기</button>
-		            	</c:otherwise>
-		            </c:choose>
-				</div>
-			</div>
-			
-			<!-- breadcrumb -->
-			<div class="row">
-				<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-					<ol class="breadcrumb">
-						<li class="breadcrumb-item"><a href="/">Home</a></li>
-						<li class="breadcrumb-item"><a href="#">게시판</a></li>
-						<li class="breadcrumb-item text-dark" aria-current="page">자유게시판</li>
-					</ol>
-				</nav>
-			</div>
-			
-			<!-- 유형별 정렬 -->
-			<div class="row justify-content-center">
-				<ul class="sortBox">
-					<a href="/board/toBoard"><li>전체</li></a>
-					<a href="#"><li>공지</li></a>
-					<a href="#"><li>일반</li></a>
-					<a href="#"><li>후기</li></a>
-				</ul>
-			</div>
-			
-			<!-- 게시글 -->
-	        <div class="row mt-3" id="boardList">
-	            <div class="col">
-	                <table class="table table-hover text-center">
-	                    <thead>
-	                      <tr>
-	                        <th class="col-2">구분</th>
-	                        <th class="col-4">제목</th>
-	                        <th class="col-2">닉네임</th>
-	                        <th class="col-2">작성일</th>
-	                        <th class="col-2">조회</th>
-	                      </tr>
-	                    </thead>
-	                    <tbody>
-	                    	<c:choose>
-	                    		<c:when test="${list.size() == 0 && noticeList.size() == 0}">
-	                    			<tr>
-	                    				<td colspan="5">등록된 게시글이 없습니다.</td>
-	                    			</tr>
-	                    		</c:when>
-	                    		<c:otherwise>
-	                    			<c:forEach items="${noticeList}" var="notice">
-	                    				<tr>
-		                    					<td class="col-2">
-			                    					<i class="fa-solid fa-bullhorn"></i>
-		                    					</td>
-		                    					<td class="col-5 text-start">
-		                    						<a class="move" href="${notice.seq_board}">
-		                    							${notice.board_title}
-		                    						</a>
-		                    					</td>
-		                    					<td class="col-2">${notice.user_nickname}</td>
-		                    					<td class="col-2">${notice.board_date}</td>
-		                    					<td class="col-1">${notice.board_count}</td>
-		                    			</tr>
-                   					</c:forEach>
-	                    			<c:forEach items="${list}" var="dto">
-	                    				<tr>
-	                    					<td class="col-2">${dto.board_category}</td>
-	                    					<td class="col-5 text-start">
-	                    						<%-- /board/toDetailView?seq_board=${dto.seq_board} --%>
-	                    						<a class="move" href="${dto.seq_board}">
-	                    							${dto.board_title}
-	                    						</a>
-	                    					</td>
-	                    					<td class="col-2">${dto.user_nickname}</td>
-	                    					<td class="col-2">${dto.board_date}</td>
-	                    					<td class="col-1">${dto.board_count}</td>
-	                    				</tr>
-	                    			</c:forEach>
-	                    		</c:otherwise>
-	                    	</c:choose>
-	                    </tbody>
-					</table>
-	            </div>
-	        </div>
-	        
-	        <!-- 페이징 -->
-	        <div class="row mt-4 pageInfo_wrap">
-	        	<div class="pageInfo_area">
-					<ul id="pageInfo" class="pageInfo pagination justify-content-center">
-						<!-- 이전 페이지 버튼 -->
-						<c:if test="${pageMaker.prev}">
-							<li class="pageInfo_btn previous page-item">
-								<a class="page-link" href="${pageMaker.startPage-1}">&laquo;</a>
-							</li>
-						</c:if>
-						
-						<!-- 각 번호 페이지 버튼 -->
-						<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-							<li class="pageInfo_btn page-item ${pageMaker.cri.pageNum == num ? 'active':''}">
-								<a class="page-link" href="${num}">${num}</a>
-							</li>
-						</c:forEach>
-						
-						<!-- 다음 페이지 버튼 -->
-						<c:if test="${pageMaker.next}">
-		                    <li class="pageInfo_btn next page-item">
-		                    	<a class="page-link" href="${pageMaker.endPage + 1 }">&raquo;</a>
-		                    </li>
-		                </c:if> 
-					</ul>
-	        	</div>
-	        </div>
-	        <form id="moveForm" method="get">
-	        	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
-	        	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
-				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-				<input type="hidden" name="type" value="${pageMaker.cri.type}">
-				<input type="hidden" name="category" value="${pageMaker.cri.category}">
-	        </form>
-	        
-	        <!-- 검색 -->
-			<div class="search_wrap">
-				<div class="search_area row mt-4 justify-content-center">
-					<div class="col-auto">
-						<select id="type" name="type" class="form-select" aria-label="유형">
-							<option value="TCW" <c:out value="${pageMaker.cri.type eq 'TCW' ? 'selected' : ''}"/>>전체</option>
-							<option value="T" <c:out value="${pageMaker.cri.type eq 'T' ? 'selected' : ''}"/>>제목</option>
-							<option value="C" <c:out value="${pageMaker.cri.type eq 'C' ? 'selected' : ''}"/>>내용</option>
-							<option value="W" <c:out value="${pageMaker.cri.type eq 'W' ? 'selected' : ''}"/>>작성자</option>
-							<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC' ? 'selected' : ''}"/>>제목 + 내용</option>
-							<option value="TW" <c:out value="${pageMaker.cri.type eq 'TW' ? 'selected' : ''}"/>>제목 + 작성자</option>
-						</select>
-					</div>
-					<div class="col-5">
-						<input type="text" id="keyword" name="keyword" value="${pageMaker.cri.keyword}" class="form-control" placeholder="검색">
-					</div>
-					<div class="col-auto">
-						<button type="button" id="searchBtn" class="btn btn-primary">
-							<img src="/resources/images/searchIcon.png">
-						</button>
-					</div>
-				</div>
+    <div id="Wrapper">
+    	<div id="headWrapper" class="container">
+		    <img id="boardHead-img" src="/resources/images/board/head.png">
+			<div id="head" class="row text-center align-items-end pb-2">
+				<h1>자유 게시판</h1>
 			</div>
 		</div>
-    
-    	
+    	<div class="container contentWrapper" style="background-color: white;">
+        
+	        <!-- 컨텐츠 영역 -->
+			<div class="row" id="contentRow">
+				
+				<!-- 유형별 정렬 -->
+				<aside id="aside" class="col-2">
+					<div class="row justify-content-center">
+						<ul class="sortBox">
+							<a href="/board/toBoard"><li>전체</li></a>
+							<a href="#"><li>공지</li></a>
+							<a href="#"><li>수다</li></a>
+							<a href="#"><li>일상</li></a>
+							<a href="#"><li>후기</li></a>
+							<a href="#"><li>기타</li></a>
+						</ul>
+					</div>
+				</aside>
+				
+				<div id="content-body" class="col-10">
+				
+					<div class="row mt-4 justify-content-end">
+						<div class="col-auto">
+				            <c:choose>
+				            	<c:when test="${loginType eq 'admin'}">
+				            		<button type="button" id="writeBtn" class="btn" style="background-color: #d2e3ec;">관리자 글쓰기</button>
+				            	</c:when>
+				            	<c:otherwise>
+				            		<button type="button" id="writeBtn" class="btn" style="background-color: #d2e3ec;">글쓰기</button>
+				            	</c:otherwise>
+				            </c:choose>
+						</div>
+					</div>
+				
+					<!-- breadcrumb -->
+					<div class="row">
+						<nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="/">Home</a></li>
+								<li class="breadcrumb-item"><a href="#">커뮤니티</a></li>
+								<li class="breadcrumb-item text-dark" aria-current="page">자유게시판</li>
+							</ol>
+						</nav>
+					</div>
+				
+					<!-- 게시글 -->
+			        <div class="row mt-3" id="boardList">
+			            <div class="col">
+			                <table class="table table-hover text-center">
+			                    <thead>
+			                      <tr>
+			                        <th class="col-2">구분</th>
+			                        <th class="col-4">제목</th>
+			                        <th class="col-2">닉네임</th>
+			                        <th class="col-2">작성일</th>
+			                        <th class="col-2">조회</th>
+			                      </tr>
+			                    </thead>
+			                    <tbody>
+			                    	<c:choose>
+			                    		<c:when test="${list.size() == 0 && noticeList.size() == 0}">
+			                    			<tr>
+			                    				<td colspan="5">등록된 게시글이 없습니다.</td>
+			                    			</tr>
+			                    		</c:when>
+			                    		<c:otherwise>
+			                    			<c:forEach items="${noticeList}" var="notice">
+			                    				<tr>
+				                    					<td class="col-2">
+					                    					<i class="fa-solid fa-bullhorn"></i>
+				                    					</td>
+				                    					<td class="col-5 text-start">
+				                    						<a class="move" href="${notice.seq_board}">
+				                    							${notice.board_title}
+				                    						</a>
+				                    					</td>
+				                    					<td class="col-2">${notice.user_nickname}</td>
+				                    					<td class="col-2">${notice.board_date}</td>
+				                    					<td class="col-1">${notice.board_count}</td>
+				                    			</tr>
+		                   					</c:forEach>
+			                    			<c:forEach items="${list}" var="dto">
+			                    				<tr>
+			                    					<td class="col-2">${dto.board_category}</td>
+			                    					<td class="col-5 text-start">
+			                    						<%-- /board/toDetailView?seq_board=${dto.seq_board} --%>
+			                    						<a class="move" href="${dto.seq_board}">
+			                    							${dto.board_title}
+			                    						</a>
+			                    					</td>
+			                    					<td class="col-2">${dto.user_nickname}</td>
+			                    					<td class="col-2">${dto.board_date}</td>
+			                    					<td class="col-1">${dto.board_count}</td>
+			                    				</tr>
+			                    			</c:forEach>
+			                    		</c:otherwise>
+			                    	</c:choose>
+			                    </tbody>
+							</table>
+			            </div>
+			        </div>
+		        
+			        <!-- 페이징 -->
+			        <div class="row mt-4 pageInfo_wrap">
+			        	<div class="pageInfo_area">
+							<ul id="pageInfo" class="pageInfo pagination justify-content-center">
+								<!-- 이전 페이지 버튼 -->
+								<c:if test="${pageMaker.prev}">
+									<li class="pageInfo_btn previous page-item">
+										<a class="page-link" href="${pageMaker.startPage-1}">
+											<i class="fa-solid fa-angle-left"></i>
+										</a>
+									</li>
+								</c:if>
+								
+								<!-- 각 번호 페이지 버튼 -->
+								<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
+									<li class="pageInfo_btn page-item ${pageMaker.cri.pageNum == num ? 'active':''}">
+										<a class="page-link" href="${num}">${num}</a>
+									</li>
+								</c:forEach>
+								
+								<!-- 다음 페이지 버튼 -->
+								<c:if test="${pageMaker.next}">
+				                    <li class="pageInfo_btn next page-item">
+				                    	<a class="page-link" href="${pageMaker.endPage + 1 }">
+				                    		<i class="fa-solid fa-angle-right"></i>
+				                    	</a>
+				                    </li>
+				                </c:if> 
+							</ul>
+			        	</div>
+			        </div>
+			        <form id="moveForm" method="get">
+			        	<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+			        	<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+						<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+						<input type="hidden" name="type" value="${pageMaker.cri.type}">
+						<input type="hidden" name="category" value="${pageMaker.cri.category}">
+			        </form>
+		        
+			        <!-- 검색 -->
+					<div class="search_wrap">
+						<div class="search_area row mt-4 justify-content-center">
+							<div class="col-auto">
+								<select id="type" name="type" class="form-select" aria-label="유형">
+									<option value="TCW" <c:out value="${pageMaker.cri.type eq 'TCW' ? 'selected' : ''}"/>>전체</option>
+									<option value="T" <c:out value="${pageMaker.cri.type eq 'T' ? 'selected' : ''}"/>>제목</option>
+									<option value="C" <c:out value="${pageMaker.cri.type eq 'C' ? 'selected' : ''}"/>>내용</option>
+									<option value="W" <c:out value="${pageMaker.cri.type eq 'W' ? 'selected' : ''}"/>>작성자</option>
+									<option value="TC" <c:out value="${pageMaker.cri.type eq 'TC' ? 'selected' : ''}"/>>제목 + 내용</option>
+									<option value="TW" <c:out value="${pageMaker.cri.type eq 'TW' ? 'selected' : ''}"/>>제목 + 작성자</option>
+								</select>
+							</div>
+							<div class="col-5">
+								<input type="text" id="keyword" name="keyword" value="${pageMaker.cri.keyword}" class="form-control" placeholder="검색">
+							</div>
+							<div class="col-auto">
+								<button type="button" id="searchBtn" class="btn" style="background-color: #d2e3ec;">
+									<i class="fa-solid fa-magnifying-glass"></i>
+								</button>
+							</div>
+						</div>
+					</div>
+		        </div>
+			</div>
+		</div>
+		<div id="footWrapper" class="container">
+		    <img id="boardFoot-img" src="/resources/images/board/bottom.png">
+			<div id="foot" class="row">
+			</div>
+		</div>
+
     </div>
     
     <!-- Footer-->
-    <div class="container">
+    <!-- <div class="container"> -->
 		<footer class="footer mt-5">
 			<div class="row">
 				<div class="col-lg-3 footer-imgBox">
@@ -586,7 +679,8 @@
 				}	
 			}
 		}
- 		
+ 		window.close();
+		window.opener.location.reload();	
     </script>
 </body>
 </html>
