@@ -227,6 +227,9 @@
 hr{
    margin-top : 0;
 }
+#swal2-title{
+	font-size:16px;
+}
 </style>
 </head>
 <body>
@@ -512,7 +515,7 @@ hr{
                      icon: 'info',
                      title: '누군가의 닉네임이 변경되었습니다! 새로고침을 해보세요!',
                      showConfirmButton: false,
-                     timer: 1500
+                     timer: 3000
                    })
                }else{
                   for(let i=0; i<intersection.length; i++){

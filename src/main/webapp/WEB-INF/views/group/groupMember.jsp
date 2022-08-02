@@ -559,74 +559,83 @@ footer.footer {
               this.checked = false;
 		}
 	if($(trAccess).prop("checked")){ //직책이 체크됐을때
-		for(let i=0; i<3; i++){
+		for(let i=0; i<${memList.TableJoinDTO.size()}; i++){
 			tr.parent().children().eq(i).children('td').eq(5).children('input[type=checkbox]').prop("checked", false);
 		}
 	}else if($(trEmail).prop("checked")){ // 이메일이 체크됐을때
-		for(let i=0; i<3; i++){
+		for(let i=0; i<${memList.TableJoinDTO.size()}; i++){
 			tr.parent().children().eq(i).children('td').eq(4).children('input[type=checkbox]').prop("checked", false);
 		}
 	}
- 		})
+})
 
        // 그룹 권한 수정
       $("#modifyBtn").on("click", function(){
-         let checkAccess = $('input[name=checkAccess]:checked').val();
-         let checkEmail = $('input[name=checkAccess]:checked').parent().next().children('input').val();
+         let checkAccess = $('input[name=checkAccess]:checked').val(); // 체크된 직책
+         let checkEmail = $('input[name=checkAccess]:checked').parent().next().children('input').val(); 
          let seq_group = $("#seq_group").val();
-         if(checkAccess != '주최자'){
- 	         $.ajax({
-	            url : "/group/groupAccess",
-	            type : "post",
-	            data : {user_email : checkEmail,
-	                  access : checkAccess,
-	                  seq_group : seq_group},
-	            success: function(data){
-	               if(data == "success"){
-	            	    let timerInterval
-	            	    Swal.fire({
-	            	      icon:'success',
-	            	      title: '주최자 위임이 완료되었습니다!',
-	            	      html: ' <b></b>' + '초뒤에 페이지가 이동됩니다.',
-	            	      timer: 3000,
-	            	      timerProgressBar: true,
-	            	      didOpen: () => {
-	            	        Swal.showLoading()
-	            	        const b = Swal.getHtmlContainer().querySelector('b')
-	            	        timerInterval = setInterval(() => {
-	            	          b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
-	            	        }, 100)
-	            	      },
-	            	      willClose: () => {
-	            	        clearInterval(timerInterval)
-	            	      }
-	            	    }).then((result) => {
-	            	      /* Read more about handling dismissals below */
-	            	      if (result.dismiss === Swal.DismissReason.timer) {
-	            	        console.log('I was closed by the timer')
-	            	      }
-	            	      window.location.href = "/";
-	            	    })
-	               }else{
-	                  Swal.fire({
-	                       icon: 'error',
-	                       title: 'Oops...',
-	                       text: '다시 확인해주세요!',
-	                     })
-	                     setTimeout(function() {
-	                             window.location.href = "";
-	                         },2000);
-	               }
-	            },error:function(e){
-	               console.log(e);
-	            }
-	         })
-         }else{
+         if($('input[name=checkUser_email]:checked')){
              Swal.fire({
                  icon: 'error',
                  title: 'Oops...',
-                 text: '본인은 선택하지 못합니다!',
-               }) 
+                 text: '버튼을 잘 생각해주세요!',
+               })
+         }else{
+	         if(checkAccess != '주최자'){
+	 	         $.ajax({
+		            url : "/group/groupAccess",
+		            type : "post",
+		            data : {user_email : checkEmail,
+		                  access : checkAccess,
+		                  seq_group : seq_group},
+		            success: function(data){
+		               if(data == "success"){
+		            	    let timerInterval
+		            	    Swal.fire({
+		            	      icon:'success',
+		            	      title: '주최자 위임이 완료되었습니다!',
+		            	      html: ' <b></b>' + '초뒤에 페이지가 이동됩니다.',
+		            	      timer: 3000,
+		            	      timerProgressBar: true,
+		            	      didOpen: () => {
+		            	        Swal.showLoading()
+		            	        const b = Swal.getHtmlContainer().querySelector('b')
+		            	        timerInterval = setInterval(() => {
+		            	          b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
+		            	        }, 100)
+		            	      },
+		            	      willClose: () => {
+		            	        clearInterval(timerInterval)
+		            	      }
+		            	    }).then((result) => {
+		            	      /* Read more about handling dismissals below */
+		            	      if (result.dismiss === Swal.DismissReason.timer) {
+		            	        console.log('I was closed by the timer')
+		            	      }
+		            	      window.location.href = "/";
+		            	    })
+		               }else{
+		                  Swal.fire({
+		                       icon: 'error',
+		                       title: 'Oops...',
+		                       text: '다시 확인해주세요!',
+		                     })
+		                     setTimeout(function() {
+		                             window.location.href = "";
+		                         },2000);
+		               }
+		            },error:function(e){
+		               console.log(e);
+		            }
+		         })
+	         }else{
+	             Swal.fire({
+	                 icon: 'error',
+	                 title: 'Oops...',
+	                 text: '본인은 선택하지 못합니다!',
+	               }) 
+	         }
+        	 
          }
          
       })
@@ -638,6 +647,13 @@ footer.footer {
       let seq_group = $("#seq_group").val();
       console.log(checkAccess);
 	  console.log(checkEmail);
+	  if($('input[name=checkUser_Access]:checked')){
+          Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: '버튼을 잘 생각해주세요!',
+            })
+	  }else{
 	      let checkBoxArr = [];
 		      $("input[name=checkUser_email]:checked").each(function(){
 		    	 if(checkAccess != '주최자'){
@@ -647,7 +663,7 @@ footer.footer {
 			         "seq_group" : seq_group
 			      };
 			      var jsonString = JSON.stringify(jsonData);
-
+	
 			      $.ajax({
 			         url:"/group/deleteMember",
 			         headers: {'Content-Type': 'application/json'},
@@ -673,6 +689,8 @@ footer.footer {
 		      }
 		    	 console.log(checkBoxArr);
 	      })
+		  
+	  }
    })
 
 </script>

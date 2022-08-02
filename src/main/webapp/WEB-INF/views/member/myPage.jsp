@@ -116,7 +116,7 @@ h1 {
 
 /* 프로필사진 영역 */
 #profilePic {
-   border: 2px solid rgb(25, 104, 184);
+   border: 5px solid rgb(25, 104, 184);
    width: 280px;
    height: 280px;
    border-radius: 50%;
@@ -1227,7 +1227,7 @@ footer.footer {
                   <c:if test="${selectWishList.size() == 0}">
                      <div class="row description" id="myList" style="color: #008A65;">
                         <div class="col-3 d-flex justify-content-end"></div>
-                        <div class="col-8 d-flex justify-content-start">
+                        <div class="col-8 d-flex justify-content-start wishContent">
                            <span>찜한 모임이 없습니다.</span>
                         </div>
                         <div class="col-1 d-flex justify-content-start"></div>
@@ -1314,7 +1314,7 @@ footer.footer {
                                        },
                                        success: function (data) {
                                            parent.remove();
-                                           
+                                           window.location.href = "";
                                        },
                                        error: function (e) {
                                            console.log(e);

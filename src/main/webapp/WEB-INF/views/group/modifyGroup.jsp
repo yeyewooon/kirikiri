@@ -144,36 +144,7 @@ function uploadSummernoteImageFile(file, editor){
 <meta charset="UTF-8">
 <title>Modify Group</title>
 <style>
-<!-- 폰트 -->
-@font-face {
-    font-family: 'Katuri';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
 
-@font-face {
-   font-family: 'InfinitySans-RegularA1';
-   src:
-      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
-      format('woff');
-   font-weight: normal;
-   font-style: normal;
-}
-
-@font-face {
-    font-family: 'MICEGothic Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'MICEGothic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-}
 
 body {
 	background-color: white;
@@ -445,6 +416,42 @@ footer.footer {
 }
 
 
+
+
+
+
+@font-face {
+	font-family: 'Katuri';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'InfinitySans-RegularA1';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+    font-family: 'MICEGothic Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MICEGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
 </style>
 </head>
 <body>
@@ -613,7 +620,7 @@ footer.footer {
 					<h4 style = "font-family:katuri;">Interests</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">주제가 구체적일수록 비슷한 관심사를 가진 사람들에게
 						그룹을 <br>홍보하기가 더 쉬워집니다. 주제는 1개만 선택 가능합니다.<br>
-					<br> 기존에 선택하셨던 주제는 <strong>${tbl_group_dto.group_category}</strong>
+					<br> 기존에 선택하셨던 주제는 <strong style="color :red;">${tbl_group_dto.group_category}</strong>
 						입니다.
 					</span>
 					<div class="row mt-4">
@@ -681,11 +688,11 @@ footer.footer {
 				<div
 					class="col-md-9 mainTextBasicInfo d-flex flex-column justify-content-start">
 					<h4 style = "font-family:katuri;">Basic Info</h4>
-					<strong class="mt-2">모임 이름</strong> <span style="font-family:InfinitySans-RegularA1; font-size: 14px;"
+					<strong style = "font-family:InfinitySans-RegularA1; class="mt-2">모임 이름</strong> <span style="font-family:InfinitySans-RegularA1; font-size: 14px;"
 						class="mt-2">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. 떠오르는 기발한
 						이름이 있나요? <br> 마음이 바뀌면 나중에 다시 변경할 수 있습니다.
 					</span>
-					<div class="mb-3 mt-1">
+					<div class="mb-3 mt-2">
 						<input type="text" class="form-control" id="group_title"
 							placeholder="최대 24자까지 작성 가능합니다." name="group_title" maxlength='24'
 							value="${tbl_group_dto.group_title}">
@@ -719,7 +726,7 @@ footer.footer {
 					<h4 style = "font-family:katuri;">Location</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">해당 지역의 사람들이 귀하의 이벤트를 발견하도록 돕고
 						<br> 참석자들에게 위치를 제공해주세요.<br>
-					<br> 기존에 선택하셨던 위치는 <strong>${tbl_group_dto.group_site}</strong>
+					<br> 기존에 선택하셨던 위치는 <strong style="color : red;">${tbl_group_dto.group_site}</strong>
 						입니다.
 					</span> <span class="mt-2" style = "font-family:InfinitySans-RegularA1;"><strong>새로운 지역 설정</strong></span>
 					<div class="selectBox d-flex">
@@ -785,7 +792,7 @@ footer.footer {
 					<h4 style = "font-family:katuri;">Member</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
 						인원은 최소 2명부터 최대 10명까지 가능합니다.<br>
-					<br> 현재 모임의 맴버수는 <strong>${fn:length(memberList)}명</strong>
+					<br> 현재 모임의 맴버수는 <strong style="color : red;">${fn:length(memberList)}명</strong>
 						입니다.
 					</span> <strong class="mt-3">인원 설정</strong>
 					<div class="memberCntBox d-flex mt-2 ">
@@ -818,7 +825,7 @@ footer.footer {
 				<div class="col-md-9 mainTextFile d-flex flex-column justify-content-start">
 					<h4 style = "font-family:katuri;">Guideline</h4>
 					<span>
-						<h5>거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
+						<h5 style="font-family:InfinitySans-RegularA1;">거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
 					</span> <span style="font-size: 14px;font-family:InfinitySans-RegularA1;" class="mt-2">끼리끼리는 끈끈한 커뮤니티를
 						통해 사람들이 더욱 풍요롭고 행복한 삶을 <br>살 수 있도록 합니다. 따라서 모든 그룹은 다음 사항을
 						충족해야 합니다.

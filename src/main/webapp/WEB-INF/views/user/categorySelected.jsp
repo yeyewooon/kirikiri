@@ -395,7 +395,7 @@ body {
     cursor: pointer;
 }
 .slick-prev:before, .slick-next:before {
-    color: coral;
+    color: #0061bf;
 }
 
 /* a태그 없애기 */
