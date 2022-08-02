@@ -167,6 +167,7 @@ public class AdminController {
 
       // board curPage로 자라서 list 가져오기
       List<BoardDTO> list = service.selectBoard(curPage*10-9, curPage*10);
+      System.out.println("list : "+list);
       model.addAttribute("list",list);
 
       // board 총 count 가져오기
@@ -236,7 +237,7 @@ public class AdminController {
       List<Group_BoardDTO> meetinglist = service.meetingSearchList(category, keyword);
       return meetinglist;
    }
-
+   
    @RequestMapping(value="/boardDelete") // 게시글 삭제
    @ResponseBody
    public String boardDelete(int seq_board) throws Exception{

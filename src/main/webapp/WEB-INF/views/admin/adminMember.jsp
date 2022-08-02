@@ -404,7 +404,6 @@ td>a {
 	    		location.reload();
 	    	}else{
 				$("#searchBtn").trigger("click");
-	    
 	    	}
 	    }
 	}; 
