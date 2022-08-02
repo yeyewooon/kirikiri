@@ -481,7 +481,7 @@
 		 </div>
 	 </div>
 	 <div class="row justify-content-center">
-		 <div class="col-6 mt-3 mb-4">
+		 <div class="col-4 mt-3 mb-4">
 			<div id="profilePic">
 				<c:choose>
 					<c:when test="${empty memberdto.user_image}">
@@ -493,7 +493,7 @@
 				</c:choose>
 			</div>
 		</div>
-		<div class="col-6 profiles">
+		<div class="col-8 profiles">
 			<div class="col-12" id="profileName">
 				<strong>${memberdto.user_nickname}</strong> 
 				<span style="font-size: 15px">님</span>
