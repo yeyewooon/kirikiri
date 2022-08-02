@@ -137,6 +137,8 @@ public class GroupBoardController {
 		Map<String, Object> map = service.getDetail(seq_group_board);
 		model.addAttribute("modMap", map);
 		model.addAttribute("cri", cri);
+		int seq_group = ((Group_BoardDTO)map.get("boardDTO")).getSeq_group();
+		model.addAttribute("leaderId", service.getAccess(seq_group));
 		return "group/groupBoardModify";
 	}
 	
