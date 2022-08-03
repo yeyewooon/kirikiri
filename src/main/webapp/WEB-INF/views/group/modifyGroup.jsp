@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,18 +77,18 @@ $(document).ready(function() {
 					  }
 				  },
 				 onKeyup: function(e) {
-				     	fn_checkByte(this); // 글자수 바이트 체크 
+				     	fn_checkByte(this); // 글자수 바이트 체크
 				    }
 			  }
 		});
 	         // 주기적으로 감지할 대상 요소 선정
 	         let target = document.querySelector(".note-editable");
 	         // DOM의 어떤 부분을 감시할지를 옵션 설정
-	         let config = { 
+	         let config = {
 	            childList: true, // 자식노드 추가/제거 감지
 	            subtree : true, // 대상 노드의 자식 뿐만 아니라 손자 이후로 모두 감시
 	         };
-	         
+
 	         // 옵저버 인스턴스 생성, 콜백함수 설정
 	         let observer = new MutationObserver(function(mutationList){ // 타겟에 변화가 일어나면 콜백함수를 실행하게 된다.
 	            for(let mutation of mutationList){
@@ -113,7 +113,7 @@ $(document).ready(function() {
 	                  }
 	               }
 	            }
-	         }); 
+	         });
 	         // 감지 시작
 	         observer.observe(target, config);
 });
@@ -144,37 +144,7 @@ function uploadSummernoteImageFile(file, editor){
 <meta charset="UTF-8">
 <title>Modify Group</title>
 <style>
-<!-- 폰트 -->
 
-@font-face {
-    font-family: 'Katuri';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-   font-family: 'InfinitySans-RegularA1';
-   src:
-      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
-      format('woff');
-   font-weight: normal;
-   font-style: normal;
-}
-
-@font-face {
-    font-family: 'MICEGothic Bold';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'MICEGothic';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-}
 
 body {
 	background-color: white;
@@ -251,13 +221,13 @@ header {
     text-align: center;
     background: linear-gradient(to top, #FFE400 20%, transparent 30%);
     }
-    
+
 .title-image{
     margin-bottom: 35px;
     width: 70px;
     height: 70px;
 	}
-	
+
 /*row 영역*/
 .style{
 	border: 2px solid #ff8f00;
@@ -282,7 +252,7 @@ header {
     background-color: #fcab4e;
     border-color: #e27500;
     }
-    
+
 .btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
 	color: #fff;
     background-color: #fcab4e;
@@ -441,6 +411,42 @@ footer.footer {
 }
 
 
+
+
+
+
+@font-face {
+	font-family: 'Katuri';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'InfinitySans-RegularA1';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+    font-family: 'MICEGothic Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MICEGothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
 </style>
 </head>
 <body>
@@ -554,7 +560,7 @@ footer.footer {
                               <a href="/"
                                  class="d-block link-dark text-decoration-none dropdown-toggle"
                                  id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> 
+                                 aria-expanded="false">
                                  <c:if test="${loginSession.user_image eq null}">
                                     <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
                                  </c:if>
@@ -586,7 +592,7 @@ footer.footer {
          </nav>
       </div>
    </header>
-   	
+
    	<div style = "text-align:center;">
 		<span class ="modify-title">Modify Group</span><span><img class = "title-image" src = "/resources/images/Create_Group.png"></span>
 	</div>
@@ -609,7 +615,7 @@ footer.footer {
 					<h4 style = "font-family:Katuri;">Interests</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">주제가 구체적일수록 비슷한 관심사를 가진 사람들에게
 						그룹을 <br>홍보하기가 더 쉬워집니다. 주제는 1개만 선택 가능합니다.<br>
-					<br> 기존에 선택하셨던 주제는 <strong>${tbl_group_dto.group_category}</strong>
+					<br> 기존에 선택하셨던 주제는 <strong style="color :red;">${tbl_group_dto.group_category}</strong>
 						입니다.
 					</span>
 					<div class="row mt-4">
@@ -676,16 +682,16 @@ footer.footer {
 				<!--기본 글쓰기 -->
 				<div
 					class="col-md-9 mainTextBasicInfo d-flex flex-column justify-content-start">
-					<h4 style = "font-family:Katuri;">Basic Info</h4>
-					<strong class="mt-2">모임 이름</strong> <span style="font-family:InfinitySans-RegularA1; font-size: 14px;"
+					<h4 style = "font-family:katuri;">Basic Info</h4>
+					<strong style = "font-family:InfinitySans-RegularA1; class="mt-2">모임 이름</strong> <span style="font-family:InfinitySans-RegularA1; font-size: 14px;"
 						class="mt-2">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. 떠오르는 기발한
 						이름이 있나요? <br> 마음이 바뀌면 나중에 다시 변경할 수 있습니다.
 					</span>
-					<div class="mb-3 mt-1">
+					<div class="mb-3 mt-2">
 						<input type="text" class="form-control" id="group_title"
 							placeholder="최대 24자까지 작성 가능합니다." name="group_title" maxlength='24'
 							value="${tbl_group_dto.group_title}">
-							
+
 					</div>
 					<strong style = "font-family:InfinitySans-RegularA1;"class="mt-2">모집 내용</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
 						class="mt-2">모집내용은 회원들에게 그룹을 홍보할 때 표시됩니다. <br>변경사항이
@@ -715,7 +721,7 @@ footer.footer {
 					<h4 style = "font-family:Katuri;">Location</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">해당 지역의 사람들이 귀하의 이벤트를 발견하도록 돕고
 						<br> 참석자들에게 위치를 제공해주세요.<br>
-					<br> 기존에 선택하셨던 위치는 <strong>${tbl_group_dto.group_site}</strong>
+					<br> 기존에 선택하셨던 위치는 <strong style="color : red;">${tbl_group_dto.group_site}</strong>
 						입니다.
 					</span> <span class="mt-2" style = "font-family:InfinitySans-RegularA1;"><strong>새로운 지역 설정</strong></span>
 					<div class="selectBox d-flex">
@@ -728,8 +734,8 @@ footer.footer {
 					</div>
 					<!--모임 지역-->
 					<input type="text" id="group_site" name="group_site"
-						value="${tbl_group_dto.group_site}" hidden> 
-					<input type="text" id="sido1Input" name="sido1Input" hidden> 
+						value="${tbl_group_dto.group_site}" hidden>
+					<input type="text" id="sido1Input" name="sido1Input" hidden>
 					<input type="text" id="gugun1Input" name="gugun1Input" hidden>
 				</div>
 			</div>
@@ -781,7 +787,7 @@ footer.footer {
 					<h4 style = "font-family:Katuri;">Member</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
 						인원은 최소 2명부터 최대 10명까지 가능합니다.<br>
-					<br> 현재 모임의 맴버수는 <strong>${fn:length(memberList)}명</strong>
+					<br> 현재 모임의 맴버수는 <strong style="color : red;">${fn:length(memberList)}명</strong>
 						입니다.
 					</span> <strong class="mt-3">인원 설정</strong>
 					<div class="memberCntBox d-flex mt-2 ">
@@ -814,7 +820,7 @@ footer.footer {
 				<div class="col-md-9 mainTextFile d-flex flex-column justify-content-start">
 					<h4 style = "font-family:Katuri;">Guideline</h4>
 					<span>
-						<h5>거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
+						<h5 style="font-family:InfinitySans-RegularA1;">거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
 					</span> <span style="font-size: 14px;font-family:InfinitySans-RegularA1;" class="mt-2">끼리끼리는 끈끈한 커뮤니티를
 						통해 사람들이 더욱 풍요롭고 행복한 삶을 <br>살 수 있도록 합니다. 따라서 모든 그룹은 다음 사항을
 						충족해야 합니다.
@@ -838,7 +844,7 @@ footer.footer {
 			<button class="btn btn-primary ms-4" id="modifyGroupBtn">동의 후 수정</button>
 		</span>
 	</div>
-	
+
 <!-- Footer-->
    <div class="footerWrapper mt-5" style="border-top:1px solid #e0e3e8;">
       <div class="container">
@@ -953,7 +959,7 @@ footer.footer {
 	   }
 	  });
 	 });
-  
+
 //리팩토링 필요
   // 지역 설정
   let sido1 = "";
@@ -1031,14 +1037,14 @@ footer.footer {
     )
     }
   })
-  
+
   //textarea 바이트 수 체크하는 함수
 	function fn_checkByte(obj){
 	    const maxByte = 3000; //최대 100바이트
 	    const text_val = obj.value; //입력한 문자
 	    const text_len = text_val.length; //입력한 문자수
 	    let totalByte=0;
-	    
+
 	    for(let i=0; i<text_len; i++){
 	    	const each_char = text_val.charAt(i);
 	        const uni_char = escape(each_char); //유니코드 형식으로 변환
@@ -1054,7 +1060,7 @@ footer.footer {
 	    		alert('사진포함 최대 1750자까지만 입력가능합니다.');
 	        	document.getElementById("nowByte").innerText = totalByte;
 	            document.getElementById("nowByte").style.color = "red";
-	            document.getElementById("nowText").innerText = text_len;            
+	            document.getElementById("nowText").innerText = text_len;
 	        }else{
 	        	document.getElementById("nowByte").innerText = totalByte;
 	            document.getElementById("nowByte").style.color = "green";
@@ -1064,7 +1070,7 @@ footer.footer {
 
   // Form으로 전송
   $("#modifyGroupBtn").on("click",function() {
-	  // 구/군 변경시 비교 
+	  // 구/군 변경시 비교
 	  let group_site_com = $("#sido1Input").val() + " " +$("#gugun1Input").val();
 	  if($("#group_category").val() == "") {
 		  Swal.fire("모임주제를 선택해주세요");
@@ -1084,17 +1090,17 @@ footer.footer {
 	  }
 	 $("#groupForm").submit();
   })
-  
+
   // 이미지 선택
   let groupFile = document.getElementById("groupFile");
   let groupDefaultImg = document.getElementById("groupDefaultImg");
-  
-	//사진 타입 
+
+	//사진 타입
   function checkFile(obj) {
     let fileKind = obj.value.lastIndexOf('.');
     let fileName = obj.value.substring(fileKind+1,obj.length);
     let fileType = fileName.toLowerCase();
-    
+
     if(fileType == "jpg" || fileType == "gif" || fileType == "png" || fileType == "jpeg" || fileType == "bmp"){
     	return true;
     }else{
@@ -1106,18 +1112,18 @@ footer.footer {
        $("#groupFile").val("");
    		return false;
     }
-    
+
     if(fileType == "bmp"){
        answer = confirm("BMP 파일은 웹상에서 사용하기엔 적절한 이미지 형식이 아닙니다. /n 사용하시겠습니까?");
        if(!answer) return false;
-    	
+
     }
 }
 
   // 이미지 즉각 변환
    groupFile.onchange = function () {
 	   let result = checkFile(this);
-		  if(result) { // 사진 파일 일 떄만 
+		  if(result) { // 사진 파일 일 떄만
 			  let reader = new FileReader();
 			    reader.readAsDataURL(this.files[0]);
 			    reader.onload = function (e) {
@@ -1126,7 +1132,7 @@ footer.footer {
 		  }else { // 사진 파일이 아닐 때
 			  profile_image.src = "/resources/images/메인사진2(배경).png";
 		  }
-  } 
+  }
 
   // 카테고리 선택
     $(".categoryBtn").on("click", function (e) {
@@ -1151,9 +1157,9 @@ footer.footer {
 
   // 맴버수
   let memberCnt = Number($(".memberCnt").html());
-  //현재 맴버 수 
+  //현재 맴버 수
   let curMemberCnt = Number(${fn:length(memberList)});
-  
+
   // 버튼 클릭시
   $(".calBtn").on("click", function () {
     if ($(this).attr("id") === "plusBtn") {
@@ -1187,8 +1193,8 @@ footer.footer {
     memberCnt -= 1;
     $(".memberCnt").html(memberCnt);
     $("#group_people").val(memberCnt);
-    
-    
+
+
   }
 
   // 숫자 조건 (2~10)명
@@ -1210,10 +1216,10 @@ footer.footer {
       });
       $(".memberCnt").html(10);
       $("#group_people").val(10);
-    } 
+    }
   }
 
-  
+
   </script>
 </body>
 </html>
