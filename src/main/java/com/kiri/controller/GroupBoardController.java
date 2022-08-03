@@ -123,7 +123,7 @@ public class GroupBoardController {
 		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
 		model.addAttribute("like", service.like(seq_group_board, user_email));
 		// 댓글 프로필
-		model.addAttribute("profile", service.getProfileImg(user_email));
+//		model.addAttribute("profile", service.getProfileImg(user_email));
 		
 		// criteria 인스턴스 전달
 		model.addAttribute("cri", cri);

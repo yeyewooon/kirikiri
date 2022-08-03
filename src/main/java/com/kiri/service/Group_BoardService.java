@@ -50,9 +50,9 @@ public class Group_BoardService {
 	}
 	
 	// 댓글 프로필 조회
-	public String getProfileImg(String user_email) throws Exception{
-		return commentDAO.getProfileImgG(user_email);
-	}
+//	public String getProfileImg(String user_email) throws Exception{
+//		return commentDAO.getProfileImgG(user_email);
+//	}
 
 	// 조회수 + 1
 	public void viewCntUp(int seq_group_board) throws Exception {

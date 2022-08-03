@@ -1,6 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -114,6 +115,7 @@
         
         #content{
         	font-family: initial;
+        	word-wrap: break-word;
         }
        	#content img{
        		max-width: 100%;
@@ -466,6 +468,7 @@
         <div class="row" id="commentWrapper">
             <div class="col-12" id="body-comment">
                 <!-- 댓글 출력 -->
+                ${profile[0].USER_IMAGE}
                 <c:choose>
 	                <c:when test="${detail.commentList.size() == 0}">
 	                	<!-- 댓글 없으면 -->
@@ -479,12 +482,15 @@
 	                			<!-- 프로필 이미지 -->
 			                    <div class="col-2 d-flex justify-content-center">		                        
 			                        <div class="profileBox">
-			                        	<c:if test="${profile eq null}">
+			                        	<c:if test="${comment.user_image eq null}">
 			                        		<!-- 기본이미지 -->
 			                        		<img src="/resources/images/profile.jpg">
 			                        	</c:if>
-			                            <c:if test="${profile ne null}">
-			                        		<img src="/profile/${profile}">
+			                            <c:if test="${comment.user_image ne null}">
+			                            	<img src="/profile/${comment.user_image}">
+			                            	<%-- <c:if test=${comment.user_email eq profile.user_email}>
+			                            		<img src="/profile/${profile.user_image}">
+			                            	</c:if> --%>
 			                        	</c:if>
 			                        </div>
 			                    </div>
