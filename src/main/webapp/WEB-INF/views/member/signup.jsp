@@ -420,11 +420,15 @@ span{
 		$("#emailCheck").click(function(){ //이메일 중복체크
 			 let user_email = $("#email-id").val()+"@"+$("#email-domain").val();
    	  		 let emailRegex = /^[a-zA-Z0-9+-\_.]+@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-
+			
    	  		 if($("#email-id").val() == ""){
    	  			 sweetAlertFail("아이디를 입력해주세요.");
    	  			 return;
-
+   	  			 
+   	  		 }else if(emailRegex.test($("#email-id").val())){
+   	  			 sweetAlertFail("아이디를 도메인 형식으로 하지 말아주세요.");
+	  			 return;
+   	  			 
    	  		 }else if($("#email-domain").val() === "1"){
       			 sweetAlertFail("도메인을 선택 혹은 입력해주세요.");
       			 return;
@@ -646,12 +650,20 @@ span{
        });
 
 
-       $("#checkPhone").click(function(){ //이메일 중복체크
+       $("#checkPhone").click(function(){ //핸드폰 중복체크
     	   let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
     	   let phone = $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
-
+    	   
+    	   console.log($("#phone1 option:selected").val());
+    	   console.log($("#phone2").val().length);
+    	   
+			 if($("#phone1 option:selected").val() == "010" && $("#phone2").val().length != "4" ){
+				 sweetAlertFail("올바르지 않은 전화번호 형식입니다."); 
+				 return;
+			 }
+    	   
 	  		 if(!phoneRegex.test(phone)){
-    	 		sweetAlertFail("올바르지 않은 전화번호 형식입니다.");
+    	 		 sweetAlertFail("올바르지 않은 전화번호 형식입니다.");
 	       	 	 return;
 
 	      	 }else{

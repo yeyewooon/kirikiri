@@ -149,24 +149,6 @@ public class MemberController {
 		return "member/myWrite";
 	}
 	
-	/*
-	 * @RequestMapping(value = "/toWriteDetail") // 게시글 상세페이지 요청 public String
-	 * toDetailView(int seq_board, HttpServletResponse response, Model model,
-	 * Criteria cri) throws Exception{ String user_email =
-	 * ((MemberDTO)session.getAttribute("loginSession")).getUser_email(); // 조회수 로직
-	 * // 쿠키 가져옴 // System.out.println("cookie : " + cookie); //
-	 * if(!(cookie.contains(String.valueOf(seq_board)))) { // cookie += seq_board +
-	 * "/"; // service.viewCntUp(seq_board); // } // Cookie newCookie = new
-	 * Cookie("visit_cookie", cookie); // newCookie.setPath("/"); //
-	 * response.addCookie(newCookie);
-	 * 
-	 * // 게시글 정보 얻기 Map<String, Object> map = service.getDetail(seq_board);
-	 * model.addAttribute("detail", map); // 좋아요 여부, 개수 model.addAttribute("like",
-	 * service.like(seq_board, user_email)); // criteria 인스턴스 전달
-	 * model.addAttribute("cri", cri);
-	 * 
-	 * return "member/myWriteDetail"; }
-	 */
 	@RequestMapping(value = "/profileModifyPage")
 	public String profileModify(String user_email, Model model) throws Exception { // profileModify 페이지 이동
 		System.out.println(user_email);
@@ -212,16 +194,18 @@ public class MemberController {
 				dto.setUser_pw(data_password);
 			}else {
 				String Encryption_pw = ecp.getSHA512(dto.getUser_pw());
-				dto.setUser_pw(Encryption_pw);				
+				 dto.setUser_pw(Encryption_pw);		
 			}
 		}
 		
 		System.out.println("update Dto : " +dto);
+		System.out.println("User_email : " + dto.getUser_email());
 		
 		service.groupChatmodify(dto.getUser_email(), dto.getUser_nickname());
 		service.groupMemmodify(dto.getUser_email(), dto.getUser_nickname());
 		service.groupApplymodify(dto.getUser_email(), dto.getUser_nickname());
-		
+		service.groupreportmodify(dto.getUser_email(), dto.getUser_nickname());
+		service.groupreport2modify(dto.getUser_email(), dto.getUser_nickname());
 		service.profileModify(dto);
 		session.setAttribute("loginSession", dto);
 		return "redirect:myPage";

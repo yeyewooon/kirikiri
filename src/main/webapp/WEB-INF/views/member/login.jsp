@@ -117,7 +117,10 @@ body {
 	padding: 5px;
 }
 
-
+#btnFindId, #btnFindPW{
+	background-color: #18365291;
+	color: white;
+}
 
 #loginForm p {
 	margin-bottom: 0px;
@@ -132,6 +135,8 @@ body {
 }
 
 #toLoginBtn{
+	font-weight: bold;
+	background-color:#d2e3ec;
 	width: 60%;
 }
 
@@ -754,14 +759,14 @@ footer.footer {
 			</div>
 			<div class="row">
 				<div class="col">
-					<button type="button" id="toLoginBtn" class="btn btn-outline-primary">로그인</button>
+					<button type="button" id="toLoginBtn" class="btn">로그인</button>
 				</div>
 			</div>
 			<div class="row socialRow justify-content-center align-items-center">
 				<a class="social" id="kakaoBtn" target="_parent"><img
 					class="social-img" src="/resources/images/kakoLogo.JPG"
 					alt="오류가 발생했습니다."></a>
-				<a class="social" href="${naverUrl}" target="_parent"><img
+				<a class="social" href="${naverUrl}&auth_type=reauthenticate" target="_parent"><img
 					class="social-img" src="/resources/images/naverLogo.JPG"
 					alt="오류가 발생했습니다."></a>
 				<div class="social d-flex align-items-center"
@@ -805,8 +810,8 @@ footer.footer {
 							</div>
 						</div>
 						<div class="row find-box btns mt-4">
-							<div class="col-md-12 d-flex justify-content-center">
-								<button type="button" class="btn btn-outline-primary" id="btnFindId">아이디
+							<div class="col-md-12">
+								<button type="button" class="btn" id="btnFindId">아이디
 									찾기</button>
 							</div>
 						</div>
@@ -877,7 +882,7 @@ footer.footer {
 						</div>
 						<div class="row find-box mt-4">
 							<div class="col-12 d-flex justify-content-center">
-								<button type="button" class="btn btn-outline-primary" id="btnFindPW">
+								<button type="button" class="btn" id="btnFindPW" style="background-color:#18365291; color:white;">
 									비밀번호찾기
 								</button>
 							</div>
@@ -892,7 +897,7 @@ footer.footer {
 								name="authNum" class="form-control">
 						</div>
 						<div class="col-md-4">
-							<button type="button" class="btn btn-outline-primary"
+							<button type="button" class="btn btn-outline-secondary"
 								id="findPw-emailCheck-btn">인증번호 입력</button>
 						</div>
 					</div>

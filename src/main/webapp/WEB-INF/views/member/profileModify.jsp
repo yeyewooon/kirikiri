@@ -29,26 +29,15 @@
 <style>
 /* 눈누 폰트 */
 @font-face {
-	font-family: 'OTWelcomeRA';
-	src:
-		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-		format('woff2');
-	font-weight: normal;
-	font-style: normal;
+   font-family: 'MICEGothic Bold';
+   src:
+       url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+   font-weight: 700;
+   font-style: normal;
 }
-
-@font-face {
-	font-family: '양진체';
-	src:
-		url('https://cdn.jsdelivr.net/gh/supernovice-lab/font@0.9/yangjin.woff')
-		format('woff');
-	font-weight: normal;
-	font-style: normal;
-}
-
 * {
 	box-sizing: border-box;
-	font-family: 'OTWelcomeRA';
+	font-family: 'MICEGothic Bold';
 }
 
 body {
@@ -450,10 +439,7 @@ footer.footer {
 		<!-- info 영역-->
 		<form action="/mem/profileModify" method="post" id="profileModifyForm">
 			<div id="userInfoBox">
-				<div class="row">
-					<div class="col">
-						<img src="/resources/images/kiri.jpg" alt="오류발생">
-					</div>
+				<div class="row p-3">
 				</div>
 				<div class="row">
 					<div class="col-md-3">
@@ -496,17 +482,46 @@ footer.footer {
 							$("#nicknameCheck").attr("disabled",true);
 						}
 					})
-					
+						$(".user_nickname").change(function(){
+		         $("#nickname-col").empty();
+		         let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;
+		         let nicknameRegex2 = /^[0-9]{2,12}$/;
+		         let nicknameRegex3 = /^((l){2,12}|(i){2,12}){2,12}$/;
+		         let nicknameRegex4 = /^(l|i|1)*$/;
+
+		         if(!nicknameRegex.test($("#user_nickname").val())){
+		            invalidNickname();
+		                 return;
+		                 
+		         }else if (nicknameRegex2.test($("#user_nickname").val())){
+		            invalidNickname();
+		            return;
+		            
+		         }else if (nicknameRegex3.test($("#user_nickname").val())){
+		            invalidNickname();
+		            return;
+		            
+		         }else if (nicknameRegex4.test($("#user_nickname").val())){
+		            invalidNickname();
+		            return;
+		                  
+		             }
+		         
+		         
+		      });
 					/* 중복확인 */
 					$("#nicknameCheck").on("click",function(){
 						let user_nickname = $("#nickname").val();
 						let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;
-						if(!nicknameRegex.test(user_nickname)){
+						let nicknameRegex2 = /^[0-9]{2,12}$/;
+				        let nicknameRegex3 = /^((l){2,12}|(i){2,12}){2,12}$/;
+				        let nicknameRegex4 = /^(l|i|1)*$/;
+
+						if(!nicknameRegex.test(user_nickname) || nicknameRegex2.test(user_nickname) || nicknameRegex3.test(user_nickname) || nicknameRegex4.test(user_nickname)){
 							Swal.fire({
 								  icon: 'error',
 								  title: 'Oops...',
 								  text: '형식에 맞지 않은 닉네임입니다.',
-								  footer: '<a href="">Why do I have this issue?</a>'
 								})
 						}else{
 							$.ajax({
@@ -554,7 +569,6 @@ footer.footer {
 								}
 							})
 						}
-
 					})
 				</script>
 				<div class="row">					
@@ -584,6 +598,7 @@ footer.footer {
 						</div>
 						<div class="col-md-7" style="text-align: left;">
 							<input type="password" id="password" name="user_pw" class="form-control" style="font-family:none;">
+							<span class="d-none" id="wrong-password-regex" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호의 형식에 맞지 않습니다. **</span>
 							<ul class="desc" style="font-size: 0.8rem; padding: 10px">
 								<li>영문, 숫자, 특수문자를 혼합하여 최소 8자리 이상 20자리 이하로 설정해 주세요.</li>
 								<li>기타 일반 정보 등으로부터 추측이 용이한 비밀번호는 피해주세요.</li>
@@ -650,6 +665,20 @@ footer.footer {
 					<div class="col-md-2"></div>
 				</div>
 				<script>
+				/* 비밀번호 regex 실행 후 span 뿌려주기 */
+				let passwordRegex = /^$|^[a-z0-9!@#$]{8,20}$/;
+				
+				const test = document.querySelector('#password');
+	            console.log(test)
+	            test.addEventListener('change', (e) => {
+	            	let password = e.target.value;
+	                console.log(e.target.value);
+	                if(!passwordRegex.test(password)){
+	                	$("#wrong-password-regex").removeClass("d-none");
+	                }else if(passwordRegex.test(password)){
+	                	$("#wrong-password-regex").addClass("d-none");
+	                }
+	            })
 				
 				/* phone 실시간으로 검색후 중복확인 버튼 disabled 속성 제거 */
 				let phone1 = $(".checkPhone1").val();

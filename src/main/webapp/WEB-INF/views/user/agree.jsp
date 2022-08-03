@@ -163,10 +163,31 @@ label{
 }
 
 button{
+	margin : 5px;
 	margin-bottom: 30px;
 }
 
-/* footer */
+#cpBtn,#backBtn{
+	color: black;
+	border: none;
+	border-radius: 5px;
+	width: 10%;
+	height: 90%;
+}
+
+#cpBtn{
+	background-color: #18365291;
+	color: white;
+}
+
+#backBtn{
+	background-color: #d8d8d891;
+}
+
+#backBtn:hover{
+	color: white;
+}
+
 /*풋터 영역*/
 .footer-imgBox img{
    max-width: 100%;
@@ -432,9 +453,9 @@ $(document).ready(function(){
 				</div>
 			</div>
 			<div class="row" style="text-align: center; margin-bottom: 70px;" >
-				<div class="col">
-					<button class="btn btn-outline-secondary" type="button" id="backBtn">취소</button>
-					<button class="btn btn-outline-primary" type="button" id="cpBtn">확인</button>
+				<div class="col" style="margin-bottom: 30px;">
+					<button type="button" id="backBtn">취소</button>
+					<button type="button" id="cpBtn">확인</button>
 				</div>
 			</div>
         </div>

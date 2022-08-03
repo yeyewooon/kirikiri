@@ -49,28 +49,6 @@
     font-style: normal;
 }
 
-      <head>
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-            crossorigin="anonymous"></script>
-         <!--구글 폰트-->
-         <link rel="preconnect" href="https://fonts.googleapis.com">
-         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-         <link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Open+Sans:ital,wght@1,300&display=swap"
-            rel="stylesheet">
-         <script src="https://code.jquery.com/jquery-3.6.0.js"
-            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-         <!-- AOS 라이브러리 불러오기-->
-         <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-         <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-         <!-- 아이콘 -->
-         <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
-         <!-- Bootstrap icons-->
-         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
-         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-         <title>끼리끼리</title>
-         <style>
             * {
                box-sizing: border-box;
                font-family: 'MICEGothic Bold';
@@ -332,28 +310,42 @@
                font-size: 10px;
             }
 
-            /*풋터 영역*/
-            .footerBox {
-               height: 0px;
-            }
+            /* footer */
+.footer-imgBox img {
+	max-width: 100%;
+}
 
-            footer.footer {
-               padding-top: 2rem;
-               padding-bottom: 2rem;
-               background-color: #ffffff;
-            }
+.footerWrapper {
+	background-color: white;
+	font-family: "MICEGothic Bold";
+	font-size: 15px;
+}
 
-            .footer a {
-               text-decoration: none;
-               color: black;
-               font-weight: 40px;
-               font-weight: bold;
-            }
+.footerBox {
+	height: 0px;
+}
 
-            .footer-imgBox>img {
-               width: 100%;
-               height: 100%;
-            }
+footer.footer {
+	padding-top: 2rem;
+	padding-bottom: 2rem;
+}
+
+.footer a {
+	text-decoration: none;
+	color: black;
+	font-weight: 40px;
+	font-weight: bold;
+}
+
+.footer-imgBox>img {
+	height: 100%;
+	text-align: center;
+}
+
+.footer-imgBox {
+	height: 100%;
+	text-align: center;
+}
 
             /*모임생성 버튼*/
             @import url(https://fonts.googleapis.com/css?family=Roboto:700);
@@ -497,7 +489,8 @@
       </head>
 
       <body>
-      <!--네비바-->
+      
+  <!--네비바-->
    <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
@@ -525,7 +518,7 @@
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
                         <c:if test="${empty loginSession}">
                            <li class="nav-item"><a class="nav-link"
                               href="/login/toLogin">로그인</a></li>
@@ -878,12 +871,12 @@
          <div class="col-4 d-flex justify-content-center text newGroup">NEW</div>
          <div class="col-4 d-flex justify-content-start text bestGroup">BEST</div>
       </div>
-   <!-- 모임 card 캐러셀 All -->
+    <!-- 모임 card 캐러셀 All -->
       <div class="row contentAll">
          <div class="col p-0">
             <div class="content2">
                <div class="imgContainer">
-                  <div class="row" style="padding : 18px;">
+                  <div class="row">
                      <c:forEach items="${selectAllList}" var="dto" begin="0" end = "5">
                         <div class="col-md-4 d-flex justify-content-center p-4">
                            <div class="card" data-aos="flip-up" data-aos-duration="1000">
@@ -903,7 +896,7 @@
                                  <div class="card-text mt-1">
                                     <strong>${dto.group_title}</strong>
                                  </div>
-                                 <div class="card-text-site d-flex justify-content-end">
+                                 <div class="card-text-site d-flex justify-content-end align-items-center">
                                     <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
                                  </div>
                               </div>
@@ -946,7 +939,7 @@
                                  <div class="card-text mt-1">
                                     <strong>${dto.group_title}</strong>
                                  </div>
-                                 <div class="card-text d-flex justify-content-end">
+                                 <div class=" d-flex card-text-site justify-content-end align-items-center">
                                     <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
                                  </div>
                               </div>
@@ -989,7 +982,7 @@
                                  <div class="card-text mt-1">
                                     <strong>${dto.group_title}</strong>
                                  </div>
-                                 <div class="card-text d-flex justify-content-end">
+                                 <div class="card-text-site d-flex justify-content-end align-items-center">
                                     <i class="fa-solid fa-location-dot"></i><span class="ms-2">${dto.group_site}</span>
                                  </div>
                               </div>
@@ -1006,80 +999,76 @@
             </div>
          </div>
       </div>
-          <!-- Footer-->
-  <div class="footerWrapper">
-    <div class="container">
-      <footer class="footer">
-        <div class="row">
-          <div class="col-lg-3 footer-imgBox">
-            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
-          </div>
-          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-             <ul class="list-inline mb-2">
-            <li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
-            <li class="list-inline-item">⋅</li>
-            <c:choose>
-               <c:when test="${not empty loginSession}">
-                  <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-                  <li class="list-inline-item">⋅</li>
-                  <c:if test="${loginType ne 'kakao'}">
-		<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-	      </c:if>
-	      <c:if test="${loginType eq 'kakao'}">
-		<li class="list-inline-item"><a href="${kakaoLogout}">로그아웃</a></li>
-	      </c:if>
-               </c:when>
-               <c:otherwise>
-                  <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-                  <li class="list-inline-item">⋅</li>
-                  <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-               </c:otherwise>
-            </c:choose>
-            <li class="list-inline-item">⋅</li>
-            <li class="list-inline-item">
-               <c:choose>
-                  <c:when test="${not empty loginSession}">
-                     <a href="/group/toCreateGroup">모임 만들기</a>
-                  </c:when>
-                  <c:otherwise>
-                     <a href="/login/toLogin">모임 만들기</a>
-                  </c:otherwise>
-               </c:choose>
-            </li>
-            <li class="list-inline-item">⋅</li>
-            <li class="list-inline-item"><a href="/privacy"
-               style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-         </ul>
-            <p class="text-muted small mb-4 mb-lg-0">
-              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
-              사업자등록번호 : 22-02-22
-            </p>
-            <p class="text-muted small mb-4 mb-lg-0">
-              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
-            </p>
-            <p class="text-muted small mb-4 mb-lg-0">
-              &copy; Your Website 2022. All Rights Reserved.
-            </p>
-          </div>
-          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
-            <ul class="list-inline mb-0">
-            <li class="list-inline-item me-4"><a
-               href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-            <li class="list-inline-item me-4"><a
-               href="https://twitter.com/?lang=ko"><i
-                  class="bi-twitter fs-3"></i></a></li>
-            <li class="list-inline-item"><a
-               href="https://www.instagram.com/"><i
-                  class="bi-instagram fs-3"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </div>
+      </div>
+  <!-- Footer-->
+   <div class="footerWrapper mt-5" style="border-top:1px solid #e0e3e8;">
+      <div class="container">
+         <footer class="footer">
+            <div class="row">
+               <div class="col-lg-3 footer-imgBox">
+                  <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+               </div>
+               <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+                  <ul class="list-inline mb-2">
+                     <li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
+                     <li class="list-inline-item">⋅</li>
+                     <c:choose>
+                        <c:when test="${not empty loginSession}">
+                           <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                           <li class="list-inline-item">⋅</li>
+                           <c:if test="${loginType ne 'kakao'}">
+                              <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+                           </c:if>
+                           <c:if test="${loginType eq 'kakao'}">
+                              <li class="list-inline-item"><a href="${kakaoLogout}">로그아웃</a></li>
+                           </c:if>
+                        </c:when>
+                        <c:otherwise>
+                           <li class="list-inline-item"><a
+                              href="/signup/toSignupAgree">회원가입</a></li>
+                           <li class="list-inline-item">⋅</li>
+                           <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+                        </c:otherwise>
+                     </c:choose>
+                     <li class="list-inline-item">⋅</li>
+                     <li class="list-inline-item">
+                        <c:choose>
+                           <c:when test="${not empty loginSession}">
+                              <a href="/group/toCreateGroup">모임 만들기</a>
+                           </c:when>
+                           <c:otherwise>
+                              <a href="/login/toLogin">모임 만들기</a>
+                           </c:otherwise>
+                        </c:choose>
+                     </li>
+                     <li class="list-inline-item">⋅</li>
+                     <li class="list-inline-item"><a href="/privacy"
+                        style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+                  </ul>
+                  <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+                     개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+                  <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+                     57 이레빌딩</p>
+                  <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+                     2022. All Rights Reserved.</p>
+               </div>
+               <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+                  <ul class="list-inline mb-0">
+                     <li class="list-inline-item me-4"><a
+                        href="https://ko-kr.facebook.com"><i
+                           class="bi-facebook fs-3"></i></a></li>
+                     <li class="list-inline-item me-4"><a
+                        href="https://twitter.com/?lang=ko"><i
+                           class="bi-twitter fs-3"></i></a></li>
+                     <li class="list-inline-item"><a
+                        href="https://www.instagram.com/"><i
+                           class="bi-instagram fs-3"></i></a></li>
+                  </ul>
+               </div>
+            </div>
+         </footer>
+      </div>
    </div>
-
-
    <script>
    <!-- 모임생성 고! 버튼 -->
    let check = "${loginSession.user_email}";
@@ -1095,7 +1084,7 @@
    })
    <!-- 가입하기 버튼 -->
    $(".btn").on("click", function(){
-      location.href = "/user/toViewAllGroupList";
+      location.href = "/signup/toSignupAgree";
    })
    <!-- AOS 스크립트 시작 -->
       AOS.init(); // 자바스크립트로 init()을 해야 동작한다.
