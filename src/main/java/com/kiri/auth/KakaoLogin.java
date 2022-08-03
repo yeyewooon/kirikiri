@@ -1,5 +1,13 @@
 package com.kiri.auth;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
@@ -19,7 +27,7 @@ import com.kiri.utills.SecurityInfo;
 public class KakaoLogin {
 	private final static String kakaoClientId = SecurityInfo.kakaoId;
 	private final static String kakaoClientSecret = SecurityInfo.kakaoSecret;
-	private final static String kakaoRedirectUri = "http://localhost:80/auth/kakaoCallback"; 
+	private final static String kakaoRedirectUri = "http://localhost:8090/auth/kakaoCallback"; 
 	private final static String sessionState = "kakao_oauth_state";
 	private final static String kakaoProfileApiUri = "https://kapi.kakao.com/v2/user/me";
 
@@ -70,5 +78,24 @@ public class KakaoLogin {
 		Response response = request.send();
 		return response.getBody();
 	}
+	
+	public void kakaoLogout(String accessToken, String reqURL) throws Exception {
+        URL url = new URL(reqURL);
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        conn.setRequestMethod("POST");
+        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
+        conn.setRequestProperty("Authorization", "Bearer " + accessToken);
+        int responseCode = conn.getResponseCode();
+        BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+        System.err.println("responseCode : " + responseCode);
+        String result = "";
+        String line = "";
 
+        while ((line = br.readLine()) != null) {
+            result += line;
+        }
+        System.out.println(result);
+    }
+	
+	
 }

@@ -102,6 +102,15 @@ public class MemberService {
 		public void groupApplymodify(String user_email, String user_nickname) throws Exception{
 			memberdao.groupApplymodify(user_email, user_nickname);
 		}
+		//groupreportmodify 닉네임 수정
+		public void groupreportmodify(String user_email, String user_nickname) throws Exception{
+			memberdao.groupreportmodify(user_email, user_nickname);
+		}
+		
+		//groupreportmodify 닉네임 수정
+		public void groupreport2modify(String user_email, String user_nickname) throws Exception{
+			memberdao.groupreport2modify(user_email, user_nickname);
+		}
 
 
 	
