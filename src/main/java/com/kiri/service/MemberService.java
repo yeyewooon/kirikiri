@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,12 +22,14 @@ import com.kiri.dao.WishListDAO;
 import com.kiri.dto.BoardDTO;
 import com.kiri.dto.Group_BoardDTO;
 import com.kiri.dto.HobbyDTO;
+import com.kiri.dto.Login_TypeDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.dto.SiteDTO;
 
 @Service
 public class MemberService {
-
+	@Autowired
+	private HttpSession session;
 	@Autowired
 	private MemberDAO memberdao;
 	@Autowired
@@ -49,7 +53,7 @@ public class MemberService {
 	}
 	
 	// 사진 수정
-	public void modifyProfilePic(String user_email,String profile_image) {
+	public void modifyProfilePic(String user_email,String profile_image) throws Exception{
 		
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("user_image", profile_image);
@@ -70,12 +74,36 @@ public class MemberService {
         }
         return sys_name;
     }
+	
+	// LoginType 가져오기
+	public Login_TypeDTO selectLoginType(String user_email) throws Exception{
+		return  memberdao.selectLoginType(user_email);
+	}
 
 	// 개인정보 수정
-	public void profileModify(MemberDTO dto){
+	   public void profileModify(MemberDTO dto) throws Exception{
+	      ((MemberDTO)session.getAttribute("loginSession")).setUser_nickname(dto.getUser_nickname());
+	      ((MemberDTO)session.getAttribute("loginSession")).setUser_phone(dto.getUser_phone());
+	      ((MemberDTO)session.getAttribute("loginSession")).setUser_intro(dto.getUser_intro());
+	      memberdao.profileModify(dto);
+	   }
+	   
+	// 채팅 테이블 닉네임 수정
+		public void groupChatmodify(String user_email, String user_nickname) throws Exception{
+			memberdao.groupChatmodify(user_email, user_nickname);
+		}
 		
-		memberdao.profileModify(dto);
-	}
+		//그룹멤버 닉네임 수정
+		public void groupMemmodify(String user_email, String user_nickname) throws Exception{
+			memberdao.groupMemmodify(user_email, user_nickname);
+		}
+		
+		//group_apply 닉네임 수정
+		public void groupApplymodify(String user_email, String user_nickname) throws Exception{
+			memberdao.groupApplymodify(user_email, user_nickname);
+		}
+
+
 	
 	// 닉네임 중복확인
 	public int nicknameCheck(String user_nickname) throws Exception{
@@ -88,9 +116,9 @@ public class MemberService {
 	}
 	
 	// pw 중복확인
-   public int pwCheck(String user_pw, String user_email) throws Exception{
-      return memberdao.pwCheck(user_pw, user_email);
-   }
+	public int pwCheck(String user_pw, String user_email) throws Exception{
+		return memberdao.pwCheck(user_pw, user_email);
+	}
 	
 	// 회원 탈퇴
 	public void profileDelete(Map<String,String> memberdto) throws Exception{

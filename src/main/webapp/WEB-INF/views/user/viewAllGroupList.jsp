@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +27,8 @@
   <script src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
-	<!-- Bootstrap icons-->
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+   <!-- Bootstrap icons-->
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
   <!-- 아이콘 -->
   <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
 <title>Insert title here</title>
@@ -51,40 +51,40 @@
 }
 /* 네비바  */
 * {
-	box-sizing: border-box;
-	font-family: "MICEGothic Bold"; 
+   box-sizing: border-box;
+   font-family: "MICEGothic Bold";
 }
 
 /* header 반응형 */
 @media ( max-width : 768px) {
-	#navLogo {
-		display: none;
-	}
-	#menu {
-		display: none;
-	}
+   #navLogo {
+      display: none;
+   }
+   #menu {
+      display: none;
+   }
 }
 
 /* header */
 #navLogo {
-	width: 150px;
-	height: 100px;
+   width: 150px;
+   height: 100px;
 }
 
 #logoImgs {
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 
 @media ( min-width : 768px) {
-	#navibar {
-		display: none;
-	}
+   #navibar {
+      display: none;
+   }
 }
 
 /* header 반응형 끝 */
 #logoImg {
-	width: 50%;
+   width: 50%;
 }
 
 /* 네비바 드롭다운 */
@@ -100,8 +100,8 @@
 }
 
 ul {
-	list-style: none;
-	padding: 0;
+   list-style: none;
+   padding: 0;
 }
 
 /* 슬라이드 */
@@ -113,21 +113,21 @@ ul {
     .locationPic img {
       width: 100%;
       height: 100%;
-  } 
+  }
 .locationText, .categoryText{
-	font-family : katuri;
-}  
-  
+   font-family : katuri;
+}
+
 
 /* body content */
 .content {
-	width: 100%;
-	margin-top: 40px;
+   width: 100%;
+   margin-top: 40px;
     margin-bottom: 0px;
-	background-color: #fbfbdf;
-	border-top: 5px solid #ffd766;
-	border-bottom: 5px solid #ffd766;
-	padding-right: 100px;
+   background-color: #fbfbdf;
+   border-top: 5px solid #ffd766;
+   border-bottom: 5px solid #ffd766;
+   padding-right: 100px;
     padding-left: 100px;
     padding-top: 30px;
     padding-bottom: 30px;
@@ -135,108 +135,108 @@ ul {
 }
 
 .card {
-	width:350px;
+   width:350px;
     border: 3px solid #d5f1d5;
     cursor: pointer;
 }
 .card-body{
-	background-color : #f4fdef;
-	padding-bottom:0px;	
+   background-color : #f4fdef;
+   padding-bottom:0px;
 }
 .card>img {
-	width: 100%;
+   width: 100%;
 }
 
 .card-img-top {
-	width: 18rem;
-	height: 13rem;
+   width: 18rem;
+   height: 13rem;
 }
 .card-text{
-	height:48px;
+   height:48px;
 }
 .card-text-category {
-	width: fit-content;
-	padding: 4px;
-	background-color: #e26b8b;
-	height: 22px;
-	border-radius: 5px;
-	font-size: 14px;
+   width: fit-content;
+   padding: 4px;
+   background-color: #e26b8b;
+   height: 22px;
+   border-radius: 5px;
+   font-size: 14px;
 }
 .card-text-site{
-	height:30px;
-	margin: 0px;
+   height:30px;
+   margin: 0px;
     margin-top: 30px;
 }
 
 /* footer */
 /*풋터 영역*/
 .footerWrapper{
-	background-color: #f9fafe;
+   background-color: #f9fafe;
 }
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	height: 100%;
-	text-align:center;
+   height: 100%;
+   text-align:center;
 }
 .footer-imgBox {
-	height: 100%;
-	text-align:center;
+   height: 100%;
+   text-align:center;
 }
 
 /*슬라이드*/
 img {
-	max-width: 100%;
-	height: auto;
+   max-width: 100%;
+   height: auto;
 }
 
 .slider {
-	width: 80%;
-	margin: 0px auto;
+   width: 80%;
+   margin: 0px auto;
 }
 
 .slider .slick-slide {
-	margin: 10px;
+   margin: 10px;
 }
 
 .slick-prev:before, .slick-next:before {
-	color: #444444;
+   color: #444444;
 }
 
 /* 사이즈 */
 .categoryMapper, .locationMapper {
-	width: 120px;
-	color: #62656e;
+   width: 120px;
+   color: #62656e;
 }
 
 .categoryMapper:hover {
-	width: 120px;
-	color: cornflowerblue;
-	cursor: pointer;
+   width: 120px;
+   color: cornflowerblue;
+   cursor: pointer;
 }
 
 .locationMapper:hover {
-	width: 120px;
-	color: cornflowerblue;
-	cursor: pointer;
+   width: 120px;
+   color: cornflowerblue;
+   cursor: pointer;
 }
 
 #categoryList {
-	display: none
+   display: none
 }
 
 
@@ -244,7 +244,7 @@ img {
 
 /* 지역,카테고리 버튼*/
 #locationBtn, #categoryBtn{
-	cursor:pointer;
+   cursor:pointer;
 }
 .b05_3d_roll {
     perspective: 500px;
@@ -371,8 +371,7 @@ body {
 
 <body>
   <!--네비바-->
-      <header class="mb-3 border-bottom">
-      <div style="background-color : #fff;">
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -400,19 +399,28 @@ body {
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
-                           <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
+                        <c:if test="${empty loginSession}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogin">로그인</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/signup/toSignupAgree">회원가입</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/admin/toAdmin">관리자페이지 이동</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
                      </ul>
                   </div>
                </div>
@@ -425,16 +433,19 @@ body {
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
+
                <!-- logo -->
                <div class="col-2">
                   <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
                      id="logoImgs" src="/resources/images/kiri.jpg">
+
                   </a>
                </div>
+
                <div class="col-5">
                   <div class="row align-items-center justify-content-center">
                      <div class="col-auto">
@@ -448,62 +459,73 @@ body {
                         </ul>
                      </div>
                      <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
+               <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                         <div class="dropdown text-end">
+                           <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                           <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                           </a>
+                           <ul class="dropdown-menu text-small"
+                              aria-labelledby="dropdownUser1">
+                              <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                              <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+                              <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                           </ul>
+                        </div>
+                     </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> 
+                                 <c:if test="${loginSession.user_image eq null}">
+                                    <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                                 <c:if test="${loginSession.user_image ne null}">
+                                    <img src="/profile/${loginSession.user_image }" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider" style="margin:0px;">
+                                 </li>
+                                 <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
             </div>
          </nav>
       </div>
-      </div>
    </header>
 
 <div class="container">
-	<div class = "row">
-		<div class = "col-md-12 d-flex justify-content-start">
-			<div class = "mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
-		</div>
-	</div>
-	<div class="back row">
-	    <div class="col-md-4 button_base b05_3d_roll locationBtn" id="locationBtn">
-	        <div style = "font-family:katuri;">지역</div>
-	        <div style = "font-family:katuri;">지역</div>
-	    </div>
-	    <div class="col-md-4 button_base b05_3d_roll categoryBtn" id="categoryBtn">
-	        <div style = "font-family:katuri;">카테고리</div>
-	        <div style = "font-family:katuri;">카테고리</div>
-	    </div>
-	    <div class="col-md-4">
-	    </div>
-	</div>
+   <div class = "row">
+      <div class = "col-md-12 d-flex justify-content-start">
+         <div class = "mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
+      </div>
+   </div>
+   <div class="back row">
+       <div class="col-md-4 button_base b05_3d_roll locationBtn" id="locationBtn">
+           <div style = "font-family:katuri;">지역</div>
+           <div style = "font-family:katuri;">지역</div>
+       </div>
+       <div class="col-md-4 button_base b05_3d_roll categoryBtn" id="categoryBtn">
+           <div style = "font-family:katuri;">카테고리</div>
+           <div style = "font-family:katuri;">카테고리</div>
+       </div>
+       <div class="col-md-4">
+       </div>
+   </div>
   <!--지역 설정 슬라이더-->
       <div id="locationList" class="responsive mt-5">
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
@@ -583,7 +605,7 @@ body {
         <img src = "/resources/images/slide/지역14.png">
       </div>
       <span class="locationText mt-1">
-       	충청북도
+          충청북도
       </span>
     </div>
     <div class="locationMapper d-flex flex-column align-items-center justify-content-center">
@@ -735,12 +757,12 @@ body {
     </div>
 </div>
 </div>
-	<!-- 모임 card 캐러셀 -->
+   <!-- 모임 card 캐러셀 -->
       <div class="row content mt-4">
          <div class="col p-0">
             <div class="content2">
                <div class="imgContainer">
-                  <div class="row">
+                  <div class="row" style="padding : 18px;">
                   	<c:if test = "${selectAllList.size() == 0}">
                   		<div>아직 개설된 모임이 없습니다.</div>
                   	</c:if>
@@ -761,7 +783,7 @@ body {
 	                                 <div class="card-text-category d-flex justify-content-center align-items-center" style="color:#fff;">
 	                                    ${dto.group_category}
 	                                 </div>
-	                                 <div class="card-text mb-9">
+	                                 <div class="card-text mt-3">
 	                                    <span style = "font-size:25px; font-family:Katuri;">${dto.group_title}</span>
 	                                 </div>
 	                                 <div class="card-text-site d-flex justify-content-end">
@@ -786,36 +808,36 @@ body {
             <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
           </div>
           <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-          	<ul class="list-inline mb-2">
-				<li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
-				<li class="list-inline-item">⋅</li>
-				<c:choose>
-					<c:when test="${not empty loginSession}">
-						<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-					</c:when>
-					<c:otherwise>
-						<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-					</c:otherwise>
-				</c:choose>
-				<li class="list-inline-item">⋅</li>
-				<li class="list-inline-item">
-					<c:choose>
-						<c:when test="${not empty loginSession}">
-							<a href="/group/toCreateGroup">모임 만들기</a>
-						</c:when>
-						<c:otherwise>
-							<a href="/login/toLogin">모임 만들기</a>
-						</c:otherwise>
-					</c:choose>
-				</li>
-				<li class="list-inline-item">⋅</li>
-				<li class="list-inline-item"><a href="/privacy"
-					style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-			</ul>
+             <ul class="list-inline mb-2">
+            <li class="list-inline-item"><a href="/board/toBoard">공지사항</a></li>
+            <li class="list-inline-item">⋅</li>
+            <c:choose>
+               <c:when test="${not empty loginSession}">
+                  <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+               </c:when>
+               <c:otherwise>
+                  <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+               </c:otherwise>
+            </c:choose>
+            <li class="list-inline-item">⋅</li>
+            <li class="list-inline-item">
+               <c:choose>
+                  <c:when test="${not empty loginSession}">
+                     <a href="/group/toCreateGroup">모임 만들기</a>
+                  </c:when>
+                  <c:otherwise>
+                     <a href="/login/toLogin">모임 만들기</a>
+                  </c:otherwise>
+               </c:choose>
+            </li>
+            <li class="list-inline-item">⋅</li>
+            <li class="list-inline-item"><a href="/privacy"
+               style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+         </ul>
             <p class="text-muted small mb-4 mb-lg-0">
               끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
               사업자등록번호 : 22-02-22
@@ -829,25 +851,25 @@ body {
           </div>
           <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
             <ul class="list-inline mb-0">
-				<li class="list-inline-item me-4"><a
-					href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-				<li class="list-inline-item me-4"><a
-					href="https://twitter.com/?lang=ko"><i
-						class="bi-twitter fs-3"></i></a></li>
-				<li class="list-inline-item"><a
-					href="https://www.instagram.com/"><i
-						class="bi-instagram fs-3"></i></a></li>
+            <li class="list-inline-item me-4"><a
+               href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+            <li class="list-inline-item me-4"><a
+               href="https://twitter.com/?lang=ko"><i
+                  class="bi-twitter fs-3"></i></a></li>
+            <li class="list-inline-item"><a
+               href="https://www.instagram.com/"><i
+                  class="bi-instagram fs-3"></i></a></li>
             </ul>
           </div>
         </div>
       </footer>
     </div>
-  </div> 
+  </div>
 
 
 
   <script>
-  
+
 //카테고리 설정 스크립트
 //지역 클릭시
 $('#locationBtn').on("click", function() {
@@ -908,19 +930,19 @@ $(".card").on("click",function() {
     let findSeq_group = $(this).find('span').html(); // 공백이 포함되서 나옴
     let seq_group = findSeq_group.trim(); // 공백을 없앰
     console.log(seq_group);
-    location.href = "/group/toGroupDetail?seq_group="+seq_group; 
+    location.href = "/group/toGroupDetail?seq_group="+seq_group;
   })
 
 
   // 지역으로 모임 조회
   $(".locationMapper").on("click",function() {
-	console.log("hi");
+   console.log("hi");
     let locationText = $(this).find('span').html(); // 공백이 포함되서 나옴
     let group_site = locationText.trim(); // 공백을 없앰
     console.log(group_site);
-    location.href = "/user/toUserSelectedGroupList?group_site="+group_site; 
+    location.href = "/user/toUserSelectedGroupList?group_site="+group_site;
   })
-  
+
   // 카테고리로로 모임 조회
   $(".categoryMapper").on("click",function(e) {
     let categoryText = $(this).find('span').html(); // 공백이 포함되서 나옴

@@ -680,7 +680,7 @@
 			}
 		}
  		window.close();
-		window.opener.location.reload();	
+		window.opener.location.reload();
     </script>
 </body>
 </html>

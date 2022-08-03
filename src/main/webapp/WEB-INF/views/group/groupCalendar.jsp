@@ -14,6 +14,8 @@
 <!--bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+<!-- Bootstrap icons-->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
 <!-- jquery -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <!-- fullcalendar CDN -->
@@ -193,12 +195,12 @@ input[type="text"] {
 }
 
 /* 시간 설정*/
-.timeContainer {
-	background-color: rgb(233, 236, 239);
+.groupDefaultTimeContainer, .timeContainer{
 	height: 40px;
 	border-radius: 6px;
 	border: 1px solid rgb(206, 212, 218);
 }
+
 
 .defaultTime {
 	color: black;
@@ -228,28 +230,32 @@ input[type="text"] {
 	transform: scale(1.2, 1.2);
 }
 
-/* footer */
-/*풋터 영역*/
+.footerWrapper{
+   background-color: #fff;
+}
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	background-color: #f6f7f9;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	width: 100%;
-	height: 100%;
+   height: 100%;
+   text-align:center;
+}
+.footer-imgBox {
+   height: 100%;
+   text-align:center;
 }
 
 /* 눈누 폰트 */
@@ -261,148 +267,184 @@ footer.footer {
 	font-weight: normal;
 	font-style: normal;
 }
+
+.fc-event-time {
+	display:none;
+}
+
+
+/* 버튼 색 */
+
+/* 취소 */
+.btn-secondary, .btn-secondary:hover, .btn-secondary:active, .btn-secondary:visited {
+    background-color: #a4a4a4 !important;
+    color:#fff;
+    border-color: #a4a4a4;
+}
+
+/* 저장 */
+.btn-success, .btn-success:hover, .btn-success:active, .btn-success:visited {
+    background-color: #2551a8 !important;
+    color:#fff;
+    border-color: #2551a8;
+}
+
+/* 삭제 */
+.btn-danger , .btn-danger:hover, .btn-danger:active, .btn-danger:visited {
+    background-color: #2551a8 !important;
+    color:#fff;
+    border-color: #2551a8;
+}
+
+/* 수정 */
+.btn-warning, .btn-warning:hover, .btn-warning:active, .btn-warning:visited {
+    background-color: #96c93d !important;
+    color:#fff;
+    border-color: #96c93d;
+}
+
 </style>
 
 
 </head>
 <body>
 	<!--네비바-->
-	<header class="mb-3 border-bottom">
-		<div style="background-color: #fff;">
-			<div class="container">
-				<!-- 접혔을 때 nav -->
-				<nav id="navibar" class="navbar navbar-expand-md navbar-light"
-					aria-label="Main navigation">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-10">
-								<a class="navbar-brand mb-2 mb-lg-0" href="/">
-									<div class="title-box">
-										<img id="logoImg" src="/resources/images/kiri.jpg">
-									</div>
-								</a>
-							</div>
-							<!-- toggle button -->
-							<div class="col-2 d-flex align-items-center">
-								<button class="navbar-toggler" type="button"
-									data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-									aria-controls="navbarNavDropdown" aria-expanded="false"
-									aria-label="Toggle navigation">
-									<span class="navbar-toggler-icon"></span>
-								</button>
-							</div>
-							<!-- 메뉴 -->
-							<div class="collapse navbar-collapse justify-content-end"
-								id="navbarNavDropdown">
-								<ul class="navbar-nav mb-2 mb-lg-0">
-									<li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
-									<c:if test="${empty loginSession}">
-										<li class="nav-item"><a class="nav-link"
-											href="/login/toLogin">로그인</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/signup/toSignupAgree">회원가입</a></li>
-									</c:if>
-									<c:if
-										test="${not empty loginSession && loginSession.user_email eq 'admin'}">
-										<li class="nav-item"><a class="nav-link"
-											href="/mem/myPage">마이페이지</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/admin/toAdmin">관리자페이지 이동</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/login/toLogout">로그아웃</a></li>
-									</c:if>
-									<c:if
-										test="${not empty loginSession && loginSession.user_email ne 'admin'}">
-										<li class="nav-item"><a class="nav-link"
-											href="/mem/myPage">마이페이지</a></li>
-										<li class="nav-item"><a class="nav-link"
-											href="/login/toLogout">로그아웃</a></li>
-									</c:if>
-								</ul>
-							</div>
-						</div>
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf; background-color:white;">
+      <div class="container">
+         <!-- 접혔을 때 nav -->
+         <nav id="navibar" class="navbar navbar-expand-md navbar-light"
+            aria-label="Main navigation">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-10">
+                     <a class="navbar-brand mb-2 mb-lg-0" href="/">
+                        <div class="title-box">
+                           <img id="logoImg" src="/resources/images/kiri.jpg">
+                        </div>
+                     </a>
+                  </div>
+                  <!-- toggle button -->
+                  <div class="col-2 d-flex align-items-center">
+                     <button class="navbar-toggler" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                        aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                     </button>
+                  </div>
+                  <!-- 메뉴 -->
+                  <div class="collapse navbar-collapse justify-content-end"
+                     id="navbarNavDropdown">
+                     <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                        <c:if test="${empty loginSession}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogin">로그인</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/signup/toSignupAgree">회원가입</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/admin/toAdmin">관리자페이지 이동</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
+                     </ul>
+                  </div>
+               </div>
 
-					</div>
-				</nav>
-				<!-- 펼쳐졌을 때 nav -->
-				<nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
-					aria-label="Main navigation">
-					<div class="row w-100 align-items-center">
-						<div class="col-5 d-flex justify-content-center">
-							<ul class="navbar-nav mb-2 mb-lg-0">
-								<li class="nav-item"><a class="nav-link mx-2"
-									href="/board/toBoard">자유 게시판</a></li>
-							</ul>
-						</div>
-						<!-- logo -->
-						<div class="col-2">
-							<a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
-								id="logoImgs" src="/resources/images/kiri.jpg">
-							</a>
-						</div>
-						<div class="col-5">
-							<div class="row align-items-center justify-content-center">
-								<div class="col-auto">
-									<ul class="navbar-nav mb-2 mb-lg-0 me-2">
-										<c:if test="${empty loginSession}">
-											<li class="nav-item"><a class="nav-link"
-												href="/login/toLogin">로그인</a></li>
-											<li class="nav-item"><a class="nav-link"
-												href="/signup/toSignupAgree">회원가입</a></li>
-										</c:if>
-									</ul>
-								</div>
-								<div class="col-auto user">
-									<c:if
-										test="${not empty loginSession && loginSession.user_email eq 'admin'}">
-										<div class="dropdown text-end">
-											<a href="/"
-												class="d-block link-dark text-decoration-none dropdown-toggle"
-												id="dropdownUser1" data-bs-toggle="dropdown"
-												aria-expanded="false"> <img
-												src="/resources/images/profile.jpg" alt="mdo" width="32"
-												height="32" class="rounded-circle">
-											</a>
-											<ul class="dropdown-menu text-small"
-												aria-labelledby="dropdownUser1">
-												<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-												<li><a class="dropdown-item"
-													href="/group/toCreateGroup">모임생성</a></li>
-												<li><hr class="dropdown-divider"></li>
-												<li><a class="dropdown-item" href="/admin/toAdmin">관리자
-														페이지이동</a></li>
-												<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-											</ul>
-										</div>
-									</c:if>
-									<c:if
-										test="${not empty loginSession && loginSession.user_email ne 'admin'}">
-										<div class="dropdown text-end">
-											<a href="/"
-												class="d-block link-dark text-decoration-none dropdown-toggle"
-												id="dropdownUser1" data-bs-toggle="dropdown"
-												aria-expanded="false"> <img
-												src="/resources/images/profile.jpg" alt="mdo" width="32"
-												height="32" class="rounded-circle">
-											</a>
-											<ul class="dropdown-menu text-small"
-												aria-labelledby="dropdownUser1">
-												<li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-												<li><a class="dropdown-item"
-													href="/group/toCreateGroup">모임생성</a></li>
-												<li><hr class="dropdown-divider"></li>
-												<li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-											</ul>
-										</div>
-									</c:if>
-								</div>
-							</div>
-						</div>
-					</div>
-				</nav>
-			</div>
-		</div>
-	</header>
+            </div>
+         </nav>
+         <!-- 펼쳐졌을 때 nav -->
+         <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
+            aria-label="Main navigation">
+            <div class="row w-100 align-items-center">
+               <div class="col-5 d-flex justify-content-center">
+                  <ul class="navbar-nav mb-2 mb-lg-0">
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
+                  </ul>
+               </div>
+
+               <!-- logo -->
+               <div class="col-2">
+                  <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
+                     id="logoImgs" src="/resources/images/kiri.jpg">
+
+                  </a>
+               </div>
+
+               <div class="col-5">
+                  <div class="row align-items-center justify-content-center">
+                     <div class="col-auto">
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-2">
+                           <c:if test="${empty loginSession}">
+                              <li class="nav-item"><a class="nav-link"
+                                 href="/login/toLogin">로그인</a></li>
+                              <li class="nav-item"><a class="nav-link"
+                                 href="/signup/toSignupAgree">회원가입</a></li>
+                           </c:if>
+                        </ul>
+                     </div>
+                     <div class="col-auto user">
+               <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                         <div class="dropdown text-end">
+                           <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                           <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                           </a>
+                           <ul class="dropdown-menu text-small"
+                              aria-labelledby="dropdownUser1">
+                              <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                              <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+                              <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                           </ul>
+                        </div>
+                     </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> 
+                                 <c:if test="${loginSession.user_image eq null}">
+                                    <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                                 <c:if test="${loginSession.user_image ne null}">
+                                    <img src="/profile/${loginSession.user_image }" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider" style="margin:0px;">
+                                 </li>
+                                 <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </nav>
+      </div>
+   </header>
 
 	<!-- 캘린더 -->
 	<div id="wrapper" class="container-fluid mb-5">
@@ -429,22 +471,31 @@ footer.footer {
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
 											<input type="text" class="form-control" id="title"
-												name="title" disabled> <label for="partyCategory">모임유형</label>
+												name="title" maxlength='30' placeholder="최대 30자까지 가능합니다"> <label for="partyTitle">제목</label>
 										</div>
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
-											<input type="text" class="form-control" id="start"
-												name="start" disabled> <label for="partyDate">모임날짜</label>
+											<input type="text" class="form-control" id="showDate"
+												name="showDate" disabled> <label for="partyDate">모임날짜</label>
+											<input type="text" name="start" id="start" hidden>
+											<input type="text" name="end" id="end" hidden>
 										</div>
 										<div
-											class="mb-3 partyCal d-flex timeContainer justify-content-center align-items-center"
+											class="mb-3 partyCal d-flex flex-column timeContainer"
 											style="margin-left: 10%; margin-right: 10%; height: 56px; width: 376px;">
-											<div class="defaultTime">
+											<div class="mt-1" style="color: #8793a1; font-size : 13px; margin-left:11px;">시간</div>
+											<div class="defaultTime text-center">
 												<span class="me-2" id="defaultHour">00</span>:<span
 													class="ms-2" id="defaultMin">00</span>
 											</div>
 										</div>
-
+										<div
+											class="mb-3 partyCal d-flex flex-column groupDefaultTimeContainer"
+											style="margin-left: 10%; margin-right: 10%; height: 56px; width: 376px; background-color: rgb(233, 236, 239);">
+											<div class="mt-1" style="color: #8793a1; font-size : 13px; margin-left:11px;">시간</div>
+											<div class="gDefaultTime text-center"></div>
+										</div>
+										<input type="text" name="group_time" class="d-none" id="hiddenGroupDefaultTime" >
 										<!--시간 선택-->
 										<div id="hour-picker" class="p-4 mt-2"
 											style="margin-left: 10%; margin-right: 10%; width: 376px;">
@@ -581,13 +632,8 @@ footer.footer {
 											name="min" hidden>
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
-											<input type="text" class="form-control" id="gcal_name"
-												name="gcal_name"> <label for="partyTitle">제목</label>
-										</div>
-										<div class="form-floating mb-3 partyCal"
-											style="margin-left: 10%;">
-											<input type="text" class="form-control" id="gcal_content"
-												name="gcal_content"> <label for="partyContent">내용</label>
+											<input type="text" class="form-control" id="gcal_content" placeholder="최대 30자까지 가능합니다"
+												name="gcal_content" maxlength='30'> <label for="partyContent">내용</label>
 										</div>
 										<div class="form-floating mb-3 partyCal"
 											style="margin-left: 10%;">
@@ -613,36 +659,21 @@ footer.footer {
 									</div>
 								</div>
 								<div class="modal-footer" id="buttonDiv">
-									<button type="button" class="btn btn-secondary"
-										onclick="moveSite();">닫기</button>
-									<button type="button" class="btn btn-primary" id="calSubmit">저장</button>
-									<button type="button" class="btn btn-success" id="calDelete">삭제</button>
-									<button type="button" class="btn btn-danger searchBtn">검색</button>
+									<button type="button" class="btn btn-secondary"onclick="moveSite()">취소</button>
+									<button type="button" class="btn btn-success " id="calSubmit">저장</button>
+									<button type="button" class="btn btn-danger" id="calDelete">삭제</button>
+									<button type="button" class="btn btn-warning" id="calModify">수정</button>
+									<button type="button" class="btn btn-warning d-none" id="calModifySubmit">수정 완료</button>
 								</div>
 							</div>
 						</div>
 					</div>
 					<!-- Calendar 일정 생성기-->
-					<div class="col-md-2 col-5" id='external-events'>
-						<p>
-							<strong>일정 생성하기</strong>
-						</p>
-						<div
-							class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-							<div class='fc-event-main text-center'>정모</div>
-						</div>
-						<div
-							class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-							<div class='fc-event-main text-center'>회식</div>
-						</div>
-						<div
-							class='fc-event fc-h-event fc-daygrid-event fc-daygrid-block-event'>
-							<div class='fc-event-main text-center'>여행</div>
-						</div>
+					<div class="" id='external-events'>
 					</div>
 					<!--캘린더 자체 생성-->
-					<div class="col-md-10 col-auto flex-fill" id='calendar'
-						style="min-width: initial; min-height: 80vh;"></div>
+					<div class="col-md-12 col-auto flex-fill" id='calendar'
+						style="min-width: initial; min-height: 60vh;"></div>
 					<!-- Calendar end -->
 				</section>
 			</div>
@@ -650,48 +681,57 @@ footer.footer {
 	</div>
 
 	<!-- Footer-->
-	<div class="footerWrapper" style="background-color: #fff;">
-		<div class="container">
-			<footer class="footer" style="background-color: #fff;">
-				<div class="row">
-					<div class="col-lg-3 footer-imgBox">
-						<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
-					</div>
-					<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-						<ul class="list-inline mb-2">
-							<li class="list-inline-item"><a href="#!">공지사항</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">회원가입</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">로그인</a></li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!">책임의 한계 및 법적고지</a>
-							</li>
-							<li class="list-inline-item">⋅</li>
-							<li class="list-inline-item"><a href="#!"
-								style="color: red; font-weight: bold">개인정보처리방침</a></li>
-						</ul>
-						<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-							개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-						<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-							57 이레빌딩</p>
-						<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-							2022. All Rights Reserved.</p>
-					</div>
-					<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-						<ul class="list-inline mb-0">
-							<li class="list-inline-item me-4"><a href="#!"><i
-									class="bi-facebook fs-3"></i></a></li>
-							<li class="list-inline-item me-4"><a href="#!"><i
-									class="bi-twitter fs-3"></i></a></li>
-							<li class="list-inline-item"><a href="#!"><i
-									class="bi-instagram fs-3"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</footer>
-		</div>
-	</div>
+  <div class="footerWrapper">
+    <div class="container">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-lg-3 footer-imgBox">
+            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-2">
+              <li class="list-inline-item"><a href="#!">공지사항</a></li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item"><a href="#!">회원가입</a></li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item"><a href="#!">로그인</a></li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item">
+                <a href="#!">책임의 한계 및 법적고지</a>
+              </li>
+              <li class="list-inline-item">⋅</li>
+              <li class="list-inline-item">
+                <a href="#!" style="color: red; font-weight: bold">개인정보처리방침</a>
+              </li>
+            </ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
+              사업자등록번호 : 22-02-22
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2022. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-0">
+              <li class="list-inline-item me-4">
+                <a href="#!"><i class="bi-facebook fs-3"></i></a>
+              </li>
+              <li class="list-inline-item me-4">
+                <a href="#!"><i class="bi-twitter fs-3"></i></a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#!"><i class="bi-instagram fs-3"></i></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div> 
 	<script>
 		// 다시 홈으로 돌아오는 함수
 		let moveSite = function() {
@@ -725,7 +765,6 @@ footer.footer {
 			
 			// full-calendar 생성하기
 			var calendar = new FullCalendar.Calendar(calendarEl, {
-
 				// 해더에 표시할 툴바(기본설정)
 				headerToolbar : {
 					left : 'today',
@@ -736,8 +775,8 @@ footer.footer {
 				locale : 'ko', // 한국어 설정
 				editable : true, // 수정 가능
 				droppable : true, // 드래그 가능
-				
-				selectable : false, // 빈 공간 클릭 허용
+				draggable : true,
+				selectable : true, // 빈 공간 클릭 허용
 				events : [ 
 					$.ajax({
 						url : '/cal/calList',
@@ -747,8 +786,9 @@ footer.footer {
 						success : function(response) {
 						for (i = 0; i < response.length; i++) {
 							calendar.addEvent({
-								title : response[i].title,
-								start : response[i].start,
+								title : response[i].group_time + " " + response[i].title,
+								start : response[i].start, // 시작 날짜 
+								end : response[i].end, // 끝 날짜 
 								seq_group_cal : response[i].seq_group_cal // 번호도 생성 해줘야 가져올 수 있음
 							})
 						}
@@ -762,19 +802,63 @@ footer.footer {
 					}
 				}) ],
 
+				// 날짜 클릭시 혹은 드래그
+				select: function (info) {
+					// 마지막 날짜 설정 (현재날짜에서 +1이 되어서)
+					let endDate = info.endStr;
+					endDate = endDate.replace(/-/g, ""); // 현재 날짜(String -> -빼기)
+					endDate = (Number(endDate)) - 1;
+					endDate = endDate.toString();
+					endDate = endDate.slice(0,4) + '-' + endDate.slice(4, 6) + '-' + endDate.slice(6,8);
+
+					// 시작 끝 날짜 삽입(보여주기 식)
+					$("#showDate").val(info.startStr + " ~ " + endDate);
+					
+					// 초기화 작업
+					$("#ycoord").val('37.5339071790577'); // 위도
+					$("#xcoord").val('126.896761296215'); // 경도
+					$("#title").val(''); // 제목
+					$("#gcal_content").val(''); // 내용
+					$("#partyLocation").val(''); // 위치명
+					$("#start").val(info.startStr); // 시작 날짜 넣어주기 
+					$("#end").val(info.endStr); // 끝 날짜 넣어주기 
+					$(".groupDefaultTimeContainer").addClass("d-none"); // 디폴트 시간 
+					
+					
+					if($("calDelete").hasClass("d-none") === false) {
+						// 삭제 버튼 안보이게 
+						$("#calDelete").addClass("d-none");
+						// 저장 버튼 보이게
+						$("#calSubmit").removeClass("d-none");
+						// 수정 버튼 안보이게 
+						$("#calModify").addClass("d-none"); 
+					}
+
+					// 모달 보여주기 
+					calendarModal.show();
+					// 기존 맵 지우기
+					$('#map').empty()
+					// 모달 띄워준 뒤에 맵이 생성되야 함 
+					makeMap();
+					// 캘린더 랜더링
+					calendar.render();
+				},
+					
 				// 일정 옮겼을 때 
 				eventDrop:function(events) {
+					console.log(events);
 					let seq_group = ${seq_group}; // 현재 모임의 일정 번호
 					let seq_group_cal = events.event.extendedProps.seq_group_cal; // 클릭한 일정의 번호 
 					let year = (events.event._instance.range.start.getFullYear()); //옮긴 달력의 날짜
 	                let month = events.event._instance.range.start.getMonth() + 1; //옮긴 달력의 날짜
 	                let day = events.event._instance.range.start.getDate(); //옮긴 달력의 날짜
 	                let start = year + "-" + month + "-" + day; // 변경된 날짜
+	                let modifyDays = events.delta.days; // 기존의 일정으로 부터 바뀐 날짜
 	                
-					$.ajax ({
-						url : "/cal/calModify",
+					 $.ajax ({
+						url : "/cal/calMove",
 						type: 'get',
-						data : {"start" : start, "seq_group_cal" : seq_group_cal, "seq_group" : seq_group},
+						data : {"start" : start, "seq_group_cal" : seq_group_cal, "seq_group" : seq_group, "modifyDays" : modifyDays},
 						success : function(data) {
 							if(data === "success") {
 								Swal.fire({
@@ -793,7 +877,7 @@ footer.footer {
 								  text: '관리자에게 문의해주세여!',
 								})
 						}
-					})
+					}) 
 				},
 				
 				// 일정 클릭시
@@ -801,6 +885,8 @@ footer.footer {
 					let seq_group_cal =""; // 초기화 
 					let seq_group = ${seq_group}; // 현재 모임의 번호
 					seq_group_cal = info.event.extendedProps.seq_group_cal; // extendedProps는 event 함수에서 존재하는 값만 사용 가능 -> 클릭했을 때 해당 seq_group_cal을 찾아줌
+					
+					
 					// 시간 안보이게 
 					$(".timeContainer").addClass("d-none");
 					
@@ -821,15 +907,24 @@ footer.footer {
 								data : {"seq_group_cal" : seq_group_cal, "seq_group" : seq_group},
 								dataType : "json",
 								success : function(data) {
-									
+									// 마지막 날짜 설정 (현재날짜에서 +1이 되어서)
+									let endDate = data[0].end;
+									endDate = endDate.replace(/-/g, ""); // 현재 날짜(String -> -빼기)
+									endDate = endDate.substr(0, 8); // 날짜만 가져오기 00:00:00 빼기
+									endDate = (Number(endDate)) - 1;
+									endDate = endDate.toString();
+									endDate = endDate.slice(0,4) + '-' + endDate.slice(4, 6) + '-' + endDate.slice(6,8);
+
 									// 받아온 값들을 input에 셋팅
-									$("#title").val(data[0].title);
-									$("#start").val(data[0].start);
-									$("#gcal_name").val(data[0].gcal_name);
-									$("#gcal_content").val(data[0].gcal_content);
-									$("#partyLocation").val(data[0].gcal_place);
+									$("#title").val(data[0].title); // 일정 제목 
+									$("#showDate").val(data[0].start + " ~ " + endDate); // 일정 날짜
+									$("#gcal_content").val(data[0].gcal_content); // 일정 내용 
+									$("#partyLocation").val(data[0].gcal_place); // 일정 위치 
 									$("#ycoord").val(data[0].gcal_latitude);
 									$("#xcoord").val(data[0].gcal_longitude);
+									$(".gDefaultTime").text(data[0].group_time); // 일정 시간 넣어두기
+									$("#hiddenGroupDefaultTime").val(data[0].group_time);// 일정 시간 넣어두기 
+									$(".groupDefaultTimeContainer").removeClass("d-none"); // 디폴트 시간 
 									
 									// seq_group_cal을 modal에 넣어준다 
 									$("#seq_group_cal").val(seq_group_cal);
@@ -849,7 +944,6 @@ footer.footer {
 									// 초기화 작업
 									$("#ycoord").val('37.566826'); // 위도
 									$("#xcoord").val('126.9786567'); // 경도
-									$("#gcal_name").val(''); // 제목
 									$("#gcal_content").val(''); // 내용
 									$("#partyLocation").val(''); // 위치명
 									$("#title").val('');
@@ -867,46 +961,237 @@ footer.footer {
 					
 				},
 
-				// 일정을 달력에 가져다 놓았을 때
-				drop : function(info) { // 드래그 엔 드롭 성공시
-					// 데이터값 입력
-					$("#title").val(info.draggedEl.innerText);
-					$("#start").val(info.dateStr);
-
-					// 초기화 작업
-					$("#ycoord").val('37.5339071790577'); // 위도
-					$("#xcoord").val('126.896761296215'); // 경도
-					$("#gcal_name").val(''); // 제목
-					$("#gcal_content").val(''); // 내용
-					$("#partyLocation").val(''); // 위치명
-
-					if($("calDelete").hasClass("d-none") === false) {
-						// 삭제 버튼 안보이게 
-						$("#calDelete").addClass("d-none");
-						// 저장 버튼 보이게
-						$("#calSubmit").removeClass("d-none");
-					}
-
-					// 모달 보여주기 
-					calendarModal.show();
-					// 기존 맵 지우기
-					$('#map').empty()
-					// 모달 띄워준 뒤에 맵이 생성되야 함 
-					makeMap();
-				}
 			});
 
 			// 캘린더 랜더링
 			calendar.render();
 		});
 
-		// 카카오맵 api
+		
+		// 지도 검색 엔터 이벤트
+		$(".keyword").keyup(function(e){
+			if(e.keyCode == 13) {
+				let keyword = $(".keyword").val();
+				// 지도 찾기 호출
+				searchMap(keyword);
+			} 
+		})
+		
+		// 이벤트 발생
+		const searchPlace = function() {
+			let keyword = $(".keyword").val();
+			searchMap(keyword);
+		}
+		
+		
+	/* 	// 카카오맵 api
 		$(".searchBtn").on("click", function() {
 			let keyword = $(".keyword").val();
 			// 지도 찾기 호출
 			searchMap(keyword);
-		})
+		}) */
 
+		
+
+		// 일정 저장
+		$("#calSubmit").on("click", function() {
+			let seq_group = ${seq_group}; // 현재 모임 번호 
+			let title = $("#title").val(); //  일정 제목 
+			let start = $("#start").val(); // 모임 날짜 시작 
+			let end = $("#end").val(); // 모임 날짜 끝 
+			let gcal_content = $("#gcal_content").val(); // 일정 내용
+			let gcal_longitude = $("#xcoord").val(); // 일정 경도
+			let gcal_latitude = $("#ycoord").val(); // 일정 위도 
+			let gcal_place = $("#partyLocation").val(); // 일정 위치
+			let hour = $("#hourInput").val(); // 시간 
+			let min = $("#minInput").val(); // 분 
+			let group_time = hour + ":" + min; // 전체 시간
+
+			if(title == "") {
+				Swal.fire('제목을 입력해주세요');
+				return;
+			}else if(gcal_content == "") {
+				Swal.fire('내용을 입력해주세요');
+				return;
+			}else if(gcal_place == "") {
+				Swal.fire('장소를 검색해주세요');
+				return;
+			}else {
+				 $.ajax({
+					url : "/cal/calInsert",
+					type : "post",
+					data : {
+						"seq_group" : seq_group,
+						"title" : title,
+						"start" : start,
+						"end" : end,
+						"gcal_content" : gcal_content,
+						"gcal_longitude" : gcal_longitude,
+						"gcal_latitude" : gcal_latitude,
+						"gcal_place" : gcal_place,
+						"group_time" : group_time
+					},
+					success : function(data) {
+						// 일정 추가되었다고 알림 
+						Swal.fire({
+							position : 'center',
+							icon : 'success',
+							title :'일정이 등록되었습니다',
+							showConfirmButton : false,
+							timer : 900
+						})
+						// 모달창 안보이게 
+						calendarModal.hide();
+						
+						// 0.8 초있다가 페이지 로드
+						setTimeout(function() {
+							window.location.href = "";
+						},1000);
+						
+					},
+					error : function(e) {
+						Swal.fire({
+							  icon: 'error',
+							  title: '에러가 발생했네요..',
+							  text: '관리자에게 문의해주세여!',
+							})
+					}
+				})  
+			} 
+		})
+		
+		// 일정 삭제
+		$("#calDelete").on("click",function() {
+			let seq_group_cal = $("#seq_group_cal").val(); // 일정 번호
+			Swal.fire({
+				  title: '일정을 정말 삭제하시겠습니까?',
+				  text: "삭제 후, 일정을 다시 만드셔야 합니다",
+				  icon: 'warning',
+				  showCancelButton: true,
+				  confirmButtonColor: '#3085d6',
+				  cancelButtonColor: '#d33',
+				  confirmButtonText: '네, 삭제할래요!',
+				  cancelButtonText: '아니요!',
+				}).then((result) => {
+				  if (result.isConfirmed) { // 삭제에서 yes를 누르다면
+					  $.ajax ({
+						  url : "/cal/calDelete",
+					  	  data : {"seq_group_cal" : seq_group_cal},
+					  	  dataType : "text",
+					  	  success : function(data) {
+					  		  if(data === "success") { // 삭제 성공시
+					  			// 모달창 안보이게 
+								calendarModal.hide();
+					  			
+					  		  	Swal.fire(
+									      '삭제되었습니다!',
+									      '일정을 다시 확인해주세여',
+									      'success'
+									 )
+								// 0.9 초있다가 페이지 로드
+								setTimeout(function() {
+									window.location.href = "";
+								},1000);
+								
+								
+					  		  }else { // 삭제 실패시
+					  			Swal.fire({
+									  icon: 'error',
+									  title: '에러가 발생했네요..',
+									  text: '관리자에게 문의해주세여!',
+									})
+					  		  }
+					  			
+					  	  },
+					  	  error : function(e) {
+					  		Swal.fire({
+								  icon: 'error',
+								  title: '에러가 발생했네요..',
+								  text: '관리자에게 문의해주세여!',
+								})
+					  	  }
+					  })
+					 
+				  }
+				})
+		})
+		
+		// 일정 수정
+		$("#calModify").on("click",function() {
+			$("#calModifySubmit").removeClass("d-none"); // 수정 제출 보이게
+			$("#calModify").addClass("d-none"); // 수정 버튼 안보이게 
+			let group_time = $(".gDefaultTime").text();
+			$("#defaultHour").html(group_time.substr(0,2)); // 시간 div 창에 넣어주기  
+			$("#defaultMin").html(group_time.substr(3,5));  // 분 div 창에 넣어주기 
+			$(".groupDefaultTimeContainer").addClass("d-none"); // 그룹 디폴트 타임 선택 박스 안보이게 
+			$(".timeContainer").removeClass("d-none");  // 기존 타임 선택 박스 보이게
+			
+		})
+		
+		// 일정 수정 버튼 클릭시 
+		$("#calModifySubmit").on("click",function() {
+			let seq_group_cal = $("#seq_group_cal").val(); // 일정 번호
+			let seq_group = ${seq_group}; // 현재 모임 번호 
+			let title = $("#title").val(); //  일정 제목 
+			let start = $("#start").val(); // 모임 날짜 시작 
+			let end = $("#end").val(); // 모임 날짜 끝 
+			let gcal_content = $("#gcal_content").val(); // 일정 내용
+			let gcal_longitude = $("#xcoord").val(); // 일정 경도
+			let gcal_latitude = $("#ycoord").val(); // 일정 위도 
+			let gcal_place = $("#partyLocation").val(); // 일정 위치
+			
+			let hour = $("#hourInput").val(); // 시간 
+			let min = $("#minInput").val(); // 분 
+			let modifyTime = hour+":"+min; // 바뀐 시간 */
+			let group_time = $("#hiddenGroupDefaultTime").val() // 기존 시간
+			
+			if(title == "") {
+				Swal.fire('제목을 입력해주세요');
+				return;
+			}else if(gcal_content == "") {
+				Swal.fire('내용을 입력해주세요');
+				return;
+			}else if(gcal_place == "") {
+				Swal.fire('장소를 검색해주세요');
+				return;
+			}else {
+				 $.ajax({
+					url : "/cal/calModify",
+					type : "post",
+					dataType : "json",
+					data : {
+						"seq_group_cal" : seq_group_cal,
+						"seq_group" : seq_group,
+						"title" : title,
+						"start" : start,
+						"end" : end,
+						"gcal_content" : gcal_content,
+						"gcal_longitude" : gcal_longitude,
+						"gcal_latitude" : gcal_latitude,
+						"gcal_place" : gcal_place,
+						"group_time" : group_time,
+						"modifyTime" : modifyTime
+					},
+					success : function(data) {
+						if(data >= 1) {
+							Swal.fire('일정 내용 수정 완료!');
+							setTimeout(function() {
+                                window.location.href = "";
+                           },800);
+						}	
+					},
+					error : function(e) {
+						Swal.fire({
+							  icon: 'error',
+							  title: '에러가 발생했네요..',
+							  text: '관리자에게 문의해주세여!',
+							})
+					}
+				})  
+			}
+		})
+		
+		
 		// 지도 찾기 함수
 		const makeMap = function(defaultVal = "끼리끼리") {
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
@@ -1036,156 +1321,31 @@ footer.footer {
 								});
 			}
 		}
-
-		// 일정 저장
-		$("#calSubmit").on("click", function() {
-			let seq_group = ${seq_group}; // 현재 모임 번호 
-			let title = $("#title").val(); // 모임 유형 
-			let start = $("#start").val(); // 모임 날짜 
-			let gcal_name = $("#gcal_name").val(); // 일정 제목 
-			let gcal_content = $("#gcal_content").val(); // 일정 내용
-			let gcal_longitude = $("#xcoord").val(); // 일정 경도
-			let gcal_latitude = $("#ycoord").val(); // 일정 위도 
-			let gcal_place = $("#partyLocation").val(); // 일정 위치
-			let hour = $("#hourInput").val(); // 시간 
-			let min = $("#minInput").val(); // 분 
-			let totalTime = hour + ":" + min; // 전체 시간
-
-			if(gcal_name == "") {
-				Swal.fire('제목을 입력해주세요');
-				return;
-			}else if(gcal_content == "") {
-				Swal.fire('내용을 입력해주세요');
-				return;
-			}else if(gcal_place == "") {
-				Swal.fire('장소를 검색해주세요');
-				return;
-			}else {
-				$.ajax({
-					url : "/cal/calInsert",
-					type : "post",
-					data : {
-						"seq_group" : seq_group,
-						"title" : title,
-						"start" : start,
-						"gcal_name" : gcal_name,
-						"gcal_content" : gcal_content,
-						"gcal_longitude" : gcal_longitude,
-						"gcal_latitude" : gcal_latitude,
-						"gcal_place" : gcal_place,
-						"totalTime" : totalTime
-					},
-					success : function(data) {
-						// 일정 추가되었다고 알림 
-						Swal.fire({
-							position : 'center',
-							icon : 'success',
-							title :'일정이 등록되었습니다',
-							showConfirmButton : false,
-							timer : 900
-						})
-						// 모달창 안보이게 
-						calendarModal.hide();
-						
-						// 0.8 초있다가 페이지 로드
-						setTimeout(function() {
-							window.location.href = "";
-						},1000);
-						
-					},
-					error : function(e) {
-						Swal.fire({
-							  icon: 'error',
-							  title: '에러가 발생했네요..',
-							  text: '관리자에게 문의해주세여!',
-							})
-					}
-				}) 
-			}
-
-			 
-		})
-		
-		// 일정 삭제
-		$("#calDelete").on("click",function() {
-			let seq_group_cal = $("#seq_group_cal").val(); // 일정 번호
-			Swal.fire({
-				  title: '일정을 정말 삭제하시겠습니까?',
-				  text: "삭제 후, 일정을 다시 만드셔야 합니다",
-				  icon: 'warning',
-				  showCancelButton: true,
-				  confirmButtonColor: '#3085d6',
-				  cancelButtonColor: '#d33',
-				  confirmButtonText: '네, 삭제할래요!',
-				  cancelButtonText: '아니요!',
-				}).then((result) => {
-				  if (result.isConfirmed) { // 삭제에서 yes를 누르다면
-					  $.ajax ({
-						  url : "/cal/calDelete",
-					  	  data : {"seq_group_cal" : seq_group_cal},
-					  	  dataType : "text",
-					  	  success : function(data) {
-					  		  if(data === "success") { // 삭제 성공시
-					  			// 모달창 안보이게 
-								calendarModal.hide();
-					  			
-					  		  	Swal.fire(
-									      '삭제되었습니다!',
-									      '일정을 다시 확인해주세여',
-									      'success'
-									 )
-								// 0.9 초있다가 페이지 로드
-								setTimeout(function() {
-									window.location.href = "";
-								},1000);
-								
-								
-					  		  }else { // 삭제 실패시
-					  			Swal.fire({
-									  icon: 'error',
-									  title: '에러가 발생했네요..',
-									  text: '관리자에게 문의해주세여!',
-									})
-					  		  }
-					  			
-					  	  },
-					  	  error : function(e) {
-					  		Swal.fire({
-								  icon: 'error',
-								  title: '에러가 발생했네요..',
-								  text: '관리자에게 문의해주세여!',
-								})
-					  	  }
-					  })
-					 
-				  }
-				})
-		})
 		
 
-	// 00 클릭시(시간)
-    $("#defaultHour").on("click",function() {
-      $("#hour-picker").toggle(400);
-    })
-
-    // 시간 선택시
-    $(".item").on("click",function() {
-      $("#defaultHour").html($(this).html()); // 시간 선택
-      $("#hourInput").val($(this).html()); // 안보이는 input에 시간 넣기 
-      $("#hour-picker").toggle(400);
-    })
-
-    // 00 클릭시(분)
-    $("#defaultMin").on("click",function() {
-      $("#min-picker").toggle(400);
-    })
-
-    // 분 선택시
-    $(".item2").on("click",function() {
-      $("#defaultMin").html($(this).html()); // 분 선택
-      $("#minInput").val($(this).html()); // 안보이는 input에 시간 넣기 
-      $("#min-picker").toggle(400);
-    })
+		// 00 클릭시(시간)
+	    $("#defaultHour").on("click",function() {
+	      $("#hour-picker").toggle(400);
+	    })
+	
+	    // 시간 선택시
+	    $(".item").on("click",function() {
+	      $("#defaultHour").html($(this).html()); // 시간 선택
+	      $("#hourInput").val($(this).html()); // 안보이는 input에 시간 넣기 
+	      $("#hour-picker").toggle(400);
+	    })
+	
+	    // 00 클릭시(분)
+	    $("#defaultMin").on("click",function() {
+	      $("#min-picker").toggle(400);
+	    })
+	
+	    // 분 선택시
+	    $(".item2").on("click",function() {
+	      $("#defaultMin").html($(this).html()); // 분 선택
+	      $("#minInput").val($(this).html()); // 안보이는 input에 시간 넣기 
+	      $("#min-picker").toggle(400);
+	    })
 
 	</script>
 </body>

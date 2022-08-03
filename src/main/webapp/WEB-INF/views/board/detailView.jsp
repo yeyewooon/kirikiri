@@ -35,6 +35,9 @@
 		}
 		
 		/* header */
+		header{
+			background-color: white;
+		}
 		#navLogo {
 		   width: 150px;
 		   height: 100px;
@@ -73,6 +76,13 @@
         } */
 	
 		/* 컨텐츠 영역 */
+		#detail{
+			border-radius: 30px;
+		}
+		#detail:not(#content){
+        	font-family: 'InfinitySans-RegularA1';
+        }
+		
         #category {
             background-color: #fce2e1;
             border-radius: 60px;
@@ -91,25 +101,39 @@
        		max-width: 100%;
        		height: auto;
        	}
-       	.likeBtn{
+		
+		/* 좋아요 영역 */
+		/* #body-like .col-auto{
+			background-color: #fce2e1;
+			border-radius: 50px;
+		} */
+		/* span.text-center{
+			background-color: #fce2e1;
+			border-radius: 20px;
+			width: auto;
+			padding: 10px;
+			margin-bottom: 10px;
+		} */
+		
+		.likeBtn{
        		border: none;
        		background-color: transparent;
        	}
        	.likeBtn img{
-       		width: 40px;
+       		width: 100px;
        	}
 		
-		/* 좋아요 영역 */
-		#body-like .col-auto{
-			background-color: #fce2e1;
-			border-radius: 50px;
-		}
-		
 		/* 댓글 영역 */
-		#Commenttab .col-auto{
+		/* #Commenttab .col-auto{
+			margin-left: 10px;
 			background-color: #d2e3ec;
 			border-top-left-radius: 5px;
 			border-top-right-radius: 5px;
+		} */
+		
+		#commentWrapper{
+			background-color: #edf6fa;
+			border-radius: 10px;
 		}
 		
         .profileBox{
@@ -162,11 +186,11 @@
         }
         
         @font-face {
-            font-family: 'OTWelcomeRA';
-            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
-            font-weight: normal;
-            font-style: normal;
-        }
+		    font-family: 'InfinitySans-RegularA1';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
 
         @font-face {
             font-family: '양진체';
@@ -177,7 +201,7 @@
     </style>
 </head>
 <body>
-	<header class="mb-3 border-bottom">
+	<header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -230,8 +254,8 @@
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
 
@@ -256,35 +280,52 @@
                         </ul>
                      </div>
                      <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
@@ -293,7 +334,8 @@
       </div>
    </header>
    
-    <div class="container my-5 py-5" style="width: 70%;">
+   <!-- 디테일 뷰 -->
+    <div id="detail" class="container my-5 py-5">
         <div class="row text-center">
             <div class="col-auto my-3 fs-5 py-1" id="category">${detail.boardDTO.board_category}</div>
         </div>
@@ -304,9 +346,14 @@
 
         <div class="row mt-4 justify-content-between align-items-center">
             <div class="col-auto" id="board-head-col">
-                <i class="fa-regular fa-clock me-3"> ${detail.boardDTO.board_date}</i>
-                <i class="fa-regular fa-font-awesome me-3"> ${detail.boardDTO.board_count}</i>
-                <i class="fa-regular fa-comment-dots"> ${detail.commentCnt}</i>
+                <i class="fa-regular fa-clock"></i>
+                <span class="me-3">${detail.boardDTO.board_date}</span>
+                <i class="fa-regular fa-font-awesome"></i>
+                <span class="me-3">${detail.boardDTO.board_count}</span>
+                <i class="fa-regular fa-comment-dots"></i>
+                <span class="me-3">${detail.commentCnt}</span>
+                <i class="fa-regular fa-heart"></i>
+                <span>${like.likeHit}</span>
             </div>
             <div class="col-auto d-flex justify-content-end">
                 <div class="fw-bold fs-4 me-2">작성자</div>
@@ -329,23 +376,25 @@
         		<%-- 로그인 상태일 때 --%>
         		<c:when test="${not empty loginSession.user_email}">
 	        		<c:choose>
-	        			<%-- 추천 안누름 --%>
+	        			<%-- 좋아요 안누름 --%>
 	        			<c:when test="${like.likeCheck == 0}">
-	        				<div class="col-auto">
+	        				<div class="col-12 text-center">
 			        			<button class="likeBtn" id="likeBefore" value="${detail.boardDTO.seq_board}">
-			        				<img src="/resources/images/emptyheart.png" alt="좋아요">
+			        				<img src="/resources/images/board/likeText.png" alt="좋아요"><br>
+			        				<img src="/resources/images/board/like.png" alt="좋아요">
 			        			</button>
-			        			<span>버튼을 눌러서 게시글에 공감해 보세요!</span>
 			        		</div>
+			        		<span class="text-center">게시글에 좋아요를 눌러보세요!</span>
 	        			</c:when>
-	        			<%-- 추천 누름 --%>
+	        			<%-- 좋아요 누름 --%>
 	        			<c:otherwise>
-	        				<div class="col-auto">
+	        				<div class="col-12 text-center">
 			        			<button class="likeBtn" id="likeAfter" value="${detail.boardDTO.seq_board}">
-			        				<img src="/resources/images/fullheart.png" alt="좋아요">
+			        				<img src="/resources/images/board/notLikeText.png" alt="좋아요"><br>
+			        				<img src="/resources/images/board/notLike.png" alt="좋아요취소">
 			        			</button>
-			        			<span>이미 좋아요 한 게시물이에요</span>
 			        		</div>
+			        		<span class="text-center">좋아요를 취소할 수 있어요.</span>
 	        			</c:otherwise>
 	        		</c:choose>
 	        	</c:when>
@@ -354,22 +403,23 @@
 	        	<c:otherwise>
 		        	<div class="col-auto">
 				        <button class="likeBtn" id="like-notLoginBtn" value="${detail.boardDTO.seq_board}">
-				        	<img src="/resources/images/emptyheart.png" alt="좋아요">
+				        	<img src="/resources/images/board/likeText.png" alt="좋아요"><br>
+			        		<img src="/resources/images/board/like.png" alt="좋아요">
 				        </button>
-				        <span>${like.likeHit}</span>
 					</div>
+					<span class="text-center">로그인 후 좋아요를 눌러보세요!</span>
 	        	</c:otherwise>
 	        </c:choose>
         </div>
 	
 		<!-- 댓글 탭 -->
-		<div class="row" id="Commenttab">
-			<div class="col-auto" style="margin-right: 1px;"><i class="fa-solid fa-comment"></i> [${detail.commentCnt}개]</div>
-			<div class="col-auto"><i class="fa-solid fa-heart"></i> [${like.likeHit}개]</div>
-		</div>
+		<%-- <div class="row" id="Commenttab">
+			<div class="col-auto"><i class="fa-regular fa-comment"></i> [${detail.commentCnt}개]</div>
+			<div class="col-auto"><i class="fa-regular fa-heart"></i> [${like.likeHit}개]</div>
+		</div> --%>
 		
 		<!-- 댓글 영역 -->
-        <div class="row" style="border: 1px solid #e8e8e8;">
+        <div class="row" id="commentWrapper">
             <div class="col-12" id="body-comment">
                 <!-- 댓글 출력 -->
                 <c:choose>
@@ -381,11 +431,17 @@
 	                </c:when>
 	                <c:otherwise>
 	                	<c:forEach items="${detail.commentList}" var="comment">
-	                		<div class="row align-items-center py-3" style="border-bottom: 1px solid #e8e8e8;">
+	                		<div class="row align-items-center py-3" style="border-bottom: 3px solid white;">
 	                			<!-- 프로필 이미지 -->
 			                    <div class="col-2 d-flex justify-content-center">		                        
 			                        <div class="profileBox">
-			                            <img src="/resources/images/profile.jpg">
+			                        	<c:if test="${profile eq null}">
+			                        		<!-- 기본이미지 -->
+			                        		<img src="/resources/images/profile.jpg">
+			                        	</c:if>
+			                            <c:if test="${profile ne null}">
+			                        		<img src="/profile/${profile}">
+			                        	</c:if>
 			                        </div>
 			                    </div>
 								<!-- 내용 -->
@@ -416,13 +472,11 @@
 						                	</div>
 					                	</c:if>
 			                        </div>
-			
 			                        <div class="row">
-			                            <div class="col-12">
-			                                <textarea class="form-control comment" style="resize: none; background-color: transparent;" readonly>${comment.comment_content}</textarea>
-			                            </div>
-			                            
-			                        </div>
+										<div class="col-12">
+											<textarea class="form-control comment" style="resize: none; background-color: transparent;" readonly>${comment.comment_content}</textarea>
+										</div>
+									</div>
 			                    </div>
 			                </div>
 			                
@@ -604,7 +658,7 @@
 	    					timer: 1500
     					});
     					$("#body-like").load(location.href + " #body-like");
-    					$("#Commenttab").load(location.href + " #Commenttab");
+    					$("#board-head-col").load(location.href + " #board-head-col");
     				}
     				else if(likeCheck == 1){
     					Swal.fire({
@@ -614,7 +668,7 @@
 	    					timer: 1500
     					});
     					$("#body-like").load(location.href + " #body-like");
-    					$("#Commenttab").load(location.href + " #Commenttab");
+    					$("#board-head-col").load(location.href + " #board-head-col");
     				}
     			}, error : function(e){
     				console.log(e);
@@ -660,8 +714,6 @@
     		let comment = $("#commentForm").serialize();
     		$("#inputComment").val(""); // 댓글 입력창 초기화
     		
-    		
-    		
     		$.ajax({
     			url : "/comment/write"
     			, type : "post"
@@ -677,7 +729,7 @@
     					});
     					$("#body-comment").load(location.href + " #body-comment");
     					$("#board-head-col").load(location.href + " #board-head-col");
-    					$("#Commenttab").load(location.href + " #Commenttab");
+    					//$("#Commenttab").load(location.href + " #Commenttab");
     				}else{
     					Swal.fire({
     						icon: 'warning'
@@ -695,7 +747,7 @@
     	$("#body-comment").on("click", ".mod-commentBtn", function(e){
     		$(e.target).parents(".defaultComment").addClass("d-none");
     		$(e.target).parents().next(".afterComment").removeClass("d-none");
-    		$(e.target).parents(".commentHead").next().find(".comment").attr("readonly", false).css("border", "3px solid #fce2e1").focus();
+    		$(e.target).parents(".commentHead").next().find(".comment").attr("readonly", false).css("background-color", "white").focus();
     	})
     	
     	// 댓글 수정 취소
@@ -767,7 +819,7 @@
     	    					Swal.fire('삭제 완료!', '', 'success');
     	        				$("#body-comment").load(location.href + " #body-comment"); 
     	        				$("#board-head-col").load(location.href + " #board-head-col");
-    	        				$("#Commenttab").load(location.href + " #Commenttab");
+    	        				//$("#Commenttab").load(location.href + " #Commenttab");
     	    				}else{
     	    					Swal.fire('삭제 실패', '', 'error');
     	    				}			

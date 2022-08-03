@@ -11,7 +11,7 @@
    src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
    crossorigin="anonymous"></script>
-   
+
 <!--구글 폰트-->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,23 +37,9 @@
 <script src="sweetalert2.min.js"></script>
 <title>그룹해산</title>
 <style>
-* {
-   font-family: 'OTWelcomeRA';
-}
-
-#mainText {
-   font-family: '양진체';
-}
-
 /* header 반응형 */
 @media ( max-width : 768px) {
    #navLogo {
-      display: none;
-   }
-   #myPageIcon {
-      display: none;
-   }
-   #cartIcon {
       display: none;
    }
    #menu {
@@ -84,33 +70,18 @@
 }
 
 /*버튼 및 테이블*/
-.container-btn {
-   width: 100%;
-}
-.rowBtn{
-    border: 5px solid #d2e3ec;
-    width: max-content;
-    margin: auto;
-    margin-top: 50px;
-    padding: 30px;
+.rowBtn {
+	border: 5px solid #d2e3ec;
+	width: 60%;
+	margin: auto;
+	margin-top: 50px;
+	padding: 30px;
 }
 
 .btnBox {
-   text-align: center;
-   margin-top: 10px;
-    margin-bottom: 10px;
+	text-align: center;
+	margin-bottom: 10px;
 }
-/*버튼 색 지정*/
-.btn-primary {/*버튼 4개*/
-   background-color: cornflowerblue;
-   border-color: cornflowerblue;
-}
-.btn-primary:hover{ /*버튼 4개*/
-	color: #fff;
-    background-color: #5680CC;
-    border-color: #5680CC;
-}
-
 /*모임 해산 문구 및 사진*/
 .container-content {
    width: 100%;
@@ -135,6 +106,9 @@
 }
 
 /*풋터 영역*/
+.footerWrapper{
+   background-color: #fff;
+}
 .footerBox {
 	height: 0px;
 }
@@ -158,6 +132,37 @@ footer.footer {
 .footer-imgBox {
 	height: 100%;
 	text-align:center;
+}
+/*버튼4개*/
+.btn-3d {
+  position: relative;
+  font-size: 22px;
+  padding: 10px 15px;
+  color: white;
+  margin: 20px 10px 10px;
+  border-radius: 6px;
+  transition: top .01s linear;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+  cursor:pointer;
+}
+.btn-3d.blue:hover{
+	background-color: #699DD1;
+}
+.btn-3d:active {
+  top: 9px;
+}
+.btn-3d.blue:not(.groupBtn) {
+  background-color: #6DA2D9;
+  box-shadow: 0 0 0 1px #6698cb inset,
+        0 0 0 2px rgba(255,255,255,0.15) inset,
+        0 8px 0 0 rgba(110, 164, 219, .7),
+        0 8px 0 1px rgba(0,0,0,.4),
+        0 8px 8px 1px rgba(0,0,0,0.5);
+}
+/*버튼4개중 모임 해산 버튼 색 변경*/
+.groupBtn{
+	background-color: #aed6ff;
+    box-shadow: 0 0 0 1px #6698cb inset, 0 0 0 2px rgb(255 255 255 / 15%) inset, 0 8px 0 0 rgb(110 164 219 / 70%), 0 8px 0 1px rgb(0 0 0 / 40%), 0 8px 8px 1px rgb(0 0 0 / 50%);
 }
 /*모임 해산 버튼*/
 .deleteBtn{
@@ -216,7 +221,8 @@ footer.footer {
 </head>
 <body>
 
-   <header class="mb-3 border-bottom">
+   <!--네비바-->
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -244,19 +250,28 @@ footer.footer {
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
-                           <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
+                        <c:if test="${empty loginSession}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogin">로그인</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/signup/toSignupAgree">회원가입</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/admin/toAdmin">관리자페이지 이동</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
                      </ul>
                   </div>
                </div>
@@ -269,8 +284,8 @@ footer.footer {
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
 
@@ -295,35 +310,47 @@ footer.footer {
                         </ul>
                      </div>
                      <div class="col-auto user">
-						<c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-								</a>
-								<ul class="dropdown-menu text-small"
-								   aria-labelledby="dropdownUser1">
-								   <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-								   <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-								   <li><hr class="dropdown-divider"></li>
-								   <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-								</ul>
-							</div>
-						</c:if> 
-						<c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-								</a>
-								<ul class="dropdown-menu text-small"
-								   aria-labelledby="dropdownUser1">
-								   <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-								   <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-								   <li><hr class="dropdown-divider"></li>
-								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-								</ul>
-							</div>
-						</c:if> 
+               <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                         <div class="dropdown text-end">
+                           <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                           <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                           </a>
+                           <ul class="dropdown-menu text-small"
+                              aria-labelledby="dropdownUser1">
+                              <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                              <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+                              <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                           </ul>
+                        </div>
+                     </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> 
+                                 <c:if test="${loginSession.user_image eq null}">
+                                    <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                                 <c:if test="${loginSession.user_image ne null}">
+                                    <img src="/profile/${loginSession.user_image }" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider" style="margin:0px;">
+                                 </li>
+                                 <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
@@ -332,27 +359,25 @@ footer.footer {
       </div>
    </header>
 
-	<div class="body">
+	<div class="container">
 		<div class="container-btn">
 			<!-- 버튼 그룹 -->
 			<div class="row rowBtn">
-					<div class="col-md-3 btnBox">
-						<button type="button" class="btn btn-primary btn-lg"
-							id="groupApply" style="font-weight: bold;">가입 신청</button>
-					</div>
-					<div class="col-md-3 btnBox">
-						<button type="button" class="btn btn-primary btn-lg"
-							id="groupMember" style="font-weight: bold;">멤버 관리</button>
-					</div>
-					<div class="col-md-3 btnBox">
-						<button type="button" class="btn btn-primary btn-lg"
-							id="groupModify" style="font-weight: bold;">모임 수정</button>
-					</div>
-					<div class="col-md-3 btnBox">
-						<button type="button" class="btn btn-primary btn-lg"
-							id="groupDelete" style="font-weight: bold;">모임 해산</button>
-					</div>
+				<div class="col-sm-3 btnBox">
+					<div id = "groupApply" class="btn-3d blue" style="font-weight: bold;">가입 신청</div>
+				</div>
+				<div class="col-sm-3 btnBox">
+					<div id="groupMember" class="btn-3d blue" style="font-weight: bold;">멤버 관리</div>
+				</div>
+				<div class="col-sm-3 btnBox">
+					<div id="groupModify" class="btn-3d blue" style="font-weight: bold;">모임 수정</div>
+				</div>
+				<div class="col-sm-3 btnBox">
+					<div id="groupDelete" class="btn-3d blue groupBtn" style="font-weight: bold;">모임 해산</div>
+				</div>
 			</div>
+		</div>
+	</div>
 			<!-- 해산 문구 및 사진 -->
 			<div class="container-content mt-5 py-5">
 				<div class="row content-delete m-auto py-5">
@@ -379,13 +404,10 @@ footer.footer {
 					</div>
 				</div>
 			</div>
-
-		</div>
 		<!-- 그룹번호 숨겨서 받기 -->
 		<div class="d-none">
 			<input type="text" value="${seq_group}" name="seq_group" id="seq_group">
 		</div>
-	</div>
 <!-- Footer-->
   <div class="footerWrapper">
     <div class="container">
@@ -451,26 +473,26 @@ footer.footer {
         </div>
       </footer>
     </div>
-  </div> 	
+  </div>
 </body>
 <script>
 	// 멤버관리 페이지 이동
 	$("#groupMember").on("click", function(){
 		location.href = "/group/toGroupMember?seq_group="+$("#seq_group").val();
-	})	
+	})
 	// 모임가입 페이지 이동
 	$("#groupApply").on("click", function(){
 		location.href = "/group/toGroupApply?seq_group="+$("#seq_group").val();
-	})	
+	})
 	// 모임수정 이동
 	$("#groupModify").on("click", function(){
 		location.href = "/group/toModifyGroup?seq_group="+$("#seq_group").val();
-	})	
+	})
 	// 모임해산 페이지 이동
 	$("#groupDelete").on("click", function(){
 		location.href = "/group/toGroupDelete?seq_group="+$("#seq_group").val();
-	})	
-	
+	})
+
 	// 모임 해산시키기
 	$("#deleteBtn").on("click", function(){
 			Swal.fire({
@@ -490,7 +512,7 @@ footer.footer {
 					}).css("display", "none");
 					deleteForm.append($("#seq_group"));
 					deleteForm.appendTo("body");
-					deleteForm.submit(); 
+					deleteForm.submit();
 			  }
 			})
 		})

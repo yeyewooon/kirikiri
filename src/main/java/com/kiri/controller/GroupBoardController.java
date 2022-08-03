@@ -40,17 +40,19 @@ public class GroupBoardController {
 		
 		cri.setSeq_group(seq_group);
 		model.addAttribute("list", service.getListPaging(cri));
-		model.addAttribute("noticeList", service.getNotice());
+		model.addAttribute("noticeList", service.getNotice(seq_group));
 		int total = service.getTotal(cri);
 		PageMakerDTO pageMake = new PageMakerDTO(cri, total);
 		model.addAttribute("pageMaker", pageMake);
+		model.addAttribute("leaderId", service.getAccess(seq_group));
 		
 		return "group/groupBoard";
 	}
 	
 	@RequestMapping(value = "/toWrite") // write 페이지 요청
-	public String toWrite(int seq_group, Model model) {
+	public String toWrite(int seq_group, Model model) throws Exception{
 		model.addAttribute("seq_group", seq_group);
+		model.addAttribute("leaderId", service.getAccess(seq_group));
 		return "group/groupBoardWrite";
 	}
 	
@@ -120,6 +122,9 @@ public class GroupBoardController {
 		// 여긴 인터셉터로 관리하니까 어차피 null 들어올 일 없음
 		String user_email = ((MemberDTO)session.getAttribute("loginSession")).getUser_email();
 		model.addAttribute("like", service.like(seq_group_board, user_email));
+		// 댓글 프로필
+		model.addAttribute("profile", service.getProfileImg(user_email));
+		
 		// criteria 인스턴스 전달
 		model.addAttribute("cri", cri);
 		

@@ -103,15 +103,27 @@
         /* header 반응형 끝 */
         
     	/* contents 영역 */
+    	#modifyWrapper:not(textarea){
+    		font-family: 'InfinitySans-RegularA1';
+    	}
+    	
         #head{
             background-color: #d2e3ec;
             height: 100px;
-        }
-        #head>h1{
-            margin-top: 20px;
+            border-top-left-radius: 80px;
+            border-top-right-radius: 80px;
+            border: 3px solid black;
         }
         label {
             margin-top: 5px;
+        }
+        
+        #bottom{
+        	background-color: #d2e3ec;
+            height: 100px;
+            border-bottom-left-radius: 80px;
+            border-bottom-right-radius: 80px;
+            border: 3px solid black;
         }
         
         /*풋터 영역*/
@@ -139,12 +151,16 @@
         
         /* 눈누 폰트 */
 		@font-face {
-			font-family: 'OTWelcomeRA';
-			src:
-				url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-				format('woff2');
-			font-weight: normal;
-			font-style: normal;
+            font-family: 'MICEGothic Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+		    font-family: 'InfinitySans-RegularA1';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
 		}
 		
 		@font-face {
@@ -170,7 +186,7 @@
 	</style>
 </head>
 <body>
-	<header class="border-bottom">
+	<header class="border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -223,8 +239,8 @@
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
 
@@ -249,35 +265,52 @@
                         </ul>
                      </div>
                      <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
@@ -286,11 +319,10 @@
       </div>
    </header>
 
-	<div class="container">
-        <div id="head" class="row text-center align-items-center mb-5">
-            <h1>글 수정</h1>
-        </div>
-        
+	<div class="container" id="modifyWrapper" style="width: 70%;">
+		<div id="head" class="row text-center align-items-center my-5">
+			<h1>게시글 수정</h1>
+		</div>
         <form id="modifyForm" action="/board/modify" method="post">
         	
         	<div class="d-none">
@@ -303,18 +335,22 @@
 	            <div class="col-2">
 	                <c:choose>
 	            		<%-- 관리자 계정이라면 공지 쓰기 --%>
-	            		<c:when test="${loginSession.user_email eq 'admin'}">
+	            		<c:when test="${loginType eq 'admin'}">
 	            			<select name="board_category" class="form-select selectBox" aria-label="유형" disabled>
 			                    <option value="default">선택</option>
 			                    <option value="공지" <c:out value="${modMap.boardDTO.board_category eq '공지' ? 'selected' : ''}"/>>공지</option>
-			                    <option value="일반" <c:out value="${modMap.boardDTO.board_category eq '일반' ? 'selected' : ''}"/>>일반</option>
+			                    <option value="수다" <c:out value="${modMap.boardDTO.board_category eq '수다' ? 'selected' : ''}"/>>수다</option>
+			                    <option value="일상" <c:out value="${modMap.boardDTO.board_category eq '일상' ? 'selected' : ''}"/>>일상</option>
+			                    <option value="기타" <c:out value="${modMap.boardDTO.board_category eq '기타' ? 'selected' : ''}"/>>기타</option>
 			                </select>
 	            		</c:when>
 	            		<c:otherwise>
 	            			<select name="board_category" class="form-select selectBox" aria-label="유형" disabled>
 			                    <option value="default">선택</option>
-			                    <option value="일반" <c:out value="${modMap.boardDTO.board_category eq '일반' ? 'selected' : ''}"/>>일반</option>
+			                    <option value="수다" <c:out value="${modMap.boardDTO.board_category eq '수다' ? 'selected' : ''}"/>>수다</option>
+			                    <option value="일상" <c:out value="${modMap.boardDTO.board_category eq '일상' ? 'selected' : ''}"/>>일상</option>
 			                    <option value="후기" <c:out value="${modMap.boardDTO.board_category eq '후기' ? 'selected' : ''}"/>>후기</option>
+			                    <option value="기타" <c:out value="${modMap.boardDTO.board_category eq '기타' ? 'selected' : ''}"/>>기타</option>
 			                </select>
 	            		</c:otherwise>
 	            	</c:choose>
@@ -323,7 +359,7 @@
 	                <label class="form-label fs-5">제목</label>
 	            </div>
 	            <div class="col-8">
-	                <input type="text" id="title" name="board_title" class="form-control" value="${modMap.boardDTO.board_title}">
+	                <input type="text" id="title" name="board_title" class="form-control" placeholder="제목을 입력하세요. (최대 18자)" value="${modMap.boardDTO.board_title}" maxlength="18">
 	            </div>
 	        </div>
 			
@@ -331,12 +367,12 @@
 				<textarea id="summernote" name="board_content">${modMap.boardDTO.board_content}</textarea>
 	        </div>
 	        
-	        <div class="row my-4 justify-content-center">
+	        <div class="row my-4 justify-content-center align-items-center" id="bottom">
 	            <div class="col-auto">
-	                <button type="button" id="cancelBtn" class="btn btn-secondary">취소</button>
+	                <button type="button" id="cancelBtn" class="btn btn-light">취소</button>
 	            </div>
 	            <div class="col-auto">
-	                <button type="button" id="submitBtn" class="btn btn-primary">수정 완료</button>
+	                <button type="button" id="submitBtn" class="btn" style="background-color: #e6f6ff;">수정 완료</button>
 	            </div>
 	        </div>
         </form>
@@ -495,6 +531,7 @@
 			observer.observe(target, config);
 		});
 		
+		let newImg = new Array();
 		// summernote 이미지 업로드 function
 		function uploadSummernoteImageFile(file, editor){
 			data = new FormData();
@@ -508,13 +545,14 @@
 				, processData : false
 				, success : function(data){
 					$(editor).summernote("editor.insertImage", data.url);
+					newImg.push(data.url.replace("/boardFile/", ""));
 				}, error : function(e){
 					console.log(e);
 				}
 			});
 		}
 		
-		let imgArr = new Array();
+		
 		// 작성 완료 버튼
 		$("#submitBtn").on("click", function(){
 			if($("#title").val() === ""){
@@ -543,23 +581,23 @@
 				return;
 			}
 			
-			let content = $("#summernote").summernote("code");
+			/* let content = $("#summernote").summernote("code");
 			let regImg = /(<img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>)/g;
 			let src;
 			while(regImg.test(content)){
 				src = RegExp.$2.replace("/boardFile/", "");
-				imgArr.push(src);
+				newImg.push(src);
 			}
-			console.log(imgArr);
-			console.log(imgArr.length);
+			console.log(newImg);
+			console.log(newImg.length); */
 			
-			if(imgArr.length !== 0){
-				for(let i = 0; i < imgArr.length; i++){
+			if(newImg.length !== 0){
+				for(let i = 0; i < newImg.length; i++){
 					let inputImg = $("<input>").attr({
 						"type" : "hidden"
 						, "class" : "imgs"
 						, "name" : "imgs[]"
-						, "value" : imgArr[i]
+						, "value" : newImg[i]
 					});
 					$("#modifyForm").append(inputImg);
 				};

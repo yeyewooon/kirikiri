@@ -241,7 +241,7 @@ hr{
 											<img src="/resources/images/profile.jpg" id="profile_img">
 										</c:if>
 										<c:if test="${profileList[status.index] ne null}" >
-											<img src="${profileList[status.index]}" id="profile_img">
+											<img src="/profile/${profileList[status.index]}" id="profile_img">
 										</c:if>
 									</div>
 								</td>
@@ -421,11 +421,7 @@ hr{
 		// 웹소켓 객체 생성할때 반드시 서버의 ip 주소값은 실제 ip 주소를 이용
 		// 포트번호 다르면 :포트번호/chat 39.120.220.2:11111
 		var seq_group = $("#seq_group").val();
-		let ws = new WebSocket("ws://192.168.0.4/chat/"+seq_group);
 		let nickname = $("#nickname").val();
-		
-		//이모티콘 나오게 하기
-		$(".emoticon").click(function(){
 			$(".emojiBox").fadeToggle();
 			$(".ogu").css("display","none");
 			$("#rupi").css("box-shadow","2px 2px 2px 2px skyblue");
@@ -490,28 +486,27 @@ hr{
 				console.log(msg.status);
 				console.log(msg.close);
 				if(msg.status=="open"){		 //누가 들어왔을때
-					for(let i=0; i<nickList.length;i++){
-						openNick.push(msg.openNickname[i]);
-						for(let j=0; j<openNick.length; j++){
-							console.log(openNick[j]);
-							if(openNick[j]==nickList[i]){
-								$(".users_tbody").children("tr").eq(i).children("td").eq(1).css("color","black");
-								$(".users_tbody").children("tr").eq(i).children("td").eq(2).children().attr("class","online ms-1");
+					let intersection = nickList.filter(x => msg.openNickname.includes(x));
+					console.log(intersection);
+					for(let i=0; i<intersection.length; i++){
+						for(let j=0; j<nickList.length; j++){
+							if(intersection[i]==nickList[j]){
+								$(".users_tbody").children("tr").eq(j).children("td").eq(1).css("color","black");
+								$(".users_tbody").children("tr").eq(j).children("td").eq(2).children().attr("class","online ms-1");
 							}
 						}
 					}
 				}else if(msg.close=="close"){ //누가 나갔을 때
 					console.log("클로즈 실행됨");
-					openNick.length=0;
-					for(let i=0; i<nickList.length;i++){
-						openNick.push(msg.closeNickname[i]);
-						console.log(openNick);
-						$(".users_tbody").children("tr").eq(i).children("td").eq(2).children().attr("class","offline ms-1");
-						$(".users_tbody").children("tr").eq(i).children("td").eq(1).css("color","darkgrey");
-						for(let j=0; j<openNick.length; j++){
-							if(openNick[j]==nickList[i]){
-								$(".users_tbody").children("tr").eq(i).children("td").eq(1).css("color","black");
-								$(".users_tbody").children("tr").eq(i).children("td").eq(2).children().attr("class","online ms-1");
+					let intersection = nickList.filter(x => msg.closeNickname.includes(x));
+					console.log(intersection);
+					for(let i=0; i<intersection.length; i++){
+						for(let j=0; j<nickList.length; j++){
+							$(".users_tbody").children("tr").eq(j).children("td").eq(1).css("color","darkgray");
+							$(".users_tbody").children("tr").eq(j).children("td").eq(2).children().attr("class","offline ms-1");
+							if(intersection[i]==nickList[j]){
+								$(".users_tbody").children("tr").eq(j).children("td").eq(1).css("color","black");
+								$(".users_tbody").children("tr").eq(j).children("td").eq(2).children().attr("class","online ms-1");
 							}
 						}
 					}
@@ -606,7 +601,7 @@ hr{
 		
 		//이모티콘 보내는 함수
 		function sendEmoji(imgCls){
-			let url = 'http://192.168.0.4/';
+			let url = 'http://192.168.20.21/';
 			let emojiSrc = $(imgCls).prop("src").indexOf(url)+url.length-1; // /resources 시작하는 index번호
 			let realSrc = $(imgCls).prop("src").slice(emojiSrc);
 			console.log(realSrc);

@@ -44,11 +44,6 @@
 * {
    font-family: 'OTWelcomeRA';
 }
-
-#mainText {
-   font-family: '양진체';
-}
-
 /* header 반응형 */
 @media ( max-width : 768px) {
    #navLogo {
@@ -87,90 +82,45 @@
    width: 50%;
 }
 
-/*버튼 및 테이블*/
-.container-btn {
-   width: 100%;
+/*테이블 배경 및 범위*/
+.tableinfo {
+	margin-top: 50px;
 }
-
+/*버튼 및 테이블*/
 .rowBtn {
-   border: 5px solid #d2e3ec;
-   width: max-content;
-   margin: auto;
-   margin-top: 50px;
-   padding: 30px;
+	border: 5px solid #d2e3ec;
+	width: 60%;
+	margin: auto;
+	margin-top: 50px;
+	padding: 30px;
 }
 
 .btnBox {
-   text-align: center;
-   margin-top: 10px;
-    margin-bottom: 10px;
-}
-.btn-primary {/*버튼 4개*/
-   background-color: cornflowerblue;
-   border-color: cornflowerblue;
-}
-.btn-primary:hover{ /*버튼 4개*/
-	color: #fff;
-    background-color: #5680CC;
-    border-color: #5680CC;
-}
-
-.btn-success{ /*가입 승인*/
-	color: #fff;
-    background-color: #50C7D9;
-    border-color: #50C7D9;
-}
-.btn-success:hover{ /*가입 승인*/
-	color: #fff;
-    background-color: #3A919E;
-    border-color: #3A919E;
-}
-.btn-check:focus+.btn-success, .btn-success:focus{ /*가입 승인*/
-	color: #fff;
-    background-color: #3A919E;
-    border-color: #3A919E;
-    box-shadow: 0 0 0 0.25rem rgb(48 145 158 / 50%);
-}
-
-.btn-secondary {/*가입 거절*/
-   color: #fff;
-   background-color: #f06345;
-   border-color: #f06345;
-}
-
-.btn-secondary:hover {/*가입 거절*/
-   color: #fff;
-   background-color: #D4583D;
-   border-color: #D4583D;
-}
-.btn-check:focus+.btn-secondary, .btn-secondary:focus{ /*가입 거절*/
-	color: #fff;
-    background-color: #D4583D;
-    border-color: #D4583D;
-    box-shadow: 0 0 0 0.25rem rgb(212 88 61 / 50%);
+	text-align: center;
+	margin-bottom: 10px;
 }
 
 /*테이블*/
 .table {
-   width: 80%;
-   margin: auto;
-   margin-top: 40px;
-   margin-bottom: 40px;
+	width: 80%;
+	margin: auto;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	font-size:20px;
+	font-family:MICEGothic;
 }
 
 tr {
    text-align: center;
 }
 
-th, td {
-   font-family: 'Poor Story', cursive;
-}
-
+/*테이블 배경 및 범위*/
 .tableinfo {
-   margin: auto;
    margin-top: 50px;
 }
-
+.table-primary{
+	font-weight:bold;
+}
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
    color: #83bf7b;
@@ -215,10 +165,81 @@ footer.footer {
 	height: 100%;
 	text-align:center;
 }
+/*버튼4개*/
+.btn-3d {
+  position: relative;
+  font-size: 22px;
+  padding: 10px 15px;
+  color: white;
+  margin: 20px 10px 10px;
+  border-radius: 6px;
+  transition: top .01s linear;
+  text-shadow: 0 1px 0 rgba(0,0,0,0.15);
+  cursor:pointer;
+}
+.btn-3d.blue:hover{
+	background-color: #699DD1;
+}
+.btn-3d:active {
+  top: 9px;
+}
+.btn-3d.blue:not(.applyBtn) {
+  background-color: #6DA2D9;
+  box-shadow: 0 0 0 1px #6698cb inset,
+        0 0 0 2px rgba(255,255,255,0.15) inset,
+        0 8px 0 0 rgba(110, 164, 219, .7),
+        0 8px 0 1px rgba(0,0,0,.4),
+        0 8px 8px 1px rgba(0,0,0,0.5);
+}
+/*가입신청 버튼 색 변경*/
+.applyBtn{
+	background-color: #aed6ff;
+    box-shadow: 0 0 0 1px #6698cb inset, 0 0 0 2px rgb(255 255 255 / 15%) inset, 0 8px 0 0 rgb(110 164 219 / 70%), 0 8px 0 1px rgb(0 0 0 / 40%), 0 8px 8px 1px rgb(0 0 0 / 50%);
+}
+/*버튼 승인,거절*/
+.btn-text {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-text:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-text:focus {
+    outline: none;
+}
+.btn-text.color-8 {
+    background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+    box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+}
+.btn-text.color-11 {
+	background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  
+	box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
+}
 </style>
 </head>
 <body>
-   <header class="mb-3 border-bottom">
+   <!--네비바-->
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -246,19 +267,28 @@ footer.footer {
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
-                           <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
+                        <c:if test="${empty loginSession}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogin">로그인</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/signup/toSignupAgree">회원가입</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/admin/toAdmin">관리자페이지 이동</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
                      </ul>
                   </div>
                </div>
@@ -271,8 +301,8 @@ footer.footer {
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
 
@@ -297,35 +327,47 @@ footer.footer {
                         </ul>
                      </div>
                      <div class="col-auto user">
-						<c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-								</a>
-								<ul class="dropdown-menu text-small"
-								   aria-labelledby="dropdownUser1">
-								   <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-								   <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-								   <li><hr class="dropdown-divider"></li>
-								   <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-								</ul>
-							</div>
-						</c:if> 
-						<c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-							<div class="dropdown text-end">
-								<a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-								<img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-								</a>
-								<ul class="dropdown-menu text-small"
-								   aria-labelledby="dropdownUser1">
-								   <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-								   <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-								   <li><hr class="dropdown-divider"></li>
-								   <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-								</ul>
-							</div>
-						</c:if> 
+               <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                         <div class="dropdown text-end">
+                           <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                           <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                           </a>
+                           <ul class="dropdown-menu text-small"
+                              aria-labelledby="dropdownUser1">
+                              <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                              <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+                              <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                           </ul>
+                        </div>
+                     </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> 
+                                 <c:if test="${loginSession.user_image eq null}">
+                                    <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                                 <c:if test="${loginSession.user_image ne null}">
+                                    <img src="/profile/${loginSession.user_image }" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider" style="margin:0px;">
+                                 </li>
+                                 <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
@@ -338,22 +380,18 @@ footer.footer {
       <div class="container-btn">
          <!-- 버튼 그룹 -->
          <div class="row rowBtn">
-            <div class="col-md-3 btnBox">
-               <button type="button" class="btn btn-primary btn-lg"
-                  id="groupApply" style = "font-weight: bold;">가입 신청</button>
-            </div>
-            <div class="col-md-3 btnBox">
-               <button type="button" class="btn btn-primary btn-lg"
-                  id="groupMember" style = "font-weight: bold;">멤버 관리</button>
-            </div>
-            <div class="col-md-3 btnBox">
-               <button type="button" class="btn btn-primary btn-lg"
-                  id="groupModify" style = "font-weight: bold;">모임 수정</button>
-            </div>
-            <div class="col-md-3 btnBox">
-               <button type="button" class="btn btn-primary btn-lg"
-                  id="groupDelete" style = "font-weight: bold;">모임 해산</button>
-            </div>
+			<div class="col-sm-3 btnBox">
+				<div id = "groupApply" class="btn-3d blue applyBtn" style="font-weight: bold;">가입 신청</div>
+			</div>
+			<div class="col-sm-3 btnBox">
+				<div id="groupMember" class="btn-3d blue" style="font-weight: bold;">멤버 관리</div>
+			</div>
+			<div class="col-sm-3 btnBox">
+				<div id="groupModify" class="btn-3d blue" style="font-weight: bold;">모임 수정</div>
+			</div>
+			<div class="col-sm-3 btnBox">
+				<div id="groupDelete" class="btn-3d blue" style="font-weight: bold;">모임 해산</div>
+			</div>
          </div>
 
          <!-- 테이블 -->
@@ -362,11 +400,11 @@ footer.footer {
                <table class="table table-bordered">
                   <thead>
                      <tr class="table-primary">
-                        <th class="col-2">닉네임</th>
-                        <th class="col-5">소개</th>
-                        <th class="col-1">성별</th>
-                        <th class="col-3">생년월일</th>
-                        <th class="col-1">선택</th>
+                        <td>닉네임</td>
+                        <td>소개</td>
+                        <td>성별</td>
+                        <td>생년월일</td>
+                        <td>선택</td>
                      </tr>
                   </thead>
                   <tbody>
@@ -402,10 +440,8 @@ footer.footer {
             </div>
             <div class="row">
                <div class="col d-flex justify-content-center">
-                  <button type="submit" class="btn btn-success btn-lg m-3"
-                     id="applyBtn">가입 승인</button>
-                  <button type="button" class="btn btn-secondary  btn-lg m-3"
-                     id="denyBtn">가입 거절</button>
+               		<button type = "submit" class="btn-text color-8" id="applyBtn">가입 승인</button>
+			    	<button type = "button" class="btn-text color-11" id="denyBtn">가입 거절</button>
                </div>
             </div>
          </div>
@@ -476,46 +512,46 @@ footer.footer {
         </div>
       </footer>
     </div>
-  </div> 
+  </div>
 </body>
 <script>
 
 // 멤버관리 이동
 $("#groupMember").on("click", function(){
    location.href = "/group/toGroupMember?seq_group="+$("#seq_group").val();
-})   
+})
 // 모임가입 이동
 $("#groupApply").on("click", function(){
    location.href = "/group/toGroupApply?seq_group="+$("#seq_group").val();
-})   
+})
    // 모임수정 이동
    $("#groupModify").on("click", function(){
       location.href = "/group/toModifyGroup?seq_group="+$("#seq_group").val();
-   })   
+   })
 // 모임해산 이동
 $("#groupDelete").on("click", function(){
    location.href = "/group/toGroupDelete?seq_group="+$("#seq_group").val();
-})   
-   
+})
+
    // 그룹 승인하기
    $("#applyBtn").on("click", function(){
       let count = $("#group_people").val();
       let groupCount = $("#groupCount").val();
       let checkBoxArr = [];
-      $("input[name=checkUser_email]:checked").each(function(){         
+      $("input[name=checkUser_email]:checked").each(function(){
          checkBoxArr.push($(this).val());
       })
       if(checkBoxArr.length < 1){
           Swal.fire({
               icon: 'warning',
               text: '선택된 항목이 없습니다..',
-            })  
+            })
       }else{
 	      var jsonData = {
 	         "userEmails" : JSON.stringify(checkBoxArr)
 	      };
 	      var jsonString = JSON.stringify(jsonData);
-	      
+
 	       $.ajax({
 	         url:"/group/completeApply?&group_people="+count+"&groupCount="+groupCount,
 	         headers: {'Content-Type': 'application/json'},
@@ -526,7 +562,7 @@ $("#groupDelete").on("click", function(){
 	                  Swal.fire({
 	                       icon: 'success',
 	                       text: '승인이 완료되었습니다.',
-	                     })            
+	                     })
 	            }else if(data == "error"){
 	               Swal.fire({
 	                    icon: 'error',
@@ -538,29 +574,29 @@ $("#groupDelete").on("click", function(){
 	                    window.location.href = "";
 	                },1500);
 	         },error : function(e){
-	            console.log(e);      
+	            console.log(e);
 	         }
-	      })  	  
+	      })
       }
    })
-   
+
    // 그룹 승인 거절하기
    $("#denyBtn").on("click", function(){
       let checkBoxArr = [];
-      $("input[name=checkUser_email]:checked").each(function(){         
+      $("input[name=checkUser_email]:checked").each(function(){
          checkBoxArr.push($(this).val());
       })
       if(checkBoxArr.length < 1){
           Swal.fire({
               icon: 'warning',
               text: '선택된 항목이 없습니다.',
-            })  
+            })
       }else{
 	      var jsonData = {
 	         "userEmails" : JSON.stringify(checkBoxArr)
 	      };
 	      var jsonString = JSON.stringify(jsonData);
-	      
+
 	       $.ajax({
 	         url:"/group/denyApply",
 	         headers: {'Content-Type': 'application/json'},
@@ -570,17 +606,17 @@ $("#groupDelete").on("click", function(){
 	            Swal.fire({
 	                 icon: 'success',
 	                 text: '거절이 완료되었습니다.',
-	               })   
+	               })
 	               setTimeout(function() {
 	                       window.location.href = "";
 	                   },1500);
 	         },error : function(e){
-	            console.log(e);         
+	            console.log(e);
 	         }
 	      })
-    	  
+
       }
    })
-   
+
 </script>
 </html>

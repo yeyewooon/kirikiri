@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- summernote -->
+   <!-- summernote -->
     <script type="text/javascript" src="//code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" />
     <script type="text/javascript" src="cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
@@ -14,53 +14,53 @@
     <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
     <!-- swal -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-	<script src="sweetalert2.min.js"></script>
+   <script src="sweetalert2.min.js"></script>
 <meta charset="UTF-8">
 <title>그룹 글 작성</title>
     <style>
-    	/* header 반응형 */
-		@media ( max-width : 768px) {
-		   #navLogo {
-		      display: none;
-		   }
-		   #myPageIcon {
-		      display: none;
-		   }
-		   #cartIcon {
-		      display: none;
-		   }
-		   #menu {
-		      display: none;
-		   }
-		}
-		
-		/* header */
-		#navLogo {
-		   width: 150px;
-		   height: 100px;
-		}
-		
-		#logoImgs {
-		   width: 100%;
-		   height: 100%;
-		}
-		
-		@media ( min-width : 768px) {
-		   #navibar {
-		      display: none;
-		   }
-		}
-		
-		#logoImg {
-		   width: 50%;
-		}
-		/* header 반응형 끝 */
-		
-    	* {
+       /* header 반응형 */
+      @media ( max-width : 768px) {
+         #navLogo {
+            display: none;
+         }
+         #myPageIcon {
+            display: none;
+         }
+         #cartIcon {
+            display: none;
+         }
+         #menu {
+            display: none;
+         }
+      }
+
+      /* header */
+      #navLogo {
+         width: 150px;
+         height: 100px;
+      }
+
+      #logoImgs {
+         width: 100%;
+         height: 100%;
+      }
+
+      @media ( min-width : 768px) {
+         #navibar {
+            display: none;
+         }
+      }
+
+      #logoImg {
+         width: 50%;
+      }
+      /* header 반응형 끝 */
+
+       * {
             box-sizing: border-box;
             /*font-family: 'OTWelcomeRA';*/
         }
-        
+
         /* header 반응형 */
         @media (max-width : 768px) {
             #navLogo {
@@ -100,57 +100,71 @@
         #logoImg {
             width: 50%;
         }
-        
+
         /* header 반응형 끝 */
-        
+
     	/* contents 영역 */
+    	#writeWrapper:not(textarea){
+    		font-family: 'InfinitySans-RegularA1';
+    	}
+
         #head{
-            background-color: #d2e3ec;
+            background-color: #EEEEEE;
             height: 100px;
-        }
-        /* #head>h1{
-        	font-family: 'OTWelcomeRA';
-            margin-top: 20px;
+            border-top-left-radius: 80px;
+            border-top-right-radius: 80px;
+            border: 3px solid black;
         }
         label {
-        	font-family: 'OTWelcomeRA';
             margin-top: 5px;
-        } */
-        
+        }
+
+        #bottom{
+        	background-color: #EEEEEE;
+            height: 100px;
+            border-bottom-left-radius: 80px;
+            border-bottom-right-radius: 80px;
+            border: 3px solid black;
+        }
+
         /*풋터 영역*/
-		.footerBox {
-		   height: 0px;
-		}
-		
-		footer.footer {
-		   padding-top: 2rem;
-		   padding-bottom: 2rem;
-		   background-color: #ffffff;
-		}
-		
-		.footer a {
-		   text-decoration: none;
-		   color: black;
-		   font-weight: 40px;
-		   font-weight: bold;
-		}
-		
-		.footer-imgBox>img {
-		   width: 100%;
-		   height: 100%;
-		}
-		
-		
+      .footerBox {
+         height: 0px;
+      }
+
+      footer.footer {
+         padding-top: 2rem;
+         padding-bottom: 2rem;
+         background-color: #ffffff;
+      }
+
+      .footer a {
+         text-decoration: none;
+         color: black;
+         font-weight: 40px;
+         font-weight: bold;
+      }
+
+      .footer-imgBox>img {
+         width: 100%;
+         height: 100%;
+      }
+
+
         /* 눈누 폰트 */
 		@font-face {
-			font-family: 'OTWelcomeRA';
-			src:
-				url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2')
-				format('woff2');
-			font-weight: normal;
-			font-style: normal;
+            font-family: 'MICEGothic Bold';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+            font-weight: 700;
+            font-style: normal;
+        }
+        @font-face {
+		    font-family: 'InfinitySans-RegularA1';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
 		}
-		
+
 		@font-face {
 			font-family: '양진체';
 			src:
@@ -166,15 +180,15 @@
 		    font-weight: normal;
 		    font-style: normal;
 		}
-		
+
 		.dropdown-toggle::after {
             display: none;
         }
-		
-	</style>
+
+   </style>
 </head>
 <body>
-	<header class="border-bottom">
+   <header class="border-bottom">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -227,8 +241,8 @@
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
 
@@ -253,35 +267,52 @@
                         </ul>
                      </div>
                      <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
@@ -290,64 +321,70 @@
       </div>
    </header>
 
-	<div class="container">
-        <div id="head" class="row text-center align-items-center mb-5">
+	<div class="container" id="writeWrapper" style="width: 70%;">
+        <div id="head" class="row text-center align-items-center my-5">
             <h1>글쓰기</h1>
         </div>
-        
+
         <form id="writeForm" action="/Gboard/write" method="post">
-        	<input type="hidden" id="seq_group" name="seq_group" value="${seq_group}">
-	        <div class="row mt-4 text-center">
-	            <div class="col-1">
-	                <label class="form-label fs-5">분류</label>
-	            </div>
-	            <div class="col-2">
-	            	<c:choose>
-	            		<%-- 관리자 계정이라면 공지 쓰기 --%>
-	            		<c:when test="${loginSession.user_email eq 'admin'}">
-	            			<select name="gboard_category" class="form-select selectBox" aria-label="유형">
-			                    <option selected value="default">선택</option>
-			                    <option value="공지">공지</option>
-			                    <option value="잡담">잡담</option>
-			                    <option value="모집">모집</option>
-			                    <option value="후기">후기</option>
-			                </select>
-	            		</c:when>
-	            		<c:otherwise>
-	            			<select name="gboard_category" class="form-select selectBox" aria-label="유형">
-			                    <option selected value="default">선택</option>
-			                    <option value="잡담">잡담</option>
-			                    <option value="모집">모집</option>
-			                    <option value="후기">후기</option>
-			                </select>
-	            		</c:otherwise>
-	            	</c:choose>
-	                
-	            </div>
-	            <div class="col-1">
-	                <label class="form-label fs-5">제목</label>
-	            </div>
-	            <div class="col-8">
-	                <input type="text" id="title" name="gboard_title" class="form-control" placeholder="제목을 입력하세요.">
-	            </div>
+        	<div id="writeDiv">
+
+	        	<input type="hidden" id="seq_group" name="seq_group" value="${seq_group}">
+		        <div class="row mt-4 text-center">
+		            <div class="col-1">
+		                <label class="form-label fs-5">분류</label>
+		            </div>
+		            <div class="col-2">
+		            	<c:choose>
+		            		<%-- 관리자 계정이라면 공지 쓰기 --%>
+		            		<c:when test="${loginSession.user_email eq leaderId}">
+		            			<select name="gboard_category" class="form-select selectBox" aria-label="유형">
+				                    <option selected value="default">선택</option>
+				                    <option value="공지">공지</option>
+				                    <option value="가입인사">가입인사</option>
+				                    <option value="수다">수다</option>
+				                    <option value="정모">정모</option>
+				                    <option value="후기">후기</option>
+				                </select>
+		            		</c:when>
+		            		<c:otherwise>
+		            			<select name="gboard_category" class="form-select selectBox" aria-label="유형">
+				                    <option selected value="default">선택</option>
+				                    <option value="가입인사">가입인사</option>
+				                    <option value="수다">수다</option>
+				                    <option value="정모">정모</option>
+				                    <option value="후기">후기</option>
+				                </select>
+		            		</c:otherwise>
+		            	</c:choose>
+
+		            </div>
+		            <div class="col-1">
+		                <label class="form-label fs-5">제목</label>
+		            </div>
+		            <div class="col-8">
+		                <input type="text" id="title" name="gboard_title" class="form-control" placeholder="제목을 입력하세요. (최대 18자)" maxlength="18">
+		            </div>
+		        </div>
+
+		        <div class="row mt-4">
+					<textarea id="summernote" name="gboard_content"></textarea>
+		        </div>
+
 	        </div>
-			
-	        <div class="row mt-4">
-				<textarea id="summernote" name="gboard_content"></textarea>
-	        </div>
-	        
-	        <div class="row my-4 justify-content-center">
+
+	        <div class="row my-4 justify-content-center align-items-center" id="bottom">
 	            <div class="col-auto">
-	                <button type="button" id="cancelBtn" class="btn btn-secondary">취소</button>
+	                <button type="button" id="cancelBtn" class="btn btn-light">취소</button>
 	            </div>
 	            <div class="col-auto">
-	                <button type="button" id="submitBtn" class="btn btn-primary">작성 완료</button>
+	                <button type="button" id="submitBtn" class="btn" style="background-color: #c5d4db;">작성 완료</button>
 	            </div>
 	        </div>
         </form>
-	</div>
-	
-	<!-- Footer-->
+   </div>
+
+   <!-- Footer-->
     <div class="container">
 		<footer class="footer mt-5">
 			<div class="row">
@@ -576,7 +613,7 @@
 		
 		// 취소 버튼
 		$("#cancelBtn").on("click", function(){
-			location.href = "/Gboard/toBoard?seq_group" + ${seq_group};
+			location.href = "/Gboard/toBoard?seq_group=" + ${seq_group};
 		})
 		
 	</script>

@@ -55,7 +55,7 @@ public class Tbl_GroupService {
 
 		for (Group_ApplyDTO dto : list) {
 			Group_MemberDTO member = new Group_MemberDTO(0, dto.getUser_email(), dto.getSeq_group(),
-					dto.getUser_nickname(), "맴버");
+					dto.getUser_nickname(), "멤버");
 			tbl_group_dao.completeApply(member);
 		}
 
@@ -83,10 +83,11 @@ public class Tbl_GroupService {
 	}
 
 	// 해당 그룹 멤버 강퇴
-	public void groupMemberDelete(List<String> userEmails) throws Exception {
+	public void groupMemberDelete(List<String> userEmails, int seq_group) throws Exception {
 		Map<String, Object> param = new HashMap<>();
 		param.put("userEmails", userEmails);
-		tbl_group_dao.groupMemberDelete(param);
+		param.put("seq_group", seq_group);
+		tbl_group_dao.groupMemberDelete(param); 
 	}
 
 	// 모임 해산하기

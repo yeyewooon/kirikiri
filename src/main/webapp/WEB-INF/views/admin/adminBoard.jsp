@@ -55,7 +55,6 @@
 	}
 
 
-
       /* 눈누 폰트 */
       @font-face {
         font-family: "BMJUA";
@@ -300,10 +299,10 @@
 	          </div>
 	        </div>
         </form>
-        <div class="row mt-3" style="font-size:15px;">
+        <div class="row mt-3" style="font-size:15px;width:82%;">
         	<div class="col-md-12 d-flex justify-content-end" style="align-items: center;">
 	        	<i class="fa-solid fa-book me-2"></i>
-	        	<span  class="notice" style="padding-right:30px; cursor: pointer;">Notice</span>      	
+	        	<a class="notice" style="text-decoration:none; color:black; cursor:pointer;"><span style="padding-right:30px;">Notice</span></a>        	
         	</div>
         </div>
         <div class="row resultBox mt-3">
@@ -365,16 +364,10 @@
       </div>
     </div>
     <script>
-	   $(".notice").on("click",function(){
-		   let url = "/board/toWrite";
-           let name = "게시글 작성";
-           let option = "width=1000, height=1200, left=700, top=300";
-           let windows = window.open(url, name, option);
-	       if(windows.closed){
-	           location.href ="/admin/adminBoard";
-	       }
-	   })
-    
+    	$(".notice").on("click",function(){
+    		let url = "/board/toWrite"
+    		window.open(url, '_blank', 'width=1200, height=800');
+    	})
 	   //검색하는거 enter 키
 	   $(".keyword").on("keyup", function(key) {
 	     if (key.keyCode == 13) {
@@ -421,7 +414,7 @@
         if (selectedCategory === "normal") {
           url = "/admin/normalSearch?curPage=" + curPage;
           type = "일반";
-        } else {
+        } else if(selectedCategory === "meeting"){
           url = "/admin/meetingSearch?curPage=" + curPage;
           type = "모임";
         } else if(selectedCategory === "notice") {
@@ -524,7 +517,8 @@
             let td6;
             let a;
             let span = $("<span>");
-            if (type === "일반") {
+            if (type === "일반" || type === "공지") {
+              td1 = $("<td>").append(dto.board_category);
               td2 = $("<td>");
               a = $("<a>");
               a.attr('href','/board/toDetailView?seq_board=' + dto.seq_board)
@@ -552,11 +546,12 @@
                 boardDelete(this, "/admin/boardDelete", "seq_board");
               });
             } else if (type === "모임") {
+              td1 = $("<td>").append(dto.gboard_category);
            	  td2 = $("<td>");
               a = $("<a>");
-              a.attr('href','/group_board/toDetailView?seq_board=' + dto.seq_board)
+              a.attr('href','/Gboard/toDetailView?seq_group_board=' + dto.seq_group_board)
               a.attr('onclick',"window.open(this.href, '_blank', 'width=1000, height=800'); return false;");
-              a.append(dto.title);
+              a.append(dto.gboard_title);
               a.appendTo(td2);
               
               td3 = $("<td>").append(dto.written_date);
