@@ -29,7 +29,7 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<title>모임 생성 페이지</title>
+<title>모임 생성</title>
 <script>
 // 썸머노트
 $(document).ready(function() {
@@ -73,9 +73,13 @@ $(document).ready(function() {
                     uploadSummernoteImageFile(files[i], this);
                  }
               },
+              onKeydown: function(e) {
+                  fn_checkByte(this); // 글자수 바이트 체크
+                },
             onKeyup: function(e) {
-                 fn_checkByte(this); // 글자수 바이트 체크 
-             }
+                 fn_checkByte(this); // 글자수 바이트 체크
+             },
+            
            }
       });
 
@@ -140,8 +144,15 @@ function uploadSummernoteImageFile(file, editor){
 }
 </script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>그룹 만들기</title>
 <style>
+
+/* 썸머노트 제약 */
+.note-group-image-url{
+            display: none;
+        }
+
+
 @font-face {
    font-family: 'Katuri';
    src:
@@ -278,7 +289,7 @@ header {
     background-color: #fcab4e;
     border-color: #e27500;
     }
-    
+
 .btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
    color: #fff;
     background-color: #fcab4e;
@@ -307,7 +318,7 @@ header {
     background-color: #fcab4e;
     border-color: #e27500;
     }
-    
+
 .btn-check:active+.btn-outline-warning, .btn-check:checked+.btn-outline-warning, .btn-outline-warning.active, .btn-outline-warning.dropdown-toggle.show, .btn-outline-warning, .btn-outline-warning:active {
    color: #fff;
     background-color: #fcab4e;
@@ -573,7 +584,7 @@ footer.footer {
                               <a href="/"
                                  class="d-block link-dark text-decoration-none dropdown-toggle"
                                  id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> 
+                                 aria-expanded="false">
                                  <c:if test="${loginSession.user_image eq null}">
                                     <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
                                  </c:if>
@@ -605,7 +616,7 @@ footer.footer {
          </nav>
       </div>
    </header>
-   
+
       <div style = "text-align:center;">
          <span class = "create-title">Create Group</span><span><img class = "title-image" src = "/resources/images/Create_Group.png"></span>
       </div>
@@ -704,10 +715,8 @@ footer.footer {
                </span>
                <div class="form-floating mb-3 mt-2">
                   <textarea id="summernote" name="group_info" class="group_info"></textarea>
-                  <sup class="d-none">(<span id="nowByte">0</span>/4000bytes)</sup>
-                  <sup>(<span id="nowText">0</span>/1750자)</sup>
+                  <sup>(<span id="nowByte">0</span>/3000bytes)</sup>
                </div>
-               
             </div>
          </div>
          <!--위치 -->
@@ -1033,7 +1042,7 @@ footer.footer {
        const text_val = obj.value; //입력한 문자
        const text_len = text_val.length; //입력한 문자수
        let totalByte=0;
-       
+
        for(let i=0; i<text_len; i++){
           const each_char = text_val.charAt(i);
            const uni_char = escape(each_char); //유니코드 형식으로 변환
@@ -1046,14 +1055,12 @@ footer.footer {
            }
        }
        if(totalByte>maxByte){
-             alert('사진포함 최대 1750자까지만 입력가능합니다.');
+             alert('3000byte를 넘어갈 수 없습니다.');
               document.getElementById("nowByte").innerText = totalByte;
                document.getElementById("nowByte").style.color = "red";
-               document.getElementById("nowText").innerText = text_len;            
            }else{
               document.getElementById("nowByte").innerText = totalByte;
                document.getElementById("nowByte").style.color = "green";
-               document.getElementById("nowText").innerText = text_len;
            }
        }
 
@@ -1062,7 +1069,7 @@ footer.footer {
      let totalGroupCntById = "${totalGroupCntById}" //현재 세션의 가입한 모임 갯수
      // 구/군 변경시 비교
      let group_site_com = $("#sido1Input").val() + " " +$("#gugun1Input").val();
-     
+
      let groupInfoByteCnt = $("#nowByte").html();
      if(totalGroupCntById >= 3) { // 모임 가입 갯수 판별
         Swal.fire({
@@ -1081,7 +1088,7 @@ footer.footer {
         Swal.fire("모임 내용을 입력해주세요");
         return;
      }else if(groupInfoByteCnt >= 3000) {
-        Swal.fire("내용은 사진 포함1750자 이내로만 가능합니다");
+        Swal.fire('모임 내용은 3000byte를 넘어갈 수 없습니다.');
         return;
      }else if($("#group_site").val() == "" || $("#sido1Input").val() == "") {
         Swal.fire('지역 선택을 완료를 눌러주세요');
@@ -1099,20 +1106,20 @@ footer.footer {
 
       setTimeout(function() {
         $("#groupForm").submit();
-     },1000); 
+     },1000);
 
   })
 
   // 이미지 선택
   let groupFile = document.getElementById("groupFile");
   let groupDefaultImg = document.getElementById("groupDefaultImg");
-  
-   //사진 타입 
+
+   //사진 타입
   function checkFile(obj) {
     let fileKind = obj.value.lastIndexOf('.');
     let fileName = obj.value.substring(fileKind+1,obj.length);
     let fileType = fileName.toLowerCase();
-    
+
     if(fileType == "jpg" || fileType == "gif" || fileType == "png" || fileType == "jpeg" || fileType == "bmp"){
        return true;
     }else{
@@ -1124,18 +1131,18 @@ footer.footer {
        $("#groupFile").val("");
          return false;
     }
-    
+
     if(fileType == "bmp"){
        answer = confirm("BMP 파일은 웹상에서 사용하기엔 적절한 이미지 형식이 아닙니다. /n 사용하시겠습니까?");
        if(!answer) return false;
-       
+
     }
 }
 
   // 이미지 즉각 변환
    groupFile.onchange = function () {
      let result = checkFile(this);
-     if(result) { // 사진 파일 일 떄만 
+     if(result) { // 사진 파일 일 떄만
         let reader = new FileReader();
           reader.readAsDataURL(this.files[0]);
           reader.onload = function (e) {
@@ -1144,7 +1151,7 @@ footer.footer {
      }else { // 사진 파일이 아닐 때
         groupDefaultImg.src = "/resources/images/메인사진2(배경).png";
      }
-  } 
+  }
 
   // 카테고리 선택
     $(".categoryBtn").on("click", function (e) {
@@ -1200,7 +1207,7 @@ footer.footer {
     if (cnt < 2) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
+        title: '에러',
         text: '모임은 최소 2명부터 입니다!',
       });
       $(".memberCnt").html(2);
@@ -1208,7 +1215,7 @@ footer.footer {
     } else if (cnt > 10) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
+        title: '에러',
         text: '모임은 최대 10명 까지입니다!',
       });
       $(".memberCnt").html(10);
@@ -1219,6 +1226,9 @@ footer.footer {
    $("#backBtn").on("click",function() {
       location.href = "/";
    })
+   
+ 
+   
   </script>
 </body>
 </html>

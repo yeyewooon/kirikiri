@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,19 +76,22 @@ $(document).ready(function() {
 						  uploadSummernoteImageFile(files[i], this);
 					  }
 				  },
+				  onKeydown: function(e) {
+					  fn_checkByte(this); // 글자수 바이트 체크
+	                },
 				 onKeyup: function(e) {
-				     	fn_checkByte(this); // 글자수 바이트 체크 
-				    }
+				     	fn_checkByte(this); // 글자수 바이트 체크
+				    },
 			  }
 		});
 	         // 주기적으로 감지할 대상 요소 선정
 	         let target = document.querySelector(".note-editable");
 	         // DOM의 어떤 부분을 감시할지를 옵션 설정
-	         let config = { 
+	         let config = {
 	            childList: true, // 자식노드 추가/제거 감지
 	            subtree : true, // 대상 노드의 자식 뿐만 아니라 손자 이후로 모두 감시
 	         };
-	         
+
 	         // 옵저버 인스턴스 생성, 콜백함수 설정
 	         let observer = new MutationObserver(function(mutationList){ // 타겟에 변화가 일어나면 콜백함수를 실행하게 된다.
 	            for(let mutation of mutationList){
@@ -113,7 +116,7 @@ $(document).ready(function() {
 	                  }
 	               }
 	            }
-	         }); 
+	         });
 	         // 감지 시작
 	         observer.observe(target, config);
 });
@@ -144,6 +147,12 @@ function uploadSummernoteImageFile(file, editor){
 <meta charset="UTF-8">
 <title>Modify Group</title>
 <style>
+
+/* 썸머노트 제약 */
+.note-group-image-url{
+            display: none;
+        }
+        
 
 
 body {
@@ -214,26 +223,27 @@ header {
         }
 
 /*타이틀*/
-.create-title{
-    font-family: katuri;
+.modify-title{
+    font-family: 'Katuri';
     font-size: 60px;
     font-weight: bold;
     text-align: center;
-    background: linear-gradient(to top, #FFE400 20%, transparent 30%)
+    background: linear-gradient(to top, #FFE400 20%, transparent 30%);
     }
+
 .title-image{
     margin-bottom: 35px;
     width: 70px;
     height: 70px;
 	}
-	
+
 /*row 영역*/
 .style{
-	border: 2px solid #f3fffc;
+	border: 2px solid #ff8f00;
     border-radius: 50px;
     padding: 50px;
-    background-color: #f3fffc;
-    box-shadow: 3px 3px 5px 5px rgb(182 182 181);
+    background-color: #fffeea8a;
+    box-shadow: 3px 3px 5px 5px rgb(195 145 27);
 }
 
 /*Interest 버튼 영역*/
@@ -242,20 +252,20 @@ header {
 }
 
 .btn-outline-primary{
-	color:black;
-	border: 2px solid #b5a8a8;
+	color: #ffb526;
+    border: 3px solid #ffcd70;
 }
 
 .btn-outline-primary:hover {
     color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
+    background-color: #fcab4e;
+    border-color: #e27500;
     }
-    
+
 .btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
+	color: #fff;
+    background-color: #fcab4e;
+    border-color: #e27500;
 }
 
 .btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
@@ -264,12 +274,6 @@ header {
 
 .btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
     box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
-}
-
-.btn-outline-primary:hover {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
 }
 
 /*Basic Info*/
@@ -565,7 +569,7 @@ footer.footer {
                               <a href="/"
                                  class="d-block link-dark text-decoration-none dropdown-toggle"
                                  id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> 
+                                 aria-expanded="false">
                                  <c:if test="${loginSession.user_image eq null}">
                                     <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
                                  </c:if>
@@ -597,9 +601,9 @@ footer.footer {
          </nav>
       </div>
    </header>
-   	
+
    	<div style = "text-align:center;">
-		<span class = "create-title">Modify Group</span><span><img class = "title-image" src = "/resources/images/Create_Group.png"></span>
+		<span class ="modify-title">Modify Group</span><span><img class = "title-image" src = "/resources/images/Create_Group.png"></span>
 	</div>
 	<div class="container w-75 mainContainer">
 		<form action="/group/modifyGroup" method="post"
@@ -617,7 +621,7 @@ footer.footer {
 					value="${tbl_group_dto.seq_group}" hidden>
 				<!--관심사 버튼  -->
 				<div class="col-9 mainTextInterest d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Interests</h4>
+					<h4 style = "font-family:Katuri;">Interests</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">주제가 구체적일수록 비슷한 관심사를 가진 사람들에게
 						그룹을 <br>홍보하기가 더 쉬워집니다. 주제는 1개만 선택 가능합니다.<br>
 					<br> 기존에 선택하셨던 주제는 <strong style="color :red;">${tbl_group_dto.group_category}</strong>
@@ -696,7 +700,7 @@ footer.footer {
 						<input type="text" class="form-control" id="group_title"
 							placeholder="최대 24자까지 작성 가능합니다." name="group_title" maxlength='24'
 							value="${tbl_group_dto.group_title}">
-							
+
 					</div>
 					<strong style = "font-family:InfinitySans-RegularA1;"class="mt-2">모집 내용</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
 						class="mt-2">모집내용은 회원들에게 그룹을 홍보할 때 표시됩니다. <br>변경사항이
@@ -706,8 +710,7 @@ footer.footer {
 						<textarea id="summernote" name="group_info" class="group_info">
 							${tbl_group_dto.group_info}
 						</textarea>
-						<sup class="d-none">(<span id="nowByte">0</span>/4000bytes)</sup>
-						<sup>(<span id="nowText">0</span>/1750자)</sup>
+						<sup>(<span id="nowByte">0</span>/3000bytes)</sup>
 					</div>
 				</div>
 			</div>
@@ -723,7 +726,7 @@ footer.footer {
 				<!--위치 설정-->
 				<div
 					class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Location</h4>
+					<h4 style = "font-family:Katuri;">Location</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">해당 지역의 사람들이 귀하의 이벤트를 발견하도록 돕고
 						<br> 참석자들에게 위치를 제공해주세요.<br>
 					<br> 기존에 선택하셨던 위치는 <strong style="color : red;">${tbl_group_dto.group_site}</strong>
@@ -739,8 +742,8 @@ footer.footer {
 					</div>
 					<!--모임 지역-->
 					<input type="text" id="group_site" name="group_site"
-						value="${tbl_group_dto.group_site}" hidden> 
-					<input type="text" id="sido1Input" name="sido1Input" hidden> 
+						value="${tbl_group_dto.group_site}" hidden>
+					<input type="text" id="sido1Input" name="sido1Input" hidden>
 					<input type="text" id="gugun1Input" name="gugun1Input" hidden>
 				</div>
 			</div>
@@ -756,7 +759,7 @@ footer.footer {
 				<!--이미지 올리기 -->
 				<div
 					class="col-9 mainTextFile d-flex flex-column justify-content-start">
-					<h4 style ="font-family:katuri;">Main Image</h4>
+					<h4 style ="font-family:Katuri;">Main Image</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">썸네일로 보여질 이미지입니다. <br>본인이
 						생각하는 최고의 사진을 넣어주세요!
 					</span>
@@ -789,7 +792,7 @@ footer.footer {
 				<!--위치 설정-->
 				<div
 					class="col-md-9 mainText mainTextMap d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Member</h4>
+					<h4 style = "font-family:Katuri;">Member</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
 						인원은 최소 2명부터 최대 10명까지 가능합니다.<br>
 					<br> 현재 모임의 맴버수는 <strong style="color : red;">${fn:length(memberList)}명</strong>
@@ -823,7 +826,7 @@ footer.footer {
 				</div>
 				<!--이미지 올리기 -->
 				<div class="col-md-9 mainTextFile d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Guideline</h4>
+					<h4 style = "font-family:Katuri;">Guideline</h4>
 					<span>
 						<h5 style="font-family:InfinitySans-RegularA1;">거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
 					</span> <span style="font-size: 14px;font-family:InfinitySans-RegularA1;" class="mt-2">끼리끼리는 끈끈한 커뮤니티를
@@ -849,7 +852,7 @@ footer.footer {
 			<button class="btn btn-primary ms-4" id="modifyGroupBtn">동의 후 수정</button>
 		</span>
 	</div>
-	
+
 <!-- Footer-->
    <div class="footerWrapper mt-5" style="border-top:1px solid #e0e3e8;">
       <div class="container">
@@ -964,7 +967,7 @@ footer.footer {
 	   }
 	  });
 	 });
-  
+
 //리팩토링 필요
   // 지역 설정
   let sido1 = "";
@@ -1042,14 +1045,14 @@ footer.footer {
     )
     }
   })
-  
+
   //textarea 바이트 수 체크하는 함수
 	function fn_checkByte(obj){
 	    const maxByte = 3000; //최대 100바이트
 	    const text_val = obj.value; //입력한 문자
 	    const text_len = text_val.length; //입력한 문자수
 	    let totalByte=0;
-	    
+
 	    for(let i=0; i<text_len; i++){
 	    	const each_char = text_val.charAt(i);
 	        const uni_char = escape(each_char); //유니코드 형식으로 변환
@@ -1062,21 +1065,21 @@ footer.footer {
 	        }
 	    }
 	    if(totalByte>maxByte){
-	    		alert('사진포함 최대 1750자까지만 입력가능합니다.');
+	    		alert('3000byte를 넘어갈 수 없습니다.');
 	        	document.getElementById("nowByte").innerText = totalByte;
 	            document.getElementById("nowByte").style.color = "red";
-	            document.getElementById("nowText").innerText = text_len;            
 	        }else{
 	        	document.getElementById("nowByte").innerText = totalByte;
 	            document.getElementById("nowByte").style.color = "green";
-	            document.getElementById("nowText").innerText = text_len;
 	        }
 	    }
 
   // Form으로 전송
   $("#modifyGroupBtn").on("click",function() {
-	  // 구/군 변경시 비교 
+	  // 구/군 변경시 비교
 	  let group_site_com = $("#sido1Input").val() + " " +$("#gugun1Input").val();
+	  
+	  let groupInfoByteCnt = $("#nowByte").html();
 	  if($("#group_category").val() == "") {
 		  Swal.fire("모임주제를 선택해주세요");
 		  return;
@@ -1086,6 +1089,9 @@ footer.footer {
 	  }else if($(".group_info").val() == "") {
 		  Swal.fire("모임 내용을 적어주세요");
 		  return;
+	  }else if(groupInfoByteCnt >= 3000) {
+	      Swal.fire('모임 내용은 3000byte를 넘어갈 수 없습니다.');
+	      return;
 	  }else if($("#group_site").val() == "" || $("#sido1Input").val() == "") {
 		  Swal.fire('지역 선택을 완료를 눌러주세요');
 		  return;
@@ -1095,17 +1101,17 @@ footer.footer {
 	  }
 	 $("#groupForm").submit();
   })
-  
+
   // 이미지 선택
   let groupFile = document.getElementById("groupFile");
   let groupDefaultImg = document.getElementById("groupDefaultImg");
-  
-	//사진 타입 
+
+	//사진 타입
   function checkFile(obj) {
     let fileKind = obj.value.lastIndexOf('.');
     let fileName = obj.value.substring(fileKind+1,obj.length);
     let fileType = fileName.toLowerCase();
-    
+
     if(fileType == "jpg" || fileType == "gif" || fileType == "png" || fileType == "jpeg" || fileType == "bmp"){
     	return true;
     }else{
@@ -1117,29 +1123,27 @@ footer.footer {
        $("#groupFile").val("");
    		return false;
     }
-    
+
     if(fileType == "bmp"){
        answer = confirm("BMP 파일은 웹상에서 사용하기엔 적절한 이미지 형식이 아닙니다. /n 사용하시겠습니까?");
        if(!answer) return false;
-    	
+
     }
 }
 
   // 이미지 즉각 변환
    groupFile.onchange = function () {
 	   let result = checkFile(this);
-		  if(result) { // 사진 파일 일 떄만 
+		  if(result) { // 사진 파일 일 떄만
 			  let reader = new FileReader();
 			    reader.readAsDataURL(this.files[0]);
 			    reader.onload = function (e) {
-			    	console.log("hello");
-			    	console.log(e.target);
 			    	profile_image.src = e.target.result;
 			    }
 		  }else { // 사진 파일이 아닐 때
 			  profile_image.src = "/resources/images/메인사진2(배경).png";
 		  }
-  } 
+  }
 
   // 카테고리 선택
     $(".categoryBtn").on("click", function (e) {
@@ -1164,9 +1168,9 @@ footer.footer {
 
   // 맴버수
   let memberCnt = Number($(".memberCnt").html());
-  //현재 맴버 수 
+  //현재 맴버 수
   let curMemberCnt = Number(${fn:length(memberList)});
-  
+
   // 버튼 클릭시
   $(".calBtn").on("click", function () {
     if ($(this).attr("id") === "plusBtn") {
@@ -1200,8 +1204,8 @@ footer.footer {
     memberCnt -= 1;
     $(".memberCnt").html(memberCnt);
     $("#group_people").val(memberCnt);
-    
-    
+
+
   }
 
   // 숫자 조건 (2~10)명
@@ -1210,7 +1214,7 @@ footer.footer {
     if (cnt < 2) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
+        title: '에러',
         text: '모임은 최소 2명부터 입니다!',
       });
       $(".memberCnt").html(2);
@@ -1218,15 +1222,19 @@ footer.footer {
     } else if (cnt > 10) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
+        title: '에러',
         text: '모임은 최대 10명 까지입니다!',
       });
       $(".memberCnt").html(10);
       $("#group_people").val(10);
-    } 
+    }
   }
 
-  
+//뒤로가기 버튼
+  $("#backBtn").on("click",function() {
+      location.href = "/group/toGroupMember?seq_group="+$("#seq_group").val();
+   })
+   
   </script>
 </body>
 </html>

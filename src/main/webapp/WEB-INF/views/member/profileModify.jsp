@@ -459,7 +459,7 @@ footer.footer {
 					</div>
 					<div class="col-md-5">
 						<input type="text" id="nickname" name="user_nickname"
-							class="form-control user_nickname" value="${memberdto.user_nickname}">
+							class="form-control user_nickname" value="${memberdto.user_nickname}" placeholder="닉네임은 12자까지 가능합니다" maxlength="12">
 					</div>
 					<div class="col-md-2">
 						<button type="button" class="btn btn-secondary" id="nicknameCheck" disabled>중복확인</button>
