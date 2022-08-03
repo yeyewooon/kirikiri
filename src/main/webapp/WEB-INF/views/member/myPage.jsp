@@ -823,7 +823,7 @@ footer.footer {
    <div class="container"style="max-width:1620px;">
       <div style="margin:auto;">
          <div class="row body" style="margin:0px;">
-            <div class="col-md-4 d-flex justify-content-center mt-5">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-5">
                <div class="serviceBox color1 m-2">
                   <div class="service-icon" style="color:#008A65;">
                      <span><i class="fa fa-globe"></i></span>
@@ -968,7 +968,7 @@ footer.footer {
                   </div>
                </div>
             </div>
-            <div class="col-md-4 d-flex justify-content-center mt-5">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-5">
                <div class="serviceBox m-2 color2">
                   <div class="service-icon" style="color: #27436d;">
                      <span><i class="fa-solid fa-thumbs-up"></i></span>
@@ -1071,7 +1071,7 @@ footer.footer {
                                        <label for="요리/제조">요리/제조</label>
                                     </div>
                                     <div>
-                                       <input type="checkbox" id="문화/공연/축제" name="hobby"
+                                       <input onclick="CountChecked(this)" type="checkbox" id="문화/공연/축제" name="hobby"
                                           class="checkbox me-1" value="문화/공연/축제"> <label
                                           for="문화/공연/축제">문화/공연/축제</label>
                                     </div>
@@ -1134,7 +1134,7 @@ footer.footer {
                </div>
             </div>
             <div
-               class="col-md-4 d-flex justify-content-center mt-5 d-flex justify-content-center">
+               class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-5 d-flex justify-content-center">
                <div class="serviceBox  m-2 color1">
                   <div class="service-icon" style="color: #008A65;">
                      <span><i class="fa-solid fa-people-group"></i></span>
@@ -1181,9 +1181,7 @@ footer.footer {
                   </c:if>
                </div>
             </div>
-         </div>
-         <div class="row body" style="margin:0px;">
-            <div class="col-md-4 d-flex justify-content-center mt-5">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-5">
                <div class="serviceBox color2 m-2">
                   <div class="service-icon" style="color: #27436d;">
                      <span><i class="fa-solid fa-file-pen"></i></span>
@@ -1219,7 +1217,7 @@ footer.footer {
                   </c:if>
                </div>
             </div>
-            <div class="col-md-4 d-flex justify-content-center mt-5">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-5">
                <div class="serviceBox m-2 color1">
                   <div class="service-icon" style="color: #008A65;">
                      <span><i class="fa-solid fa-heart"></i></span>
@@ -1242,7 +1240,7 @@ footer.footer {
                               <i class="fa-solid fa-heart"></i>
                            </div>
                            <div class="col-6 d-flex justify-content-start text-start">
-                              <span><a href="/group/toGroupDetail?seq_group=${wishlistdto.SEQ_GROUP}">${wishlistdto.TITLE}</a></span>
+                              <span style = "word-break:break-all;"><a href="/group/toGroupDetail?seq_group=${wishlistdto.SEQ_GROUP}">${wishlistdto.TITLE}</a></span>
                            </div>
                            <div class="col-3 d-flex justify-content-start">
                               <i class="fa-solid fa-trash-can wishDelete"></i> <input
@@ -1314,8 +1312,7 @@ footer.footer {
                                            "seq_group": seq_group
                                        },
                                        success: function (data) {
-                                           parent.remove();
-                                           window.location.href = "";
+                                           location.href="/mem/myPage"
                                        },
                                        error: function (e) {
                                            console.log(e);
@@ -1326,7 +1323,7 @@ footer.footer {
                        })
                    })
                </script>
-            <div class="col-md-4 d-flex justify-content-center mt-5">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-5">
                <div class="serviceBox m-2 color2">
                   <div class="service-icon" style="color: #27436d;">
                      <span><i class="fa-solid fa-envelope"></i></span>
@@ -1430,7 +1427,7 @@ footer.footer {
                   </div>
                </div>
             </div>
-			</div>
+         </div>
       </div>
 	</div>
 	<!-- Footer-->

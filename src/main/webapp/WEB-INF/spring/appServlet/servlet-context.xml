@@ -39,6 +39,8 @@
 			<exclude-mapping path="/"/>
 			<exclude-mapping path="/group_profile/*"/>
 			<exclude-mapping path="/profile/*"/>
+			<exclude-mapping path="/boardFile/*"/>
+			<exclude-mapping path="/groupBoardFile/*"/>
 			
 			<exclude-mapping path="/resources/**"/>
 			<exclude-mapping path="/privacy"/>
@@ -63,6 +65,7 @@
 			<exclude-mapping path="/auth/toConnetion"/>
 			<exclude-mapping path="/auth/connetion"/>
 			<exclude-mapping path="/auth/socialSignup"/>
+			<exclude-mapping path="/auth/kakao"/>
 			
 			<exclude-mapping path="/group/selectMemberProfile"/>
 			<exclude-mapping path="/group/toGroupDetail"/>
@@ -93,6 +96,7 @@
 			<mapping path="/auth/toConnetion"/>
 			<mapping path="/auth/connetion"/>
 			<mapping path="/auth/socialSignup"/>
+			<mapping path="/auth/kakao"/>
 			<mapping path="/mem/welcome"/>
 			<beans:bean class="com.kiri.utills.Interceptor"/>
 		</interceptor>
