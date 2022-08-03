@@ -1,6 +1,7 @@
 package com.kiri.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.JsonObject;
 import com.kiri.dto.BoardDTO;
+import com.kiri.dto.Board_CommentDTO;
 import com.kiri.dto.MemberDTO;
 import com.kiri.service.BoardService;
 import com.kiri.utills.Criteria;
@@ -145,8 +147,25 @@ public class BoardController {
 		}
 		// 좋아요 여부, 개수
 		model.addAttribute("like", service.like(seq_board, user_email));
+		
 		// 댓글 프로필
-		model.addAttribute("profile", service.getProfileImg(user_email));
+//		System.out.println(service.getProfileImg(seq_board).toString());
+//		model.addAttribute("profile", service.getProfileImg(seq_board));
+//		List<Board_CommentDTO> comments = service.getCommentList(seq_board); // 댓글 정보
+//		List<String> profile = new ArrayList<>();
+//		Map<Object, Object> 
+//		for(Board_CommentDTO comment : comments) {
+//			//String email = comment.getUser_email();
+//			//Map<Object, Object> imageMap = service.getProfileImg(email);
+//			//System.out.println(imageMap.toString());
+////			MemberDTO memDTO = service.getProfileImg(email);
+////			memberDTO.add("memDTO", memDTO);
+//			//System.out.println(memDTO.toString());
+//			//profile.add(memDTO.getUser_image());
+//		}
+//		System.out.println(profile.toString());
+//		model.addAttribute("");
+//		model.addAttribute("profile", profile);
 		
 		// criteria 인스턴스 전달
 		model.addAttribute("cri", cri);
