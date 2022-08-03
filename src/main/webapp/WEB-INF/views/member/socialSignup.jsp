@@ -589,7 +589,15 @@ footer.footer {
        $("#checkPhone").click(function(){ //휴대폰 중복체크
     	   let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
     	   let phone = $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
-   
+    	   
+    	     if($("#phone1 option:selected").val() == "010" && $("#phone2").val().length != "4" ){
+				 sweetAlertFail("올바르지 않은 전화번호 형식입니다."); 
+				 return;
+			 }else if($("#phone1 option:selected").val() != "010" && $("#phone2").val().length != "3" ){
+				 sweetAlertFail("올바르지 않은 전화번호 형식입니다."); 
+				 return;
+			 }
+    	   
 	  		 if(!phoneRegex.test(phone)){
 	  			 sweetAlertFail("올바르지 않은 전화번호 형식입니다.");
 	       	 	 return;
