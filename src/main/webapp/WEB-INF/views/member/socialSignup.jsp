@@ -28,7 +28,6 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet">
 <style>
-/* 눈누 폰트 */
 @font-face {
     font-family: 'InfinitySans-RegularA1';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
@@ -41,58 +40,73 @@
     font-weight: normal;
     font-style: normal;
 }
-
-* {
-	box-sizing: border-box;
-	font-family: 'InfinitySans-RegularA1';
+*{box-sizing: border-box;   font-family: 'InfinitySans-RegularA1';}
+/* header */
+header {
+   font-family: 'MICEGothic Bold';
 }
 
-body {
-	background-color: #d2e3ec;
+.border-bottom{
+    background-color: white;
 }
-/* header 반응형 */
+
 @media ( max-width : 768px) {
-	#navLogo {
-		display: none;
-	}
-	#myPageIcon {
-		display: none;
-	}
-	#cartIcon {
-		display: none;
-	}
-	#menu {
-		display: none;
-	}
+   #navLogo {
+      display: none;
+   }
+   #myPageIcon {
+      display: none;
+   }
+   #cartIcon {
+      display: none;
+   }
+   #menu {
+      display: none;
+   }
 }
 
 /* header */
-.border-bottom {
-	background-color: white;
-}
-
 #navLogo {
-	width: 150px;
-	height: 100px;
+   width: 150px;
+   height: 100px;
 }
 
 #logoImgs {
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 
 @media ( min-width : 768px) {
-	#navibar {
-		display: none;
-	}
+   #navibar {
+      display: none;
+   }
 }
 
 /* header 반응형 끝 */
 #logoImg {
-	width: 50%;
+   width: 50%;
+}
+
+/* 네비바 드롭다운 */
+.dropdown-toggle:hover {
+   color: #83bf7b;
+   border-color: aliceblue;
+}
+
+.dropdown:hover .dropdown-menu {
+   display: block;
+   margin-top: 0;
+   font-weight: bold;
+}
+
+.groupHeaderInfo {
+   height: 480px;
 }
 
 /* 바디*/
+body {
+	background-color: #d2e3ec;
+}
 .signupBox {
 	margin-top: 100px;
 	width: 1000px;
@@ -339,7 +353,7 @@ input {
 #phone2, #phone3, #phone1 {
 	margin-left: 5px;
 	display: inline;
-	width: 30%;
+	width: 28%;
 }
 
 #singupBackBtn, #completeBtn {
@@ -411,31 +425,41 @@ span {
 	font-size: 0.05rem;
 }
 
+/* footer */
 /*풋터 영역*/
+.footer-imgBox img{
+   max-width: 100%;
+}
+
+.footerWrapper{
+   background-color: white;
+   font-family: "MICEGothic Bold";
+   font-size: 15px;
+}
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	background-color: white;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
+   background-color: white;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
-}
-
-.footer-imgBox {
-	overflow: hidden;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	width: 100%;
-	height: 100%;
+   height: 100%;
+   text-align:center;
+}
+.footer-imgBox {
+   height: 100%;
+   text-align:center;
 }
 </style>
 </head>
@@ -453,13 +477,17 @@ footer.footer {
 	   }else if($("#user_email").val() === ""){
 		   sweetAlertFail("아이디를 필수로 동의하지 않았습니다. 회원 가입을 취소합니다.");
 		   setTimeout(function() {
-			   location.href = "/login/toLogin";
+			   location.href = "/auth/kakao";
 		   },2000);
 	   }
 	   
        $("#singupBackBtn").click(function(){ // 뒤로가기 
            back();
        
+       });
+       
+       $("#backPageBtn").click(function(){
+    	   location.href="/login/toLogin";
        });
       
        $("#user_name").change(function(){
@@ -479,22 +507,56 @@ footer.footer {
 	   });
 	   	
 	   $("#user_nickname").change(function(){
-		   	$("#nickname-col").empty();
-		   	let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;   
-	   	
-		   	if(!nicknameRegex.test($("#user_nickname").val())){
-		   		invalidNickname();
-		        return;
-		   	}
-	   });
-	      
-	   $("#nicknameCheck").click(function(){ //이메일 중복체크
-  	  		 let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;    
-     
-  	  		 if(!nicknameRegex.test($("#user_nickname").val())){
-  	  			 sweetAlertFail("올바르지 않은 닉네임 형식입니다.");
-      	 		 $("#nicknameCheck").focus();
+			$("#nickname-col").empty();
+			let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;
+			let nicknameRegex2 = /^[0-9]{2,12}$/;
+			let nicknameRegex3 = /^((l){2,12}|(i){2,12}){2,12}$/;
+			let nicknameRegex4 = /^(l|i|1)*$/;
+
+			if(!nicknameRegex.test($("#user_nickname").val())){
+				invalidNickname();
+	       	 	return;
+	       	 	
+			}else if (nicknameRegex2.test($("#user_nickname").val())){
+				invalidNickname();
+				return;
+				
+			}else if (nicknameRegex3.test($("#user_nickname").val())){
+				invalidNickname();
+				return;
+				
+			}else if (nicknameRegex4.test($("#user_nickname").val())){
+				invalidNickname();
+				return;
+	       	 	 
+	      	 }
+			
+		});
+
+		$("#nicknameCheck").click(function(){ //휴대폰 중복체크
+ 	  		 let nicknameRegex = /^[0-9a-zA-Z가-힣]{2,12}$/;
+ 	  	 	 let nicknameRegex2 = /^[0-9]{2,12}$/;
+			 let nicknameRegex3 = /^((l){2,12}|(i){2,12}){2,12}$/;
+			 let nicknameRegex4 = /^(l|i|1)*$/;
+			 
+ 	  		 if(!nicknameRegex.test($("#user_nickname").val())){
+     	 		 sweetAlertFail("올바르지 않은 닉네임 형식입니다.");
+     	 		 $("#nicknameCheck").focus();
 	       	 	 return;
+ 	  		 }else if (nicknameRegex2.test($("#user_nickname").val())){
+ 	  			sweetAlertFail("닉네임을 숫자로만 구성하지 말아주세요.");
+    	 		$("#nicknameCheck").focus();
+				return;
+				
+			 }else if (nicknameRegex3.test($("#user_nickname").val())){
+				sweetAlertFail("닉네임을 l,i로만 구성하지 말아주세요.");
+     	 		$("#nicknameCheck").focus();
+				return;
+				
+			 }else if (nicknameRegex4.test($("#user_nickname").val())){
+				sweetAlertFail("닉네임을 바코드형으로 구성하지 말아주세요.");
+     	 		$("#nicknameCheck").focus();
+				return;
 	       	 	 
 	      	 }else{
 		      	  let user_nickname = $("#user_nickname").val();
@@ -527,7 +589,15 @@ footer.footer {
        $("#checkPhone").click(function(){ //휴대폰 중복체크
     	   let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
     	   let phone = $("#phone1 option:selected").val() + $("#phone2").val() + $("#phone3").val();
-   
+    	   
+    	     if($("#phone1 option:selected").val() == "010" && $("#phone2").val().length != "4" ){
+				 sweetAlertFail("올바르지 않은 전화번호 형식입니다."); 
+				 return;
+			 }else if($("#phone1 option:selected").val() != "010" && $("#phone2").val().length != "3" ){
+				 sweetAlertFail("올바르지 않은 전화번호 형식입니다."); 
+				 return;
+			 }
+    	   
 	  		 if(!phoneRegex.test(phone)){
 	  			 sweetAlertFail("올바르지 않은 전화번호 형식입니다.");
 	       	 	 return;
@@ -737,16 +807,14 @@ function checkFile(obj) {
 	 if(fileType == "jpg" || fileType == "gif" || fileType == "png" || fileType == "jpeg" || fileType == "bmp"){
 		 return true;
 	 }else{
-		 alert("이미지 파일만 선택할 수 있습니다.");
-		 let parentObj = obj.parentNode;
-		 let node = parentObj.replaceChild(obj.cloneNode(true),obj);
+		 sweetAlertFail("이미지 파일만 선택할 수 있습니다.");
 		 $("#user_image").val("");
 		 $("#p_img").attr("src", "/resources/images/profile.jpg");
 		 return false;
 	 }
 	 
 	 if(fileType == "bmp"){
-		 answer = confirm("BMP 파일은 웹상에서 사용하기엔 적절한 이미지 형식이 아닙니다. /n 사용하시겠습니까?");
+		 answer = confirm("BMP 파일은 웹상에서 사용하기엔 적절한 이미지 형식이 아닙니다. 사용하시겠습니까?");
 		 if(!answer)return false;
 	 }
 	}
@@ -797,27 +865,36 @@ function sweetAlertSuccess(content){
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="/board/toBoard" style="font-size:18px;">자유게시판</a></li>
-                           <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
+                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                        <c:if test="${empty loginSession}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogin">로그인</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/signup/toSignupAgree">회원가입</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/admin/toAdmin">관리자페이지 이동</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
                      </ul>
                   </div>
                </div>
 
             </div>
          </nav>
-      <!-- 펼쳐졌을 때 nav -->
+         <!-- 펼쳐졌을 때 nav -->
          <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
             aria-label="Main navigation">
             <div class="row w-100 align-items-center">
@@ -839,7 +916,7 @@ function sweetAlertSuccess(content){
                <div class="col-5">
                   <div class="row align-items-center justify-content-center">
                      <div class="col-auto">
-                        <ul class="navbar-nav mb-2 mb-lg-0 me-2" style = "font-size:18px;">
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link"
                                  href="/login/toLogin">로그인</a></li>
@@ -849,39 +926,34 @@ function sweetAlertSuccess(content){
                         </ul>
                      </div>
                      <div class="col-auto user">
-                        <c:if
-                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
-                           <div class="dropdown text-end">
-                              <a href="/"
-                                 class="d-block link-dark text-decoration-none dropdown-toggle"
-                                 id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> <img
-                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
-                                 height="40" class="rounded-circle">
-                              </a>
-                              <ul class="dropdown-menu text-small"
-                                 aria-labelledby="dropdownUser1">
-                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
-                                 </li>
-                                 <li>
-                                    <hr class="dropdown-divider">
-                                 </li>
-                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
-                                       페이지이동</a></li>
-                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                              </ul>
-                           </div>
-                        </c:if>
+               <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                         <div class="dropdown text-end">
+                           <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                           <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                           </a>
+                           <ul class="dropdown-menu text-small"
+                              aria-labelledby="dropdownUser1">
+                              <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                              <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+                              <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                           </ul>
+                        </div>
+                     </c:if>
                         <c:if
                            test="${not empty loginSession && loginSession.user_email ne 'admin'}">
                            <div class="dropdown text-end">
                               <a href="/"
                                  class="d-block link-dark text-decoration-none dropdown-toggle"
                                  id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> <img
-                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
-                                 height="40" class="rounded-circle">
+                                 aria-expanded="false"> 
+                                 <c:if test="${loginSession.user_image eq null}">
+                                    <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                                 <c:if test="${loginSession.user_image ne null}">
+                                    <img src="/profile/${loginSession.user_image }" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
                               </a>
                               <ul class="dropdown-menu text-small"
                                  aria-labelledby="dropdownUser1">
@@ -889,9 +961,14 @@ function sweetAlertSuccess(content){
                                  <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
                                  </li>
                                  <li>
-                                    <hr class="dropdown-divider">
+                                    <hr class="dropdown-divider" style="margin:0px;">
                                  </li>
-                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                                  <c:if test="${loginType ne 'kakao'}">
+                                  	 <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  </c:if>
+	                              <c:if test="${loginType eq 'kakao'}">
+	                                 <li><a class="dropdown-item mt-2" href="${kakaoLogout}">로그아웃</a></li>
+	                              </c:if>
                               </ul>
                            </div>
                         </c:if>
@@ -987,8 +1064,9 @@ function sweetAlertSuccess(content){
 			<div class="row">
 				<div class="col-md-3"></div>
 				<div class="col-md-7 text-align-left-col">
-					<span class="condition"> *한글, 영어, 숫자을 사용하여 최소 2, 최대 12자리까지
-						설정해주세요. </span>
+					<span class="condition">
+						*한글, 영어, 숫자을 사용하여 최소 2, 최대 12자리까지 설정해주세요. 숫자만 이용, l,i반복의 바코드형식의 닉네임은 제한됩니다.
+					</span>
 				</div>
 				<div class="col-2 text-align-left-col"></div>
 			</div>
@@ -1180,64 +1258,75 @@ function sweetAlertSuccess(content){
 </div>
 </form>	
     <!-- Footer-->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 footer-imgBox">
-					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-				</div>
-				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
-						<li class="list-inline-item">⋅</li>
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="list-inline-item"><a href="/signup/toSignup">회원가입</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-							</c:otherwise>
-						</c:choose>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item">
-							<c:choose>
-								<c:when test="${not empty loginSession}">
-									<a href="/group/toCreateGroup">모임 만들기</a>
-								</c:when>
-								<c:otherwise>
-									<a href="/login/toLogin">모임 만들기</a>
-								</c:otherwise>
-							</c:choose>
-						</li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="/privacy"
-							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-					</ul>
-					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-						57 이레빌딩</p>
-					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-						2022. All Rights Reserved.</p>
-				</div>
-				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-					<ul class="list-inline mb-0">
-						<li class="list-inline-item me-4"><a
-							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-						<li class="list-inline-item me-4"><a
-							href="https://twitter.com/?lang=ko"><i
-								class="bi-twitter fs-3"></i></a></li>
-						<li class="list-inline-item"><a
-							href="https://www.instagram.com/"><i
-								class="bi-instagram fs-3"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
+  <div class="footerWrapper mt-5" style="border-top:1px solid #e0e3e8;">
+    <div class="container">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-lg-3 footer-imgBox">
+            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+             <ul class="list-inline mb-2">
+            <li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
+            <li class="list-inline-item">⋅</li>
+            <c:choose>
+               <c:when test="${not empty loginSession}">
+                  <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <c:if test="${loginType ne 'kakao'}">
+						<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+			      </c:if>
+			      <c:if test="${loginType eq 'kakao'}">
+					<li class="list-inline-item"><a href="${kakaoLogout}">로그아웃</a></li>
+	      		  </c:if>
+               </c:when>
+               <c:otherwise>
+                  <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+               </c:otherwise>
+            </c:choose>
+            <li class="list-inline-item">⋅</li>
+            <li class="list-inline-item">
+               <c:choose>
+                  <c:when test="${not empty loginSession}">
+                     <a href="/group/toCreateGroup">모임 만들기</a>
+                  </c:when>
+                  <c:otherwise>
+                     <a href="/login/toLogin">모임 만들기</a>
+                  </c:otherwise>
+               </c:choose>
+            </li>
+            <li class="list-inline-item">⋅</li>
+            <li class="list-inline-item"><a href="/privacy"
+               style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+         </ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
+              사업자등록번호 : 22-02-22
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2022. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-0">
+            <li class="list-inline-item me-4"><a
+               href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+            <li class="list-inline-item me-4"><a
+               href="https://twitter.com/?lang=ko"><i
+                  class="bi-twitter fs-3"></i></a></li>
+            <li class="list-inline-item"><a
+               href="https://www.instagram.com/"><i
+                  class="bi-instagram fs-3"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
 </body>
 </html>

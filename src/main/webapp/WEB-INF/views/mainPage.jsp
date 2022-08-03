@@ -617,11 +617,11 @@ footer.footer {
                                     <hr class="dropdown-divider" style="margin:0px;">
                                  </li>
                                   <c:if test="${loginType ne 'kakao'}">
-                                      <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  	 <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
                                   </c:if>
-                                 <c:if test="${loginType eq 'kakao'}">
-                                    <li><a class="dropdown-item mt-2" href="${kakaoLogout}">로그아웃</a></li>
-                                 </c:if>
+	                              <c:if test="${loginType eq 'kakao'}">
+	                                 <li><a class="dropdown-item mt-2" href="${kakaoLogout}">로그아웃</a></li>
+	                              </c:if>
                               </ul>
                            </div>
                         </c:if>

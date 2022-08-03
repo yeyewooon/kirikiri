@@ -1,7 +1,9 @@
 package com.kiri.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +22,6 @@ import com.kiri.service.LoginService;
 import com.kiri.service.MailService;
 import com.kiri.service.SignupService;
 import com.kiri.utills.EncryptionUtils;
-import com.kiri.utills.SecurityInfo;
 
 @RequestMapping("/login")
 @Controller
@@ -130,17 +131,21 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/toLogout")//logout페이지 요청 feat.조용진
-	public String logout(HttpServletResponse response) {
+	public String logout(HttpServletResponse response) throws Exception {
 		// 쿠키
 		Cookie cookie = new Cookie("postView", null);
 		cookie.setMaxAge(0);
 		cookie.setPath("/");
 		response.addCookie(cookie);
 		
-		session.removeAttribute("loginSession");
-		session.removeAttribute("loginType");
+		if(session.getAttribute("loginType").equals("kakao")) {
+			String accessToken = (String)session.getAttribute("accessToken");
+			kakaoLogin.kakaoLogout(accessToken, "https://kapi.kakao.com/v1/user/logout");
+		}
 		
+		session.invalidate();
 		return "redirect:/";
+		
 	}
 	
 	
