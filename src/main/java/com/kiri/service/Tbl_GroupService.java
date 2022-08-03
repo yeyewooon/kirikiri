@@ -48,9 +48,10 @@ public class Tbl_GroupService {
 
 	// 모임 가입 승인 및 group_apply 테이블에서 삭제
 	@Transactional
-	public void completeApply(List<String> userEmails) throws Exception {
+	public void completeApply(List<String> userEmails, int seq_group) throws Exception {
 		Map<String, Object> param = new HashMap<>();
 		param.put("userEmails", userEmails);
+		param.put("seq_group", seq_group);
 		List<Group_ApplyDTO> list = tbl_group_dao.selectApplyByEmail(param);
 
 		for (Group_ApplyDTO dto : list) {
@@ -59,13 +60,14 @@ public class Tbl_GroupService {
 			tbl_group_dao.completeApply(member);
 		}
 
-		denyApply(userEmails);
+		denyApply(userEmails,seq_group);
 	}
 
 	// 모임 가입 거절하기
-	public void denyApply(List<String> userEmails) throws Exception {
+	public void denyApply(List<String> userEmails, int seq_group) throws Exception {
 		Map<String, Object> param = new HashMap<>();
 		param.put("userEmails", userEmails);
+		param.put("seq_group", seq_group);
 		tbl_group_dao.denyApply(param);
 	}
 

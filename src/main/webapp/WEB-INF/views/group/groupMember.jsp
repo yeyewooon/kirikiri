@@ -572,15 +572,8 @@ footer.footer {
        // 그룹 권한 수정
       $("#modifyBtn").on("click", function(){
          let checkAccess = $('input[name=checkAccess]:checked').val(); // 체크된 직책
-         let checkEmail = $('input[name=checkAccess]:checked').parent().next().children('input').val(); 
+         let checkEmail = $('input[name=checkAccess]:checked').parent().next().children('input').val();  // 이메일값
          let seq_group = $("#seq_group").val();
-         if($('input[name=checkUser_email]:checked')){
-             Swal.fire({
-                 icon: 'error',
-                 title: 'Oops...',
-                 text: '버튼을 잘 생각해주세요!',
-               })
-         }else{
 	         if(checkAccess != '주최자'){
 	 	         $.ajax({
 		            url : "/group/groupAccess",
@@ -632,12 +625,9 @@ footer.footer {
 	             Swal.fire({
 	                 icon: 'error',
 	                 title: 'Oops...',
-	                 text: '본인은 선택하지 못합니다!',
+	                 text: '주최자 본인에게 위임하지 못합니다!',
 	               }) 
-	         }
-        	 
-         }
-         
+	         }      	 
       })
 
    // 그룹 멤버 강퇴
@@ -647,13 +637,7 @@ footer.footer {
       let seq_group = $("#seq_group").val();
       console.log(checkAccess);
 	  console.log(checkEmail);
-	  if($('input[name=checkUser_Access]:checked')){
-          Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: '버튼을 잘 생각해주세요!',
-            })
-	  }else{
+	  console.log($('input[name=checkUser_email]:checked').val());
 	      let checkBoxArr = [];
 		      $("input[name=checkUser_email]:checked").each(function(){
 		    	 if(checkAccess != '주최자'){
@@ -689,8 +673,6 @@ footer.footer {
 		      }
 		    	 console.log(checkBoxArr);
 	      })
-		  
-	  }
    })
 
 </script>

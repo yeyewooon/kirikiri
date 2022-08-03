@@ -105,8 +105,9 @@ public class GroupController {
    public String completeApply(@RequestBody Map<String, Object> param, int group_people, int groupCount)
          throws Exception {
       List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
+	  int seq_group = Integer.parseInt(param.get("seq_group").toString());
       if (userEmails.size() + groupCount <= group_people) {
-         tbl_group_service.completeApply(userEmails);
+         tbl_group_service.completeApply(userEmails, seq_group);
       } else if (userEmails.size() + groupCount > group_people) {
          return "error";
       }
@@ -119,7 +120,10 @@ public class GroupController {
    @ResponseBody
    public String denyApply(@RequestBody Map<String, Object> param) throws Exception {
       List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
-      tbl_group_service.denyApply(userEmails);
+      int seq_group = Integer.parseInt(param.get("seq_group").toString());
+      tbl_group_service.denyApply(userEmails,seq_group);
+      System.out.println(userEmails);
+      System.out.println(seq_group);
       return String.valueOf(userEmails);
    }
 

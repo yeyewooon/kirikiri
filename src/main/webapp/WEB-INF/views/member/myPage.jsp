@@ -1070,7 +1070,7 @@ footer.footer {
                                        <label for="요리/제조">요리/제조</label>
                                     </div>
                                     <div>
-                                       <input type="checkbox" id="문화/공연/축제" name="hobby"
+                                       <input onclick="CountChecked(this)" type="checkbox" id="문화/공연/축제" name="hobby"
                                           class="checkbox me-1" value="문화/공연/축제"> <label
                                           for="문화/공연/축제">문화/공연/축제</label>
                                     </div>

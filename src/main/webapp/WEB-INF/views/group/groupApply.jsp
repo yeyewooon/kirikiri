@@ -575,6 +575,7 @@ $("#groupDelete").on("click", function(){
    $("#applyBtn").on("click", function(){
       let count = $("#group_people").val();
       let groupCount = $("#groupCount").val();
+      let seq_group = $("#seq_group").val();
       let checkBoxArr = [];
       $("input[name=checkUser_email]:checked").each(function(){
          checkBoxArr.push($(this).val());
@@ -586,7 +587,8 @@ $("#groupDelete").on("click", function(){
             })
       }else{
 	      var jsonData = {
-	         "userEmails" : JSON.stringify(checkBoxArr)
+	         "userEmails" : JSON.stringify(checkBoxArr),
+	         "seq_group" : seq_group
 	      };
 	      var jsonString = JSON.stringify(jsonData);
 
@@ -620,6 +622,7 @@ $("#groupDelete").on("click", function(){
 
    // 그룹 승인 거절하기
    $("#denyBtn").on("click", function(){
+	  let seq_group = $("#seq_group").val();
       let checkBoxArr = [];
       $("input[name=checkUser_email]:checked").each(function(){
          checkBoxArr.push($(this).val());
@@ -631,7 +634,8 @@ $("#groupDelete").on("click", function(){
             })
       }else{
 	      var jsonData = {
-	         "userEmails" : JSON.stringify(checkBoxArr)
+	         "userEmails" : JSON.stringify(checkBoxArr),
+	         "seq_group" : seq_group
 	      };
 	      var jsonString = JSON.stringify(jsonData);
 
