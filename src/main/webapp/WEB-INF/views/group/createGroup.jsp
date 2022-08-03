@@ -29,7 +29,7 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<title>모임 생성 페이지</title>
+<title>모임 생성</title>
 <script>
 // 썸머노트
 $(document).ready(function() {
@@ -73,9 +73,13 @@ $(document).ready(function() {
                     uploadSummernoteImageFile(files[i], this);
                  }
               },
+              onKeydown: function(e) {
+                  fn_checkByte(this); // 글자수 바이트 체크
+                },
             onKeyup: function(e) {
                  fn_checkByte(this); // 글자수 바이트 체크
-             }
+             },
+            
            }
       });
 
@@ -140,8 +144,15 @@ function uploadSummernoteImageFile(file, editor){
 }
 </script>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>그룹 만들기</title>
 <style>
+
+/* 썸머노트 제약 */
+.note-group-image-url{
+            display: none;
+        }
+
+
 @font-face {
    font-family: 'Katuri';
    src:
@@ -704,10 +715,8 @@ footer.footer {
                </span>
                <div class="form-floating mb-3 mt-2">
                   <textarea id="summernote" name="group_info" class="group_info"></textarea>
-                  <sup class="d-none">(<span id="nowByte">0</span>/4000bytes)</sup>
-                  <sup>(<span id="nowText">0</span>/1750자)</sup>
+                  <sup>(<span id="nowByte">0</span>/3000bytes)</sup>
                </div>
-
             </div>
          </div>
          <!--위치 -->
@@ -1046,14 +1055,12 @@ footer.footer {
            }
        }
        if(totalByte>maxByte){
-             alert('사진포함 최대 1750자까지만 입력가능합니다.');
+             alert('3000byte를 넘어갈 수 없습니다.');
               document.getElementById("nowByte").innerText = totalByte;
                document.getElementById("nowByte").style.color = "red";
-               document.getElementById("nowText").innerText = text_len;
            }else{
               document.getElementById("nowByte").innerText = totalByte;
                document.getElementById("nowByte").style.color = "green";
-               document.getElementById("nowText").innerText = text_len;
            }
        }
 
@@ -1081,7 +1088,7 @@ footer.footer {
         Swal.fire("모임 내용을 입력해주세요");
         return;
      }else if(groupInfoByteCnt >= 3000) {
-        Swal.fire("내용은 사진 포함1750자 이내로만 가능합니다");
+        Swal.fire('모임 내용은 3000byte를 넘어갈 수 없습니다.');
         return;
      }else if($("#group_site").val() == "" || $("#sido1Input").val() == "") {
         Swal.fire('지역 선택을 완료를 눌러주세요');

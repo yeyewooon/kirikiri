@@ -76,9 +76,12 @@ $(document).ready(function() {
 						  uploadSummernoteImageFile(files[i], this);
 					  }
 				  },
+				  onKeydown: function(e) {
+					  fn_checkByte(this); // 글자수 바이트 체크
+	                },
 				 onKeyup: function(e) {
 				     	fn_checkByte(this); // 글자수 바이트 체크
-				    }
+				    },
 			  }
 		});
 	         // 주기적으로 감지할 대상 요소 선정
@@ -144,6 +147,12 @@ function uploadSummernoteImageFile(file, editor){
 <meta charset="UTF-8">
 <title>Modify Group</title>
 <style>
+
+/* 썸머노트 제약 */
+.note-group-image-url{
+            display: none;
+        }
+        
 
 
 body {
@@ -701,8 +710,7 @@ footer.footer {
 						<textarea id="summernote" name="group_info" class="group_info">
 							${tbl_group_dto.group_info}
 						</textarea>
-						<sup class="d-none">(<span id="nowByte">0</span>/4000bytes)</sup>
-						<sup>(<span id="nowText">0</span>/1750자)</sup>
+						<sup>(<span id="nowByte">0</span>/3000bytes)</sup>
 					</div>
 				</div>
 			</div>
@@ -1057,14 +1065,12 @@ footer.footer {
 	        }
 	    }
 	    if(totalByte>maxByte){
-	    		alert('사진포함 최대 1750자까지만 입력가능합니다.');
+	    		alert('3000byte를 넘어갈 수 없습니다.');
 	        	document.getElementById("nowByte").innerText = totalByte;
 	            document.getElementById("nowByte").style.color = "red";
-	            document.getElementById("nowText").innerText = text_len;
 	        }else{
 	        	document.getElementById("nowByte").innerText = totalByte;
 	            document.getElementById("nowByte").style.color = "green";
-	            document.getElementById("nowText").innerText = text_len;
 	        }
 	    }
 
@@ -1072,6 +1078,8 @@ footer.footer {
   $("#modifyGroupBtn").on("click",function() {
 	  // 구/군 변경시 비교
 	  let group_site_com = $("#sido1Input").val() + " " +$("#gugun1Input").val();
+	  
+	  let groupInfoByteCnt = $("#nowByte").html();
 	  if($("#group_category").val() == "") {
 		  Swal.fire("모임주제를 선택해주세요");
 		  return;
@@ -1081,6 +1089,9 @@ footer.footer {
 	  }else if($(".group_info").val() == "") {
 		  Swal.fire("모임 내용을 적어주세요");
 		  return;
+	  }else if(groupInfoByteCnt >= 3000) {
+	      Swal.fire('모임 내용은 3000byte를 넘어갈 수 없습니다.');
+	      return;
 	  }else if($("#group_site").val() == "" || $("#sido1Input").val() == "") {
 		  Swal.fire('지역 선택을 완료를 눌러주세요');
 		  return;
