@@ -17,71 +17,73 @@ rel="stylesheet">
 <!-- sweetAlert -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style>
-/* 눈누 폰트 */
-@font-face {
-    font-family: 'InfinitySans-RegularA1';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-}
-@font-face {
-    font-family: 'BMJUA';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+/* header */
+header {
+   font-family: 'MICEGothic Bold';
 }
 
-* {
-	box-sizing: border-box;
-	font-family: 'InfinitySans-RegularA1';
+.border-bottom{
+    background-color: white;
 }
 
-body {
-	background-color: #d2e3ec;
-}
-/* header 반응형 */
 @media ( max-width : 768px) {
-	#navLogo {
-		display: none;
-	}
-	#myPageIcon {
-		display: none;
-	}
-	#cartIcon {
-		display: none;
-	}
-	#menu {
-		display: none;
-	}
+   #navLogo {
+      display: none;
+   }
+   #myPageIcon {
+      display: none;
+   }
+   #cartIcon {
+      display: none;
+   }
+   #menu {
+      display: none;
+   }
 }
 
 /* header */
-.border-bottom {
-	background-color: white;
-}
-
 #navLogo {
-	width: 150px;
-	height: 100px;
+   width: 150px;
+   height: 100px;
 }
 
 #logoImgs {
-	width: 100%;
-	height: 100%;
+   width: 100%;
+   height: 100%;
 }
 
 @media ( min-width : 768px) {
-	#navibar {
-		display: none;
-	}
+   #navibar {
+      display: none;
+   }
 }
 
 /* header 반응형 끝 */
 #logoImg {
-	width: 50%;
+   width: 50%;
+}
+
+/* 네비바 드롭다운 */
+.dropdown-toggle:hover {
+   color: #83bf7b;
+   border-color: aliceblue;
+}
+
+.dropdown:hover .dropdown-menu {
+   display: block;
+   margin-top: 0;
+   font-weight: bold;
+}
+
+.groupHeaderInfo {
+   height: 480px;
 }
 
 /* 바디*/
+body {
+	background-color: #d2e3ec;
+}
+
 .loginBox {
 	width: 1000px;
 	height: auto;
@@ -138,12 +140,6 @@ body {
 	width: 60%;
 }
 
-button {
-	margin-bottom: 20px;
-	width: 25%;
-	height: 80%;
-}
-
 span {
 	color: #656565;
 	font-size: 16px;
@@ -185,8 +181,8 @@ h2 {
 }
 
 #findId_body button, #findPw_body button {
-	width: 91%;
-	height: 60%;
+	width: 93%;
+	height: 100%;
 }
 
 #findPw-emailCheck-btn{
@@ -236,35 +232,45 @@ h2 {
 
 .social span {
 	margin: auto;
-	font-size: 19px;
+	font-size: 18px;
 	color: #030087;
 }
 
+/* footer */
 /*풋터 영역*/
+.footer-imgBox img{
+   max-width: 100%;
+}
+
+.footerWrapper{
+   background-color: white;
+   font-family: "MICEGothic Bold";
+   font-size: 15px;
+}
 .footerBox {
-	height: 0px;
+   height: 0px;
 }
 
 footer.footer {
-	padding-top: 2rem;
-	padding-bottom: 2rem;
-	background-color: white;
+   padding-top: 2rem;
+   padding-bottom: 2rem;
+   background-color: white;
 }
 
 .footer a {
-	text-decoration: none;
-	color: black;
-	font-weight: 40px;
-	font-weight: bold;
-}
-
-.footer-imgBox {
-	overflow: hidden;
-	text-align: center;
+   text-decoration: none;
+   color: black;
+   font-weight: 40px;
+   font-weight: bold;
 }
 
 .footer-imgBox>img {
-	height: 100%;
+   height: 100%;
+   text-align:center;
+}
+.footer-imgBox {
+   height: 100%;
+   text-align:center;
 }
 </style>
 </head>
@@ -273,7 +279,31 @@ footer.footer {
     	let authNum;
     	let loginType = "general"
     	
-    	$("input").on("keyup",function(key){   
+//     	$("#findPw_email").on("keyup",function(key){   
+//     		if(key.keyCode==13) {  
+//     			$("#btnFindPW").click();	
+//     		}
+//     	})
+//     	$("#findPw_name").on("keyup",function(key){   
+//     		if(key.keyCode==13) {  
+//     			$("#btnFindPW").click();	
+//     		}
+//     	})
+    	
+//     	$("#findId_name").on("keyup",function(key){   
+//     		if(key.keyCode==13) {  
+//     			$("#btnFindId").click();	
+//     		}
+//     	})
+    	
+//     	$("#find_phone").on("keyup",function(key){   
+//     		if(key.keyCode==13) {  
+//     			$("#btnFindId").click();	
+//     		}
+//     	})
+    	
+    	
+    	$("#id").on("keyup",function(key){   
     		if(key.keyCode==13) {  
     			if($("#id").val() == "" || $("#pw").val() == ""){
         			sweetAlertFail("아이디 혹은 비밀번호를 입력해주세요.");
@@ -283,6 +313,19 @@ footer.footer {
         		}
     		}
     	});
+    	
+    	$("#pw").on("keyup",function(key){   
+    		if(key.keyCode==13) {  
+    			if($("#id").val() == "" || $("#pw").val() == ""){
+        			sweetAlertFail("아이디 혹은 비밀번호를 입력해주세요.");
+        			return;
+        		}else{
+        			login(loginType);     
+        		}
+    		}
+    	});
+    	
+    	
     	
         $("#toLoginBtn").click(function(){
         	if($("#id").val() == "" || $("#pw").val() == ""){
@@ -310,7 +353,7 @@ footer.footer {
         	let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
         	
         	if( $("#findId_name").val() == "" || $("#find_phone").val() ==""){
-        		sweetAlertFail("아이디 혹은 비밀번호를 입력해주세요.");
+        		sweetAlertFail("아이디 혹은 전화번호를 입력해주세요.");
         		return; 
         		
         	}else if(!phoneRegex.test($("#find_phone").val())){
@@ -530,7 +573,7 @@ footer.footer {
     
 </script>
 <body>
- <!--네비바-->
+  <!--네비바-->
    <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
@@ -558,27 +601,36 @@ footer.footer {
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="/board/toBoard" style="font-size:18px;">자유게시판</a></li>
-                           <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
+                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                        <c:if test="${empty loginSession}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogin">로그인</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/signup/toSignupAgree">회원가입</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/admin/toAdmin">관리자페이지 이동</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
                      </ul>
                   </div>
                </div>
 
             </div>
          </nav>
-      <!-- 펼쳐졌을 때 nav -->
+         <!-- 펼쳐졌을 때 nav -->
          <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
             aria-label="Main navigation">
             <div class="row w-100 align-items-center">
@@ -600,7 +652,7 @@ footer.footer {
                <div class="col-5">
                   <div class="row align-items-center justify-content-center">
                      <div class="col-auto">
-                        <ul class="navbar-nav mb-2 mb-lg-0 me-2" style = "font-size:18px;">
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link"
                                  href="/login/toLogin">로그인</a></li>
@@ -610,39 +662,34 @@ footer.footer {
                         </ul>
                      </div>
                      <div class="col-auto user">
-                        <c:if
-                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
-                           <div class="dropdown text-end">
-                              <a href="/"
-                                 class="d-block link-dark text-decoration-none dropdown-toggle"
-                                 id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> <img
-                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
-                                 height="40" class="rounded-circle">
-                              </a>
-                              <ul class="dropdown-menu text-small"
-                                 aria-labelledby="dropdownUser1">
-                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
-                                 </li>
-                                 <li>
-                                    <hr class="dropdown-divider">
-                                 </li>
-                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
-                                       페이지이동</a></li>
-                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                              </ul>
-                           </div>
-                        </c:if>
+               <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                         <div class="dropdown text-end">
+                           <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                           <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                           </a>
+                           <ul class="dropdown-menu text-small"
+                              aria-labelledby="dropdownUser1">
+                              <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                              <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+                              <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                           </ul>
+                        </div>
+                     </c:if>
                         <c:if
                            test="${not empty loginSession && loginSession.user_email ne 'admin'}">
                            <div class="dropdown text-end">
                               <a href="/"
                                  class="d-block link-dark text-decoration-none dropdown-toggle"
                                  id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> <img
-                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
-                                 height="40" class="rounded-circle">
+                                 aria-expanded="false"> 
+                                 <c:if test="${loginSession.user_image eq null}">
+                                    <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                                 <c:if test="${loginSession.user_image ne null}">
+                                    <img src="/profile/${loginSession.user_image }" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
                               </a>
                               <ul class="dropdown-menu text-small"
                                  aria-labelledby="dropdownUser1">
@@ -650,9 +697,14 @@ footer.footer {
                                  <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
                                  </li>
                                  <li>
-                                    <hr class="dropdown-divider">
+                                    <hr class="dropdown-divider" style="margin:0px;">
                                  </li>
-                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                                  <c:if test="${loginType ne 'kakao'}">
+                                  	 <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  </c:if>
+	                              <c:if test="${loginType eq 'kakao'}">
+	                                 <li><a class="dropdown-item mt-2" href="${kakaoLogout}">로그아웃</a></li>
+	                              </c:if>
                               </ul>
                            </div>
                         </c:if>
@@ -697,7 +749,7 @@ footer.footer {
 				</div>
 			</div>
 			<div class="row m-3">
-				<div class="col-12 d-flex justify-content-center">
+				<div class="col-12">
 					<p data-bs-toggle="modal" data-bs-target="#staticBackdrop1"
 						class="search">아이디 찾기&emsp;</p>
 					<span>/</span>
@@ -857,64 +909,75 @@ footer.footer {
 	
 </div>
     <!-- Footer-->
-	<footer class="footer">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3 footer-imgBox">
-					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-				</div>
-				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-					<ul class="list-inline mb-2">
-						<li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
-						<li class="list-inline-item">⋅</li>
-						<c:choose>
-							<c:when test="${not empty loginSession}">
-								<li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="list-inline-item"><a href="/signup/toSignup">회원가입</a></li>
-								<li class="list-inline-item">⋅</li>
-								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-							</c:otherwise>
-						</c:choose>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item">
-							<c:choose>
-								<c:when test="${not empty loginSession}">
-									<a href="/group/toCreateGroup">모임 만들기</a>
-								</c:when>
-								<c:otherwise>
-									<a href="/login/toLogin">모임 만들기</a>
-								</c:otherwise>
-							</c:choose>
-						</li>
-						<li class="list-inline-item">⋅</li>
-						<li class="list-inline-item"><a href="/privacy"
-							style="color: red; font-weight: bold;">개인정보처리방침</a></li>
-					</ul>
-					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-						57 이레빌딩</p>
-					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-						2022. All Rights Reserved.</p>
-				</div>
-				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-					<ul class="list-inline mb-0">
-						<li class="list-inline-item me-4"><a
-							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-						<li class="list-inline-item me-4"><a
-							href="https://twitter.com/?lang=ko"><i
-								class="bi-twitter fs-3"></i></a></li>
-						<li class="list-inline-item"><a
-							href="https://www.instagram.com/"><i
-								class="bi-instagram fs-3"></i></a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</footer>
+  <div class="footerWrapper mt-5" style="border-top:1px solid #e0e3e8;">
+    <div class="container">
+      <footer class="footer">
+        <div class="row">
+          <div class="col-lg-3 footer-imgBox">
+            <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다." />
+          </div>
+          <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+             <ul class="list-inline mb-2">
+            <li class="list-inline-item"><a href="/board/toBoard?pageNum=1&amount=10&keyword=&type=&category=공지">공지사항</a></li>
+            <li class="list-inline-item">⋅</li>
+            <c:choose>
+               <c:when test="${not empty loginSession}">
+                  <li class="list-inline-item"><a href="/mem/myPage">마이페이지</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <c:if test="${loginType ne 'kakao'}">
+					<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+	      		  </c:if>
+	      		  <c:if test="${loginType eq 'kakao'}">
+		<li class="list-inline-item"><a href="${kakaoLogout}">로그아웃</a></li>
+	      </c:if>
+               </c:when>
+               <c:otherwise>
+                  <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+                  <li class="list-inline-item">⋅</li>
+                  <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+               </c:otherwise>
+            </c:choose>
+            <li class="list-inline-item">⋅</li>
+            <li class="list-inline-item">
+               <c:choose>
+                  <c:when test="${not empty loginSession}">
+                     <a href="/group/toCreateGroup">모임 만들기</a>
+                  </c:when>
+                  <c:otherwise>
+                     <a href="/login/toLogin">모임 만들기</a>
+                  </c:otherwise>
+               </c:choose>
+            </li>
+            <li class="list-inline-item">⋅</li>
+            <li class="list-inline-item"><a href="/privacy"
+               style="color: red; font-weight: bold;">개인정보처리방침</a></li>
+         </ul>
+            <p class="text-muted small mb-4 mb-lg-0">
+              끼리끼리(주) 대표 : 이호준 | 개인정보관리책임자 : 김영완 |
+              사업자등록번호 : 22-02-22
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              주소 : 서울특별시 영등포구 선유동2로 57 이레빌딩
+            </p>
+            <p class="text-muted small mb-4 mb-lg-0">
+              &copy; Your Website 2022. All Rights Reserved.
+            </p>
+          </div>
+          <div class="col-lg-3 h-100 text-center text-lg-start my-auto">
+            <ul class="list-inline mb-0">
+            <li class="list-inline-item me-4"><a
+               href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+            <li class="list-inline-item me-4"><a
+               href="https://twitter.com/?lang=ko"><i
+                  class="bi-twitter fs-3"></i></a></li>
+            <li class="list-inline-item"><a
+               href="https://www.instagram.com/"><i
+                  class="bi-instagram fs-3"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
 </body>
 </html>
