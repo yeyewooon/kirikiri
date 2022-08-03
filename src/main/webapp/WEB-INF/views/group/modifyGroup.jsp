@@ -76,7 +76,10 @@ $(document).ready(function() {
 					  for (var i = files.length - 1; i >= 0; i--) {
 						  uploadSummernoteImageFile(files[i], this);
 					  }
-				  }
+				  },
+				 onKeyup: function(e) {
+				     	fn_checkByte(this); // 글자수 바이트 체크 
+				    }
 			  }
 		});
 	         // 주기적으로 감지할 대상 요소 선정
@@ -412,8 +415,7 @@ footer.footer {
 </head>
 <body>
 	<!--네비바-->
-      <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
-      <div style= "background-color : #fff;">
+   <header class="mb-3 border-bottom" style="box-shadow: 2px 1px 6px 1px #bfbfbf;">
       <div class="container">
          <!-- 접혔을 때 nav -->
          <nav id="navibar" class="navbar navbar-expand-md navbar-light"
@@ -440,7 +442,7 @@ footer.footer {
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard" style="font-size:18px;">자유게시판</a></li>
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
                               <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
@@ -460,16 +462,17 @@ footer.footer {
 
             </div>
          </nav>
-         <!-- 펼쳐졌을 때 nav -->
+		<!-- 펼쳐졌을 때 nav -->
          <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
             aria-label="Main navigation">
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
+
                <!-- logo -->
                <div class="col-2">
                   <a href="/" id="navLogo" class="mb-2 mb-lg-0"> <img
@@ -477,10 +480,11 @@ footer.footer {
 
                   </a>
                </div>
+
                <div class="col-5">
                   <div class="row align-items-center justify-content-center">
                      <div class="col-auto">
-                        <ul class="navbar-nav mb-2 mb-lg-0 me-2">
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-2" style = "font-size:18px;">
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link"
                                  href="/login/toLogin">로그인</a></li>
@@ -490,42 +494,58 @@ footer.footer {
                         </ul>
                      </div>
                      <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
             </div>
          </nav>
       </div>
-     </div>
    </header>
    	
    	<div style = "text-align:center;">
@@ -630,12 +650,14 @@ footer.footer {
 					</div>
 					<strong style = "font-family:InfinitySans-RegularA1;"class="mt-2">모집 내용</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
 						class="mt-2">모집내용은 회원들에게 그룹을 홍보할 때 표시됩니다. <br>변경사항이
-						있다면 나중에 언제든지 업데이트가 가능합니다.
+						있다면 나중에 언제든지 업데이트가 가능합니다.내용은 최대 1750자까지 입력 가능합니다.
 					</span>
 					<div class="form-floating mb-3 mt-2">
 						<textarea id="summernote" name="group_info" class="group_info">
 							${tbl_group_dto.group_info}
 						</textarea>
+						<sup class="d-none">(<span id="nowByte">0</span>/4000bytes)</sup>
+						<sup>(<span id="nowText">0</span>/1750자)</sup>
 					</div>
 				</div>
 			</div>
@@ -728,14 +750,14 @@ footer.footer {
 						<div
 							class="calBtn minusBtn d-flex justify-content-center align-items-center"
 							id="minusBtn">
-							<i class="fa-solid fa-minus"></i>
+							<i class="fa-solid fa-minus" style="font-size:14px;"></i>
 						</div>
 						<div
 							class="memberCnt d-flex justify-content-center align-items-center">${tbl_group_dto.group_people}</div>
 						<div
 							class="calBtn plusBtn d-flex justify-content-center align-items-center"
 							id="plusBtn">
-							<i class="fa-solid fa-plus"></i>
+							<i class="fa-solid fa-plus" style="font-size:14px;"></i>
 						</div>
 					</div>
 					<input type="text" name="group_people" id="group_people"
@@ -968,6 +990,43 @@ footer.footer {
     )
     }
   })
+  
+  //textarea 바이트 수 체크하는 함수
+	function fn_checkByte(obj){
+	    const maxByte = 3000; //최대 100바이트
+	    const text_val = obj.value; //입력한 문자
+	    const text_len = text_val.length; //입력한 문자수
+	    let totalByte=0;
+	    
+	    for(let i=0; i<text_len; i++){
+	    	const each_char = text_val.charAt(i);
+	        const uni_char = escape(each_char); //유니코드 형식으로 변환
+	        if(uni_char.length>4){
+	        	// 한글 : 2Byte
+	            totalByte += 2;
+	        }else{
+	        	// 영문,숫자,특수문자 : 1Byte
+	            totalByte += 1;
+	        }
+	    }
+	    if(totalByte>maxByte){
+	    		alert('사진포함 최대 1750자까지만 입력가능합니다.');
+	        	document.getElementById("nowByte").innerText = totalByte;
+	            document.getElementById("nowByte").style.color = "red";
+	            document.getElementById("nowText").innerText = text_len;            
+	        }else{
+	        	document.getElementById("nowByte").innerText = totalByte;
+	            document.getElementById("nowByte").style.color = "green";
+	            document.getElementById("nowText").innerText = text_len;
+	        }
+	    }
+  
+  
+  
+  
+  
+  
+  
   
 
   // Form으로 전송

@@ -241,8 +241,8 @@
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
 
@@ -267,35 +267,52 @@
                         </ul>
                      </div>
                      <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if>
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
@@ -320,7 +337,7 @@
 		            <div class="col-2">
 		            	<c:choose>
 		            		<%-- 관리자 계정이라면 공지 쓰기 --%>
-		            		<c:when test="${loginSession.user_email eq 'admin'}">
+		            		<c:when test="${loginSession.user_email eq leaderId}">
 		            			<select name="gboard_category" class="form-select selectBox" aria-label="유형">
 				                    <option selected value="default">선택</option>
 				                    <option value="공지">공지</option>
@@ -346,7 +363,7 @@
 		                <label class="form-label fs-5">제목</label>
 		            </div>
 		            <div class="col-8">
-		                <input type="text" id="title" name="gboard_title" class="form-control" placeholder="제목을 입력하세요.">
+		                <input type="text" id="title" name="gboard_title" class="form-control" placeholder="제목을 입력하세요. (최대 18자)" maxlength="18">
 		            </div>
 		        </div>
 
@@ -361,7 +378,7 @@
 	                <button type="button" id="cancelBtn" class="btn btn-light">취소</button>
 	            </div>
 	            <div class="col-auto">
-	                <button type="button" id="submitBtn" class="btn" style="background-color: #EDEDED;">작성 완료</button>
+	                <button type="button" id="submitBtn" class="btn" style="background-color: #c5d4db;">작성 완료</button>
 	            </div>
 	        </div>
         </form>
@@ -369,236 +386,236 @@
 
    <!-- Footer-->
     <div class="container">
-      <footer class="footer mt-5">
-         <div class="row">
-            <div class="col-lg-3 footer-imgBox">
-               <img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
-            </div>
-            <div class="col-lg-6 h-100 text-center text-lg-start my-auto">
-               <ul class="list-inline mb-2">
-                  <li class="list-inline-item"><a href="#!">공지사항</a></li>
-                  <li class="list-inline-item">⋅</li>
-                  <c:choose>
-                     <c:when test="${not empty loginSession}">
-                        <li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
-                     </c:when>
-                     <c:otherwise>
-                        <li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
-                        <li class="list-inline-item">⋅</li>
-                        <li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
-                     </c:otherwise>
-                  </c:choose>
-                  <li class="list-inline-item">⋅</li>
-                  <li class="list-inline-item">
-                     <c:choose>
-                        <c:when test="${not empty loginSession}">
-                           <a href="/group/toCreateGroup">모임 만들기</a>
-                        </c:when>
-                        <c:otherwise>
-                           <a href="/login/toLogin">모임 만들기</a>
-                        </c:otherwise>
-                     </c:choose>
-                  </li>
-                  <li class="list-inline-item">⋅</li>
-                  <li class="list-inline-item">
-                     <a href="privacy" style="color: red; font-weight: bold;">개인정보처리방침</a>
-                  </li>
-               </ul>
-               <p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
-                  개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
-               <p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
-                  57 이레빌딩</p>
-               <p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
-                  2022. All Rights Reserved.</p>
-            </div>
-            <div class="col-lg-3 h-100 text-center text-lg-end my-auto">
-               <ul class="list-inline mb-0">
-                  <li class="list-inline-item me-4"><a
-                     href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
-                  <li class="list-inline-item me-4"><a
-                     href="https://twitter.com/?lang=ko"><i
-                        class="bi-twitter fs-3"></i></a></li>
-                  <li class="list-inline-item"><a
-                     href="https://www.instagram.com/"><i
-                        class="bi-instagram fs-3"></i></a></li>
-               </ul>
-            </div>
-         </div>
-      </footer>
-   </div>
-
-   <script>
-      /* summernote */
-      $(document).ready(function() {
-         var fontList = ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','EarlyFontDiary', '맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'];
-         $('#summernote').summernote({
-              height: 450, // 에디터 높이
-              minHeight: 300, // 최소 높이
-              maxHeight: 550, // 최대 높이
-              focus: true, // 에디터 로딩후 포커스를 맞출지 여부
-              lang: "ko-KR", // 한글 설정
-              placeholder: '최대 1000자까지 작성 가능합니다.', //placeholder 설정
-              toolbar: [
-                  // [groupName, [list of button]]
-                  ['fontname', ['fontname']], // 글꼴
-                  ['fontsize', ['fontsize']], // 글자 크기
-                  // 굵기, 기울임꼴, 밑줄, 취소선, 서식 지우기
-                   ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-                   // 글자 색
-                   ['color', ['forecolor', 'color']],
-                   // 그림첨부, 링크만들기, 동영상첨부
-                   ['insert',['picture', 'link', 'video']],
-                   // 글머리, 번호매기기, 문단정렬
-                   ['para', ['ul', 'ol', 'paragraph']],
-                   // 줄간격
-                   ['height', ['height']],
-                  // 표 만들기
-                   ['table', ['table']],
-                   // 코드보기, 확대해서보기, 도움말
-                   ['view', ['codeview', 'help']]
-              ],
-              // 추가한 글꼴
-              fontNames: fontList,
-              // 추가한 폰트 사이즈
-              fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
-              fontNamesIgnoreCheck: fontList,
-              callbacks: {
-                 onImageUpload : function(files, editor, welEditable){
-                    // 파일 업로드(다중 업로드를 위해 반복문 사용)
-                    for (var i = files.length - 1; i >= 0; i--) {
-                       uploadSummernoteImageFile(files[i], this);
-                    }
-                 }
-              }
-         });
-
-         // 주기적으로 감지할 대상 요소 선정
-         let target = document.querySelector(".note-editable");
-
-         // DOM의 어떤 부분을 감시할지를 옵션 설정
-         let config = {
-            childList: true, // 자식노드 추가/제거 감지
-            subtree : true, // 대상 노드의 자식 뿐만 아니라 손자 이후로 모두 감시
-         };
-
-         // 옵저버 인스턴스 생성, 콜백함수 설정
-         let observer = new MutationObserver(function(mutationList){ // 타겟에 변화가 일어나면 콜백함수를 실행하게 된다.
-            //console.log(mutationList);
-            for(let mutation of mutationList){
-               if(mutation.removedNodes.length == 1){
-                  if(mutation.removedNodes[0].src != null) {
-                     let img = mutation.removedNodes[0].src;
-                     //console.log("img" + img);
-                     //console.log("src : " + src);
-                     let src = decodeURIComponent(img.replace("http://localhost/groupBoardFile/", ""));
-                     console.log(src);
-                     $.ajax({
-                        url : "/Gboard/delImg"
-                        , type : "post"
-                        , data : {"src" : src}
-                        , success : function(data){
-                           console.log(data);
-                        }, error : function(e){
-                           console.log(e);
-                        }
-                     })
-                  }
-               }
-            }
-         });
-         // 감지 시작
-         observer.observe(target, config);
-      });
-
-      // summernote 이미지 업로드 function
-      function uploadSummernoteImageFile(file, editor){
-         data = new FormData();
-         data.append("file", file);
-         $.ajax({
-            data : data
-            , type : "POST"
-            , enctype: "multipart/form-data"
-            , url : "/Gboard/summernoteImg"
-            , contentType : false
-            , processData : false
-            , success : function(data){
-               $(editor).summernote("editor.insertImage", data.url);
-            }, error : function(e){
-               console.log(e);
-            }
-         });
-      }
-
-      let imgArr = new Array();
-      // 작성 완료 버튼
-      $("#submitBtn").on("click", function(){
-
-         if($("#title").val() === ""){
-            Swal.fire({
-               icon: 'warning'
-               , title: '웁쓰...'
-               , text: '게시글 제목이 없어요. 제목을 작성해 주세요!'
-            })
-            $("#title").focus();
-            return;
-         }
-         if($("#summernote").summernote("isEmpty")){
-            Swal.fire({
-               icon: 'warning'
-               , title: '웁쓰...'
-               , text: '게시글에 내용이 없어요. 내용을 작성해 보세요!'
-            })
-            return;
-         }
-         if($(".selectBox").val() === "default"){
-            Swal.fire({
-               icon: 'warning'
-               , title: '웁쓰...'
-               , text: '게시글 분류를 선택하셔야 합니다!'
-            })
-            return;
-         }
-
-         let content = $("#summernote").summernote("code");
-         let regImg = /(<img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>)/g;
-         let src;
-         while(regImg.test(content)){
-            src = RegExp.$2.replace("/groupBoardFile/", "");
-            imgArr.push(src);
-         }
-         console.log(imgArr);
-         console.log(imgArr.length);
-
-         if(imgArr.length !== 0){
-            for(let i = 0; i < imgArr.length; i++){
-               let inputImg = $("<input>").attr({
-                  "type" : "hidden"
-                  , "class" : "imgs"
-                  , "name" : "imgs[]"
-                  , "value" : imgArr[i]
-               });
-               $("#writeForm").append(inputImg);
-            };
-         }
-
-         Swal.fire({
-            icon: 'success'
-            , title: '게시글이 등록되었어요!'
-            , showConfirmButton: true
-         }).then((result) =>{
-            if(result.isConfirmed){
-               $("#writeForm").submit();
-            }
-         });
-      });
-
-      // 취소 버튼
-      $("#cancelBtn").on("click", function(){
-         location.href = "/Gboard/toBoard?seq_group" + ${seq_group};
-      })
-
-   </script>
+		<footer class="footer mt-5">
+			<div class="row">
+				<div class="col-lg-3 footer-imgBox">
+					<img src="/resources/images/kirilogo.png" alt="오류가 발생했습니다.">
+				</div>
+				<div class="col-lg-6 h-100 text-center text-lg-start my-auto">
+					<ul class="list-inline mb-2">
+						<li class="list-inline-item"><a href="#!">공지사항</a></li>
+						<li class="list-inline-item">⋅</li>
+						<c:choose>
+							<c:when test="${not empty loginSession}">
+								<li class="list-inline-item"><a href="member/toMyPage">마이페이지</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogout">로그아웃</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="list-inline-item"><a href="/signup/toSignupAgree">회원가입</a></li>
+								<li class="list-inline-item">⋅</li>
+								<li class="list-inline-item"><a href="/login/toLogin">로그인</a></li>
+							</c:otherwise>
+						</c:choose>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item">
+							<c:choose>
+								<c:when test="${not empty loginSession}">
+									<a href="/group/toCreateGroup">모임 만들기</a>
+								</c:when>
+								<c:otherwise>
+									<a href="/login/toLogin">모임 만들기</a>
+								</c:otherwise>
+							</c:choose>
+						</li>
+						<li class="list-inline-item">⋅</li>
+						<li class="list-inline-item">
+							<a href="privacy" style="color: red; font-weight: bold;">개인정보처리방침</a>
+						</li>
+					</ul>
+					<p class="text-muted small mb-4 mb-lg-0">끼리끼리(주) 대표 : 이호준 |
+						개인정보관리책임자 : 김영완 | 사업자등록번호 : 22-02-22</p>
+					<p class="text-muted small mb-4 mb-lg-0">주소 : 서울특별시 영등포구 선유동2로
+						57 이레빌딩</p>
+					<p class="text-muted small mb-4 mb-lg-0">&copy; Your Website
+						2022. All Rights Reserved.</p>
+				</div>
+				<div class="col-lg-3 h-100 text-center text-lg-end my-auto">
+					<ul class="list-inline mb-0">
+						<li class="list-inline-item me-4"><a
+							href="https://ko-kr.facebook.com"><i class="bi-facebook fs-3"></i></a></li>
+						<li class="list-inline-item me-4"><a
+							href="https://twitter.com/?lang=ko"><i
+								class="bi-twitter fs-3"></i></a></li>
+						<li class="list-inline-item"><a
+							href="https://www.instagram.com/"><i
+								class="bi-instagram fs-3"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</footer>
+	</div>
+	
+	<script>
+		/* summernote */
+		$(document).ready(function() {
+			var fontList = ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','EarlyFontDiary', '맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'];
+			$('#summernote').summernote({
+				  height: 450, // 에디터 높이
+				  minHeight: 300, // 최소 높이
+				  maxHeight: 550, // 최대 높이
+				  focus: true, // 에디터 로딩후 포커스를 맞출지 여부
+				  lang: "ko-KR", // 한글 설정
+				  placeholder: '최대 1000자까지 작성 가능합니다.', //placeholder 설정
+				  toolbar: [
+						// [groupName, [list of button]]
+						['fontname', ['fontname']], // 글꼴
+						['fontsize', ['fontsize']], // 글자 크기
+						// 굵기, 기울임꼴, 밑줄, 취소선, 서식 지우기
+					    ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+					 	// 글자 색
+					    ['color', ['forecolor', 'color']],
+					 	// 그림첨부, 링크만들기, 동영상첨부
+					    ['insert',['picture', 'link', 'video']],
+					    // 글머리, 번호매기기, 문단정렬
+					    ['para', ['ul', 'ol', 'paragraph']],
+					    // 줄간격
+					    ['height', ['height']],
+						// 표 만들기
+					    ['table', ['table']],
+					 	// 코드보기, 확대해서보기, 도움말
+					    ['view', ['codeview', 'help']]
+				  ],
+				  // 추가한 글꼴
+				  fontNames: fontList,
+				  // 추가한 폰트 사이즈
+				  fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+				  fontNamesIgnoreCheck: fontList,
+				  callbacks: {
+					  onImageUpload : function(files, editor, welEditable){
+						  // 파일 업로드(다중 업로드를 위해 반복문 사용)
+						  for (var i = files.length - 1; i >= 0; i--) {
+							  uploadSummernoteImageFile(files[i], this);
+						  }
+					  }
+				  }
+			});
+			
+			// 주기적으로 감지할 대상 요소 선정
+			let target = document.querySelector(".note-editable");
+			
+			// DOM의 어떤 부분을 감시할지를 옵션 설정
+			let config = { 
+				childList: true, // 자식노드 추가/제거 감지
+				subtree : true, // 대상 노드의 자식 뿐만 아니라 손자 이후로 모두 감시
+			};
+			
+			// 옵저버 인스턴스 생성, 콜백함수 설정
+			let observer = new MutationObserver(function(mutationList){ // 타겟에 변화가 일어나면 콜백함수를 실행하게 된다.
+				//console.log(mutationList);
+				for(let mutation of mutationList){
+					if(mutation.removedNodes.length == 1){
+						if(mutation.removedNodes[0].src != null) {
+							let img = mutation.removedNodes[0].src;
+							//console.log("img" + img);
+							//console.log("src : " + src);
+							let src = decodeURIComponent(img.replace("http://localhost/groupBoardFile/", ""));
+							console.log(src);
+							$.ajax({
+								url : "/Gboard/delImg"
+								, type : "post"
+								, data : {"src" : src}
+								, success : function(data){
+									console.log(data);
+								}, error : function(e){
+									console.log(e);
+								}
+							})
+						}
+					}
+				}
+			}); 
+			// 감지 시작
+			observer.observe(target, config);
+		});
+		
+		// summernote 이미지 업로드 function
+		function uploadSummernoteImageFile(file, editor){
+			data = new FormData();
+			data.append("file", file);
+			$.ajax({
+				data : data
+				, type : "POST"
+				, enctype: "multipart/form-data"
+				, url : "/Gboard/summernoteImg"
+				, contentType : false
+				, processData : false
+				, success : function(data){
+					$(editor).summernote("editor.insertImage", data.url);
+				}, error : function(e){
+					console.log(e);
+				}
+			});
+		}
+		
+		let imgArr = new Array();
+		// 작성 완료 버튼
+		$("#submitBtn").on("click", function(){
+			
+			if($("#title").val() === ""){
+				Swal.fire({
+					icon: 'warning'
+					, title: '웁쓰...'
+					, text: '게시글 제목이 없어요. 제목을 작성해 주세요!'
+				})
+				$("#title").focus();
+				return;
+			}
+			if($("#summernote").summernote("isEmpty")){
+				Swal.fire({
+					icon: 'warning'
+					, title: '웁쓰...'
+					, text: '게시글에 내용이 없어요. 내용을 작성해 보세요!'
+				})
+				return;
+			}
+			if($(".selectBox").val() === "default"){
+				Swal.fire({
+					icon: 'warning'
+					, title: '웁쓰...'
+					, text: '게시글 분류를 선택하셔야 합니다!'
+				})
+				return;
+			}
+			
+			let content = $("#summernote").summernote("code");
+			let regImg = /(<img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>)/g;
+			let src;
+			while(regImg.test(content)){
+				src = RegExp.$2.replace("/groupBoardFile/", "");
+				imgArr.push(src);
+			}
+			console.log(imgArr);
+			console.log(imgArr.length);
+			
+			if(imgArr.length !== 0){
+				for(let i = 0; i < imgArr.length; i++){
+					let inputImg = $("<input>").attr({
+						"type" : "hidden"
+						, "class" : "imgs"
+						, "name" : "imgs[]"
+						, "value" : imgArr[i]
+					});
+					$("#writeForm").append(inputImg);
+				};
+			}
+			
+			Swal.fire({
+				icon: 'success'
+				, title: '게시글이 등록되었어요!'
+				, showConfirmButton: true
+			}).then((result) =>{
+				if(result.isConfirmed){
+					$("#writeForm").submit();
+				}
+			});
+		});
+		
+		// 취소 버튼
+		$("#cancelBtn").on("click", function(){
+			location.href = "/Gboard/toBoard?seq_group=" + ${seq_group};
+		})
+		
+	</script>
 </body>
 </html>

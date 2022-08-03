@@ -24,10 +24,11 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Black+Han+Sans&family=Mochiy+Pop+One&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
 <style>
  	* {
      box-sizing: border-box;
-     font-family: 'MICEGothic Bold';
+     font-family: 'InfinitySans-RegularA1';
 	 }
 	
 	 /* navi bar */
@@ -82,6 +83,8 @@
 	 
 	 .profiles{
 	     background-color: #ffffff8e;
+	     width:auto;
+	     min-width:500px;
 	     padding : 35px;
 	     height: max-content;
 	     border-radius:20px;
@@ -93,13 +96,14 @@
 	.line {
 		border: none;
 		background-color: rgb(102, 154, 209, 0.5);
-		margin-top: 10px;
-		width: 180px;
-		position: absolute;
-		top: 16px;
+		margin : auto;
+		position:relative;
+		bottom:20px;
+		width: 100%;
 		height: 20px;
 		box-shadow: 3px 2px 2px rgb(25, 104, 184);
 	}
+	
 	
 	h1 {
 		margin: 0;
@@ -109,7 +113,7 @@
 	 .profile {
 	     margin: auto;
 	 }
-	
+	 
 	 #profile_image {
 	     width: 100%;
 	     height: 100%;
@@ -181,6 +185,11 @@
 	 .meeting span {
 	     cursor: pointer;
 	 }
+	 .contentBox{
+         padding : 50px;
+         margin-left : 20px;
+         margin-right : 20px;
+     }
 	
 	 /*풋터 영역*/
 	 .footerBox {
@@ -206,13 +215,30 @@
 	 }
 	
 	 /* 눈누 폰트 */
-	 @font-face {
-	     font-family: 'MICEGothic Bold';
-	     src:
-	         url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
-	     font-weight: 700;
-	     font-style: normal;
-	 }
+@font-face {
+   font-family: 'MICEGothic Bold';
+   src:
+       url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2') format('woff2');
+   font-weight: 700;
+   font-style: normal;
+}
+@font-face {
+   font-family: 'InfinitySans-RegularA1';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@2.1/InfinitySans-RegularA1.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
+
+@font-face {
+   font-family: 'BMJUA';
+   src:
+      url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/BMJUA.woff')
+      format('woff');
+   font-weight: normal;
+   font-style: normal;
+}
 </style>
 </head>
 <body>
@@ -245,7 +271,7 @@
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="">자유게시판</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard" style="font-size:18px;">자유게시판</a></li>
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
                               <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
@@ -265,14 +291,14 @@
 
             </div>
          </nav>
-         <!-- 펼쳐졌을 때 nav -->
+      <!-- 펼쳐졌을 때 nav -->
          <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
             aria-label="Main navigation">
             <div class="row w-100 align-items-center">
                <div class="col-5 d-flex justify-content-center">
                   <ul class="navbar-nav mb-2 mb-lg-0">
-                     <li class="nav-item"><a class="nav-link mx-2" href="/board/toBoard">자유
-                           게시판</a></li>
+                     <li class="nav-item"><a class="nav-link mx-2"
+                        href="/board/toBoard" style="font-size:18px;">자유 게시판</a></li>
                   </ul>
                </div>
 
@@ -287,7 +313,7 @@
                <div class="col-5">
                   <div class="row align-items-center justify-content-center">
                      <div class="col-auto">
-                        <ul class="navbar-nav mb-2 mb-lg-0 me-2">
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-2" style = "font-size:18px;">
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link"
                                  href="/login/toLogin">로그인</a></li>
@@ -297,35 +323,52 @@
                         </ul>
                      </div>
                      <div class="col-auto user">
-                  <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
-                  <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                     <div class="dropdown text-end">
-                        <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false"> 
-                        <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
-                        </a>
-                        <ul class="dropdown-menu text-small"
-                           aria-labelledby="dropdownUser1">
-                           <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                           <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
-                           <li><hr class="dropdown-divider"></li>
-                           <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                        </ul>
-                     </div>
-                  </c:if> 
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
+                                       페이지이동</a></li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <div class="dropdown text-end">
+                              <a href="/"
+                                 class="d-block link-dark text-decoration-none dropdown-toggle"
+                                 id="dropdownUser1" data-bs-toggle="dropdown"
+                                 aria-expanded="false"> <img
+                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
+                                 height="40" class="rounded-circle">
+                              </a>
+                              <ul class="dropdown-menu text-small"
+                                 aria-labelledby="dropdownUser1">
+                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
+                                 </li>
+                                 <li>
+                                    <hr class="dropdown-divider">
+                                 </li>
+                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                              </ul>
+                           </div>
+                        </c:if>
                      </div>
                   </div>
                </div>
@@ -333,18 +376,20 @@
          </nav>
       </div>
    </header>
-	<div class="container py-5">
 		<!-- header 부분 -->
 		<div class="row m-0 topHeader">
-            	<div class="row profileTitle mb-5 text-center justify-content-center" style="font-family: 'Mochiy Pop One', sans-serif;">
-					<h1 style="font-family: 'Mochiy Pop One', sans-serif;">내가 쓴 글</h1>
+            <div class="row profileTitle mb-5 justify-content-center" style="font-family: 'Mochiy Pop One', sans-serif;">
+				<div class="col-auto">
+					<h1 style="font-family: 'Do Hyeon', sans-serif;">내가 쓴 글</h1>
 					<div class="line"></div>
 				</div>
-                <div class="col-md-6 mt-3 mb-4 d-flex justify-content-center">
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-6 mt-3 mb-4">
                     <div id="profilePic">
                         <c:choose>
                             <c:when test="${empty memberdto.user_image}">
-                                <img src="/resources/images/default_profile.jpg" id="profile_image">
+                                <img src="/resources/images/메인사진2(배경).png" id="profile_image">
                             </c:when>
                             <c:otherwise>
                                 <img src="/profile/${memberdto.user_image}" id="profile_image">
@@ -352,7 +397,7 @@
                         </c:choose>
                     </div>
                 </div>
-                <div class="col-md-5 profiles">
+                <div class="col-6 profiles">
                     <div class="col-12" id="profileName">
                         <strong>${memberdto.user_nickname}</strong> 
                         <span style="font-size: 15px">님</span>
@@ -373,24 +418,26 @@
                         <span>${selectGroupBoardCount} 건</span>
                     </div>
                 </div>
+			</div>
             </div>
-		<hr />
-		<form id="searchForm">
+		<hr/>
+		<div class="contentBox">
+			<form id="searchForm">
 			<div class="row">	
-				<div class="col-12" style="display:flex; justify-content:end;">
+				<div class="col-12 mt-2" style="display:flex; justify-content:end;">
 					<input class="d-none" type="text" id="user_email" value="${memberdto.user_email}">
-					<select class="form-select title" aria-label="Default select example"
+					<select class="form-select title me-3" aria-label="Default select example"
 						name="boardNameCategory" style="width: 100px;">
 						<option value="normal">일반</option>
 						<option value="meeting">모임</option>
 					</select>
-					<select class="form-select" aria-label="Default select example"
+					<select class="form-select me-3" aria-label="Default select example"
 						name="category" id="category" style="width: 100px;">
 						<option value="board_all">전체</option>
 						<option value="board_title">제목</option>
 						<option value="board_content">내용</option>
 					</select>		
-					<input type="text" name="keyword" class="form-control keyword" placeholder="검색" style="width: 250px;">		
+					<input type="text" name="keyword" class="form-control keyword me-3" placeholder="검색" style="width: 250px;">		
 					<button type="button" class="btn btn-outline-secondary" id="searchBtn" style="width: 70px;">검색</button>
 				</div>
 			</div>	
@@ -530,6 +577,7 @@
 				
 				 for (let i=startIdx; i < endIdx; i++) {
 			        	const dto = data[i];
+						console.log(dto.seq_board);
 			            let tr = $("<tr>");
 			            let td1 = $("<td>").append(type);
 			            let td2;
@@ -538,11 +586,15 @@
 			            let td5;
 			            let td6;
 			            let a;
-			            let span = $("<span>");
+			            let span= $("<span>");
 			            if (type === "일반") {
 			                td2 = $("<td>");
 			                a = $("<a>");
-			                a.attr('href','/board/toMyDetailWrite?seq_board=' + dto.seq_board)
+			                a.attr('href','/board/toDetailView?seq_board=' + dto.seq_board);
+			                a.css({
+			                	"color":"black",
+			                	"text-decoration":"none",
+			                });
 			                a.append(dto.board_title);
 			                a.appendTo(td2);
 			                
@@ -563,14 +615,18 @@
 			                span.addClass("text-center boardDelete");
 			                span.css("cursor", "pointer");
 			                span.on("click", function () {
-			                  boardDelete(this, "/admin/boardDelete", "seq_board");
+			                  boardDelete(this, "/mem/boardDelete", "seq_board");
 			                });
 			              } else if (type === "모임") {
 			            	  
 			             	td2 = $("<td>");
 			                a = $("<a>");
-			                a.attr('href','/group_board/toMyDetailWrite?seq_board=' + dto.seq_board)
-			                a.append(dto.title);
+			                a.attr('href','/Gboard/toDetailView?seq_group_board=' + dto.seq_group_board);
+			                a.css({
+			                	"color":"black",
+			                	"text-decoration":"none",
+			                });
+			                a.append(dto.gboard_title);
 			                a.appendTo(td2);
 			                
 			                td3 = $("<td>").append(dto.written_date);
@@ -590,12 +646,12 @@
 			                span.addClass("text-center boardGroupDelete");
 			                span.css("cursor", "pointer");
 			                span.on("click", function () {
-			                  boardDelete(this, "/admin/groupBoardDelete", "seq_groud_board");
+			                  boardDelete(this, "/mem/groupBoardDelete", "seq_groud_board");
 			                });
 			              }
 
 					
-					tr.append(td1, td2, td3, td4, td5, td6, td7);
+					tr.append(td1, td2, td3, td4, td5, td6);
 					tr.appendTo("tbody");
 				}
 			}
@@ -712,7 +768,6 @@
 			let seq_board = +$(target).parent().next().text();
 			let user_email = $("#user_email").val();
 			console.log("seq_board: ", seq_board)
-			console.log(typeof dataType)
 			Swal.fire({
 			  title: '정말 삭제하시겠습니까?',
 			  text: "다시 복구 할수 없습니다.!",
@@ -755,6 +810,7 @@
 		});
 		
 		</script>
+	</div>
 		<!-- Footer-->
 		<footer class="footer mt-5">
 			<div class="row">
@@ -813,6 +869,5 @@
 				</div>
 			</div>
 		</footer>
-	</div>
 </body>
 </html>

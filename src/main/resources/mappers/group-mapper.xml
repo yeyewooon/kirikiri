@@ -72,10 +72,10 @@
       update group_member set "access" =
       <choose>
          <when test = "access.equals('주최자')">
-            '멤버' where user_email = #{user_email}
+            '멤버' where user_email = #{user_email} and seq_group = #{seq_group}
          </when>
          <when test = "access.equals('멤버')">
-            '주최자' where user_email = #{user_email}
+            '주최자' where user_email = #{user_email} and seq_group = #{seq_group}
          </when>
       </choose>
    </update>
@@ -87,6 +87,7 @@
          separator="," close=")">
          #{email}
       </foreach>
+      and seq_group = #{seq_group}
    </delete>
 <!-- ////////////////////////////////////////////////////////////////// -->
 <!-- 김영완 -->  

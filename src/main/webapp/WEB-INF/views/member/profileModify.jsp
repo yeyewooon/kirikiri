@@ -583,14 +583,13 @@ footer.footer {
 							<p>비밀번호</p>
 						</div>
 						<div class="col-md-7" style="text-align: left;">
-							<input type="text" id="password" name="user_pw" class="form-control">
+							<input type="password" id="password" name="user_pw" class="form-control" style="font-family:none;">
 							<ul class="desc" style="font-size: 0.8rem; padding: 10px">
 								<li>영문, 숫자, 특수문자를 혼합하여 최소 8자리 이상 20자리 이하로 설정해 주세요.</li>
 								<li>기타 일반 정보 등으로부터 추측이 용이한 비밀번호는 피해주세요.</li>
 								<li>타사 서비스에서 사용하는 비밀번호와 동일한 비밀번호를 사용하지 마십시오.</li>
 								<li>번호를 바꾸시려면 중복확인은 필수 항목입니다.</li>
 							</ul>
-							<input type="text" class='d-none' value="${memberdto.user_pw}" name="data_password">
 						</div>
 						<div class="col-2"></div>
 					</div>		
@@ -599,13 +598,14 @@ footer.footer {
 							<p>비밀번호 확인</p>
 						</div>
 						<div class="col-md-7" style="text-align: left;">
-							<input type="text" id="password-check" class="form-control">
+							<input type="password" id="password-check" class="form-control" style="font-family:none;">
 							<span class="d-none" id="wrong-password-check" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호와 맞지 않습니다. **</span>
 							<span class="d-none" id="right-password-check" style="color:green; font-size:0.8rem; margin-left:8px;">** 비밀번호와 일치합니다. **</span>
 						</div>
 						<div class="col-2"></div>
 					</div>					
 				</c:if>
+				<input type="text" class='d-none' value="${memberdto.user_pw}" name="data_password">
 				<div class="row">
 					<div class="col-md-3">
 						<p>이메일</p>
@@ -756,10 +756,17 @@ footer.footer {
 						<p style="margin-top: 50px;">자기소개</p>
 					</div>
 					<div class="col-md-7" style="height: 120px;">
-						<textarea class="form-control" name="user_intro" id="introMessage">${memberdto.user_intro}</textarea>
+						<textarea class="form-control" name="user_intro" id="introMessage" maxlength="29">${memberdto.user_intro}</textarea>
 					</div>
 					<div class="col-2"></div>
 				</div>
+				<div class="row">
+					<div class="col-3"></div>
+					<div class="col-7" id="user_intro_cnt">
+						0/30
+					</div>
+				<div class="col-2"></div>
+			</div>
 			</div>
 			<div class="row">
 				<div class="col">
@@ -769,6 +776,21 @@ footer.footer {
 			</div>
 		</form>
 		<script>
+		if($("#introMessage").val()!=""){
+			$('#user_intro_cnt').html($("#introMessage").val().length + '/30');
+			
+		}
+		
+		$('#introMessage').keyup(function (e){
+	 		  const top = $('#user_intro').prop('scrollHeight');
+	          $('#introMessage').scrollTop(top);
+	          var content = $(this).val();
+	          if($(this).val().length > 29) {
+	           $(this).val($(this).val().substring(0, 30));
+	          }
+	          $('#user_intro_cnt').html(content.length + '/30');
+	      });
+		
 		/* 취소버튼 */
 		$("#backPageBtn").on("click",function(){
 			location.href="/mem/myPage";

@@ -63,7 +63,7 @@ body,html{
 .sidebar {
 	float: left;
 	width: 15%;
-	height: 100%;
+	height: 1200px;
 	background-color: #4e78f5;
 }
 
