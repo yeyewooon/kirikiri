@@ -145,6 +145,7 @@ function uploadSummernoteImageFile(file, editor){
 <title>Modify Group</title>
 <style>
 <!-- 폰트 -->
+
 @font-face {
     font-family: 'Katuri';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_13@1.0/Katuri.woff') format('woff');
@@ -243,13 +244,14 @@ header {
         }
 
 /*타이틀*/
-.create-title{
-    font-family: katuri;
+.modify-title{
+    font-family: 'Katuri';
     font-size: 60px;
     font-weight: bold;
     text-align: center;
-    background: linear-gradient(to top, #FFE400 20%, transparent 30%)
+    background: linear-gradient(to top, #FFE400 20%, transparent 30%);
     }
+    
 .title-image{
     margin-bottom: 35px;
     width: 70px;
@@ -258,11 +260,11 @@ header {
 	
 /*row 영역*/
 .style{
-	border: 2px solid #f3fffc;
+	border: 2px solid #ff8f00;
     border-radius: 50px;
     padding: 50px;
-    background-color: #f3fffc;
-    box-shadow: 3px 3px 5px 5px rgb(182 182 181);
+    background-color: #fffeea8a;
+    box-shadow: 3px 3px 5px 5px rgb(195 145 27);
 }
 
 /*Interest 버튼 영역*/
@@ -271,20 +273,20 @@ header {
 }
 
 .btn-outline-primary{
-	color:black;
-	border: 2px solid #b5a8a8;
+	color: #ffb526;
+    border: 3px solid #ffcd70;
 }
 
 .btn-outline-primary:hover {
     color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
+    background-color: #fcab4e;
+    border-color: #e27500;
     }
     
 .btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
+	color: #fff;
+    background-color: #fcab4e;
+    border-color: #e27500;
 }
 
 .btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
@@ -293,12 +295,6 @@ header {
 
 .btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus, .btn-outline-primary.active:focus, .btn-outline-primary.dropdown-toggle.show:focus, .btn-outline-primary:active:focus {
     box-shadow: 0 0 0 0.25rem rgb(218 222 229 / 50%);
-}
-
-.btn-outline-primary:hover {
-    color: #fff;
-    background-color: #b5a8a8;
-    border-color: #b5a8a8;
 }
 
 /*Basic Info*/
@@ -592,7 +588,7 @@ footer.footer {
    </header>
    	
    	<div style = "text-align:center;">
-		<span class = "create-title">Modify Group</span><span><img class = "title-image" src = "/resources/images/Create_Group.png"></span>
+		<span class ="modify-title">Modify Group</span><span><img class = "title-image" src = "/resources/images/Create_Group.png"></span>
 	</div>
 	<div class="container w-75 mainContainer">
 		<form action="/group/modifyGroup" method="post"
@@ -610,7 +606,7 @@ footer.footer {
 					value="${tbl_group_dto.seq_group}" hidden>
 				<!--관심사 버튼  -->
 				<div class="col-9 mainTextInterest d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Interests</h4>
+					<h4 style = "font-family:Katuri;">Interests</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">주제가 구체적일수록 비슷한 관심사를 가진 사람들에게
 						그룹을 <br>홍보하기가 더 쉬워집니다. 주제는 1개만 선택 가능합니다.<br>
 					<br> 기존에 선택하셨던 주제는 <strong>${tbl_group_dto.group_category}</strong>
@@ -680,7 +676,7 @@ footer.footer {
 				<!--기본 글쓰기 -->
 				<div
 					class="col-md-9 mainTextBasicInfo d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Basic Info</h4>
+					<h4 style = "font-family:Katuri;">Basic Info</h4>
 					<strong class="mt-2">모임 이름</strong> <span style="font-family:InfinitySans-RegularA1; font-size: 14px;"
 						class="mt-2">사람들이 그룹의 성격과 내용을 파악할 수 있는 이름을 지어주세요. 떠오르는 기발한
 						이름이 있나요? <br> 마음이 바뀌면 나중에 다시 변경할 수 있습니다.
@@ -716,7 +712,7 @@ footer.footer {
 				<!--위치 설정-->
 				<div
 					class="col-9 mainText mainTextMap d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Location</h4>
+					<h4 style = "font-family:Katuri;">Location</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">해당 지역의 사람들이 귀하의 이벤트를 발견하도록 돕고
 						<br> 참석자들에게 위치를 제공해주세요.<br>
 					<br> 기존에 선택하셨던 위치는 <strong>${tbl_group_dto.group_site}</strong>
@@ -749,7 +745,7 @@ footer.footer {
 				<!--이미지 올리기 -->
 				<div
 					class="col-9 mainTextFile d-flex flex-column justify-content-start">
-					<h4 style ="font-family:katuri;">Main Image</h4>
+					<h4 style ="font-family:Katuri;">Main Image</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">썸네일로 보여질 이미지입니다. <br>본인이
 						생각하는 최고의 사진을 넣어주세요!
 					</span>
@@ -782,7 +778,7 @@ footer.footer {
 				<!--위치 설정-->
 				<div
 					class="col-md-9 mainText mainTextMap d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Member</h4>
+					<h4 style = "font-family:Katuri;">Member</h4>
 					<span style="font-family:InfinitySans-RegularA1; font-size: 14px;">인원수를 조정을 통해 유동적인 모임을 생성하세요!<br>
 						인원은 최소 2명부터 최대 10명까지 가능합니다.<br>
 					<br> 현재 모임의 맴버수는 <strong>${fn:length(memberList)}명</strong>
@@ -816,7 +812,7 @@ footer.footer {
 				</div>
 				<!--이미지 올리기 -->
 				<div class="col-md-9 mainTextFile d-flex flex-column justify-content-start">
-					<h4 style = "font-family:katuri;">Guideline</h4>
+					<h4 style = "font-family:Katuri;">Guideline</h4>
 					<span>
 						<h5>거의 다왔습니다! 잠시 시간을 내어 가이드라인을 읽어주세요.</h5>
 					</span> <span style="font-size: 14px;font-family:InfinitySans-RegularA1;" class="mt-2">끼리끼리는 끈끈한 커뮤니티를
@@ -1125,8 +1121,6 @@ footer.footer {
 			  let reader = new FileReader();
 			    reader.readAsDataURL(this.files[0]);
 			    reader.onload = function (e) {
-			    	console.log("hello");
-			    	console.log(e.target);
 			    	profile_image.src = e.target.result;
 			    }
 		  }else { // 사진 파일이 아닐 때

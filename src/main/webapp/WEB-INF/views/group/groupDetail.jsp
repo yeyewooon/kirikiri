@@ -1329,11 +1329,12 @@ footer.footer {
                data : {"seq_group" : seq_group,"user_email" : loginSession_id},
                success : function(data) {
                       if(data == "success") {
-                       Swal.fire(
+                    	  console.log("hello");
+                        Swal.fire(
                         '모임가입 신청 완료!',
                         '호스트가 승인을 할 때까지 기다려주세요!',
                         'success'
-                     )
+                     ) 
                       }
                    },
                    error : function(e) {
@@ -1371,7 +1372,7 @@ footer.footer {
                      $("#wishCancelBtn").removeClass("d-none"); // 찜한 취소한 즉시 wishList 버튼 보이게
                      setTimeout(function() {
                      window.location.href = "";
-                  },800);
+                  },500);
                }
             },error : function(e) {
             	Swal.fire({

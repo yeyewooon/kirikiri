@@ -257,34 +257,32 @@ header {
 }
 /*row 영역*/
 .style {
-	border: 2px solid #f3fffc;
-	border-radius: 50px;
-	padding: 50px;
-	background-color: #f3fffc;
-	box-shadow: 3px 3px 5px 5px rgb(182, 182, 181);
+    border: 2px solid #ff8f00;
+    border-radius: 50px;
+    padding: 50px;
+    background-color: #fffeea8a;
+    box-shadow: 3px 3px 5px 5px rgb(195 145 27);
 }
 /*Interest 버튼 영역*/
 .categoryBtn {
 	font-family: InfinitySans-RegularA1;
 }
 
-.btn-outline-primary {
-	color: black;
-	border: 2px solid #b5a8a8;
+.btn-outline-primary{
+	color: #ffb526;
+    border: 3px solid #ffcd70;
 }
 
 .btn-outline-primary:hover {
+    color: #fff;
+    background-color: #fcab4e;
+    border-color: #e27500;
+    }
+    
+.btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show, .btn-outline-primary:active {
 	color: #fff;
-	background-color: #b5a8a8;
-	border-color: #b5a8a8;
-}
-
-.btn-check:active+.btn-outline-primary, .btn-check:checked+.btn-outline-primary,
-	.btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show,
-	.btn-outline-primary:active {
-	color: #fff;
-	background-color: #b5a8a8;
-	border-color: #b5a8a8;
+    background-color: #fcab4e;
+    border-color: #e27500;
 }
 
 .btn-check:active+.btn-outline-primary:focus, .btn-check:checked+.btn-outline-primary:focus,
@@ -299,10 +297,21 @@ header {
 	box-shadow: 0 0 0 0.25rem rgb(218 222 229/ 50%);
 }
 
-.btn-outline-primary:hover {
+.btn-outline-warning{
+	color: #ffb526;
+    border: 3px solid #ffcd70;
+}
+
+.btn-outline-warning:hover {
+    color: #fff;
+    background-color: #fcab4e;
+    border-color: #e27500;
+    }
+    
+.btn-check:active+.btn-outline-warning, .btn-check:checked+.btn-outline-warning, .btn-outline-warning.active, .btn-outline-warning.dropdown-toggle.show, .btn-outline-warning, .btn-outline-warning:active {
 	color: #fff;
-	background-color: #b5a8a8;
-	border-color: #b5a8a8;
+    background-color: #fcab4e;
+    border-color: #e27500;
 }
 
 /*Basic Info*/
@@ -372,7 +381,7 @@ a {
 }
 
 .mainIcon i {
-	color: #316f8c;
+	color: #aa6565;
 }
 
 .mainFooter {
@@ -393,7 +402,8 @@ ul {
 }
 
 .memberCntBox {
-	background-color: #c4d4eb;
+	background-color: #fcab4e;
+    border-color: #e27500;
 	width: 140px;
 	border-radius: 10px;
 	height: 30px;
@@ -819,8 +829,8 @@ footer.footer {
 	<!--뒤로가기 , 동의 후 등록-->
 	<div class="mainFooter d-flex justify-content-center align-items-center mt-3">
 		<span class="mainFooterBtnBox">
-			<button class="btn btn-outline-warning" id="backBtn">뒤로 가기</button>
-			<button class="btn btn-primary ms-4" id="registerGroupBtn">동의후 등록</button>
+			<button class="btn btn-outline-secondary" id="backBtn">뒤로 가기</button>
+			<button class="btn btn-warning ms-4" id="registerGroupBtn">동의후 등록</button>
 		</span>
 	</div>
 	<!-- Footer-->
