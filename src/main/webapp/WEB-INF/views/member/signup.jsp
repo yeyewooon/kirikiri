@@ -660,6 +660,9 @@ span{
 			 if($("#phone1 option:selected").val() == "010" && $("#phone2").val().length != "4" ){
 				 sweetAlertFail("올바르지 않은 전화번호 형식입니다."); 
 				 return;
+			 }else if($("#phone1 option:selected").val() != "010" && $("#phone2").val().length != "3" ){
+				 sweetAlertFail("올바르지 않은 전화번호 형식입니다."); 
+				 return;
 			 }
     	   
 	  		 if(!phoneRegex.test(phone)){
