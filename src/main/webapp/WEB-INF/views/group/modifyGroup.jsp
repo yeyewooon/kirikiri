@@ -1203,7 +1203,7 @@ footer.footer {
     if (cnt < 2) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
+        title: '에러',
         text: '모임은 최소 2명부터 입니다!',
       });
       $(".memberCnt").html(2);
@@ -1211,7 +1211,7 @@ footer.footer {
     } else if (cnt > 10) {
       Swal.fire({
         icon: 'error',
-        title: 'Oops...',
+        title: '에러',
         text: '모임은 최대 10명 까지입니다!',
       });
       $(".memberCnt").html(10);
@@ -1219,7 +1219,11 @@ footer.footer {
     }
   }
 
-
+//뒤로가기 버튼
+  $("#backBtn").on("click",function() {
+      location.href = "/group/toGroupMember?seq_group="+$("#seq_group").val();
+   })
+   
   </script>
 </body>
 </html>

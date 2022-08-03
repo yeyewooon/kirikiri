@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>모임 일정</title>
 <!-- kakaoMap -->
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=fef0f2eae29928e7e7027600e1cf8f7d&libraries=services"></script>
 <!-- swal -->
@@ -107,6 +107,7 @@ body {
 
 * {
 	box-sizing: border-box;
+	font-family : 'MICEGothic Bold';
 }
 
 /* header */
