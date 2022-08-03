@@ -381,6 +381,7 @@
 		        <div class="row mt-4">
 					<textarea id="summernote" name="gboard_content"></textarea>
 		        </div>
+		        <sup>(<span id="nowByte">0</span>/3000bytes)</sup>
 
 	        </div>
 
@@ -506,6 +507,10 @@
 						  for (var i = files.length - 1; i >= 0; i--) {
 							  uploadSummernoteImageFile(files[i], this);
 						  }
+					  }, onKeyup : function(e){
+						  fn_checkByte(this); // 글자수 바이트 체크
+					  }, onKeydown : function(e){
+						  fn_checkByte(this); // 글자수 바이트 체크
 					  }
 				  }
 			});
@@ -548,6 +553,34 @@
 			observer.observe(target, config);
 		});
 		
+		//textarea 바이트 수 체크하는 함수
+		function fn_checkByte(obj){
+			const maxByte = 3000; //최대 100바이트
+			const text_val = obj.value; //입력한 문자
+			const text_len = text_val.length; //입력한 문자수
+			let totalByte=0;
+
+			for(let i=0; i<text_len; i++){
+				const each_char = text_val.charAt(i);
+				const uni_char = escape(each_char); //유니코드 형식으로 변환
+				if(uni_char.length>4){
+					// 한글 : 2Byte
+					totalByte += 2;
+				}else{
+					// 영문,숫자,특수문자 : 1Byte
+					totalByte += 1;
+				}
+			}
+			if(totalByte>maxByte){
+				alert('3000byte를 넘어갈 수 없습니다.');
+				document.getElementById("nowByte").innerText = totalByte;
+				document.getElementById("nowByte").style.color = "red";
+			}else{
+				document.getElementById("nowByte").innerText = totalByte;
+				document.getElementById("nowByte").style.color = "green";
+			}
+		}
+		
 		// summernote 이미지 업로드 function
 		function uploadSummernoteImageFile(file, editor){
 			data = new FormData();
@@ -570,6 +603,10 @@
 		let imgArr = new Array();
 		// 작성 완료 버튼
 		$("#submitBtn").on("click", function(){
+			if($("#nowByte").html() >= 3000){
+				alert("최대 바이트 허용 수를 초과하여 글을 등록할 수 없습니다.");
+				return;
+			}
 			
 			if($("#title").val() === ""){
 				Swal.fire({
