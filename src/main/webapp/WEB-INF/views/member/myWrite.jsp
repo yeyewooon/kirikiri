@@ -519,7 +519,7 @@
  <hr/>
   <div id="Wrapper">
   	<div id="headWrapper" class="container">
-     <img id="boardHead-img" src="/resources/images/board/head.png"> 
+     <img id="boardHead-img" src="/resources/images/내가쓴글코끼리.png"> 
      <div id="headTab">
 		<ul>
 			<li class="general">일반</li>

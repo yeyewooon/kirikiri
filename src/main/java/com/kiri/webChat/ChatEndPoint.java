@@ -67,9 +67,6 @@ public class ChatEndPoint {
 		// 클라이언트가 웹소켓을 통해 서버와 연결되어있는 동안 send라는 함수를 사용했을 때 실행되는 메서드
 		@OnMessage
 		public void onMessage(Session session, String message, @PathParam("seq_group") int seq_group) {// message 변수에 클라이언트가 전송한 메세지 담김
-			System.out.println("메세지 발신자 : " + this.user_nickname);
-			System.out.println("message : "+message);
-			
 			// Jackson이 가지고 있는 JsonObject 클래스를 이용해 user_nickname, message를 json형태로 변환
 			JSONObject obj = new JSONObject();
 			obj.put("user_nickname", this.user_nickname);
@@ -110,8 +107,6 @@ public class ChatEndPoint {
 		@OnClose // 연결이 끊어지면 이 어노테이션 붙은 메서드가 실행됨
 		public void onClose(Session session) { //지금 연결이 끊기는 세션값
 
-			
-			
 			//client 에서 지금 연결을 끊은 클라이언트의 session 삭제
 			clients.remove(session);
 			System.out.println("클라이언트의 접속이 끊어졌습니다.");
@@ -123,7 +118,7 @@ public class ChatEndPoint {
 			
 			for(int i=0; i<nickList.size(); i++) {
 				if(nickList.get(i).equals(this.user_nickname)) {
-					System.out.println("지금 나가는 애"+this.user_nickname);
+					System.out.println("지금 나가는 애 "+this.user_nickname);
 					nickList.remove(i);
 				}
 			}
@@ -134,7 +129,6 @@ public class ChatEndPoint {
 				for(Session client : clients) {
 					System.out.println(client);
 					client.getBasicRemote().sendText(objStatus.toString());
-					System.out.println("메세지 전송됨");
 				}
 			}catch(Exception e) {
 				e.printStackTrace();

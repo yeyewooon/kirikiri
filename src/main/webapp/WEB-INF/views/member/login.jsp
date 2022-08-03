@@ -336,7 +336,7 @@ footer.footer {
         	let phoneRegex = /^01{1}[016789]{1}[0-9]{7,8}$/;
         	
         	if( $("#findId_name").val() == "" || $("#find_phone").val() ==""){
-        		sweetAlertFail("아이디 혹은 전화번호를 입력해주세요.");
+        		sweetAlertFail("이름 혹은 전화번호를 입력해주세요.");
         		return; 
         		
         	}else if(!phoneRegex.test($("#find_phone").val())){
