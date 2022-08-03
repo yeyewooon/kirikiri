@@ -7,7 +7,7 @@
 
    <!-- 신고하기 -->
    <insert id = "insertReport" parameterType = "com.kiri.dto.ReportDTO">
-      insert into report values (seq_report.nextval, #{report_send}, #{report_receive}, #{report_reason}, sysdate)
+      insert into report values (seq_report.nextval, #{send_email}, #{receive_email}, #{report_send}, #{report_receive}, #{report_reason}, sysdate)
    </insert>
 
 </mapper>

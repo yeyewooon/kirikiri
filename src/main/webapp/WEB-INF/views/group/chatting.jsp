@@ -228,7 +228,11 @@ hr{
    margin-top : 0;
 }
 #swal2-title{
+<<<<<<< HEAD
    font-size:16px;
+=======
+	font-size:16px;
+>>>>>>> be9b6023fb61d6f7f49b42e4e862589ea00fe709
 }
 </style>
 </head>
@@ -421,7 +425,7 @@ hr{
                </div>
             </div>
             <div class="inputmsg d-flex justify-content-center align-items-center">
-               <input type="text" id="message" class="form-control w-75 mt-2" autofocus>
+               <input type="text" id="message" class="form-control w-75 mt-2" maxlength="399" autofocus>
                <button type="button" class="btn btn-outline-primary d-flex align-items-center mt-2 ms-4 h-75"
                   id="send">send</button>
                <button type="button" class="btn d-flex align-items-center emoticon ms-3 mt-2"><i class="fa-regular fa-face-smile"></i></button>
@@ -435,7 +439,7 @@ hr{
       // 웹소켓 객체 생성할때 반드시 서버의 ip 주소값은 실제 ip 주소를 이용
       // 포트번호 다르면 :포트번호/chat 39.120.220.2:11111
       var seq_group = $("#seq_group").val();
-      let ws = new WebSocket("ws://192.168.20.21/chat/"+seq_group);
+      let ws = new WebSocket("ws://39.120.220.2:11111/chat/"+seq_group);
       let nickname = $("#nickname").val();
       //이모티콘 나오게 하기
          $(".emoticon").click(function(){
@@ -632,7 +636,7 @@ hr{
       
       //이모티콘 보내는 함수
       function sendEmoji(imgCls){
-         let url = 'http://192.168.20.21/';
+         let url = 'http://39.120.220.2:11111/';
          let emojiSrc = $(imgCls).prop("src").indexOf(url)+url.length-1; // /resources 시작하는 index번호
          let realSrc = $(imgCls).prop("src").slice(emojiSrc);
          console.log(realSrc);

@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>모임관리</title>
+<title>관리자-모임관리</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <!--구글 폰트-->
@@ -154,7 +154,7 @@ a {
 
 /*content*/
 .contents {
-	background-color: #f6f7f9;
+	background-color: rgb(224, 230, 243);
 	width: 100%;
 	height: 1200px;
 }
@@ -230,7 +230,7 @@ td>a {
 			</ul>
 		</div>
 		<div class="navbar">
-			<div class="userName">| &nbsp&nbsp admin</div>
+		<div class="userName">| &nbsp&nbsp admin</div>
 			<div class="user">
 				<img src="/resources/images/해삐루피.png" id="user_img">
 			</div>
@@ -239,9 +239,9 @@ td>a {
 			</div>
 		</div>
 		<div class="contents">
-			<div class="row title ">
-				<div class="col d-flex mt-4 ms-4">
-					<h4 style="color: darkblue; text-shadow: 1px 1px 1px dodgerblue;">
+			<div class="row title mt-2">
+				<div class="col mt-4">
+					<h4 style="color: darkblue; text-shadow: 1px 1px 1px dodgerblue; margin-left : 75px;">
 						모임 관리</h4>
 				</div>
 			</div>
@@ -263,8 +263,8 @@ td>a {
 				<span style = "font-size:20px;">총 모임<span id="groupCnt" style="color: navy">${groupCnt}</span>개
 				</span>
 				<table class="table table-bordered">
-					<thead style="text-align: center;">
-						<tr class="table-info">
+					<thead style="text-align: center; background-color : gainsboro;">
+						<tr>
 							<td>모임장</td>
 							<td>모임명</td>
 							<td>카테고리</td>
@@ -323,6 +323,47 @@ td>a {
 	</div>
 </body>
 <script>
+//로그아웃 부분
+$(".user").mouseenter(function () {
+    $(".logOut").css({ "display": "block", "z-index": "99" });
+})
+$(".user").mouseleave(function () {
+    $(".logOut").css("display", "none");
+})
+$(".logOut").click(function () {
+    Swal.fire({
+        title: '정말 로그아웃 하시겠습니까?',
+        showConfirmButton: false,
+        showDenyButton: true,
+        showCancelButton: true,
+        denyButtonText: `로그아웃`,
+    }).then((result) => {
+    	if (result.isDenied) {
+    		Swal.fire({
+        	      icon:'success',
+        	      title: '메인화면으로 이동합니다!',
+        	      html: ' <b></b>' + '초뒤에 페이지가 이동됩니다.',
+        	      timer: 1000,
+        	      timerProgressBar: true,
+        	      didOpen: () => {
+        	        Swal.showLoading()
+        	        const b = Swal.getHtmlContainer().querySelector('b')
+        	        timerInterval = setInterval(() => {
+        	          b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
+        	        }, 100)
+        	      },
+        	      willClose: () => {
+        	        clearInterval(timerInterval)
+        	      }
+        	    })
+        	     setTimeout(function() {
+        	    	 	location.href = "/login/toLogout";
+                     },1200);
+        	 
+        }
+    
+    })
+})
 //부분 새로고침 -> 팝업 닫힌후
 window.call = function (data) {
     if(data=="msg"){
@@ -374,8 +415,8 @@ function makeSearchTable(){
 						let tr = $("<tr>");
 						let td1 = $("<td>").html(groupList.user_email);
 						let td2 = $("<td>").html(groupList.group_title);
-						let td3 = $("<td>").html(groupList.group_people);
-						let td4 = $("<td>").html(groupList.group_category);
+						let td3 = $("<td>").html(groupList.group_category);
+						let td4 = $("<td>").html(groupList.group_people);
 						let td5 = $("<td>").html(groupList.group_site);
 						let icon = $("<i>").addClass("fa-solid fa-trash");
 						let anchor = $("<a>").attr("href", "/admin/toDeleteGroup?seq_group="+groupList.seq_group).append(icon);
@@ -393,26 +434,6 @@ function makeSearchTable(){
 		
 	}
 }
-//로그아웃 부분
-$(".user").mouseenter(function () {
-    $(".logOut").css({ "display": "block", "z-index": "99" });
-})
-$(".user").mouseleave(function () {
-    $(".logOut").css("display", "none");
-})
-$(".logOut").click(function () {
-    Swal.fire({
-        title: '정말 로그아웃 하시겠습니까?',
-        showConfirmButton: false,
-        showDenyButton: true,
-        showCancelButton: true,
-        denyButtonText: `로그아웃`,
-    }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isDenied) {
-            Swal.fire('로그아웃 성공', '', 'info')
-        }
-    })
-})
+
 </script>
 </html>

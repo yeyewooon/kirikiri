@@ -352,12 +352,12 @@ a {
 			<!-- 차트 -->
 			<div class="row">
 				<div class="col-lg-7">
-					<div class="card shadow mb-4" style="height: 380px;">
+					<div class="card shadow mb-4">
 						<div class="card-header py-2 d-flex align-items-center">
 							<h6 class="m-0 font-weight-bold text-primary">지역별 선호도 수</h6>
 						</div>
-						<div class="chart-container" style="padding: 10px; height:380px;">
-							<canvas id="bar-chartcanvas" width="500" height="190"></canvas>
+						<div class="chart-container" style="padding: 10px;">
+							<canvas id="bar-chartcanvas" width="500" height="180"></canvas>
 						</div>
 					</div>
 					<div class="card shadow mb-4">
@@ -368,12 +368,12 @@ a {
 					</div>
 				</div>
 				<div class="col-lg-5">
-					<div class="card shadow mb-4" style="height: 380px;">
+					<div class="card shadow mb-4">
 						<div class="card-header py-2">
 							<h6 class="m-0 font-weight-bold text-primary">일주일 동안 로그 기록</h6>
 						</div>
-						<div class="chart-container" style="padding: 10px; height:100%;">
-							<canvas id="line-chartcanvas" width="500" height="260"></canvas>
+						<div class="chart-container" style="padding: 10px;">
+							<canvas id="line-chartcanvas" width="500" height="256"></canvas>
 						</div>
 					</div>
 					<div class="card shadow mb-4">
@@ -455,22 +455,27 @@ a {
             var customOverlay; // 오버레이
             var contentStr; // 마커 텍스트
 
-            for(let i = 0; i < ${jsonLocationList}.length; i++) {
-            	markerTmp = new daum.maps.Marker({
-          	        position: new daum.maps.LatLng(${jsonLocationList}[i].gcal_latitude,${jsonLocationList}[i].gcal_longitude),
-          	        image: markerImage,
-          	        map:map
-          		});
+            console.log(${jsonLocationList});
+          
+        	   for(let i = 0; i < ${jsonLocationList}.length; i++) {
+               	markerTmp = new daum.maps.Marker({
+             	        position: new daum.maps.LatLng(${jsonLocationList}[i].gcal_latitude,${jsonLocationList}[i].gcal_longitude),
+             	        image: markerImage,
+             	        map:map
+             		});
 
-            	contentStr = "<div class='customoverlay'><a target='_blank'><span class='title'>"+ ${jsonLocationList}[i].group_title +"</span></a></div>"; // 지도 마크업 타이틀
+               	contentStr = "<div class='customoverlay'><a target='_blank'><span class='title'>"+ ${jsonLocationList}[i].group_title +"</span></a></div>"; // 지도 마크업 타이틀
 
-          	    customOverlay = new kakao.maps.CustomOverlay({
-          	        map: map,
-          	        position: new daum.maps.LatLng(${jsonLocationList}[i].gcal_latitude,${jsonLocationList}[i].gcal_longitude),
-          	        content: contentStr,
-          	        yAnchor: 1
-          	    });
-            }
+             	    customOverlay = new kakao.maps.CustomOverlay({
+             	        map: map,
+             	        position: new daum.maps.LatLng(${jsonLocationList}[i].gcal_latitude,${jsonLocationList}[i].gcal_longitude),
+             	        content: contentStr,
+             	        yAnchor: 1
+             	    });
+               }
+           
+            
+            
 
          	  // 지도 타입 변경 컨트롤을 생성한다
         	  var mapTypeControl = new kakao.maps.MapTypeControl();

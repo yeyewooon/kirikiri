@@ -40,6 +40,26 @@
 		where user_email = #{user_email}
 	</update>
 	
+	<!-- 그룹챗, 그룹멤버 테이블 닉네임 바꿔주기 -->
+	<update id="groupChatmodify" parameterType="map">
+		update group_chat set user_nickname = #{user_nickname} where user_email=#{user_email}
+	</update>
+	<update id="groupMemmodify" parameterType="map">
+		update group_member set user_nickname = #{user_nickname} where user_email=#{user_email}
+	</update>
+	<!-- group_apply 닉네임 바꿔주기 -->
+	<update id="groupApplymodify" parameterType="map">
+		update group_apply set user_nickname = #{user_nickname} where user_email=#{user_email}
+	</update>
+	<!-- report1 닉네임 바꿔주기 -->
+	<update id="groupreportmodify" parameterType="map">
+		update report set report_send = #{user_nickname} where send_email=#{user_email}
+	</update>
+	<!-- report2 닉네임 바꿔주기 -->
+	<update id="groupreport2modify" parameterType="map">
+		update report set report_receive = #{user_nickname} where receive_email=#{user_email}
+	</update>
+	
 	<!-- 닉네임 중복검사 -->
 	<select id="nicknameCheck" resultType="int" parameterType="String">
 		select count(*) from member
@@ -108,24 +128,24 @@
 	<!-- 내가 쓴 일반게시판 글 정보 -->
 	<select id="selectBoardList" resultType="com.kiri.dto.BoardDTO">
 		select * from board
-			where user_email = #{user_email}
+			where user_email = #{user_email} and board_category not like '%공지%'
 	</select>
 	
 	<!-- 검색으로 일반게시판 글 정보 가져오기 -->
 	<select id="genalSearchList" parameterType="map" resultType="com.kiri.dto.BoardDTO">
 		
 		<if test="category == 'board_all'">
-			select * from board where
+			select * from board where board_category not like '%공지%' and
 					(board_title like '%' || #{keyword} ||'%' or
-					board_content like '%' || #{keyword} ||'%') and user_email=#{user_email}
+					board_category like '%' || #{keyword} ||'%') and user_email=#{user_email}
 		</if>
 		<if test="category == 'board_title'">
-			select * from board where
+			select * from board where board_category not like '%공지%' and
 					board_title like '%' || #{keyword} ||'%' and user_email=#{user_email}		
 		</if>
-		<if test="category == 'board_content'">
-			select * from board where
-					board_content like '%' || #{keyword} ||'%' and user_email= #{user_email}		
+		<if test="category == 'board_category'">
+			select * from board where board_category not like '%공지%' and
+					board_category like '%' || #{keyword} ||'%' and user_email= #{user_email}		
 		</if>
 	</select>
 	<select id="selectBoard" parameterType="map" resultType="com.kiri.dto.BoardDTO">
@@ -153,16 +173,16 @@
 		
 		<if test="category == 'board_all'">
 			select * from group_board where
-					(title like '%' || #{keyword} ||'%' or
-					content like '%' || #{keyword} ||'%') and user_email=#{user_email}
+					(gboard_title like '%' || #{keyword} ||'%' or
+					gboard_category like '%' || #{keyword} ||'%') and user_email=#{user_email}
 		</if>
-		<if test="category == 'title'">
+		<if test="category == 'gboard_title'">
 			select * from group_board where
-					title like '%' || #{keyword} ||'%' and user_email=#{user_email}		
+					gboard_title like '%' || #{keyword} ||'%' and user_email=#{user_email}		
 		</if> 
-		<if test="category == 'content'">
+		<if test="category == 'gboard_category'">
 			select * from group_board where
-					content like '%' || #{keyword} ||'%' and user_email=#{user_email}		
+					gboard_category like '%' || #{keyword} ||'%' and user_email=#{user_email}		
 		</if> 
 	</select>
 
@@ -207,15 +227,14 @@
 
 	<!-- 내가 쓴 일반게시판 글 갯수 가져오기 -->
 	<select id="selectBoardCount" resultType="int">
-		select count(*) from
-		board
-		where user_email = #{user_email}
+		select count(*) from board
+			where user_email = #{user_email}
 	</select>
 
 	<!-- 내가 쓴 모임게시판 글 갯수 가져오기 -->
 	<select id="selectGroupBoardCount" resultType="int">
 		select count(*)
-		from group_board
+			from group_board
 		where user_email = #{user_email}
 	</select>
 </mapper>

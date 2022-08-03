@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,6 +67,31 @@ public class BoardController {
 		service.insert(dto, fileList);
 		
 		return "redirect:/board/toBoard";
+	}
+	
+	@RequestMapping(value = "/toNoticeWrite") // 공지 쓰기 페이지 요청
+	public String toNoticeWrite() {
+		return "admin/noticeWrite";
+	}
+
+	@ResponseBody
+	@RequestMapping(value = "/noticeWrite") // 공지 쓰기
+	public String noticeWrite(BoardDTO dto, @RequestParam(value = "imgs[]", required = false) String[] imgs)
+			throws Exception {
+		String user_email = ((MemberDTO) session.getAttribute("loginSession")).getUser_email();
+		String user_nickname = ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname();
+		dto.setUser_email(user_email);
+		dto.setUser_nickname(user_nickname);
+
+		List<String> fileList = new ArrayList<>();
+		if (imgs != null) {
+			for (String image : imgs) {
+				fileList.add(image);
+			}
+		}
+		service.insert(dto, fileList);
+
+		return "success";
 	}
 	
 	@RequestMapping(value = "/summernoteImg", produces = "application/json") // summernote 이미지 업로드

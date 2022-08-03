@@ -31,7 +31,7 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
   <!-- 아이콘 -->
   <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>모임 전체</title>
 
 
   <style>
@@ -52,41 +52,54 @@
 /* 네비바  */
 * {
    box-sizing: border-box;
-   font-family: "MICEGothic Bold";
+   font-family: "MICEGothic Bold"; 
 }
+/* header */
+header {
+	font-family : 'MICEGothic Bold';
+}
+
 
 /* header 반응형 */
-@media ( max-width : 768px) {
-   #navLogo {
-      display: none;
-   }
-   #menu {
-      display: none;
-   }
-}
+            @media (max-width : 768px) {
+               #navLogo {
+                  display: none;
+               }
 
-/* header */
-#navLogo {
-   width: 150px;
-   height: 100px;
-}
+               #myPageIcon {
+                  display: none;
+               }
 
-#logoImgs {
-   width: 100%;
-   height: 100%;
-}
+               #cartIcon {
+                  display: none;
+               }
 
-@media ( min-width : 768px) {
-   #navibar {
-      display: none;
-   }
-}
+               #menu {
+                  display: none;
+               }
+            }
 
-/* header 반응형 끝 */
-#logoImg {
-   width: 50%;
-}
+            /* header */
+            #navLogo {
+               width: 150px;
+               height: 100px;
+            }
 
+            #logoImgs {
+               width: 100%;
+               height: 100%;
+            }
+
+            @media (min-width : 768px) {
+               #navibar {
+                  display: none;
+               }
+            }
+
+            /* header 반응형 끝 */
+            #logoImg {
+               width: 50%;
+            }
 /* 네비바 드롭다운 */
 .dropdown-toggle:hover {
    color: #83bf7b;
@@ -106,8 +119,8 @@ ul {
 
 /* 슬라이드 */
 .locationPic {
-	width : 100px;
-	height : 100px;
+   width : 100px;
+   height : 100px;
     overflow: hidden;
     border :3px solid #BABDEB;
     border-radius : 50%;
@@ -122,10 +135,10 @@ ul {
 }
 
 .categoryPic{
-	 font-size: 55px;
-	 width : 100px;
-	 height : 100px;
-	 border :3px solid #BABDEB;
+    font-size: 55px;
+    width : 100px;
+    height : 100px;
+    border :3px solid #BABDEB;
      border-radius : 50%;
      background-color : #f4f5f9;
      text-align : center;
@@ -375,7 +388,7 @@ body {
     cursor: pointer;
 }
 .slick-prev:before, .slick-next:before {
-    color: coral;
+    color: #0061bf;
 }
 
 </style>
@@ -411,27 +424,36 @@ body {
                   <div class="collapse navbar-collapse justify-content-end"
                      id="navbarNavDropdown">
                      <ul class="navbar-nav mb-2 mb-lg-0">
-                        <li class="nav-item"><a class="nav-link" href="/board/toBoard" style="font-size:18px;">자유게시판</a></li>
-                           <c:if test="${empty loginSession}">
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogin">로그인</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/signup/toSignupAgree">회원가입</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/admin/toAdmin">관리자페이지 이동</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
-                           <c:if test = "${not empty loginSession && loginSession.user_email ne 'admin'}">
-                              <li class="nav-item"><a class="nav-link" href="/mem/myPage">마이페이지</a></li>
-                              <li class="nav-item"><a class="nav-link" href="/login/toLogout">로그아웃</a></li>
-                           </c:if>
+                        <li class="nav-item"><a class="nav-link" href="/board/toBoard">자유게시판</a></li>
+                        <c:if test="${empty loginSession}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogin">로그인</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/signup/toSignupAgree">회원가입</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/admin/toAdmin">관리자페이지 이동</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
+                        <c:if
+                           test="${not empty loginSession && loginSession.user_email ne 'admin'}">
+                           <li class="nav-item"><a class="nav-link"
+                              href="/mem/myPage">마이페이지</a></li>
+                           <li class="nav-item"><a class="nav-link"
+                              href="/login/toLogout">로그아웃</a></li>
+                        </c:if>
                      </ul>
                   </div>
                </div>
 
             </div>
          </nav>
-      <!-- 펼쳐졌을 때 nav -->
+         <!-- 펼쳐졌을 때 nav -->
          <nav id="menu" class="navbar navbar-expand-md w-100 navbar-light"
             aria-label="Main navigation">
             <div class="row w-100 align-items-center">
@@ -453,7 +475,7 @@ body {
                <div class="col-5">
                   <div class="row align-items-center justify-content-center">
                      <div class="col-auto">
-                        <ul class="navbar-nav mb-2 mb-lg-0 me-2" style = "font-size:18px;">
+                        <ul class="navbar-nav mb-2 mb-lg-0 me-2">
                            <c:if test="${empty loginSession}">
                               <li class="nav-item"><a class="nav-link"
                                  href="/login/toLogin">로그인</a></li>
@@ -463,39 +485,34 @@ body {
                         </ul>
                      </div>
                      <div class="col-auto user">
-                        <c:if
-                           test="${not empty loginSession && loginSession.user_email eq 'admin'}">
-                           <div class="dropdown text-end">
-                              <a href="/"
-                                 class="d-block link-dark text-decoration-none dropdown-toggle"
-                                 id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> <img
-                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
-                                 height="40" class="rounded-circle">
-                              </a>
-                              <ul class="dropdown-menu text-small"
-                                 aria-labelledby="dropdownUser1">
-                                 <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
-                                 <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
-                                 </li>
-                                 <li>
-                                    <hr class="dropdown-divider">
-                                 </li>
-                                 <li><a class="dropdown-item" href="/admin/toAdmin">관리자
-                                       페이지이동</a></li>
-                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
-                              </ul>
-                           </div>
-                        </c:if>
+               <c:if test = "${not empty loginSession && loginSession.user_email eq 'admin'}">
+                         <div class="dropdown text-end">
+                           <a href="/" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+                           <img src="/resources/images/profile.jpg" alt="mdo" width="32" height="32" class="rounded-circle">
+                           </a>
+                           <ul class="dropdown-menu text-small"
+                              aria-labelledby="dropdownUser1">
+                              <li><a class="dropdown-item" href="/mem/myPage">마이페이지</a></li>
+                              <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a></li>
+                              <li><hr class="dropdown-divider"></li>
+                              <li><a class="dropdown-item" href="/admin/toAdmin">관리자 페이지이동</a></li>
+                              <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                           </ul>
+                        </div>
+                     </c:if>
                         <c:if
                            test="${not empty loginSession && loginSession.user_email ne 'admin'}">
                            <div class="dropdown text-end">
                               <a href="/"
                                  class="d-block link-dark text-decoration-none dropdown-toggle"
                                  id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> <img
-                                 src="/resources/images/profile.jpg" alt="mdo" width="40"
-                                 height="40" class="rounded-circle">
+                                 aria-expanded="false"> 
+                                 <c:if test="${loginSession.user_image eq null}">
+                                    <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
+                                 <c:if test="${loginSession.user_image ne null}">
+                                    <img src="/profile/${loginSession.user_image }" alt="mdo" width="40" height="40" class="rounded-circle">
+                                 </c:if>
                               </a>
                               <ul class="dropdown-menu text-small"
                                  aria-labelledby="dropdownUser1">
@@ -503,9 +520,14 @@ body {
                                  <li><a class="dropdown-item" href="/group/toCreateGroup">모임생성</a>
                                  </li>
                                  <li>
-                                    <hr class="dropdown-divider">
+                                    <hr class="dropdown-divider" style="margin:0px;">
                                  </li>
-                                 <li><a class="dropdown-item" href="/login/toLogout">로그아웃</a></li>
+                                  <c:if test="${loginType ne 'kakao'}">
+                                      <li><a class="dropdown-item mt-2" href="/login/toLogout">로그아웃</a></li>
+                                  </c:if>
+                                 <c:if test="${loginType eq 'kakao'}">
+                                    <li><a class="dropdown-item mt-2" href="${kakaoLogout}">로그아웃</a></li>
+                                 </c:if>
                               </ul>
                            </div>
                         </c:if>
@@ -516,11 +538,11 @@ body {
          </nav>
       </div>
    </header>
-
+   
 <div class="container">
    <div class = "row">
       <div class = "col-md-12 d-flex justify-content-start">
-         <div class = "mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
+         <div class = "allGroup mb-1" style = "font-size: 30px; font-family: katuri;">모임 전체</div>
       </div>
    </div>
    <div class="back row">
@@ -701,7 +723,7 @@ body {
       </span>
     </div>
     <div class="categoryMapper d-flex flex-column align-items-center justify-content-center">
-      <div class="categoryPic" style="font-size: 66px;">
+      <div class="categoryPic">
         <i class="fa-solid fa-guitar"></i>
       </div>
       <span class="categoryText mt-1">
@@ -773,7 +795,21 @@ body {
                <div class="imgContainer">
                   <div class="row" style="padding : 18px;">
                   	<c:if test = "${selectAllList.size() == 0}">
-                  		<div>아직 개설된 모임이 없습니다.</div>
+                           <div class="col-sm-12 col-md-12 d-flex flex-column align-items-center justify-content-center" >
+                              <div>
+                                 <div><h3>현재 해당 카테고리는 그룹이 존재하지 않습니다.<h3></div>
+                                 <div style="font-size : 18px;">자신이 모임장이 되어서 취미를 공유하고
+                                    모임 일정을 통해 즐거운 만남과, 모임 게시판, 모임 채팅을 활용하여
+                                    다양한 이야기와 취미활동을 공유하세요.
+                                 </div>
+                                 <div class="button mt-3">
+                                          <p class="btnText">모임만들기</p>
+                                          <div class="btnTwo">
+                                             <p class="btnText2">Go!</p>
+                                          </div>
+                                       </div>
+                              </div>
+                           </div>
                   	</c:if>
                   	<c:if test = "${selectAllList.size() > 0}">
 						<c:forEach items="${selectAllList}" var="dto">

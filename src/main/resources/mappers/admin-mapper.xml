@@ -5,11 +5,11 @@
 
  <mapper namespace="adminMapper">
  	<select id="selectAllMember" parameterType="map" resultType="com.kiri.dto.MemberDTO">
- 		select * from (select member.*, row_number() over(order by 1 desc) as num from member)
+ 		select * from (select member.*, row_number() over(order by 1 desc) as num from member where user_email != 'admin')
 				where num between #{start} and #{end}
  	</select>
  	<select id="getPageNavi" resultType="int">
- 		select count(*) as totalCnt from member
+ 		select count(*) as totalCnt from member where user_email != 'admin'
  	</select>
  	<select id="selectReport" resultType="com.kiri.dto.ReportDTO">
  		select * from report
@@ -28,8 +28,8 @@
  	</update>
  	<select id="searchMember" parameterType="map" resultType="com.kiri.dto.MemberDTO">
  		select * from member where
-			<if test="searchType == 'all'">user_email like '%${searchKeyword}%' or user_nickname like '%${searchKeyword}%'or user_phone like '%${searchKeyword}%' </if>
-			<if test="searchType != 'all'">${searchType} like '%' || #{searchKeyword} || '%'</if>
+			<if test="searchType == 'all'">(user_email like '%${searchKeyword}%' or user_nickname like '%${searchKeyword}%'or user_phone like '%${searchKeyword}%') and user_email != 'admin' </if>
+			<if test="searchType != 'all'">${searchType} like '%' || #{searchKeyword} || '%' and user_email != 'admin' </if>
 			order by 1
  	</select>
  	<select id="selectDetailMem" resultType="com.kiri.dto.MemberDTO" parameterType="String">
@@ -76,7 +76,7 @@
 
 	<!-- 내가 쓴 일반게시판 글 갯수 가져오기 -->
 	<select id="selectBoardCount" resultType="int">
-		select count(*) from board
+		select count(*) from board where board_category not like '%공지%'
 	</select>
 
 	<!-- 내가 쓴 모임게시판 글 갯수 가져오기 -->
@@ -180,28 +180,28 @@
  	</select>
 
  	<!-- 멤버 수 -->
- 	<select id="cntGroupMember" resultType="int">
- 		select sum(count(*)) cntMem from group_member group by seq_group
- 	</select>
+ 	<select id="cntMember" resultType="int">
+       select sum(count(*)) cntMem from member group by user_email
+    </select>
 
 	<!-- 모임 수 -->
 	<select id="cntGroupCnt" resultType="int">
-		select sum(count(*)) cntGroup from tbl_group group by seq_group
+		select nvl(sum(count(*)),0) cntGroup from tbl_group group by seq_group
 	</select>
 
 	<!-- 게시글 수(자유게시판) -->
-	<!-- <select id="cntBoard" resultType="int">
-		select sum(count(*)) cntBoard from board group by seq_board
-	</select> -->
+	<select id="cntBoard" resultType="int">
+		select nvl(sum(count(*)),0) cntBoard from board group by seq_board
+	</select> 
 
 	<!-- 게시글 수(모임게시판) -->
-	<!-- <select id="cntGroupBoard" resultType="int">
-		select sum(count(*)) cntGroupBoard from group_board group by seq_group_board
-	</select> -->
+	<select id="cntGroupBoard" resultType="int">
+		select nvl(sum(count(*)),0) cntGroupBoard from group_board group by seq_group_board
+	</select>
 
 	<!-- 일정수 -->
 	<select id="cntGroupCal" resultType="int">
-		select sum(count(*)) cntCal from group_calendar group by seq_group
+		select nvl(sum(count(*)),0) cntCal from group_calendar group by seq_group
 	</select>
 
 	<!-- 선호 지역수 -->

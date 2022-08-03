@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>끼리끼리-회원관리</title>
+<title>관리자-회원관리</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -283,7 +283,7 @@ td>a {
 							<td><input class="form-check-input ms-2 me-1"
 								type="checkbox" id="checkAll"></td>
 							<td>신고자</td>
-							<td>문제아</td>
+							<td>피신고자</td>
 							<td>신고 사유</td>
 						</tr>
 					</thead>
@@ -291,7 +291,7 @@ td>a {
 						<c:choose>
 							<c:when test="${reportList.size() == 0}">
 								<tr>
-									<td colspan="3">신고 내역이 없습니다.</td>
+									<td colspan="4">신고 내역이 없습니다.</td>
 								</tr>
 							</c:when>
 							<c:otherwise>
@@ -303,6 +303,7 @@ td>a {
 										<td>${dto.report_send }</td>
 										<td>${dto.report_receive }</td>
 										<td>${dto.report_reason }</td>
+										<td class = "receive_email d-none">${dto.receive_email}</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
@@ -397,6 +398,47 @@ td>a {
 		</div>
 	</div>
 	<script>
+	//로그아웃 부분
+    $(".user").mouseenter(function () {
+        $(".logOut").css({ "display": "block", "z-index": "99" });
+    })
+    $(".user").mouseleave(function () {
+        $(".logOut").css("display", "none");
+    })
+    $(".logOut").click(function () {
+        Swal.fire({
+            title: '정말 로그아웃 하시겠습니까?',
+            showConfirmButton: false,
+            showDenyButton: true,
+            showCancelButton: true,
+            denyButtonText: `로그아웃`,
+        }).then((result) => {
+        	if (result.isDenied) {
+        		Swal.fire({
+            	      icon:'success',
+            	      title: '메인화면으로 이동합니다!',
+            	      html: ' <b></b>' + '초뒤에 페이지가 이동됩니다.',
+            	      timer: 1000,
+            	      timerProgressBar: true,
+            	      didOpen: () => {
+            	        Swal.showLoading()
+            	        const b = Swal.getHtmlContainer().querySelector('b')
+            	        timerInterval = setInterval(() => {
+            	          b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
+            	        }, 100)
+            	      },
+            	      willClose: () => {
+            	        clearInterval(timerInterval)
+            	      }
+            	    })
+            	     setTimeout(function() {
+            	    	 	location.href = "/login/toLogout";
+                         },1200);
+            	 
+            }
+        
+        })
+    })
 	//부분 새로고침 -> 팝업 닫힌후
 	window.call = function (data) {
 	    if(data=="msg"){
@@ -404,7 +446,6 @@ td>a {
 	    		location.reload();
 	    	}else{
 				$("#searchBtn").trigger("click");
-	    
 	    	}
 	    }
 	}; 
@@ -580,28 +621,6 @@ td>a {
 		}
 	})
 	
-    
-        //로그아웃 부분
-        $(".user").mouseenter(function () {
-            $(".logOut").css({ "display": "block", "z-index": "99" });
-        })
-        $(".user").mouseleave(function () {
-            $(".logOut").css("display", "none");
-        })
-        $(".logOut").click(function () {
-            Swal.fire({
-                title: '정말 로그아웃 하시겠습니까?',
-                showConfirmButton: false,
-                showDenyButton: true,
-                showCancelButton: true,
-                denyButtonText: `로그아웃`,
-            }).then((result) => {
-                /* Read more about isConfirmed, isDenied below */
-                if (result.isDenied) {
-                    Swal.fire('로그아웃 성공', '', 'info')
-                }
-            })
-        })
     </script>
 </body>
 

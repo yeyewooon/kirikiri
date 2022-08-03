@@ -7,7 +7,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>끼리끼리-회원관리</title>
+    <title>관리자-게시판관리</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -72,43 +72,49 @@
         font-style: normal;
       }
 
-      /*사이드바*/
-      .sidebar {
-        float: left;
-        width: 15%;
-        height: 100%;
-        background-color: #4e78f5;
-      }
+		   /*사이드바*/
+		.sidebar {
+			float: left;
+			width: 15%;
+			height: 1200px;
+			background-color: #4e78f5;
+		}
+		
+		.sidebar span {
+			font-family: 'BMJUA';
+		}
+		
+		.sidebar li {
+			list-style: none;
+			border-bottom: 3px solid rgba(255, 255, 255, 0.63);
+			text-align: center;
+		}
+		
+		.sidebar a:hover {
+			color: white;
+		}
+		
+		.logoHome span {
+			color: white;
+			font-size: x-large;
+			font-weight: 80px;
+		}
+		
+		#logoImg {
+			width: 70%;
+		}
+		
+		i {
+			margin-top: 15px;
+			margin-bottom: 15px;
+		}
+		
+		a {
+			text-decoration: none;
+			font-size: larger;
+			color: rgba(255, 255, 255, 0.683);
+		}
 
-      .sidebar span {
-        font-family: "BMJUA";
-      }
-
-      .sidebar li {
-        list-style: none;
-        border-bottom: 3px solid rgba(255, 255, 255, 0.63);
-        text-align: center;
-      }
-
-      .sidebar a:hover {
-        color: white;
-      }
-
-      .logoHome span {
-        color: white;
-        font-size: x-large;
-        font-weight: 80px;
-      }
-
-      #logoImg {
-        width: 70%;
-      }
-
-      a {
-        text-decoration: none;
-        font-size: larger;
-        color: rgba(255, 255, 255, 0.683);
-      }
 
       /*네비바*/
       .navbar {
@@ -307,13 +313,13 @@
         </div>
         <div class="row resultBox mt-3">
           <table>
-            <thead style="background-color: gainsboro; text-align: center">
+            <thead style="background-color: gainsboro; text-align: center;">
               <tr>
-                <th scope="col">유형</th>
-				<th scope="col">제목</th>
-				<th scope="col">작성일</th>
-				<th scope="col">조회수</th>
-				<th scope="col">삭제</th>
+                <th scope="col" class='col-1'>유형</th>
+				<th scope="col" class='col-5'>제목</th>
+				<th scope="col" class='col-3'>작성일</th>
+				<th scope="col" class='col-1'>조회수</th>
+				<th scope="col" class='col-2'>삭제</th>
               </tr>
             </thead>
             <tbody id="tbody">
@@ -341,33 +347,81 @@
           </table>
         </div>
 
-    <!-- 검색전 pagination -->    
-		<div class="pagination mt-4 justify-content-center" id="page">
-			<nav aria-label="Page navigation example">
-				<ul class="pagination">
-					<c:if test="${naviMap.needPrev eq true}">
-						<li class="page-item"><a class="page-link"
-							href="/admin/toBoard?curPage=${naviMap.startNavi-1}"><i
-								class="fa-solid fa-angle-left"></i></a></li>
-					</c:if>
-					<c:forEach var="pageNum" begin="${naviMap.startNavi}" end="${naviMap.endNavi}">
-						<li class="page-item"><a class="page-link" href="/admin/toBoard?curPage=${pageNum}">${pageNum}</a></li>
-					</c:forEach>
-					<c:if test="${naviMap.needNext eq true}">
-						<li class="page-item"><a class="page-link"
-							href="/admin/toBoard?curPage=${naviMap.endNavi+1}"><i
-								class="fa-solid fa-angle-right"></i></a></li>
-					</c:if>
-				</ul>
-			</nav>
-		</div>
-      </div>
+   	<!-- 검색전 pagination -->    
+			<div class="pagination mt-4 justify-content-center" id="page">
+				<nav aria-label="Page navigation example">
+					<ul class="pagination">
+						<c:if test="${naviMap.needPrev eq true}">
+							<li class="page-item"><a class="page-link"
+								href="/admin/toBoard?curPage=${naviMap.startNavi-1}"><i
+									class="fa-solid fa-angle-left"></i></a></li>
+						</c:if>
+						<c:forEach var="pageNum" begin="${naviMap.startNavi}"
+							end="${naviMap.endNavi}">
+							<li class="page-item"><a class="page-link"
+								href="/admin/toBoard?curPage=${pageNum}">${pageNum}</a></li>
+						</c:forEach>
+						<c:if test="${naviMap.needNext eq true}">
+							<li class="page-item"><a class="page-link"
+								href="/admin/toBoard?curPage=${naviMap.endNavi+1}"><i
+									class="fa-solid fa-angle-right"></i></a></li>
+						</c:if>
+					</ul>
+				</nav>
+			</div> 
+     	 </div>
     </div>
     <script>
+	//로그아웃 부분
+    $(".user").mouseenter(function () {
+        $(".logOut").css({ "display": "block", "z-index": "99" });
+    })
+    $(".user").mouseleave(function () {
+        $(".logOut").css("display", "none");
+    })
+    $(".logOut").click(function () {
+        Swal.fire({
+            title: '정말 로그아웃 하시겠습니까?',
+            showConfirmButton: false,
+            showDenyButton: true,
+            showCancelButton: true,
+            denyButtonText: `로그아웃`,
+        }).then((result) => {
+        	if (result.isDenied) {
+        		Swal.fire({
+            	      icon:'success',
+            	      title: '메인화면으로 이동합니다!',
+            	      html: ' <b></b>' + '초뒤에 페이지가 이동됩니다.',
+            	      timer: 1000,
+            	      timerProgressBar: true,
+            	      didOpen: () => {
+            	        Swal.showLoading()
+            	        const b = Swal.getHtmlContainer().querySelector('b')
+            	        timerInterval = setInterval(() => {
+            	          b.textContent = (Swal.getTimerLeft()/1000).toFixed(0)
+            	        }, 100)
+            	      },
+            	      willClose: () => {
+            	        clearInterval(timerInterval)
+            	      }
+            	    })
+            	     setTimeout(function() {
+            	    	 	location.href = "/login/toLogout";
+                         },1200);
+            	 
+            }
+        
+        })
+    })
     	$(".notice").on("click",function(){
-    		let url = "/board/toWrite"
+    		let url = "/board/toNoticeWrite";
     		window.open(url, '_blank', 'width=1200, height=800');
     	})
+    	window.call = function (data) {
+		    if(data=="msg"){
+		    	location.reload();
+		    }
+		}; 
 	   //검색하는거 enter 키
 	   $(".keyword").on("keyup", function(key) {
 	     if (key.keyCode == 13) {
@@ -463,6 +517,7 @@
             a.attr("href", "/admin/toBoard?curPage=" + Number(curPage - 1));
             ajaxPagination(data, curPage - 1, a, type, keyword);
             i.addClass("fa-solid fa-angle-left");
+            i.css({"margin":"0"});
 
             a.append(i);
             li.append(a);
@@ -493,6 +548,7 @@
             a.attr("href", "/admin/toBoard?curPage=" + Number(curPage + 1));
             ajaxPagination(data, curPage + 1, a, type, keyword);
             i.addClass("fa-solid fa-angle-right");
+            i.css({"margin":"0"});
 
             a.append(i);
             li.append(a);
@@ -681,27 +737,6 @@
 		boardDelete(this, "/admin/groupBoardDelete", "seq_groud_board")
 	});
 
-    //로그아웃 부분
-    $(".user").mouseenter(function () {
-      $(".logOut").css({ display: "block", "z-index": "99" });
-    });
-    $(".user").mouseleave(function () {
-      $(".logOut").css("display", "none");
-    });
-    $(".logOut").click(function () {
-      Swal.fire({
-        title: "정말 로그아웃 하시겠습니까?",
-        showConfirmButton: false,
-        showDenyButton: true,
-        showCancelButton: true,
-        denyButtonText: `로그아웃`,
-      }).then((result) => {
-        /* Read more about isConfirmed, isDenied below */
-        if (result.isDenied) {
-          Swal.fire("로그아웃 성공", "", "info");
-        }
-      });
-    });
     </script>
   </body>
 </html>

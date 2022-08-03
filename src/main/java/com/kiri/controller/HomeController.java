@@ -34,7 +34,6 @@ public class HomeController {
 		model.addAttribute("selectAllList", selectAllList);
 		model.addAttribute("selectNewList", selectNewList);
 		model.addAttribute("selectBestList", selectBestList);
-		
 		//게시판 두개
 	      List<BoardDTO> getBestBoard = home_service.getBestBoard();
 	      int seq_board;
@@ -58,7 +57,6 @@ public class HomeController {
 	         model.addAttribute("sysList", sys_name);
 	         model.addAttribute("boardList", getBestBoard);
 	      }
-
 		
 		return "mainPage";
 	}
