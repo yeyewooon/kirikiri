@@ -171,5 +171,11 @@ public class Tbl_GroupDAO {
 	public List<Map<String, Object>> selectGroupList(String user_email) throws Exception {
 		return session.selectList("myPageMapper.selectGroupList", user_email);
 	}
+	
+	// 이메일 배열 개수
+	public int selectEmail(String user_email) {
+		int rs = session.selectOne("tblGroupMapper.selectEmail",user_email);
+		return rs;
+	}
 
 }

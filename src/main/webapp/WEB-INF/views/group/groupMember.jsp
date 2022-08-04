@@ -588,7 +588,7 @@ footer.footer {
                            icon:'success',
                            title: '주최자 위임이 완료되었습니다!',
                            html: ' <b></b>' + '초뒤에 페이지가 이동됩니다.',
-                           timer: 3000,
+                           timer: 1500,
                            timerProgressBar: true,
                            didOpen: () => {
                              Swal.showLoading()
@@ -660,7 +660,7 @@ footer.footer {
                         })
                         setTimeout(function() {
                                 window.location.href = "";
-                            },3000);
+                            },1500);
                   },error : function(e){
                      console.log(e);
                   }

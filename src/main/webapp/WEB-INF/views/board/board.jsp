@@ -243,6 +243,7 @@
           font-weight: normal;
           font-style: normal;
       }
+      
     </style>
 </head>
 <body>
@@ -659,8 +660,10 @@
        // 페이징
        $(".move").on("click", function(e){
           e.preventDefault();
-          
-          $("#moveForm").append("<input type='hidden' name='seq_board' value='" + $(this).attr("href")+"'>");
+          if($("#seq_boardInput").length == 1){
+              $("#seq_boardInput").remove();
+           }
+          $("#moveForm").append("<input type='hidden' name='seq_board' id='seq_boardInput' value='" + $(this).attr("href")+"'>");
           $("#moveForm").attr("action", "/board/toDetailView");
           $("#moveForm").submit();
        });

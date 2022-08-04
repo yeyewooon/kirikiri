@@ -29,7 +29,7 @@ public class HomeController {
 	@RequestMapping(value = "/")
 	public String main(Model model) throws Exception {
 		session.setAttribute("kakaoLogout", "https://kauth.kakao.com/oauth/logout?client_id=" + SecurityInfo.kakaoId 
-		+"&logout_redirect_uri=" + "http://39.120.220.2:11111/login/toLogout");
+		+"&logout_redirect_uri=" + "http://192.168.20.21/login/toLogout");
 		
 		List<Tbl_GroupDTO> selectAllList = home_service.selectAllGroup();
 		List<Tbl_GroupDTO> selectNewList = home_service.selectNewGroup();

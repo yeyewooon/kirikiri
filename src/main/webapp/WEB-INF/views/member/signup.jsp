@@ -104,7 +104,7 @@ header {
 /* 바디*/
 .signupBox{
     margin-top: 100px;
-    width: 1000px;
+    width: 60%;
     height: auto;
     border: 1px solid d2e3ec;
     text-align: center;
@@ -723,10 +723,10 @@ span{
       	 	   $("#email-domain").focus();
  	       	   return;
  	       	auth = comfirm;
-           }else if(auth !== "comfirm"){
-      	 	   sweetAlertFail("이메일 인증을 완료해주세요.");
-      	 	   $("#email_id").focus();
- 	       	   return;
+            }else if(auth !== "comfirm"){
+       	 	   sweetAlertFail("이메일 인증을 완료해주세요.");
+       	 	   $("#email_id").focus();
+  	       	   return;
 
            }else if($("#user_pw").val() === "" || $("#pwCheck").val() === ""){
         	   sweetAlertFail("비밀번호를 입력해주세요.");

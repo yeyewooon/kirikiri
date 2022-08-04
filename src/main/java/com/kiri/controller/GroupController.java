@@ -275,8 +275,7 @@ public class GroupController {
       mapList.get("TableJoinDTO");
       // 해당 아이디가 가입된 그룹 갯수 출력
       int totalGroupCntById = tbl_group_service.selectGroupCntByEmail(loginSession_id);
-      System.out.println("asdasdasd");
-      System.out.println(mapList.get("TableJoinDTO"));
+      
       
       
       model.addAttribute("tbl_group_dto", tbl_group_dto); // 해당 그룹 내용 가져오기

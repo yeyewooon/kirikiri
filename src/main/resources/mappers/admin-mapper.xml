@@ -165,7 +165,7 @@
 
  	<!-- 페이지네이션 BoardCnt -->
  	<select id="getBoardPageNavi" resultType="int">
- 		select count(*) as totalCnt from board
+ 		select count(*) as totalCnt from board where board_category not like '%공지%'
  	</select>
 
  	<!-- 김영완 07_22 -->

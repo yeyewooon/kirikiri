@@ -55,9 +55,14 @@ public class Tbl_GroupService {
       List<Group_ApplyDTO> list = tbl_group_dao.selectApplyByEmail(param);
 
       for (Group_ApplyDTO dto : list) {
-         Group_MemberDTO member = new Group_MemberDTO(0, dto.getUser_email(), dto.getSeq_group(),
-               dto.getUser_nickname(), "멤버");
-         tbl_group_dao.completeApply(member);
+         int rs = tbl_group_dao.selectEmail(dto.getUser_email());
+         if(rs >= 3) {
+
+         }else {
+             Group_MemberDTO member = new Group_MemberDTO(0, dto.getUser_email(), dto.getSeq_group(),
+            		 dto.getUser_nickname(), "멤버");
+             tbl_group_dao.completeApply(member);
+         }
       }
 
       denyApply(userEmails,seq_group);

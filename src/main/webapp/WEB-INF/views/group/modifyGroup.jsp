@@ -42,9 +42,9 @@ $(document).ready(function() {
            height: 450, // 에디터 높이
            minHeight: 300, // 최소 높이
            maxHeight: 550, // 최대 높이
-           focus: true, // 에디터 로딩후 포커스를 맞출지 여부
+           focus: false, // 에디터 로딩후 포커스를 맞출지 여부
            lang: "ko-KR", // 한글 설정
-           placeholder: '최대 1750자까지 작성 가능합니다.', //placeholder 설정
+           placeholder: '최대 2500byte까지 작성 가능합니다.', //placeholder 설정
            toolbar: [
                // [groupName, [list of button]]
                ['fontname', ['fontname']], // 글꼴
@@ -457,6 +457,13 @@ footer.footer {
     font-style: normal;
 }
 
+@font-face {
+          font-family: 'EarlyFontDiary';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2') format('woff2');
+          font-weight: normal;
+          font-style: normal;
+      }
+      
 </style>
 </head>
 <body>
@@ -705,13 +712,13 @@ footer.footer {
                </div>
                <strong style = "font-family:InfinitySans-RegularA1;"class="mt-2">모집 내용</strong> <span style="font-size: 14px; font-family:InfinitySans-RegularA1;"
                   class="mt-2">모집내용은 회원들에게 그룹을 홍보할 때 표시됩니다. <br>변경사항이
-                  있다면 나중에 언제든지 업데이트가 가능합니다.내용은 최대 1750자까지 입력 가능합니다.
+                  있다면 나중에 언제든지 업데이트가 가능합니다.
                </span>
                <div class="form-floating mb-3 mt-2">
                   <textarea id="summernote" name="group_info" class="group_info">
                      ${tbl_group_dto.group_info}
                   </textarea>
-                  <sup>(<span id="nowByte">0</span>/3000bytes)</sup>
+                  <sup>(<span id="nowByte">0</span>/2500bytes)</sup>
                </div>
             </div>
          </div>
@@ -1049,7 +1056,7 @@ footer.footer {
 
   //textarea 바이트 수 체크하는 함수
    function fn_checkByte(obj){
-       const maxByte = 3000; //최대 100바이트
+       const maxByte = 2500; //최대 100바이트
        const text_val = obj.value; //입력한 문자
        const text_len = text_val.length; //입력한 문자수
        let totalByte=0;
@@ -1066,7 +1073,6 @@ footer.footer {
            }
        }
        if(totalByte>maxByte){
-             alert('3000byte를 넘어갈 수 없습니다.');
               document.getElementById("nowByte").innerText = totalByte;
                document.getElementById("nowByte").style.color = "red";
            }else{
@@ -1090,8 +1096,8 @@ footer.footer {
      }else if($(".group_info").val() == "") {
         Swal.fire("모임 내용을 적어주세요");
         return;
-     }else if(groupInfoByteCnt >= 3000) {
-         Swal.fire('모임 내용은 3000byte를 넘어갈 수 없습니다.');
+     }else if(groupInfoByteCnt >= 2500) {
+         Swal.fire('모임 내용은 2500byte를 넘어갈 수 없습니다.');
          return;
      }else if($("#group_site").val() == "" || $("#sido1Input").val() == "") {
         Swal.fire('지역 선택을 완료를 눌러주세요');
