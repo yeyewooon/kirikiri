@@ -378,7 +378,7 @@
 	        <div class="row mt-4">
 				<textarea id="summernote" name="board_content">${modMap.boardDTO.board_content}</textarea>
 	        </div>
-	        <sup>(<span id="nowByte">0</span>/3000bytes)</sup>
+	        <sup>(<span id="nowByte">0</span>/2500bytes)</sup>
 	        
 	        <div class="row my-4 justify-content-center align-items-center" id="bottom">
 	            <div class="col-auto">
@@ -479,7 +479,7 @@
 				  maxHeight: 550, // 최대 높이
 				  focus: true, // 에디터 로딩후 포커스를 맞출지 여부
 				  lang: "ko-KR", // 한글 설정
-				  placeholder: '최대 1000자까지 작성 가능합니다.', //placeholder 설정
+				  placeholder: '최대 2500byte까지 작성 가능합니다.', //placeholder 설정
 				  toolbar: [
 						// [groupName, [list of button]]
 						['fontname', ['fontname']], // 글꼴
@@ -535,7 +535,7 @@
 						if(mutation.removedNodes[0].src != null) {
 							let img = mutation.removedNodes[0].src;
 							//console.log(img);
-							let src = decodeURIComponent(img.replace("http://localhost/boardFile/", ""));
+							let src = decodeURIComponent(img.replace("http://192.168.20.21/boardFile/", ""));
 							//console.log(src);
 							$.ajax({
 								url : "/board/delImg"
@@ -558,7 +558,7 @@
 		
 		//textarea 바이트 수 체크하는 함수
 		function fn_checkByte(obj){
-			const maxByte = 3000; //최대 100바이트
+			const maxByte = 2500; //최대 100바이트
 			const text_val = obj.value; //입력한 문자
 			const text_len = text_val.length; //입력한 문자수
 			let totalByte=0;
@@ -575,7 +575,6 @@
 				}
 			}
 			if(totalByte>maxByte){
-				alert('3000byte를 넘어갈 수 없습니다.');
 				document.getElementById("nowByte").innerText = totalByte;
 				document.getElementById("nowByte").style.color = "red";
 			}else{
@@ -608,7 +607,7 @@
 		
 		// 작성 완료 버튼
 		$("#submitBtn").on("click", function(){
-			if($("#nowByte").html() >= 3000){
+			if($("#nowByte").html() >= 2500){
 				alert("최대 바이트 허용 수를 초과하여 글을 등록할 수 없습니다.");
 				return;
 			}

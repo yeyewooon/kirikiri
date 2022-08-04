@@ -220,6 +220,13 @@
             font-weight: normal;
             font-style: normal;
         }
+        
+        @font-face {
+          font-family: 'EarlyFontDiary';
+          src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2') format('woff2');
+          font-weight: normal;
+          font-style: normal;
+      	}
     </style>
 </head>
 <body>
@@ -387,9 +394,9 @@
 
         <div class="row mt-4 justify-content-between align-items-center">
             <div class="col-auto" id="board-head-col">
-                <i class="fa-regular fa-clock me-3"></i>
+                <i class="fa-regular fa-clock"></i>
                 <span class="me-3">${detail.boardDTO.written_date}</span>
-                <i class="fa-regular fa-font-awesome me-3"></i>
+                <i class="fa-regular fa-font-awesome"></i>
                 <span class="me-3">${detail.boardDTO.view_count}</span>
                 <i class="fa-regular fa-comment-dots"></i>
                 <span class="me-3">${detail.commentCnt}</span>

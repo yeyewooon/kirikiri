@@ -183,5 +183,9 @@
          select count(*) from group_member where user_email = #{loginSession_id}
    </select>
    
-   
+   <!-- 이메일 배열 갯수 -->
+   <select id = "selectEmail" parameterType = "String" resultType = "int">
+   		select count(*) from group_member where user_email = #{user_email}
+   </select>
+
 </mapper>

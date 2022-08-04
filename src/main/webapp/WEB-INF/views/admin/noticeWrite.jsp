@@ -272,6 +272,7 @@ label {
 		let imgArr = new Array();
 		// 작성 완료 버튼
 		$("#submitBtn").on("click", function(){
+			let groupInfoByteCnt = $("#nowByte").html();
 			
 			if($("#title").val() === ""){
 				Swal.fire({
@@ -298,6 +299,11 @@ label {
 				})
 				return;
 			}
+			
+			if(groupInfoByteCnt >= 2500) {
+		        Swal.fire('모임 내용은 2500byte를 넘어갈 수 없습니다.');
+		        return;
+		     }
 			
 			let content = $("#summernote").summernote("code");
 			let regImg = /(<img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>)/g;
@@ -370,7 +376,6 @@ label {
            }
        }
        if(totalByte>maxByte){
-             alert('2500byte를 넘어갈 수 없습니다.');
               document.getElementById("nowByte").innerText = totalByte;
                document.getElementById("nowByte").style.color = "red";
            }else{

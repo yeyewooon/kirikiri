@@ -291,14 +291,14 @@
 	        <div class="row searchBox">
 	          <div class="d-flex align-items-center m-auto w-75">
 	            <select name="boardNameCategory" class="form-select title w-25 me-3">
-	              <option value="normal">일반</option>
-	              <option value="meeting">모임</option>
+	              <option value="normal">일반 게시판</option>
+	              <option value="meeting">모임 게시판</option>
 	              <option value="notice">공지</option>
 	            </select>
 	            <select id="category" name="category" class="form-select w-25 me-3">
-	              <option value="board_all" selected>ALL</option>
-	              <option value="board_category">CATEGORY</option>
-	              <option value="board_title">TITLE</option>
+	              <option value="board_all" selected>전체</option>
+	              <option value="board_category">카테고리</option>
+	              <option value="board_title">제목</option>
 	            </select>
 	            <input class="form-control keyword me-2" name="keyword" id="searchKeyword" type="text" placeholder="검색" aria-label="Search"/>
 	            <button class="btn btn-outline-primary" type="button" id="searchBtn">Search</button>

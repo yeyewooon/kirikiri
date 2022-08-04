@@ -56,6 +56,13 @@
 	font-style: normal;
 }
 
+@font-face {
+    font-family: 'RixInooAriDuriR';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
             * {
                box-sizing: border-box;
                font-family: 'MICEGothic Bold';
@@ -87,7 +94,9 @@
                   display: none;
                }
             }
-
+header {
+    font-family: 'MICEGothic Bold';
+}
             /* header */
             #navLogo {
                width: 150px;
@@ -163,7 +172,7 @@
             /*모임영역 카드6개*/
             /* body menu */
             .menu {
-               background-color: #e0ecf3;
+               background-color: #d2e3ec;
                width: 100%;
                height: 100px;
                align-items: center;
@@ -199,10 +208,11 @@
             }
 
             .text {
-               color: #1d76c9;
+               color: black;
                font-weight: bold;
                font-size: 30px;
                cursor: pointer;
+               font-family: 'RixInooAriDuriR';
             }
 
             .text:hover {
@@ -217,7 +227,7 @@
             .contentBest {
                width: 100%;
                margin-bottom: 0px;
-               background-color: #fbfbdf;
+               background-color: #d2e3ec42;
                margin-left: 0px;
             }
 
@@ -227,12 +237,12 @@
 
             .card {
                width: 350px;
-               border: 3px solid #d5f1d5;
+               border: 3px solid #b5cdd9;
                cursor: pointer;
             }
 
             .card-body {
-               background-color: #f4fdef;
+               background-color: #fafdff;
                padding-bottom: 0px;
             }
 
@@ -439,7 +449,7 @@ footer.footer {
                content: '';
                position: absolute;
                top: 0;
-               width: var(--dot-w);
+               width: 20px;
                height: 100%;
                border-radius: 100%;
                transition: all 300ms ease;

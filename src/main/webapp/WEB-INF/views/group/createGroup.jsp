@@ -39,7 +39,7 @@ $(document).ready(function() {
            height: 450, // 에디터 높이
            minHeight: 300, // 최소 높이
            maxHeight: 550, // 최대 높이
-           focus: true, // 에디터 로딩후 포커스를 맞출지 여부
+           focus: false, // 에디터 로딩후 포커스를 맞출지 여부
            lang: "ko-KR", // 한글 설정
            placeholder: '최대 2500byte까지 작성 가능합니다.', //placeholder 설정
            toolbar: [
@@ -1055,7 +1055,6 @@ footer.footer {
            }
        }
        if(totalByte>maxByte){
-             alert('2500byte를 넘어갈 수 없습니다.');
               document.getElementById("nowByte").innerText = totalByte;
                document.getElementById("nowByte").style.color = "red";
            }else{
