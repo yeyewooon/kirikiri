@@ -40,7 +40,7 @@
 <!-- 아이콘 -->
 <script src="https://kit.fontawesome.com/f9358a6ceb.js"
    crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>카테고리별 모임</title>
 
 <style>
 

@@ -25,7 +25,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
 	rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-<title>Document</title>
+<title>개인정보 수정</title>
 <style>
 /* 눈누 폰트 */
 @font-face {
@@ -459,7 +459,7 @@ footer.footer {
 					</div>
 					<div class="col-md-5">
 						<input type="text" id="nickname" name="user_nickname"
-							class="form-control user_nickname" value="${memberdto.user_nickname}">
+							class="form-control user_nickname" value="${memberdto.user_nickname}" placeholder="닉네임은 12자까지 가능합니다" maxlength="12">
 					</div>
 					<div class="col-md-2">
 						<button type="button" class="btn btn-secondary" id="nicknameCheck" disabled>중복확인</button>
@@ -592,35 +592,60 @@ footer.footer {
 				</div>
 				
 				<c:if test="${loginType eq 'general'}">
-					<div class="row">
-						<div class="col-md-3">
-							<p>비밀번호</p>
-						</div>
-						<div class="col-md-7" style="text-align: left;">
-							<input type="password" id="password" name="user_pw" class="form-control" style="font-family:none;">
-							<span class="d-none" id="wrong-password-regex" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호의 형식에 맞지 않습니다. **</span>
-							<ul class="desc" style="font-size: 0.8rem; padding: 10px">
-								<li>영문, 숫자, 특수문자를 혼합하여 최소 8자리 이상 20자리 이하로 설정해 주세요.</li>
-								<li>기타 일반 정보 등으로부터 추측이 용이한 비밀번호는 피해주세요.</li>
-								<li>타사 서비스에서 사용하는 비밀번호와 동일한 비밀번호를 사용하지 마십시오.</li>
-								<li>번호를 바꾸시려면 중복확인은 필수 항목입니다.</li>
-							</ul>
-						</div>
-						<div class="col-2"></div>
-					</div>		
-					<div class="row">
-						<div class="col-md-3">
-							<p>비밀번호 확인</p>
-						</div>
-						<div class="col-md-7" style="text-align: left;">
-							<input type="password" id="password-check" class="form-control" style="font-family:none;">
-							<span class="d-none" id="wrong-password-check" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호와 맞지 않습니다. **</span>
-							<span class="d-none" id="right-password-check" style="color:green; font-size:0.8rem; margin-left:8px;">** 비밀번호와 일치합니다. **</span>
-						</div>
-						<div class="col-2"></div>
-					</div>					
-				</c:if>
-				<input type="text" class='d-none' value="${memberdto.user_pw}" name="data_password">
+               <div class="row">
+                  <div class="col-md-3">
+                     <p>비밀번호</p>
+                  </div>
+                  <div class="col-md-7" style="text-align: left;">
+                     <input type="password" id="password" name="user_pw" class="form-control" style="font-family:none;">
+                     <span class="d-none" id="wrong-password-regex" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호의 형식에 맞지 않습니다. **</span>
+                     <ul class="desc" style="font-size: 0.8rem; padding: 10px">
+                        <li>영문, 숫자, 특수문자를 혼합하여 최소 8자리 이상 20자리 이하로 설정해 주세요.</li>
+                        <li>기타 일반 정보 등으로부터 추측이 용이한 비밀번호는 피해주세요.</li>
+                        <li>타사 서비스에서 사용하는 비밀번호와 동일한 비밀번호를 사용하지 마십시오.</li>
+                        <li>번호를 바꾸시려면 중복확인은 필수 항목입니다.</li>
+                     </ul>
+                  </div>
+                  <div class="col-2"></div>
+               </div>      
+               <div class="row">
+                  <div class="col-md-3">
+                     <p>비밀번호 확인</p>
+                  </div>
+                  <div class="col-md-7" style="text-align: left;">
+                     <input type="password" id="password-check" class="form-control" style="font-family:none;">
+                     <span class="d-none" id="wrong-password-check" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호와 맞지 않습니다. **</span>
+                     <span class="d-none" id="right-password-check" style="color:green; font-size:0.8rem; margin-left:8px;">** 비밀번호와 일치합니다. **</span>
+                  </div>
+                  <div class="col-2"></div>
+               </div>               
+            </c:if> 
+            
+            <c:if test="${loginType ne 'general'}">
+               <div class="row d-none">
+                  <div class="col-md-3">
+                     <p>비밀번호</p>
+                  </div>
+                  <div class="col-md-7" style="text-align: left;">
+                     <input type="password" id="password" name="user_pw" class="form-control" style="font-family:none;" disabled>
+                     <span class="d-none" id="wrong-password-regex" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호의 형식에 맞지 않습니다. **</span>
+                        <span style="color:red; font-size: 0.8rem; padding: 10px">** 소셜로 로그인하시면 비밀번호 수정이 안됩니다 ** </span>
+                  </div>
+                  <div class="col-2"></div>
+               </div>
+               <div class="row d-none">
+                  <div class="col-md-3">
+                     <p>비밀번호 확인</p>
+                  </div>
+                  <div class="col-md-7" style="text-align: left;">
+                     <input type="password" id="password-check" class="form-control d-none" style="font-family:none;" disabled>
+                     <span class="d-none" id="wrong-password-check" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호와 맞지 않습니다. **</span>
+                     <span class="d-none" id="right-password-check" style="color:green; font-size:0.8rem; margin-left:8px;">** 비밀번호와 일치합니다. **</span>
+                  </div>
+                  <div class="col-2"></div>
+               </div>                        
+            </c:if> 
+            <input type="text" class='d-none' value="${memberdto.user_pw}" name="data_password">
 				<div class="row">
 					<div class="col-md-3">
 						<p>이메일</p>
@@ -692,7 +717,7 @@ footer.footer {
 					}
 				})
 				
-				let phone2 = $(".checkPhone2").val();;
+				let phone2 = $(".checkPhone2").val();
 				$("#phone2").on("input",function(){
 					phone2 = $(this).val();
 					console.log(phone2)
@@ -870,6 +895,9 @@ footer.footer {
 			let passwordRegex = /^$|^[a-z0-9!@#$]{8,20}$/;
 			let checkPhone = $(".checkPhone").val();
 			let checkPw = $("#check-pw").val();
+			let phone1 = $(".checkPhone1").val();
+			let phone2 = $(".checkPhone2").val();
+			let phone3 = $(".checkPhone3").val();
 			user_phone = phone1 + phone2 + phone3;
 			console.log("adasdas : ",checkPhone)
 			

@@ -7,7 +7,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>끼리끼리-회원관리</title>
+    <title>관리자-게시판관리</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -313,7 +313,7 @@
         </div>
         <div class="row resultBox mt-3">
           <table>
-            <thead style="background-color: gainsboro; text-align: center">
+            <thead style="background-color: gainsboro; text-align: center;">
               <tr>
                 <th scope="col" class='col-1'>유형</th>
 				<th scope="col" class='col-5'>제목</th>

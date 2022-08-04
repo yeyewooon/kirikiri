@@ -29,7 +29,15 @@
     font-weight: normal;
     font-style: normal;
 }
-*{box-sizing: border-box;   font-family: 'InfinitySans-RegularA1';}
+@font-face {
+	font-family: 'MICEGothic Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
+*{box-sizing: border-box;   font-family: 'MICEGothic Bold';}
 body{
     background-color: #d2e3ec;
     height: auto;

@@ -130,6 +130,7 @@ h1 {
    width: 100%;
    height: 100%;
    border-radius: 50%;
+   background-color:white;
 }
 
 #profilePic:hover {
@@ -821,7 +822,7 @@ footer.footer {
    <div class="container"style="max-width:1620px;">
       <div style="margin:auto;">
          <div class="row body" style="margin:0px;">
-            <div class="col-md-4 d-flex justify-content-center mt-5">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-5">
                <div class="serviceBox color1 m-2">
                   <div class="service-icon" style="color:#008A65;">
                      <span><i class="fa fa-globe"></i></span>
@@ -847,12 +848,12 @@ footer.footer {
             <!-- modal -->
 
             <div class="modal fade" id="exampleModal1" tabindex="-1"
-               aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
-               <div class="modal-dialog modal-dialog-centered">
+               aria-labelledby="exampleModalLabel" aria-hidden="true">
+               <div class="modal-dialog modal-dialog-centered justify-content-center d-flex">
                   <div class="modal-content" style="width: 350px;">
                      <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">선호지역(최대 3개선택)</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        <button type="button" class="btn-close closeBtn" data-bs-dismiss="modal"
                            aria-label="Close"></button>
                      </div>
                      <div class="modal-body">
@@ -907,8 +908,8 @@ footer.footer {
                            </div>
                         </div>
                         <div class="modal-footer">
-                           <button type="button" class="btn btn-secondary"
-                              data-bs-dismiss="modal" onclick="moveSite();">닫기</button>
+                           <button type="button" class="btn btn-secondary closeBtn"
+                              data-bs-dismiss="modal">닫기</button>
                            <button type="button" class="btn btn-primary" id="saveSiteBtn">저장</button>
                         </div>
                      </div>
@@ -929,7 +930,7 @@ footer.footer {
                               count -= 1;
                           }
                           if (count > maxCount) {
-                              alert("최대 3개까지만 선택가능합니다!");
+                        	  Swal.fire('최대 3개까지 선택 가능해요!!!');
                               field.checked = false;
                               count -= 1;
                           }
@@ -966,7 +967,7 @@ footer.footer {
                   </div>
                </div>
             </div>
-            <div class="col-md-4 d-flex justify-content-center mt-5">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-5">
                <div class="serviceBox m-2 color2">
                   <div class="service-icon" style="color: #27436d;">
                      <span><i class="fa-solid fa-thumbs-up"></i></span>
@@ -992,13 +993,13 @@ footer.footer {
                <!-- Modal -->
 
                <div class="modal fade" id="exampleModal" tabindex="-1"
-                  aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 9999;">
+                  aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                      <div class="modal-content">
                         <div class="modal-header">
                            <h5 class="modal-title" id="exampleModalLabel">관심사(최대 3개
                               선택)</h5>
-                           <button type="button" class="btn-close" data-bs-dismiss="modal"
+                           <button type="button" class="btn-close closeBtn" data-bs-dismiss="modal"
                               aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -1077,14 +1078,19 @@ footer.footer {
                               </div>
                            </div>
                            <div class="modal-footer">
-                              <button type="button" class="btn btn-secondary"
+                              <button type="button" class="btn btn-secondary closeBtn"
                                  data-bs-dismiss="modal">닫기</button>
                               <button type="button" class="btn btn-primary" id="saveBtn">저장</button>
                            </div>
                         </div>
                         <script>
-                                   var maxCount = 3;
-                                   var count = 0;
+                        // 닫기 버튼
+                        $(".closeBtn").on("click",function(){
+                          location.href="/mem/myPage"
+                        })
+                               	var maxCount = 3;
+                               	var count = 0;
+                               	
                                    function CountChecked(field) {
                                        if (field.checked) {
                                            count += 1;
@@ -1092,7 +1098,7 @@ footer.footer {
                                            count -= 1;
                                        }
                                        if (count > maxCount) {
-                                           alert("최대 3개까지만 선택가능합니다!");
+                                    	   Swal.fire('최대 3개까지 선택 가능해요!!!');
                                            field.checked = false;
                                            count -= 1;
                                        }
@@ -1132,7 +1138,7 @@ footer.footer {
                </div>
             </div>
             <div
-               class="col-md-4 d-flex justify-content-center mt-5 d-flex justify-content-center">
+               class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-5 d-flex justify-content-center">
                <div class="serviceBox  m-2 color1">
                   <div class="service-icon" style="color: #008A65;">
                      <span><i class="fa-solid fa-people-group"></i></span>
@@ -1179,9 +1185,7 @@ footer.footer {
                   </c:if>
                </div>
             </div>
-         </div>
-         <div class="row body" style="margin:0px;">
-            <div class="col-md-4 d-flex justify-content-center mt-5">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-5">
                <div class="serviceBox color2 m-2">
                   <div class="service-icon" style="color: #27436d;">
                      <span><i class="fa-solid fa-file-pen"></i></span>
@@ -1217,7 +1221,7 @@ footer.footer {
                   </c:if>
                </div>
             </div>
-            <div class="col-md-4 d-flex justify-content-center mt-5">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-5">
                <div class="serviceBox m-2 color1">
                   <div class="service-icon" style="color: #008A65;">
                      <span><i class="fa-solid fa-heart"></i></span>
@@ -1312,8 +1316,7 @@ footer.footer {
                                            "seq_group": seq_group
                                        },
                                        success: function (data) {
-                                           parent.remove();
-                                           window.location.href = "";
+                                           location.href="/mem/myPage"
                                        },
                                        error: function (e) {
                                            console.log(e);
@@ -1324,7 +1327,7 @@ footer.footer {
                        })
                    })
                </script>
-            <div class="col-md-4 d-flex justify-content-center mt-5">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center mt-5">
                <div class="serviceBox m-2 color2">
                   <div class="service-icon" style="color: #27436d;">
                      <span><i class="fa-solid fa-envelope"></i></span>
@@ -1349,7 +1352,7 @@ footer.footer {
                      </span>
                      <span class="ms-2" id="msgTitle">쪽지함보기</span>
                      <button type="button" class="btn-close" data-bs-dismiss="modal"
-                        aria-label="Close" onclick="moveSite();"></button>
+                        aria-label="Close"></button>
                   </div>
                   <!-- 답장 (보낸사람 클릭시 활성화 -->
 					<div class="d-none" id="msgForm" style="padding: 14px;">
@@ -1419,7 +1422,7 @@ footer.footer {
                      </div>
                      <div class="modal-footer msgModal-footer"  style="background-color:#FFFEE9; border-top:2px solid #FFE19E;">
                         <button type="button" class="btn btn-primary ms-2" id="closeBtn"
-                           data-bs-dismiss="modal" onclick="moveSite();">닫기</button>
+                           data-bs-dismiss="modal">닫기</button>
                         <button type="button" class="btn btn-danger ms-2" id="deleteBtn">삭제</button>
                         <button type="button" class="btn btn-danger ms-2 d-none" id="replyBtn">답장</button>
                         <input type="text" value="${memberdto.user_nickname}" id="myId"
@@ -1428,7 +1431,7 @@ footer.footer {
                   </div>
                </div>
             </div>
-			</div>
+         </div>
       </div>
 	</div>
 	<!-- Footer-->
