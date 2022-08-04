@@ -96,7 +96,7 @@
 	<!-- 조회수 + 1 -->
 	<update id="viewCntUp" parameterType="int">
 		update group_board set
-			view_count = view_count+1
+			view_count = view_count + 1
 			where seq_group_board = #{seq_group_board}
 	</update>
 	

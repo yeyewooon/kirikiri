@@ -659,7 +659,6 @@
     	// 페이징
     	$(".move").on("click", function(e){
     		e.preventDefault();
-    		
     		$("#moveForm").append("<input type='hidden' name='seq_board' value='" + $(this).attr("href")+"'>");
     		$("#moveForm").attr("action", "/board/toDetailView");
     		$("#moveForm").submit();
