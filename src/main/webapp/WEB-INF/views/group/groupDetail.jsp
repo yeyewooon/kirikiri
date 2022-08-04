@@ -579,7 +579,7 @@ footer.footer {
                               <a href="/"
                                  class="d-block link-dark text-decoration-none dropdown-toggle"
                                  id="dropdownUser1" data-bs-toggle="dropdown"
-                                 aria-expanded="false"> 
+                                 aria-expanded="false">
                                  <c:if test="${loginSession.user_image eq null}">
                                     <img src="/resources/images/profile.jpg" alt="mdo" width="40" height="40" class="rounded-circle">
                                  </c:if>
@@ -729,7 +729,7 @@ footer.footer {
                       id="joinGroupBtn">모임 가입하기</button>
                   </div>
                 </div>
-                
+
               </div>
             </div>
 
@@ -910,7 +910,7 @@ footer.footer {
 										</div>
 									</div>
 								</div>
-								
+
 								<!-- 쪽지보내기 버튼 클릭시 활성화 -->
 								<div class="d-none" id="msgForm">
 									<div class="row">
@@ -1108,8 +1108,8 @@ footer.footer {
               $("#reportName").text('${loginSession.user_name}'); // 해당 회원 이름 신고자에 넣어주기
               $("#user_receive").val(data.profileList[0].user_nickname); // 쪽지 보내기 -> 받는사람 닉네임 넣어주기
               $("#report_receive").val(data.profileList[0].user_nickname); // 신고하기 -> 신고자 닉네임 넣어주기
-              
-              
+
+
               $("#receive_email").val(data.profileList[0].user_email); // 신고하기 -> 신고자 이메일 넣어주기
            },
            error : function(e) {
@@ -1211,7 +1211,7 @@ footer.footer {
                 	   window.open(url, name, option);
                    }
                    return;
-                   
+
                 }
             }
              Swal.fire('모임 회원만 가능합니다');
@@ -1333,7 +1333,8 @@ footer.footer {
                data : {"seq_group" : seq_group,"user_email" : loginSession_id},
                success : function(data) {
                       if(data == "success") {
-                       Swal.fire(
+                    	  console.log("hello");
+                        Swal.fire(
                         '모임가입 신청 완료!',
                         '호스트가 승인을 할 때까지 기다려주세요!',
                         'success'

@@ -138,6 +138,12 @@ public class LoginController {
 		cookie.setPath("/");
 		response.addCookie(cookie);
 		
+		// 그룹 쿠키
+		Cookie gcookie = new Cookie("groupPostView", null);
+		gcookie.setMaxAge(0);
+		gcookie.setPath("/");
+		response.addCookie(gcookie);
+				
 		if(session.getAttribute("loginType").equals("kakao")) {
 			String accessToken = (String)session.getAttribute("accessToken");
 			kakaoLogin.kakaoLogout(accessToken, "https://kapi.kakao.com/v1/user/logout");

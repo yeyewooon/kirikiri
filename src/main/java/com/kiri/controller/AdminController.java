@@ -65,10 +65,10 @@ public class AdminController {
 	      }else {
 	         for(int seq_report : seqArray) {
 	               rdto = service.selectReportBySeq(seq_report);
-	               bdto = new BlackListDTO(0, rdto.getReport_receive(), null, rdto.getReport_reason());
+	               bdto = new BlackListDTO(0, rdto.getReceive_email(), null, rdto.getReport_reason());
 	               service.insertBl(bdto);
 	               service.deleteReport(seq_report);
-	               service.updateBl(rdto.getReport_receive());
+	               service.updateBl(rdto.getReceive_email());
 	           }
 	         return "success";
 	      }
@@ -105,6 +105,8 @@ public class AdminController {
    @RequestMapping(value="/toDetailMem")
    public String toDetailMem(String user_email, Model model) throws Exception{
       MemberDTO memList = service.selectDetailMem(user_email);
+      String date = memList.getUser_bd().substring(0, 10);
+      memList.setUser_bd(date);
       model.addAttribute("memList", memList);
       return "admin/memberDetail";
    }

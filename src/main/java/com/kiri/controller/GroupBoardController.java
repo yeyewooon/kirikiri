@@ -93,7 +93,7 @@ public class GroupBoardController {
 		Cookie[] cookies = request.getCookies();
 		if (cookies != null) {
 			for (Cookie cookie : cookies) {
-				if (cookie.getName().equals("postView")) {
+				if (cookie.getName().equals("groupPostView")) {
 					oldCookie = cookie;
 				}
 			}
@@ -109,7 +109,7 @@ public class GroupBoardController {
 			}
 		}else {
 			service.viewCntUp(seq_group_board);
-			Cookie newCookie = new Cookie("postView","[" + seq_group_board + "]");
+			Cookie newCookie = new Cookie("groupPostView","[" + seq_group_board + "]");
 			newCookie.setPath("/");
 			newCookie.setMaxAge(60 * 60 * 24);
 			response.addCookie(newCookie);

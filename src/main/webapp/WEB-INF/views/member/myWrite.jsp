@@ -519,7 +519,7 @@
  <hr/>
   <div id="Wrapper">
   	<div id="headWrapper" class="container">
-     <img id="boardHead-img" src="/resources/images/board/head.png"> 
+     <img id="boardHead-img" src="/resources/images/내가쓴글코끼리.png"> 
      <div id="headTab">
 		<ul>
 			<li class="general">일반</li>
@@ -541,8 +541,8 @@
 						<select class="form-select me-3" aria-label="Default select example"
 							name="category" id="category" style="width: 100px;">
 							<option value="board_all">전체</option>
+							<option value="board_category">유형</option>
 							<option value="board_title">제목</option>
-							<option value="board_content">내용</option>
 						</select>		
 						<input type="text" name="keyword" class="form-control keyword me-3" placeholder="검색" style="width: 250px;">		
 						<button type="button" class="btn btn-outline-secondary" id="searchBtn" style="width: 70px;">검색</button>
@@ -564,11 +564,11 @@
               <table class="table table-striped memberTable text-center mt-3" id="tableBox">
 				<thead>
 					<tr>
-				        <th scope="col">유형</th>
-						<th scope="col">제목</th>
-						<th scope="col">작성일</th>
-						<th scope="col">조회수</th>
-						<th scope="col">삭제</th>
+				        <th class="col-1">유형</th>
+						<th class="col-4">제목</th>
+						<th class="col-4">작성일</th>
+						<th class="col-1">조회수</th>
+						<th class="col-2">삭제</th>
 			   		</tr>
 				</thead>
 				<tbody>
@@ -709,23 +709,25 @@
 				}
 			}); 
 		}
+		let selectedCategory = 'normal'
 		$(".general").on("click",function(){
 			$(".general").css({"padding-top":"10px", "padding-bottom":"10px"});
 			$(".meeting").css({"padding-top":"0", "padding-bottom":"0"});
 			selectBoardList("/mem/genalBoard","일반");
+			selectedCategory = 'normal';
 		})
 		$(".meeting").on("click",function(){
 			$(".general").css({"padding-top":"0", "padding-bottom":"0"});
 			$(".meeting").css({"padding-top":"10px", "padding-bottom":"10px"});
 			selectBoardList("/mem/meetingBoard","모임");
+			selectedCategory = 'meeting';
 		})
 		/* 첫 번째 selectBox */
-		let selectedCategory = 'normal'
 		$('.title').on('change', function() {
 			selectedCategory = this.value;
 			if (selectedCategory =="normal") {
 				selectBoardList("/mem/genalBoard","일반");
-			} else {
+			} else if(selectedCategory =="meeting") {
 				selectBoardList("/mem/meetingBoard","모임");
 			}
 		})

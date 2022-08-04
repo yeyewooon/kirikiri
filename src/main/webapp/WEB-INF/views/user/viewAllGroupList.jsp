@@ -31,7 +31,7 @@
    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
   <!-- 아이콘 -->
   <script src="https://kit.fontawesome.com/f9358a6ceb.js" crossorigin="anonymous"></script>
-<title>Insert title here</title>
+<title>모임 전체</title>
 
 
   <style>
@@ -265,7 +265,6 @@ img {
 #categoryList {
    display: none
 }
-
 
 
 
