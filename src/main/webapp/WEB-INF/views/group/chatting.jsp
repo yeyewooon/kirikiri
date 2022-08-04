@@ -509,7 +509,7 @@ hr{
                console.log(msg.openNickname.length);
                console.log("difference : " + difference.length);
                
-               if(nickList.length-msg.openNickname.length != difference.length){
+               if(nickList.length - msg.openNickname.length != difference.length){
                   Swal.fire({
                      position: 'top-center',
                      icon: 'info',
@@ -519,7 +519,7 @@ hr{
                    })
                }else{
                   for(let i=0; i<intersection.length; i++){
-                       for(let j=0; j<nickList.length; j++){
+                       for(let j=0; j<k.length; j++){
                           if(intersection[i]==nickList[j]){
                              $(".users_tbody").children("tr").eq(j).children("td").eq(1).css("color","black");
                              $(".users_tbody").children("tr").eq(j).children("td").eq(2).children().attr("class","online ms-1");
