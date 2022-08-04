@@ -586,6 +586,39 @@ $("#groupDelete").on("click", function(){
               text: '선택된 항목이 없습니다..',
             })
       }else{
+<<<<<<< HEAD
+	      var jsonData = {
+	         "userEmails" : JSON.stringify(checkBoxArr),
+	         "seq_group" : seq_group
+	      };
+	      var jsonString = JSON.stringify(jsonData);
+
+	       $.ajax({
+	         url:"/group/completeApply?&group_people="+count+"&groupCount="+groupCount,
+	         headers: {'Content-Type': 'application/json'},
+	         type : "post",
+	         data: jsonString,
+	         success:function(data){
+	            if(data == "success"){
+	                  Swal.fire({
+	                       icon: 'success',
+	                       text: '승인이 완료되었습니다.',
+	                     })
+	            }else if(data == "error"){
+	               Swal.fire({
+	                    icon: 'error',
+	                    title: 'Oops...',
+	                    text: '인원수를 확인해주세요!',
+	                  })
+	            }
+	            setTimeout(function() {
+	                    window.location.href = "";
+	                },1500);
+	         },error : function(e){
+	            console.log(e);
+	         }
+	      })
+=======
          var jsonData = {
             "userEmails" : JSON.stringify(checkBoxArr),
             "seq_group" : seq_group
@@ -617,6 +650,7 @@ $("#groupDelete").on("click", function(){
                console.log(e);
             }
          })
+>>>>>>> fef71796b8c2da770faff9562c54097579718fcd
       }
    })
 

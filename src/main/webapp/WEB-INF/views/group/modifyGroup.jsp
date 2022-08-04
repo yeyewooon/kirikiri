@@ -361,7 +361,8 @@ ul {
 
 /* 맴버수 */
 .memberCntBox {
-   background-color: #c4d4eb;
+   background-color: #fcab4e;
+   border-color: #e27500;
    width: 140px;
    border-radius: 10px;
    height: 30px;
@@ -848,8 +849,8 @@ footer.footer {
    <!--뒤로가기 , 동의 후 등록-->
    <div class="mainFooter d-flex justify-content-center align-items-center mt-3">
       <span class="mainFooterBtnBox">
-         <button class="btn btn-outline-warning" id="backBtn">뒤로 가기</button>
-         <button class="btn btn-primary ms-4" id="modifyGroupBtn">동의 후 수정</button>
+         <button class="btn btn-outline-secondary" id="backBtn">뒤로 가기</button>
+         <button class="btn btn-warning ms-4" id="modifyGroupBtn">동의 후 수정</button>
       </span>
    </div>
 

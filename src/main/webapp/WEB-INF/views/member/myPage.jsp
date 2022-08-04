@@ -580,7 +580,6 @@ footer.footer {
 		<form action="/mem/modifyProfilePic" method="post" id="modifyPicForm"
 			enctype="multipart/form-data">
 			<div class="row justify-content-center">
-				<!-- <div class="col-md-2 d-none d-md-block"></div> -->
 				<div class="col-4 d-flex justify-content-center">
 					<div id="profilePic">
 						<c:choose>
@@ -1209,7 +1208,7 @@ footer.footer {
                               <i class="fa-solid fa-pen-nib ms-3"></i>
                            </div>
                            <div class="col-7 d-felx justify-content-start text-start">
-                              <span>${boarddto.board_title}</span>
+                              <span style = "word-break:break-all;">${boarddto.board_title}</span>
                            </div>
                            <div class="col-2 d-felx justify-content-start"></div>
                         </div>

@@ -592,35 +592,60 @@ footer.footer {
 				</div>
 				
 				<c:if test="${loginType eq 'general'}">
-					<div class="row">
-						<div class="col-md-3">
-							<p>비밀번호</p>
-						</div>
-						<div class="col-md-7" style="text-align: left;">
-							<input type="password" id="password" name="user_pw" class="form-control" style="font-family:none;">
-							<span class="d-none" id="wrong-password-regex" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호의 형식에 맞지 않습니다. **</span>
-							<ul class="desc" style="font-size: 0.8rem; padding: 10px">
-								<li>영문, 숫자, 특수문자를 혼합하여 최소 8자리 이상 20자리 이하로 설정해 주세요.</li>
-								<li>기타 일반 정보 등으로부터 추측이 용이한 비밀번호는 피해주세요.</li>
-								<li>타사 서비스에서 사용하는 비밀번호와 동일한 비밀번호를 사용하지 마십시오.</li>
-								<li>번호를 바꾸시려면 중복확인은 필수 항목입니다.</li>
-							</ul>
-						</div>
-						<div class="col-2"></div>
-					</div>		
-					<div class="row">
-						<div class="col-md-3">
-							<p>비밀번호 확인</p>
-						</div>
-						<div class="col-md-7" style="text-align: left;">
-							<input type="password" id="password-check" class="form-control" style="font-family:none;">
-							<span class="d-none" id="wrong-password-check" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호와 맞지 않습니다. **</span>
-							<span class="d-none" id="right-password-check" style="color:green; font-size:0.8rem; margin-left:8px;">** 비밀번호와 일치합니다. **</span>
-						</div>
-						<div class="col-2"></div>
-					</div>					
-				</c:if>
-				<input type="text" class='d-none' value="${memberdto.user_pw}" name="data_password">
+               <div class="row">
+                  <div class="col-md-3">
+                     <p>비밀번호</p>
+                  </div>
+                  <div class="col-md-7" style="text-align: left;">
+                     <input type="password" id="password" name="user_pw" class="form-control" style="font-family:none;">
+                     <span class="d-none" id="wrong-password-regex" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호의 형식에 맞지 않습니다. **</span>
+                     <ul class="desc" style="font-size: 0.8rem; padding: 10px">
+                        <li>영문, 숫자, 특수문자를 혼합하여 최소 8자리 이상 20자리 이하로 설정해 주세요.</li>
+                        <li>기타 일반 정보 등으로부터 추측이 용이한 비밀번호는 피해주세요.</li>
+                        <li>타사 서비스에서 사용하는 비밀번호와 동일한 비밀번호를 사용하지 마십시오.</li>
+                        <li>번호를 바꾸시려면 중복확인은 필수 항목입니다.</li>
+                     </ul>
+                  </div>
+                  <div class="col-2"></div>
+               </div>      
+               <div class="row">
+                  <div class="col-md-3">
+                     <p>비밀번호 확인</p>
+                  </div>
+                  <div class="col-md-7" style="text-align: left;">
+                     <input type="password" id="password-check" class="form-control" style="font-family:none;">
+                     <span class="d-none" id="wrong-password-check" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호와 맞지 않습니다. **</span>
+                     <span class="d-none" id="right-password-check" style="color:green; font-size:0.8rem; margin-left:8px;">** 비밀번호와 일치합니다. **</span>
+                  </div>
+                  <div class="col-2"></div>
+               </div>               
+            </c:if> 
+            
+            <c:if test="${loginType ne 'general'}">
+               <div class="row d-none">
+                  <div class="col-md-3">
+                     <p>비밀번호</p>
+                  </div>
+                  <div class="col-md-7" style="text-align: left;">
+                     <input type="password" id="password" name="user_pw" class="form-control" style="font-family:none;" disabled>
+                     <span class="d-none" id="wrong-password-regex" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호의 형식에 맞지 않습니다. **</span>
+                        <span style="color:red; font-size: 0.8rem; padding: 10px">** 소셜로 로그인하시면 비밀번호 수정이 안됩니다 ** </span>
+                  </div>
+                  <div class="col-2"></div>
+               </div>
+               <div class="row d-none">
+                  <div class="col-md-3">
+                     <p>비밀번호 확인</p>
+                  </div>
+                  <div class="col-md-7" style="text-align: left;">
+                     <input type="password" id="password-check" class="form-control d-none" style="font-family:none;" disabled>
+                     <span class="d-none" id="wrong-password-check" style="color:red; font-size:0.8rem; margin-left:8px;">** 비밀번호와 맞지 않습니다. **</span>
+                     <span class="d-none" id="right-password-check" style="color:green; font-size:0.8rem; margin-left:8px;">** 비밀번호와 일치합니다. **</span>
+                  </div>
+                  <div class="col-2"></div>
+               </div>                        
+            </c:if> 
+            <input type="text" class='d-none' value="${memberdto.user_pw}" name="data_password">
 				<div class="row">
 					<div class="col-md-3">
 						<p>이메일</p>

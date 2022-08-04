@@ -39,6 +39,7 @@
          separator="," close=")">
          #{email}
       </foreach>
+      and seq_group = #{seq_group}      
    </delete>
 
    <!-- 가입승인 여러명 받기위한 user_email 뽑기 -->
