@@ -20,7 +20,7 @@ import com.kiri.utills.SecurityInfo;
 public class NaverLogin {
     private final static String naverClientId = SecurityInfo.naverId;
     private final static String naverClientSecret = SecurityInfo.naverSecret;
-    private final static String naverRedirectUri = "http://39.120.220.2:11111/auth/naverCallback";
+    private final static String naverRedirectUri = "http://192.168.20.21/auth/naverCallback";
     private final static String sessionState = "oauth_state";
     private final static String naverProfileApiUri = "https://openapi.naver.com/v1/nid/me";
     

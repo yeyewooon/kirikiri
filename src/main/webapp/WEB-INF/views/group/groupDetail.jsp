@@ -41,7 +41,6 @@
 	font-weight: 700;
 	font-style: normal;
 }
-
 @font-face {
 	font-family: 'MICEGothic';
 	src:
@@ -795,7 +794,7 @@ footer.footer {
 					<!--상세 정보 내용-->
 					<div class="groupInfo mt-4" style="width:100%;">
             			<span style=" font-size: 30px; background: linear-gradient(to top, #FFE400 20%, transparent 30%)">상세정보</span>
-						<div class="groupContent mt-4">${tbl_group_dto.group_info}</div>
+						<div class="groupContent mt-4" style="font-family: initial;">${tbl_group_dto.group_info}</div>
 					</div>
 				</div>
         <!--주의사항-->
