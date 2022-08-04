@@ -113,6 +113,7 @@
         }
 		#content{
         	font-family: initial;
+        	word-wrap: break-word;
         }
        	#content img{
        		max-width: 100%;
@@ -475,12 +476,12 @@
 	                			<!-- 프로필 이미지 -->
 			                    <div class="col-2 d-flex justify-content-center">
 			                        <div class="profileBox">
-			                            <c:if test="${profile eq null}">
+			                            <c:if test="${comment.user_image eq null}">
 			                        		<!-- 기본이미지 -->
 			                        		<img src="/resources/images/profile.jpg">
 			                        	</c:if>
-			                            <c:if test="${profile ne null}">
-			                        		<img src="/profile/${profile}">
+			                            <c:if test="${comment.user_image ne null}">
+			                        		<img src="/profile/${comment.user_image}">
 			                        	</c:if>
 			                        </div>
 			                    </div>

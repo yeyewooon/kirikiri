@@ -107,6 +107,7 @@ body {
 
 * {
 	box-sizing: border-box;
+	font-family : 'MICEGothic Bold';
 }
 
 /* header */

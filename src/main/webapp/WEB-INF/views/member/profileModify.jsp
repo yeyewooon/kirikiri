@@ -459,7 +459,7 @@ footer.footer {
 					</div>
 					<div class="col-md-5">
 						<input type="text" id="nickname" name="user_nickname"
-							class="form-control user_nickname" value="${memberdto.user_nickname}">
+							class="form-control user_nickname" value="${memberdto.user_nickname}" placeholder="닉네임은 12자까지 가능합니다" maxlength="12">
 					</div>
 					<div class="col-md-2">
 						<button type="button" class="btn btn-secondary" id="nicknameCheck" disabled>중복확인</button>
@@ -692,7 +692,7 @@ footer.footer {
 					}
 				})
 				
-				let phone2 = $(".checkPhone2").val();;
+				let phone2 = $(".checkPhone2").val();
 				$("#phone2").on("input",function(){
 					phone2 = $(this).val();
 					console.log(phone2)
@@ -870,6 +870,9 @@ footer.footer {
 			let passwordRegex = /^$|^[a-z0-9!@#$]{8,20}$/;
 			let checkPhone = $(".checkPhone").val();
 			let checkPw = $("#check-pw").val();
+			let phone1 = $(".checkPhone1").val();
+			let phone2 = $(".checkPhone2").val();
+			let phone3 = $(".checkPhone3").val();
 			user_phone = phone1 + phone2 + phone3;
 			console.log("adasdas : ",checkPhone)
 			
