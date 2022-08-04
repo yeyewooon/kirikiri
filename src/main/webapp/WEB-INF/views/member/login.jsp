@@ -193,9 +193,9 @@ h2 {
 }
 
 #findPw-emailCheck-btn{
-	width: 88%;
+	width: 100%;
 	height: 47%;
-	margin-top: 18px;
+	margin-bottom: 5px;
 }
 
 .findId-box, .findPw-emailCheck-box {

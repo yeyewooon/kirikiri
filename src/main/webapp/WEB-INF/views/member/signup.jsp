@@ -618,35 +618,48 @@ span{
      	   }
   	   });
 
-	   $("#user_name").change(function(){
-		   let nameRegex = /^[가-힣]+$/;
+		 $("#user_name").change(function(){
+			   let nameRegex = /^[가-힣]{2,4}$/;
+			         
+			   if( $("#user_name").val() ==""){
+			      $("#name-col").empty();
+			      return
+			            
+			   }else if(!nameRegex.test($("#user_name").val())){
+			      invalidName();
+			       return;
+			            
+			   }else{
+			      $("#name-col").empty();
+			   }
 
-		   if(!nameRegex.test($("#user_name").val())){
-			   invalidName();
-			   return;
-		   }else{
-			   $("#name-col").empty();
-		   }
-	   });
+			});
+
 
        $("#email-btn").click(function(){ //이메일 직접입력 취소
     	   $(".email-domain-row").hide();
     	   $("#email-domain").val("");
        });
 
-       $("#user_pw").change(function(){ //비밀번호
-    	   let passwordRegex = /^[a-z0-9!@#$]{8,20}$/
 
-    	   if(!passwordRegex.test($("#user_pw").val())){
-    		   invalidPw();
-    		   return;
-    	   }else if($("#email-id").val() === $("#user_pw").val()){
-    		   idEqPw();
-    		   return;
-    	   }else{
-    		   validPw();
-    	   }
-       });
+       $("#user_pw").change(function(){ //비밀번호
+           let passwordRegex = /^[a-z0-9!@#$]{8,20}$/
+          
+           if($("#user_pw").val() == ""){
+              $("#regex-col").empty();
+              return;
+              
+           }else if(!passwordRegex.test($("#user_pw").val())){
+              invalidPw();
+              return;
+           }else if($("#email-id").val() === $("#user_pw").val()){
+              idEqPw();
+              return;
+           }else{
+              validPw();
+           }
+ 		});
+       
 
        $("#pwCheck").change(function(){ //비밀번호확인
     	   if($("#user_pw").val() != $("#pwCheck").val()){
@@ -703,7 +716,7 @@ span{
 
 
        $("#nextBtn").click(function(){ //다음으로
-    	   let nameRegex = /^[가-힣]+$/;
+    	   let nameRegex = /^[가-힣]{2,4}$/;
 
       	   let bdRegex = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/;
 		   let bd = $("#year").val() + $("#month").val() + $("#day").val();

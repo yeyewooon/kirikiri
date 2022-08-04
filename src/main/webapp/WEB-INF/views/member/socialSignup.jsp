@@ -491,16 +491,22 @@ footer.footer {
        });
       
        $("#user_name").change(function(){
-		   let nameRegex = /^[가-힣]+$/;
-		   
-		   if(!nameRegex.test($("#user_name").val())){
-			   invalidName();
-			   return;
-		   }else{
-			   $("#name-col").empty();
-		   }
+    	   let nameRegex = /^[가-힣]{2,4}$/;
+    	         
+    	   if( $("#user_name").val() ==""){
+    	      $("#name-col").empty();
+    	      return
+    	            
+    	   }else if(!nameRegex.test($("#user_name").val())){
+    	      invalidName();
+    	       return;
+    	            
+    	   }else{
+    	      $("#name-col").empty();
+    	   }
 
-	   });
+    	});
+
 		
 	   $("#user_nickname").change(function(){
 	   	nicknameConfirm = "deny";

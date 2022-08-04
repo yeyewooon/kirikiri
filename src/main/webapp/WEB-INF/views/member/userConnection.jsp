@@ -44,7 +44,7 @@ rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 <style>
 /* header */
-header {
+* {
    font-family: 'MICEGothic Bold';
 }
 
@@ -232,6 +232,15 @@ p{
     height: 100%;
     text-align:center;
  }
+ 
+@font-face {
+	font-family: 'MICEGothic Bold';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2206-01@1.0/MICEGothic Bold.woff2')
+		format('woff2');
+	font-weight: 700;
+	font-style: normal;
+}
 </style>
 </head>
 <script>
