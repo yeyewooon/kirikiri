@@ -539,7 +539,7 @@
 							let img = mutation.removedNodes[0].src;
 							//console.log("img" + img);
 							//console.log("src : " + src);
-							let src = decodeURIComponent(img.replace("http://localhost/groupBoardFile/", ""));
+							let src = decodeURIComponent(img.replace("http://192.168.20.21/groupBoardFile/", ""));
 							console.log(src);
 							$.ajax({
 								url : "/Gboard/delImg"

@@ -42,7 +42,7 @@ public class HomeController {
 	      int seq_board;
 	      List<String> sys_name = new ArrayList<>();
 	      if(getBestBoard.size()==0) {
-	         System.out.println("없습니다~~");
+
 	      }else if(getBestBoard.size()==1) {
 	         for(int i=0; i<1; i++) {
 	            seq_board = getBestBoard.get(i).getSeq_board();

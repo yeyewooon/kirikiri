@@ -81,7 +81,7 @@ public class LoginController {
 				return "admin";
 				
 			}else {
-				return "error";
+				return "loginFail";
 			}
 			
 		}else { // 맴버는 조회 되었는데 타입에 오류 발생 

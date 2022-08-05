@@ -175,6 +175,7 @@ body {
 
 label {
 	margin: 5px;
+	align-self : center;
 }
 
 button {
@@ -612,7 +613,7 @@ h1 {
 					<div class="col-md-3">
 						<p>생년월일</p>
 					</div>
-					<div class="col-md-7">
+					<div class="col-md-8 d-flex justify-content-start">
 						<input type="text" name="year" class="form-control bthday" maxlength="4" value="${date.get(0)}" style="width:140px;" readonly>
 						<label for="year">년</label> 
 						<input type="text" name="month" class="form-control bthday" maxlength="2" value="${date.get(1)}" style="width:130px;" readonly>
@@ -625,7 +626,7 @@ h1 {
 							<span class="d-none" id="birthText" style="color:red; font-size:0.8rem; margin-left:8px;">** 생년월일은 수정할 수 없습니다. **</span>					
 						</div>
 					</div>
-					<div class="col-md-2"></div>
+					<div class="col-md-1"></div>
 				</div>
 				
 				<c:if test="${loginType eq 'general'}">

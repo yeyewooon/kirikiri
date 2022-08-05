@@ -55,7 +55,7 @@ public class GroupController {
    @RequestMapping(value = "/groupAccess")
    @ResponseBody
    public String groupAccess(Group_MemberDTO Group_MemberDTO) throws Exception {
-     System.out.println(Group_MemberDTO);
+
 
      tbl_group_service.groupAccess(Group_MemberDTO);
 
@@ -75,10 +75,7 @@ public class GroupController {
        List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
        int seq_group = Integer.parseInt(param.get("seq_group").toString());
 
-       System.out.println("================================");
-       System.out.println(seq_group);
-       System.out.println(userEmails);
-       System.out.println("================================");
+
        tbl_group_service.groupMemberDelete(userEmails, seq_group); 
      
      return String.valueOf(userEmails); 
@@ -122,8 +119,7 @@ public class GroupController {
       List<String> userEmails = new ObjectMapper().readValue(param.get("userEmails").toString(), List.class);
       int seq_group = Integer.parseInt(param.get("seq_group").toString());
       tbl_group_service.denyApply(userEmails,seq_group);
-      System.out.println(userEmails);
-      System.out.println(seq_group);
+
       return String.valueOf(userEmails);
    }
 
@@ -230,7 +226,7 @@ public class GroupController {
       int seq_group = tbl_group_dto.getSeq_group(); // 현재 시퀀스 번호 얻어오기
       // 사진을 넣었다면 실행
       if (!groupFile.isEmpty()) {
-         System.out.println("hello!!");
+
          // 그룹 프로필 사진 저장(group_profile)
          String realPath = session.getServletContext().getRealPath("group_profile");
          String sys_name = tbl_group_service.uploadProfile(groupFile, realPath);
@@ -354,33 +350,26 @@ public class GroupController {
       //session에서 받아온 닉네임
       // 현재 세션 아이디
       String user_nickname = ((MemberDTO) session.getAttribute("loginSession")).getUser_nickname();
-      System.out.println(user_nickname);
       
       model.addAttribute("user_nickname", user_nickname);
-      System.out.println(seq_group);
+
       model.addAttribute("seq_group", seq_group);
       // 채팅 했던 부분 불러오기
       List<Group_ChatDTO> gcList = gcService.selectChat(seq_group);
       model.addAttribute("gcList", gcList);
-      System.out.println("그룹 채팅");
-      System.out.println(gcList.toString());
+
       // 그룹정보 가져오기(채팅방, 사람 수)
       List<Tbl_GroupDTO> tgList = gcService.selectGroup(seq_group);
       model.addAttribute("tgList", tgList);
-      System.out.println("채팅방, 사람 수");
-      System.out.println(tgList.toString());
+
       
       // 닉네임 리스트 가져와서 프로필 사진 member에서 꺼내오기
       List<Group_MemberDTO> nickList = gcService.selectNick(seq_group);
-      System.out.println("닉리스트" + nickList.toString());
+
       List<String> profileList = new ArrayList<>();
       for (Group_MemberDTO dto : nickList) {
          user_nickname = dto.getUser_nickname();
-         System.out.println(user_nickname);
          MemberDTO mdto = gcService.getProfileImg(user_nickname);
-         System.out.println(mdto.toString());
-         System.out.println("안녕하세요!!");
-         System.out.println(mdto.getUser_image());
          profileList.add(mdto.getUser_image());
       }
 
