@@ -98,7 +98,7 @@ $(document).ready(function() {
                   if(mutation.removedNodes.length == 1){
                      if(mutation.removedNodes[0].src != null) {
                         let img = mutation.removedNodes[0].src;
-                        let decode_src = img.replace("http://localhost/boardFile/", "");
+                        let decode_src = img.replace("http://192.168.20.21/boardFile/", "");
                         let src = decodeURIComponent(decode_src);
                         $.ajax({
                            url : "/group/delImg"

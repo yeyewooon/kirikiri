@@ -543,7 +543,7 @@
                   if(mutation.removedNodes[0].src != null) {
                      let img = mutation.removedNodes[0].src;
                      //console.log(img);
-                     let src = decodeURIComponent(img.replace("http://localhost/groupBoardFile/", ""));
+                     let src = decodeURIComponent(img.replace("http://192.168.20.21/groupBoardFile/", ""));
                      //console.log(src);
                      $.ajax({
                         url : "/Gboard/delImg"
@@ -590,7 +590,8 @@
 				document.getElementById("nowByte").style.color = "green";
 			}
 		}
-
+		
+		let newImg = new Array();
       // summernote 이미지 업로드 function
       function uploadSummernoteImageFile(file, editor){
          data = new FormData();
@@ -604,13 +605,14 @@
             , processData : false
             , success : function(data){
                $(editor).summernote("editor.insertImage", data.url);
+               newImg.push(data.url.replace("/groupBoardFile/", ""));
             }, error : function(e){
                console.log(e);
             }
          });
       }
 
-      let imgArr = new Array();
+      //let imgArr = new Array();
       // 작성 완료 버튼
       $("#submitBtn").on("click", function(){
 			if($("#nowByte").html() >= 2500){
@@ -644,7 +646,7 @@
             return;
          }
 
-         let content = $("#summernote").summernote("code");
+         /* let content = $("#summernote").summernote("code");
          let regImg = /(<img[^>]+src\s*=\s*[\"']?([^>\"']+)[\"']?[^>]*>)/g;
          let src;
          while(regImg.test(content)){
@@ -652,15 +654,15 @@
             imgArr.push(src);
          }
          console.log(imgArr);
-         console.log(imgArr.length);
+         console.log(imgArr.length); */
 
-         if(imgArr.length !== 0){
-            for(let i = 0; i < imgArr.length; i++){
+         if(newImg.length !== 0){
+            for(let i = 0; i < newImg.length; i++){
                let inputImg = $("<input>").attr({
                   "type" : "hidden"
                   , "class" : "imgs"
                   , "name" : "imgs[]"
-                  , "value" : imgArr[i]
+                  , "value" : newImg[i]
                });
                $("#modifyForm").append(inputImg);
             };

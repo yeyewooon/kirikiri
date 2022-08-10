@@ -100,7 +100,7 @@ public class BoardController {
 	@ResponseBody
 	public String uploadSummernoteImg(@RequestParam("file") MultipartFile file) throws Exception{
 		String realPath = session.getServletContext().getRealPath("boardFile");
-//		System.out.println("realPath : " + realPath);
+
 		JsonObject jsonObject = service.uploadSummernoteImg(file, realPath);
 		
 		String result = jsonObject.toString();
@@ -148,25 +148,6 @@ public class BoardController {
 		// 좋아요 여부, 개수
 		model.addAttribute("like", service.like(seq_board, user_email));
 		
-		// 댓글 프로필
-//		System.out.println(service.getProfileImg(seq_board).toString());
-//		model.addAttribute("profile", service.getProfileImg(seq_board));
-//		List<Board_CommentDTO> comments = service.getCommentList(seq_board); // 댓글 정보
-//		List<String> profile = new ArrayList<>();
-//		Map<Object, Object> 
-//		for(Board_CommentDTO comment : comments) {
-//			//String email = comment.getUser_email();
-//			//Map<Object, Object> imageMap = service.getProfileImg(email);
-//			//System.out.println(imageMap.toString());
-////			MemberDTO memDTO = service.getProfileImg(email);
-////			memberDTO.add("memDTO", memDTO);
-//			//System.out.println(memDTO.toString());
-//			//profile.add(memDTO.getUser_image());
-//		}
-//		System.out.println(profile.toString());
-//		model.addAttribute("");
-//		model.addAttribute("profile", profile);
-		
 		// criteria 인스턴스 전달
 		model.addAttribute("cri", cri);
 		
@@ -201,7 +182,6 @@ public class BoardController {
 	@ResponseBody
 	public String delImg(String src) throws Exception {
 		String path = session.getServletContext().getRealPath("boardFile");
-		System.out.println("src : " + src);
 		service.delFile(path, src);
 		return "success";
 	}

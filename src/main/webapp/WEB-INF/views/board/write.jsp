@@ -571,7 +571,7 @@ footer.footer {
 							let img = mutation.removedNodes[0].src;
 							//console.log("img" + img);
 							//console.log("src : " + src);
-							let src = decodeURIComponent(img.replace("http://localhost/boardFile/", ""));
+							let src = decodeURIComponent(img.replace("http://192.168.20.21/boardFile/", ""));
 							console.log(src);
 							$.ajax({
 								url : "/board/delImg"

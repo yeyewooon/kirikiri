@@ -201,7 +201,7 @@ public class Tbl_GroupService {
       File targetFile = new File(realPath + File.separator + saveName);
 
       try {
-         System.out.println("이미지 저장 성공");
+
          InputStream fileStream = file.getInputStream();
          FileUtils.copyInputStreamToFile(fileStream, targetFile); // 파일 저장
          // contextroot + resources + 저장할 내부 폴더명
@@ -209,7 +209,7 @@ public class Tbl_GroupService {
          jsonObject.addProperty("responseCode", "success");
          // jsonObject.addProperty("saveName", saveName);
       } catch (Exception e) {
-         System.out.println("이미지 저장 실패");
+
          FileUtils.deleteQuietly(targetFile); // 저장된 파일 삭제
          jsonObject.addProperty("responseCode", "error");
          e.printStackTrace();

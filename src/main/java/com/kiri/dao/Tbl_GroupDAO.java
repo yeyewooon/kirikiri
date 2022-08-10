@@ -85,20 +85,12 @@ public class Tbl_GroupDAO {
    // 그룹 생성
    public void createGroup(Tbl_GroupDTO dto) throws Exception {
       int rs = session.insert("tblGroupMapper.createGroup", dto);
-      if (rs > 0)
-         System.out.println("tbl_group 생성 성공");
-      else
-         System.out.println("tbl_group 생성 실패");
    }
 
 
    // 그룹 생성시 group_member에 호스트로 insert
    public void insertGroupHost(Group_MemberDTO group_member_dto) throws Exception {
       int rs = session.insert("tblGroupMapper.insertGroupHost", group_member_dto);
-      if (rs > 0)
-         System.out.println("group_member 삽입 완료");
-      else
-         System.out.println("group_member 삽입 실패");
    }
 
    // 그룹 디테일 조회

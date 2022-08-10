@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 
@@ -294,6 +295,7 @@ h4 {
    line-height: 22px;
    padding: 8px;
    padding-left:0px;
+   align-items: center;
 }
 .serviceBox a:hover{
    color:#008A65;
@@ -841,7 +843,7 @@ h4 {
                            <i class="fa-solid fa-location-dot me-3"></i>
                         </div>
                         <div class="col-7 d-flex justify-content-start">
-                           <span>${sitedto.area}</span>
+                           <a href="/user/toUserSelectedGroupList?group_site=${fn:substring(sitedto.area,0,2)}"><span>${sitedto.area}</span></a>
                         </div>
                         <div class="col-2 d-flex justify-content-end"></div>
                      </div>
@@ -888,9 +890,9 @@ h4 {
                               </div>
                               <div class="col-6 hobbyWrapper">
                                  <div>
-                                    <input onclick="CountChecked1(this)" type="checkbox" id="충정도"
-                                       name="site" class="checkbox me-1" value="충정도"> <label
-                                       for="충정도">충정도</label>
+                                    <input onclick="CountChecked1(this)" type="checkbox" id="충청도"
+                                       name="site" class="checkbox me-1" value="충청도"> <label
+                                       for="충청도">충청도</label>
                                  </div>
                                  <div>
                                     <input onclick="CountChecked1(this)" type="checkbox" id="경상도"
@@ -987,7 +989,7 @@ h4 {
                            <i class="fa-solid fa-thumbs-up me-3"></i>
                         </div>
                         <div class="col-7 d-flex justify-content-start">
-                           <span>${hobbydto.hobby}</span>
+                           <a href="/user/toUserSelectedGroupList?group_category=${hobbydto.hobby}"><span>${hobbydto.hobby}</span></a>
                         </div>
                         <div class="col-2"></div>
                      </div>
